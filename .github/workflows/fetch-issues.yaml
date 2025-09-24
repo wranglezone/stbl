@@ -4,16 +4,8 @@ on:
   workflow_dispatch:
   issues:
     types:
-      - opened
-      - edited
-      - deleted
-      - transferred
       - closed
       - reopened
-      - milestoned
-      - demilestoned
-      - typed
-      - untyped
 
 concurrency:
   group: ${{ github.workflow }}
