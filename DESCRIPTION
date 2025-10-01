@@ -1,7 +1,7 @@
 Package: stbl
 Title: Stabilize Function Arguments
 Version: 0.2.0.9000
-Authors@R: 
+Authors@R:
     person("Jon", "Harmon", , "jonthegeek@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-4781-4346"))
 Description: A set of consistent, opinionated functions to quickly check
@@ -17,17 +17,17 @@ Imports:
     glue,
     rlang (>= 1.1.0),
     vctrs
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
     stringi,
     stringr,
     testthat (>= 3.0.0)
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
