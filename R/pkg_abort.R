@@ -49,7 +49,7 @@ pkg_abort <- function(
 #'
 #' Implements an opinionated framework in which condition classes are composed
 #' by joining pieces of the class with "-", and always include a base class
-#' formed by combining the namme of the package and the word "condition".
+#' formed by combining the name of the package and the word "condition".
 #'
 #' @param ... `(character)` Components of the class name.
 #' @inheritParams .shared-params

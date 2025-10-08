@@ -2,7 +2,7 @@
 
 ## New features
 
-* New condition functions: `pkg_abort()` throws errors with a standardized, opnionated collection of classes, `compile_pkg_condition_classes()` compiles a vector of opinionated condition classes, and `compile_pkg_error_classes()` compiles a vector of opinionated error classes (#136).
+* New condition functions: `pkg_abort()` throws errors with a standardized, opinionated collection of classes, `compile_pkg_condition_classes()` compiles a vector of opinionated condition classes, and `compile_pkg_error_classes()` compiles a vector of opinionated error classes (#136).
 
 ## Potential breaking changes
 

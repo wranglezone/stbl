@@ -18,7 +18,7 @@ A character vector.
 \description{
 Implements an opinionated framework in which condition classes are composed
 by joining pieces of the class with "-", and always include a base class
-formed by combining the namme of the package and the word "condition".
+formed by combining the name of the package and the word "condition".
 }
 \examples{
 compile_pkg_condition_classes("stbl")
