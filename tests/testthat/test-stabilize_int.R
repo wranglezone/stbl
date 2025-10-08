@@ -6,7 +6,7 @@ test_that("stabilize_int() checks min_value", {
   )
   expect_error(
     stabilize_int(given, min_value = 11),
-    class = .compile_error_class("stbl", "error", "outside_range")
+    class = .compile_dash("stbl", "error", "outside_range")
   )
   expect_snapshot(
     stabilize_int(given, min_value = 11),
@@ -22,7 +22,7 @@ test_that("stabilize_int() checks max_value", {
   given <- 1:10
   expect_error(
     stabilize_int(given, max_value = 4),
-    class = .compile_error_class("stbl", "error", "outside_range")
+    class = .compile_dash("stbl", "error", "outside_range")
   )
   expect_snapshot(
     stabilize_int(given, max_value = 4),
@@ -43,7 +43,7 @@ test_that("stabilize_int_scalar() errors on non-scalars", {
   given <- 1:10
   expect_error(
     stabilize_int_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_int_scalar(given),

@@ -9,7 +9,7 @@
   x_arg,
   call,
   additional_msg = NULL,
-  subclass = NULL,
+  subclass = "must",
   message_env = call,
   parent = NULL,
   ...

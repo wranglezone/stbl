@@ -12,6 +12,8 @@ rlang::caller_env
 #'
 #' @param message (`character`) The message for the new error. Messages will be
 #'   formatted with [cli::cli_bullets()].
+#' @param subclass (`character`) Class(es) to assign to the error. Will be
+#'   prefixed by "stbl-error-".
 #' @param ... Additional parameters passed to [cli::cli_abort()] and on to
 #'   [rlang::abort()].
 #' @inheritParams .shared-params
@@ -25,28 +27,15 @@ rlang::caller_env
   parent = NULL,
   ...
 ) {
-  cli::cli_abort(
-    message,
-    class = c(
-      .compile_error_class("stbl", "error", subclass),
-      .compile_error_class("stbl", "error"),
-      .compile_error_class("stbl", "condition")
-    ),
+  pkg_abort(
+    "stbl",
+    message = message,
+    subclass = subclass,
     call = call,
-    .envir = message_env,
+    message_env = message_env,
     parent = parent,
     ...
   )
-}
-
-#' Compile an error class
-#'
-#' @param ... `(character)` Components of the class name.
-#'
-#' @returns A length-1 character vector.
-#' @keywords internal
-.compile_error_class <- function(...) {
-  paste(..., sep = "-")
 }
 
 #' Abort with a standardized "can't coerce" message
@@ -77,10 +66,7 @@ rlang::caller_env
   )
   .stbl_abort(
     message = c(main_msg, additional_msg),
-    subclass = c(
-      .compile_error_class("coerce", to_class),
-      "coerce"
-    ),
+    subclass = c("coerce", to_class),
     call = call,
     message_env = message_env,
     parent = parent,
@@ -104,7 +90,7 @@ rlang::caller_env
   x_arg,
   call,
   additional_msg = NULL,
-  subclass = NULL,
+  subclass = "must",
   message_env = call,
   parent = NULL,
   ...
@@ -112,7 +98,7 @@ rlang::caller_env
   main_msg <- .define_main_msg(x_arg, msg)
   .stbl_abort(
     message = c(main_msg, additional_msg),
-    subclass = c(subclass, "must"),
+    subclass = subclass,
     call = call,
     message_env = message_env,
     parent = parent,

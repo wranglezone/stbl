@@ -17,7 +17,7 @@ test_that("to_dbl() respects allow_null", {
   given <- NULL
   testthat::expect_error(
     to_dbl(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   testthat::expect_snapshot(
     to_dbl(given, allow_null = FALSE),
@@ -46,7 +46,7 @@ test_that("to_dbl() respects coerce_character", {
   given <- as.character(expected)
   testthat::expect_error(
     to_dbl(given, coerce_character = FALSE),
-    class = .compile_error_class("stbl", "error", "coerce", "double")
+    class = .compile_dash("stbl", "error", "coerce", "double")
   )
   testthat::expect_snapshot(
     to_dbl(given, coerce_character = FALSE),
@@ -62,7 +62,7 @@ test_that("to_dbl() errors informatively for bad chrs", {
   given <- c("1.1", "a")
   testthat::expect_error(
     to_dbl(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   testthat::expect_snapshot(
     to_dbl(given),
@@ -85,7 +85,7 @@ test_that("to_dbl() errors informatively for bad complexes", {
   given[[1]] <- 1.1 + 1i
   testthat::expect_error(
     to_dbl(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   testthat::expect_snapshot(
     to_dbl(given),
@@ -108,7 +108,7 @@ test_that("to_dbl() respects coerce_factor", {
   given <- factor(expected)
   testthat::expect_error(
     to_dbl(given, coerce_factor = FALSE),
-    class = .compile_error_class("stbl", "error", "coerce", "double")
+    class = .compile_dash("stbl", "error", "coerce", "double")
   )
   testthat::expect_snapshot(
     to_dbl(given, coerce_factor = FALSE),
@@ -124,7 +124,7 @@ test_that("to_dbl() errors informatively for bad factors", {
   given <- factor(letters)
   testthat::expect_error(
     to_dbl(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   testthat::expect_snapshot(
     to_dbl(given),
@@ -141,7 +141,7 @@ test_that("to_dbl() works for lists", {
   expect_identical(to_dbl(list(list(1.1), 2L)), c(1.1, 2.0))
   expect_error(
     to_dbl(list(1.1, 1:5)),
-    class = .compile_error_class("stbl", "error", "coerce", "double")
+    class = .compile_dash("stbl", "error", "coerce", "double")
   )
 })
 
@@ -160,7 +160,7 @@ test_that("to_dbl_scalar() provides informative error messages", {
   given <- c(1.1, 2.2)
   testthat::expect_error(
     to_dbl_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   testthat::expect_snapshot(
     to_dbl_scalar(given),

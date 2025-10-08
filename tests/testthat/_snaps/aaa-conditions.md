@@ -6,34 +6,6 @@
       Error:
       ! A message.
 
-# .stbl_abort() uses parent when provided
-
-    Code
-      .stbl_abort("child message", "child_class", parent = parent_cnd)
-    Condition
-      Error:
-      ! child message
-      Caused by error:
-      ! parent message
-
-# .stbl_abort() passes dots to cli_abort()
-
-    Code
-      .stbl_abort("A message.", "a_subclass", .internal = TRUE)
-    Condition
-      Error:
-      ! A message.
-      i This is an internal error that was detected in the stbl package.
-        Please report it at <https://github.com/api2r/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
-
-# .stbl_abort() uses message_env when provided
-
-    Code
-      .stbl_abort("This message comes from {var}.", "subclass", message_env = msg_env)
-    Condition
-      Error:
-      ! This message comes from a custom environment.
-
 # .stop_cant_coerce() throws the expected error
 
     Code

@@ -57,6 +57,9 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
+\item{package}{\verb{(length-1 character)} The name of the package to use in
+classes.}
+
 \item{parent}{A parent condition, as you might create during a
 \code{\link[rlang:try_fetch]{rlang::try_fetch()}}. See \code{\link[rlang:abort]{rlang::abort()}} for additional information.}
 
@@ -70,9 +73,6 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
-
-\item{subclass}{(\code{character}) Class(es) to assign to the error. Will be
-prefixed by "stbl-error-".}
 
 \item{to_class}{\verb{(length-1 character)} The name of the class to coerce to.}
 

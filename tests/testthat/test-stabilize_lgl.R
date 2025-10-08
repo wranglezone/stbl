@@ -19,7 +19,7 @@ test_that("stabilize_lgl() checks NAs", {
   )
   expect_error(
     stabilize_lgl(given, allow_na = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_na")
+    class = .compile_dash("stbl", "error", "bad_na")
   )
   expect_snapshot(
     stabilize_lgl(given, allow_na = FALSE),
@@ -35,7 +35,7 @@ test_that("stabilize_lgl() checks min_size", {
   given <- c("TRUE", NA, "true", "fALSE")
   expect_error(
     stabilize_lgl(given, min_size = 5),
-    class = .compile_error_class("stbl", "error", "size_too_small")
+    class = .compile_dash("stbl", "error", "size_too_small")
   )
   expect_snapshot(
     stabilize_lgl(given, min_size = 5),
@@ -51,7 +51,7 @@ test_that("stabilize_lgl() checks max_size", {
   given <- c("TRUE", NA, "true", "fALSE")
   expect_error(
     stabilize_lgl(given, max_size = 3),
-    class = .compile_error_class("stbl", "error", "size_too_large")
+    class = .compile_dash("stbl", "error", "size_too_large")
   )
   expect_snapshot(
     stabilize_lgl(given, max_size = 3),
@@ -71,7 +71,7 @@ test_that("stabilize_lgl_scalar() errors on non-scalars", {
   given <- c(TRUE, FALSE, TRUE)
   expect_error(
     stabilize_lgl_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_lgl_scalar(given),

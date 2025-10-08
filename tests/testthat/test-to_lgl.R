@@ -27,7 +27,7 @@ test_that("to_lgl() respects allow_null", {
   given <- NULL
   expect_error(
     to_lgl(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_lgl(given, allow_null = FALSE),
@@ -112,7 +112,7 @@ test_that("to_lgl works for characters", {
 test_that("to_lgl() errors for bad characters", {
   expect_error(
     to_lgl(letters),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_lgl(letters),
@@ -164,7 +164,7 @@ test_that("to_lgl errors for bad factors", {
   given <- factor(letters)
   expect_error(
     to_lgl(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_lgl(given),
@@ -184,7 +184,7 @@ test_that("to_lgl() works for lists", {
   expect_identical(to_lgl(list(list(TRUE), 0L)), c(TRUE, FALSE))
   expect_error(
     to_lgl(list(TRUE, 1:5)),
-    class = .compile_error_class("stbl", "error", "coerce", "logical")
+    class = .compile_dash("stbl", "error", "coerce", "logical")
   )
 })
 
@@ -192,7 +192,7 @@ test_that("to_lgl() errors for other types", {
   given <- list(1, 1:10)
   expect_error(
     to_lgl(given),
-    class = .compile_error_class("stbl", "error", "coerce", "logical")
+    class = .compile_dash("stbl", "error", "coerce", "logical")
   )
   expect_snapshot(
     to_lgl(given),
@@ -206,7 +206,7 @@ test_that("to_lgl() errors for other types", {
   given <- mean
   expect_error(
     to_lgl(given),
-    class = .compile_error_class("stbl", "error", "coerce", "logical")
+    class = .compile_dash("stbl", "error", "coerce", "logical")
   )
   expect_snapshot(
     to_lgl(given),
@@ -231,7 +231,7 @@ test_that("to_lgl_scalar() errors for non-scalars", {
   given <- c(TRUE, FALSE, TRUE)
   expect_error(
     to_lgl_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     to_lgl_scalar(given),
@@ -247,7 +247,7 @@ test_that("to_lgl_scalar() errors for bad characters", {
   given <- "a"
   expect_error(
     to_lgl_scalar(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_lgl_scalar(given),
@@ -263,7 +263,7 @@ test_that("to_lgl_scalar() respects allow_null", {
   given <- NULL
   expect_error(
     to_lgl_scalar(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_lgl_scalar(given, allow_null = FALSE),

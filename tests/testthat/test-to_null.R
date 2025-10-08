@@ -6,7 +6,7 @@ test_that(".to_null() errors when NULL isn't allowed", {
   given <- NULL
   expect_error(
     .to_null(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     .to_null(given, allow_null = FALSE),
@@ -28,7 +28,7 @@ test_that(".to_null() coerces anything to NULL", {
 test_that(".to_null() errors for bad allow_null", {
   expect_error(
     .to_null(NULL, allow_null = NULL),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     .to_null(NULL, allow_null = NULL),
@@ -37,7 +37,7 @@ test_that(".to_null() errors for bad allow_null", {
 
   expect_error(
     .to_null(NULL, allow_null = "fish"),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     .to_null(NULL, allow_null = "fish"),
@@ -52,7 +52,7 @@ test_that(".to_null() errors for bad allow_null", {
 test_that(".to_null() errors informatively for missing value", {
   expect_error(
     .to_null(),
-    class = .compile_error_class("stbl", "error", "must")
+    class = .compile_dash("stbl", "error", "must")
   )
   expect_snapshot(
     .to_null(),
