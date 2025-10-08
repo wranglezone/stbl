@@ -26,7 +26,7 @@ test_that("to_chr() respects allow_null", {
   given <- NULL
   expect_error(
     to_chr(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_chr(given, allow_null = FALSE),
@@ -83,7 +83,7 @@ test_that("to_chr() fails gracefully for weird cases", {
   given <- mean
   expect_error(
     to_chr(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr(given),
@@ -97,7 +97,7 @@ test_that("to_chr() fails gracefully for weird cases", {
   given <- list(mean)
   expect_error(
     to_chr(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr(given),
@@ -111,7 +111,7 @@ test_that("to_chr() fails gracefully for weird cases", {
   given <- list("x", mean)
   expect_error(
     to_chr(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr(given),
@@ -125,7 +125,7 @@ test_that("to_chr() fails gracefully for weird cases", {
   given <- mtcars
   expect_error(
     to_chr(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr(given),
@@ -139,7 +139,7 @@ test_that("to_chr() fails gracefully for weird cases", {
   given <- list(a = 1, b = 1:5)
   expect_error(
     to_chr(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr(given),
@@ -163,7 +163,7 @@ test_that("to_chr_scalar() errors for non-scalars", {
   given <- letters
   expect_error(
     to_chr_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     to_chr_scalar(given),
@@ -179,7 +179,7 @@ test_that("to_chr_scalar() errors for uncoerceable types", {
   given <- list(a = 1:10)
   expect_error(
     to_chr_scalar(given),
-    class = .compile_error_class("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(
     to_chr_scalar(given),
@@ -195,7 +195,7 @@ test_that("to_chr_scalar() respects allow_null", {
   given <- NULL
   expect_error(
     to_chr_scalar(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_chr_scalar(given, allow_null = FALSE),
@@ -211,7 +211,7 @@ test_that("to_chr_scalar respects allow_zero_length", {
   given <- character()
   expect_error(
     to_chr_scalar(given, allow_zero_length = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_empty")
+    class = .compile_dash("stbl", "error", "bad_empty")
   )
   expect_snapshot(
     to_chr_scalar(given, allow_zero_length = FALSE),

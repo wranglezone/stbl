@@ -12,7 +12,7 @@ test_that("to_int() respects allow_null", {
   given <- NULL
   expect_error(
     to_int(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_int(given, allow_null = FALSE),
@@ -62,7 +62,7 @@ test_that("to_int() respects coerce_character", {
   given <- as.character(expected)
   expect_error(
     to_int(given, coerce_character = FALSE),
-    class = .compile_error_class("stbl", "error", "coerce", "integer")
+    class = .compile_dash("stbl", "error", "coerce", "integer")
   )
   expect_snapshot(
     to_int(given, coerce_character = FALSE),
@@ -79,7 +79,7 @@ test_that("to_int() errors informatively for bad chrs", {
   given[[4]] <- "1.1"
   expect_error(
     to_int(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_int(given),
@@ -93,7 +93,7 @@ test_that("to_int() errors informatively for bad chrs", {
   given[[4]] <- "a"
   expect_error(
     to_int(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_int(given),
@@ -116,7 +116,7 @@ test_that("to_int() errors informatively for bad complexes", {
   given[[4]] <- 1 + 1i
   expect_error(
     to_int(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_int(given),
@@ -139,7 +139,7 @@ test_that("to_int() respects coerce_factor", {
   given <- factor(expected)
   expect_error(
     to_int(given, coerce_factor = FALSE),
-    class = .compile_error_class("stbl", "error", "coerce", "integer")
+    class = .compile_dash("stbl", "error", "coerce", "integer")
   )
   expect_snapshot(
     to_int(given, coerce_factor = FALSE),
@@ -155,7 +155,7 @@ test_that("to_int() errors informatively for bad factors", {
   given <- factor(letters)
   expect_error(
     to_int(given),
-    class = .compile_error_class("stbl", "error", "incompatible_type")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
     to_int(given),
@@ -172,7 +172,7 @@ test_that("to_int() works for lists", {
   expect_identical(to_int(list(list(1L), 2L)), c(1L, 2L))
   expect_error(
     to_int(list(1L, 1:5)),
-    class = .compile_error_class("stbl", "error", "coerce", "integer")
+    class = .compile_dash("stbl", "error", "coerce", "integer")
   )
 })
 
@@ -192,7 +192,7 @@ test_that("to_int_scalar() provides informative error messages", {
   given <- 1:10
   expect_error(
     to_int_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     to_int_scalar(given),

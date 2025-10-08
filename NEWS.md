@@ -1,5 +1,13 @@
 # stbl (development version)
 
+## New features
+
+* New condition functions: `pkg_abort()` throws errors with a standardized, opnionated collection of classes, `compile_pkg_condition_classes()` compiles a vector of opinionated condition classes, and `compile_pkg_error_classes()` compiles a vector of opinionated error classes (#136).
+
+## Potential breaking changes
+
+* Several conditions that formerly included a subclass of "stbl-error-must" no longer include that subclass. This only occurs when "stbl-error-must" was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (#136). 
+
 # stbl 0.2.0
 
 ## New features

@@ -24,7 +24,7 @@ test_that("stabilize_arg() rejects NULLs when asked", {
   given <- NULL
   expect_error(
     stabilize_arg(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     stabilize_arg(given, allow_null = FALSE),
@@ -43,7 +43,7 @@ test_that("stabilize_arg() checks NAs", {
   given[c(4, 7)] <- NA
   expect_error(
     stabilize_arg(given, allow_na = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_na")
+    class = .compile_dash("stbl", "error", "bad_na")
   )
   expect_snapshot(
     stabilize_arg(given, allow_na = FALSE),
@@ -61,7 +61,7 @@ test_that("stabilize_arg() checks size args", {
 
   expect_error(
     stabilize_arg(given, min_size = 2, max_size = 1),
-    class = .compile_error_class("stbl", "error", "size_x_vs_y")
+    class = .compile_dash("stbl", "error", "size_x_vs_y")
   )
   expect_snapshot(
     stabilize_arg(given, min_size = 2, max_size = 1),
@@ -82,7 +82,7 @@ test_that("stabilize_arg() checks min_size", {
 
   expect_error(
     stabilize_arg(given, min_size = 11),
-    class = .compile_error_class("stbl", "error", "size_too_small")
+    class = .compile_dash("stbl", "error", "size_too_small")
   )
   expect_snapshot(
     stabilize_arg(given, min_size = 11),
@@ -98,7 +98,7 @@ test_that("stabilize_arg() checks max_size", {
   given <- 1:3
   expect_error(
     stabilize_arg(given, max_size = 2),
-    class = .compile_error_class("stbl", "error", "size_too_large")
+    class = .compile_dash("stbl", "error", "size_too_large")
   )
   expect_snapshot(
     stabilize_arg(given, max_size = 2),
@@ -120,7 +120,7 @@ test_that("stabilize_arg_scalar() errors for non-scalars", {
   given <- 1:10
   expect_error(
     stabilize_arg_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_arg_scalar(given),
@@ -136,7 +136,7 @@ test_that("stabilize_arg_scalar() respects allow_null", {
   given <- NULL
   expect_error(
     stabilize_arg_scalar(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_arg_scalar(given, allow_null = FALSE),
@@ -152,7 +152,7 @@ test_that("stabilize_arg_scalar() errors on weird internal arg values", {
   given <- NULL
   expect_error(
     stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE)),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE)),

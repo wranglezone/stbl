@@ -37,6 +37,8 @@
 #'   size will be tested using [vctrs::vec_size()].
 #' @param max_value `(length-1 numeric)` The highest allowed value for `x`. If
 #'   `NULL` (default) values are not checked.
+#' @param package `(length-1 character)` The name of the package to use in
+#'   classes.
 #' @param parent A parent condition, as you might create during a
 #'   [rlang::try_fetch()]. See [rlang::abort()] for additional information.
 #' @param regex `(character, list, or stringr_pattern)` One or more optional
@@ -49,8 +51,6 @@
 #'   message that should be displayed. To check that a pattern is *not* matched,
 #'   attach a `negate` attribute set to `TRUE`. If a complex regex pattern
 #'   throws an error, try installing the stringi package.
-#' @param subclass (`character`) Class(es) to assign to the error. Will be
-#'   prefixed by "stbl-error-".
 #' @param to_class `(length-1 character)` The name of the class to coerce to.
 #' @param to_cls_args `(list)` A list of additional arguments to pass to
 #'   `to_cls_fn()`.

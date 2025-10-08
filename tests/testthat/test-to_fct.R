@@ -15,7 +15,7 @@ test_that("to_fct() deals with levels of fcts", {
 test_that("to_fct() throws errors for bad levels", {
   expect_error(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    class = .compile_error_class("stbl", "error", "fct_levels")
+    class = .compile_dash("stbl", "error", "fct_levels")
   )
   expect_snapshot(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
@@ -46,7 +46,7 @@ test_that("to_fct() respects allow_null", {
   given <- NULL
   expect_error(
     to_fct(given, allow_null = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_null")
+    class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
     to_fct(given, allow_null = FALSE),
@@ -69,7 +69,7 @@ test_that("to_fct() works for lists", {
   )
   expect_error(
     to_fct(list("a", 1:5)),
-    class = .compile_error_class("stbl", "error", "coerce", "factor")
+    class = .compile_dash("stbl", "error", "coerce", "factor")
   )
 })
 
@@ -77,7 +77,7 @@ test_that("to_fct() errors for things that can't be coerced", {
   given <- mean
   expect_error(
     to_fct(given),
-    class = .compile_error_class("stbl", "error", "coerce", "factor")
+    class = .compile_dash("stbl", "error", "coerce", "factor")
   )
   expect_snapshot(to_fct(given), error = TRUE)
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
@@ -85,7 +85,7 @@ test_that("to_fct() errors for things that can't be coerced", {
   given <- mtcars
   expect_error(
     to_fct(given),
-    class = .compile_error_class("stbl", "error", "coerce", "factor")
+    class = .compile_dash("stbl", "error", "coerce", "factor")
   )
   expect_snapshot(to_fct(given), error = TRUE)
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
@@ -93,7 +93,7 @@ test_that("to_fct() errors for things that can't be coerced", {
   given <- list(a = 1, b = 1:5)
   expect_error(
     to_fct(given),
-    class = .compile_error_class("stbl", "error", "coerce", "factor")
+    class = .compile_dash("stbl", "error", "coerce", "factor")
   )
   expect_snapshot(to_fct(given), error = TRUE)
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
@@ -113,7 +113,7 @@ test_that("to_fct_scalar() provides informative error messages", {
   given <- letters
   expect_error(
     to_fct_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(to_fct_scalar(given), error = TRUE)
   expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
@@ -123,7 +123,7 @@ test_that("to_fct_scalar respects allow_zero_length", {
   given <- factor()
   expect_error(
     to_fct_scalar(given, allow_zero_length = FALSE),
-    class = .compile_error_class("stbl", "error", "bad_empty")
+    class = .compile_dash("stbl", "error", "bad_empty")
   )
   expect_snapshot(
     to_fct_scalar(given, allow_zero_length = FALSE),

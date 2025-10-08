@@ -6,7 +6,7 @@ test_that("stabilize_dbl() checks min_value", {
   )
   testthat::expect_error(
     stabilize_dbl(given, min_value = 11.1),
-    class = .compile_error_class("stbl", "error", "outside_range")
+    class = .compile_dash("stbl", "error", "outside_range")
   )
   testthat::expect_snapshot(
     stabilize_dbl(given, min_value = 11.1),
@@ -22,7 +22,7 @@ test_that("stabilize_dbl() checks max_value", {
   given <- 1.1:10.1
   testthat::expect_error(
     stabilize_dbl(given, max_value = 4.1),
-    class = .compile_error_class("stbl", "error", "outside_range")
+    class = .compile_dash("stbl", "error", "outside_range")
   )
   testthat::expect_snapshot(
     stabilize_dbl(given, max_value = 4.1),
@@ -43,7 +43,7 @@ test_that("stabilize_dbl_scalar() errors on non-scalars", {
   given <- 1.1:10.1
   testthat::expect_error(
     stabilize_dbl_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   testthat::expect_snapshot(
     stabilize_dbl_scalar(given),

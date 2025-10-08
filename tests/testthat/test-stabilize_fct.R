@@ -5,7 +5,7 @@ test_that("stabilize_fct() works", {
 test_that("stabilize_fct() throws errors for bad levels", {
   expect_error(
     stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    class = .compile_error_class("stbl", "error", "fct_levels")
+    class = .compile_dash("stbl", "error", "fct_levels")
   )
   expect_snapshot(
     stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
@@ -25,7 +25,7 @@ test_that("stabilize_fct_scalar() errors for non-scalars", {
   given <- letters
   expect_error(
     stabilize_fct_scalar(given),
-    class = .compile_error_class("stbl", "error", "non_scalar")
+    class = .compile_dash("stbl", "error", "non_scalar")
   )
   expect_snapshot(
     stabilize_fct_scalar(given),
