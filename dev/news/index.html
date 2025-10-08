@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,14 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>New condition functions: <code><a href="../reference/pkg_abort.html">pkg_abort()</a></code> throws errors with a standardized, opinionated collection of classes, <code><a href="../reference/compile_pkg_condition_classes.html">compile_pkg_condition_classes()</a></code> compiles a vector of opinionated condition classes, and <code><a href="../reference/compile_pkg_error_classes.html">compile_pkg_error_classes()</a></code> compiles a vector of opinionated error classes (<a href="https://github.com/api2r/stbl/issues/136" class="external-link">#136</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="potential-breaking-changes-development-version">Potential breaking changes<a class="anchor" aria-label="anchor" href="#potential-breaking-changes-development-version"></a></h3>
+<ul><li>Several conditions that formerly included a subclass of “stbl-error-must” no longer include that subclass. This only occurs when “stbl-error-must” was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (<a href="https://github.com/api2r/stbl/issues/136" class="external-link">#136</a>).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="stbl-020">stbl 0.2.0<a class="anchor" aria-label="anchor" href="#stbl-020"></a></h2><p class="text-muted">CRAN release: 2025-09-16</p>

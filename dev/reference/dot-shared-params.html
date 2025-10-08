@@ -9,7 +9,7 @@ make them easier to import and to find."><meta name="robots" content="noindex"><
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,6 +137,11 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <code>NULL</code> (default) values are not checked.</p></dd>
 
 
+<dt id="arg-package">package<a class="anchor" aria-label="anchor" href="#arg-package"></a></dt>
+<dd><p><code>(length-1 character)</code> The name of the package to use in
+classes.</p></dd>
+
+
 <dt id="arg-parent">parent<a class="anchor" aria-label="anchor" href="#arg-parent"></a></dt>
 <dd><p>A parent condition, as you might create during a
 <code><a href="https://rlang.r-lib.org/reference/try_fetch.html" class="external-link">rlang::try_fetch()</a></code>. See <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::abort()</a></code> for additional information.</p></dd>
@@ -153,11 +158,6 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is <em>not</em> matched,
 attach a <code>negate</code> attribute set to <code>TRUE</code>. If a complex regex pattern
 throws an error, try installing the stringi package.</p></dd>
-
-
-<dt id="arg-subclass">subclass<a class="anchor" aria-label="anchor" href="#arg-subclass"></a></dt>
-<dd><p>(<code>character</code>) Class(es) to assign to the error. Will be
-prefixed by "stbl-error-".</p></dd>
 
 
 <dt id="arg-to-class">to_class<a class="anchor" aria-label="anchor" href="#arg-to-class"></a></dt>

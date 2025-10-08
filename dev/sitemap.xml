@@ -14,6 +14,8 @@
 <url><loc>https://stbl.api2r.org/dev/reference/are_fct_ish.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/are_int_ish.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/are_lgl_ish.html</loc></url>
+<url><loc>https://stbl.api2r.org/dev/reference/compile_pkg_condition_classes.html</loc></url>
+<url><loc>https://stbl.api2r.org/dev/reference/compile_pkg_error_classes.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-apply_regex_rule.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-are_not_dbl_ish_chr.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
@@ -31,7 +33,8 @@
 <url><loc>https://stbl.api2r.org/dev/reference/dot-coerce_fct_levels.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-coerce_fct_levels_impl.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-coerce_fct_to_na.html</loc></url>
-<url><loc>https://stbl.api2r.org/dev/reference/dot-compile_error_class.html</loc></url>
+<url><loc>https://stbl.api2r.org/dev/reference/dot-collapse_dash.html</loc></url>
+<url><loc>https://stbl.api2r.org/dev/reference/dot-compile_dash.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-define_main_msg.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-describe_failure_chr.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/dot-elements_are_cls_ish.html</loc></url>
@@ -58,6 +61,7 @@
 <url><loc>https://stbl.api2r.org/dev/reference/grapes-and-and-grapes.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/index.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/object_type.html</loc></url>
+<url><loc>https://stbl.api2r.org/dev/reference/pkg_abort.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/reexports.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.api2r.org/dev/reference/regex_must_not_match.html</loc></url>
