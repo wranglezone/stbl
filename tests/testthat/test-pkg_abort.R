@@ -22,10 +22,6 @@ test_that(".compile_pkg_error_classes() compiles error class chains", {
     .compile_pkg_error_classes("wrapped", "my_subclass"),
     c("wrapped-error-my_subclass", "wrapped-error", "wrapped-condition")
   )
-  expect_setequal(
-    .compile_pkg_error_classes("wrapped", "my_subclass"),
-    c("wrapped-error-my_subclass", "wrapped-error", "wrapped-condition")
-  )
 })
 
 test_that("pkg_abort() throws the expected error", {
