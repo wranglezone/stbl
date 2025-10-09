@@ -1,25 +1,29 @@
-test_that("compile_pkg_condition_classes() compiles condition class chains", {
-  expect_equal(
-    compile_pkg_condition_classes("wrapped"),
-    "wrapped-condition"
+test_that(".compile_pkg_condition_classes() compiles condition class chains", {
+  expect_setequal(
+    .compile_pkg_condition_classes("wrapped"),
+    c("wrapped-condition")
   )
-  expect_equal(
-    compile_pkg_condition_classes("wrapped", "error"),
+  expect_setequal(
+    .compile_pkg_condition_classes("wrapped", "error"),
     c("wrapped-error", "wrapped-condition")
   )
-  expect_equal(
-    compile_pkg_condition_classes("wrapped", "error", "my_subclass"),
+  expect_setequal(
+    .compile_pkg_condition_classes("wrapped", "error", "my_subclass"),
     c("wrapped-error-my_subclass", "wrapped-error", "wrapped-condition")
   )
 })
 
-test_that("compile_pkg_error_classes() compiles error class chains", {
-  expect_equal(
-    compile_pkg_error_classes("wrapped"),
+test_that(".compile_pkg_error_classes() compiles error class chains", {
+  expect_setequal(
+    .compile_pkg_error_classes("wrapped"),
     c("wrapped-error", "wrapped-condition")
   )
-  expect_equal(
-    compile_pkg_error_classes("wrapped", "my_subclass"),
+  expect_setequal(
+    .compile_pkg_error_classes("wrapped", "my_subclass"),
+    c("wrapped-error-my_subclass", "wrapped-error", "wrapped-condition")
+  )
+  expect_setequal(
+    .compile_pkg_error_classes("wrapped", "my_subclass"),
     c("wrapped-error-my_subclass", "wrapped-error", "wrapped-condition")
   )
 })
@@ -28,17 +32,19 @@ test_that("pkg_abort() throws the expected error", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
-  expect_error(
-    wrapped_abort("A message.", "a_subclass"),
-    class = "wrapped-error-a_subclass"
+  error_cnd <- expect_error(
+    wrapped_abort("A message.", "a_subclass")
   )
-  expect_error(
-    wrapped_abort("A message.", "a_subclass"),
-    class = "wrapped-error"
-  )
-  expect_error(
-    wrapped_abort("A message.", "a_subclass"),
-    class = "wrapped-condition"
+  expect_s3_class(
+    error_cnd,
+    c(
+      .compile_pkg_error_classes("wrapped", "a_subclass"),
+      # Added by rlang::abort()
+      "rlang_error",
+      "error",
+      "condition"
+    ),
+    exact = TRUE
   )
   expect_snapshot(
     wrapped_abort("A message.", "a_subclass"),
@@ -94,27 +100,26 @@ test_that("expect_pkg_error_classes() tests expressions for classes", {
       {
         rlang::abort(
           "A message.",
-          class = compile_pkg_error_classes("a_pkg", "a_class")
+          class = .compile_pkg_error_classes("a_pkg", "a_class")
         )
       },
       "a_pkg",
       "a_class"
     )
   })
-  # Can't use expect_failure() for wrapped expect_error().
-  expect_error(
+  expect_failure(
     {
       expect_pkg_error_classes(
         {
           rlang::abort(
             "A message.",
-            class = compile_pkg_error_classes("a_pkg", "a_class")
+            class = .compile_pkg_error_classes("a_pkg", "a_class")
           )
         },
         "a_pkg",
         "a_different_class"
       )
     },
-    "A message"
+    "has class"
   )
 })

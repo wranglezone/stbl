@@ -1,7 +1,8 @@
 test_that(".stbl_abort() throws the expected error", {
   expect_pkg_error_classes(
     .stbl_abort("A message.", "a_subclass"),
-    "stbl"
+    "stbl",
+    "a_subclass"
   )
   expect_snapshot(
     .stbl_abort("A message.", "a_subclass"),

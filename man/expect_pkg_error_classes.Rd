@@ -16,8 +16,9 @@ classes.}
 most.}
 }
 \value{
-\code{NULL} invisibly on success or the error on failure. Unlike most
-testthat expectations, this expectation cannot be chained.
+The classes of the error invisibly on success or the error on
+failure. Unlike most testthat expectations, this expectation cannot be
+usefully chained.
 }
 \description{
 When you use \code{\link[=pkg_abort]{pkg_abort()}} to signal errors, you can use this function to
