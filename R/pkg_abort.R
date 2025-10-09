@@ -105,3 +105,42 @@ compile_pkg_condition_classes <- function(package, ...) {
 compile_pkg_error_classes <- function(package, ...) {
   compile_pkg_condition_classes(package, "error", ...)
 }
+
+#' Test package error classes
+#'
+#' When you use [pkg_abort()] to signal errors, you can use this function to
+#' test that those errors are generated as expected.
+#'
+#' @param object An expression that is expected to throw an error.
+#' @inheritParams compile_pkg_error_classes
+#'
+#' @returns `NULL` invisibly on success or the error on failure. Unlike most
+#'   testthat expectations, this expectation cannot be chained.
+#' @examples
+#' expect_pkg_error_classes(
+#'   pkg_abort("stbl", "This is a test error", "test_subclass"),
+#'   "stbl",
+#'   "test_subclass"
+#' )
+#' try(
+#'   expect_pkg_error_classes(
+#'     pkg_abort("stbl", "This is a test error", "test_subclass"),
+#'     "stbl",
+#'     "different_subclass"
+#'   )
+#' )
+#' @export
+expect_pkg_error_classes <- function(
+  object,
+  package,
+  ...
+) {
+  object <- rlang::enquo(object)
+  expected_classes <- compile_pkg_error_classes(package, ...)
+  for (cls in expected_classes) {
+    rlang::inject(
+      testthat::expect_error(!!object, class = cls),
+      env = rlang::current_env()
+    )
+  }
+}

@@ -87,3 +87,34 @@ test_that("pkg_abort() uses message_env when provided", {
     error = TRUE
   )
 })
+
+test_that("expect_pkg_error_classes() tests expressions for classes", {
+  expect_success({
+    expect_pkg_error_classes(
+      {
+        rlang::abort(
+          "A message.",
+          class = compile_pkg_error_classes("a_pkg", "a_class")
+        )
+      },
+      "a_pkg",
+      "a_class"
+    )
+  })
+  # Can't use expect_failure() for wrapped expect_error().
+  expect_error(
+    {
+      expect_pkg_error_classes(
+        {
+          rlang::abort(
+            "A message.",
+            class = compile_pkg_error_classes("a_pkg", "a_class")
+          )
+        },
+        "a_pkg",
+        "a_different_class"
+      )
+    },
+    "A message"
+  )
+})
