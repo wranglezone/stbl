@@ -37,7 +37,7 @@ pkg_abort <- function(
 ) {
   cli::cli_abort(
     message,
-    class = compile_pkg_error_classes(package, subclass),
+    class = .compile_pkg_error_classes(package, subclass),
     call = call,
     .envir = message_env,
     parent = parent,
@@ -47,21 +47,13 @@ pkg_abort <- function(
 
 #' Compile a condition class chain
 #'
-#' Implements an opinionated framework in which condition classes are composed
-#' by joining pieces of the class with "-", and always include a base class
-#' formed by combining the name of the package and the word "condition".
-#'
-#' @param ... `(character)` Components of the class name.
+#' @param ... `(character)` Components of the class name, from least-specific to
+#'   most.
 #' @inheritParams .shared-params
 #'
 #' @returns A character vector.
-#' @examples
-#' compile_pkg_condition_classes("stbl")
-#' compile_pkg_condition_classes("stbl", "error")
-#' compile_pkg_condition_classes("stbl", "warning")
-#'
-#' @export
-compile_pkg_condition_classes <- function(package, ...) {
+#' @keywords internal
+.compile_pkg_condition_classes <- function(package, ...) {
   dots <- unlist(list(...))
   accumulated <- vector("character", length = length(dots))
   for (i in seq_along(dots)) {
@@ -90,18 +82,58 @@ compile_pkg_condition_classes <- function(package, ...) {
 
 #' Compile an error class chain
 #'
-#' Compile a set of classes for a package error, from most-specific to least.
+#' @inheritParams .compile_pkg_condition_classes
 #'
-#' @param ... `(character)` Components of the class name, from least-specific to
-#'   most.
-#' @inheritParams .shared-params
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_error_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "error",
+    ...
+  )
+}
+
+#' Test package error classes
 #'
-#' @returns A character vector of classes (see examples).
+#' When you use [pkg_abort()] to signal errors, you can use this function to
+#' test that those errors are generated as expected.
+#'
+#' @param object An expression that is expected to throw an error.
+#' @inheritParams .compile_pkg_error_classes
+#'
+#' @returns The classes of the error invisibly on success or the error on
+#'   failure. Unlike most testthat expectations, this expectation cannot be
+#'   usefully chained.
 #' @examples
-#' compile_pkg_error_classes("stbl")
-#' compile_pkg_error_classes("stbl", "coerce", "character", "scalar")
-#'
+#' expect_pkg_error_classes(
+#'   pkg_abort("stbl", "This is a test error", "test_subclass"),
+#'   "stbl",
+#'   "test_subclass"
+#' )
+#' try(
+#'   expect_pkg_error_classes(
+#'     pkg_abort("stbl", "This is a test error", "test_subclass"),
+#'     "stbl",
+#'     "different_subclass"
+#'   )
+#' )
 #' @export
-compile_pkg_error_classes <- function(package, ...) {
-  compile_pkg_condition_classes(package, "error", ...)
+expect_pkg_error_classes <- function(
+  object,
+  package,
+  ...
+) {
+  object <- rlang::enquo(object)
+  expected_classes <- c(
+    .compile_pkg_error_classes(package, ...),
+    "rlang_error",
+    "error",
+    "condition"
+  )
+  object_error <- rlang::inject(
+    testthat::expect_error(!!object),
+    env = rlang::current_env()
+  )
+  testthat::expect_s3_class(object_error, expected_classes, exact = TRUE)
 }
