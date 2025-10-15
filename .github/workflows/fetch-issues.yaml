@@ -4,8 +4,18 @@ on:
   workflow_dispatch:
   issues:
     types:
+      - opened
+      - edited
+      - deleted
+      - transferred
       - closed
       - reopened
+      - labeled
+      - unlabeled
+      - milestoned
+      - demilestoned
+      - typed
+      - untyped
 
 concurrency:
   group: ${{ github.workflow }}
@@ -23,8 +33,6 @@ jobs:
       - name: Setup R
         id: setup-r
         uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'release'
 
       - name: Install system dependencies
         run: |
@@ -46,51 +54,22 @@ jobs:
         shell: Rscript {0}
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.ADMIN_PAT }}
-          # Fetch all history so that git log can find the true last modification time
-          fetch-depth: 0
-
-      - name: Debounce issue-triggered runs
-        if: github.event_name != 'workflow_dispatch'
-        run: |
-          FILE_PATH=".github/ai/issues.json"
-          # Check if the file exists in git history before trying to get its log
-          if git log --pretty=format:'' -- "$FILE_PATH" &> /dev/null; then
-            LAST_MODIFIED=$(git log -1 --format=%ct -- "$FILE_PATH")
-            CURRENT_TIME=$(date +%s)
-            DIFF=$((CURRENT_TIME - LAST_MODIFIED))
-            # How long should we wait between issues.json updates?
-            DEBOUNCE_WINDOW_MINUTES=60
-            DEBOUNCE_WINDOW=$((DEBOUNCE_WINDOW_MINUTES * 60))
-
-            echo "Time since last update: $DIFF seconds."
-
-            if [ "$DIFF" -lt "$DEBOUNCE_WINDOW" ]; then
-              WAIT_TIME=$((DEBOUNCE_WINDOW - DIFF))
-              echo "Last update was less than ${DEBOUNCE_WINDOW_MINUTES} minutes ago. Waiting for $WAIT_TIME seconds..."
-              sleep "$WAIT_TIME"
-              echo "Wait complete. Pulling latest changes before proceeding."
-              git pull
-            else
-              echo "Proceeding without delay."
-            fi
-          else
-            echo "issues.json not found in history. Proceeding without delay."
-          fi
-        shell: bash
 
       - name: Run script to fetch issues
         run: Rscript .github/scripts/fetch-issues.R
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_PAT }}
 
-      - name: Commit and push changes
+      - name: Commit and push changes to ai branch
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Create a new 'ai' branch from the current HEAD (main) or reset the existing one.
+          git checkout -B ai
           git add .github/ai/issues.json
-          # Commit only if there are changes
           git diff --staged --quiet || git commit -m "chore: Update issues.json"
-          git push
+          # Force push the 'ai' branch to the remote, overwriting its history.
+          git push --force origin ai
