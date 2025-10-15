@@ -60,6 +60,6 @@ jobs:
           # Create a new 'ai' branch from the current HEAD (main) or reset the existing one.
           git checkout -B ai
           git add .github/ai/issues.json
-          git commit -m "chore: Update issues.json"
+          git diff --staged --quiet || git commit -m "chore: Update issues.json"
           # Force push the 'ai' branch to the remote, overwriting its history.
           git push --force origin ai
