@@ -10,7 +10,7 @@
 
 ## Other changes
 
-* Revised the "Getting started with stbl" vignette to clarify what happens at each step (#139).
+* Revised the "Getting started with stbl" vignette to clarify what happens at each step (#139, #143, #144).
 
 # stbl 0.2.0
 
