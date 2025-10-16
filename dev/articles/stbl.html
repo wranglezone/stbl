@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9003</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,11 +117,8 @@ list of strings) into a proper character vector.</p>
 <span>    interests <span class="op">=</span> <span class="va">interests</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>It works when <code>interests</code> is a character vector or a list
-of character vectors.</p>
-<p>It works when <code>interests</code> is a character vector. Note:
-Throughout this article, we pipe the result into <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> to
-make it easier to see the differences.</p>
+<p>The function still returns the list when <code>interests</code> is a
+character vector:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -129,14 +126,17 @@ make it easier to see the differences.</p>
 <span>  age <span class="op">=</span> <span class="fl">42</span>, </span>
 <span>  is_premium_member <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>  interests <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"hiking"</span><span class="op">)</span>    <span class="co"># Note that this is already a character vector</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co"># Note: Throughout this article, we pipe the result into `str()` to make it</span></span>
+<span>  <span class="co"># easier to see the differences.</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
 <span><span class="co">#&gt;  $ username         : chr "test_user"</span></span>
 <span><span class="co">#&gt;  $ email_address    : chr "test@example.com"</span></span>
 <span><span class="co">#&gt;  $ age              : num 42</span></span>
 <span><span class="co">#&gt;  $ is_premium_member: logi TRUE</span></span>
 <span><span class="co">#&gt;  $ interests        : chr [1:2] "R" "hiking"</span></span></code></pre></div>
-<p>It also works when <code>interests</code> is a list of strings.</p>
+<p>It also works when <code>interests</code> is a list of strings:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -152,7 +152,7 @@ make it easier to see the differences.</p>
 <span><span class="co">#&gt;  $ is_premium_member: logi TRUE</span></span>
 <span><span class="co">#&gt;  $ interests        : chr [1:2] "R" "hiking"</span></span></code></pre></div>
 <p>If the input is something that cannot be reasonably flattened to a
-character vector, it fails with a helpful message.</p>
+character vector, it fails with a helpful error message:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fails because the list contains a function, which is not character-like.</span></span>
 <span><span class="fu">register_user</span><span class="op">(</span></span>
@@ -194,7 +194,8 @@ functions are liberal in what they accept. For example,
 <span>    interests <span class="op">=</span> <span class="va">interests</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>This works.</p>
+<p>When everything follows the rules, <code>register_user()</code>
+works:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -209,9 +210,10 @@ functions are liberal in what they accept. For example,
 <span><span class="co">#&gt;  $ age              : int 42</span></span>
 <span><span class="co">#&gt;  $ is_premium_member: logi TRUE</span></span>
 <span><span class="co">#&gt;  $ interests        : chr [1:2] "R" "hiking"</span></span></code></pre></div>
-<p>They fail clearly if the input isn’t a single value or can’t be
-coerced.</p>
-<p>This fails because age is not a single value.</p>
+<p>The <code>register_user()</code> function will fail with clear error
+messages if the input isn’t a single value or can’t be coerced.</p>
+<p>For example, when age is not a single value,
+<code>register_user()</code> throws an error:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -223,7 +225,8 @@ coerced.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `age` must be a single <span style="color: #0000BB;">&lt;integer&gt;</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> `age` has 2 values.</span></span></code></pre></div>
-<p>This fails because “forty-two” cannot be converted to an integer.</p>
+<p>Likewise, this next example fails because “forty-two” cannot be
+converted to an integer:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -240,14 +243,15 @@ coerced.</p>
 <div class="section level2">
 <h2 id="step-3-complex-validation-with-stabilize_">Step 3: Complex Validation with <code>stabilize_*()</code><a class="anchor" aria-label="anchor" href="#step-3-complex-validation-with-stabilize_"></a>
 </h2>
-<p>Finally, let’s add our most complex validation for
-<code>username</code> and <code>email_address</code>. For these, simple
-type coercion isn’t enough; we need to check their content and structure
-using <code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code>. This function first coerces
-the input, then applies a list of validation <code>rules</code>. You
-should prefer the faster <code>to_*()</code> functions and only
-“upgrade” to <code>stabilize_*()</code> when you need these additional
-checks.</p>
+<p>Finally, let’s add more complex validation for <code>username</code>
+and <code>email_address</code>. For these, simple type coercion isn’t
+enough; we need to check their content and structure using
+<code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code>. This function first coerces the
+input to character, then applies a list of validation rules supplied via
+the <code>regex</code> argument (see the <code><a href="../reference/stabilize_chr.html">stabilize_chr()</a></code>
+documentation for details). If speed matters, you should prefer the
+faster <code>to_*()</code> functions and only “upgrade” to
+<code>stabilize_*()</code> when you need these additional checks.</p>
 <p>This is our final, fully stabilized function:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">register_user</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">username</span>,</span>
@@ -261,7 +265,7 @@ checks.</p>
 <span>  <span class="va">is_premium_member</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_lgl.html">to_lgl_scalar</a></span><span class="op">(</span><span class="va">is_premium_member</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Make sure the username is a length-1 character vector without any spaces,</span></span>
-<span>  <span class="co"># tabs, or newlines.</span></span>
+<span>  <span class="co"># tabs, or newlines. "\\s" means "any space character".</span></span>
 <span>  <span class="va">space_regex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"must not contain spaces"</span> <span class="op">=</span> <span class="st">"\\s"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">space_regex</span>, <span class="st">"negate"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span>  <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
@@ -269,7 +273,11 @@ checks.</p>
 <span>    regex <span class="op">=</span> <span class="va">space_regex</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span>  <span class="co"># The email address has to have the pattern "*@*.*".</span></span>
+<span>  <span class="co"># The email address has to have the pattern "*@*.*". Or, in regex, "^" (start</span></span>
+<span>  <span class="co"># of string), "[...]+" (one or more of any character in the brackets), "@"</span></span>
+<span>  <span class="co"># (the at sign), "[...]+" (one or more of any character in the brackets),</span></span>
+<span>  <span class="co"># "\\." (a literal period), "[...]{2,}" (two or more of any character in the</span></span>
+<span>  <span class="co"># brackets), "$" (end of string).</span></span>
 <span>  <span class="va">email_regex</span> <span class="op">&lt;-</span> <span class="st">"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"</span></span>
 <span>  <span class="va">email_address</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
 <span>    <span class="va">email_address</span>,</span>
@@ -285,7 +293,7 @@ checks.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>When all of the inputs follow the expectations, the call
-succeeds.</p>
+succeeds:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
@@ -301,7 +309,8 @@ succeeds.</p>
 <span><span class="co">#&gt;  $ is_premium_member: logi TRUE</span></span>
 <span><span class="co">#&gt;  $ interests        : chr [1:2] "R" "hiking"</span></span></code></pre></div>
 <p>If anything is wrong, it fails with informative error messages.</p>
-<p>This fails because the username has a space.</p>
+<p>When the username has a space, <code>register_user()</code> fails
+with an informative error message:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test user"</span>, </span>
@@ -313,7 +322,7 @@ succeeds.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `username` must not contain spaces</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"test user"</span> fails the check.</span></span></code></pre></div>
-<p>This fails because the email address is invalid.</p>
+<p>This example fails because the email address is invalid:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
