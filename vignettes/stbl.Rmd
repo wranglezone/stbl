@@ -71,10 +71,7 @@ register_user <- function(username,
 }
 ```
 
-It works when `interests` is a character vector or a list of character vectors.
-
-It works when `interests` is a character vector.
-Note: Throughout this article, we pipe the result into `str()` to make it easier to see the differences.
+The function still returns the list when `interests` is a character vector:
 
 ```{r}
 register_user(
@@ -83,10 +80,13 @@ register_user(
   age = 42, 
   is_premium_member = TRUE, 
   interests = c("R", "hiking")    # Note that this is already a character vector
-) |> str()
+) |> 
+  # Note: Throughout this article, we pipe the result into `str()` to make it
+  # easier to see the differences.
+  str()
 ```
 
-It also works when `interests` is a list of strings.
+It also works when `interests` is a list of strings:
 
 ```{r}
 register_user(
@@ -98,7 +98,7 @@ register_user(
 ) |> str()
 ```
 
-If the input is something that cannot be reasonably flattened to a character vector, it fails with a helpful message.
+If the input is something that cannot be reasonably flattened to a character vector, it fails with a helpful error message:
 
 ```{r, error = TRUE}
 # Fails because the list contains a function, which is not character-like.
@@ -139,7 +139,7 @@ register_user <- function(username,
 }
 ```
 
-This works.
+When everything follows the rules, `register_user()` works:
 
 ```{r}
 register_user(
@@ -151,9 +151,9 @@ register_user(
 ) |> str()
 ```
 
-They fail clearly if the input isn't a single value or can't be coerced.
+The `register_user()` function will fail with clear error messages if the input isn't a single value or can't be coerced.
 
-This fails because age is not a single value.
+For example, when age is not a single value, `register_user()` throws an error:
 
 ```{r, error = TRUE}
 register_user(
@@ -165,7 +165,7 @@ register_user(
 )
 ```
 
-This fails because "forty-two" cannot be converted to an integer.
+Likewise, this next example fails because "forty-two" cannot be converted to an integer:
 
 ```{r, error = TRUE}
 register_user(
@@ -179,10 +179,10 @@ register_user(
 
 ## Step 3: Complex Validation with `stabilize_*()`
 
-Finally, let's add our most complex validation for `username` and `email_address`.
+Finally, let's add more complex validation for `username` and `email_address`.
 For these, simple type coercion isn't enough; we need to check their content and structure using `stabilize_chr_scalar()`.
-This function first coerces the input, then applies a list of validation `rules`.
-You should prefer the faster `to_*()` functions and only "upgrade" to `stabilize_*()` when you need these additional checks.
+This function first coerces the input to character, then applies a list of validation rules supplied via the `regex` argument (see the `stabilize_chr()` documentation for details).
+If speed matters, you should prefer the faster `to_*()` functions and only "upgrade" to `stabilize_*()` when you need these additional checks.
 
 This is our final, fully stabilized function:
 
@@ -198,7 +198,7 @@ register_user <- function(username,
   is_premium_member <- to_lgl_scalar(is_premium_member)
 
   # Make sure the username is a length-1 character vector without any spaces,
-  # tabs, or newlines.
+  # tabs, or newlines. "\\s" means "any space character".
   space_regex <- c("must not contain spaces" = "\\s")
   attr(space_regex, "negate") <- TRUE
   username <- stabilize_chr_scalar(
@@ -206,7 +206,11 @@ register_user <- function(username,
     regex = space_regex
   )
 
-  # The email address has to have the pattern "*@*.*".
+  # The email address has to have the pattern "*@*.*". Or, in regex, "^" (start
+  # of string), "[...]+" (one or more of any character in the brackets), "@"
+  # (the at sign), "[...]+" (one or more of any character in the brackets),
+  # "\\." (a literal period), "[...]{2,}" (two or more of any character in the
+  # brackets), "$" (end of string).
   email_regex <- "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
   email_address <- stabilize_chr_scalar(
     email_address,
@@ -223,7 +227,7 @@ register_user <- function(username,
 }
 ```
 
-When all of the inputs follow the expectations, the call succeeds.
+When all of the inputs follow the expectations, the call succeeds:
 
 ```{r}
 register_user(
@@ -237,7 +241,7 @@ register_user(
 
 If anything is wrong, it fails with informative error messages.
 
-This fails because the username has a space.
+When the username has a space, `register_user()` fails with an informative error message:
 
 ```{r, error = TRUE}
 register_user(
@@ -249,7 +253,7 @@ register_user(
 )
 ```
 
-This fails because the email address is invalid.
+This example fails because the email address is invalid:
 
 ```{r, error = TRUE}
 register_user(
