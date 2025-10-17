@@ -8,8 +8,8 @@ Description: A set of consistent, opinionated functions to quickly check
     function arguments, coerce them to the desired configuration, or
     deliver informative error messages when that is not possible.
 License: MIT + file LICENSE
-URL: https://stbl.api2r.org/, https://github.com/api2r/stbl
-BugReports: https://github.com/api2r/stbl/issues
+URL: https://stbl.wrangle.zone/, https://github.com/wranglezone/stbl
+BugReports: https://github.com/wranglezone/stbl/issues
 Depends:
     R (>= 4.1)
 Imports:

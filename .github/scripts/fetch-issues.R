@@ -7,7 +7,7 @@ repo_full_name <- Sys.getenv("GITHUB_REPOSITORY")
 if (repo_full_name == "") {
   stop(
     "Error: GITHUB_REPOSITORY environment variable not set.\n",
-    "Please set it for local testing (e.g., Sys.setenv(GITHUB_REPOSITORY = 'api2r/stbl')).",
+    "Please set it for local testing (e.g., Sys.setenv(GITHUB_REPOSITORY = 'wranglezone/stbl')).",
     call. = FALSE
   )
 }

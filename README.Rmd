@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/stbl)](https://CRAN.R-project.org/package=stbl)
-[![Codecov test coverage](https://codecov.io/gh/api2r/stbl/branch/main/graph/badge.svg)](https://app.codecov.io/gh/api2r/stbl?branch=main)
-[![R-CMD-check](https://github.com/api2r/stbl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/api2r/stbl/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/wranglezone/stbl/branch/main/graph/badge.svg)](https://app.codecov.io/gh/wranglezone/stbl?branch=main)
+[![R-CMD-check](https://github.com/wranglezone/stbl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wranglezone/stbl/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 R is flexible about classes.
@@ -45,7 +45,7 @@ Install the development version of stbl from [GitHub](https://github.com/):
 
 ``` r
 # install.packages("pak")
-pak::pak("api2r/stbl")
+pak::pak("wranglezone/stbl")
 ```
 :::
 
@@ -102,4 +102,4 @@ Other packages perform functions similar to stbl, but with different approaches:
 
 ## Code of Conduct
 
-Please note that the stbl project is released with a [Contributor Code of Conduct](https://stbl.api2r.org/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the stbl project is released with a [Contributor Code of Conduct](https://stbl.wrangle.zone/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
