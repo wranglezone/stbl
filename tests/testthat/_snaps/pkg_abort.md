@@ -24,7 +24,7 @@
       Error in `wrapped_abort()`:
       ! A message.
       i This is an internal error that was detected in the stbl package.
-        Please report it at <https://github.com/api2r/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
+        Please report it at <https://github.com/wranglezone/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
 
 # pkg_abort() uses message_env when provided
 
