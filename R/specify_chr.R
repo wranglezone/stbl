@@ -24,15 +24,21 @@ specify_chr <- function(...) {
 
   structure(
     rlang::new_function(
-      as.pairlist(alist(x = , ... = )),
+      as.pairlist(alist(
+        x = ,
+        ... = ,
+        x_arg = rlang::caller_arg(x),
+        call = rlang::caller_env(),
+        x_class = stbl::object_type(x)
+      )),
       rlang::expr({
         stbl::stabilize_chr(
           x,
           !!!rlang::list2(...),
           ...,
-          x_arg = rlang::caller_arg(x),
-          call = rlang::caller_env(),
-          x_class = stbl::object_type(x)
+          x_arg = x_arg,
+          call = call,
+          x_class = x_class
         )
       }),
       rlang::caller_env()
