@@ -21,6 +21,26 @@ specify_chr <- function(...) {
 
   # Dummy variable(s) to avoid R CMD check undefined global variable notes.
   x <- "x"
+  x_arg <- "x_arg"
+  call <- "call"
+  x_class <- "x_class"
+  factory_args <- rlang::list2(...)
+  factory_arg_names <- names(factory_args)
+  preproc <- list()
+  if (length(factory_args)) {
+    preproc <- rlang::exprs({
+      duplicated_args <- intersect(...names(), !!factory_arg_names)
+      if (length(duplicated_args)) {
+        .stbl_abort(
+          c(
+            "Arguments passed via `...` cannot duplicate specification.",
+            i = "Duplicated arguments: {.arg {duplicated_args}}"
+          ),
+          subclass = "duplicate_args"
+        )
+      }
+    })
+  }
 
   structure(
     rlang::new_function(
@@ -32,9 +52,10 @@ specify_chr <- function(...) {
         x_class = stbl::object_type(x)
       )),
       rlang::expr({
+        !!!preproc
         stbl::stabilize_chr(
           x,
-          !!!rlang::list2(...),
+          !!!factory_args,
           ...,
           x_arg = x_arg,
           call = call,
