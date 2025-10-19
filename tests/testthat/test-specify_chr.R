@@ -10,7 +10,6 @@ test_that("specify_chr builds the expected factory", {
     regex_checker(given),
     given
   )
-
   expect_pkg_error_classes(
     regex_checker("invalid"),
     "stbl",
@@ -31,5 +30,20 @@ test_that("specify_chr passes dots", {
     baseline(NULL, allow_null = FALSE),
     "stbl",
     "bad_null"
+  )
+})
+
+test_that("specify_chr throws helpful errors for duplicated dots", {
+  regex_checker <- specify_chr(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
+  expect_pkg_error_classes(
+    regex_checker("12345", regex = ".*"),
+    "stbl",
+    "duplicate_args"
+  )
+  expect_snapshot(
+    {
+      regex_checker("12345", regex = ".*")
+    },
+    error = TRUE
   )
 })
