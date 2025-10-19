@@ -183,13 +183,13 @@ stabilize_chr_scalar <- function(
 .has_regex_pattern <- function(x, regex) {
   if (inherits(regex, "stringr_pattern")) {
     rlang::check_installed("stringr", "to apply a stringr-style regex pattern.")
-    return(stringr::str_detect(x, regex))
+    return(is.na(x) | stringr::str_detect(x, regex))
   }
 
   if (requireNamespace("stringi", quietly = TRUE)) {
-    return(stringi::stri_detect_regex(x, regex))
+    return(is.na(x) | stringi::stri_detect_regex(x, regex))
   }
-  return(grepl(regex, x)) # nocov
+  return(is.na(x) | grepl(regex, x)) # nocov
 }
 
 #' Describe a character-based validation failure

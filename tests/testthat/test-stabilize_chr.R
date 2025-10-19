@@ -173,6 +173,26 @@ test_that("stabilize_chr() works with stringr::regex()", {
   )
 })
 
+test_that("stabilize_chr works with NA and regex pattern", {
+  expect_no_error({
+    stabilize_chr(
+      c("abc", NA),
+      allow_na = TRUE,
+      regex = "^[A-Za-z]+$"
+    )
+  })
+  expect_error(
+    {
+      stabilize_chr(
+        c("abc", NA),
+        allow_na = FALSE,
+        regex = "^[A-Za-z]+$"
+      )
+    },
+    class = .compile_dash("stbl", "error", "bad_na")
+  )
+})
+
 test_that("stabilize_chr_scalar() allows length-1 chrs through", {
   expect_identical(stabilize_chr_scalar("a"), "a")
 })

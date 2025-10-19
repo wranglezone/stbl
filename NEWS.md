@@ -3,6 +3,7 @@
 ## New features
 
 * New condition functions: `pkg_abort()` throws errors with a standardized, opinionated collection of classes, and `expect_pkg_error_classes()` checks that an error with the expected set of classes is thrown (#136).
+* New specification functions: `specify_*()` creates a "stbl-specified function" (class `"stbl_specified_function"`), a call to the corresponding `stabilize_*()` function with arguments pre-filled. For example, `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")` creates a `stabilize_email()` function that calls `stabilize_chr()` with `regex = "^[^@]+@[^@]+\\.[^@]+$"`, which could then be used to stabilize email addresses (#147).
 
 ## Potential breaking changes
 
