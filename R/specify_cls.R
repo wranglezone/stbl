@@ -171,9 +171,9 @@ specify_chr_scalar <- function(...) {
 
 #' Create a specified double stabilizer function
 #'
-#' `specify_fct()` creates a function that will call [stabilize_dbl()] with the
+#' `specify_dbl()` creates a function that will call [stabilize_dbl()] with the
 #' provided arguments. `specify_dbl_scalar()` creates a function that will call
-#' [stabilize_dbl_scalar()] with the provided arguments..
+#' [stabilize_dbl_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_dbl -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_dbl_scalar -x -x_arg -call -x_class
@@ -206,7 +206,7 @@ specify_dbl_scalar <- function(...) {
 #'
 #' `specify_fct()` creates a function that will call [stabilize_fct()] with the
 #' provided arguments. `specify_fct_scalar()` creates a function that will call
-#' [stabilize_fct_scalar()] with the provided arguments..
+#' [stabilize_fct_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_fct -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_fct_scalar -x -x_arg -call -x_class
@@ -235,11 +235,11 @@ specify_fct_scalar <- function(...) {
 
 # int ----
 
-#' Create a specified factor stabilizer function
+#' Create a specified integer stabilizer function
 #'
 #' `specify_int()` creates a function that will call [stabilize_int()] with the
 #' provided arguments. `specify_int_scalar()` creates a function that will call
-#' [stabilize_int_scalar()] with the provided arguments..
+#' [stabilize_int_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_int -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_int_scalar -x -x_arg -call -x_class
@@ -268,11 +268,11 @@ specify_int_scalar <- function(...) {
 
 # lgl ----
 
-#' Create a specified factor stabilizer function
+#' Create a specified logical stabilizer function
 #'
 #' `specify_lgl()` creates a function that will call [stabilize_lgl()] with the
 #' provided arguments. `specify_lgl_scalar()` creates a function that will call
-#' [stabilize_lgl_scalar()] with the provided arguments..
+#' [stabilize_lgl_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_lgl -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_lgl_scalar -x -x_arg -call -x_class

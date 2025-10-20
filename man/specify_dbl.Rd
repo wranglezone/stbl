@@ -42,9 +42,9 @@ the body of the resulting function if you want to provide additional
 context or functionality.
 }
 \description{
-\code{specify_fct()} creates a function that will call \code{\link[=stabilize_dbl]{stabilize_dbl()}} with the
+\code{specify_dbl()} creates a function that will call \code{\link[=stabilize_dbl]{stabilize_dbl()}} with the
 provided arguments. \code{specify_dbl_scalar()} creates a function that will call
-\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}} with the provided arguments..
+\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}} with the provided arguments.
 }
 \examples{
 stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)

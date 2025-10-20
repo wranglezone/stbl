@@ -3,7 +3,7 @@
 \name{specify_int}
 \alias{specify_int}
 \alias{specify_int_scalar}
-\title{Create a specified factor stabilizer function}
+\title{Create a specified integer stabilizer function}
 \usage{
 specify_int(...)
 
@@ -44,7 +44,7 @@ context or functionality.
 \description{
 \code{specify_int()} creates a function that will call \code{\link[=stabilize_int]{stabilize_int()}} with the
 provided arguments. \code{specify_int_scalar()} creates a function that will call
-\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}} with the provided arguments..
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}} with the provided arguments.
 }
 \examples{
 stabilize_3_to_5 <- specify_int(min_value = 3, max_value = 5)

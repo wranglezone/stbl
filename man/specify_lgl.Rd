@@ -3,7 +3,7 @@
 \name{specify_lgl}
 \alias{specify_lgl}
 \alias{specify_lgl_scalar}
-\title{Create a specified factor stabilizer function}
+\title{Create a specified logical stabilizer function}
 \usage{
 specify_lgl(...)
 
@@ -34,7 +34,7 @@ context or functionality.
 \description{
 \code{specify_lgl()} creates a function that will call \code{\link[=stabilize_lgl]{stabilize_lgl()}} with the
 provided arguments. \code{specify_lgl_scalar()} creates a function that will call
-\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}} with the provided arguments..
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}} with the provided arguments.
 }
 \examples{
 stabilize_few_lgl <- specify_lgl(max_size = 5)
