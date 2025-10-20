@@ -124,11 +124,14 @@ specify_cls <- function(
 #' @usage NULL
 #' @export
 `!!` <- function(x) {
+  # nocov start
+
   # Copied from {rlang} to make R CMD check happy.
   rlang::abort(
     "`!!` can only be used within a defused argument.",
     call = rlang::caller_env()
   )
+  # nocov end
 }
 
 # chr ----
@@ -164,13 +167,46 @@ specify_chr_scalar <- function(...) {
   specify_cls("chr", ..., scalar = TRUE)
 }
 
+# dbl ----
+
+#' Create a specified double stabilizer function
+#'
+#' `specify_dbl()` creates a function that will call [stabilize_dbl()] with the
+#' provided arguments. `specify_dbl_scalar()` creates a function that will call
+#' [stabilize_dbl_scalar()] with the provided arguments.
+#'
+#' @inheritDotParams stabilize_dbl -x -x_arg -call -x_class
+#' @inheritDotParams stabilize_dbl_scalar -x -x_arg -call -x_class
+#'
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_dbl()] or [stabilize_dbl_scalar()] with the provided arguments.
+#'   The generated function will also accept `...` for additional arguments to
+#'   pass to `stabilize_dbl()` or `stabilize_dbl_scalar()`. You can copy/paste
+#'   the body of the resulting function if you want to provide additional
+#'   context or functionality.
+#' @export
+#' @examples
+#' stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)
+#' stabilize_3_to_5(c(3.3, 4.4, 5))
+#' try(stabilize_3_to_5(c(1:6)))
+#' @rdname specify_dbl
+specify_dbl <- function(...) {
+  specify_cls("dbl", ...)
+}
+
+#' @export
+#' @rdname specify_dbl
+specify_dbl_scalar <- function(...) {
+  specify_cls("dbl", ..., scalar = TRUE)
+}
+
 # fct ----
 
 #' Create a specified factor stabilizer function
 #'
 #' `specify_fct()` creates a function that will call [stabilize_fct()] with the
 #' provided arguments. `specify_fct_scalar()` creates a function that will call
-#' [stabilize_fct_scalar()] with the provided arguments..
+#' [stabilize_fct_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_fct -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_fct_scalar -x -x_arg -call -x_class
@@ -195,4 +231,70 @@ specify_fct <- function(...) {
 #' @rdname specify_fct
 specify_fct_scalar <- function(...) {
   specify_cls("fct", ..., scalar = TRUE)
+}
+
+# int ----
+
+#' Create a specified integer stabilizer function
+#'
+#' `specify_int()` creates a function that will call [stabilize_int()] with the
+#' provided arguments. `specify_int_scalar()` creates a function that will call
+#' [stabilize_int_scalar()] with the provided arguments.
+#'
+#' @inheritDotParams stabilize_int -x -x_arg -call -x_class
+#' @inheritDotParams stabilize_int_scalar -x -x_arg -call -x_class
+#'
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_int()] or [stabilize_int_scalar()] with the provided arguments.
+#'   The generated function will also accept `...` for additional arguments to
+#'   pass to `stabilize_int()` or `stabilize_int_scalar()`. You can copy/paste
+#'   the body of the resulting function if you want to provide additional
+#'   context or functionality.
+#' @export
+#' @examples
+#' stabilize_3_to_5 <- specify_int(min_value = 3, max_value = 5)
+#' stabilize_3_to_5(c(3:5))
+#' try(stabilize_3_to_5(c(1:6)))
+#' @rdname specify_int
+specify_int <- function(...) {
+  specify_cls("int", ...)
+}
+
+#' @export
+#' @rdname specify_int
+specify_int_scalar <- function(...) {
+  specify_cls("int", ..., scalar = TRUE)
+}
+
+# lgl ----
+
+#' Create a specified logical stabilizer function
+#'
+#' `specify_lgl()` creates a function that will call [stabilize_lgl()] with the
+#' provided arguments. `specify_lgl_scalar()` creates a function that will call
+#' [stabilize_lgl_scalar()] with the provided arguments.
+#'
+#' @inheritDotParams stabilize_lgl -x -x_arg -call -x_class
+#' @inheritDotParams stabilize_lgl_scalar -x -x_arg -call -x_class
+#'
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_lgl()] or [stabilize_lgl_scalar()] with the provided arguments.
+#'   The generated function will also accept `...` for additional arguments to
+#'   pass to `stabilize_lgl()` or `stabilize_lgl_scalar()`. You can copy/paste
+#'   the body of the resulting function if you want to provide additional
+#'   context or functionality.
+#' @export
+#' @examples
+#' stabilize_few_lgl <- specify_lgl(max_size = 5)
+#' stabilize_few_lgl(c(TRUE, "False", TRUE))
+#' try(stabilize_few_lgl(rep(TRUE, 10)))
+#' @rdname specify_lgl
+specify_lgl <- function(...) {
+  specify_cls("lgl", ...)
+}
+
+#' @export
+#' @rdname specify_lgl
+specify_lgl_scalar <- function(...) {
+  specify_cls("lgl", ..., scalar = TRUE)
 }
