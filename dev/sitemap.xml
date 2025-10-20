@@ -35,6 +35,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_dash.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_condition_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_error_classes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_specification_fn.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-define_main_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-elements_are_cls_ish.html</loc></url>
@@ -43,6 +45,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-glue2.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-has_regex_pattern.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
@@ -61,12 +64,15 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/grapes-and-and-grapes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/index.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/injection-operator.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/object_type.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_abort.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/reexports.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_not_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_cls.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dbl.html</loc></url>
