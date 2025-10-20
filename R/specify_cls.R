@@ -75,6 +75,7 @@ specify_cls <- function(
 #' @param check_dupes `(list)` An empty list, or a list containing an expression
 #'   that checks for duplicate arguments.
 #' @param factory_args Arguments passed to [specify_cls()] as `...`.
+#' @param ... Not used. Included to avoid confusion in R CMD check.
 #' @inheritParams specify_cls
 #' @inherit specify_cls return
 #' @keywords internal
@@ -82,6 +83,7 @@ specify_cls <- function(
   check_dupes,
   stabilizer,
   factory_args,
+  ...,
   call = rlang::caller_env()
 ) {
   # Function created with the help of factory::build_factory(). See
@@ -114,6 +116,18 @@ specify_cls <- function(
       env = call
     ),
     class = c("stbl_specified_fn", "function")
+  )
+}
+
+#' Injection operator for defused arguments
+#' @name injection-operator
+#' @usage NULL
+#' @export
+`!!` <- function(x) {
+  # Copied from {rlang} to make R CMD check happy.
+  rlang::abort(
+    "`!!` can only be used within a defused argument.",
+    call = rlang::caller_env()
   )
 }
 

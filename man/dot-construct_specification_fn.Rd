@@ -8,6 +8,7 @@
   check_dupes,
   stabilizer,
   factory_args,
+  ...,
   call = rlang::caller_env()
 )
 }
@@ -19,6 +20,8 @@ that checks for duplicate arguments.}
 call.}
 
 \item{factory_args}{Arguments passed to \code{\link[=specify_cls]{specify_cls()}} as \code{...}.}
+
+\item{...}{Not used. Included to avoid confusion in R CMD check.}
 
 \item{call}{\code{(environment)} The environment to use as the parent of the
 generated function. Defaults to the caller's environment.}
