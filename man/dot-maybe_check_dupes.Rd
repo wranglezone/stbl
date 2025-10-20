@@ -2,7 +2,7 @@
 % Please edit documentation in R/specify_cls.R
 \name{.maybe_check_dupes}
 \alias{.maybe_check_dupes}
-\title{Construction the check_dupes expression}
+\title{Construct the check_dupes expression}
 \usage{
 .maybe_check_dupes(factory_args)
 }
@@ -14,6 +14,6 @@ An empty list, or a list containing an expression that checks for
 duplicate arguments.
 }
 \description{
-Construction the check_dupes expression
+Construct the check_dupes expression
 }
 \keyword{internal}

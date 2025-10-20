@@ -112,9 +112,9 @@ test_that("specify_fct can build a level checker", {
     factor(c("a", NA, "c"), levels = c("a", "c"))
   )
   expect_pkg_error_classes(
-    regex_checker("invalid"),
+    level_checker("invalid"),
     "stbl",
-    "must"
+    "fct_levels"
   )
 })
 

@@ -44,7 +44,7 @@ context or functionality.
 \description{
 \code{specify_chr()} creates a function that will call \code{\link[=stabilize_chr]{stabilize_chr()}} with the
 provided arguments. \code{specify_chr_scalar()} creates a function that will call
-\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}} with the provided argumetns.
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}} with the provided arguments.
 }
 \examples{
 stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\\\.[^@]+$")

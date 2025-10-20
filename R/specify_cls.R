@@ -30,7 +30,7 @@ specify_cls <- function(
   )
 }
 
-#' Construction the check_dupes expression
+#' Construct the check_dupes expression
 #'
 #' @param factory_args Arguments passed into the factory.
 #' @returns An empty list, or a list containing an expression that checks for
@@ -123,7 +123,7 @@ specify_cls <- function(
 #'
 #' `specify_chr()` creates a function that will call [stabilize_chr()] with the
 #' provided arguments. `specify_chr_scalar()` creates a function that will call
-#' [stabilize_chr_scalar()] with the provided argumetns.
+#' [stabilize_chr_scalar()] with the provided arguments.
 #'
 #' @inheritDotParams stabilize_chr -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_chr_scalar -x -x_arg -call -x_class
@@ -156,7 +156,7 @@ specify_chr_scalar <- function(...) {
 #'
 #' `specify_fct()` creates a function that will call [stabilize_fct()] with the
 #' provided arguments. `specify_fct_scalar()` creates a function that will call
-#' [stabilize_fct_scalar()] with the provided argumetns.
+#' [stabilize_fct_scalar()] with the provided arguments..
 #'
 #' @inheritDotParams stabilize_fct -x -x_arg -call -x_class
 #' @inheritDotParams stabilize_fct_scalar -x -x_arg -call -x_class

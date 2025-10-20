@@ -37,7 +37,7 @@ context or functionality.
 \description{
 \code{specify_fct()} creates a function that will call \code{\link[=stabilize_fct]{stabilize_fct()}} with the
 provided arguments. \code{specify_fct_scalar()} creates a function that will call
-\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}} with the provided argumetns.
+\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}} with the provided arguments..
 }
 \examples{
 stabilize_lowercase_letter <- specify_fct(levels = letters)
