@@ -78,54 +78,132 @@ test_that("specify_cls builds the expected scalar function snapshot", {
 # Class versions ----
 
 test_that("specify_chr can build a regex checker", {
-  regex_checker <- specify_chr(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
+  checker <- specify_chr(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
   given <- "12345-6789"
   expect_identical(
-    regex_checker(given),
+    checker(given),
     given
   )
   expect_pkg_error_classes(
-    regex_checker("invalid"),
+    checker("invalid"),
     "stbl",
     "must"
   )
 })
 
 test_that("specify_chr_scalar can build a regex checker", {
-  regex_checker <- specify_chr_scalar(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
+  checker <- specify_chr_scalar(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
   given <- "12345-6789"
   expect_identical(
-    regex_checker(given),
+    checker(given),
     given
   )
   expect_pkg_error_classes(
-    regex_checker("invalid"),
+    checker("invalid"),
     "stbl",
     "must"
   )
 })
 
-test_that("specify_fct can build a level checker", {
-  level_checker <- specify_fct(levels = c("a", "c"), to_na = "b")
+test_that("specify_dbl can build a value checker", {
+  checker <- specify_dbl(min_value = 27.2)
   expect_identical(
-    level_checker(c("a", "b", "c")),
+    checker(30:40 + 0.1),
+    30:40 + 0.1
+  )
+  expect_pkg_error_classes(
+    checker(19.2),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_dbl_scalar can build a value checker", {
+  checker <- specify_dbl_scalar(min_value = 27.2)
+  expect_identical(
+    checker(30.1),
+    30.1
+  )
+  expect_pkg_error_classes(
+    checker(30:40 + 0.1),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_fct can build a level checker", {
+  checker <- specify_fct(levels = c("a", "c"), to_na = "b")
+  expect_identical(
+    checker(c("a", "b", "c")),
     factor(c("a", NA, "c"), levels = c("a", "c"))
   )
   expect_pkg_error_classes(
-    level_checker("invalid"),
+    checker("invalid"),
     "stbl",
     "fct_levels"
   )
 })
 
 test_that("specify_fct_scalar can build a level checker", {
-  level_checker <- specify_fct_scalar(levels = c("a", "c"), to_na = "b")
+  checker <- specify_fct_scalar(levels = c("a", "c"), to_na = "b")
   expect_identical(
-    level_checker("a"),
+    checker("a"),
     factor("a", levels = c("a", "c"))
   )
   expect_pkg_error_classes(
-    level_checker(c("a", "c")),
+    checker(c("a", "c")),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_int can build a value checker", {
+  checker <- specify_int(min_value = 2)
+  expect_identical(
+    checker(2:10),
+    2:10
+  )
+  expect_pkg_error_classes(
+    checker(1),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_int_scalar can build a value checker", {
+  checker <- specify_int_scalar(min_value = 2)
+  expect_identical(
+    checker(2),
+    2L
+  )
+  expect_pkg_error_classes(
+    checker(2:10),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_lgl can build a checker", {
+  checker <- specify_lgl(allow_na = FALSE)
+  expect_identical(
+    checker(c(TRUE, "False")),
+    c(TRUE, FALSE)
+  )
+  expect_pkg_error_classes(
+    checker(NA),
+    "stbl",
+    "bad_na"
+  )
+})
+
+test_that("specify_lgl_scalar can build a value checker", {
+  checker <- specify_lgl_scalar(allow_na = FALSE)
+  expect_identical(
+    checker("True"),
+    TRUE
+  )
+  expect_pkg_error_classes(
+    checker(c(TRUE, FALSE)),
     "stbl",
     "non_scalar"
   )
