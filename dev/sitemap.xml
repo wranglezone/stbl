@@ -72,7 +72,10 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_not_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_cls.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_dbl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_fct.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dbl.html</loc></url>
