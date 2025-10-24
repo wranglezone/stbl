@@ -56,7 +56,7 @@ informative error message is signaled. \code{to_lst()} is an alias of
 This function has three important distinctions from
 \code{\link[base:list]{base::as.list()}}:
 \itemize{
-\item Functions can be rejects as part of the call to this function (with
+\item Functions can be rejected as part of the call to this function (with
 \code{coerce_function = FALSE}, the default). If they are allowed, they'll be
 coerced to a list concatenating their formals and body (as with
 \code{\link[base:list]{base::as.list()}}.

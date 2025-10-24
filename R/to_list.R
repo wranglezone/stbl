@@ -7,7 +7,7 @@
 #'
 #' @details This function has three important distinctions from
 #'   [base::as.list()]:
-#' - Functions can be rejects as part of the call to this function (with
+#' - Functions can be rejected as part of the call to this function (with
 #'   `coerce_function = FALSE`, the default). If they are allowed, they'll be
 #'   coerced to a list concatenating their formals and body (as with
 #'   [base::as.list()].
