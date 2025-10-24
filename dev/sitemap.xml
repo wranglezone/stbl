@@ -20,6 +20,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_int_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_function_allowed.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_is_not_primitive.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_size.html</loc></url>
@@ -53,6 +55,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_must.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_null.html</loc></url>
@@ -83,5 +86,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stbl-package.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/to_list.html</loc></url>
 </urlset>
 
