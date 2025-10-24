@@ -22,6 +22,7 @@
 #'   "1" and "2.0" be considered numeric-ish? Note that this package uses the
 #'   character value from the factor, while [as.integer()] and [as.double()] use
 #'   the integer index of the factor.
+#' @param coerce_function `(length-1 logical)` Should functions be coerced?
 #' @param depth `(length-1 integer)` Current recursion depth. Do not manually
 #'   set this parameter.
 #' @param is_rlang_cls_scalar `(function)` An `is_scalar_*()` function from
