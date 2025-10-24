@@ -34,6 +34,8 @@ pass to \code{check_cls_value_fn()}.}
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 
+\item{coerce_function}{\verb{(length-1 logical)} Should functions be coerced?}
+
 \item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
 set this parameter.}
 
