@@ -46,54 +46,75 @@ provided arguments. <code>specify_int_scalar()</code> creates a function that wi
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_int</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_int</span><span class="op">(</span></span>
+<span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">specify_int_scalar</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">specify_int_scalar</span><span class="op">(</span></span>
+<span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="stabilize_int.html">stabilize_int</a></code>, <code><a href="stabilize_int.html">stabilize_int_scalar</a></code></p><dl><dt><code>allow_na</code></dt>
-<dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
-
-    <dt><code>allow_null</code></dt>
+<dl><dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
-    <dt><code>coerce_character</code></dt>
+
+<dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
+<dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
+
+
+<dt id="arg-coerce-character">coerce_character<a class="anchor" aria-label="anchor" href="#arg-coerce-character"></a></dt>
 <dd><p><code>(length-1 logical)</code> Should character vectors such as
 "1" and "2.0" be considered numeric-ish?</p></dd>
 
-    <dt><code>coerce_factor</code></dt>
+
+<dt id="arg-coerce-factor">coerce_factor<a class="anchor" aria-label="anchor" href="#arg-coerce-factor"></a></dt>
 <dd><p><code>(length-1 logical)</code> Should factors with values such as
 "1" and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code> and <code><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double()</a></code> use
 the integer index of the factor.</p></dd>
 
-    <dt><code>min_size</code></dt>
+
+<dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
-    <dt><code>min_value</code></dt>
-<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
 
-    <dt><code>max_size</code></dt>
+<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
-    <dt><code>max_value</code></dt>
+
+<dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
+<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
+<code>NULL</code> (default) values are not checked.</p></dd>
+
+
+<dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
 <dd><p><code>(length-1 numeric)</code> The highest allowed value for <code>x</code>. If
 <code>NULL</code> (default) values are not checked.</p></dd>
 
-    <dt><code>allow_zero_length</code></dt>
+
+<dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
 <dd><p><code>(length-1 logical)</code> Are zero-length vectors
 acceptable?</p></dd>
-
-
-</dl></dd>
 
 </dl></div>
     <div class="section level2">
@@ -104,6 +125,17 @@ The generated function will also accept <code>...</code> for additional argument
 pass to <code><a href="stabilize_int.html">stabilize_int()</a></code> or <code><a href="stabilize_int.html">stabilize_int_scalar()</a></code>. You can copy/paste
 the body of the resulting function if you want to provide additional
 context or functionality.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other integer functions:
+<code><a href="are_int_ish.html">are_int_ish</a>()</code>,
+<code><a href="stabilize_int.html">stabilize_int</a>()</code></p>
+<p>Other specification functions:
+<code><a href="specify_chr.html">specify_chr</a>()</code>,
+<code><a href="specify_dbl.html">specify_dbl</a>()</code>,
+<code><a href="specify_fct.html">specify_fct</a>()</code>,
+<code><a href="specify_lgl.html">specify_lgl</a>()</code></p></div>
     </div>
 
     <div class="section level2">

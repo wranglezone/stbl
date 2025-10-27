@@ -40,7 +40,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_cls</span><span class="op">(</span><span class="va">stabilizer</span>, <span class="va">...</span>, scalar <span class="op">=</span> <span class="cn">FALSE</span>, call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_cls</span><span class="op">(</span></span>
+<span>  <span class="va">stabilizer</span>,</span>
+<span>  factory_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  scalar <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -52,8 +57,9 @@
 call.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments to include in the call to the stabilizer function.</p></dd>
+<dt id="arg-factory-args">factory_args<a class="anchor" aria-label="anchor" href="#arg-factory-args"></a></dt>
+<dd><p><code>(list)</code> Arguments to include in the call to the
+stabilizer function.</p></dd>
 
 
 <dt id="arg-scalar">scalar<a class="anchor" aria-label="anchor" href="#arg-scalar"></a></dt>

@@ -46,43 +46,58 @@ provided arguments. <code>specify_fct_scalar()</code> creates a function that wi
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_fct</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_fct</span><span class="op">(</span></span>
+<span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">specify_fct_scalar</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">specify_fct_scalar</span><span class="op">(</span></span>
+<span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="stabilize_fct.html">stabilize_fct</a></code>, <code><a href="stabilize_fct.html">stabilize_fct_scalar</a></code></p><dl><dt><code>levels</code></dt>
-<dd><p><code>(character)</code> Expected levels. If <code>NULL</code> (default), the levels
-will be computed by <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code>.</p></dd>
-
-    <dt><code>allow_na</code></dt>
-<dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
-
-    <dt><code>allow_null</code></dt>
+<dl><dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
-    <dt><code>min_size</code></dt>
+
+<dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
+<dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
+
+
+<dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
-    <dt><code>max_size</code></dt>
+
+<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
-    <dt><code>to_na</code></dt>
+
+<dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
+<dd><p><code>(character)</code> Expected levels. If <code>NULL</code> (default), the levels
+will be computed by <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code>.</p></dd>
+
+
+<dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>
 <dd><p><code>(character)</code> Values to convert to <code>NA</code>.</p></dd>
 
-    <dt><code>allow_zero_length</code></dt>
+
+<dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
 <dd><p><code>(length-1 logical)</code> Are zero-length vectors
 acceptable?</p></dd>
-
-
-</dl></dd>
 
 </dl></div>
     <div class="section level2">
@@ -93,6 +108,17 @@ The generated function will also accept <code>...</code> for additional argument
 pass to <code><a href="stabilize_fct.html">stabilize_fct()</a></code> or <code><a href="stabilize_fct.html">stabilize_fct_scalar()</a></code>. You can copy/paste
 the body of the resulting function if you want to provide additional
 context or functionality.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other factor functions:
+<code><a href="are_fct_ish.html">are_fct_ish</a>()</code>,
+<code><a href="stabilize_fct.html">stabilize_fct</a>()</code></p>
+<p>Other specification functions:
+<code><a href="specify_chr.html">specify_chr</a>()</code>,
+<code><a href="specify_dbl.html">specify_dbl</a>()</code>,
+<code><a href="specify_int.html">specify_int</a>()</code>,
+<code><a href="specify_lgl.html">specify_lgl</a>()</code></p></div>
     </div>
 
     <div class="section level2">
