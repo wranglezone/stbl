@@ -13,6 +13,8 @@
 #' @returns `are_chr_ish()` returns a logical vector with the same length as the
 #'   input. `is_chr_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`) for
 #'   the entire vector.
+#' @family character functions
+#' @family check functions
 #' @export
 #'
 #' @examples

@@ -123,7 +123,7 @@ its coercion, but want the error message to match the original class.}
 acceptable?}
 }
 \value{
-The argument as an integer.
+The argument as an integer vector.
 }
 \description{
 \code{to_int()} checks whether an argument can be coerced to integer
@@ -167,3 +167,17 @@ try(stabilize_int_scalar(1:10))
 stabilize_int_scalar(NULL)
 try(stabilize_int_scalar(NULL, allow_null = FALSE))
 }
+\seealso{
+Other integer functions: 
+\code{\link{are_int_ish}()},
+\code{\link{specify_int}()}
+
+Other stabilization functions: 
+\code{\link{stabilize_arg}()},
+\code{\link{stabilize_chr}()},
+\code{\link{stabilize_dbl}()},
+\code{\link{stabilize_fct}()},
+\code{\link{stabilize_lgl}()}
+}
+\concept{integer functions}
+\concept{stabilization functions}

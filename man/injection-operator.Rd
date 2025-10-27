@@ -7,3 +7,4 @@
 \description{
 Injection operator for defused arguments
 }
+\keyword{internal}

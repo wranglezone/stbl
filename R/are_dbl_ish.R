@@ -13,6 +13,8 @@
 #' @returns `are_dbl_ish()` returns a logical vector with the same length as the
 #'   input. `is_dbl_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`) for
 #'   the entire vector.
+#' @family double functions
+#' @family check functions
 #' @export
 #'
 #' @examples

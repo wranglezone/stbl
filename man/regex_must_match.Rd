@@ -2,23 +2,30 @@
 % Please edit documentation in R/regex.R
 \name{regex_must_match}
 \alias{regex_must_match}
+\alias{regex_must_not_match}
 \title{Create a regex matching rule}
 \usage{
 regex_must_match(regex)
+
+regex_must_not_match(regex)
 }
 \arguments{
 \item{regex}{\code{(character)} The regular expression pattern.}
 }
 \value{
-The \code{regex} value with \code{\link[=names]{names()}} equal to the generated error
+For \code{regex_must_match}, the \code{regex} value with \code{\link[=names]{names()}} equal to
+the generated error message.
+
+For \code{regex_must_not_match()}, the \code{regex} value with a \code{negate}
+attribute and with \code{\link[=names]{names()}} equal to the generated "must not match" error
 message.
 }
 \description{
 Attach a standardized error message to a \code{regex} argument. By default, the
 message will be "must match the regex pattern \{regex\}". If the input
-\code{regex} has a \code{negate} attribute set to \code{TRUE}, the message will instead be
-"must not match...". This message can be used with \code{\link[=stabilize_chr]{stabilize_chr()}} and
-\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}}.
+\code{regex} has a \code{negate} attribute set to \code{TRUE} (set automatically by
+\code{regex_must_not_match()}), the message will instead be "must not match...".
+This message can be used with \code{\link[=stabilize_chr]{stabilize_chr()}} and \code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}}.
 }
 \examples{
 regex_must_match("[aeiou]")
@@ -27,4 +34,5 @@ regex_must_match("[aeiou]")
 regex <- "[aeiou]"
 attr(regex, "negate") <- TRUE
 regex_must_match(regex)
+regex_must_not_match("[aeiou]")
 }

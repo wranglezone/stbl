@@ -5,23 +5,32 @@
 \alias{specify_lgl_scalar}
 \title{Create a specified logical stabilizer function}
 \usage{
-specify_lgl(...)
+specify_lgl(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL
+)
 
-specify_lgl_scalar(...)
+specify_lgl_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE
+)
 }
 \arguments{
-\item{...}{
-  Arguments passed on to \code{\link[=stabilize_lgl]{stabilize_lgl}}, \code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar}}
-  \describe{
-    \item{\code{allow_na}}{\verb{(length-1 logical)} Are NA values ok?}
-    \item{\code{allow_null}}{\verb{(length-1 logical)} Is NULL an acceptable value?}
-    \item{\code{min_size}}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
+\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+
+\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{max_size}}{\verb{(length-1 integer)} The maximum size of the object. Object
+
+\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{allow_zero_length}}{\verb{(length-1 logical)} Are zero-length vectors
+
+\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
-  }}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -41,3 +50,16 @@ stabilize_few_lgl <- specify_lgl(max_size = 5)
 stabilize_few_lgl(c(TRUE, "False", TRUE))
 try(stabilize_few_lgl(rep(TRUE, 10)))
 }
+\seealso{
+Other logical functions: 
+\code{\link{are_lgl_ish}()},
+\code{\link{stabilize_lgl}()}
+
+Other specification functions: 
+\code{\link{specify_chr}()},
+\code{\link{specify_dbl}()},
+\code{\link{specify_fct}()},
+\code{\link{specify_int}()}
+}
+\concept{logical functions}
+\concept{specification functions}

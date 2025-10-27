@@ -145,3 +145,17 @@ try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
 stabilize_chr_scalar(NULL)
 try(stabilize_chr_scalar(NULL, allow_null = FALSE))
 }
+\seealso{
+Other character functions: 
+\code{\link{are_chr_ish}()},
+\code{\link{specify_chr}()}
+
+Other stabilization functions: 
+\code{\link{stabilize_arg}()},
+\code{\link{stabilize_dbl}()},
+\code{\link{stabilize_fct}()},
+\code{\link{stabilize_int}()},
+\code{\link{stabilize_lgl}()}
+}
+\concept{character functions}
+\concept{stabilization functions}

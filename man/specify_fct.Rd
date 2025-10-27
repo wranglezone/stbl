@@ -5,26 +5,41 @@
 \alias{specify_fct_scalar}
 \title{Create a specified factor stabilizer function}
 \usage{
-specify_fct(...)
+specify_fct(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character()
+)
 
-specify_fct_scalar(...)
+specify_fct_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character()
+)
 }
 \arguments{
-\item{...}{
-  Arguments passed on to \code{\link[=stabilize_fct]{stabilize_fct}}, \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar}}
-  \describe{
-    \item{\code{levels}}{\code{(character)} Expected levels. If \code{NULL} (default), the levels
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
+\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+
+\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{levels}{\code{(character)} Expected levels. If \code{NULL} (default), the levels
 will be computed by \code{\link[base:factor]{base::factor()}}.}
-    \item{\code{allow_na}}{\verb{(length-1 logical)} Are NA values ok?}
-    \item{\code{allow_null}}{\verb{(length-1 logical)} Is NULL an acceptable value?}
-    \item{\code{min_size}}{\verb{(length-1 integer)} The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{max_size}}{\verb{(length-1 integer)} The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{to_na}}{\code{(character)} Values to convert to \code{NA}.}
-    \item{\code{allow_zero_length}}{\verb{(length-1 logical)} Are zero-length vectors
+
+\item{to_na}{\code{(character)} Values to convert to \code{NA}.}
+
+\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
-  }}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -44,3 +59,16 @@ stabilize_lowercase_letter <- specify_fct(levels = letters)
 stabilize_lowercase_letter(c("s", "t", "b", "l"))
 try(stabilize_lowercase_letter("A"))
 }
+\seealso{
+Other factor functions: 
+\code{\link{are_fct_ish}()},
+\code{\link{stabilize_fct}()}
+
+Other specification functions: 
+\code{\link{specify_chr}()},
+\code{\link{specify_dbl}()},
+\code{\link{specify_int}()},
+\code{\link{specify_lgl}()}
+}
+\concept{factor functions}
+\concept{specification functions}

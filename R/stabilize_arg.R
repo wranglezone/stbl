@@ -11,6 +11,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `x`, unless one of the checks fails.
+#' @family stabilization functions
 #' @export
 #'
 #' @examples

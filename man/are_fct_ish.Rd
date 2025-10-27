@@ -55,3 +55,16 @@ is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 is_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 }
+\seealso{
+Other factor functions: 
+\code{\link{specify_fct}()},
+\code{\link{stabilize_fct}()}
+
+Other check functions: 
+\code{\link{are_chr_ish}()},
+\code{\link{are_dbl_ish}()},
+\code{\link{are_int_ish}()},
+\code{\link{are_lgl_ish}()}
+}
+\concept{check functions}
+\concept{factor functions}

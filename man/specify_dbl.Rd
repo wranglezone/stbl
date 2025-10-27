@@ -5,33 +5,54 @@
 \alias{specify_dbl_scalar}
 \title{Create a specified double stabilizer function}
 \usage{
-specify_dbl(...)
+specify_dbl(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL
+)
 
-specify_dbl_scalar(...)
+specify_dbl_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL
+)
 }
 \arguments{
-\item{...}{
-  Arguments passed on to \code{\link[=stabilize_dbl]{stabilize_dbl}}, \code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar}}
-  \describe{
-    \item{\code{allow_na}}{\verb{(length-1 logical)} Are NA values ok?}
-    \item{\code{allow_null}}{\verb{(length-1 logical)} Is NULL an acceptable value?}
-    \item{\code{coerce_character}}{\verb{(length-1 logical)} Should character vectors such as
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
+\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+
+\item{coerce_character}{\verb{(length-1 logical)} Should character vectors such as
 "1" and "2.0" be considered numeric-ish?}
-    \item{\code{coerce_factor}}{\verb{(length-1 logical)} Should factors with values such as
+
+\item{coerce_factor}{\verb{(length-1 logical)} Should factors with values such as
 "1" and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
-    \item{\code{min_size}}{\verb{(length-1 integer)} The minimum size of the object. Object
+
+\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{min_value}}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
-\code{NULL} (default) values are not checked.}
-    \item{\code{max_size}}{\verb{(length-1 integer)} The maximum size of the object. Object
+
+\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{max_value}}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
+
+\item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
-    \item{\code{allow_zero_length}}{\verb{(length-1 logical)} Are zero-length vectors
+
+\item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
+\code{NULL} (default) values are not checked.}
+
+\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
-  }}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -51,3 +72,16 @@ stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)
 stabilize_3_to_5(c(3.3, 4.4, 5))
 try(stabilize_3_to_5(c(1:6)))
 }
+\seealso{
+Other double functions: 
+\code{\link{are_dbl_ish}()},
+\code{\link{stabilize_dbl}()}
+
+Other specification functions: 
+\code{\link{specify_chr}()},
+\code{\link{specify_fct}()},
+\code{\link{specify_int}()},
+\code{\link{specify_lgl}()}
+}
+\concept{double functions}
+\concept{specification functions}

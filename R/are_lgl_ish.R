@@ -13,6 +13,8 @@
 #' @returns `are_lgl_ish()` returns a logical vector with the same length as the
 #'   input. `is_lgl_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`) for
 #'   the entire vector.
+#' @family logical functions
+#' @family check functions
 #' @export
 #'
 #' @examples

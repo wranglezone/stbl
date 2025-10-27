@@ -12,6 +12,8 @@
 #' @returns `are_fct_ish()` returns a logical vector with the same length as the
 #'   input. `is_fct_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`) for
 #'   the entire vector.
+#' @family factor functions
+#' @family check functions
 #' @export
 #'
 #' @examples

@@ -51,3 +51,16 @@ is_lgl_ish(factor(c("T", "a")))
 are_lgl_ish(list(TRUE, 0, "F", "a"))
 is_lgl_ish(list(TRUE, 0, "F", "a"))
 }
+\seealso{
+Other logical functions: 
+\code{\link{specify_lgl}()},
+\code{\link{stabilize_lgl}()}
+
+Other check functions: 
+\code{\link{are_chr_ish}()},
+\code{\link{are_dbl_ish}()},
+\code{\link{are_fct_ish}()},
+\code{\link{are_int_ish}()}
+}
+\concept{check functions}
+\concept{logical functions}

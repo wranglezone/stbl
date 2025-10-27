@@ -12,7 +12,9 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as an integer.
+#' @returns The argument as an integer vector.
+#' @family integer functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples
