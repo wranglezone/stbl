@@ -23,6 +23,8 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a character vector.
+#' @family character functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples

@@ -1,8 +1,8 @@
 #' Ensure a logical argument meets expectations
 #'
-#' @description `to_lgl()` checks whether an argument can be coerced to
-#'   logical without losing information, returning it silently if so.
-#'   Otherwise an informative error message is signaled.
+#' @description `to_lgl()` checks whether an argument can be coerced to logical
+#'   without losing information, returning it silently if so. Otherwise an
+#'   informative error message is signaled.
 #'
 #'   `stabilize_lgl()` can check more details about the argument, but is slower
 #'   than `to_lgl()`.
@@ -13,6 +13,8 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a logical vector.
+#' @family logical functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples

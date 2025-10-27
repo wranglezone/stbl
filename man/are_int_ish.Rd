@@ -66,3 +66,16 @@ is_int_ish(c("1", "1.0", "1.1", "a"))
 are_int_ish(factor(c("1", "a")))
 is_int_ish(factor(c("1", "a")))
 }
+\seealso{
+Other integer functions: 
+\code{\link{specify_int}()},
+\code{\link{stabilize_int}()}
+
+Other check functions: 
+\code{\link{are_chr_ish}()},
+\code{\link{are_dbl_ish}()},
+\code{\link{are_fct_ish}()},
+\code{\link{are_lgl_ish}()}
+}
+\concept{check functions}
+\concept{integer functions}

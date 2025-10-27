@@ -16,7 +16,7 @@ test_that("specify_cls builds the expected function snapshot with no args", {
 })
 
 test_that("specify_cls builds the expected function with at least one arg", {
-  no_null <- specify_cls("chr", allow_null = FALSE)
+  no_null <- specify_cls("chr", list(allow_null = FALSE))
   expect_identical(
     {
       no_null("a")
@@ -34,12 +34,12 @@ test_that("specify_cls builds the expected function with at least one arg", {
 
 test_that("specify_cls builds the expected function snapshot with at least one arg", {
   skip_on_covr()
-  no_null <- specify_cls("chr", allow_null = FALSE)
+  no_null <- specify_cls("chr", list(allow_null = FALSE))
   expect_snapshot(no_null, transform = clean_function_snapshot)
 })
 
 test_that("The function built via specify_cls errors informatively for duplicated args", {
-  no_null <- specify_cls("chr", allow_null = FALSE)
+  no_null <- specify_cls("chr", list(allow_null = FALSE))
   expect_pkg_error_classes(
     {
       no_null(NULL, allow_null = FALSE)

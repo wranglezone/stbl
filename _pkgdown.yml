@@ -4,3 +4,32 @@ development:
 template:
   bootstrap: 5
 lang: en-US
+
+reference:
+- title: character vectors
+- contents:
+  - matches("chr")
+  - regex_must_match
+- title: double vectors
+- contents:
+  - matches("dbl")
+- title: factors
+- contents:
+  - matches("fct")
+- title: integer vectors
+- contents:
+  - matches("int")
+- title: logical vectors
+- contents:
+  - matches("lgl")
+- title: lists
+- contents:
+  - matches("lst")
+- title: generic args
+- contents:
+  - object_type
+  - stabilize_arg
+- title: conditions
+- contents:
+  - pkg_abort
+  - expect_pkg_error_classes

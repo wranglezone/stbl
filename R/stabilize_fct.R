@@ -23,6 +23,8 @@
 #'   will be computed by [base::factor()].
 #'
 #' @returns The argument as a factor.
+#' @family factor functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples

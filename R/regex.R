@@ -2,14 +2,14 @@
 #'
 #' Attach a standardized error message to a `regex` argument. By default, the
 #' message will be "must match the regex pattern \{regex\}". If the input
-#' `regex` has a `negate` attribute set to `TRUE`, the message will instead be
-#' "must not match...". This message can be used with [stabilize_chr()] and
-#' [stabilize_chr_scalar()].
+#' `regex` has a `negate` attribute set to `TRUE` (set automatically by
+#' `regex_must_not_match()`), the message will instead be "must not match...".
+#' This message can be used with [stabilize_chr()] and [stabilize_chr_scalar()].
 #'
 #' @param regex `(character)` The regular expression pattern.
 #'
-#' @returns The `regex` value with [names()] equal to the generated error
-#'   message.
+#' @returns For `regex_must_match`, the `regex` value with [names()] equal to
+#'   the generated error message.
 #' @export
 #'
 #' @examples
@@ -32,20 +32,14 @@ regex_must_match <- function(regex) {
   )
 }
 
-#' Create a 'must not match' regex rule
-#'
-#' Attach a standardized error message to a `regex` argument that specifies
-#' that the pattern must *not* be matched. This is a wrapper around
-#' [regex_must_match()] that sets the `negate` attribute to `TRUE`.
-#'
-#' @inheritParams regex_must_match
-#'
-#' @returns The `regex` value with a `negate` attribute and with [names()] equal
-#'   to the generated "must not match" error message.
+#' @returns For `regex_must_not_match()`, the `regex` value with a `negate`
+#'   attribute and with [names()] equal to the generated "must not match" error
+#'   message.
 #' @export
 #'
 #' @examples
 #' regex_must_not_match("[aeiou]")
+#' @rdname regex_must_match
 regex_must_not_match <- function(regex) {
   attr(regex, "negate") <- TRUE
   regex_must_match(regex)

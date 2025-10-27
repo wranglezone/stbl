@@ -2,7 +2,8 @@
 #'
 #' @param stabilizer `(length-1 character)` Name of the stabilizer function to
 #'   call.
-#' @param ... Arguments to include in the call to the stabilizer function.
+#' @param factory_args `(list)` Arguments to include in the call to the
+#'   stabilizer function.
 #' @param scalar `(length-1 logical)` Whether to call the scalar version of the
 #'   stabilizer.
 #' @param call `(environment)` The environment to use as the parent of the
@@ -15,11 +16,10 @@
 #' @keywords internal
 specify_cls <- function(
   stabilizer,
-  ...,
+  factory_args = list(),
   scalar = FALSE,
   call = rlang::caller_env()
 ) {
-  factory_args <- rlang::list2(...)
   check_dupes <- .maybe_check_dupes(factory_args)
   stabilizer <- .construct_stabilizer_symbol(stabilizer, scalar = scalar)
   .construct_specification_fn(
@@ -123,6 +123,7 @@ specify_cls <- function(
 #' @name injection-operator
 #' @usage NULL
 #' @export
+#' @keywords internal
 `!!` <- function(x) {
   # nocov start
 
@@ -142,29 +143,55 @@ specify_cls <- function(
 #' provided arguments. `specify_chr_scalar()` creates a function that will call
 #' [stabilize_chr_scalar()] with the provided arguments.
 #'
-#' @inheritDotParams stabilize_chr -x -x_arg -call -x_class
-#' @inheritDotParams stabilize_chr_scalar -x -x_arg -call -x_class
-#'
+#' @inheritParams stabilize_chr
+#' @inheritParams stabilize_chr_scalar
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_chr()] or [stabilize_chr_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
-#'   pass to `stabilize_chr()` or `stabilize_chr_scalar()`. You can copy/paste
+#'   pass to [stabilize_chr()] or [stabilize_chr_scalar()]. You can copy/paste
 #'   the body of the resulting function if you want to provide additional
 #'   context or functionality.
+#' @family character functions
+#' @family specification functions
 #' @export
+#'
 #' @examples
 #' stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")
 #' stabilize_email("stbl@example.com")
 #' try(stabilize_email("not-an-email-address"))
-#' @rdname specify_chr
-specify_chr <- function(...) {
-  specify_cls("chr", ...)
+specify_chr <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("chr", factory_args)
 }
 
 #' @export
 #' @rdname specify_chr
-specify_chr_scalar <- function(...) {
-  specify_cls("chr", ..., scalar = TRUE)
+specify_chr_scalar <- function(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("chr", factory_args, scalar = TRUE)
 }
 
 # dbl ----
@@ -175,29 +202,61 @@ specify_chr_scalar <- function(...) {
 #' provided arguments. `specify_dbl_scalar()` creates a function that will call
 #' [stabilize_dbl_scalar()] with the provided arguments.
 #'
-#' @inheritDotParams stabilize_dbl -x -x_arg -call -x_class
-#' @inheritDotParams stabilize_dbl_scalar -x -x_arg -call -x_class
-#'
+#' @inheritParams stabilize_dbl
+#' @inheritParams stabilize_dbl_scalar
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_dbl()] or [stabilize_dbl_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
 #'   pass to `stabilize_dbl()` or `stabilize_dbl_scalar()`. You can copy/paste
 #'   the body of the resulting function if you want to provide additional
 #'   context or functionality.
+#' @family double functions
+#' @family specification functions
 #' @export
+#'
 #' @examples
 #' stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)
 #' stabilize_3_to_5(c(3.3, 4.4, 5))
 #' try(stabilize_3_to_5(c(1:6)))
-#' @rdname specify_dbl
-specify_dbl <- function(...) {
-  specify_cls("dbl", ...)
+specify_dbl <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("dbl", factory_args)
 }
 
 #' @export
 #' @rdname specify_dbl
-specify_dbl_scalar <- function(...) {
-  specify_cls("dbl", ..., scalar = TRUE)
+specify_dbl_scalar <- function(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("dbl", factory_args, scalar = TRUE)
 }
 
 # fct ----
@@ -208,29 +267,57 @@ specify_dbl_scalar <- function(...) {
 #' provided arguments. `specify_fct_scalar()` creates a function that will call
 #' [stabilize_fct_scalar()] with the provided arguments.
 #'
-#' @inheritDotParams stabilize_fct -x -x_arg -call -x_class
-#' @inheritDotParams stabilize_fct_scalar -x -x_arg -call -x_class
-#'
+#' @inheritParams stabilize_fct
+#' @inheritParams stabilize_fct_scalar
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_fct()] or [stabilize_fct_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
 #'   pass to `stabilize_fct()` or `stabilize_fct_scalar()`. You can copy/paste
 #'   the body of the resulting function if you want to provide additional
 #'   context or functionality.
+#' @family factor functions
+#' @family specification functions
 #' @export
+#'
 #' @examples
 #' stabilize_lowercase_letter <- specify_fct(levels = letters)
 #' stabilize_lowercase_letter(c("s", "t", "b", "l"))
 #' try(stabilize_lowercase_letter("A"))
-#' @rdname specify_fct
-specify_fct <- function(...) {
-  specify_cls("fct", ...)
+specify_fct <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character()
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("fct", factory_args)
 }
 
 #' @export
 #' @rdname specify_fct
-specify_fct_scalar <- function(...) {
-  specify_cls("fct", ..., scalar = TRUE)
+specify_fct_scalar <- function(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character()
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("fct", factory_args, scalar = TRUE)
 }
 
 # int ----
@@ -241,8 +328,8 @@ specify_fct_scalar <- function(...) {
 #' provided arguments. `specify_int_scalar()` creates a function that will call
 #' [stabilize_int_scalar()] with the provided arguments.
 #'
-#' @inheritDotParams stabilize_int -x -x_arg -call -x_class
-#' @inheritDotParams stabilize_int_scalar -x -x_arg -call -x_class
+#' @inheritParams stabilize_int
+#' @inheritParams stabilize_int_scalar
 #'
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_int()] or [stabilize_int_scalar()] with the provided arguments.
@@ -250,20 +337,53 @@ specify_fct_scalar <- function(...) {
 #'   pass to `stabilize_int()` or `stabilize_int_scalar()`. You can copy/paste
 #'   the body of the resulting function if you want to provide additional
 #'   context or functionality.
+#' @family integer functions
+#' @family specification functions
 #' @export
+#'
 #' @examples
 #' stabilize_3_to_5 <- specify_int(min_value = 3, max_value = 5)
 #' stabilize_3_to_5(c(3:5))
 #' try(stabilize_3_to_5(c(1:6)))
-#' @rdname specify_int
-specify_int <- function(...) {
-  specify_cls("int", ...)
+specify_int <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("int", factory_args)
 }
 
 #' @export
 #' @rdname specify_int
-specify_int_scalar <- function(...) {
-  specify_cls("int", ..., scalar = TRUE)
+specify_int_scalar <- function(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("int", factory_args, scalar = TRUE)
 }
 
 # lgl ----
@@ -274,8 +394,8 @@ specify_int_scalar <- function(...) {
 #' provided arguments. `specify_lgl_scalar()` creates a function that will call
 #' [stabilize_lgl_scalar()] with the provided arguments.
 #'
-#' @inheritDotParams stabilize_lgl -x -x_arg -call -x_class
-#' @inheritDotParams stabilize_lgl_scalar -x -x_arg -call -x_class
+#' @inheritParams stabilize_lgl
+#' @inheritParams stabilize_lgl_scalar
 #'
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_lgl()] or [stabilize_lgl_scalar()] with the provided arguments.
@@ -283,18 +403,42 @@ specify_int_scalar <- function(...) {
 #'   pass to `stabilize_lgl()` or `stabilize_lgl_scalar()`. You can copy/paste
 #'   the body of the resulting function if you want to provide additional
 #'   context or functionality.
+#' @family logical functions
+#' @family specification functions
 #' @export
 #' @examples
 #' stabilize_few_lgl <- specify_lgl(max_size = 5)
 #' stabilize_few_lgl(c(TRUE, "False", TRUE))
 #' try(stabilize_few_lgl(rep(TRUE, 10)))
-#' @rdname specify_lgl
-specify_lgl <- function(...) {
-  specify_cls("lgl", ...)
+specify_lgl <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("lgl", factory_args)
 }
 
 #' @export
 #' @rdname specify_lgl
-specify_lgl_scalar <- function(...) {
-  specify_cls("lgl", ..., scalar = TRUE)
+specify_lgl_scalar <- function(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  specify_cls("lgl", factory_args, scalar = TRUE)
 }

@@ -123,7 +123,7 @@ its coercion, but want the error message to match the original class.}
 acceptable?}
 }
 \value{
-The argument as a double.
+The argument as a double vector.
 }
 \description{
 \code{to_dbl()} checks whether an argument can be coerced to double
@@ -166,3 +166,17 @@ try(stabilize_dbl_scalar(1:10))
 stabilize_dbl_scalar(NULL)
 try(stabilize_dbl_scalar(NULL, allow_null = FALSE))
 }
+\seealso{
+Other double functions: 
+\code{\link{are_dbl_ish}()},
+\code{\link{specify_dbl}()}
+
+Other stabilization functions: 
+\code{\link{stabilize_arg}()},
+\code{\link{stabilize_chr}()},
+\code{\link{stabilize_fct}()},
+\code{\link{stabilize_int}()},
+\code{\link{stabilize_lgl}()}
+}
+\concept{double functions}
+\concept{stabilization functions}

@@ -5,21 +5,33 @@
 \alias{specify_chr_scalar}
 \title{Create a specified character stabilizer function}
 \usage{
-specify_chr(...)
+specify_chr(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL
+)
 
-specify_chr_scalar(...)
+specify_chr_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL
+)
 }
 \arguments{
-\item{...}{
-  Arguments passed on to \code{\link[=stabilize_chr]{stabilize_chr}}, \code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar}}
-  \describe{
-    \item{\code{allow_na}}{\verb{(length-1 logical)} Are NA values ok?}
-    \item{\code{allow_null}}{\verb{(length-1 logical)} Is NULL an acceptable value?}
-    \item{\code{min_size}}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
+\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+
+\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{max_size}}{\verb{(length-1 integer)} The maximum size of the object. Object
+
+\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-    \item{\code{regex}}{\verb{(character, list, or stringr_pattern)} One or more optional
+
+\item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
 regular expressions to test against the values of \code{x}. This can be a
 character vector, a list of character vectors, or a pattern object from the
 \{stringr\} package (e.g., \code{stringr::fixed("a.b")}). The default error
@@ -29,15 +41,15 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
-    \item{\code{allow_zero_length}}{\verb{(length-1 logical)} Are zero-length vectors
+
+\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
-  }}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
 \code{\link[=stabilize_chr]{stabilize_chr()}} or \code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}} with the provided arguments.
 The generated function will also accept \code{...} for additional arguments to
-pass to \code{stabilize_chr()} or \code{stabilize_chr_scalar()}. You can copy/paste
+pass to \code{\link[=stabilize_chr]{stabilize_chr()}} or \code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}}. You can copy/paste
 the body of the resulting function if you want to provide additional
 context or functionality.
 }
@@ -51,3 +63,16 @@ stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\\\.[^@]+$")
 stabilize_email("stbl@example.com")
 try(stabilize_email("not-an-email-address"))
 }
+\seealso{
+Other character functions: 
+\code{\link{are_chr_ish}()},
+\code{\link{stabilize_chr}()}
+
+Other specification functions: 
+\code{\link{specify_dbl}()},
+\code{\link{specify_fct}()},
+\code{\link{specify_int}()},
+\code{\link{specify_lgl}()}
+}
+\concept{character functions}
+\concept{specification functions}

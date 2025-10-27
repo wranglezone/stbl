@@ -12,9 +12,10 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a double.
+#' @returns The argument as a double vector.
+#' @family double functions
+#' @family stabilization functions
 #' @export
-#' @name stabilize_dbl
 #'
 #' @examples
 #' to_dbl(1:10)

@@ -4,13 +4,19 @@
 \alias{specify_cls}
 \title{Create a specified stabilizer function}
 \usage{
-specify_cls(stabilizer, ..., scalar = FALSE, call = rlang::caller_env())
+specify_cls(
+  stabilizer,
+  factory_args = list(),
+  scalar = FALSE,
+  call = rlang::caller_env()
+)
 }
 \arguments{
 \item{stabilizer}{\verb{(length-1 character)} Name of the stabilizer function to
 call.}
 
-\item{...}{Arguments to include in the call to the stabilizer function.}
+\item{factory_args}{\code{(list)} Arguments to include in the call to the
+stabilizer function.}
 
 \item{scalar}{\verb{(length-1 logical)} Whether to call the scalar version of the
 stabilizer.}

@@ -84,9 +84,9 @@ acceptable?}
 The argument as a logical vector.
 }
 \description{
-\code{to_lgl()} checks whether an argument can be coerced to
-logical without losing information, returning it silently if so.
-Otherwise an informative error message is signaled.
+\code{to_lgl()} checks whether an argument can be coerced to logical
+without losing information, returning it silently if so. Otherwise an
+informative error message is signaled.
 
 \code{stabilize_lgl()} can check more details about the argument, but is slower
 than \code{to_lgl()}.
@@ -121,3 +121,17 @@ try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
 stabilize_lgl_scalar(NULL)
 try(stabilize_lgl_scalar(NULL, allow_null = FALSE))
 }
+\seealso{
+Other logical functions: 
+\code{\link{are_lgl_ish}()},
+\code{\link{specify_lgl}()}
+
+Other stabilization functions: 
+\code{\link{stabilize_arg}()},
+\code{\link{stabilize_chr}()},
+\code{\link{stabilize_dbl}()},
+\code{\link{stabilize_fct}()},
+\code{\link{stabilize_int}()}
+}
+\concept{logical functions}
+\concept{stabilization functions}

@@ -136,3 +136,17 @@ stabilize_fct_scalar("a")
 try(stabilize_fct_scalar(letters))
 try(stabilize_fct_scalar("c", levels = c("a", "b")))
 }
+\seealso{
+Other factor functions: 
+\code{\link{are_fct_ish}()},
+\code{\link{specify_fct}()}
+
+Other stabilization functions: 
+\code{\link{stabilize_arg}()},
+\code{\link{stabilize_chr}()},
+\code{\link{stabilize_dbl}()},
+\code{\link{stabilize_int}()},
+\code{\link{stabilize_lgl}()}
+}
+\concept{factor functions}
+\concept{stabilization functions}
