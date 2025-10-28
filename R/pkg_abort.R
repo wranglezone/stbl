@@ -105,7 +105,7 @@ pkg_abort <- function(
 #' @returns The classes of the error invisibly on success or the error on
 #'   failure. Unlike most testthat expectations, this expectation cannot be
 #'   usefully chained.
-#' @examples
+#' @examplesIf rlang::is_installed("testthat")
 #' expect_pkg_error_classes(
 #'   pkg_abort("stbl", "This is a test error", "test_subclass"),
 #'   "stbl",
@@ -132,8 +132,8 @@ expect_pkg_error_classes <- function(
     "condition"
   )
   object_error <- rlang::inject(
-    expect_error(!!object),
+    testthat::expect_error(!!object),
     env = rlang::current_env()
   )
-  expect_s3_class(object_error, expected_classes, exact = TRUE)
+  testthat::expect_s3_class(object_error, expected_classes, exact = TRUE)
 }
