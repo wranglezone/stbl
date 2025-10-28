@@ -1,4 +1,4 @@
-test_that("to_lgl() works for lgls", {
+test_that("to_lgl() works for lgls (#21)", {
   expect_true(to_lgl(TRUE))
   expect_false(to_lgl(FALSE))
 
@@ -15,7 +15,7 @@ test_that("to_lgl() works for lgls", {
   )
 })
 
-test_that("to_lgl() works for NULL", {
+test_that("to_lgl() works for NULL (#21)", {
   given <- NULL
   expect_identical(
     to_lgl(given),
@@ -23,7 +23,7 @@ test_that("to_lgl() works for NULL", {
   )
 })
 
-test_that("to_lgl() respects allow_null", {
+test_that("to_lgl() respects allow_null (#21)", {
   given <- NULL
   expect_error(
     to_lgl(given, allow_null = FALSE),
@@ -39,7 +39,7 @@ test_that("to_lgl() respects allow_null", {
   )
 })
 
-test_that("to_lgl() works for integers", {
+test_that("to_lgl() works for integers (#21)", {
   given <- 1L
   expect_true(to_lgl(given))
   given <- 0L
@@ -54,7 +54,7 @@ test_that("to_lgl() works for integers", {
   )
 })
 
-test_that("to_lgl() works for doubles", {
+test_that("to_lgl() works for doubles (#21)", {
   given <- 1
   expect_true(to_lgl(given))
   given <- 0
@@ -69,7 +69,7 @@ test_that("to_lgl() works for doubles", {
   )
 })
 
-test_that("to_lgl works for characters", {
+test_that("to_lgl works for characters (#21)", {
   given <- "TRUE"
   expect_true(to_lgl(given))
   given <- "FALSE"
@@ -109,7 +109,7 @@ test_that("to_lgl works for characters", {
   expect_identical(to_lgl(c("1.1", "0.1", "-1.1")), c(TRUE, TRUE, TRUE))
 })
 
-test_that("to_lgl() errors for bad characters", {
+test_that("to_lgl() errors for bad characters (#21)", {
   expect_error(
     to_lgl(letters),
     class = .compile_dash("stbl", "error", "incompatible_type")
@@ -124,7 +124,7 @@ test_that("to_lgl() errors for bad characters", {
   )
 })
 
-test_that("to_lgl works for factors", {
+test_that("to_lgl works for factors (#21)", {
   given <- factor("TRUE")
   expect_true(to_lgl(given))
   given <- factor("FALSE")
@@ -160,7 +160,7 @@ test_that("to_lgl works for factors", {
   )
 })
 
-test_that("to_lgl errors for bad factors", {
+test_that("to_lgl errors for bad factors (#21)", {
   given <- factor(letters)
   expect_error(
     to_lgl(given),
@@ -176,7 +176,7 @@ test_that("to_lgl errors for bad factors", {
   )
 })
 
-test_that("to_lgl() works for lists", {
+test_that("to_lgl() works for lists (#21)", {
   expect_identical(
     to_lgl(list(TRUE, FALSE, 1, 0, "T", "F")),
     as.logical(c(1, 0, 1, 0, 1, 0))
@@ -188,7 +188,7 @@ test_that("to_lgl() works for lists", {
   )
 })
 
-test_that("to_lgl() errors for other types", {
+test_that("to_lgl() errors for other types (#21)", {
   given <- list(1, 1:10)
   expect_error(
     to_lgl(given),
@@ -218,7 +218,7 @@ test_that("to_lgl() errors for other types", {
   )
 })
 
-test_that("to_lgl_scalar() allows length-1 lgls through", {
+test_that("to_lgl_scalar() allows length-1 lgls through (#32)", {
   given <- TRUE
   expect_true(to_lgl_scalar(given))
   given <- FALSE
@@ -227,7 +227,7 @@ test_that("to_lgl_scalar() allows length-1 lgls through", {
   expect_null(to_lgl_scalar(given))
 })
 
-test_that("to_lgl_scalar() errors for non-scalars", {
+test_that("to_lgl_scalar() errors for non-scalars (#32)", {
   given <- c(TRUE, FALSE, TRUE)
   expect_error(
     to_lgl_scalar(given),
@@ -243,7 +243,7 @@ test_that("to_lgl_scalar() errors for non-scalars", {
   )
 })
 
-test_that("to_lgl_scalar() errors for bad characters", {
+test_that("to_lgl_scalar() errors for bad characters (#32)", {
   given <- "a"
   expect_error(
     to_lgl_scalar(given),
@@ -259,7 +259,7 @@ test_that("to_lgl_scalar() errors for bad characters", {
   )
 })
 
-test_that("to_lgl_scalar() respects allow_null", {
+test_that("to_lgl_scalar() respects allow_null (#32)", {
   given <- NULL
   expect_error(
     to_lgl_scalar(given, allow_null = FALSE),

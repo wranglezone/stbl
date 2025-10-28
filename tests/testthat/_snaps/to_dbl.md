@@ -1,4 +1,4 @@
-# to_dbl() respects allow_null
+# to_dbl() respects allow_null (#23)
 
     Code
       to_dbl(given, allow_null = FALSE)
@@ -14,7 +14,7 @@
       Error in `wrapped_to_dbl()`:
       ! `val` must not be <NULL>.
 
-# to_dbl() respects coerce_character
+# to_dbl() respects coerce_character (#23)
 
     Code
       to_dbl(given, coerce_character = FALSE)
@@ -30,7 +30,7 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <character> to <double>.
 
-# to_dbl() errors informatively for bad chrs
+# to_dbl() errors informatively for bad chrs (#23)
 
     Code
       to_dbl(given)
@@ -50,7 +50,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 2
 
-# to_dbl() errors informatively for bad complexes
+# to_dbl() errors informatively for bad complexes (#23)
 
     Code
       to_dbl(given)
@@ -70,7 +70,7 @@
       x Can't convert some values due to non-zero complex components.
       * Locations: 1
 
-# to_dbl() respects coerce_factor
+# to_dbl() respects coerce_factor (#23)
 
     Code
       to_dbl(given, coerce_factor = FALSE)
@@ -86,7 +86,7 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <factor> to <double>.
 
-# to_dbl() errors informatively for bad factors
+# to_dbl() errors informatively for bad factors (#23)
 
     Code
       to_dbl(given)
@@ -106,7 +106,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
 
-# to_dbl_scalar() provides informative error messages
+# to_dbl_scalar() provides informative error messages (#23)
 
     Code
       to_dbl_scalar(given)

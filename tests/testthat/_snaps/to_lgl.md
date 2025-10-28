@@ -1,4 +1,4 @@
-# to_lgl() respects allow_null
+# to_lgl() respects allow_null (#21)
 
     Code
       to_lgl(given, allow_null = FALSE)
@@ -14,7 +14,7 @@
       Error in `wrapped_to_lgl()`:
       ! `val` must not be <NULL>.
 
-# to_lgl() errors for bad characters
+# to_lgl() errors for bad characters (#21)
 
     Code
       to_lgl(letters)
@@ -34,7 +34,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
 
-# to_lgl errors for bad factors
+# to_lgl errors for bad factors (#21)
 
     Code
       to_lgl(given)
@@ -54,7 +54,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
 
-# to_lgl() errors for other types
+# to_lgl() errors for other types (#21)
 
     Code
       to_lgl(given)
@@ -86,7 +86,7 @@
       Error in `wrapped_to_lgl()`:
       ! Can't coerce `val` <function> to <logical>.
 
-# to_lgl_scalar() errors for non-scalars
+# to_lgl_scalar() errors for non-scalars (#32)
 
     Code
       to_lgl_scalar(given)
@@ -104,7 +104,7 @@
       ! `val` must be a single <logical>.
       x `val` has 3 values.
 
-# to_lgl_scalar() errors for bad characters
+# to_lgl_scalar() errors for bad characters (#32)
 
     Code
       to_lgl_scalar(given)
@@ -124,7 +124,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1
 
-# to_lgl_scalar() respects allow_null
+# to_lgl_scalar() respects allow_null (#32)
 
     Code
       to_lgl_scalar(given, allow_null = FALSE)

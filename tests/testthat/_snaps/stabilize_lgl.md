@@ -1,4 +1,4 @@
-# stabilize_lgl() checks NAs
+# stabilize_lgl() checks NAs (#28)
 
     Code
       stabilize_lgl(given, allow_na = FALSE)
@@ -16,7 +16,7 @@
       ! `val` must not contain NA values.
       * NA locations: 2
 
-# stabilize_lgl() checks min_size
+# stabilize_lgl() checks min_size (#28)
 
     Code
       stabilize_lgl(given, min_size = 5)
@@ -34,7 +34,7 @@
       ! `val` must have size >= 5.
       x 4 is too small.
 
-# stabilize_lgl() checks max_size
+# stabilize_lgl() checks max_size (#28)
 
     Code
       stabilize_lgl(given, max_size = 3)
@@ -52,7 +52,7 @@
       ! `val` must have size <= 3.
       x 4 is too big.
 
-# stabilize_lgl_scalar() errors on non-scalars
+# stabilize_lgl_scalar() errors on non-scalars (#28)
 
     Code
       stabilize_lgl_scalar(given)

@@ -188,7 +188,7 @@ test_that(".stabilize_cls_scalar() checks for NA and empty dots", {
   )
 })
 
-test_that(".elements_are_cls_ish() works", {
+test_that(".elements_are_cls_ish() works (#93)", {
   # A simple, non-S3 predicate function for testing.
   # The helper will call this function on scalar elements.
   # For our test, something is "ish" if it is an integer.
@@ -210,7 +210,7 @@ test_that(".elements_are_cls_ish() works", {
   )
 })
 
-test_that(".to_cls_from_fct() works", {
+test_that(".to_cls_from_fct() works (#23)", {
   to_fn <- function(x, ...) as.integer(x)
 
   # Happy path
@@ -237,7 +237,7 @@ test_that(".to_cls_from_fct() works", {
   )
 })
 
-test_that(".to_num_from_complex() works", {
+test_that(".to_num_from_complex() works (#23)", {
   # Happy path
   expect_equal(
     .to_num_from_complex(
@@ -259,7 +259,7 @@ test_that(".to_num_from_complex() works", {
   )
 })
 
-test_that(".to_cls_from_list() works", {
+test_that(".to_cls_from_list() works (#128)", {
   to_fn <- function(x, ...) as.character(x)
   expect_identical(
     .to_cls_from_list(list(1, "b"), to_fn, "character"),
@@ -275,7 +275,7 @@ test_that(".to_cls_from_list() works", {
   )
 })
 
-test_that(".to_cls_from_list() works for single-element lists", {
+test_that(".to_cls_from_list() works for single-element lists (#128)", {
   to_fn <- function(x, ...) as.character(x)
   # This tests the `if (length(flat) == 1)` block
   expect_identical(

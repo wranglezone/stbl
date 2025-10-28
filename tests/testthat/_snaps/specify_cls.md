@@ -1,4 +1,4 @@
-# specify_cls builds the expected function snapshot with no args
+# specify_cls builds the expected function snapshot with no args (#150)
 
     Code
       baseline
@@ -11,7 +11,7 @@
       attr(,"class")
       [1] "stbl_specified_fn" "function"         
 
-# specify_cls builds the expected function snapshot with at least one arg
+# specify_cls builds the expected function snapshot with at least one arg (#150, #161)
 
     Code
       no_null
@@ -33,7 +33,7 @@
       attr(,"class")
       [1] "stbl_specified_fn" "function"         
 
-# The function built via specify_cls errors informatively for duplicated args
+# The function built via specify_cls errors informatively for duplicated args (#150, #161)
 
     Code
       no_null(NULL, allow_null = FALSE)
@@ -42,7 +42,7 @@
       ! Arguments passed via `...` cannot duplicate specification.
       i Duplicated arguments: `allow_null`
 
-# specify_cls builds the expected scalar function snapshot
+# specify_cls builds the expected scalar function snapshot (#150)
 
     Code
       scalar_checker

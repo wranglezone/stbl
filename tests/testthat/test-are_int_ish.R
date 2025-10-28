@@ -1,21 +1,21 @@
-test_that("are_int_ish() works for ints", {
+test_that("are_int_ish() works for ints (#93)", {
   expect_identical(are_int_ish(1:10), rep(TRUE, 10))
 })
 
-test_that("are_int_ish() works for NULL", {
+test_that("are_int_ish() works for NULL (#93)", {
   expect_identical(are_int_ish(NULL), logical(0))
 })
 
-test_that("are_int_ish() works for logicals", {
+test_that("are_int_ish() works for logicals (#93)", {
   expect_identical(are_int_ish(c(TRUE, FALSE, NA)), rep(TRUE, 3))
 })
 
-test_that("are_int_ish() works for doubles", {
+test_that("are_int_ish() works for doubles (#93)", {
   expect_identical(are_int_ish(c(1, 2.0, NA)), c(TRUE, TRUE, TRUE))
   expect_identical(are_int_ish(c(1.1, Inf, -Inf)), c(FALSE, FALSE, FALSE))
 })
 
-test_that("are_int_ish() works for characters", {
+test_that("are_int_ish() works for characters (#93)", {
   expect_identical(
     are_int_ish(c("1", "2.0", NA)),
     c(TRUE, TRUE, TRUE)
@@ -26,7 +26,7 @@ test_that("are_int_ish() works for characters", {
   )
 })
 
-test_that("are_int_ish() respects coerce_character", {
+test_that("are_int_ish() respects coerce_character (#93)", {
   expect_identical(
     are_int_ish(c("1", "2.0"), coerce_character = TRUE),
     c(TRUE, TRUE)
@@ -37,12 +37,12 @@ test_that("are_int_ish() respects coerce_character", {
   )
 })
 
-test_that("are_int_ish() works for factors", {
+test_that("are_int_ish() works for factors (#93)", {
   expect_identical(are_int_ish(factor(c(1, 2, NA))), rep(TRUE, 3))
   expect_identical(are_int_ish(factor(c("1.1", "a"))), c(FALSE, FALSE))
 })
 
-test_that("are_int_ish() respects coerce_factor", {
+test_that("are_int_ish() respects coerce_factor (#93)", {
   expect_identical(
     are_int_ish(factor(1:2), coerce_factor = TRUE),
     c(TRUE, TRUE)
@@ -53,12 +53,12 @@ test_that("are_int_ish() respects coerce_factor", {
   )
 })
 
-test_that("are_int_ish() works for complex", {
+test_that("are_int_ish() works for complex (#93)", {
   expect_identical(are_int_ish(c(1 + 0i, 2.0 + 0i, NA)), rep(TRUE, 3))
   expect_identical(are_int_ish(c(1 + 1i, 1.1 + 0i)), c(FALSE, FALSE))
 })
 
-test_that("are_int_ish() works for lists", {
+test_that("are_int_ish() works for lists (#93, #128)", {
   expect_identical(
     are_int_ish(list(1, 2L, "3", NA, 4.0)),
     rep(TRUE, 5)
@@ -71,11 +71,11 @@ test_that("are_int_ish() works for lists", {
   expect_identical(are_int_ish(list(1, 1:5)), c(TRUE, FALSE))
 })
 
-test_that("are_int_ish() returns FALSE for non-vectors", {
+test_that("are_int_ish() returns FALSE for non-vectors (#93)", {
   expect_false(are_int_ish(mean))
 })
 
-test_that("are_int_ish() returns FALSE for unhandled S3 objects", {
+test_that("are_int_ish() returns FALSE for unhandled S3 objects (#93)", {
   expect_false(is_int_ish(Sys.Date()))
   expect_identical(
     are_int_ish(as.Date(c("2025-01-01", "2025-01-02"))),
@@ -87,7 +87,7 @@ test_that("are_int_ish() returns FALSE for unhandled S3 objects", {
   )
 })
 
-test_that("is_int_ish() works", {
+test_that("is_int_ish() works (#93)", {
   expect_true(is_int_ish(1L))
   expect_true(is_int_ish(c(1, 2.0, NA)))
   expect_true(is_int_ish(NULL))

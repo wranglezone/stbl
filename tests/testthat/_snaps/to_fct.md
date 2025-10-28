@@ -1,4 +1,4 @@
-# to_fct() throws errors for bad levels
+# to_fct() throws errors for bad levels (#62)
 
     Code
       to_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
@@ -20,7 +20,7 @@
       i Allowed values: a and c
       i Values that will be converted to `NA`: b
 
-# to_fct() respects allow_null
+# to_fct() respects allow_null (#62)
 
     Code
       to_fct(given, allow_null = FALSE)
@@ -36,7 +36,7 @@
       Error in `wrapped_to_fct()`:
       ! `val` must not be <NULL>.
 
-# to_fct() errors for things that can't be coerced
+# to_fct() errors for things that can't be coerced (#62)
 
     Code
       to_fct(given)
@@ -84,7 +84,7 @@
       Error in `wrapped_to_fct()`:
       ! Can't coerce `val` <list> to <factor>.
 
-# to_fct_scalar() provides informative error messages
+# to_fct_scalar() provides informative error messages (#62)
 
     Code
       to_fct_scalar(given)
@@ -102,7 +102,7 @@
       ! `val` must be a single <factor>.
       x `val` has 26 values.
 
-# to_fct_scalar respects allow_zero_length
+# to_fct_scalar respects allow_zero_length (#62)
 
     Code
       to_fct_scalar(given, allow_zero_length = FALSE)

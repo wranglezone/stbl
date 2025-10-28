@@ -132,8 +132,8 @@ expect_pkg_error_classes <- function(
     "condition"
   )
   object_error <- rlang::inject(
-    testthat::expect_error(!!object),
+    expect_error(!!object),
     env = rlang::current_env()
   )
-  testthat::expect_s3_class(object_error, expected_classes, exact = TRUE)
+  expect_s3_class(object_error, expected_classes, exact = TRUE)
 }

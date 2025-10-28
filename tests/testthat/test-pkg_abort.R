@@ -1,4 +1,4 @@
-test_that(".compile_pkg_condition_classes() compiles condition class chains", {
+test_that(".compile_pkg_condition_classes() compiles condition class chains (#136)", {
   expect_setequal(
     .compile_pkg_condition_classes("wrapped"),
     c("wrapped-condition")
@@ -13,7 +13,7 @@ test_that(".compile_pkg_condition_classes() compiles condition class chains", {
   )
 })
 
-test_that(".compile_pkg_error_classes() compiles error class chains", {
+test_that(".compile_pkg_error_classes() compiles error class chains (#136)", {
   expect_setequal(
     .compile_pkg_error_classes("wrapped"),
     c("wrapped-error", "wrapped-condition")
@@ -24,7 +24,7 @@ test_that(".compile_pkg_error_classes() compiles error class chains", {
   )
 })
 
-test_that("pkg_abort() throws the expected error", {
+test_that("pkg_abort() throws the expected error (#136)", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
@@ -48,7 +48,7 @@ test_that("pkg_abort() throws the expected error", {
   )
 })
 
-test_that("pkg_abort() uses parent when provided", {
+test_that("pkg_abort() uses parent when provided (#136)", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
@@ -59,7 +59,7 @@ test_that("pkg_abort() uses parent when provided", {
   )
 })
 
-test_that("pkg_abort() passes dots to cli_abort()", {
+test_that("pkg_abort() passes dots to cli_abort() (#136)", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
@@ -73,7 +73,7 @@ test_that("pkg_abort() passes dots to cli_abort()", {
   )
 })
 
-test_that("pkg_abort() uses message_env when provided", {
+test_that("pkg_abort() uses message_env when provided (#136)", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
@@ -90,7 +90,7 @@ test_that("pkg_abort() uses message_env when provided", {
   )
 })
 
-test_that("expect_pkg_error_classes() tests expressions for classes", {
+test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
   expect_success({
     expect_pkg_error_classes(
       {

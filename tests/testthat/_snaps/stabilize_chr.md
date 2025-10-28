@@ -1,4 +1,4 @@
-# stabilize_chr() errors for bad regex matches
+# stabilize_chr() errors for bad regex matches (#27, #52)
 
     Code
       stabilize_chr(given, regex = pattern)
@@ -20,7 +20,7 @@
       * Locations: 1
       * Values: 123456789
 
-# stabilize_chr() works with complex url regex
+# stabilize_chr() works with complex url regex (#52)
 
     Code
       stabilize_chr("example.com", regex = url_regex)
@@ -38,7 +38,7 @@
       * Locations: 2
       * Values: not a url
 
-# stabilize_chr() allows for customized error messages
+# stabilize_chr() allows for customized error messages (#52)
 
     Code
       stabilize_chr(c("not a url", "example.com"), regex = c(`must be a url.` = url_regex))
@@ -49,7 +49,7 @@
       * Locations: 1
       * Values: not a url
 
-# stabilize_chr() works with regex that contains braces
+# stabilize_chr() works with regex that contains braces (#52)
 
     Code
       stabilize_chr(c("b", "aa"), regex = "a{1,3}")
@@ -60,7 +60,7 @@
       * Locations: 1
       * Values: b
 
-# stabilize_chr() accepts negated regex args
+# stabilize_chr() accepts negated regex args (#85)
 
     Code
       stabilize_chr(given, regex = regex)
@@ -71,7 +71,7 @@
       * Locations: 3
       * Values: c
 
-# stabilize_chr() accepts multiple regex rules
+# stabilize_chr() accepts multiple regex rules (#86, #85)
 
     Code
       stabilize_chr(given, regex = rules)
@@ -86,7 +86,7 @@
       * Locations: 2 and 3
       * Values: banana and boat
 
-# stabilize_chr() works with stringr::fixed()
+# stabilize_chr() works with stringr::fixed() (#87)
 
     Code
       stabilize_chr(c("a.b", "acb"), regex = stringr::fixed("a.b"))
@@ -97,7 +97,7 @@
       * Locations: 2
       * Values: acb
 
-# stabilize_chr() works with stringr::coll()
+# stabilize_chr() works with stringr::coll() (#87)
 
     Code
       stabilize_chr(c("a", "A"), regex = stringr::coll("a"))
@@ -108,7 +108,7 @@
       * Locations: 2
       * Values: A
 
-# stabilize_chr() works with stringr::regex()
+# stabilize_chr() works with stringr::regex() (#87)
 
     Code
       stabilize_chr(c("A", "B"), regex = stringr::regex("a", ignore_case = TRUE))
@@ -119,7 +119,7 @@
       * Locations: 2
       * Values: B
 
-# stabilize_chr_scalar() errors for non-scalars
+# stabilize_chr_scalar() errors for non-scalars (#22)
 
     Code
       stabilize_chr_scalar(given)
@@ -137,7 +137,7 @@
       ! `val` must be a single <character>.
       x `val` has 26 values.
 
-# stabilize_chr_scalar() works with regex that contains braces
+# stabilize_chr_scalar() works with regex that contains braces (#52)
 
     Code
       stabilize_chr_scalar("b", regex = "a{1,3}")

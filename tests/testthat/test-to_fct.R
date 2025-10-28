@@ -1,4 +1,4 @@
-test_that("to_fct() works for fcts", {
+test_that("to_fct() works for fcts (#62)", {
   given <- factor(letters)
   expect_identical(to_fct(given), given)
 
@@ -6,13 +6,13 @@ test_that("to_fct() works for fcts", {
   expect_identical(to_fct(given), given)
 })
 
-test_that("to_fct() deals with levels of fcts", {
+test_that("to_fct() deals with levels of fcts (#62)", {
   given <- factor(c("a", "b"))
   expected <- factor(c("a", NA))
   expect_identical(to_fct(given, levels = "a", to_na = "b"), expected)
 })
 
-test_that("to_fct() throws errors for bad levels", {
+test_that("to_fct() throws errors for bad levels (#62)", {
   expect_error(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
     class = .compile_dash("stbl", "error", "fct_levels")
@@ -27,7 +27,7 @@ test_that("to_fct() throws errors for bad levels", {
   )
 })
 
-test_that("to_fct() works for chrs", {
+test_that("to_fct() works for chrs (#62)", {
   given <- letters
   expected <- factor(letters)
   expect_identical(to_fct(given), expected)
@@ -37,12 +37,12 @@ test_that("to_fct() works for chrs", {
   expect_identical(to_fct(given), expected)
 })
 
-test_that("to_fct() works for NULL", {
+test_that("to_fct() works for NULL (#62)", {
   given <- NULL
   expect_identical(to_fct(given), given)
 })
 
-test_that("to_fct() respects allow_null", {
+test_that("to_fct() respects allow_null (#62)", {
   given <- NULL
   expect_error(
     to_fct(given, allow_null = FALSE),
@@ -58,7 +58,7 @@ test_that("to_fct() respects allow_null", {
   )
 })
 
-test_that("to_fct() works for lists", {
+test_that("to_fct() works for lists (#64)", {
   expect_identical(
     to_fct(list("a", "b")),
     factor(c("a", "b"))
@@ -73,7 +73,7 @@ test_that("to_fct() works for lists", {
   )
 })
 
-test_that("to_fct() errors for things that can't be coerced", {
+test_that("to_fct() errors for things that can't be coerced (#62)", {
   given <- mean
   expect_error(
     to_fct(given),
@@ -99,17 +99,17 @@ test_that("to_fct() errors for things that can't be coerced", {
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
 })
 
-test_that("to_fct() treats numbers as text", {
+test_that("to_fct() treats numbers as text (#62)", {
   given <- 1:10
   expect_identical(to_fct(given), factor(given))
 })
 
-test_that("to_fct_scalar() allows length-1 fcts through", {
+test_that("to_fct_scalar() allows length-1 fcts through (#62)", {
   expect_identical(to_fct_scalar("a"), factor("a"))
   expect_identical(to_fct_scalar("a", levels = "a"), factor("a"))
 })
 
-test_that("to_fct_scalar() provides informative error messages", {
+test_that("to_fct_scalar() provides informative error messages (#62)", {
   given <- letters
   expect_error(
     to_fct_scalar(given),
@@ -119,7 +119,7 @@ test_that("to_fct_scalar() provides informative error messages", {
   expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
 })
 
-test_that("to_fct_scalar respects allow_zero_length", {
+test_that("to_fct_scalar respects allow_zero_length (#62)", {
   given <- factor()
   expect_error(
     to_fct_scalar(given, allow_zero_length = FALSE),

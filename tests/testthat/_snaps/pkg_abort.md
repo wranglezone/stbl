@@ -1,4 +1,4 @@
-# pkg_abort() throws the expected error
+# pkg_abort() throws the expected error (#136)
 
     Code
       wrapped_abort("A message.", "a_subclass")
@@ -6,7 +6,7 @@
       Error in `wrapped_abort()`:
       ! A message.
 
-# pkg_abort() uses parent when provided
+# pkg_abort() uses parent when provided (#136)
 
     Code
       wrapped_abort("child message", "child_class", parent = parent_cnd)
@@ -16,7 +16,7 @@
       Caused by error:
       ! parent message
 
-# pkg_abort() passes dots to cli_abort()
+# pkg_abort() passes dots to cli_abort() (#136)
 
     Code
       wrapped_abort("A message.", "a_subclass", .internal = TRUE)
@@ -26,7 +26,7 @@
       i This is an internal error that was detected in the stbl package.
         Please report it at <https://github.com/wranglezone/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
 
-# pkg_abort() uses message_env when provided
+# pkg_abort() uses message_env when provided (#136)
 
     Code
       wrapped_abort("This message comes from {var}.", "subclass", message_env = msg_env)
