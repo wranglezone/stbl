@@ -25,9 +25,13 @@ jobs:
         with:
           extra-packages: local::., any::pak, any::dplyr
 
+      - name: Install qcthat
+        run: |
+          # This is separated out to make it easy to update the tag/PR/etc
+          pak::pak("Gilead-BioStats/qcthat#51")
+
       - name: QC report
         run: |
-          pak::pak("Gilead-BioStats/qcthat")
           IssueTestMatrix <- qcthat::CompileIssueTestMatrix(
             qcthat::FetchRepoIssues() |>
               dplyr::filter(
