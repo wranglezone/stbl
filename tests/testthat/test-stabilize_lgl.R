@@ -1,4 +1,4 @@
-test_that("stabilize_lgl() works on happy path", {
+test_that("stabilize_lgl() works on happy path (#28)", {
   given <- TRUE
   expect_true(stabilize_lgl(given))
   given <- FALSE
@@ -11,7 +11,7 @@ test_that("stabilize_lgl() works on happy path", {
   )
 })
 
-test_that("stabilize_lgl() checks NAs", {
+test_that("stabilize_lgl() checks NAs (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
   expect_identical(
     stabilize_lgl(given),
@@ -31,7 +31,7 @@ test_that("stabilize_lgl() checks NAs", {
   )
 })
 
-test_that("stabilize_lgl() checks min_size", {
+test_that("stabilize_lgl() checks min_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
   expect_error(
     stabilize_lgl(given, min_size = 5),
@@ -47,7 +47,7 @@ test_that("stabilize_lgl() checks min_size", {
   )
 })
 
-test_that("stabilize_lgl() checks max_size", {
+test_that("stabilize_lgl() checks max_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
   expect_error(
     stabilize_lgl(given, max_size = 3),
@@ -63,11 +63,11 @@ test_that("stabilize_lgl() checks max_size", {
   )
 })
 
-test_that("stabilize_lgl_scalar() allows length-1 lgls through", {
+test_that("stabilize_lgl_scalar() allows length-1 lgls through (#28)", {
   expect_true(stabilize_lgl_scalar(TRUE))
 })
 
-test_that("stabilize_lgl_scalar() errors on non-scalars", {
+test_that("stabilize_lgl_scalar() errors on non-scalars (#28)", {
   given <- c(TRUE, FALSE, TRUE)
   expect_error(
     stabilize_lgl_scalar(given),

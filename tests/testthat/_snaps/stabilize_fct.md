@@ -1,4 +1,4 @@
-# stabilize_fct() throws errors for bad levels
+# stabilize_fct() throws errors for bad levels (#62)
 
     Code
       stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
@@ -20,7 +20,7 @@
       i Allowed values: a and c
       i Values that will be converted to `NA`: b
 
-# stabilize_fct_scalar() errors for non-scalars
+# stabilize_fct_scalar() errors for non-scalars (#62)
 
     Code
       stabilize_fct_scalar(given)

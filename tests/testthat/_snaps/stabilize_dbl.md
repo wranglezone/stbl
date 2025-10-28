@@ -1,4 +1,4 @@
-# stabilize_dbl() checks min_value
+# stabilize_dbl() checks min_value (#23)
 
     Code
       stabilize_dbl(given, min_value = 11.1)
@@ -16,7 +16,7 @@
       ! Values of `val` must be >= 11.1.
       x Values are too low at locations 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
 
-# stabilize_dbl() checks max_value
+# stabilize_dbl() checks max_value (#23)
 
     Code
       stabilize_dbl(given, max_value = 4.1)
@@ -34,7 +34,7 @@
       ! Values of `val` must be <= 4.1.
       x Values are too high at locations 5, 6, 7, 8, 9, and 10.
 
-# stabilize_dbl_scalar() errors on non-scalars
+# stabilize_dbl_scalar() errors on non-scalars (#23)
 
     Code
       stabilize_dbl_scalar(given)

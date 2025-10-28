@@ -1,4 +1,4 @@
-# to_list() respects allow_null
+# to_list() respects allow_null (#157)
 
     Code
       to_list(given, allow_null = FALSE)
@@ -14,7 +14,7 @@
       Error in `wrapped_to_list()`:
       ! `val` must not be <NULL>.
 
-# to_list() errors by default for functions
+# to_list() errors by default for functions (#157)
 
     Code
       to_list(given)
@@ -30,7 +30,7 @@
       Error in `wrapped_to_list()`:
       ! `val` must not be a <function>.
 
-# to_list() errors informatively for primitives
+# to_list() errors informatively for primitives (#157)
 
     Code
       to_list(given, coerce_function = TRUE)
