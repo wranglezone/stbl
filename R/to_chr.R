@@ -11,6 +11,10 @@ to_chr <- function(
 }
 
 #' @export
+#' @rdname stabilize_chr
+to_character <- to_chr
+
+#' @export
 to_chr.character <- function(x, ...) {
   return(x)
 }
@@ -106,3 +110,7 @@ to_chr_scalar <- function(
     x_class = x_class
   )
 }
+
+#' @export
+#' @rdname stabilize_chr
+to_character_scalar <- to_chr_scalar

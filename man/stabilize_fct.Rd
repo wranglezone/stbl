@@ -2,13 +2,31 @@
 % Please edit documentation in R/stabilize_fct.R, R/to_fct.R
 \name{stabilize_fct}
 \alias{stabilize_fct}
+\alias{stabilize_factor}
 \alias{stabilize_fct_scalar}
+\alias{stabilize_factor_scalar}
 \alias{to_fct}
+\alias{to_factor}
 \alias{to_fct.NULL}
 \alias{to_fct_scalar}
+\alias{to_factor_scalar}
 \title{Ensure a factor argument meets expectations}
 \usage{
 stabilize_fct(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilize_factor(
   x,
   ...,
   allow_null = TRUE,
@@ -35,7 +53,30 @@ stabilize_fct_scalar(
   x_class = object_type(x)
 )
 
+stabilize_factor_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 to_fct(
+  x,
+  ...,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_factor(
   x,
   ...,
   levels = NULL,
@@ -48,6 +89,18 @@ to_fct(
 \method{to_fct}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 to_fct_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_factor_scalar(
   x,
   ...,
   allow_null = TRUE,

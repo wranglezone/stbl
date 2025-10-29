@@ -82,6 +82,10 @@ stabilize_chr <- function(
 
 #' @export
 #' @rdname stabilize_chr
+stabilize_character <- stabilize_chr
+
+#' @export
+#' @rdname stabilize_chr
 stabilize_chr_scalar <- function(
   x,
   ...,
@@ -107,6 +111,10 @@ stabilize_chr_scalar <- function(
     ...
   )
 }
+
+#' @export
+#' @rdname stabilize_chr
+stabilize_character_scalar <- stabilize_chr_scalar
 
 #' Check character values against one or more regex patterns
 #'

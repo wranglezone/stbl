@@ -25,6 +25,7 @@ When you use \code{\link[=pkg_abort]{pkg_abort()}} to signal errors, you can use
 test that those errors are generated as expected.
 }
 \examples{
+\dontshow{if (rlang::is_installed("testthat")) withAutoprint(\{ # examplesIf}
 expect_pkg_error_classes(
   pkg_abort("stbl", "This is a test error", "test_subclass"),
   "stbl",
@@ -37,4 +38,5 @@ try(
     "different_subclass"
   )
 )
+\dontshow{\}) # examplesIf}
 }

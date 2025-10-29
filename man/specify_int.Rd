@@ -3,6 +3,8 @@
 \name{specify_int}
 \alias{specify_int}
 \alias{specify_int_scalar}
+\alias{specify_integer}
+\alias{specify_integer_scalar}
 \title{Create a specified integer stabilizer function}
 \usage{
 specify_int(
@@ -17,6 +19,27 @@ specify_int(
 )
 
 specify_int_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL
+)
+
+specify_integer(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL
+)
+
+specify_integer_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,

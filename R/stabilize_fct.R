@@ -75,6 +75,10 @@ stabilize_fct <- function(
 
 #' @export
 #' @rdname stabilize_fct
+stabilize_factor <- stabilize_fct
+
+#' @export
+#' @rdname stabilize_fct
 stabilize_fct_scalar <- function(
   x,
   ...,
@@ -100,3 +104,7 @@ stabilize_fct_scalar <- function(
     ...
   )
 }
+
+#' @export
+#' @rdname stabilize_fct
+stabilize_factor_scalar <- stabilize_fct_scalar

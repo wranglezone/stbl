@@ -70,3 +70,11 @@ test_that("is_fct_ish() works (#93)", {
   expect_true(is_fct_ish(NULL))
   expect_false(is_fct_ish(letters, levels = "a"))
 })
+
+test_that("are_factor_ish() exists (#164)", {
+  expect_no_error(are_factor_ish())
+})
+
+test_that("is_factor_ish() exists (#164)", {
+  expect_no_error(is_factor_ish("a"))
+})

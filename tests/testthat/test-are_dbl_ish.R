@@ -92,3 +92,11 @@ test_that("is_dbl_ish() works (#23)", {
   expect_false(is_dbl_ish("a"))
   expect_false(is_dbl_ish(list(1, "a")))
 })
+
+test_that("are_double_ish() exists (#164)", {
+  expect_no_error(are_double_ish())
+})
+
+test_that("is_double_ish() exists (#164)", {
+  expect_no_error(is_double_ish(1))
+})

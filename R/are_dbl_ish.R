@@ -46,6 +46,14 @@ is_dbl_ish <- function(x, ...) {
 }
 
 #' @export
+#' @rdname are_dbl_ish
+are_double_ish <- are_dbl_ish
+
+#' @export
+#' @rdname are_dbl_ish
+is_double_ish <- is_dbl_ish
+
+#' @export
 are_dbl_ish.double <- function(x, ...) {
   rep(TRUE, length(x))
 }

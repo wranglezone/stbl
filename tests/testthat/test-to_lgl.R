@@ -274,3 +274,11 @@ test_that("to_lgl_scalar() respects allow_null (#32)", {
     error = TRUE
   )
 })
+
+test_that("to_logical() exists (#164)", {
+  expect_no_error(to_logical(TRUE))
+})
+
+test_that("to_logical_scalar() exists (#164)", {
+  expect_no_error(to_logical_scalar(TRUE))
+})

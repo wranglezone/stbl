@@ -46,6 +46,14 @@ is_lgl_ish <- function(x, ...) {
 }
 
 #' @export
+#' @rdname are_lgl_ish
+are_logical_ish <- are_lgl_ish
+
+#' @export
+#' @rdname are_lgl_ish
+is_logical_ish <- is_lgl_ish
+
+#' @export
 are_lgl_ish.logical <- function(x, ...) {
   rep(TRUE, length(x))
 }

@@ -2,15 +2,35 @@
 % Please edit documentation in R/stabilize_dbl.R, R/to_dbl.R
 \name{stabilize_dbl}
 \alias{stabilize_dbl}
+\alias{stabilize_double}
 \alias{stabilize_dbl_scalar}
+\alias{stabilize_double_scalar}
 \alias{to_dbl}
+\alias{to_double}
 \alias{to_dbl.NULL}
 \alias{to_dbl.character}
 \alias{to_dbl.factor}
 \alias{to_dbl_scalar}
+\alias{to_double_scalar}
 \title{Ensure a double argument meets expectations}
 \usage{
 stabilize_dbl(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilize_double(
   x,
   ...,
   allow_null = TRUE,
@@ -41,7 +61,30 @@ stabilize_dbl_scalar(
   x_class = object_type(x)
 )
 
+stabilize_double_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 to_dbl(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_double(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -70,6 +113,16 @@ to_dbl(
 )
 
 to_dbl_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_double_scalar(
   x,
   ...,
   allow_null = TRUE,

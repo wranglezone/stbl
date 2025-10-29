@@ -87,6 +87,10 @@ stabilize_int <- function(
 
 #' @export
 #' @rdname stabilize_int
+stabilize_integer <- stabilize_int
+
+#' @export
+#' @rdname stabilize_int
 stabilize_int_scalar <- function(
   x,
   ...,
@@ -122,3 +126,7 @@ stabilize_int_scalar <- function(
     ...
   )
 }
+
+#' @export
+#' @rdname stabilize_int
+stabilize_integer_scalar <- stabilize_int_scalar

@@ -2,13 +2,30 @@
 % Please edit documentation in R/stabilize_chr.R, R/to_chr.R
 \name{stabilize_chr}
 \alias{stabilize_chr}
+\alias{stabilize_character}
 \alias{stabilize_chr_scalar}
+\alias{stabilize_character_scalar}
 \alias{to_chr}
+\alias{to_character}
 \alias{to_chr.NULL}
 \alias{to_chr_scalar}
+\alias{to_character_scalar}
 \title{Ensure a character argument meets expectations}
 \usage{
 stabilize_chr(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilize_character(
   x,
   ...,
   allow_null = TRUE,
@@ -33,7 +50,27 @@ stabilize_chr_scalar(
   x_class = object_type(x)
 )
 
+stabilize_character_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 to_chr(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_character(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -44,6 +81,16 @@ to_chr(
 \method{to_chr}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 to_chr_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_character_scalar(
   x,
   ...,
   allow_null = TRUE,

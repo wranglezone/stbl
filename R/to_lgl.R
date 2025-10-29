@@ -11,6 +11,10 @@ to_lgl <- function(
 }
 
 #' @export
+#' @rdname stabilize_lgl
+to_logical <- to_lgl
+
+#' @export
 to_lgl.logical <- function(x, ...) {
   return(x)
 }
@@ -140,3 +144,7 @@ to_lgl_scalar <- function(
     x_class = x_class
   )
 }
+
+#' @export
+#' @rdname stabilize_lgl
+to_logical_scalar <- to_lgl_scalar

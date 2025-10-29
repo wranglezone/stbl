@@ -68,3 +68,11 @@ test_that("is_lgl_ish() works (#93)", {
   expect_false(is_lgl_ish("a"))
   expect_false(is_lgl_ish(list(TRUE, "a")))
 })
+
+test_that("are_logical_ish() exists (#164)", {
+  expect_no_error(are_logical_ish())
+})
+
+test_that("is_logical_ish() exists (#164)", {
+  expect_no_error(is_logical_ish(TRUE))
+})

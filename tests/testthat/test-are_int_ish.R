@@ -97,3 +97,11 @@ test_that("is_int_ish() works (#93)", {
   expect_false(is_int_ish("a"))
   expect_false(is_int_ish(list(1, "a")))
 })
+
+test_that("are_integer_ish() exists (#164)", {
+  expect_no_error(are_integer_ish())
+})
+
+test_that("is_integer_ish() exists (#164)", {
+  expect_no_error(is_integer_ish(1))
+})

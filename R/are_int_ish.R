@@ -46,6 +46,14 @@ is_int_ish <- function(x, ...) {
 }
 
 #' @export
+#' @rdname are_int_ish
+are_integer_ish <- are_int_ish
+
+#' @export
+#' @rdname are_int_ish
+is_integer_ish <- is_int_ish
+
+#' @export
 are_int_ish.integer <- function(x, ...) {
   rep(TRUE, length(x))
 }

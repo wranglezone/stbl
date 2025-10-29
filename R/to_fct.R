@@ -13,6 +13,10 @@ to_fct <- function(
 }
 
 #' @export
+#' @rdname stabilize_fct
+to_factor <- to_fct
+
+#' @export
 to_fct.factor <- function(
   x,
   ...,
@@ -218,6 +222,10 @@ to_fct_scalar <- function(
     x_class = x_class
   )
 }
+
+#' @export
+#' @rdname stabilize_fct
+to_factor_scalar <- to_fct_scalar
 
 #' Always return FALSE
 #'

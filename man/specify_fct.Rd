@@ -3,6 +3,8 @@
 \name{specify_fct}
 \alias{specify_fct}
 \alias{specify_fct_scalar}
+\alias{specify_factor}
+\alias{specify_factor_scalar}
 \title{Create a specified factor stabilizer function}
 \usage{
 specify_fct(
@@ -15,6 +17,23 @@ specify_fct(
 )
 
 specify_fct_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character()
+)
+
+specify_factor(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character()
+)
+
+specify_factor_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,

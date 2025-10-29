@@ -51,3 +51,11 @@ test_that("is_chr_ish() returns FALSE for uncoercibles (#93)", {
   expect_false(is_chr_ish(list(a = character(0))))
   expect_false(is_chr_ish(mtcars))
 })
+
+test_that("are_character_ish() exists (#164)", {
+  expect_no_error(are_character_ish())
+})
+
+test_that("is_character_ish() exists (#164)", {
+  expect_no_error(is_character_ish("a"))
+})
