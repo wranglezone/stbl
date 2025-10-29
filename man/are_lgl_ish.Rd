@@ -3,12 +3,18 @@
 \name{are_lgl_ish}
 \alias{are_lgl_ish}
 \alias{is_lgl_ish}
+\alias{are_logical_ish}
+\alias{is_logical_ish}
 \alias{are_lgl_ish.default}
 \title{Check if an object can be safely coerced to logical}
 \usage{
 are_lgl_ish(x, ...)
 
 is_lgl_ish(x, ...)
+
+are_logical_ish(x, ...)
+
+is_logical_ish(x, ...)
 
 \method{are_lgl_ish}{default}(x, ..., depth = 1)
 }

@@ -86,6 +86,10 @@ stabilize_dbl <- function(
 
 #' @export
 #' @rdname stabilize_dbl
+stabilize_double <- stabilize_dbl
+
+#' @export
+#' @rdname stabilize_dbl
 stabilize_dbl_scalar <- function(
   x,
   ...,
@@ -121,6 +125,10 @@ stabilize_dbl_scalar <- function(
     ...
   )
 }
+
+#' @export
+#' @rdname stabilize_dbl
+stabilize_double_scalar <- stabilize_dbl_scalar
 
 #' Check double values against min and max values
 #'

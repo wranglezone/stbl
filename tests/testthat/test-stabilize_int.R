@@ -54,3 +54,11 @@ test_that("stabilize_int_scalar() errors on non-scalars (#12)", {
     error = TRUE
   )
 })
+
+test_that("stabilize_integer() exists (#164)", {
+  expect_no_error(stabilize_integer(TRUE))
+})
+
+test_that("stabilize_integer_scalar() exists (#164)", {
+  expect_no_error(stabilize_integer_scalar(TRUE))
+})

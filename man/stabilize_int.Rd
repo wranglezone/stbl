@@ -2,15 +2,35 @@
 % Please edit documentation in R/stabilize_int.R, R/to_int.R
 \name{stabilize_int}
 \alias{stabilize_int}
+\alias{stabilize_integer}
 \alias{stabilize_int_scalar}
+\alias{stabilize_integer_scalar}
 \alias{to_int}
+\alias{to_integer}
 \alias{to_int.NULL}
 \alias{to_int.character}
 \alias{to_int.factor}
 \alias{to_int_scalar}
+\alias{to_integer_scalar}
 \title{Ensure an integer argument meets expectations}
 \usage{
 stabilize_int(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilize_integer(
   x,
   ...,
   allow_null = TRUE,
@@ -41,7 +61,30 @@ stabilize_int_scalar(
   x_class = object_type(x)
 )
 
+stabilize_integer_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 to_int(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_integer(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -70,6 +113,16 @@ to_int(
 )
 
 to_int_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_integer_scalar(
   x,
   ...,
   allow_null = TRUE,

@@ -3,12 +3,18 @@
 \name{are_fct_ish}
 \alias{are_fct_ish}
 \alias{is_fct_ish}
+\alias{are_factor_ish}
+\alias{is_factor_ish}
 \alias{are_fct_ish.default}
 \title{Check if an object can be safely coerced to a factor}
 \usage{
 are_fct_ish(x, ..., levels = NULL, to_na = character())
 
 is_fct_ish(x, ...)
+
+are_factor_ish(x, ..., levels = NULL, to_na = character())
+
+is_factor_ish(x, ...)
 
 \method{are_fct_ish}{default}(x, ..., levels = NULL, to_na = character(), depth = 1)
 }

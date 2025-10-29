@@ -208,3 +208,43 @@ test_that("specify_lgl_scalar can build a value checker (#151)", {
     "non_scalar"
   )
 })
+
+test_that("specify_character() exists (#164)", {
+  expect_no_error(specify_character())
+})
+
+test_that("stabilize_character_scalar() exists (#164)", {
+  expect_no_error(specify_character_scalar())
+})
+
+test_that("specify_double() exists (#164)", {
+  expect_no_error(specify_double())
+})
+
+test_that("stabilize_double_scalar() exists (#164)", {
+  expect_no_error(specify_double_scalar())
+})
+
+test_that("specify_factor() exists (#164)", {
+  expect_no_error(specify_factor())
+})
+
+test_that("stabilize_factor_scalar() exists (#164)", {
+  expect_no_error(specify_factor_scalar())
+})
+
+test_that("specify_integer() exists (#164)", {
+  expect_no_error(specify_integer())
+})
+
+test_that("stabilize_integer_scalar() exists (#164)", {
+  expect_no_error(specify_integer_scalar())
+})
+
+test_that("specify_logical() exists (#164)", {
+  expect_no_error(specify_logical())
+})
+
+test_that("stabilize_logical_scalar() exists (#164)", {
+  expect_no_error(specify_logical_scalar())
+})

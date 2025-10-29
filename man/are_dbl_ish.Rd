@@ -3,6 +3,8 @@
 \name{are_dbl_ish}
 \alias{are_dbl_ish}
 \alias{is_dbl_ish}
+\alias{are_double_ish}
+\alias{is_double_ish}
 \alias{are_dbl_ish.character}
 \alias{are_dbl_ish.factor}
 \alias{are_dbl_ish.default}
@@ -11,6 +13,10 @@
 are_dbl_ish(x, ...)
 
 is_dbl_ish(x, ...)
+
+are_double_ish(x, ...)
+
+is_double_ish(x, ...)
 
 \method{are_dbl_ish}{character}(x, ..., coerce_character = TRUE)
 

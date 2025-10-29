@@ -3,6 +3,8 @@
 \name{specify_dbl}
 \alias{specify_dbl}
 \alias{specify_dbl_scalar}
+\alias{specify_double}
+\alias{specify_double_scalar}
 \title{Create a specified double stabilizer function}
 \usage{
 specify_dbl(
@@ -17,6 +19,27 @@ specify_dbl(
 )
 
 specify_dbl_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL
+)
+
+specify_double(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL
+)
+
+specify_double_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,

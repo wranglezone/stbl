@@ -194,6 +194,14 @@ specify_chr_scalar <- function(
   specify_cls("chr", factory_args, scalar = TRUE)
 }
 
+#' @export
+#' @rdname specify_chr
+specify_character <- specify_chr
+
+#' @export
+#' @rdname specify_chr
+specify_character_scalar <- specify_chr_scalar
+
 # dbl ----
 
 #' Create a specified double stabilizer function
@@ -259,6 +267,14 @@ specify_dbl_scalar <- function(
   specify_cls("dbl", factory_args, scalar = TRUE)
 }
 
+#' @export
+#' @rdname specify_dbl
+specify_double <- specify_dbl
+
+#' @export
+#' @rdname specify_dbl
+specify_double_scalar <- specify_dbl_scalar
+
 # fct ----
 
 #' Create a specified factor stabilizer function
@@ -319,6 +335,14 @@ specify_fct_scalar <- function(
   }
   specify_cls("fct", factory_args, scalar = TRUE)
 }
+
+#' @export
+#' @rdname specify_fct
+specify_factor <- specify_fct
+
+#' @export
+#' @rdname specify_fct
+specify_factor_scalar <- specify_fct_scalar
 
 # int ----
 
@@ -386,6 +410,14 @@ specify_int_scalar <- function(
   specify_cls("int", factory_args, scalar = TRUE)
 }
 
+#' @export
+#' @rdname specify_int
+specify_integer <- specify_int
+
+#' @export
+#' @rdname specify_int
+specify_integer_scalar <- specify_int_scalar
+
 # lgl ----
 
 #' Create a specified logical stabilizer function
@@ -442,3 +474,11 @@ specify_lgl_scalar <- function(
   }
   specify_cls("lgl", factory_args, scalar = TRUE)
 }
+
+#' @export
+#' @rdname specify_lgl
+specify_logical <- specify_lgl
+
+#' @export
+#' @rdname specify_lgl
+specify_logical_scalar <- specify_lgl_scalar

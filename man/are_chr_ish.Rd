@@ -3,12 +3,18 @@
 \name{are_chr_ish}
 \alias{are_chr_ish}
 \alias{is_chr_ish}
+\alias{are_character_ish}
+\alias{is_character_ish}
 \alias{are_chr_ish.default}
 \title{Check if an object can be safely coerced to character}
 \usage{
 are_chr_ish(x, ...)
 
 is_chr_ish(x, ...)
+
+are_character_ish(x, ...)
+
+is_character_ish(x, ...)
 
 \method{are_chr_ish}{default}(x, ..., depth = 1)
 }

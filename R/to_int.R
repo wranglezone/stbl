@@ -11,6 +11,10 @@ to_int <- function(
 }
 
 #' @export
+#' @rdname stabilize_int
+to_integer <- to_int
+
+#' @export
 to_int.integer <- function(x, ...) {
   return(x)
 }
@@ -151,6 +155,10 @@ to_int_scalar <- function(
     x_class = x_class
   )
 }
+
+#' @export
+#' @rdname stabilize_int
+to_integer_scalar <- to_int_scalar
 
 #' Check for character to integer coercion failures
 #'

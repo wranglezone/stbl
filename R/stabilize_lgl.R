@@ -70,6 +70,10 @@ stabilize_lgl <- function(
 
 #' @export
 #' @rdname stabilize_lgl
+stabilize_logical <- stabilize_lgl
+
+#' @export
+#' @rdname stabilize_lgl
 stabilize_lgl_scalar <- function(
   x,
   ...,
@@ -92,3 +96,7 @@ stabilize_lgl_scalar <- function(
     ...
   )
 }
+
+#' @export
+#' @rdname stabilize_lgl
+stabilize_logical_scalar <- stabilize_lgl_scalar

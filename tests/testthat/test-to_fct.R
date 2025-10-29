@@ -130,3 +130,11 @@ test_that("to_fct_scalar respects allow_zero_length (#62)", {
     error = TRUE
   )
 })
+
+test_that("to_factor() exists (#164)", {
+  expect_no_error(to_factor("a"))
+})
+
+test_that("to_factor_scalar() exists (#164)", {
+  expect_no_error(to_factor_scalar("a"))
+})

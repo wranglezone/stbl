@@ -11,6 +11,10 @@ to_dbl <- function(
 }
 
 #' @export
+#' @rdname stabilize_dbl
+to_double <- to_dbl
+
+#' @export
 to_dbl.double <- function(x, ...) {
   return(x)
 }
@@ -159,3 +163,7 @@ to_dbl_scalar <- function(
     x_class = x_class
   )
 }
+
+#' @export
+#' @rdname stabilize_dbl
+to_double_scalar <- to_dbl_scalar

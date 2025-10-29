@@ -218,3 +218,11 @@ test_that("to_chr_scalar respects allow_zero_length (#22)", {
     error = TRUE
   )
 })
+
+test_that("to_character() exists (#164)", {
+  expect_no_error(to_character(TRUE))
+})
+
+test_that("to_character_scalar() exists (#164)", {
+  expect_no_error(to_character_scalar(TRUE))
+})

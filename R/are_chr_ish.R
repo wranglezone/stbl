@@ -40,6 +40,14 @@ is_chr_ish <- function(x, ...) {
 }
 
 #' @export
+#' @rdname are_chr_ish
+are_character_ish <- are_chr_ish
+
+#' @export
+#' @rdname are_chr_ish
+is_character_ish <- is_chr_ish
+
+#' @export
 are_chr_ish.character <- function(x, ...) {
   rep(TRUE, length(x))
 }

@@ -3,6 +3,8 @@
 \name{are_int_ish}
 \alias{are_int_ish}
 \alias{is_int_ish}
+\alias{are_integer_ish}
+\alias{is_integer_ish}
 \alias{are_int_ish.character}
 \alias{are_int_ish.factor}
 \alias{are_int_ish.default}
@@ -11,6 +13,10 @@
 are_int_ish(x, ...)
 
 is_int_ish(x, ...)
+
+are_integer_ish(x, ...)
+
+is_integer_ish(x, ...)
 
 \method{are_int_ish}{character}(x, ..., coerce_character = TRUE)
 

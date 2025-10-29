@@ -2,13 +2,29 @@
 % Please edit documentation in R/stabilize_lgl.R, R/to_lgl.R
 \name{stabilize_lgl}
 \alias{stabilize_lgl}
+\alias{stabilize_logical}
 \alias{stabilize_lgl_scalar}
+\alias{stabilize_logical_scalar}
 \alias{to_lgl}
+\alias{to_logical}
 \alias{to_lgl.NULL}
 \alias{to_lgl_scalar}
+\alias{to_logical_scalar}
 \title{Ensure a logical argument meets expectations}
 \usage{
 stabilize_lgl(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilize_logical(
   x,
   ...,
   allow_null = TRUE,
@@ -31,7 +47,26 @@ stabilize_lgl_scalar(
   x_class = object_type(x)
 )
 
+stabilize_logical_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 to_lgl(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_logical(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -42,6 +77,16 @@ to_lgl(
 \method{to_lgl}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 to_lgl_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+to_logical_scalar(
   x,
   ...,
   allow_null = TRUE,

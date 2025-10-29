@@ -203,3 +203,11 @@ test_that("to_int_scalar() provides informative error messages (#12)", {
     error = TRUE
   )
 })
+
+test_that("to_integer() exists (#164)", {
+  expect_no_error(to_integer(1))
+})
+
+test_that("to_integer_scalar() exists (#164)", {
+  expect_no_error(to_integer_scalar(1))
+})

@@ -54,3 +54,11 @@ test_that("stabilize_dbl_scalar() errors on non-scalars (#23)", {
     error = TRUE
   )
 })
+
+test_that("stabilize_double() exists (#164)", {
+  expect_no_error(stabilize_double(TRUE))
+})
+
+test_that("stabilize_double_scalar() exists (#164)", {
+  expect_no_error(stabilize_double_scalar(TRUE))
+})

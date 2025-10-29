@@ -3,6 +3,8 @@
 \name{specify_chr}
 \alias{specify_chr}
 \alias{specify_chr_scalar}
+\alias{specify_character}
+\alias{specify_character_scalar}
 \title{Create a specified character stabilizer function}
 \usage{
 specify_chr(
@@ -14,6 +16,21 @@ specify_chr(
 )
 
 specify_chr_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL
+)
+
+specify_character(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL
+)
+
+specify_character_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,

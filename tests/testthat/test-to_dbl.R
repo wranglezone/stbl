@@ -171,3 +171,11 @@ test_that("to_dbl_scalar() provides informative error messages (#23)", {
     error = TRUE
   )
 })
+
+test_that("to_double() exists (#164)", {
+  expect_no_error(to_double(1))
+})
+
+test_that("to_double_scalar() exists (#164)", {
+  expect_no_error(to_double_scalar(1))
+})

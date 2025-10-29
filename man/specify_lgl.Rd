@@ -3,6 +3,8 @@
 \name{specify_lgl}
 \alias{specify_lgl}
 \alias{specify_lgl_scalar}
+\alias{specify_logical}
+\alias{specify_logical_scalar}
 \title{Create a specified logical stabilizer function}
 \usage{
 specify_lgl(
@@ -13,6 +15,19 @@ specify_lgl(
 )
 
 specify_lgl_scalar(
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE
+)
+
+specify_logical(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL
+)
+
+specify_logical_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE
