@@ -26,9 +26,6 @@ permissions:
 jobs:
   fetch-issues:
     runs-on: ubuntu-latest
-    concurrency:
-      group: fetch-issues
-      cancel-in-progress: true
     steps:
       - name: Setup R
         id: setup-r
