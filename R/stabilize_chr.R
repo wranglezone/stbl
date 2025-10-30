@@ -2,13 +2,18 @@
 #'
 #' @description `to_chr()` checks whether an argument can be coerced to
 #'   character without losing information, returning it silently if so.
-#'   Otherwise an informative error message is signaled.
+#'   Otherwise an informative error message is signaled. `to_character` is a
+#'   synonym of `to_chr()`.
 #'
 #'   `stabilize_chr()` can check more details about the argument, but is slower
-#'   than `to_chr()`.
+#'   than `to_chr()`. `stabilise_chr()`, `stabilize_character()`, and
+#'   `stabilise_character()` are synonyms of `stabilize_chr()`.
 #'
 #'   `stabilize_chr_scalar()` and `to_chr_scalar()` are optimized to check for
-#'   length-1 character vectors.
+#'   length-1 character vectors. `stabilise_chr_scalar`,
+#'   `stabilize_character_scalar()`, and `stabilise_character_scalar` are
+#'   synonyms of `stabilize_chr_scalar()`, and `to_character_scalar()` is a
+#'   synonym of `to_chr_scalar()`.
 #'
 #' @details These functions have two important differences from
 #'   [base::as.character()]:
@@ -86,6 +91,14 @@ stabilize_character <- stabilize_chr
 
 #' @export
 #' @rdname stabilize_chr
+stabilise_chr <- stabilize_chr
+
+#' @export
+#' @rdname stabilize_chr
+stabilise_character <- stabilize_chr
+
+#' @export
+#' @rdname stabilize_chr
 stabilize_chr_scalar <- function(
   x,
   ...,
@@ -115,6 +128,14 @@ stabilize_chr_scalar <- function(
 #' @export
 #' @rdname stabilize_chr
 stabilize_character_scalar <- stabilize_chr_scalar
+
+#' @export
+#' @rdname stabilize_chr
+stabilise_chr_scalar <- stabilize_chr_scalar
+
+#' @export
+#' @rdname stabilize_chr
+stabilise_character_scalar <- stabilize_chr_scalar
 
 #' Check character values against one or more regex patterns
 #'

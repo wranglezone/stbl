@@ -3,8 +3,12 @@
 \name{stabilize_chr}
 \alias{stabilize_chr}
 \alias{stabilize_character}
+\alias{stabilise_chr}
+\alias{stabilise_character}
 \alias{stabilize_chr_scalar}
 \alias{stabilize_character_scalar}
+\alias{stabilise_chr_scalar}
+\alias{stabilise_character_scalar}
 \alias{to_chr}
 \alias{to_character}
 \alias{to_chr.NULL}
@@ -38,6 +42,32 @@ stabilize_character(
   x_class = object_type(x)
 )
 
+stabilise_chr(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_character(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 stabilize_chr_scalar(
   x,
   ...,
@@ -51,6 +81,30 @@ stabilize_chr_scalar(
 )
 
 stabilize_character_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_chr_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  regex = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_character_scalar(
   x,
   ...,
   allow_null = TRUE,
@@ -146,13 +200,18 @@ The argument as a character vector.
 \description{
 \code{to_chr()} checks whether an argument can be coerced to
 character without losing information, returning it silently if so.
-Otherwise an informative error message is signaled.
+Otherwise an informative error message is signaled. \code{to_character} is a
+synonym of \code{to_chr()}.
 
 \code{stabilize_chr()} can check more details about the argument, but is slower
-than \code{to_chr()}.
+than \code{to_chr()}. \code{stabilise_chr()}, \code{stabilize_character()}, and
+\code{stabilise_character()} are synonyms of \code{stabilize_chr()}.
 
 \code{stabilize_chr_scalar()} and \code{to_chr_scalar()} are optimized to check for
-length-1 character vectors.
+length-1 character vectors. \code{stabilise_chr_scalar},
+\code{stabilize_character_scalar()}, and \code{stabilise_character_scalar} are
+synonyms of \code{stabilize_chr_scalar()}, and \code{to_character_scalar()} is a
+synonym of \code{to_chr_scalar()}.
 }
 \details{
 These functions have two important differences from

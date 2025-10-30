@@ -32,11 +32,13 @@ input. \code{is_chr_ish()} returns a \verb{length-1 logical} (\code{TRUE} or \co
 the entire vector.
 }
 \description{
-\code{are_chr_ish()} is a vectorized predicate function that checks whether each
-element of its input can be safely coerced to a character vector.
+\code{are_chr_ish()} is a vectorized predicate function that checks
+whether each element of its input can be safely coerced to a character
+vector. \code{are_character_ish()} is a synonym of \code{are_chr_ish()}.
 
-\code{is_chr_ish()} is a scalar predicate function that checks if all elements of
-its input can be safely coerced to a character vector.
+\code{is_chr_ish()} is a scalar predicate function that checks if all elements
+of its input can be safely coerced to a character vector.
+\code{is_character_ish()} is a synonym of \code{is_chr_ish()}.
 }
 \examples{
 are_chr_ish(letters)

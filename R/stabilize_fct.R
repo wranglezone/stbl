@@ -2,13 +2,17 @@
 #'
 #' @description `to_fct()` checks whether an argument can be coerced to a factor
 #'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled.
+#'   informative error message is signaled. `to_factor` is a synonym of
+#'   `to_fct()`.
 #'
 #'   `stabilize_fct()` can check more details about the argument, but is slower
-#'   than `to_fct()`.
+#'   than `to_fct()`. `stabilise_fct()`, `stabilize_factor()`, and
+#'   `stabilise_factor()` are synonyms of `stabilize_fct()`.
 #'
 #'   `stabilize_fct_scalar()` and `to_fct_scalar()` are optimized to check for
-#'   length-1 factors.
+#'   length-1 factors. `stabilise_fct_scalar`, `stabilize_factor_scalar()`, and
+#'   `stabilise_factor_scalar` are synonyms of `stabilize_fct_scalar()`, and
+#'   `to_factor_scalar()` is a synonym of `to_fct_scalar()`.
 #'
 #' @details These functions have important differences from [base::as.factor()]
 #'   and [base::factor()]:
@@ -79,6 +83,14 @@ stabilize_factor <- stabilize_fct
 
 #' @export
 #' @rdname stabilize_fct
+stabilise_fct <- stabilize_fct
+
+#' @export
+#' @rdname stabilize_fct
+stabilise_factor <- stabilize_fct
+
+#' @export
+#' @rdname stabilize_fct
 stabilize_fct_scalar <- function(
   x,
   ...,
@@ -108,3 +120,11 @@ stabilize_fct_scalar <- function(
 #' @export
 #' @rdname stabilize_fct
 stabilize_factor_scalar <- stabilize_fct_scalar
+
+#' @export
+#' @rdname stabilize_fct
+stabilise_fct_scalar <- stabilize_fct_scalar
+
+#' @export
+#' @rdname stabilize_fct
+stabilise_factor_scalar <- stabilize_fct_scalar

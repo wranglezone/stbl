@@ -3,8 +3,12 @@
 \name{stabilize_dbl}
 \alias{stabilize_dbl}
 \alias{stabilize_double}
+\alias{stabilise_dbl}
+\alias{stabilise_double}
 \alias{stabilize_dbl_scalar}
 \alias{stabilize_double_scalar}
+\alias{stabilise_dbl_scalar}
+\alias{stabilise_double_scalar}
 \alias{to_dbl}
 \alias{to_double}
 \alias{to_dbl.NULL}
@@ -46,6 +50,38 @@ stabilize_double(
   x_class = object_type(x)
 )
 
+stabilise_dbl(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_double(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 stabilize_dbl_scalar(
   x,
   ...,
@@ -62,6 +98,36 @@ stabilize_dbl_scalar(
 )
 
 stabilize_double_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_dbl_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_double_scalar(
   x,
   ...,
   allow_null = TRUE,
@@ -181,13 +247,18 @@ The argument as a double vector.
 \description{
 \code{to_dbl()} checks whether an argument can be coerced to double
 without losing information, returning it silently if so. Otherwise an
-informative error message is signaled.
+informative error message is signaled. \code{to_double} is a synonym of
+\code{to_dbl()}.
 
 \code{stabilize_dbl()} can check more details about the argument, but is slower
-than \code{to_dbl()}.
+than \code{to_dbl()}. \code{stabilise_dbl()}, \code{stabilize_double()}, and
+\code{stabilise_double()} are synonyms of \code{stabilize_dbl()}.
 
 \code{stabilize_dbl_scalar()} and \code{to_dbl_scalar()} are optimized to check for
-length-1 double vectors.
+length-1 double vectors. \code{stabilise_dbl_scalar},
+\code{stabilize_double_scalar()}, and \code{stabilise_double_scalar} are synonyms of
+\code{stabilize_dbl_scalar()}, and \code{to_double_scalar()} is a synonym of
+\code{to_dbl_scalar()}.
 }
 \examples{
 to_dbl(1:10)

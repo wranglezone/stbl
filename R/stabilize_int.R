@@ -2,13 +2,18 @@
 #'
 #' @description `to_int()` checks whether an argument can be coerced to integer
 #'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled.
+#'   informative error message is signaled. `to_integer` is a synonym of
+#'   `to_int()`.
 #'
 #'   `stabilize_int()` can check more details about the argument, but is slower
-#'   than `to_int()`.
+#'   than `to_int()`. `stabilise_int()`, `stabilize_integer()`, and
+#'   `stabilise_integer()` are synonyms of `stabilize_int()`.
 #'
 #'   `stabilize_int_scalar()` and `to_int_scalar()` are optimized to check for
-#'   length-1 integer vectors.
+#'   length-1 integer vectors. `stabilise_int_scalar`,
+#'   `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms of
+#'   `stabilize_int_scalar()`, and `to_integer_scalar()` is a synonym of
+#'   `to_int_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -91,6 +96,14 @@ stabilize_integer <- stabilize_int
 
 #' @export
 #' @rdname stabilize_int
+stabilise_int <- stabilize_int
+
+#' @export
+#' @rdname stabilize_int
+stabilise_integer <- stabilize_int
+
+#' @export
+#' @rdname stabilize_int
 stabilize_int_scalar <- function(
   x,
   ...,
@@ -130,3 +143,11 @@ stabilize_int_scalar <- function(
 #' @export
 #' @rdname stabilize_int
 stabilize_integer_scalar <- stabilize_int_scalar
+
+#' @export
+#' @rdname stabilize_int
+stabilise_int_scalar <- stabilize_int_scalar
+
+#' @export
+#' @rdname stabilize_int
+stabilise_integer_scalar <- stabilize_int_scalar

@@ -2,13 +2,18 @@
 #'
 #' @description `to_lgl()` checks whether an argument can be coerced to logical
 #'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled.
+#'   informative error message is signaled. `to_logical` is a synonym of
+#'   `to_lgl()`.
 #'
 #'   `stabilize_lgl()` can check more details about the argument, but is slower
-#'   than `to_lgl()`.
+#'   than `to_lgl()`. `stabilise_lgl()`, `stabilize_logical()`, and
+#'   `stabilise_logical()` are synonyms of `stabilize_lgl()`.
 #'
 #'   `stabilize_lgl_scalar()` and `to_lgl_scalar()` are optimized to check for
-#'   length-1 logical vectors.
+#'   length-1 logical vectors. `stabilise_lgl_scalar()`,
+#'   `stabilize_logical_scalar()`, and `stabilise_logical_scalar()` are synonyms
+#'   of `stabilize_lgl_scalar()`, and `to_logical_scalar()` is a synonym of
+#'   `to_lgl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -74,6 +79,14 @@ stabilize_logical <- stabilize_lgl
 
 #' @export
 #' @rdname stabilize_lgl
+stabilise_lgl <- stabilize_lgl
+
+#' @export
+#' @rdname stabilize_lgl
+stabilise_logical <- stabilize_lgl
+
+#' @export
+#' @rdname stabilize_lgl
 stabilize_lgl_scalar <- function(
   x,
   ...,
@@ -100,3 +113,11 @@ stabilize_lgl_scalar <- function(
 #' @export
 #' @rdname stabilize_lgl
 stabilize_logical_scalar <- stabilize_lgl_scalar
+
+#' @export
+#' @rdname stabilize_lgl
+stabilise_lgl_scalar <- stabilize_lgl_scalar
+
+#' @export
+#' @rdname stabilize_lgl
+stabilise_logical_scalar <- stabilize_lgl_scalar

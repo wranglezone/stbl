@@ -3,8 +3,12 @@
 \name{stabilize_fct}
 \alias{stabilize_fct}
 \alias{stabilize_factor}
+\alias{stabilise_fct}
+\alias{stabilise_factor}
 \alias{stabilize_fct_scalar}
 \alias{stabilize_factor_scalar}
+\alias{stabilise_fct_scalar}
+\alias{stabilise_factor_scalar}
 \alias{to_fct}
 \alias{to_factor}
 \alias{to_fct.NULL}
@@ -40,6 +44,34 @@ stabilize_factor(
   x_class = object_type(x)
 )
 
+stabilise_fct(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_factor(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 stabilize_fct_scalar(
   x,
   ...,
@@ -54,6 +86,32 @@ stabilize_fct_scalar(
 )
 
 stabilize_factor_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_fct_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_factor_scalar(
   x,
   ...,
   allow_null = TRUE,
@@ -152,13 +210,17 @@ The argument as a factor.
 \description{
 \code{to_fct()} checks whether an argument can be coerced to a factor
 without losing information, returning it silently if so. Otherwise an
-informative error message is signaled.
+informative error message is signaled. \code{to_factor} is a synonym of
+\code{to_fct()}.
 
 \code{stabilize_fct()} can check more details about the argument, but is slower
-than \code{to_fct()}.
+than \code{to_fct()}. \code{stabilise_fct()}, \code{stabilize_factor()}, and
+\code{stabilise_factor()} are synonyms of \code{stabilize_fct()}.
 
 \code{stabilize_fct_scalar()} and \code{to_fct_scalar()} are optimized to check for
-length-1 factors.
+length-1 factors. \code{stabilise_fct_scalar}, \code{stabilize_factor_scalar()}, and
+\code{stabilise_factor_scalar} are synonyms of \code{stabilize_fct_scalar()}, and
+\code{to_factor_scalar()} is a synonym of \code{to_fct_scalar()}.
 }
 \details{
 These functions have important differences from \code{\link[base:factor]{base::as.factor()}}

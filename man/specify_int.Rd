@@ -88,7 +88,9 @@ context or functionality.
 \description{
 \code{specify_int()} creates a function that will call \code{\link[=stabilize_int]{stabilize_int()}} with the
 provided arguments. \code{specify_int_scalar()} creates a function that will call
-\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}} with the provided arguments.
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}} with the provided arguments. \code{specify_integer()} is
+a synonym of \code{specify_int()}, and \code{specify_integer_scalar()} is a synonym of
+\code{specify_int_scalar()}.
 }
 \examples{
 stabilize_3_to_5 <- specify_int(min_value = 3, max_value = 5)

@@ -48,10 +48,11 @@ the entire vector.
 \description{
 \code{are_int_ish()} is a vectorized predicate function that checks
 whether each element of its input can be safely coerced to an integer
-vector.
+vector. \code{are_integer_ish()} is a synonym of \code{are_int_ish()}.
 
 \code{is_int_ish()} is a scalar predicate function that checks if all elements
-of its input can be safely coerced to an integer vector.
+of its input can be safely coerced to an integer vector. \code{is_integer_ish()}
+is a synonym of \code{is_int_ish()}.
 }
 \examples{
 are_int_ish(1:4)

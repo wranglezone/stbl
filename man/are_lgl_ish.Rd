@@ -32,11 +32,13 @@ input. \code{is_lgl_ish()} returns a \verb{length-1 logical} (\code{TRUE} or \co
 the entire vector.
 }
 \description{
-\code{are_lgl_ish()} is a vectorized predicate function that checks whether each
-element of its input can be safely coerced to a logical vector.
+\code{are_lgl_ish()} is a vectorized predicate function that checks
+whether each element of its input can be safely coerced to a logical vector.
+\code{are_logical_ish()} is a synonym of \code{are_lgl_ish()}.
 
 \code{is_lgl_ish()} is a scalar predicate function that checks if all elements of
-its input can be safely coerced to a logical vector.
+its input can be safely coerced to a logical vector. \code{is_logical_ish()} is a
+synonym of \code{is_lgl_ish()}.
 }
 \examples{
 are_lgl_ish(c(TRUE, FALSE, NA))

@@ -58,7 +58,9 @@ context or functionality.
 \description{
 \code{specify_lgl()} creates a function that will call \code{\link[=stabilize_lgl]{stabilize_lgl()}} with the
 provided arguments. \code{specify_lgl_scalar()} creates a function that will call
-\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}} with the provided arguments.
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}} with the provided arguments. \code{specify_logical()} is
+a synonym of \code{specify_lgl()}, and \code{specify_logical_scalar()} is a synonym of
+\code{specify_lgl_scalar()}.
 }
 \examples{
 stabilize_few_lgl <- specify_lgl(max_size = 5)

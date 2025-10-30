@@ -1,11 +1,12 @@
 #' Check if an object can be safely coerced to character
 #'
-#' @description
-#' `are_chr_ish()` is a vectorized predicate function that checks whether each
-#' element of its input can be safely coerced to a character vector.
+#' @description `are_chr_ish()` is a vectorized predicate function that checks
+#'   whether each element of its input can be safely coerced to a character
+#'   vector. `are_character_ish()` is a synonym of `are_chr_ish()`.
 #'
-#' `is_chr_ish()` is a scalar predicate function that checks if all elements of
-#' its input can be safely coerced to a character vector.
+#'   `is_chr_ish()` is a scalar predicate function that checks if all elements
+#'   of its input can be safely coerced to a character vector.
+#'   `is_character_ish()` is a synonym of `is_chr_ish()`.
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params

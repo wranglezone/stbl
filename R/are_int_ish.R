@@ -2,10 +2,11 @@
 #'
 #' @description `are_int_ish()` is a vectorized predicate function that checks
 #'   whether each element of its input can be safely coerced to an integer
-#'   vector.
+#'   vector. `are_integer_ish()` is a synonym of `are_int_ish()`.
 #'
 #'   `is_int_ish()` is a scalar predicate function that checks if all elements
-#'   of its input can be safely coerced to an integer vector.
+#'   of its input can be safely coerced to an integer vector. `is_integer_ish()`
+#'   is a synonym of `is_int_ish()`.
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params

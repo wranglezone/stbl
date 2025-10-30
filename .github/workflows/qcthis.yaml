@@ -28,7 +28,7 @@ jobs:
       - name: Install qcthat
         run: |
           # This is separated out to make it easy to update the tag/PR/etc
-          pak::pak("Gilead-BioStats/qcthat#51")
+          pak::pak("Gilead-BioStats/qcthat@dev")
         shell: Rscript {0}
 
       - name: QC report
