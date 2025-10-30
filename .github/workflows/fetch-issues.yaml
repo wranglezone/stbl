@@ -2,6 +2,8 @@ name: Fetch and Update Issues JSON
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
   issues:
     types:
       - opened
@@ -17,10 +19,6 @@ on:
       - typed
       - untyped
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
-
 permissions:
   contents: write
   issues: read
@@ -28,7 +26,9 @@ permissions:
 jobs:
   fetch-issues:
     runs-on: ubuntu-latest
-
+    concurrency:
+      group: fetch-issues
+      cancel-in-progress: true
     steps:
       - name: Setup R
         id: setup-r
