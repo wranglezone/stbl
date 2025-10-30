@@ -3,8 +3,12 @@
 \name{stabilize_int}
 \alias{stabilize_int}
 \alias{stabilize_integer}
+\alias{stabilise_int}
+\alias{stabilise_integer}
 \alias{stabilize_int_scalar}
 \alias{stabilize_integer_scalar}
+\alias{stabilise_int_scalar}
+\alias{stabilise_integer_scalar}
 \alias{to_int}
 \alias{to_integer}
 \alias{to_int.NULL}
@@ -46,6 +50,38 @@ stabilize_integer(
   x_class = object_type(x)
 )
 
+stabilise_int(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_integer(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 stabilize_int_scalar(
   x,
   ...,
@@ -62,6 +98,36 @@ stabilize_int_scalar(
 )
 
 stabilize_integer_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_int_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  coerce_character = TRUE,
+  coerce_factor = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_integer_scalar(
   x,
   ...,
   allow_null = TRUE,
@@ -181,13 +247,18 @@ The argument as an integer vector.
 \description{
 \code{to_int()} checks whether an argument can be coerced to integer
 without losing information, returning it silently if so. Otherwise an
-informative error message is signaled.
+informative error message is signaled. \code{to_integer} is a synonym of
+\code{to_int()}.
 
 \code{stabilize_int()} can check more details about the argument, but is slower
-than \code{to_int()}.
+than \code{to_int()}. \code{stabilise_int()}, \code{stabilize_integer()}, and
+\code{stabilise_integer()} are synonyms of \code{stabilize_int()}.
 
 \code{stabilize_int_scalar()} and \code{to_int_scalar()} are optimized to check for
-length-1 integer vectors.
+length-1 integer vectors. \code{stabilise_int_scalar},
+\code{stabilize_integer_scalar()}, and \code{stabilise_integer_scalar} are synonyms of
+\code{stabilize_int_scalar()}, and \code{to_integer_scalar()} is a synonym of
+\code{to_int_scalar()}.
 }
 \examples{
 to_int(1:10)

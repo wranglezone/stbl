@@ -224,10 +224,26 @@ test_that("stabilize_chr_scalar() works with regex that contains braces (#52)", 
   )
 })
 
+test_that("stabilise_chr() exists (#167)", {
+  expect_no_error(stabilise_chr(TRUE))
+})
+
 test_that("stabilize_character() exists (#164)", {
   expect_no_error(stabilize_character(TRUE))
 })
 
+test_that("stabilise_character() exists (#167)", {
+  expect_no_error(stabilise_character(TRUE))
+})
+
+test_that("stabilise_chr_scalar() exists (#167)", {
+  expect_no_error(stabilise_chr_scalar(TRUE))
+})
+
 test_that("stabilize_character_scalar() exists (#164)", {
   expect_no_error(stabilize_character_scalar(TRUE))
+})
+
+test_that("stabilise_character_scalar() exists (#167)", {
+  expect_no_error(stabilise_character_scalar(TRUE))
 })

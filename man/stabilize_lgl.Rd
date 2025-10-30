@@ -3,8 +3,12 @@
 \name{stabilize_lgl}
 \alias{stabilize_lgl}
 \alias{stabilize_logical}
+\alias{stabilise_lgl}
+\alias{stabilise_logical}
 \alias{stabilize_lgl_scalar}
 \alias{stabilize_logical_scalar}
+\alias{stabilise_lgl_scalar}
+\alias{stabilise_logical_scalar}
 \alias{to_lgl}
 \alias{to_logical}
 \alias{to_lgl.NULL}
@@ -36,6 +40,30 @@ stabilize_logical(
   x_class = object_type(x)
 )
 
+stabilise_lgl(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_logical(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 stabilize_lgl_scalar(
   x,
   ...,
@@ -48,6 +76,28 @@ stabilize_lgl_scalar(
 )
 
 stabilize_logical_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_lgl_scalar(
+  x,
+  ...,
+  allow_null = TRUE,
+  allow_zero_length = TRUE,
+  allow_na = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+stabilise_logical_scalar(
   x,
   ...,
   allow_null = TRUE,
@@ -131,13 +181,18 @@ The argument as a logical vector.
 \description{
 \code{to_lgl()} checks whether an argument can be coerced to logical
 without losing information, returning it silently if so. Otherwise an
-informative error message is signaled.
+informative error message is signaled. \code{to_logical} is a synonym of
+\code{to_lgl()}.
 
 \code{stabilize_lgl()} can check more details about the argument, but is slower
-than \code{to_lgl()}.
+than \code{to_lgl()}. \code{stabilise_lgl()}, \code{stabilize_logical()}, and
+\code{stabilise_logical()} are synonyms of \code{stabilize_lgl()}.
 
 \code{stabilize_lgl_scalar()} and \code{to_lgl_scalar()} are optimized to check for
-length-1 logical vectors.
+length-1 logical vectors. \code{stabilise_lgl_scalar()},
+\code{stabilize_logical_scalar()}, and \code{stabilise_logical_scalar()} are synonyms
+of \code{stabilize_lgl_scalar()}, and \code{to_logical_scalar()} is a synonym of
+\code{to_lgl_scalar()}.
 }
 \examples{
 to_lgl(TRUE)

@@ -2,7 +2,7 @@
 #'
 #' @description `to_list()` checks whether an argument can be coerced to a list
 #'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_lst()` is an alias of
+#'   informative error message is signaled. `to_lst()` is a synonym of
 #'   `to_list()`.
 #'
 #' @details This function has three important distinctions from
@@ -21,34 +21,34 @@
 #'
 #' @returns The argument as a list.
 #' @export
-to_list <- function(
+to_lst <- function(
   x,
   ...,
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  UseMethod("to_list")
+  UseMethod("to_lst")
 }
 
 #' @export
-#' @rdname to_list
-to_lst <- to_list
+#' @rdname to_lst
+to_list <- to_lst
 
 #' @export
-#' @rdname to_list
-to_list.list <- function(x, ...) {
+#' @rdname to_lst
+to_lst.list <- function(x, ...) {
   x
 }
 
 #' @export
-#' @rdname to_list
-to_list.default <- function(x, ...) {
+#' @rdname to_lst
+to_lst.default <- function(x, ...) {
   as.list(x, ...)
 }
 
 #' @export
-#' @rdname to_list
-to_list.NULL <- function(
+#' @rdname to_lst
+to_lst.NULL <- function(
   x,
   ...,
   allow_null = TRUE,
@@ -59,8 +59,8 @@ to_list.NULL <- function(
 }
 
 #' @export
-#' @rdname to_list
-to_list.function <- function(
+#' @rdname to_lst
+to_lst.function <- function(
   x,
   ...,
   coerce_function = FALSE,

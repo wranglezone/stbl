@@ -37,10 +37,26 @@ test_that("stabilize_fct_scalar() errors for non-scalars (#62)", {
   )
 })
 
+test_that("stabilise_fct() exists (#167)", {
+  expect_no_error(stabilise_fct(TRUE))
+})
+
 test_that("stabilize_factor() exists (#164)", {
   expect_no_error(stabilize_factor(TRUE))
 })
 
+test_that("stabilise_factor() exists (#167)", {
+  expect_no_error(stabilise_factor(TRUE))
+})
+
+test_that("stabilise_fct_scalar() exists (#167)", {
+  expect_no_error(stabilise_fct_scalar(TRUE))
+})
+
 test_that("stabilize_factor_scalar() exists (#164)", {
   expect_no_error(stabilize_factor_scalar(TRUE))
+})
+
+test_that("stabilise_factor_scalar() exists (#167)", {
+  expect_no_error(stabilise_factor_scalar(TRUE))
 })

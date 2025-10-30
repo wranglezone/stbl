@@ -46,11 +46,13 @@ input. \code{is_dbl_ish()} returns a \verb{length-1 logical} (\code{TRUE} or \co
 the entire vector.
 }
 \description{
-\code{are_dbl_ish()} is a vectorized predicate function that checks whether each
-element of its input can be safely coerced to a double vector.
+\code{are_dbl_ish()} is a vectorized predicate function that checks
+whether each element of its input can be safely coerced to a double vector.
+\code{are_double_ish()} is a synonym of \code{are_dbl_ish()}.
 
 \code{is_dbl_ish()} is a scalar predicate function that checks if all elements of
-its input can be safely coerced to a double vector.
+its input can be safely coerced to a double vector. \code{is_double_ish()} is a
+synonym of \code{is_dbl_ish()}.
 }
 \examples{
 are_dbl_ish(c(1.0, 2.2, 3.14))

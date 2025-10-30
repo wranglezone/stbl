@@ -83,10 +83,26 @@ test_that("stabilize_lgl_scalar() errors on non-scalars (#28)", {
   )
 })
 
+test_that("stabilise_lgl() exists (#167)", {
+  expect_no_error(stabilise_lgl(TRUE))
+})
+
 test_that("stabilize_logical() exists (#164)", {
   expect_no_error(stabilize_logical(TRUE))
 })
 
+test_that("stabilise_logical() exists (#167)", {
+  expect_no_error(stabilise_logical(TRUE))
+})
+
+test_that("stabilise_lgl_scalar() exists (#167)", {
+  expect_no_error(stabilise_lgl_scalar(TRUE))
+})
+
 test_that("stabilize_logical_scalar() exists (#164)", {
+  expect_no_error(stabilize_logical_scalar(TRUE))
+})
+
+test_that("stabilise_logical_scalar() exists (#167)", {
   expect_no_error(stabilize_logical_scalar(TRUE))
 })

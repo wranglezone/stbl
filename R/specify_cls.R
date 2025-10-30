@@ -141,7 +141,9 @@ specify_cls <- function(
 #'
 #' `specify_chr()` creates a function that will call [stabilize_chr()] with the
 #' provided arguments. `specify_chr_scalar()` creates a function that will call
-#' [stabilize_chr_scalar()] with the provided arguments.
+#' [stabilize_chr_scalar()] with the provided arguments. `specify_character()`
+#' is a synonym of `specify_chr()`, and `specify_character_scalar()` is a
+#' synonym of `specify_chr_scalar()`.
 #'
 #' @inheritParams stabilize_chr
 #' @inheritParams stabilize_chr_scalar
@@ -208,7 +210,9 @@ specify_character_scalar <- specify_chr_scalar
 #'
 #' `specify_dbl()` creates a function that will call [stabilize_dbl()] with the
 #' provided arguments. `specify_dbl_scalar()` creates a function that will call
-#' [stabilize_dbl_scalar()] with the provided arguments.
+#' [stabilize_dbl_scalar()] with the provided arguments. `specify_double()` is a
+#' synonym of `specify_dbl()`, and `specify_double_scalar()` is a
+#' synonym of `specify_dbl_scalar()`.
 #'
 #' @inheritParams stabilize_dbl
 #' @inheritParams stabilize_dbl_scalar
@@ -281,7 +285,9 @@ specify_double_scalar <- specify_dbl_scalar
 #'
 #' `specify_fct()` creates a function that will call [stabilize_fct()] with the
 #' provided arguments. `specify_fct_scalar()` creates a function that will call
-#' [stabilize_fct_scalar()] with the provided arguments.
+#' [stabilize_fct_scalar()] with the provided arguments. `specify_factor()` is a
+#' synonym of `specify_fct()`, and `specify_factor_scalar()` is a synonym of
+#' `specify_fct_scalar()`.
 #'
 #' @inheritParams stabilize_fct
 #' @inheritParams stabilize_fct_scalar
@@ -350,7 +356,9 @@ specify_factor_scalar <- specify_fct_scalar
 #'
 #' `specify_int()` creates a function that will call [stabilize_int()] with the
 #' provided arguments. `specify_int_scalar()` creates a function that will call
-#' [stabilize_int_scalar()] with the provided arguments.
+#' [stabilize_int_scalar()] with the provided arguments. `specify_integer()` is
+#' a synonym of `specify_int()`, and `specify_integer_scalar()` is a synonym of
+#' `specify_int_scalar()`.
 #'
 #' @inheritParams stabilize_int
 #' @inheritParams stabilize_int_scalar
@@ -424,7 +432,9 @@ specify_integer_scalar <- specify_int_scalar
 #'
 #' `specify_lgl()` creates a function that will call [stabilize_lgl()] with the
 #' provided arguments. `specify_lgl_scalar()` creates a function that will call
-#' [stabilize_lgl_scalar()] with the provided arguments.
+#' [stabilize_lgl_scalar()] with the provided arguments. `specify_logical()` is
+#' a synonym of `specify_lgl()`, and `specify_logical_scalar()` is a synonym of
+#' `specify_lgl_scalar()`.
 #'
 #' @inheritParams stabilize_lgl
 #' @inheritParams stabilize_lgl_scalar

@@ -2,13 +2,18 @@
 #'
 #' @description `to_dbl()` checks whether an argument can be coerced to double
 #'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled.
+#'   informative error message is signaled. `to_double` is a synonym of
+#'   `to_dbl()`.
 #'
 #'   `stabilize_dbl()` can check more details about the argument, but is slower
-#'   than `to_dbl()`.
+#'   than `to_dbl()`. `stabilise_dbl()`, `stabilize_double()`, and
+#'   `stabilise_double()` are synonyms of `stabilize_dbl()`.
 #'
 #'   `stabilize_dbl_scalar()` and `to_dbl_scalar()` are optimized to check for
-#'   length-1 double vectors.
+#'   length-1 double vectors. `stabilise_dbl_scalar`,
+#'   `stabilize_double_scalar()`, and `stabilise_double_scalar` are synonyms of
+#'   `stabilize_dbl_scalar()`, and `to_double_scalar()` is a synonym of
+#'   `to_dbl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -90,6 +95,14 @@ stabilize_double <- stabilize_dbl
 
 #' @export
 #' @rdname stabilize_dbl
+stabilise_dbl <- stabilize_dbl
+
+#' @export
+#' @rdname stabilize_dbl
+stabilise_double <- stabilize_dbl
+
+#' @export
+#' @rdname stabilize_dbl
 stabilize_dbl_scalar <- function(
   x,
   ...,
@@ -129,6 +142,14 @@ stabilize_dbl_scalar <- function(
 #' @export
 #' @rdname stabilize_dbl
 stabilize_double_scalar <- stabilize_dbl_scalar
+
+#' @export
+#' @rdname stabilize_dbl
+stabilise_dbl_scalar <- stabilize_dbl_scalar
+
+#' @export
+#' @rdname stabilize_dbl
+stabilise_double_scalar <- stabilize_dbl_scalar
 
 #' Check double values against min and max values
 #'

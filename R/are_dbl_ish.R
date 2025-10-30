@@ -1,11 +1,12 @@
 #' Check if an object can be safely coerced to double
 #'
-#' @description
-#' `are_dbl_ish()` is a vectorized predicate function that checks whether each
-#' element of its input can be safely coerced to a double vector.
+#' @description `are_dbl_ish()` is a vectorized predicate function that checks
+#' whether each element of its input can be safely coerced to a double vector.
+#' `are_double_ish()` is a synonym of `are_dbl_ish()`.
 #'
 #' `is_dbl_ish()` is a scalar predicate function that checks if all elements of
-#' its input can be safely coerced to a double vector.
+#' its input can be safely coerced to a double vector. `is_double_ish()` is a
+#' synonym of `is_dbl_ish()`.
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params

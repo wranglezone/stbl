@@ -38,9 +38,11 @@ the entire vector.
 \description{
 \code{are_fct_ish()} is a vectorized predicate function that checks
 whether each element of its input can be safely coerced to a factor.
+\code{are_factor_ish()} is a synonym of \code{are_fct_ish()}.
 
 \code{is_fct_ish()} is a scalar predicate function that checks if all elements
-of its input can be safely coerced to a factor.
+of its input can be safely coerced to a factor. \code{is_factor_ish()} is a
+synonym of \code{is_fct_ish()}.
 }
 \examples{
 # When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are not.
