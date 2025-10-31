@@ -23,6 +23,7 @@ repo_name <- repo_parts[[2]]
 
 output_path <- ".github/ai/issues.json"
 
+check_timestamp <- format(Sys.time(), tz = "UTC", "%Y-%m-%dT%H:%M:%SZ")
 issues_raw <- gh::gh(
   "/repos/{owner}/{repo}/issues",
   owner = org_name,
@@ -38,20 +39,8 @@ max_issue_number <- if (length(issues_raw)) {
 }
 
 all_issues <- list()
-max_timestamp <- purrr::map_chr(
-  issues_raw,
-  function(issue) {
-    timestamps <- unlist(issue[c("created_at", "updated_at", "closed_at")])
-    if (!length(timestamps)) {
-      return(NA_character_)
-    }
-    max(timestamps, na.rm = TRUE)
-  }
-)
 
 if (max_issue_number > 0) {
-  max_timestamp <- max(max_timestamp, na.rm = TRUE)
-
   all_issues <- stats::setNames(
     replicate(max_issue_number, list(), simplify = FALSE),
     seq_len(max_issue_number)
@@ -82,10 +71,6 @@ if (max_issue_number > 0) {
   }
 }
 
-if (!length(max_timestamp) || is.na(max_timestamp)) {
-  max_timestamp <- "1970-01-01T00:00:00Z"
-}
-
 issue_collection <- list(
   `_metadata` = list(
     description = glue::glue(
@@ -93,7 +78,7 @@ issue_collection <- list(
     ),
     lookup_key = "issue_number",
     comment = "Each key in the 'issues' object is a string representation of the GitHub issue number. Empty objects are placeholders so that positions and ids match. Empty objects should be ignored.",
-    updated_at = max_timestamp
+    updated_at = check_timestamp
   ),
   issues = all_issues
 )
