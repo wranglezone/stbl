@@ -38,18 +38,19 @@ max_issue_number <- if (length(issues_raw)) {
 }
 
 all_issues <- list()
+max_timestamp <- purrr::map_chr(
+  issues_raw,
+  function(issue) {
+    timestamps <- unlist(issue[c("created_at", "updated_at", "closed_at")])
+    if (!length(timestamps)) {
+      return(NA_character_)
+    }
+    max(timestamps, na.rm = TRUE)
+  }
+)
 
 if (max_issue_number > 0) {
-  max_timestamp <- purrr::map_chr(
-    issues_raw,
-    function(issue) {
-      if (!any(lengths(issue[c("created_at", "updated_at", "closed_at")]))) {
-        return(NA_character_)
-      }
-      max(issue$created_at, issue$updated_at, issue$closed_at, na.rm = TRUE)
-    }
-  ) |>
-    max(na.rm = TRUE)
+  max_timestamp <- max(max_timestamp, na.rm = TRUE)
 
   all_issues <- stats::setNames(
     replicate(max_issue_number, list(), simplify = FALSE),
@@ -79,6 +80,10 @@ if (max_issue_number > 0) {
       comments = comments
     )
   }
+}
+
+if (!length(max_timestamp) || is.na(max_timestamp)) {
+  max_timestamp <- "1970-01-01T00:00:00Z"
 }
 
 issue_collection <- list(
