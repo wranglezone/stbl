@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ADMIN_PAT }} # Use PAT for gh API calls
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
-          echo "$(bash .github/scripts/check-workflow-runs.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
+          bash .github/scripts/check-workflow-runs.sh >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Setup R
@@ -95,7 +95,7 @@ jobs:
         if: steps.check_changes_1.outputs.changes == 'true'
         id: check_changes_2
         run: |
-          echo "$(bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
+          bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }} >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Checkout latest main before running script
