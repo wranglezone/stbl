@@ -56,7 +56,7 @@ jobs:
       - name: Check for changes before setup
         id: check_changes_1
         run: |
-          bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }} >> $GITHUB_OUTPUT
+          echo "$(bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Setup R
@@ -84,7 +84,7 @@ jobs:
         if: steps.check_changes_1.outputs.changes == 'true'
         id: check_changes_2
         run: |
-          bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }} >> $GITHUB_OUTPUT
+          echo "$(bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Checkout latest main before running script
