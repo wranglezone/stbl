@@ -32,7 +32,7 @@ jobs:
         run: echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
 
       - name: Initial pause for event flurry
-        run: sleep 15s
+        run: sleep 30s
         shell: bash
 
       - name: Checkout main branch to get scripts
@@ -50,6 +50,10 @@ jobs:
             chmod +x .github/scripts/check-workflow-runs.sh
           fi
         shell: bash
+
+      - name: Install jq
+        run: |
+          sudo apt-get install -y jq
 
       - name: Check for newer workflow runs
         id: check_changes_1
