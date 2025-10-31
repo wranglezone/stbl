@@ -40,11 +40,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq
 
-      - name: Checkout repository for first check
+      - name: Checkout main branch to get scripts
         uses: actions/checkout@v5
         with:
           token: ${{ secrets.ADMIN_PAT }}
-          ref: ai
+          ref: main
 
       - name: Make timestamp check script executable
         run: |
@@ -87,7 +87,7 @@ jobs:
           bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }} >> $GITHUB_OUTPUT
         shell: bash
 
-      - name: Switch to main before updating
+      - name: Checkout latest main before running script
         if: steps.check_changes_2.outputs.changes == 'true'
         uses: actions/checkout@v5
         with:
@@ -111,3 +111,4 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: Update issues.json"
           # Force push the 'ai' branch to the remote, overwriting its history.
           git push --force origin ai
+
