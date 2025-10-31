@@ -27,18 +27,17 @@ jobs:
   update-ai:
     runs-on: ubuntu-latest
     steps:
-      - name: Initial pause for event flurry
-        run: sleep 15s
-        shell: bash
-
       - name: Set workflow start time
         id: start_time
         run: echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
 
+      - name: Initial pause for event flurry
+        run: sleep 15s
+        shell: bash
+
       - name: Install system dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq
+          sudo apt-get install -y jq
 
       - name: Checkout main branch to get scripts
         uses: actions/checkout@v5
@@ -72,6 +71,11 @@ jobs:
           key: ${{ runner.os }}-r-${{ steps.setup-r.outputs.r-version }}-pkgs-v1
           restore-keys: |
             ${{ runner.os }}-r-${{ steps.setup-r.outputs.r-version }}-pkgs-
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev
 
       - name: Install R script dependencies
         if: steps.check_changes_1.outputs.changes == 'true'
