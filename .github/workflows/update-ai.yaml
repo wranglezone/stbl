@@ -29,15 +29,11 @@ jobs:
     steps:
       - name: Set workflow start time
         id: start_time
-        run: echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+        run: echo "timestamp=$(date -u +'%Y-%M-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
 
       - name: Initial pause for event flurry
         run: sleep 15s
         shell: bash
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get install -y jq
 
       - name: Checkout main branch to get scripts
         uses: actions/checkout@v5
@@ -45,17 +41,23 @@ jobs:
           token: ${{ secrets.ADMIN_PAT }}
           ref: main
 
-      - name: Make timestamp check script executable
+      - name: Make check scripts executable
         run: |
           if [ -f ".github/scripts/check-timestamp.sh" ]; then
             chmod +x .github/scripts/check-timestamp.sh
           fi
+          if [ -f ".github/scripts/check-workflow-runs.sh" ]; then
+            chmod +x .github/scripts/check-workflow-runs.sh
+          fi
         shell: bash
 
-      - name: Check for changes before setup
+      - name: Check for newer workflow runs
         id: check_changes_1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADMIN_PAT }} # Use PAT for gh API calls
+          GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
-          echo "$(bash .github/scripts/check-timestamp.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
+          echo "$(bash .github/scripts/check-workflow-runs.sh ${{ steps.start_time.outputs.timestamp }})" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Setup R
@@ -75,7 +77,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq
 
       - name: Install R script dependencies
         if: steps.check_changes_1.outputs.changes == 'true'
@@ -115,4 +117,3 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: Update issues.json"
           # Force push the 'ai' branch to the remote, overwriting its history.
           git push --force origin ai
-
