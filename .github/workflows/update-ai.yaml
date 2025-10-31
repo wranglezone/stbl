@@ -79,6 +79,7 @@ jobs:
             ${{ runner.os }}-r-${{ steps.setup-r.outputs.r-version }}-pkgs-
 
       - name: Install system dependencies
+        if: steps.check_changes_1.outputs.changes == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq
