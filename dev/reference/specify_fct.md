@@ -117,8 +117,8 @@ stabilize_lowercase_letter(c("s", "t", "b", "l"))
 #> Levels: a b c d e f g h i j k l m n o p q r s t u v w x y z
 try(stabilize_lowercase_letter("A"))
 #> Error in eval(expr, envir) : 
-#>   All values of `"A"` must be present in `levels` or `to_na`.
-#> ℹ Disallowed values: A
-#> ℹ Allowed values: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, …, y,
-#>   and z
+#>   Each value of `"A"` must be in the expected levels.
+#> ℹ Allowed levels: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+#>   "m", "n", "o", "p", "q", "r", …, "y", and "z".
+#> ✖ Unexpected values: "A".
 ```

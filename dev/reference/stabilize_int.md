@@ -358,13 +358,15 @@ try(stabilize_int(factor("1"), coerce_factor = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `factor("1")` <factor> to <integer>.
 try(stabilize_int(1:10, min_value = 3))
-#> Error in eval(expr, envir) : 
-#>   ! Values of `1:10` must be >= 3.
-#> ✖ Values are too low at locations 1 and 2.
+#> Error in eval(expr, envir) : `1:10` must be >= 3.
+#> ℹ Some values are too low.
+#> ✖ Locations: 1 and 2
+#> ✖ Values: 1 and 2
 try(stabilize_int(1:10, max_value = 7))
-#> Error in eval(expr, envir) : 
-#>   ! Values of `1:10` must be <= 7.
-#> ✖ Values are too high at locations 8, 9, and 10.
+#> Error in eval(expr, envir) : `1:10` must be <= 7.
+#> ℹ Some values are too high.
+#> ✖ Locations: 8, 9, and 10
+#> ✖ Values: 8, 9, and 10
 
 stabilize_int_scalar(1L)
 #> [1] 1

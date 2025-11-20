@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   stbl: stbl.html
-last_built: 2025-11-15T14:36Z
+last_built: 2025-11-20T15:24Z
 urls:
   reference: https://stbl.wrangle.zone/reference
   article: https://stbl.wrangle.zone/articles

@@ -276,10 +276,10 @@ to_fct(NULL)
 #> NULL
 try(to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"))
 #> Error in eval(expr, envir) : 
-#>   All values of `letters[1:5]` must be present in `levels` or `to_na`.
-#> ℹ Disallowed values: d and e
-#> ℹ Allowed values: a and c
-#> ℹ Values that will be converted to `NA`: b
+#>   Each value of `letters[1:5]` must be in the expected levels.
+#> ℹ Allowed levels: "a" and "c".
+#> ℹ Values that are converted to `NA`: "b".
+#> ✖ Unexpected values: "d" and "e".
 
 to_fct_scalar("a")
 #> [1] a
@@ -316,7 +316,7 @@ try(stabilize_fct_scalar(letters))
 #> ✖ `letters` has 26 values.
 try(stabilize_fct_scalar("c", levels = c("a", "b")))
 #> Error in eval(expr, envir) : 
-#>   All values of `"c"` must be present in `levels` or `to_na`.
-#> ℹ Disallowed values: c
-#> ℹ Allowed values: a and b
+#>   Each value of `"c"` must be in the expected levels.
+#> ℹ Allowed levels: "a" and "b".
+#> ✖ Unexpected values: "c".
 ```

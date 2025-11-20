@@ -353,13 +353,15 @@ try(stabilize_dbl(factor("1.1"), coerce_factor = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `factor("1.1")` <factor> to <double>.
 try(stabilize_dbl(1:10, min_value = 3.5))
-#> Error in eval(expr, envir) : 
-#>   ! Values of `1:10` must be >= 3.5.
-#> ✖ Values are too low at locations 1, 2, and 3.
+#> Error in eval(expr, envir) : `1:10` must be >= 3.5.
+#> ℹ Some values are too low.
+#> ✖ Locations: 1, 2, and 3
+#> ✖ Values: 1, 2, and 3
 try(stabilize_dbl(1:10, max_value = 7.5))
-#> Error in eval(expr, envir) : 
-#>   ! Values of `1:10` must be <= 7.5.
-#> ✖ Values are too high at locations 8, 9, and 10.
+#> Error in eval(expr, envir) : `1:10` must be <= 7.5.
+#> ℹ Some values are too high.
+#> ✖ Locations: 8, 9, and 10
+#> ✖ Values: 8, 9, and 10
 
 stabilize_dbl_scalar(1.0)
 #> [1] 1

@@ -301,8 +301,8 @@ try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 #> Error in eval(expr, envir) : 
 #>   `c("hide", "find", "find", "hide")` must match the regex pattern "hide"
 #> ✖ Some values fail the check.
-#> • Locations: 2 and 3
-#> • Values: find and find
+#> ✖ Locations: 2 and 3
+#> ✖ Values: find and find
 
 stabilize_chr_scalar(TRUE)
 #> [1] "TRUE"

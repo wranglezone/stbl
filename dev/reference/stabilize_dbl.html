@@ -406,13 +406,15 @@ acceptable?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Can't coerce `factor("1.1")` <span style="color: #0000BB;">&lt;factor&gt;</span> to <span style="color: #0000BB;">&lt;double&gt;</span>.</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_dbl</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, min_value <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BBBB00;">!</span> Values of `1:10` must be &gt;= 3.5.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Values are too low at locations 1, 2, and 3.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `1:10` must be &gt;= 3.5.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Some values are too low.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Locations: 1, 2, and 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Values: 1, 2, and 3</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_dbl</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, max_value <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BBBB00;">!</span> Values of `1:10` must be &lt;= 7.5.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Values are too high at locations 8, 9, and 10.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `1:10` must be &lt;= 7.5.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Some values are too high.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Locations: 8, 9, and 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Values: 8, 9, and 10</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_dbl_scalar</span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>

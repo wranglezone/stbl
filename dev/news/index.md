@@ -60,6 +60,9 @@
   ([\#139](https://github.com/wranglezone/stbl/issues/139),
   [\#143](https://github.com/wranglezone/stbl/issues/143),
   [\#144](https://github.com/wranglezone/stbl/issues/144)).
+- Clarified error messages
+  ([\#176](https://github.com/wranglezone/stbl/issues/176),
+  [\#177](https://github.com/wranglezone/stbl/issues/177)).
 
 ## stbl 0.2.0
 

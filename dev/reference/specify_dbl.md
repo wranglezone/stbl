@@ -138,9 +138,12 @@ stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)
 stabilize_3_to_5(c(3.3, 4.4, 5))
 #> [1] 3.3 4.4 5.0
 try(stabilize_3_to_5(c(1:6)))
-#> Error in eval(expr, envir) : 
-#>   ! Values of `c(1:6)` must be >= 3.
-#> ✖ Values are too low at locations 1 and 2.
-#> ! Values of `c(1:6)` must be <= 5.
-#> ✖ Values are too high at locations 6.
+#> Error in eval(expr, envir) : `c(1:6)` must be >= 3.
+#> ℹ Some values are too low.
+#> ✖ Locations: 1 and 2
+#> ✖ Values: 1 and 2
+#> `c(1:6)` must be <= 5.
+#> ℹ Some values are too high.
+#> ✖ Location: 6
+#> ✖ Value: 6
 ```

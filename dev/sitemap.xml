@@ -41,6 +41,9 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-define_main_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_chr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_dbl_value.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_dbl_value_multi.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_dbl_value_single.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-elements_are_cls_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-fast_false.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_failures.html</loc></url>
