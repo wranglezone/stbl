@@ -22,7 +22,7 @@ Suggests:
     rmarkdown,
     stringi,
     stringr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.3.0)
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3

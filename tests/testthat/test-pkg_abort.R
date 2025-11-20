@@ -116,6 +116,6 @@ test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
         "a_different_class"
       )
     },
-    "has class"
+    "Actual class"
   )
 })

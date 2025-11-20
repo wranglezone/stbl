@@ -124,16 +124,17 @@ expect_pkg_error_classes <- function(
   package,
   ...
 ) {
-  object <- rlang::enquo(object)
+  rlang::check_installed("testthat", "to check error class expectations")
   expected_classes <- c(
     .compile_pkg_error_classes(package, ...),
     "rlang_error",
     "error",
     "condition"
   )
-  object_error <- rlang::inject(
-    testthat::expect_error(!!object),
-    env = rlang::current_env()
+  rlang::try_fetch(
+    object,
+    error = function(e) {
+      testthat::expect_s3_class(e, expected_classes, exact = TRUE)
+    }
   )
-  testthat::expect_s3_class(object_error, expected_classes, exact = TRUE)
 }
