@@ -165,29 +165,99 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 ) {
   min_value <- to_dbl_scalar(min_value, call = call)
   max_value <- to_dbl_scalar(max_value, call = call)
-
   min_failure_locations <- .find_failures(x, min_value, `<`)
   max_failure_locations <- .find_failures(x, max_value, `>`)
-
   if (is.null(min_failure_locations) && is.null(max_failure_locations)) {
     return(invisible(NULL))
   }
+  min_msg <- .describe_failure_dbl_value(
+    x,
+    failure_locations = min_failure_locations,
+    direction = "low",
+    target_value = min_value,
+    x_arg = x_arg
+  )
 
-  min_msg <- min_failure_locations %&&%
-    c(
-      "!" = "Values of {.arg {x_arg}} must be >= {min_value}.",
-      x = "Values are too low at locations {min_failure_locations}."
-    )
-  max_msg <- max_failure_locations %&&%
-    c(
-      "!" = "Values of {.arg {x_arg}} must be <= {max_value}.",
-      x = "Values are too high at locations {max_failure_locations}."
-    )
-
+  max_msg <- .describe_failure_dbl_value(
+    x,
+    failure_locations = max_failure_locations,
+    direction = "high",
+    target_value = max_value,
+    x_arg = x_arg
+  )
   .stbl_abort(
     c(min_msg, max_msg),
     subclass = "outside_range",
     call = call,
     message_env = rlang::current_env()
+  )
+}
+
+#' Describe a numeric value validation failure
+#'
+#' @param x `(numeric)` The vector being checked.
+#' @param failure_locations `(integer)` Indices where the check failed.
+#' @param direction `(character)` One of `"low"` or `"high"`.
+#' @param target_value `(numeric)` The value against which `x` is being compared.
+#' @inheritParams .shared-params
+#'
+#' @returns A named character vector for `.stbl_abort()`.
+#' @keywords internal
+.describe_failure_dbl_value <- function(
+  x,
+  failure_locations,
+  direction,
+  target_value,
+  x_arg
+) {
+  if (is.null(failure_locations)) {
+    return(NULL)
+  }
+  direction_sign <- if (direction == "low") ">" else "<"
+  msg_main <- format_inline(
+    "{.arg {x_arg}} must be {direction_sign}= {target_value}."
+  )
+  if (length(x) == 1) {
+    return(.describe_failure_dbl_value_single(x, msg_main, direction))
+  }
+  .describe_failure_dbl_value_multi(
+    x,
+    msg_main = msg_main,
+    failure_locations = failure_locations,
+    direction = direction
+  )
+}
+
+#' Describe a single numeric value failure
+#'
+#' @param msg_main `(character)` The main error message.
+#' @inheritParams .describe_failure_dbl_value
+#' @returns A named character vector.
+#' @keywords internal
+.describe_failure_dbl_value_single <- function(x, msg_main, direction) {
+  c(
+    msg_main,
+    "x" = format_inline("{.val {x}} is too {direction}.")
+  )
+}
+
+#' Describe multiple numeric value failures
+#'
+#' @inheritParams .describe_failure_dbl_value_single
+#' @returns A named character vector.
+#' @keywords internal
+.describe_failure_dbl_value_multi <- function(
+  x,
+  msg_main,
+  failure_locations,
+  direction
+) {
+  n_failures <- length(failure_locations)
+  failure_values <- x[failure_locations]
+  c(
+    msg_main,
+    "i" = glue("Some values are too {direction}."),
+    "x" = format_inline("{qty(n_failures)}Location{?s}: {failure_locations}"),
+    "x" = format_inline("{qty(n_failures)}Value{?s}: {failure_values}")
   )
 }

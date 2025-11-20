@@ -1,4 +1,4 @@
-test_that("stabilize_int() checks min_value (#2, #6)", {
+test_that("stabilize_int() checks min_value (#2, #6, #176)", {
   given <- 1:10
   expect_identical(
     stabilize_int(given, min_value = 1, max_value = 10),
@@ -18,7 +18,7 @@ test_that("stabilize_int() checks min_value (#2, #6)", {
   )
 })
 
-test_that("stabilize_int() checks max_value (#5)", {
+test_that("stabilize_int() checks max_value (#5, #176)", {
   given <- 1:10
   expect_error(
     stabilize_int(given, max_value = 4),

@@ -1,11 +1,22 @@
-# stabilize_dbl() checks min_value (#23)
+# stabilize_dbl() checks min_value (#23, #176)
 
     Code
       stabilize_dbl(given, min_value = 11.1)
     Condition
       Error:
-      ! Values of `given` must be >= 11.1.
-      x Values are too low at locations 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
+      ! `given` must be >= 11.1.
+      i Some values are too low.
+      x Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
+      x Values: 1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, and 10.1
+
+---
+
+    Code
+      stabilize_dbl(given[[1]], min_value = 11.1)
+    Condition
+      Error:
+      ! `given[[1]]` must be >= 11.1.
+      x 1.1 is too low.
 
 ---
 
@@ -13,17 +24,21 @@
       wrapped_stabilize_dbl(given, min_value = 11.1)
     Condition
       Error in `wrapped_stabilize_dbl()`:
-      ! Values of `val` must be >= 11.1.
-      x Values are too low at locations 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
+      ! `val` must be >= 11.1.
+      i Some values are too low.
+      x Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
+      x Values: 1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, and 10.1
 
-# stabilize_dbl() checks max_value (#23)
+# stabilize_dbl() checks max_value (#23, #176)
 
     Code
       stabilize_dbl(given, max_value = 4.1)
     Condition
       Error:
-      ! Values of `given` must be <= 4.1.
-      x Values are too high at locations 5, 6, 7, 8, 9, and 10.
+      ! `given` must be <= 4.1.
+      i Some values are too high.
+      x Locations: 5, 6, 7, 8, 9, and 10
+      x Values: 5.1, 6.1, 7.1, 8.1, 9.1, and 10.1
 
 ---
 
@@ -31,8 +46,10 @@
       wrapped_stabilize_dbl(given, max_value = 4.1)
     Condition
       Error in `wrapped_stabilize_dbl()`:
-      ! Values of `val` must be <= 4.1.
-      x Values are too high at locations 5, 6, 7, 8, 9, and 10.
+      ! `val` must be <= 4.1.
+      i Some values are too high.
+      x Locations: 5, 6, 7, 8, 9, and 10
+      x Values: 5.1, 6.1, 7.1, 8.1, 9.1, and 10.1
 
 # stabilize_dbl_scalar() errors on non-scalars (#23)
 

@@ -6,8 +6,8 @@
       Error:
       ! `given` must match the regex pattern "^\\d{5}(?:[-\\s]\\d{4})?$"
       x Some values fail the check.
-      * Locations: 1
-      * Values: 123456789
+      x Location: 1
+      x Value: 123456789
 
 ---
 
@@ -17,8 +17,8 @@
       Error in `wrapped_stabilize_chr()`:
       ! `val` must match the regex pattern "^\\d{5}(?:[-\\s]\\d{4})?$"
       x Some values fail the check.
-      * Locations: 1
-      * Values: 123456789
+      x Location: 1
+      x Value: 123456789
 
 # stabilize_chr() works with complex url regex (#52)
 
@@ -35,8 +35,8 @@
       Error:
       ! `c("example.com", "not a url")` must match the regex pattern "^(?:(?:(?:https?|ftp):)?\\/\\/)?(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z0-9\\u00a1-\\uffff][a-z0-9\\u00a1-\\uffff_-]{0,62})?[a-z0-9\\u00a1-\\uffff]\\.)+(?:[a-z\\u00a1-\\uffff]{2,}\\.?))(?::\\d{2,5})?(?:[/?#]\\S*)?$"
       x Some values fail the check.
-      * Locations: 2
-      * Values: not a url
+      x Location: 2
+      x Value: not a url
 
 # stabilize_chr() allows for customized error messages (#52)
 
@@ -46,8 +46,8 @@
       Error:
       ! `c("not a url", "example.com")` must be a url.
       x Some values fail the check.
-      * Locations: 1
-      * Values: not a url
+      x Location: 1
+      x Value: not a url
 
 # stabilize_chr() works with regex that contains braces (#52)
 
@@ -57,8 +57,8 @@
       Error:
       ! `c("b", "aa")` must match the regex pattern "a{1,3}"
       x Some values fail the check.
-      * Locations: 1
-      * Values: b
+      x Location: 1
+      x Value: b
 
 # stabilize_chr() accepts negated regex args (#85)
 
@@ -68,8 +68,8 @@
       Error:
       ! `given` must not match the regex pattern "c"
       x Some values fail the check.
-      * Locations: 3
-      * Values: c
+      x Location: 3
+      x Value: c
 
 # stabilize_chr() accepts multiple regex rules (#86, #85)
 
@@ -79,12 +79,12 @@
       Error:
       ! `given` must match the regex pattern "a"
       x Some values fail the check.
-      * Locations: 4
-      * Values: plum
+      x Location: 4
+      x Value: plum
       `given` must not match the regex pattern "b"
       x Some values fail the check.
-      * Locations: 2 and 3
-      * Values: banana and boat
+      x Locations: 2 and 3
+      x Values: banana and boat
 
 # stabilize_chr() works with stringr::fixed() (#87)
 
@@ -94,8 +94,8 @@
       Error:
       ! `c("a.b", "acb")` must match the regex pattern "a.b"
       x Some values fail the check.
-      * Locations: 2
-      * Values: acb
+      x Location: 2
+      x Value: acb
 
 # stabilize_chr() works with stringr::coll() (#87)
 
@@ -105,8 +105,8 @@
       Error:
       ! `c("a", "A")` must match the regex pattern "a"
       x Some values fail the check.
-      * Locations: 2
-      * Values: A
+      x Location: 2
+      x Value: A
 
 # stabilize_chr() works with stringr::regex() (#87)
 
@@ -116,8 +116,8 @@
       Error:
       ! `c("A", "B")` must match the regex pattern "a"
       x Some values fail the check.
-      * Locations: 2
-      * Values: B
+      x Location: 2
+      x Value: B
 
 # stabilize_chr_scalar() errors for non-scalars (#22)
 

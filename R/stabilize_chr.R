@@ -235,14 +235,12 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #' @keywords internal
 .describe_failure_chr <- function(x, success, negate = FALSE) {
   locations <- which(!success)
-
   if (length(x) == 1) {
-    return(c(x = cli::format_inline("{.val {x}} fails the check.")))
+    return(c(x = format_inline("{.val {x}} fails the check.")))
   }
-
   c(
     x = glue("Some values fail the check."),
-    "*" = cli::format_inline("Locations: {locations}"),
-    "*" = cli::format_inline("Values: {x[locations]}")
+    "x" = format_inline("Location{?s}: {as.character(locations)}"),
+    "x" = format_inline("Value{?s}: {x[locations]}")
   )
 }

@@ -4,10 +4,10 @@
       stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
     Condition
       Error:
-      ! All values of `letters[1:5]` must be present in `levels` or `to_na`.
-      i Disallowed values: d and e
-      i Allowed values: a and c
-      i Values that will be converted to `NA`: b
+      ! Each value of `letters[1:5]` must be in the expected levels.
+      i Allowed levels: "a" and "c".
+      i Values that are converted to `NA`: "b".
+      x Unexpected values: "d" and "e".
 
 ---
 
@@ -15,10 +15,10 @@
       wrapped_stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
     Condition
       Error in `wrapped_stabilize_fct()`:
-      ! All values of `val` must be present in `levels` or `to_na`.
-      i Disallowed values: d and e
-      i Allowed values: a and c
-      i Values that will be converted to `NA`: b
+      ! Each value of `val` must be in the expected levels.
+      i Allowed levels: "a" and "c".
+      i Values that are converted to `NA`: "b".
+      x Unexpected values: "d" and "e".
 
 # stabilize_fct_scalar() errors for non-scalars (#62)
 
