@@ -177,18 +177,19 @@ to_fct.default <- function(
 .stop_bad_levels <- function(x, bad_casts, levels, to_na, x_arg, call) {
   bad_values <- unique(x[bad_casts])
   msg <- c(
-    "All values of {.arg {x_arg}} must be present in {.arg levels} or {.arg to_na}.",
-    "i" = "Disallowed values: {bad_values}",
-    "i" = "Allowed values: {levels}"
+    "Each value of {.arg {x_arg}} must be in the expected levels.",
+    "i" = "Allowed levels: {.str {levels}}."
   )
-
-  if (length(to_na) > 0) {
+  if (length(to_na)) {
     msg <- c(
       msg,
-      "i" = "Values that will be converted to {.code NA}: {to_na}"
+      "i" = "Values that are converted to {.code NA}: {.str {to_na}}."
     )
   }
-
+  msg <- c(
+    msg,
+    "x" = "Unexpected values: {.str {bad_values}}."
+  )
   .stbl_abort(
     message = msg,
     subclass = "fct_levels",

@@ -2,7 +2,9 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli format_inline
 #' @importFrom cli no
+#' @importFrom cli qty
 #' @importFrom glue glue
 #' @importFrom rlang %||%
 #' @importFrom rlang check_dots_empty0

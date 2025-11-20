@@ -1,11 +1,13 @@
-# stabilize_int() checks min_value (#2, #6)
+# stabilize_int() checks min_value (#2, #6, #176)
 
     Code
       stabilize_int(given, min_value = 11)
     Condition
       Error:
-      ! Values of `given` must be >= 11.
-      x Values are too low at locations 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
+      ! `given` must be >= 11.
+      i Some values are too low.
+      x Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
+      x Values: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
 
 ---
 
@@ -13,17 +15,21 @@
       wrapped_stabilize_int(given, min_value = 11)
     Condition
       Error in `wrapped_stabilize_int()`:
-      ! Values of `val` must be >= 11.
-      x Values are too low at locations 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
+      ! `val` must be >= 11.
+      i Some values are too low.
+      x Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
+      x Values: 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10
 
-# stabilize_int() checks max_value (#5)
+# stabilize_int() checks max_value (#5, #176)
 
     Code
       stabilize_int(given, max_value = 4)
     Condition
       Error:
-      ! Values of `given` must be <= 4.
-      x Values are too high at locations 5, 6, 7, 8, 9, and 10.
+      ! `given` must be <= 4.
+      i Some values are too high.
+      x Locations: 5, 6, 7, 8, 9, and 10
+      x Values: 5, 6, 7, 8, 9, and 10
 
 ---
 
@@ -31,8 +37,10 @@
       wrapped_stabilize_int(given, max_value = 4)
     Condition
       Error in `wrapped_stabilize_int()`:
-      ! Values of `val` must be <= 4.
-      x Values are too high at locations 5, 6, 7, 8, 9, and 10.
+      ! `val` must be <= 4.
+      i Some values are too high.
+      x Locations: 5, 6, 7, 8, 9, and 10
+      x Values: 5, 6, 7, 8, 9, and 10
 
 # stabilize_int_scalar() errors on non-scalars (#12)
 

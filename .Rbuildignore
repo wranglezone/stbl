@@ -10,3 +10,4 @@
 ^pkgdown$
 ^exploration$
 ^CRAN-SUBMISSION$
+^scratch\.R$
