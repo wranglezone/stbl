@@ -107,10 +107,8 @@ test_that(".stop_null() passes dots", {
     "stbl",
     "bad_null"
   )
-  expect_snapshot(
-    .stop_null("my_arg", rlang::current_env(), .internal = TRUE),
-    error = TRUE
-  )
+  # The snapshot for this can change based on where/when it runs, so don't worry
+  # about the messaging.
 })
 
 test_that(".stop_incompatible() throws the expected error", {

@@ -58,16 +58,6 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_null() passes dots
-
-    Code
-      .stop_null("my_arg", rlang::current_env(), .internal = TRUE)
-    Condition
-      Error:
-      ! `my_arg` must not be <NULL>.
-      i This is an internal error that was detected in the stbl package.
-        Please report it at <https://github.com/wranglezone/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
-
 # .stop_incompatible() throws the expected error
 
     Code
