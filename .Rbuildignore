@@ -11,3 +11,5 @@
 ^exploration$
 ^CRAN-SUBMISSION$
 ^scratch\.R$
+^\.claude$
+^AGENTS\.md$
