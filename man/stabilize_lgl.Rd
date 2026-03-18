@@ -67,8 +67,8 @@ stabilise_logical(
 stabilize_lgl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -78,8 +78,8 @@ stabilize_lgl_scalar(
 stabilize_logical_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -89,8 +89,8 @@ stabilize_logical_scalar(
 stabilise_lgl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -100,8 +100,8 @@ stabilise_lgl_scalar(
 stabilise_logical_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -218,8 +218,8 @@ try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
 stabilize_lgl_scalar(TRUE)
 stabilize_lgl_scalar("TRUE")
 try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
-stabilize_lgl_scalar(NULL)
-try(stabilize_lgl_scalar(NULL, allow_null = FALSE))
+try(stabilize_lgl_scalar(NULL))
+stabilize_lgl_scalar(NULL, allow_null = TRUE)
 }
 \seealso{
 Other logical functions: 

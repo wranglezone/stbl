@@ -52,6 +52,22 @@
       ! `val` must have size <= 3.
       x 4 is too big.
 
+# stabilize_lgl_scalar() respects allow_null (#28)
+
+    Code
+      stabilize_lgl_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_stabilize_lgl_scalar(given)
+    Condition
+      Error in `wrapped_stabilize_lgl_scalar()`:
+      ! `val` must not be <NULL>.
+
 # stabilize_lgl_scalar() errors on non-scalars (#28)
 
     Code

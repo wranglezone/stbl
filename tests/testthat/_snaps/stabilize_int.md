@@ -42,6 +42,22 @@
       x Locations: 5, 6, 7, 8, 9, and 10
       x Values: 5, 6, 7, 8, 9, and 10
 
+# stabilize_int_scalar() respects allow_null (#12)
+
+    Code
+      stabilize_int_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_stabilize_int_scalar(given)
+    Condition
+      Error in `wrapped_stabilize_int_scalar()`:
+      ! `val` must not be <NULL>.
+
 # stabilize_int_scalar() errors on non-scalars (#12)
 
     Code

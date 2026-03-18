@@ -15,7 +15,7 @@
   if (missing(x)) {
     .stop_must("must not be missing.", x_arg = "unknown arg", call = call)
   }
-  allow_null <- to_lgl_scalar(allow_null, allow_null = FALSE, call = call)
+  allow_null <- to_lgl_scalar(allow_null, call = call)
   if (allow_null) {
     return(NULL)
   }

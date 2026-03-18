@@ -50,8 +50,8 @@
 #' stabilize_int_scalar(1L)
 #' stabilize_int_scalar("1")
 #' try(stabilize_int_scalar(1:10))
-#' stabilize_int_scalar(NULL)
-#' try(stabilize_int_scalar(NULL, allow_null = FALSE))
+#' try(stabilize_int_scalar(NULL))
+#' stabilize_int_scalar(NULL, allow_null = TRUE)
 stabilize_int <- function(
   x,
   ...,
@@ -107,8 +107,8 @@ stabilise_integer <- stabilize_int
 stabilize_int_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,

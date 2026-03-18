@@ -20,6 +20,22 @@
       i Values that are converted to `NA`: "b".
       x Unexpected values: "d" and "e".
 
+# stabilize_fct_scalar() respects allow_null (#62)
+
+    Code
+      stabilize_fct_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_stabilize_fct_scalar(given)
+    Condition
+      Error in `wrapped_stabilize_fct_scalar()`:
+      ! `val` must not be <NULL>.
+
 # stabilize_fct_scalar() errors for non-scalars (#62)
 
     Code

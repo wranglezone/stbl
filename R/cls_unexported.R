@@ -186,7 +186,7 @@
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  coerce_factor <- to_lgl_scalar(coerce_factor, allow_null = FALSE, call = call)
+  coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
   if (coerce_factor) {
     return(
       rlang::inject(

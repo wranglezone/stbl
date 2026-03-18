@@ -72,7 +72,6 @@ to_dbl.character <- function(
 ) {
   coerce_character <- to_lgl_scalar(
     coerce_character,
-    allow_null = FALSE,
     call = call
   )
   if (coerce_character) {

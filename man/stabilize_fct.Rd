@@ -75,8 +75,8 @@ stabilise_factor(
 stabilize_fct_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character(),
@@ -88,8 +88,8 @@ stabilize_fct_scalar(
 stabilize_factor_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character(),
@@ -101,8 +101,8 @@ stabilize_factor_scalar(
 stabilise_fct_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character(),
@@ -114,8 +114,8 @@ stabilise_fct_scalar(
 stabilise_factor_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character(),

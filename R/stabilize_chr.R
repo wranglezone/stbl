@@ -55,8 +55,8 @@
 #' stabilize_chr_scalar(TRUE)
 #' stabilize_chr_scalar("TRUE")
 #' try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
-#' stabilize_chr_scalar(NULL)
-#' try(stabilize_chr_scalar(NULL, allow_null = FALSE))
+#' try(stabilize_chr_scalar(NULL))
+#' stabilize_chr_scalar(NULL, allow_null = TRUE)
 stabilize_chr <- function(
   x,
   ...,
@@ -102,8 +102,8 @@ stabilise_character <- stabilize_chr
 stabilize_chr_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   regex = NULL,
   x_arg = caller_arg(x),

@@ -37,6 +37,23 @@ test_that("stabilize_int() checks max_value (#5, #176)", {
 test_that("stabilize_int_scalar() allows length-1 ints through (#12)", {
   given <- 1L
   expect_identical(stabilize_int_scalar(given), given)
+  expect_null(stabilize_int_scalar(NULL, allow_null = TRUE))
+})
+
+test_that("stabilize_int_scalar() respects allow_null (#12)", {
+  given <- NULL
+  expect_error(
+    stabilize_int_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_null")
+  )
+  expect_snapshot(
+    stabilize_int_scalar(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_stabilize_int_scalar(given),
+    error = TRUE
+  )
 })
 
 test_that("stabilize_int_scalar() errors on non-scalars (#12)", {
