@@ -149,8 +149,8 @@ to_factor(
 to_fct_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   levels = NULL,
   to_na = character(),
   x_arg = caller_arg(x),
@@ -161,8 +161,8 @@ to_fct_scalar(
 to_factor_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   levels = NULL,
   to_na = character(),
   x_arg = caller_arg(x),
