@@ -7,6 +7,10 @@
 * New function `to_lst()` (and synonym `to_list()`) to coerce an object to a list, with conditional checks for `NULL` and functions (#157, #166).
 * New synonym functions for all class functions. For example `to_character()` is now a synonym for `to_chr()`, and `specify_logical()` is a synonym for `specify_lgl()` (#164). In addition, `stabilise_*()` synonyms have been added for all `stabilize_*()` functions (#167).
 
+## Breaking changes
+
+* `to_chr_scalar()`, `to_dbl_scalar()`, `to_fct_scalar()`, `to_int_scalar()`, and `to_lgl_scalar()` now default to `allow_null = FALSE` and `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or `allow_zero_length = TRUE` to restore the previous behavior (#178).
+
 ## Potential breaking changes
 
 * Several conditions that formerly included a subclass of "stbl-error-must" no longer include that subclass. This only occurs when "stbl-error-must" was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (#136). 

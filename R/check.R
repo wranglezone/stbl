@@ -55,8 +55,8 @@
     return(invisible(NULL))
   }
 
-  min_size <- to_int_scalar(min_size, call = call)
-  max_size <- to_int_scalar(max_size, call = call)
+  min_size <- to_int_scalar(min_size, allow_null = TRUE, call = call)
+  max_size <- to_int_scalar(max_size, allow_null = TRUE, call = call)
   .check_x_no_more_than_y(min_size, max_size, call = call)
 
   x_size <- vec_size(x)

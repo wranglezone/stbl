@@ -127,7 +127,7 @@
 # to_lgl_scalar() respects allow_null (#32)
 
     Code
-      to_lgl_scalar(given, allow_null = FALSE)
+      to_lgl_scalar(given)
     Condition
       Error:
       ! `given` must not be <NULL>.
@@ -135,7 +135,7 @@
 ---
 
     Code
-      wrapped_to_lgl_scalar(given, allow_null = FALSE)
+      wrapped_to_lgl_scalar(given)
     Condition
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` must not be <NULL>.

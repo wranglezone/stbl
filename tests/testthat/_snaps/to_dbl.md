@@ -124,3 +124,27 @@
       ! `val` must be a single <numeric>.
       x `val` has 2 values.
 
+# to_dbl_scalar() respects allow_null (#23)
+
+    Code
+      to_dbl_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_to_dbl_scalar(given)
+    Condition
+      Error in `wrapped_to_dbl_scalar()`:
+      ! `val` must not be <NULL>.
+
+# to_dbl_scalar respects allow_zero_length (#23)
+
+    Code
+      to_dbl_scalar(given)
+    Condition
+      Error:
+      ! `given` must be a single <numeric (non-empty)>.
+      x `given` has no values.

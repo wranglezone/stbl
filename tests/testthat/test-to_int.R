@@ -204,6 +204,34 @@ test_that("to_int_scalar() provides informative error messages (#12)", {
   )
 })
 
+test_that("to_int_scalar() respects allow_null (#12)", {
+  given <- NULL
+  expect_error(
+    to_int_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_null")
+  )
+  expect_snapshot(
+    to_int_scalar(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int_scalar(given),
+    error = TRUE
+  )
+})
+
+test_that("to_int_scalar respects allow_zero_length (#12)", {
+  given <- integer()
+  expect_error(
+    to_int_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_empty")
+  )
+  expect_snapshot(
+    to_int_scalar(given),
+    error = TRUE
+  )
+})
+
 test_that("to_integer() exists (#164)", {
   expect_no_error(to_integer(1))
 })
