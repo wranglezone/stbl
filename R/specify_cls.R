@@ -528,7 +528,13 @@ specify_lst <- function(
 ) {
   element_specs <- list(...)
   structure(
-    function(x, ..., x_arg = caller_arg(x), call = caller_env(), x_class = object_type(x)) {
+    function(
+      x,
+      ...,
+      x_arg = caller_arg(x),
+      call = caller_env(),
+      x_class = object_type(x)
+    ) {
       # Use .element_specs to avoid naming conflicts when element specs are named
       # "x" (which would otherwise match stabilize_lst()'s first argument).
       stabilize_lst(
