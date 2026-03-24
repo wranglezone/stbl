@@ -124,7 +124,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1
 
-# to_lgl_scalar() respects allow_null (#32)
+# to_lgl_scalar() respects allow_null (#32, #189)
 
     Code
       to_lgl_scalar(given)

@@ -193,12 +193,12 @@ test_that("stabilize_chr works with NA and regex pattern (#27, #52)", {
   )
 })
 
-test_that("stabilize_chr_scalar() allows length-1 chrs through (#22)", {
+test_that("stabilize_chr_scalar() allows length-1 chrs through (#22, #189)", {
   expect_identical(stabilize_chr_scalar("a"), "a")
   expect_null(stabilize_chr_scalar(NULL, allow_null = TRUE))
 })
 
-test_that("stabilize_chr_scalar() respects allow_null (#22)", {
+test_that("stabilize_chr_scalar() respects allow_null (#22, #189)", {
   given <- NULL
   expect_error(
     stabilize_chr_scalar(given),

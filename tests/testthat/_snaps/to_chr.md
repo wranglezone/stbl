@@ -128,7 +128,7 @@
       Error in `wrapped_to_chr_scalar()`:
       ! Can't coerce `val` <list> to <character>.
 
-# to_chr_scalar() respects allow_null (#22)
+# to_chr_scalar() respects allow_null (#22, #189)
 
     Code
       to_chr_scalar(given)
@@ -144,7 +144,7 @@
       Error in `wrapped_to_chr_scalar()`:
       ! `val` must not be <NULL>.
 
-# to_chr_scalar respects allow_zero_length (#22)
+# to_chr_scalar respects allow_zero_length (#22, #189)
 
     Code
       to_chr_scalar(given)

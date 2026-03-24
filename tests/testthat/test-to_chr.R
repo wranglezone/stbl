@@ -151,7 +151,7 @@ test_that("to_chr() fails gracefully for weird cases (#22)", {
   )
 })
 
-test_that("to_chr_scalar() allows length-1 chrs through (#22)", {
+test_that("to_chr_scalar() allows length-1 chrs through (#22, #189)", {
   expect_identical(
     to_chr_scalar("a"),
     "a"
@@ -191,7 +191,7 @@ test_that("to_chr_scalar() errors for uncoerceable types (#22)", {
   )
 })
 
-test_that("to_chr_scalar() respects allow_null (#22)", {
+test_that("to_chr_scalar() respects allow_null (#22, #189)", {
   given <- NULL
   expect_error(
     to_chr_scalar(given),
@@ -207,7 +207,7 @@ test_that("to_chr_scalar() respects allow_null (#22)", {
   )
 })
 
-test_that("to_chr_scalar respects allow_zero_length (#22)", {
+test_that("to_chr_scalar respects allow_zero_length (#22, #189)", {
   given <- character()
   expect_error(
     to_chr_scalar(given),

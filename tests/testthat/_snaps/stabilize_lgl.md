@@ -52,7 +52,7 @@
       ! `val` must have size <= 3.
       x 4 is too big.
 
-# stabilize_lgl_scalar() respects allow_null (#28)
+# stabilize_lgl_scalar() respects allow_null (#28, #189)
 
     Code
       stabilize_lgl_scalar(given)

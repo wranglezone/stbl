@@ -172,7 +172,7 @@ test_that("to_dbl_scalar() provides informative error messages (#23)", {
   )
 })
 
-test_that("to_dbl_scalar() respects allow_null (#23)", {
+test_that("to_dbl_scalar() respects allow_null (#23, #189)", {
   given <- NULL
   expect_error(
     to_dbl_scalar(given),
@@ -188,7 +188,7 @@ test_that("to_dbl_scalar() respects allow_null (#23)", {
   )
 })
 
-test_that("to_dbl_scalar respects allow_zero_length (#23)", {
+test_that("to_dbl_scalar respects allow_zero_length (#23, #189)", {
   given <- double()
   expect_error(
     to_dbl_scalar(given),

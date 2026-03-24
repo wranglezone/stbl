@@ -17,12 +17,12 @@ test_that("stabilize_fct() throws errors for bad levels (#62)", {
   )
 })
 
-test_that("stabilize_fct_scalar() works (#62)", {
+test_that("stabilize_fct_scalar() works (#62, #189)", {
   expect_identical(stabilize_fct_scalar("a"), factor("a"))
   expect_null(stabilize_fct_scalar(NULL, allow_null = TRUE))
 })
 
-test_that("stabilize_fct_scalar() respects allow_null (#62)", {
+test_that("stabilize_fct_scalar() respects allow_null (#62, #189)", {
   given <- NULL
   expect_error(
     stabilize_fct_scalar(given),

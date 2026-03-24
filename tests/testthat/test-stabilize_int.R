@@ -34,13 +34,13 @@ test_that("stabilize_int() checks max_value (#5, #176)", {
   )
 })
 
-test_that("stabilize_int_scalar() allows length-1 ints through (#12)", {
+test_that("stabilize_int_scalar() allows length-1 ints through (#12, #189)", {
   given <- 1L
   expect_identical(stabilize_int_scalar(given), given)
   expect_null(stabilize_int_scalar(NULL, allow_null = TRUE))
 })
 
-test_that("stabilize_int_scalar() respects allow_null (#12)", {
+test_that("stabilize_int_scalar() respects allow_null (#12, #189)", {
   given <- NULL
   expect_error(
     stabilize_int_scalar(given),

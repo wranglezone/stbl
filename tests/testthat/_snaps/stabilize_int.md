@@ -42,7 +42,7 @@
       x Locations: 5, 6, 7, 8, 9, and 10
       x Values: 5, 6, 7, 8, 9, and 10
 
-# stabilize_int_scalar() respects allow_null (#12)
+# stabilize_int_scalar() respects allow_null (#12, #189)
 
     Code
       stabilize_int_scalar(given)

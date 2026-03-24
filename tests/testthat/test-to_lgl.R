@@ -218,7 +218,7 @@ test_that("to_lgl() errors for other types (#21)", {
   )
 })
 
-test_that("to_lgl_scalar() allows length-1 lgls through (#32)", {
+test_that("to_lgl_scalar() allows length-1 lgls through (#32, #189)", {
   given <- TRUE
   expect_true(to_lgl_scalar(given))
   given <- FALSE
@@ -258,7 +258,7 @@ test_that("to_lgl_scalar() errors for bad characters (#32)", {
   )
 })
 
-test_that("to_lgl_scalar() respects allow_null (#32)", {
+test_that("to_lgl_scalar() respects allow_null (#32, #189)", {
   given <- NULL
   expect_error(
     to_lgl_scalar(given),

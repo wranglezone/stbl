@@ -20,7 +20,7 @@
       i Values that are converted to `NA`: "b".
       x Unexpected values: "d" and "e".
 
-# stabilize_fct_scalar() respects allow_null (#62)
+# stabilize_fct_scalar() respects allow_null (#62, #189)
 
     Code
       stabilize_fct_scalar(given)

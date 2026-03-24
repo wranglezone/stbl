@@ -144,7 +144,7 @@
       ! `val` must be a single <integer>.
       x `val` has 10 values.
 
-# to_int_scalar() respects allow_null (#12)
+# to_int_scalar() respects allow_null (#12, #189)
 
     Code
       to_int_scalar(given)
@@ -160,7 +160,7 @@
       Error in `wrapped_to_int_scalar()`:
       ! `val` must not be <NULL>.
 
-# to_int_scalar respects allow_zero_length (#12)
+# to_int_scalar respects allow_zero_length (#12, #189)
 
     Code
       to_int_scalar(given)

@@ -119,7 +119,7 @@
       x Location: 2
       x Value: B
 
-# stabilize_chr_scalar() respects allow_null (#22)
+# stabilize_chr_scalar() respects allow_null (#22, #189)
 
     Code
       stabilize_chr_scalar(given)

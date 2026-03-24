@@ -204,7 +204,7 @@ test_that("to_int_scalar() provides informative error messages (#12)", {
   )
 })
 
-test_that("to_int_scalar() respects allow_null (#12)", {
+test_that("to_int_scalar() respects allow_null (#12, #189)", {
   given <- NULL
   expect_error(
     to_int_scalar(given),
@@ -220,7 +220,7 @@ test_that("to_int_scalar() respects allow_null (#12)", {
   )
 })
 
-test_that("to_int_scalar respects allow_zero_length (#12)", {
+test_that("to_int_scalar respects allow_zero_length (#12, #189)", {
   given <- integer()
   expect_error(
     to_int_scalar(given),
