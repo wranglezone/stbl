@@ -17,20 +17,55 @@ jobs:
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v6
+
+      - name: Set Development Mode Env Var
+        if: github.ref_name != 'main'
+        run: |
+          echo "Ref is '${{ github.ref_name }}', setting PKGDOWN_DEV_MODE=devel"
+          echo "PKGDOWN_DEV_MODE=devel" >> $GITHUB_ENV
 
       - uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: website
-          extra-packages: any::pkgdown local::.
+          extra-packages: any::pkgdown gilead-biostats/qcthat local::.
           cache-version: "1"
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+
+      - name: Deploy PR preview 🧪
+        if: github.event_name == 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
+          target-folder: pr/${{ github.event.number }}
+
+      - name: Comment with PR site URL 🌐
+        if: github.event_name == 'pull_request'
+        run: |
+          intPRNumber <- ${{ github.event.pull_request.number }}
+          strOwner <- tolower(qcthat::GetGHOwner())
+          strRepo <- qcthat::GetGHRepo()
+          strURL <- glue::glue(
+            "https://{strOwner}.github.io/{strRepo}/pr/{intPRNumber}/dev"
+          )
+          print(paste("🌐 URL:", strURL))
+          qcthat::CommentIssue(
+            intPRNumber,
+            glue::glue("🌐 [PR pkgdown deployed]({strURL})"),
+            NULL
+          )
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
