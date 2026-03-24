@@ -1,0 +1,282 @@
+# stbl
+
+R is flexible about classes. Variables are not declared with explicit
+classes, and arguments of the “wrong” class don’t cause errors until
+they explicitly fail at some point in the call stack. It would be
+helpful to keep that flexibility from a user standpoint, but to error
+informatively and quickly if the inputs will not work for a computation.
+The purpose of stbl is to allow programmers to specify what they want,
+and to then see if what the user supplied can work for that purpose.
+
+This approach aligns with [Postel’s
+Law](https://en.wikipedia.org/wiki/Robustness_principle):
+
+> “Be conservative in what you send. Be liberal in what you accept from
+> others.”
+
+stbl is liberal about what it accepts (by coercing when safe) and
+conservative about what it returns (by ensuring that inputs have the
+classes and other features that are expected).
+
+## Installation
+
+Install the released version of stbl from
+[CRAN](https://cran.r-project.org/):
+
+``` r
+install.packages("stbl")
+```
+
+Install the development version of stbl from
+[GitHub](https://github.com/):
+
+``` r
+# install.packages("pak")
+pak::pak("wranglezone/stbl")
+```
+
+## Usage
+
+The primary use-case for stbl is to stabilize function arguments. The
+goal is to make sure arguments will work the way you expect them to
+work, and to give meaningful error messages when they won’t.
+
+For example, perhaps you would like to protect against the case where
+data is not properly translated from character to integer when it’s
+loaded by a user.
+
+### Without stbl:
+
+Without the argument-stabilizers provided in stbl, error messages can be
+cryptic, and errors trigger when you might not want them to.
+
+``` r
+my_old_fun <- function(my_arg_name) {
+  my_arg_name + 1
+}
+my_old_fun("1")
+#> Error in my_arg_name + 1: non-numeric argument to binary operator
+```
+
+### With stbl:
+
+stbl helps to ensure that arguments are what you expect them to be.
+
+``` r
+my_fun <- function(my_arg_name) {
+  my_arg_name <- stbl::to_int(my_arg_name)
+  my_arg_name + 1
+}
+my_fun("1")
+#> [1] 2
+```
+
+Failures are reported with helpful messages.
+
+``` r
+my_fun("1.1")
+#> Error in `my_fun()`:
+#> ! `my_arg_name` <character> must be coercible to <integer>
+#> ✖ Can't convert some values due to loss of precision.
+#> • Locations: 1
+```
+
+The errors help locate issues within vectors.
+
+``` r
+my_fun(c("1", "2", "3.1", "4", "5.2"))
+#> Error in `my_fun()`:
+#> ! `my_arg_name` <character> must be coercible to <integer>
+#> ✖ Can't convert some values due to loss of precision.
+#> • Locations: 3 and 5
+```
+
+See [`vignette("stbl")`](https://stbl.wrangle.zone/dev/articles/stbl.md)
+to learn more about how to use stbl, and when to “upgrade” from `to_*()`
+functions to `stabilize_*()` functions.
+
+## Similar Packages
+
+Other packages perform functions similar to stbl, but with different
+approaches:
+
+- **[{checkmate}](https://mllg.github.io/checkmate/) and related
+  assertion packages:** stbl’s `to_*()` and `stabilize_*()` functions
+  are similar to the `assert*ish()` functions from {checkmate} with
+  `coerce = TRUE`. stbl is usually faster, and provided classed error
+  messages to allow you to handle different failure modes differently.
+- **[{vctrs}](https://vctrs.r-lib.org/):** {vctrs} provides strict,
+  low-level tools for coercion and type consistency, especially useful
+  in package internals and base-type enforcement. stbl is more tolerant
+  and higher-level, optimized for use in functions that accept flexible
+  user inputs (e.g. letting a version number 1.1 be passed in as numeric
+  or character and handling both gracefully).
+
+## Code of Conduct
+
+Please note that the stbl project is released with a [Contributor Code
+of Conduct](https://stbl.wrangle.zone/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## character vectors
+
+- [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
+  [`is_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
+  [`are_character_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
+  [`is_character_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
+  : Check if an object can be safely coerced to character
+- [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  [`specify_character()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  [`specify_character_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  : Create a specified character stabilizer function
+- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilize_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilise_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilise_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilize_character_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilise_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilise_character_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`to_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`to_character_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  : Ensure a character argument meets expectations
+- [`regex_must_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
+  [`regex_must_not_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
+  : Create a regex matching rule
+
+## double vectors
+
+- [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
+  [`is_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
+  [`are_double_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
+  [`is_double_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
+  : Check if an object can be safely coerced to double
+- [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  [`specify_double()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  [`specify_double_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  : Create a specified double stabilizer function
+- [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilize_double()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilise_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilise_double()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilize_double_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilise_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilise_double_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`to_double()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`to_double_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  : Ensure a double argument meets expectations
+
+## factors
+
+- [`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
+  [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
+  [`are_factor_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
+  [`is_factor_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
+  : Check if an object can be safely coerced to a factor
+- [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
+  [`specify_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
+  [`specify_factor()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
+  [`specify_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
+  : Create a specified factor stabilizer function
+- [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilize_factor()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilise_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilise_factor()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilize_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilise_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`stabilise_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`to_factor()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  [`to_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  : Ensure a factor argument meets expectations
+
+## integer vectors
+
+- [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  [`is_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  [`are_integer_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  [`is_integer_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  : Check if an object can be safely coerced to integer
+- [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
+  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
+  [`specify_integer()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
+  [`specify_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
+  : Create a specified integer stabilizer function
+- [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilize_integer()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilise_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilise_integer()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilize_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilise_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`stabilise_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`to_integer()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  [`to_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  : Ensure an integer argument meets expectations
+
+## logical vectors
+
+- [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
+  [`is_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
+  [`are_logical_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
+  [`is_logical_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
+  : Check if an object can be safely coerced to logical
+- [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+  [`specify_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+  [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+  [`specify_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+  : Create a specified logical stabilizer function
+- [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilize_logical()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilise_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilise_logical()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilize_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilise_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`stabilise_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`to_logical()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`to_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  : Ensure a logical argument meets expectations
+
+## lists
+
+- [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+  [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
+  Ensure a list argument meets expectations
+
+## generic args
+
+- [`object_type()`](https://stbl.wrangle.zone/dev/reference/object_type.md)
+  : Identify the class, type, etc of an object
+- [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md)
+  [`stabilize_arg_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md)
+  : Ensure an argument meets expectations
+
+## conditions
+
+- [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
+  : Signal an error with standards applied
+- [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
+  : Test package error classes
+
+# Articles
+
+### All vignettes
+
+- [Getting started with
+  stbl](https://stbl.wrangle.zone/dev/articles/stbl.md):
