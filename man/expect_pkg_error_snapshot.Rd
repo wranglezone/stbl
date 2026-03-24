@@ -14,8 +14,7 @@ expect_pkg_error_snapshot(
 )
 }
 \arguments{
-\item{object}{(\code{expression}) The expression expected to throw a package
-error.}
+\item{object}{An expression that is expected to throw an error.}
 
 \item{package}{\verb{(length-1 character)} The name of the package to use in
 classes.}

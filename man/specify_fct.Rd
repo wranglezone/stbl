@@ -89,7 +89,9 @@ Other specification functions:
 \code{\link{specify_chr}()},
 \code{\link{specify_dbl}()},
 \code{\link{specify_int}()},
-\code{\link{specify_lgl}()}
+\code{\link{specify_lgl}()},
+\code{\link{specify_lst}()},
+\code{\link{specify_present}()}
 }
 \concept{factor functions}
 \concept{specification functions}

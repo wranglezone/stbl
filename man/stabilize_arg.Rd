@@ -89,6 +89,7 @@ Other stabilization functions:
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()}
+\code{\link{stabilize_lgl}()},
+\code{\link{stabilize_lst}()}
 }
 \concept{stabilization functions}
