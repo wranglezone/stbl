@@ -119,3 +119,11 @@ test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
     "Actual class"
   )
 })
+
+test_that("expect_pkg_error_snapshot() snapshots error class and message (#155)", {
+  expect_pkg_error_snapshot(
+    pkg_abort("stbl", "A snapshot error.", "snapshot_subclass"),
+    "snapshot_subclass",
+    "stbl"
+  )
+})

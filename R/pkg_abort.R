@@ -138,3 +138,66 @@ expect_pkg_error_classes <- function(
     }
   )
 }
+
+#' Snapshot-test a package error
+#'
+#' A convenience wrapper around [testthat::expect_snapshot()] and
+#' [expect_pkg_error_classes()] that captures both the error class hierarchy
+#' and the user-facing message in a single snapshot.
+#'
+#' @param object (`expression`) The expression expected to throw a package
+#'   error.
+#' @param error_class_component (`character(1)`) The error subclass component
+#'   to check (passed to [expect_pkg_error_classes()]).
+#' @inheritParams .compile_pkg_error_classes
+#' @param transform (`function` or `NULL`) Optional function to scrub volatile
+#'   output (e.g. temp paths) before snapshot comparison. Passed through to
+#'   [testthat::expect_snapshot()].
+#' @param variant (`character(1)` or `NULL`) Optional snapshot variant name.
+#'   Passed through to [testthat::expect_snapshot()].
+#' @param call (`environment`) The call environment used as the evaluation
+#'   environment for [rlang::inject()].
+#'
+#' @returns The result of [testthat::expect_snapshot()], invisibly.
+#'
+#' @export
+expect_pkg_error_snapshot <- function(
+  object,
+  error_class_component,
+  package,
+  transform = NULL,
+  variant = NULL,
+  call = caller_env()
+) {
+  rlang::check_installed("testthat", "to snapshot-test package errors")
+  # `rlang::enexpr()` is used instead of `rlang::enquo()` because `inject()`
+  # splices a quosure as `^(expr)`, which breaks `expect_snapshot()`'s internal
+  # `parse(deparse(x))` round-trip. `enexpr()` captures only the bare
+  # expression, so the snapshot's Code section shows the full inner call
+  # transparently.
+  #
+  # The `call` parameter (defaulting to `caller_env()`) is forwarded to
+  # `inject()` as `env =` so that `expect_snapshot()` is evaluated in the
+  # test's environment. Without this, local variables in the expression (e.g.
+  # `tmp`) would be out of scope.
+  #
+  # The `transform` parameter is forwarded to `expect_snapshot()` to allow
+  # callers to scrub volatile values (e.g. temp paths) before snapshot
+  # comparison.
+  obj_expr <- rlang::enexpr(object)
+  transform_expr <- rlang::enexpr(transform)
+  rlang::inject(
+    testthat::expect_snapshot(
+      {
+        (expect_pkg_error_classes(
+          !!obj_expr,
+          !!package,
+          !!error_class_component
+        ))
+      },
+      transform = !!transform_expr,
+      variant = !!variant
+    ),
+    env = call
+  )
+}

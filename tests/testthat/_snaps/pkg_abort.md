@@ -34,3 +34,13 @@
       Error in `wrapped_abort()`:
       ! This message comes from a custom environment.
 
+# expect_pkg_error_snapshot() snapshots error class and message (#155)
+
+    Code
+      (expect_pkg_error_classes(pkg_abort("stbl", "A snapshot error.",
+        "snapshot_subclass"), "stbl", "snapshot_subclass"))
+    Output
+      <error/stbl-error-snapshot_subclass>
+      Error:
+      ! A snapshot error.
+
