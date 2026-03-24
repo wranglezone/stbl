@@ -24,7 +24,7 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
-          token: $
+          token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: copilot
           needs: build, check, website
           # Extra packages include things referenced in skills, to make sure the
