@@ -85,8 +85,8 @@ stabilise_integer(
 stabilize_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -100,8 +100,8 @@ stabilize_int_scalar(
 stabilize_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -115,8 +115,8 @@ stabilize_integer_scalar(
 stabilise_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -130,8 +130,8 @@ stabilise_int_scalar(
 stabilise_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -184,8 +184,8 @@ to_int(
 to_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -194,8 +194,8 @@ to_int_scalar(
 to_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -376,8 +376,8 @@ try(stabilize_int_scalar(1:10))
 #> Error in eval(expr, envir) : 
 #>   `1:10` must be a single <integer>.
 #> ✖ `1:10` has 10 values.
-stabilize_int_scalar(NULL)
-#> NULL
-try(stabilize_int_scalar(NULL, allow_null = FALSE))
+try(stabilize_int_scalar(NULL))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
+stabilize_int_scalar(NULL, allow_null = TRUE)
+#> NULL
 ```

@@ -44,6 +44,24 @@
   `stabilize_*()` functions
   ([\#167](https://github.com/wranglezone/stbl/issues/167)).
 
+### Breaking changes
+
+- [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+  [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  and
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  (and their synonyms) now default to `allow_null = FALSE` and
+  `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or
+  `allow_zero_length = TRUE` to restore the previous behavior
+  ([\#189](https://github.com/wranglezone/stbl/issues/189)).
+
 ### Potential breaking changes
 
 - Several conditions that formerly included a subclass of

@@ -85,8 +85,8 @@ stabilise_double(
 stabilize_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -100,8 +100,8 @@ stabilize_dbl_scalar(
 stabilize_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -115,8 +115,8 @@ stabilize_double_scalar(
 stabilise_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -130,8 +130,8 @@ stabilise_dbl_scalar(
 stabilise_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -184,8 +184,8 @@ to_dbl(
 to_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -194,8 +194,8 @@ to_dbl_scalar(
 to_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -371,8 +371,8 @@ try(stabilize_dbl_scalar(1:10))
 #> Error in eval(expr, envir) : 
 #>   `1:10` must be a single <numeric>.
 #> ✖ `1:10` has 10 values.
-stabilize_dbl_scalar(NULL)
-#> NULL
-try(stabilize_dbl_scalar(NULL, allow_null = FALSE))
+try(stabilize_dbl_scalar(NULL))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
+stabilize_dbl_scalar(NULL, allow_null = TRUE)
+#> NULL
 ```

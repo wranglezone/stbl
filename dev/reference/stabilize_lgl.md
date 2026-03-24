@@ -69,8 +69,8 @@ stabilise_logical(
 stabilize_lgl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -80,8 +80,8 @@ stabilize_lgl_scalar(
 stabilize_logical_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -91,8 +91,8 @@ stabilize_logical_scalar(
 stabilise_lgl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -102,8 +102,8 @@ stabilise_lgl_scalar(
 stabilise_logical_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -132,8 +132,8 @@ to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 to_lgl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -142,8 +142,8 @@ to_lgl_scalar(
 to_logical_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -282,8 +282,8 @@ try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
 #> Error in eval(expr, envir) : 
 #>   `c(TRUE, FALSE, TRUE)` must be a single <logical>.
 #> ✖ `c(TRUE, FALSE, TRUE)` has 3 values.
-stabilize_lgl_scalar(NULL)
-#> NULL
-try(stabilize_lgl_scalar(NULL, allow_null = FALSE))
+try(stabilize_lgl_scalar(NULL))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
+stabilize_lgl_scalar(NULL, allow_null = TRUE)
+#> NULL
 ```
