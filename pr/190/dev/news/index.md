@@ -60,7 +60,7 @@
   (and their synonyms) now default to `allow_null = FALSE` and
   `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or
   `allow_zero_length = TRUE` to restore the previous behavior
-  ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+  ([\#189](https://github.com/wranglezone/stbl/issues/189)).
 
 ### Potential breaking changes
 
