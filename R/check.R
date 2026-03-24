@@ -14,7 +14,7 @@
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  allow_na <- to_lgl_scalar(allow_na, allow_null = FALSE, call = call)
+  allow_na <- to_lgl_scalar(allow_na, call = call)
   if (allow_na) {
     return(invisible(NULL))
   }
@@ -55,8 +55,8 @@
     return(invisible(NULL))
   }
 
-  min_size <- to_int_scalar(min_size, call = call)
-  max_size <- to_int_scalar(max_size, call = call)
+  min_size <- to_int_scalar(min_size, allow_null = TRUE, call = call)
+  max_size <- to_int_scalar(max_size, allow_null = TRUE, call = call)
   .check_x_no_more_than_y(min_size, max_size, call = call)
 
   x_size <- vec_size(x)
@@ -116,7 +116,6 @@
     } else {
       allow_zero_length <- to_lgl_scalar(
         allow_zero_length,
-        allow_null = FALSE,
         call = call
       )
       if (allow_zero_length) {
@@ -155,7 +154,7 @@
 #'   `TRUE`.
 #' @keywords internal
 .is_allowed_null <- function(x, allow_null = TRUE, call = caller_env()) {
-  allow_null <- to_lgl_scalar(allow_null, allow_null = FALSE, call = call)
+  allow_null <- to_lgl_scalar(allow_null, call = call)
   return(is.null(x) && allow_null)
 }
 

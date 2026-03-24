@@ -85,8 +85,8 @@ stabilise_integer(
 stabilize_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -100,8 +100,8 @@ stabilize_int_scalar(
 stabilize_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -115,8 +115,8 @@ stabilize_integer_scalar(
 stabilise_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -130,8 +130,8 @@ stabilise_int_scalar(
 stabilise_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -181,8 +181,8 @@ to_integer(
 to_int_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -191,8 +191,8 @@ to_int_scalar(
 to_integer_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -288,8 +288,8 @@ try(stabilize_int(1:10, max_value = 7))
 stabilize_int_scalar(1L)
 stabilize_int_scalar("1")
 try(stabilize_int_scalar(1:10))
-stabilize_int_scalar(NULL)
-try(stabilize_int_scalar(NULL, allow_null = FALSE))
+try(stabilize_int_scalar(NULL))
+stabilize_int_scalar(NULL, allow_null = TRUE)
 }
 \seealso{
 Other integer functions: 

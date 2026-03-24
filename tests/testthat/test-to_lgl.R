@@ -218,13 +218,12 @@ test_that("to_lgl() errors for other types (#21)", {
   )
 })
 
-test_that("to_lgl_scalar() allows length-1 lgls through (#32)", {
+test_that("to_lgl_scalar() allows length-1 lgls through (#32, #189)", {
   given <- TRUE
   expect_true(to_lgl_scalar(given))
   given <- FALSE
   expect_false(to_lgl_scalar(given))
-  given <- NULL
-  expect_null(to_lgl_scalar(given))
+  expect_null(to_lgl_scalar(NULL, allow_null = TRUE))
 })
 
 test_that("to_lgl_scalar() errors for non-scalars (#32)", {
@@ -259,18 +258,18 @@ test_that("to_lgl_scalar() errors for bad characters (#32)", {
   )
 })
 
-test_that("to_lgl_scalar() respects allow_null (#32)", {
+test_that("to_lgl_scalar() respects allow_null (#32, #189)", {
   given <- NULL
   expect_error(
-    to_lgl_scalar(given, allow_null = FALSE),
+    to_lgl_scalar(given),
     class = .compile_dash("stbl", "error", "bad_null")
   )
   expect_snapshot(
-    to_lgl_scalar(given, allow_null = FALSE),
+    to_lgl_scalar(given),
     error = TRUE
   )
   expect_snapshot(
-    wrapped_to_lgl_scalar(given, allow_null = FALSE),
+    wrapped_to_lgl_scalar(given),
     error = TRUE
   )
 })

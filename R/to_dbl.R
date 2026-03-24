@@ -72,7 +72,6 @@ to_dbl.character <- function(
 ) {
   coerce_character <- to_lgl_scalar(
     coerce_character,
-    allow_null = FALSE,
     call = call
   )
   if (coerce_character) {
@@ -145,8 +144,8 @@ to_dbl.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
 to_dbl_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)

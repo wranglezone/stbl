@@ -94,8 +94,8 @@ stabilise_factor <- stabilize_fct
 stabilize_fct_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character(),

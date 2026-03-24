@@ -85,8 +85,8 @@ stabilise_double(
 stabilize_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -100,8 +100,8 @@ stabilize_dbl_scalar(
 stabilize_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -115,8 +115,8 @@ stabilize_double_scalar(
 stabilise_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -130,8 +130,8 @@ stabilise_dbl_scalar(
 stabilise_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -181,8 +181,8 @@ to_double(
 to_dbl_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -191,8 +191,8 @@ to_dbl_scalar(
 to_double_scalar(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -287,8 +287,8 @@ try(stabilize_dbl(1:10, max_value = 7.5))
 stabilize_dbl_scalar(1.0)
 stabilize_dbl_scalar("1.1")
 try(stabilize_dbl_scalar(1:10))
-stabilize_dbl_scalar(NULL)
-try(stabilize_dbl_scalar(NULL, allow_null = FALSE))
+try(stabilize_dbl_scalar(NULL))
+stabilize_dbl_scalar(NULL, allow_null = TRUE)
 }
 \seealso{
 Other double functions: 

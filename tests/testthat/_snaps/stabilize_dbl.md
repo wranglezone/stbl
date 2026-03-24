@@ -51,6 +51,22 @@
       x Locations: 5, 6, 7, 8, 9, and 10
       x Values: 5.1, 6.1, 7.1, 8.1, 9.1, and 10.1
 
+# stabilize_dbl_scalar() respects allow_null (#23, #189)
+
+    Code
+      stabilize_dbl_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_stabilize_dbl_scalar(given)
+    Condition
+      Error in `wrapped_stabilize_dbl_scalar()`:
+      ! `val` must not be <NULL>.
+
 # stabilize_dbl_scalar() errors on non-scalars (#23)
 
     Code

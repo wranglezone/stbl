@@ -102,10 +102,10 @@
       ! `val` must be a single <factor>.
       x `val` has 26 values.
 
-# to_fct_scalar respects allow_zero_length (#62)
+# to_fct_scalar respects allow_zero_length (#62, #189)
 
     Code
-      to_fct_scalar(given, allow_zero_length = FALSE)
+      to_fct_scalar(given)
     Condition
       Error:
       ! `given` must be a single <factor (non-empty)>.

@@ -63,8 +63,25 @@ test_that("stabilize_lgl() checks max_size (#28)", {
   )
 })
 
-test_that("stabilize_lgl_scalar() allows length-1 lgls through (#28)", {
+test_that("stabilize_lgl_scalar() allows length-1 lgls through (#28, #189)", {
   expect_true(stabilize_lgl_scalar(TRUE))
+  expect_null(stabilize_lgl_scalar(NULL, allow_null = TRUE))
+})
+
+test_that("stabilize_lgl_scalar() respects allow_null (#28, #189)", {
+  given <- NULL
+  expect_error(
+    stabilize_lgl_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_null")
+  )
+  expect_snapshot(
+    stabilize_lgl_scalar(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_stabilize_lgl_scalar(given),
+    error = TRUE
+  )
 })
 
 test_that("stabilize_lgl_scalar() errors on non-scalars (#28)", {

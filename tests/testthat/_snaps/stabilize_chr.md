@@ -119,6 +119,22 @@
       x Location: 2
       x Value: B
 
+# stabilize_chr_scalar() respects allow_null (#22, #189)
+
+    Code
+      stabilize_chr_scalar(given)
+    Condition
+      Error:
+      ! `given` must not be <NULL>.
+
+---
+
+    Code
+      wrapped_stabilize_chr_scalar(given)
+    Condition
+      Error in `wrapped_stabilize_chr_scalar()`:
+      ! `val` must not be <NULL>.
+
 # stabilize_chr_scalar() errors for non-scalars (#22)
 
     Code

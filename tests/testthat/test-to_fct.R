@@ -119,14 +119,14 @@ test_that("to_fct_scalar() provides informative error messages (#62)", {
   expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
 })
 
-test_that("to_fct_scalar respects allow_zero_length (#62)", {
+test_that("to_fct_scalar respects allow_zero_length (#62, #189)", {
   given <- factor()
   expect_error(
-    to_fct_scalar(given, allow_zero_length = FALSE),
+    to_fct_scalar(given),
     class = .compile_dash("stbl", "error", "bad_empty")
   )
   expect_snapshot(
-    to_fct_scalar(given, allow_zero_length = FALSE),
+    to_fct_scalar(given),
     error = TRUE
   )
 })

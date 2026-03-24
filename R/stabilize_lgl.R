@@ -46,8 +46,8 @@
 #' stabilize_lgl_scalar(TRUE)
 #' stabilize_lgl_scalar("TRUE")
 #' try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
-#' stabilize_lgl_scalar(NULL)
-#' try(stabilize_lgl_scalar(NULL, allow_null = FALSE))
+#' try(stabilize_lgl_scalar(NULL))
+#' stabilize_lgl_scalar(NULL, allow_null = TRUE)
 stabilize_lgl <- function(
   x,
   ...,
@@ -90,8 +90,8 @@ stabilise_logical <- stabilize_lgl
 stabilize_lgl_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),

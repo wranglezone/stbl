@@ -49,8 +49,8 @@
 #' stabilize_dbl_scalar(1.0)
 #' stabilize_dbl_scalar("1.1")
 #' try(stabilize_dbl_scalar(1:10))
-#' stabilize_dbl_scalar(NULL)
-#' try(stabilize_dbl_scalar(NULL, allow_null = FALSE))
+#' try(stabilize_dbl_scalar(NULL))
+#' stabilize_dbl_scalar(NULL, allow_null = TRUE)
 stabilize_dbl <- function(
   x,
   ...,
@@ -106,8 +106,8 @@ stabilise_double <- stabilize_dbl
 stabilize_dbl_scalar <- function(
   x,
   ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -163,8 +163,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  min_value <- to_dbl_scalar(min_value, call = call)
-  max_value <- to_dbl_scalar(max_value, call = call)
+  min_value <- to_dbl_scalar(min_value, allow_null = TRUE, call = call)
+  max_value <- to_dbl_scalar(max_value, allow_null = TRUE, call = call)
   min_failure_locations <- .find_failures(x, min_value, `<`)
   max_failure_locations <- .find_failures(x, max_value, `>`)
   if (is.null(min_failure_locations) && is.null(max_failure_locations)) {

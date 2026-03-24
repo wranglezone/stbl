@@ -172,6 +172,34 @@ test_that("to_dbl_scalar() provides informative error messages (#23)", {
   )
 })
 
+test_that("to_dbl_scalar() respects allow_null (#23, #189)", {
+  given <- NULL
+  expect_error(
+    to_dbl_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_null")
+  )
+  expect_snapshot(
+    to_dbl_scalar(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_dbl_scalar(given),
+    error = TRUE
+  )
+})
+
+test_that("to_dbl_scalar respects allow_zero_length (#23, #189)", {
+  given <- double()
+  expect_error(
+    to_dbl_scalar(given),
+    class = .compile_dash("stbl", "error", "bad_empty")
+  )
+  expect_snapshot(
+    to_dbl_scalar(given),
+    error = TRUE
+  )
+})
+
 test_that("to_double() exists (#164)", {
   expect_no_error(to_double(1))
 })
