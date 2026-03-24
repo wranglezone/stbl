@@ -28,7 +28,11 @@ test_that("stabilize_lst() returns a valid list unchanged (#110)", {
 test_that("stabilize_lst() validates required named elements (#110)", {
   given <- list(name = "Alice", age = 30L)
   expect_identical(
-    stabilize_lst(given, name = specify_chr_scalar(), age = specify_int_scalar()),
+    stabilize_lst(
+      given,
+      name = specify_chr_scalar(),
+      age = specify_int_scalar()
+    ),
     given
   )
 })
