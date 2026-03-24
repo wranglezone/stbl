@@ -9,3 +9,4 @@ exploration
 inst/doc
 scratch.R
 .positai
+tests/testthat/_problems
