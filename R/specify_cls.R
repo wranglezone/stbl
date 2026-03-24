@@ -579,7 +579,12 @@ specify_list <- specify_lst
 #' try(check_present(NULL))
 specify_present <- function() {
   structure(
-    function(x, x_arg = caller_arg(x), call = caller_env(), x_class = object_type(x)) {
+    function(
+      x,
+      x_arg = caller_arg(x),
+      call = caller_env(),
+      x_class = object_type(x)
+    ) {
       if (is.null(x)) {
         .stop_null(x_arg = x_arg, call = call)
       }
