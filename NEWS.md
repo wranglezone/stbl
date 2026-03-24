@@ -2,9 +2,7 @@
 
 ## New features
 
-* New `stabilize_lst()` function (and synonyms `stabilize_list()`, `stabilise_lst()`, `stabilise_list()`) to validate the structure and contents of lists. Container checks (`.allow_null`, `.min_size`, `.max_size`) apply to the list itself. Element checks via `...` define required named elements with individual `specify_*()` validators; `.named` validates extra named elements; `.unnamed` validates unnamed elements. Missing, extra, or unnamed elements cause clear errors by default (#110).
-* New `specify_lst()` (synonym `specify_list()`) creates a pre-configured `stabilize_lst()` validator, enabling nested list validation (#110).
-* New `specify_present()` creates a validator that requires a value to be non-`NULL`, without imposing any other type constraints (#110).
+* New `stabilize_lst()`, `specify_lst()`, and `specify_present()` to validate list structure and contents, create pre-configured list validators for nested validation, and require a value to be non-`NULL` without other type constraints (#110).
 * New `expect_pkg_error_snapshot()` function to snapshot-test the full error output of `pkg_abort()`-style errors in one step, combining `expect_snapshot()` with `expect_pkg_error_classes()` (#188).
 * New condition functions: `pkg_abort()` throws errors with a standardized, opinionated collection of classes, and `expect_pkg_error_classes()` checks that an error with the expected set of classes is thrown (#136).
 * New specification functions: `specify_*()` creates a "stbl-specified function" (class `"stbl_specified_fn"`), a call to the corresponding `stabilize_*()` function with arguments pre-filled. For example, `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")` creates a `stabilize_email()` function that calls `stabilize_chr()` with `regex = "^[^@]+@[^@]+\\.[^@]+$"`, which could then be used to stabilize email addresses (#147, #148, #149, #150, #151).
