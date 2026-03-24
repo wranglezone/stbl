@@ -4,6 +4,13 @@
 
 ### New features
 
+- New
+  [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
+  function to snapshot-test the full error output of
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)-style
+  errors in one step, combining `expect_snapshot()` with
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
+  ([\#188](https://github.com/wranglezone/stbl/issues/188)).
 - New condition functions:
   [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
   throws errors with a standardized, opinionated collection of classes,

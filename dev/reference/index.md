@@ -153,3 +153,5 @@
   : Signal an error with standards applied
 - [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
   : Test package error classes
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
+  : Snapshot-test a package error
