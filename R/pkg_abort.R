@@ -147,9 +147,6 @@ expect_pkg_error_classes <- function(
 #'
 #' @param object (`expression`) The expression expected to throw a package
 #'   error.
-#' @param error_class_component (`character(1)`) The error subclass component
-#'   to check (passed to [expect_pkg_error_classes()]).
-#' @inheritParams .compile_pkg_error_classes
 #' @param transform (`function` or `NULL`) Optional function to scrub volatile
 #'   output (e.g. temp paths) before snapshot comparison. Passed through to
 #'   [testthat::expect_snapshot()].
@@ -157,14 +154,15 @@ expect_pkg_error_classes <- function(
 #'   Passed through to [testthat::expect_snapshot()].
 #' @param call (`environment`) The call environment used as the evaluation
 #'   environment for [rlang::inject()].
+#' @inheritParams expect_pkg_error_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
 #'
 #' @export
 expect_pkg_error_snapshot <- function(
   object,
-  error_class_component,
   package,
+  ...,
   transform = NULL,
   variant = NULL,
   call = caller_env()
@@ -186,13 +184,14 @@ expect_pkg_error_snapshot <- function(
   # comparison.
   obj_expr <- rlang::enexpr(object)
   transform_expr <- rlang::enexpr(transform)
+  error_class_components <- rlang::list2(...)
   rlang::inject(
     testthat::expect_snapshot(
       {
         (expect_pkg_error_classes(
           !!obj_expr,
           !!package,
-          !!error_class_component
+          !!!error_class_components
         ))
       },
       transform = !!transform_expr,

@@ -6,8 +6,8 @@
 \usage{
 expect_pkg_error_snapshot(
   object,
-  error_class_component,
   package,
+  ...,
   transform = NULL,
   variant = NULL,
   call = caller_env()
@@ -17,11 +17,11 @@ expect_pkg_error_snapshot(
 \item{object}{(\code{expression}) The expression expected to throw a package
 error.}
 
-\item{error_class_component}{(\code{character(1)}) The error subclass component
-to check (passed to \code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}}).}
-
 \item{package}{\verb{(length-1 character)} The name of the package to use in
 classes.}
+
+\item{...}{\code{(character)} Components of the class name, from least-specific to
+most.}
 
 \item{transform}{(\code{function} or \code{NULL}) Optional function to scrub volatile
 output (e.g. temp paths) before snapshot comparison. Passed through to
