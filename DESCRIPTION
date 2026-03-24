@@ -18,6 +18,7 @@ Imports:
     rlang (>= 1.0.2.9003),
     vctrs
 Suggests:
+    astgrepr,
     knitr,
     rmarkdown,
     stringi,
