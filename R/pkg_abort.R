@@ -138,3 +138,51 @@ expect_pkg_error_classes <- function(
     }
   )
 }
+
+#' Snapshot-test a package error
+#'
+#' A convenience wrapper around [testthat::expect_snapshot()] and
+#' [expect_pkg_error_classes()] that captures both the error class hierarchy
+#' and the user-facing message in a single snapshot.
+#'
+#' @param transform (`function` or `NULL`) Optional function to scrub volatile
+#'   output (e.g. temp paths) before snapshot comparison. Passed through to
+#'   [testthat::expect_snapshot()].
+#' @param variant (`character(1)` or `NULL`) Optional snapshot variant name.
+#'   Passed through to [testthat::expect_snapshot()].
+#' @param call (`environment`) The call environment used as the evaluation
+#'   environment for [rlang::inject()].
+#' @inheritParams expect_pkg_error_classes
+#'
+#' @returns The result of [testthat::expect_snapshot()], invisibly.
+#'
+#' @export
+expect_pkg_error_snapshot <- function(
+  object,
+  package,
+  ...,
+  transform = NULL,
+  variant = NULL,
+  call = caller_env()
+) {
+  # nocov start
+  rlang::check_installed("testthat", "to snapshot-test package errors")
+  obj_expr <- rlang::enexpr(object)
+  transform_expr <- rlang::enexpr(transform)
+  error_class_components <- rlang::list2(...)
+  rlang::inject(
+    testthat::expect_snapshot(
+      {
+        (expect_pkg_error_classes(
+          !!obj_expr,
+          !!package,
+          !!!error_class_components
+        ))
+      },
+      transform = !!transform_expr,
+      variant = !!variant
+    ),
+    env = call
+  )
+  # nocov end
+}

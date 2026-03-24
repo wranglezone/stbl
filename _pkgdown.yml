@@ -33,3 +33,4 @@ reference:
 - contents:
   - pkg_abort
   - expect_pkg_error_classes
+  - expect_pkg_error_snapshot

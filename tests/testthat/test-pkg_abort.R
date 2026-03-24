@@ -119,3 +119,22 @@ test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
     "Actual class"
   )
 })
+
+test_that("expect_pkg_error_snapshot() snapshots error class and message (#188)", {
+  skip_on_covr()
+  expect_pkg_error_snapshot(
+    pkg_abort("stbl", "A snapshot error.", "snapshot_subclass"),
+    "stbl",
+    "snapshot_subclass"
+  )
+})
+
+test_that("expect_pkg_error_snapshot() works with multiple class components (#188)", {
+  skip_on_covr()
+  expect_pkg_error_snapshot(
+    pkg_abort("stbl", "A nested error.", c("outer", "inner")),
+    "stbl",
+    "outer",
+    "inner"
+  )
+})
