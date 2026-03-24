@@ -5,6 +5,32 @@
 ### New features
 
 - New
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  function (and synonyms
+  [`stabilize_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`stabilise_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`stabilise_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md))
+  to validate the structure and contents of lists. Container checks
+  (`.allow_null`, `.min_size`, `.max_size`) apply to the list itself.
+  Element checks via `...` define required named elements with
+  individual `specify_*()` validators; `.named` validates extra named
+  elements; `.unnamed` validates unnamed elements. Missing, extra, or
+  unnamed elements cause clear errors by default
+  ([\#110](https://github.com/wranglezone/stbl/issues/110)).
+- New
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  (synonym
+  [`specify_list()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md))
+  creates a pre-configured
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  validator, enabling nested list validation
+  ([\#110](https://github.com/wranglezone/stbl/issues/110)).
+- New
+  [`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
+  creates a validator that requires a value to be non-`NULL`, without
+  imposing any other type constraints
+  ([\#110](https://github.com/wranglezone/stbl/issues/110)).
+- New
   [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
   function to snapshot-test the full error output of
   [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)-style

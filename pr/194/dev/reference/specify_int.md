@@ -129,7 +129,9 @@ Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
 
 ## Examples
 

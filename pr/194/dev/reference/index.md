@@ -135,9 +135,19 @@
 
 ## lists
 
+- [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  [`specify_list()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  : Create a specified list stabilizer function
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilize_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilise_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilise_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  : Ensure a list argument meets expectations
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list argument meets expectations
+- [`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
+  : Create a specified "present" validator function
 
 ## generic args
 

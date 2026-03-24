@@ -24,7 +24,7 @@ expect_pkg_error_snapshot(
 
 - object:
 
-  (`expression`) The expression expected to throw a package error.
+  An expression that is expected to throw an error.
 
 - package:
 
