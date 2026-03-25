@@ -151,7 +151,7 @@ test_that("expect_pkg_error_snapshot() works with multiple class components (#18
   )
 })
 
-test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#noissue)", {
+test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#188)", {
   skip_on_covr()
   # Simulate calling from another package where expect_pkg_error_classes
   # isn't directly available in the caller's environment.
@@ -170,7 +170,7 @@ test_that("expect_pkg_error_snapshot() works from an env without stbl attached (
   )
 })
 
-test_that("expect_pkg_error_classes() works from an env without stbl attached (#noissue)", {
+test_that("expect_pkg_error_classes() works from an env without stbl attached (#188)", {
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_abort <- pkg_abort
   foreign_env$expect_pkg_error_classes <- expect_pkg_error_classes
