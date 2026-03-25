@@ -69,7 +69,18 @@ test_that("pkg_abort() passes dots to cli_abort() (#136)", {
   )
   expect_snapshot(
     wrapped_abort("A message.", "a_subclass", .internal = TRUE),
-    error = TRUE
+    error = TRUE,
+    transform = function(x) {
+      stringr::str_replace(
+        x,
+        "This is an internal error.+$",
+        "This is an internal error."
+      ) |>
+        stringr::str_subset(
+          "\\s*Please report it at",
+          negate = TRUE
+        )
+    }
   )
 })
 
@@ -136,5 +147,42 @@ test_that("expect_pkg_error_snapshot() works with multiple class components (#18
     "stbl",
     "outer",
     "inner"
+  )
+})
+
+test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#noissue)", {
+  skip_on_covr()
+  # Simulate calling from another package where expect_pkg_error_classes
+  # isn't directly available in the caller's environment.
+  foreign_env <- new.env(parent = baseenv())
+  foreign_env$pkg_abort <- pkg_abort
+  foreign_env$expect_pkg_error_snapshot <- expect_pkg_error_snapshot
+  local(
+    {
+      expect_pkg_error_snapshot(
+        pkg_abort("otherpkg", "Foreign env error.", "foreign_subclass"),
+        "otherpkg",
+        "foreign_subclass",
+        call = environment()
+      )
+    },
+    envir = foreign_env
+  )
+})
+
+test_that("expect_pkg_error_classes() works from an env without stbl attached (#noissue)", {
+  foreign_env <- new.env(parent = baseenv())
+  foreign_env$pkg_abort <- pkg_abort
+  foreign_env$expect_pkg_error_classes <- expect_pkg_error_classes
+  foreign_env$.compile_pkg_error_classes <- .compile_pkg_error_classes
+  expect_success(
+    local(
+      expect_pkg_error_classes(
+        pkg_abort("otherpkg", "A message.", "a_class"),
+        "otherpkg",
+        "a_class"
+      ),
+      envir = foreign_env
+    )
   )
 })

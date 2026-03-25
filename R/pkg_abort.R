@@ -170,6 +170,12 @@ expect_pkg_error_snapshot <- function(
   obj_expr <- rlang::enexpr(object)
   transform_expr <- rlang::enexpr(transform)
   error_class_components <- rlang::list2(...)
+  # Inject into a child of the caller's env that can find
+
+  # expect_pkg_error_classes, so this works even when the caller's
+  # package doesn't attach stbl.
+  inject_env <- new.env(parent = call)
+  inject_env$expect_pkg_error_classes <- expect_pkg_error_classes
   rlang::inject(
     testthat::expect_snapshot(
       {
@@ -182,7 +188,7 @@ expect_pkg_error_snapshot <- function(
       transform = !!transform_expr,
       variant = !!variant
     ),
-    env = call
+    env = inject_env
   )
   # nocov end
 }

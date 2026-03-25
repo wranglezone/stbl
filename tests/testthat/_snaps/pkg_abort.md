@@ -23,8 +23,7 @@
     Condition
       Error in `wrapped_abort()`:
       ! A message.
-      i This is an internal error that was detected in the stbl package.
-        Please report it at <https://github.com/wranglezone/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
+      i This is an internal error.
 
 # pkg_abort() uses message_env when provided (#136)
 
@@ -53,4 +52,14 @@
       <error/stbl-error-outer-inner>
       Error:
       ! A nested error.
+
+# expect_pkg_error_snapshot() works from an env without stbl attached (#noissue)
+
+    Code
+      (expect_pkg_error_classes(pkg_abort("otherpkg", "Foreign env error.",
+        "foreign_subclass"), "otherpkg", "foreign_subclass"))
+    Output
+      <error/otherpkg-error-foreign_subclass>
+      Error:
+      ! Foreign env error.
 
