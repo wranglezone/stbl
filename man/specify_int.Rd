@@ -106,7 +106,9 @@ Other specification functions:
 \code{\link{specify_chr}()},
 \code{\link{specify_dbl}()},
 \code{\link{specify_fct}()},
-\code{\link{specify_lgl}()}
+\code{\link{specify_lgl}()},
+\code{\link{specify_lst}()},
+\code{\link{specify_present}()}
 }
 \concept{integer functions}
 \concept{specification functions}

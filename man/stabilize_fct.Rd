@@ -261,7 +261,8 @@ Other stabilization functions:
 \code{\link{stabilize_chr}()},
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()}
+\code{\link{stabilize_lgl}()},
+\code{\link{stabilize_lst}()}
 }
 \concept{factor functions}
 \concept{stabilization functions}
