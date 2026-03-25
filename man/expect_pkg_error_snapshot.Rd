@@ -10,12 +10,11 @@ expect_pkg_error_snapshot(
   ...,
   transform = NULL,
   variant = NULL,
-  call = caller_env()
+  env = caller_env()
 )
 }
 \arguments{
-\item{object}{(\code{expression}) The expression expected to throw a package
-error.}
+\item{object}{An expression that is expected to throw an error.}
 
 \item{package}{\verb{(length-1 character)} The name of the package to use in
 classes.}
@@ -30,14 +29,16 @@ output (e.g. temp paths) before snapshot comparison. Passed through to
 \item{variant}{(\code{character(1)} or \code{NULL}) Optional snapshot variant name.
 Passed through to \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}}.}
 
-\item{call}{(\code{environment}) The call environment used as the evaluation
-environment for \code{\link[rlang:inject]{rlang::inject()}}.}
+\item{env}{(\code{environment}) The environment in which \code{object} should be
+evaluated. The actual evaluation will occur in a child of this environment,
+with \code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}} available even if this package is not
+attached.}
 }
 \value{
 The result of \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}}, invisibly.
 }
 \description{
 A convenience wrapper around \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}} and
-\code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}} that captures both the error class hierarchy
-and the user-facing message in a single snapshot.
+\code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}} that captures both the error class hierarchy and
+the user-facing message in a single snapshot.
 }
