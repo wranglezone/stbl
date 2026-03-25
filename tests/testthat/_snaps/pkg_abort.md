@@ -53,7 +53,7 @@
       Error:
       ! A nested error.
 
-# expect_pkg_error_snapshot() works from an env without stbl attached (#noissue)
+# expect_pkg_error_snapshot() works from an env without stbl attached (#188)
 
     Code
       (expect_pkg_error_classes(pkg_abort("otherpkg", "Foreign env error.",
