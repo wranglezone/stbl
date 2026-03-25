@@ -142,16 +142,18 @@ expect_pkg_error_classes <- function(
 #' Snapshot-test a package error
 #'
 #' A convenience wrapper around [testthat::expect_snapshot()] and
-#' [expect_pkg_error_classes()] that captures both the error class hierarchy
-#' and the user-facing message in a single snapshot.
+#' [expect_pkg_error_classes()] that captures both the error class hierarchy and
+#' the user-facing message in a single snapshot.
 #'
 #' @param transform (`function` or `NULL`) Optional function to scrub volatile
 #'   output (e.g. temp paths) before snapshot comparison. Passed through to
 #'   [testthat::expect_snapshot()].
 #' @param variant (`character(1)` or `NULL`) Optional snapshot variant name.
 #'   Passed through to [testthat::expect_snapshot()].
-#' @param call (`environment`) The call environment used as the evaluation
-#'   environment for [rlang::inject()].
+#' @param env (`environment`) The environment in which `object` should be
+#'   evaluated. The actual evaluation will occur in a child of this environment,
+#'   with [expect_pkg_error_classes()] available even if this package is not
+#'   attached.
 #' @inheritParams expect_pkg_error_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
@@ -163,7 +165,7 @@ expect_pkg_error_snapshot <- function(
   ...,
   transform = NULL,
   variant = NULL,
-  call = caller_env()
+  env = caller_env()
 ) {
   # nocov start
   rlang::check_installed("testthat", "to snapshot-test package errors")
@@ -171,10 +173,9 @@ expect_pkg_error_snapshot <- function(
   transform_expr <- rlang::enexpr(transform)
   error_class_components <- rlang::list2(...)
   # Inject into a child of the caller's env that can find
-
-  # expect_pkg_error_classes, so this works even when the caller's
-  # package doesn't attach stbl.
-  inject_env <- new.env(parent = call)
+  # expect_pkg_error_classes, so this works even when the caller's package
+  # doesn't attach stbl.
+  inject_env <- new.env(parent = env)
   inject_env$expect_pkg_error_classes <- expect_pkg_error_classes
   rlang::inject(
     testthat::expect_snapshot(

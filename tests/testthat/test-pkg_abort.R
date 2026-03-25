@@ -60,6 +60,7 @@ test_that("pkg_abort() uses parent when provided (#136)", {
 })
 
 test_that("pkg_abort() passes dots to cli_abort() (#136)", {
+  skip_if_not_installed("stringr")
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
@@ -162,8 +163,7 @@ test_that("expect_pkg_error_snapshot() works from an env without stbl attached (
       expect_pkg_error_snapshot(
         pkg_abort("otherpkg", "Foreign env error.", "foreign_subclass"),
         "otherpkg",
-        "foreign_subclass",
-        call = environment()
+        "foreign_subclass"
       )
     },
     envir = foreign_env
