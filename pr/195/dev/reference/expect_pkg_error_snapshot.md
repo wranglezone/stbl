@@ -16,7 +16,7 @@ expect_pkg_error_snapshot(
   ...,
   transform = NULL,
   variant = NULL,
-  call = caller_env()
+  env = caller_env()
 )
 ```
 
@@ -24,7 +24,7 @@ expect_pkg_error_snapshot(
 
 - object:
 
-  (`expression`) The expression expected to throw a package error.
+  An expression that is expected to throw an error.
 
 - package:
 
@@ -47,11 +47,12 @@ expect_pkg_error_snapshot(
   through to
   [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html).
 
-- call:
+- env:
 
-  (`environment`) The call environment used as the evaluation
-  environment for
-  [`rlang::inject()`](https://rlang.r-lib.org/reference/inject.html).
+  (`environment`) The environment in which `object` should be evaluated.
+  The actual evaluation will occur in a child of this environment, with
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
+  available even if this package is not attached.
 
 ## Value
 
