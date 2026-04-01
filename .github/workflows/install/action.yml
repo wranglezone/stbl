@@ -68,8 +68,8 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       run: |
-        # *Remove* this package from the container. Only relevant for stbl.
-        remove.packages("stbl")
+        # *Remove* this package from the container if present. Only relevant for stbl.
+        try(remove.packages("stbl"), silent = TRUE)
 
         # Replicate needs → Config/Needs/<field> expansion from r-lib/actions
         needs_parts <- strsplit("${{ inputs.needs }}", "[[:space:],]+")[[1]]
