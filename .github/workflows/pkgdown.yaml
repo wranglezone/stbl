@@ -27,12 +27,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set Development Mode Env Var
-        if: github.ref_name != 'main'
-        run: |
-          echo "Ref is '${{ github.ref_name }}', setting PKGDOWN_DEV_MODE=devel"
-          echo "PKGDOWN_DEV_MODE=devel" >> $GITHUB_ENV
-
       - uses: ./.github/workflows/install
         with:
           use-container: "true"
