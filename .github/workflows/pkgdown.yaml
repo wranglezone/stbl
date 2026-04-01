@@ -14,6 +14,8 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/api2r/pkgskills-ci:release
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
@@ -33,10 +35,10 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
+          use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: website
           extra-packages: any::pkgdown gilead-biostats/qcthat local::.
-          cache-version: "1"
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)

@@ -48,6 +48,8 @@ env:
 jobs:
   qcthat:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/api2r/pkgskills-ci:release
     if: >-
       (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'qcthat-uat')) ||
       github.event_name != 'issues'
@@ -58,9 +60,9 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
+          use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
           extra-packages: Gilead-BioStats/qcthat@main local::.
-          cache-version: "1"
 
       - name: Manage User Acceptance Testing
         if: >-
