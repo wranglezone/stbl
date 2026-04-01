@@ -11,6 +11,7 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
+    container: ${{ matrix.config.container }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -20,15 +21,16 @@ jobs:
         config:
           - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-latest,  r: 'devel',    http-user-agent: 'release', container: 'ghcr.io/api2r/pkgskills-ci:devel'}
+          - {os: ubuntu-latest,  r: 'release',  container: 'ghcr.io/api2r/pkgskills-ci:release'}
+          - {os: ubuntu-latest,  r: 'oldrel-1', container: 'ghcr.io/api2r/pkgskills-ci:oldrel-1'}
 
     steps:
       - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/install
         with:
+          use-container: "${{ matrix.config.container != '' }}"
           token: ${{ secrets.GITHUB_TOKEN }}
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}

@@ -11,15 +11,17 @@ name: test-coverage
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/api2r/pkgskills-ci:release
     steps:
       - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/install
         with:
+          use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: coverage
           extra-packages: any::covr any::xml2
-          cache-version: "1"
 
       - name: Test coverage
         run: |
