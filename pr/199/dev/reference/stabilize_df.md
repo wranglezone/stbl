@@ -1,65 +1,62 @@
-# Ensure a list argument meets expectations
+# Ensure a data frame argument meets expectations
 
-`stabilize_lst()` validates the structure and contents of a list. It can
-check that specific named elements are present and valid, that extra
-named elements conform to a shared rule, and that unnamed elements
-conform to a shared rule. `stabilise_lst()`, `stabilize_list()`, and
-`stabilise_list()` are synonyms of `stabilize_lst()`.
+`stabilize_df()` validates the structure and contents of a data frame.
+It first verifies that the input is a data frame and then uses
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+to apply stabilization rules to each column. `stabilise_df()`,
+`stabilize_data_frame()`, and `stabilise_data_frame()` are synonyms of
+`stabilize_df()`.
 
 ## Usage
 
 ``` r
-stabilize_lst(
+stabilize_df(
   .x,
   ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_duplicate_names = FALSE,
+  .extra_cols = NULL,
+  .col_names = NULL,
+  .min_rows = NULL,
+  .max_rows = NULL,
   .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
 )
 
-stabilize_list(
+stabilise_df(
   .x,
   ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_duplicate_names = FALSE,
+  .extra_cols = NULL,
+  .col_names = NULL,
+  .min_rows = NULL,
+  .max_rows = NULL,
   .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
 )
 
-stabilise_lst(
+stabilize_data_frame(
   .x,
   ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_duplicate_names = FALSE,
+  .extra_cols = NULL,
+  .col_names = NULL,
+  .min_rows = NULL,
+  .max_rows = NULL,
   .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
 )
 
-stabilise_list(
+stabilise_data_frame(
   .x,
   ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_duplicate_names = FALSE,
+  .extra_cols = NULL,
+  .col_names = NULL,
+  .min_rows = NULL,
+  .max_rows = NULL,
   .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -76,46 +73,37 @@ stabilise_list(
 
   Named
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `.x`. Each name corresponds
-  to a required element in `.x`, and the function is used to validate
-  that element.
+  functions for required named columns of `.x`. Each name corresponds to
+  a required column in `.x`, and the function is used to validate that
+  column.
 
-- .named:
-
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
-
-- .unnamed:
+- .extra_cols:
 
   A single
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
+  function to validate all columns of `.x` that are *not* explicitly
+  listed in `...`. If `NULL` (default), any extra columns will cause an
+  error.
 
-- .allow_duplicate_names:
+- .col_names:
 
-  `(length-1 logical)` Should `.x` be allowed to have duplicate names?
-  If `FALSE` (default), an error is thrown when any named element of
-  `.x` shares a name with another.
+  `(character)` A character vector of column names that must be present
+  in `.x`. Any columns listed here that are absent from `.x` will cause
+  an error. Unlike `...`, this does not validate the column contents.
+
+- .min_rows:
+
+  `(length-1 integer)` The minimum number of rows allowed in `.x`. If
+  `NULL` (default), the row count is not checked.
+
+- .max_rows:
+
+  `(length-1 integer)` The maximum number of rows allowed in `.x`. If
+  `NULL` (default), the row count is not checked.
 
 - .allow_null:
 
   `(length-1 logical)` Is NULL an acceptable value?
-
-- .min_size:
-
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- .max_size:
-
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .x_arg:
 
@@ -137,44 +125,47 @@ stabilise_list(
 
 ## Value
 
-The validated list.
+The validated data frame.
 
 ## See also
 
-Other list functions:
-[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
-[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+Other data frame functions:
+[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
 [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
 
 ## Examples
 
 ``` r
-# Basic validation: named required elements
-stabilize_lst(
-  list(name = "Alice", age = 30L),
+# Basic validation: required columns with type specs
+stabilize_df(
+  data.frame(name = "Alice", age = 30L),
   name = specify_chr_scalar(),
   age = specify_int_scalar()
 )
-#> $name
-#> [1] "Alice"
-#> 
-#> $age
-#> [1] 30
-#> 
+#>    name age
+#> 1 Alice  30
 
-# Allow any non-NULL element with stabilize_present
-stabilize_lst(list(data = mtcars), data = stabilize_present)
-#> $data
+# Allow extra columns with .extra_cols
+stabilize_df(
+  data.frame(name = "Alice", age = 30L, score = 99.5),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar(),
+  .extra_cols = stabilize_present
+)
+#>    name age score
+#> 1 Alice  30  99.5
+
+# Check required column names without validating contents
+stabilize_df(mtcars, .col_names = c("mpg", "cyl"), .extra_cols = stabilize_present)
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 #> Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
@@ -208,60 +199,21 @@ stabilize_lst(list(data = mtcars), data = stabilize_present)
 #> Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 #> Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 #> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-#> 
 
-# Allow extra named elements via .named
-stabilize_lst(
-  list(a = 1L, b = 2L, c = 3L),
-  .named = specify_int_scalar()
-)
-#> $a
-#> [1] 1
-#> 
-#> $b
-#> [1] 2
-#> 
-#> $c
-#> [1] 3
-#> 
-
-# Allow unnamed elements via .unnamed
-stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
-#> [[1]]
-#> [1] 1
-#> 
-#> [[2]]
-#> [1] 2
-#> 
-#> [[3]]
-#> [1] 3
-#> 
+# Enforce row count constraints
+try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))
+#> Error in eval(expr, envir) : 
+#>   `mtcars[0, ]` must have at least 1 row.
+#> ✖ 0 is too few.
 
 # NULL is allowed by default
-stabilize_lst(NULL)
+stabilize_df(NULL)
 #> NULL
-try(stabilize_lst(NULL, .allow_null = FALSE))
+try(stabilize_df(NULL, .allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 
-# Enforce size constraints
-try(stabilize_lst(list(a = 1L), .min_size = 2))
-#> Error in eval(expr, envir) : `list(a = 1L)` must have size >= 2.
-#> ✖ 1 is too small.
-
-# Reject duplicate names by default; opt in to allow them
-try(stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()))
+# Non-data-frame inputs are rejected
+try(stabilize_df(list(a = 1L)))
 #> Error in eval(expr, envir) : 
-#>   `list(a = 1L, a = 2L)` must not contain duplicate names.
-#> ✖ Duplicate name: "a"
-stabilize_lst(
-  list(a = 1L, a = 2L),
-  .named = specify_int_scalar(),
-  .allow_duplicate_names = TRUE
-)
-#> $a
-#> [1] 1
-#> 
-#> $a
-#> [1] 2
-#> 
+#>   Can't coerce `list(a = 1L)` <list> to <data.frame>.
 ```

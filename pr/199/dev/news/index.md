@@ -5,6 +5,16 @@
 ### New features
 
 - New
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  and
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  to validate data frame structure and contents.
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  wraps \[stabilize_lst()\] to apply column-level validators, and
+  supports row count constraints (`.min_rows`, `.max_rows`) and column
+  name checks (`.col_names`)
+  ([\#199](https://github.com/wranglezone/stbl/issues/199)).
+- New
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
   [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
