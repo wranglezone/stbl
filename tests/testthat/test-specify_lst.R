@@ -49,4 +49,3 @@ test_that("specify_lst() respects .allow_null (#110)", {
 test_that("specify_list() exists (#110)", {
   expect_no_error(specify_list())
 })
-
