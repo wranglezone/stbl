@@ -73,12 +73,18 @@
   [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
   [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+  [`specify_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
+  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
   and
-  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`specify_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   (and their synonyms) now default to `allow_null = FALSE` and
   `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or
   `allow_zero_length = TRUE` to restore the previous behavior
-  ([\#189](https://github.com/wranglezone/stbl/issues/189)).
+  ([\#189](https://github.com/wranglezone/stbl/issues/189),
+  [\#197](https://github.com/wranglezone/stbl/issues/197)).
 
 ### Potential breaking changes
 
