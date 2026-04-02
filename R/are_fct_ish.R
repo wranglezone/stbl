@@ -19,7 +19,8 @@
 #' @export
 #'
 #' @examples
-#' # When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are not.
+#' # When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are
+#' # not.
 #' are_fct_ish(c("a", 1, NA))
 #' is_fct_ish(c("a", 1, NA))
 #' are_fct_ish(list("a", list("b", "c")))

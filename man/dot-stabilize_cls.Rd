@@ -46,7 +46,7 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 

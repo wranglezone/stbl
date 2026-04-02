@@ -180,7 +180,7 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 
@@ -261,7 +261,9 @@ Other stabilization functions:
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()}
+\code{\link{stabilize_lgl}()},
+\code{\link{stabilize_lst}()},
+\code{\link{stabilize_present}()}
 }
 \concept{character functions}
 \concept{stabilization functions}

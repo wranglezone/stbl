@@ -11,8 +11,8 @@
 #'
 #'   `stabilize_int_scalar()` and `to_int_scalar()` are optimized to check for
 #'   length-1 integer vectors. `stabilise_int_scalar`,
-#'   `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms of
-#'   `stabilize_int_scalar()`, and `to_integer_scalar()` is a synonym of
+#'   `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms
+#'   of `stabilize_int_scalar()`, and `to_integer_scalar()` is a synonym of
 #'   `to_int_scalar()`.
 #'
 #' @inheritParams .shared-params

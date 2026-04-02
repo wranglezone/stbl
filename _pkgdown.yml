@@ -25,6 +25,7 @@ reference:
 - title: lists
 - contents:
   - matches("lst")
+  - stabilize_present
 - title: generic args
 - contents:
   - object_type

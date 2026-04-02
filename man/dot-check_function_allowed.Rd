@@ -16,7 +16,7 @@
 
 \item{coerce_function}{\verb{(length-1 logical)} Should functions be coerced?}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 

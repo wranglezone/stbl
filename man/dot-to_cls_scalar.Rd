@@ -32,7 +32,7 @@ rlang, used for a fast path if \code{x} is already the right type.}
 \item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 

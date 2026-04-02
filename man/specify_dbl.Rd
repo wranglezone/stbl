@@ -106,7 +106,8 @@ Other specification functions:
 \code{\link{specify_chr}()},
 \code{\link{specify_fct}()},
 \code{\link{specify_int}()},
-\code{\link{specify_lgl}()}
+\code{\link{specify_lgl}()},
+\code{\link{specify_lst}()}
 }
 \concept{double functions}
 \concept{specification functions}

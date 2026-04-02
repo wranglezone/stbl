@@ -227,7 +227,7 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 
@@ -256,8 +256,8 @@ than \code{to_int()}. \code{stabilise_int()}, \code{stabilize_integer()}, and
 
 \code{stabilize_int_scalar()} and \code{to_int_scalar()} are optimized to check for
 length-1 integer vectors. \code{stabilise_int_scalar},
-\code{stabilize_integer_scalar()}, and \code{stabilise_integer_scalar} are synonyms of
-\code{stabilize_int_scalar()}, and \code{to_integer_scalar()} is a synonym of
+\code{stabilize_integer_scalar()}, and \code{stabilise_integer_scalar} are synonyms
+of \code{stabilize_int_scalar()}, and \code{to_integer_scalar()} is a synonym of
 \code{to_int_scalar()}.
 }
 \examples{
@@ -301,7 +301,9 @@ Other stabilization functions:
 \code{\link{stabilize_chr}()},
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_fct}()},
-\code{\link{stabilize_lgl}()}
+\code{\link{stabilize_lgl}()},
+\code{\link{stabilize_lst}()},
+\code{\link{stabilize_present}()}
 }
 \concept{integer functions}
 \concept{stabilization functions}

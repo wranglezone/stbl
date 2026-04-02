@@ -76,7 +76,8 @@ Other specification functions:
 \code{\link{specify_chr}()},
 \code{\link{specify_dbl}()},
 \code{\link{specify_fct}()},
-\code{\link{specify_int}()}
+\code{\link{specify_int}()},
+\code{\link{specify_lst}()}
 }
 \concept{logical functions}
 \concept{specification functions}
