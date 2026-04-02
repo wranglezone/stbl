@@ -105,6 +105,21 @@ test_that("specify_chr_scalar can build a regex checker (#147)", {
   )
 })
 
+test_that("specify_chr_scalar defaults to allow_null = FALSE (#197)", {
+  checker <- specify_chr_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_chr_scalar defaults to allow_zero_length = FALSE (#197)", {
+  checker <- specify_chr_scalar()
+  expect_pkg_error_classes(checker(character(0)), "stbl", "bad_empty")
+  expect_identical(
+    checker(character(0), allow_zero_length = TRUE),
+    character(0)
+  )
+})
+
 test_that("specify_dbl can build a value checker (#148)", {
   checker <- specify_dbl(min_value = 27.2)
   expect_identical(
@@ -131,6 +146,18 @@ test_that("specify_dbl_scalar can build a value checker (#148)", {
   )
 })
 
+test_that("specify_dbl_scalar defaults to allow_null = FALSE (#197)", {
+  checker <- specify_dbl_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_dbl_scalar defaults to allow_zero_length = FALSE (#197)", {
+  checker <- specify_dbl_scalar()
+  expect_pkg_error_classes(checker(double(0)), "stbl", "bad_empty")
+  expect_identical(checker(double(0), allow_zero_length = TRUE), double(0))
+})
+
 test_that("specify_fct can build a level checker (#150)", {
   checker <- specify_fct(levels = c("a", "c"), to_na = "b")
   expect_identical(
@@ -154,6 +181,21 @@ test_that("specify_fct_scalar can build a level checker (#150)", {
     checker(c("a", "c")),
     "stbl",
     "non_scalar"
+  )
+})
+
+test_that("specify_fct_scalar defaults to allow_null = FALSE (#197)", {
+  checker <- specify_fct_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_fct_scalar defaults to allow_zero_length = FALSE (#197)", {
+  checker <- specify_fct_scalar()
+  expect_pkg_error_classes(checker(character(0)), "stbl", "bad_empty")
+  expect_identical(
+    checker(character(0), allow_zero_length = TRUE),
+    factor(character(0))
   )
 })
 
@@ -183,6 +225,18 @@ test_that("specify_int_scalar can build a value checker (#149)", {
   )
 })
 
+test_that("specify_int_scalar defaults to allow_null = FALSE (#197)", {
+  checker <- specify_int_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_int_scalar defaults to allow_zero_length = FALSE (#197)", {
+  checker <- specify_int_scalar()
+  expect_pkg_error_classes(checker(integer(0)), "stbl", "bad_empty")
+  expect_identical(checker(integer(0), allow_zero_length = TRUE), integer(0))
+})
+
 test_that("specify_lgl can build a checker (#151)", {
   checker <- specify_lgl(allow_na = FALSE)
   expect_identical(
@@ -207,6 +261,18 @@ test_that("specify_lgl_scalar can build a value checker (#151)", {
     "stbl",
     "non_scalar"
   )
+})
+
+test_that("specify_lgl_scalar defaults to allow_null = FALSE (#197)", {
+  checker <- specify_lgl_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_lgl_scalar defaults to allow_zero_length = FALSE (#197)", {
+  checker <- specify_lgl_scalar()
+  expect_pkg_error_classes(checker(logical(0)), "stbl", "bad_empty")
+  expect_identical(checker(logical(0), allow_zero_length = TRUE), logical(0))
 })
 
 test_that("specify_character() exists (#164)", {

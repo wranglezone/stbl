@@ -180,8 +180,8 @@ specify_chr <- function(
 #' @export
 #' @rdname specify_chr
 specify_chr_scalar <- function(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   regex = NULL
 ) {
@@ -251,8 +251,8 @@ specify_dbl <- function(
 #' @export
 #' @rdname specify_dbl
 specify_dbl_scalar <- function(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -323,8 +323,8 @@ specify_fct <- function(
 #' @export
 #' @rdname specify_fct
 specify_fct_scalar <- function(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character()
@@ -395,8 +395,8 @@ specify_int <- function(
 #' @export
 #' @rdname specify_int
 specify_int_scalar <- function(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
@@ -464,8 +464,8 @@ specify_lgl <- function(
 #' @export
 #' @rdname specify_lgl
 specify_lgl_scalar <- function(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE
 ) {
   # Only pass arguments that aren't missing.

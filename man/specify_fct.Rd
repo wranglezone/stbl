@@ -17,8 +17,8 @@ specify_fct(
 )
 
 specify_fct_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character()
@@ -34,8 +34,8 @@ specify_factor(
 )
 
 specify_factor_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
   to_na = character()

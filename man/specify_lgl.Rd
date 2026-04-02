@@ -15,8 +15,8 @@ specify_lgl(
 )
 
 specify_lgl_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE
 )
 
@@ -28,8 +28,8 @@ specify_logical(
 )
 
 specify_logical_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE
 )
 }
