@@ -5,14 +5,16 @@
 ### New features
 
 - New
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
-  [`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
-  to validate list structure and contents, create pre-configured list
-  validators for nested validation, and require a value to be non-`NULL`
-  without other type constraints
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  to validate list structure and contents and create pre-configured list
+  validators for nested validation
   ([\#110](https://github.com/wranglezone/stbl/issues/110)).
+- New
+  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  validates that a value is non-`NULL` without imposing any type
+  constraints ([\#110](https://github.com/wranglezone/stbl/issues/110)).
 - New
   [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
   function to snapshot-test the full error output of

@@ -62,8 +62,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>  .element_specs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">stabilize_list</span><span class="op">(</span></span>
@@ -76,8 +75,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>  .element_specs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">stabilise_lst</span><span class="op">(</span></span>
@@ -90,8 +88,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>  .element_specs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">stabilise_list</span><span class="op">(</span></span>
@@ -104,8 +101,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>  .element_specs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -165,12 +161,6 @@ source of error messages.</p></dd>
 messages. Use this if you remove a special class from <code>x</code> before checking
 its coercion, but want the error message to match the original class.</p></dd>
 
-
-<dt id="arg--element-specs">.element_specs<a class="anchor" aria-label="anchor" href="#arg--element-specs"></a></dt>
-<dd><p><code>(named list)</code> For internal use by <code><a href="specify_lst.html">specify_lst()</a></code>. A
-named list of element specification functions that is merged with the
-specifications provided via <code>...</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -180,6 +170,7 @@ specifications provided via <code>...</code>.</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other list functions:
 <code><a href="specify_lst.html">specify_lst()</a></code>,
+<code><a href="stabilize_present.html">stabilize_present()</a></code>,
 <code><a href="to_lst.html">to_lst()</a></code></p>
 <p>Other stabilization functions:
 <code><a href="stabilize_arg.html">stabilize_arg()</a></code>,
@@ -187,7 +178,8 @@ specifications provided via <code>...</code>.</p></dd>
 <code><a href="stabilize_dbl.html">stabilize_dbl()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
-<code><a href="stabilize_lgl.html">stabilize_lgl()</a></code></p></div>
+<code><a href="stabilize_lgl.html">stabilize_lgl()</a></code>,
+<code><a href="stabilize_present.html">stabilize_present()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -205,8 +197,8 @@ specifications provided via <code>...</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Allow any non-NULL element with specify_present()</span></span></span>
-<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="specify_present.html">specify_present</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Allow any non-NULL element with stabilize_present</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">stabilize_present</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>

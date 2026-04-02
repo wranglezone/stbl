@@ -146,8 +146,8 @@
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list argument meets expectations
-- [`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
-  : Create a specified "present" validator function
+- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  : Require a value to be non-NULL
 
 ## generic args
 

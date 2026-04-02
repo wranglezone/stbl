@@ -1,124 +1,41 @@
-# Ensure a list argument meets expectations
+# Require a value to be non-NULL
 
-`stabilize_lst()` validates the structure and contents of a list. It can
-check that specific named elements are present and valid, that extra
-named elements conform to a shared rule, and that unnamed elements
-conform to a shared rule. `stabilise_lst()`, `stabilize_list()`, and
-`stabilise_list()` are synonyms of `stabilize_lst()`.
+`stabilize_present()` validates that a value is not `NULL`. Any
+non-`NULL` value passes through unchanged. This is useful as an element
+specification in
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+when you need to require a named element without imposing any type
+constraints on its value.
 
 ## Usage
 
 ``` r
-stabilize_lst(
-  .x,
-  ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
-  .x_arg = caller_arg(.x),
-  .call = caller_env(),
-  .x_class = object_type(.x)
-)
-
-stabilize_list(
-  .x,
-  ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
-  .x_arg = caller_arg(.x),
-  .call = caller_env(),
-  .x_class = object_type(.x)
-)
-
-stabilise_lst(
-  .x,
-  ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
-  .x_arg = caller_arg(.x),
-  .call = caller_env(),
-  .x_class = object_type(.x)
-)
-
-stabilise_list(
-  .x,
-  ...,
-  .named = NULL,
-  .unnamed = NULL,
-  .allow_null = TRUE,
-  .min_size = NULL,
-  .max_size = NULL,
-  .x_arg = caller_arg(.x),
-  .call = caller_env(),
-  .x_class = object_type(.x)
+stabilize_present(
+  x,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
 )
 ```
 
 ## Arguments
 
-- .x:
+- x:
 
   The argument to stabilize.
 
-- ...:
-
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `.x`. Each name corresponds
-  to a required element in `.x`, and the function is used to validate
-  that element.
-
-- .named:
-
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
-
-- .unnamed:
-
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
-
-- .allow_null:
-
-  `(length-1 logical)` Is NULL an acceptable value?
-
-- .min_size:
-
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- .max_size:
-
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- .x_arg:
+- x_arg:
 
   `(length-1 character)` An argument name for `x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
-- .call:
+- call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.
 
-- .x_class:
+- x_class:
 
   `(length-1 character)` The class name of `x` to use in error messages.
   Use this if you remove a special class from `x` before checking its
@@ -126,13 +43,13 @@ stabilise_list(
 
 ## Value
 
-The validated list.
+The value, unchanged.
 
 ## See also
 
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other stabilization functions:
@@ -142,25 +59,27 @@ Other stabilization functions:
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
 
 ## Examples
 
 ``` r
-# Basic validation: named required elements
-stabilize_lst(
-  list(name = "Alice", age = 30L),
-  name = specify_chr_scalar(),
-  age = specify_int_scalar()
-)
-#> $name
-#> [1] "Alice"
+stabilize_present("any value")
+#> [1] "any value"
+stabilize_present(list(1, 2, 3))
+#> [[1]]
+#> [1] 1
 #> 
-#> $age
-#> [1] 30
+#> [[2]]
+#> [1] 2
 #> 
+#> [[3]]
+#> [1] 3
+#> 
+try(stabilize_present(NULL))
+#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 
-# Allow any non-NULL element with stabilize_present
+# Use as a named element spec in stabilize_lst()
 stabilize_lst(list(data = mtcars), data = stabilize_present)
 #> $data
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
@@ -197,42 +116,4 @@ stabilize_lst(list(data = mtcars), data = stabilize_present)
 #> Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 #> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 #> 
-
-# Allow extra named elements via .named
-stabilize_lst(
-  list(a = 1L, b = 2L, c = 3L),
-  .named = specify_int_scalar()
-)
-#> $a
-#> [1] 1
-#> 
-#> $b
-#> [1] 2
-#> 
-#> $c
-#> [1] 3
-#> 
-
-# Allow unnamed elements via .unnamed
-stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
-#> [[1]]
-#> [1] 1
-#> 
-#> [[2]]
-#> [1] 2
-#> 
-#> [[3]]
-#> [1] 3
-#> 
-
-# NULL is allowed by default
-stabilize_lst(NULL)
-#> NULL
-try(stabilize_lst(NULL, .allow_null = FALSE))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-
-# Enforce size constraints
-try(stabilize_lst(list(a = 1L), .min_size = 2))
-#> Error in eval(expr, envir) : `list(a = 1L)` must have size >= 2.
-#> ✖ 1 is too small.
 ```

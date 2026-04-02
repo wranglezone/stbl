@@ -85,7 +85,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/specify_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dbl.html</loc></url>
@@ -93,6 +92,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stbl-package.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_lst.html</loc></url>
 </urlset>

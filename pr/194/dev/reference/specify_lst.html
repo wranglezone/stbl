@@ -32,7 +32,7 @@ provided arguments. specify_list() is a synonym of specify_lst()."><meta name="r
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Create a specified list stabilizer function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/copilot/add-stabilize-lst-function/R/specify_cls.R" class="external-link"><code>R/specify_cls.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/copilot/add-stabilize-lst-function/R/specify_lst.R" class="external-link"><code>R/specify_lst.R</code></a></small>
       <div class="d-none name"><code>specify_lst.Rd</code></div>
     </div>
 
@@ -110,29 +110,47 @@ you want to provide additional context or functionality.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other list functions:
 <code><a href="stabilize_lst.html">stabilize_lst()</a></code>,
+<code><a href="stabilize_present.html">stabilize_present()</a></code>,
 <code><a href="to_lst.html">to_lst()</a></code></p>
 <p>Other specification functions:
 <code><a href="specify_chr.html">specify_chr()</a></code>,
 <code><a href="specify_dbl.html">specify_dbl()</a></code>,
 <code><a href="specify_fct.html">specify_fct()</a></code>,
 <code><a href="specify_int.html">specify_int()</a></code>,
-<code><a href="specify_lgl.html">specify_lgl()</a></code>,
-<code><a href="specify_present.html">specify_present()</a></code></p></div>
+<code><a href="specify_lgl.html">specify_lgl()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stabilize_config</span> <span class="op">&lt;-</span> <span class="fu">specify_lst</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  .min_size <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  version <span class="op">=</span> <span class="va">stabilize_int_scalar</span>,</span></span>
+<span class="r-in"><span>  debug <span class="op">=</span> <span class="fu"><a href="specify_lgl.html">specify_lgl_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .unnamed <span class="op">=</span> <span class="va">stabilize_chr_scalar</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">stabilize_config</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"myapp"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_config</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"myapp"</span>, version <span class="op">=</span> <span class="fl">1L</span>, debug <span class="op">=</span> <span class="cn">FALSE</span>, <span class="st">"extra"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "myapp"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_config</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `list()` must have size &gt;= 1.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> 0 is too small.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $version</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $debug</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "extra"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">stabilize_config</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"myapp"</span>, version <span class="op">=</span> <span class="fl">1L</span>, debug <span class="op">=</span> <span class="cn">FALSE</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))[[4]]`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> must be a single <span style="color: #0000BB;">&lt;character&gt;</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))[[4]]` has 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   values.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -82,6 +82,7 @@ provide additional context or functionality.
 
 Other list functions:
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other specification functions:
@@ -89,21 +90,38 @@ Other specification functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
-[`specify_present()`](https://stbl.wrangle.zone/dev/reference/specify_present.md)
+[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
 
 ## Examples
 
 ``` r
 stabilize_config <- specify_lst(
-  name = specify_chr_scalar(),
-  .min_size = 1
+  name = specify_chr_scalar(allow_na = FALSE),
+  version = stabilize_int_scalar,
+  debug = specify_lgl_scalar(allow_na = FALSE),
+  .unnamed = stabilize_chr_scalar
 )
-stabilize_config(list(name = "myapp"))
+stabilize_config(list(name = "myapp", version = 1L, debug = FALSE, "extra"))
 #> $name
 #> [1] "myapp"
 #> 
-try(stabilize_config(list()))
-#> Error in eval(expr, envir) : `list()` must have size >= 1.
-#> ✖ 0 is too small.
+#> $version
+#> [1] 1
+#> 
+#> $debug
+#> [1] FALSE
+#> 
+#> [[4]]
+#> [1] "extra"
+#> 
+try(
+  stabilize_config(
+    list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))
+  )
+)
+#> Error in eval(expr, envir) : 
+#>   `list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))[[4]]`
+#> must be a single <character>.
+#> ✖ `list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))[[4]]` has 2
+#>   values.
 ```

@@ -293,7 +293,8 @@ Other stabilization functions:
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
 
 ## Examples
 
