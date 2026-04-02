@@ -6,10 +6,13 @@
 #' @param ... Arguments passed to methods.
 #' @param allow_na `(length-1 logical)` Are NA values ok?
 #' @param allow_null `(length-1 logical)` Is NULL an acceptable value?
+#' @param .allow_null `(length-1 logical)` Is NULL an acceptable value?
 #' @param allow_zero_length `(length-1 logical)` Are zero-length vectors
 #'   acceptable?
 #' @param are_cls_ish_fn The `are_*_ish` function to apply to each element.
 #' @param call `(environment)` The execution environment to mention as the
+#'   source of error messages.
+#' @param .call `(environment)` The execution environment to mention as the
 #'   source of error messages.
 #' @param cast_fn `(function)` The `as.*()` function to use for coercion.
 #' @param check_cls_value_fn `(function)` A function to check the values of `x`
@@ -32,9 +35,13 @@
 #'   evaluate variables in error messages.
 #' @param min_size `(length-1 integer)` The minimum size of the object. Object
 #'   size will be tested using [vctrs::vec_size()].
+#' @param .min_size `(length-1 integer)` The minimum size of the object. Object
+#'   size will be tested using [vctrs::vec_size()].
 #' @param min_value `(length-1 numeric)` The lowest allowed value for `x`. If
 #'   `NULL` (default) values are not checked.
 #' @param max_size `(length-1 integer)` The maximum size of the object. Object
+#'   size will be tested using [vctrs::vec_size()].
+#' @param .max_size `(length-1 integer)` The maximum size of the object. Object
 #'   size will be tested using [vctrs::vec_size()].
 #' @param max_value `(length-1 numeric)` The highest allowed value for `x`. If
 #'   `NULL` (default) values are not checked.
@@ -63,10 +70,17 @@
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param x The argument to stabilize.
+#' @param .x The argument to stabilize.
 #' @param x_arg `(length-1 character)` An argument name for x. The automatic
 #'   value will work in most cases, or pass it through from higher-level
 #'   functions to make error messages clearer in unexported functions.
+#' @param .x_arg `(length-1 character)` An argument name for x. The automatic
+#'   value will work in most cases, or pass it through from higher-level
+#'   functions to make error messages clearer in unexported functions.
 #' @param x_class `(length-1 character)` The class name of `x` to use in error
+#'   messages. Use this if you remove a special class from `x` before checking
+#'   its coercion, but want the error message to match the original class.
+#' @param .x_class `(length-1 character)` The class name of `x` to use in error
 #'   messages. Use this if you remove a special class from `x` before checking
 #'   its coercion, but want the error message to match the original class.
 #'

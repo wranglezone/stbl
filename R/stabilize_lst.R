@@ -1,38 +1,24 @@
 #' Ensure a list argument meets expectations
 #'
-#' @description `stabilize_lst()` validates the structure and contents of a
-#'   list. It can check that specific named elements are present and valid, that
-#'   unnamed elements conform to a shared rule, and that extra named elements
-#'   conform to a shared rule. `stabilise_lst()`, `stabilize_list()`, and
-#'   `stabilise_list()` are synonyms of `stabilize_lst()`.
+#' `stabilize_lst()` validates the structure and contents of a list. It can
+#' check that specific named elements are present and valid, that extra named
+#' elements conform to a shared rule, and that unnamed elements conform to a
+#' shared rule. `stabilise_lst()`, `stabilize_list()`, and `stabilise_list()`
+#' are synonyms of `stabilize_lst()`.
 #'
-#' @param x The list to validate.
 #' @param ... Named [`specify_*()`][specify_chr] functions for required named
-#'   elements of `x`. Each name corresponds to a required element in `x`, and
+#'   elements of `.x`. Each name corresponds to a required element in `.x`, and
 #'   the function is used to validate that element.
 #' @param .named A single [`specify_*()`][specify_chr] function to validate all
-#'   named elements of `x` that are *not* explicitly listed in `...`. If `NULL`
+#'   named elements of `.x` that are *not* explicitly listed in `...`. If `NULL`
 #'   (default), any extra named elements will cause an error.
 #' @param .unnamed A single [`specify_*()`][specify_chr] function to validate
-#'   all unnamed elements of `x`. If `NULL` (default), any unnamed elements
+#'   all unnamed elements of `.x`. If `NULL` (default), any unnamed elements
 #'   will cause an error.
-#' @param .allow_null `(length-1 logical)` Is `NULL` an acceptable value?
-#'   Defaults to `TRUE`.
-#' @param .min_size `(length-1 integer)` The minimum size of the list. Tested
-#'   using [vctrs::vec_size()].
-#' @param .max_size `(length-1 integer)` The maximum size of the list. Tested
-#'   using [vctrs::vec_size()].
-#' @param .x_arg `(length-1 character)` An argument name for `x`. The automatic
-#'   value will work in most cases, or pass it through from higher-level
-#'   functions to make error messages clearer in unexported functions.
-#' @param .call `(environment)` The execution environment to mention as the
-#'   source of error messages.
-#' @param .x_class `(length-1 character)` The class name of `x` to use in error
-#'   messages. Use this if you remove a special class from `x` before checking
-#'   its coercion, but want the error message to match the original class.
-#' @param .element_specs `(named list)` For internal use by [specify_lst()].
-#'   A named list of element specification functions that is merged with the
+#' @param .element_specs `(named list)` For internal use by [specify_lst()]. A
+#'   named list of element specification functions that is merged with the
 #'   specifications provided via `...`.
+#' @inheritParams .shared-params
 #'
 #' @returns The validated list.
 #' @family list functions
@@ -66,29 +52,29 @@
 #' # Enforce size constraints
 #' try(stabilize_lst(list(a = 1L), .min_size = 2))
 stabilize_lst <- function(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 ) {
   force(.x_arg)
   force(.call)
 
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
+  if (is.null(.x)) {
+    return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
   }
 
-  x <- to_lst(x, x_arg = .x_arg, call = .call)
+  .x <- to_lst(.x, x_arg = .x_arg, call = .call)
 
   .check_size(
-    x,
+    .x,
     min_size = .min_size,
     max_size = .max_size,
     x_arg = .x_arg,
@@ -99,7 +85,7 @@ stabilize_lst <- function(
   .check_specs_named(element_specs, call = .call)
 
   required_names <- names(element_specs)
-  nms <- names(x) %||% character(length(x))
+  nms <- names(.x) %||% character(length(.x))
   is_unnamed <- nms == ""
   is_extra_named <- !is_unnamed & !(nms %in% required_names)
 
@@ -114,7 +100,7 @@ stabilize_lst <- function(
       )
     }
     element_arg <- paste0(.x_arg, "$", nm)
-    x[[nm]] <- element_specs[[nm]](x[[nm]], x_arg = element_arg, call = .call)
+    .x[[nm]] <- element_specs[[nm]](.x[[nm]], x_arg = element_arg, call = .call)
   }
 
   if (any(is_unnamed)) {
@@ -135,7 +121,7 @@ stabilize_lst <- function(
     } else {
       for (i in which(is_unnamed)) {
         element_arg <- paste0(.x_arg, "[[", i, "]]")
-        x[[i]] <- .unnamed(x[[i]], x_arg = element_arg, call = .call)
+        .x[[i]] <- .unnamed(.x[[i]], x_arg = element_arg, call = .call)
       }
     }
   }
@@ -156,12 +142,12 @@ stabilize_lst <- function(
     } else {
       for (nm in nms[is_extra_named]) {
         element_arg <- paste0(.x_arg, "$", nm)
-        x[[nm]] <- .named(x[[nm]], x_arg = element_arg, call = .call)
+        .x[[nm]] <- .named(.x[[nm]], x_arg = element_arg, call = .call)
       }
     }
   }
 
-  return(x)
+  return(.x)
 }
 
 #' @export

@@ -10,12 +10,17 @@
 
 \item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
+\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
 \item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
 
 \item{are_cls_ish_fn}{The \verb{are_*_ish} function to apply to each element.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
+source of error messages.}
+
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
 \item{cast_fn}{\verb{(function)} The \verb{as.*()} function to use for coercion.}
@@ -50,10 +55,16 @@ evaluate variables in error messages.}
 \item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
+\item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
 \item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
@@ -95,11 +106,21 @@ coercion.}
 
 \item{x}{The argument to stabilize.}
 
+\item{.x}{The argument to stabilize.}
+
 \item{x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 
+\item{.x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
+value will work in most cases, or pass it through from higher-level
+functions to make error messages clearer in unexported functions.}
+
 \item{x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
+messages. Use this if you remove a special class from \code{x} before checking
+its coercion, but want the error message to match the original class.}
+
+\item{.x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
 messages. Use this if you remove a special class from \code{x} before checking
 its coercion, but want the error message to match the original class.}
 }

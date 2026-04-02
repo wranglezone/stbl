@@ -145,8 +145,7 @@ specify_cls <- function(
 #' is a synonym of `specify_chr()`, and `specify_character_scalar()` is a
 #' synonym of `specify_chr_scalar()`.
 #'
-#' @inheritParams stabilize_chr
-#' @inheritParams stabilize_chr_scalar
+#' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_chr()] or [stabilize_chr_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
@@ -214,8 +213,7 @@ specify_character_scalar <- specify_chr_scalar
 #' synonym of `specify_dbl()`, and `specify_double_scalar()` is a
 #' synonym of `specify_dbl_scalar()`.
 #'
-#' @inheritParams stabilize_dbl
-#' @inheritParams stabilize_dbl_scalar
+#' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_dbl()] or [stabilize_dbl_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
@@ -290,7 +288,6 @@ specify_double_scalar <- specify_dbl_scalar
 #' `specify_fct_scalar()`.
 #'
 #' @inheritParams stabilize_fct
-#' @inheritParams stabilize_fct_scalar
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_fct()] or [stabilize_fct_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
@@ -360,9 +357,7 @@ specify_factor_scalar <- specify_fct_scalar
 #' a synonym of `specify_int()`, and `specify_integer_scalar()` is a synonym of
 #' `specify_int_scalar()`.
 #'
-#' @inheritParams stabilize_int
-#' @inheritParams stabilize_int_scalar
-#'
+#' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_int()] or [stabilize_int_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
@@ -436,9 +431,7 @@ specify_integer_scalar <- specify_int_scalar
 #' a synonym of `specify_lgl()`, and `specify_logical_scalar()` is a synonym of
 #' `specify_lgl_scalar()`.
 #'
-#' @inheritParams stabilize_lgl
-#' @inheritParams stabilize_lgl_scalar
-#'
+#' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_lgl()] or [stabilize_lgl_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to

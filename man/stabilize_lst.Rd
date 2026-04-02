@@ -8,86 +8,85 @@
 \title{Ensure a list argument meets expectations}
 \usage{
 stabilize_lst(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilize_list(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilise_lst(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilise_list(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 }
 \arguments{
-\item{x}{The list to validate.}
+\item{.x}{The argument to stabilize.}
 
 \item{...}{Named \code{\link[=specify_chr]{specify_*()}} functions for required named
-elements of \code{x}. Each name corresponds to a required element in \code{x}, and
+elements of \code{.x}. Each name corresponds to a required element in \code{.x}, and
 the function is used to validate that element.}
 
 \item{.named}{A single \code{\link[=specify_chr]{specify_*()}} function to validate all
-named elements of \code{x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
+named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
 (default), any extra named elements will cause an error.}
 
 \item{.unnamed}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all unnamed elements of \code{x}. If \code{NULL} (default), any unnamed elements
+all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
 will cause an error.}
 
-\item{.allow_null}{\verb{(length-1 logical)} Is \code{NULL} an acceptable value?
-Defaults to \code{TRUE}.}
+\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
-\item{.min_size}{\verb{(length-1 integer)} The minimum size of the list. Tested
-using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.max_size}{\verb{(length-1 integer)} The maximum size of the list. Tested
-using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
+\item{.x_arg}{\verb{(length-1 character)} An argument name for x. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 
@@ -98,19 +97,19 @@ source of error messages.}
 messages. Use this if you remove a special class from \code{x} before checking
 its coercion, but want the error message to match the original class.}
 
-\item{.element_specs}{\verb{(named list)} For internal use by \code{\link[=specify_lst]{specify_lst()}}.
-A named list of element specification functions that is merged with the
+\item{.element_specs}{\verb{(named list)} For internal use by \code{\link[=specify_lst]{specify_lst()}}. A
+named list of element specification functions that is merged with the
 specifications provided via \code{...}.}
 }
 \value{
 The validated list.
 }
 \description{
-\code{stabilize_lst()} validates the structure and contents of a
-list. It can check that specific named elements are present and valid, that
-unnamed elements conform to a shared rule, and that extra named elements
-conform to a shared rule. \code{stabilise_lst()}, \code{stabilize_list()}, and
-\code{stabilise_list()} are synonyms of \code{stabilize_lst()}.
+\code{stabilize_lst()} validates the structure and contents of a list. It can
+check that specific named elements are present and valid, that extra named
+elements conform to a shared rule, and that unnamed elements conform to a
+shared rule. \code{stabilise_lst()}, \code{stabilize_list()}, and \code{stabilise_list()}
+are synonyms of \code{stabilize_lst()}.
 }
 \examples{
 # Basic validation: named required elements
@@ -141,7 +140,8 @@ try(stabilize_lst(list(a = 1L), .min_size = 2))
 }
 \seealso{
 Other list functions: 
-\code{\link{specify_lst}()}
+\code{\link{specify_lst}()},
+\code{\link{to_lst}()}
 
 Other stabilization functions: 
 \code{\link{stabilize_arg}()},

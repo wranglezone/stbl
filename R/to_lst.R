@@ -1,9 +1,8 @@
 #' Ensure a list argument meets expectations
 #'
-#' @description `to_list()` checks whether an argument can be coerced to a list
-#'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_lst()` is a synonym of
-#'   `to_list()`.
+#' `to_lst()` checks whether an argument can be coerced to a list without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_list()` is a synonym of `to_lst()`.
 #'
 #' @details This function has three important distinctions from
 #'   [base::as.list()]:
@@ -20,6 +19,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a list.
+#' @family list functions
 #' @export
 to_lst <- function(
   x,

@@ -47,10 +47,9 @@ source of error messages.}
 The argument as a list.
 }
 \description{
-\code{to_list()} checks whether an argument can be coerced to a list
-without losing information, returning it silently if so. Otherwise an
-informative error message is signaled. \code{to_lst()} is a synonym of
-\code{to_list()}.
+\code{to_lst()} checks whether an argument can be coerced to a list without losing
+information, returning it silently if so. Otherwise an informative error
+message is signaled. \code{to_list()} is a synonym of \code{to_lst()}.
 }
 \details{
 This function has three important distinctions from
@@ -66,3 +65,9 @@ throw an error, rather than returning \code{list(NULL)}.
 \code{allow_null = FALSE}).
 }
 }
+\seealso{
+Other list functions: 
+\code{\link{specify_lst}()},
+\code{\link{stabilize_lst}()}
+}
+\concept{list functions}

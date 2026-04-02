@@ -25,25 +25,24 @@ specify_list(
 }
 \arguments{
 \item{...}{Named \code{\link[=specify_chr]{specify_*()}} functions for required named
-elements of \code{x}. Each name corresponds to a required element in \code{x}, and
+elements of \code{.x}. Each name corresponds to a required element in \code{.x}, and
 the function is used to validate that element.}
 
 \item{.named}{A single \code{\link[=specify_chr]{specify_*()}} function to validate all
-named elements of \code{x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
+named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
 (default), any extra named elements will cause an error.}
 
 \item{.unnamed}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all unnamed elements of \code{x}. If \code{NULL} (default), any unnamed elements
+all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
 will cause an error.}
 
-\item{.allow_null}{\verb{(length-1 logical)} Is \code{NULL} an acceptable value?
-Defaults to \code{TRUE}.}
+\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
-\item{.min_size}{\verb{(length-1 integer)} The minimum size of the list. Tested
-using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.max_size}{\verb{(length-1 integer)} The maximum size of the list. Tested
-using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -66,7 +65,8 @@ try(stabilize_config(list()))
 }
 \seealso{
 Other list functions: 
-\code{\link{stabilize_lst}()}
+\code{\link{stabilize_lst}()},
+\code{\link{to_lst}()}
 
 Other specification functions: 
 \code{\link{specify_chr}()},
