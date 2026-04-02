@@ -2,6 +2,7 @@
 
 ## New features
 
+* New `stabilize_df()` and `specify_df()` to validate data frame structure and contents. `stabilize_df()` wraps [stabilize_lst()] to apply column-level validators, and supports row count constraints (`.min_rows`, `.max_rows`) and column name checks (`.col_names`) (#199).
 * New `stabilize_lst()` and `specify_lst()` to validate list structure and contents and create pre-configured list validators for nested validation (#110).
 * New `stabilize_present()` validates that a value is non-`NULL` without imposing any type constraints (#110).
 * New `expect_pkg_error_snapshot()` function to snapshot-test the full error output of `pkg_abort()`-style errors in one step, combining `expect_snapshot()` with `expect_pkg_error_classes()` (#188).

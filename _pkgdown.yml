@@ -22,6 +22,10 @@ reference:
 - title: logical vectors
 - contents:
   - matches("lgl")
+- title: data frames
+- contents:
+  - matches("df")
+  - matches("data_frame")
 - title: lists
 - contents:
   - matches("lst")

@@ -259,6 +259,7 @@ Other character functions:
 Other stabilization functions: 
 \code{\link{stabilize_arg}()},
 \code{\link{stabilize_dbl}()},
+\code{\link{stabilize_df}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
 \code{\link{stabilize_lgl}()},

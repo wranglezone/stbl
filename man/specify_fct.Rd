@@ -88,6 +88,7 @@ Other factor functions:
 Other specification functions: 
 \code{\link{specify_chr}()},
 \code{\link{specify_dbl}()},
+\code{\link{specify_df}()},
 \code{\link{specify_int}()},
 \code{\link{specify_lgl}()},
 \code{\link{specify_lst}()}
