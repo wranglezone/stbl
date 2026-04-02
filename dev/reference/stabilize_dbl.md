@@ -258,7 +258,7 @@ to_double_scalar(
 
 - x_arg:
 
-  `(length-1 character)` An argument name for x. The automatic value
+  `(length-1 character)` An argument name for `x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
@@ -292,7 +292,9 @@ Other stabilization functions:
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
 
 ## Examples
 

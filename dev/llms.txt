@@ -255,9 +255,19 @@ contributing to this project, you agree to abide by its terms.
 
 ## lists
 
+- [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  [`specify_list()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  : Create a specified list stabilizer function
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilize_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilise_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  [`stabilise_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  : Ensure a list argument meets expectations
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list argument meets expectations
+- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  : Require a value to be non-NULL
 
 ## generic args
 

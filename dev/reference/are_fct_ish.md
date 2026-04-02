@@ -67,7 +67,8 @@ Other check functions:
 ## Examples
 
 ``` r
-# When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are not.
+# When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are
+# not.
 are_fct_ish(c("a", 1, NA))
 #> [1] TRUE TRUE TRUE
 is_fct_ish(c("a", 1, NA))

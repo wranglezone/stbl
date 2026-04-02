@@ -1,9 +1,9 @@
 # Ensure a list argument meets expectations
 
-`to_list()` checks whether an argument can be coerced to a list without
+`to_lst()` checks whether an argument can be coerced to a list without
 losing information, returning it silently if so. Otherwise an
-informative error message is signaled. `to_lst()` is a synonym of
-`to_list()`.
+informative error message is signaled. `to_list()` is a synonym of
+`to_lst()`.
 
 ## Usage
 
@@ -45,7 +45,7 @@ to_lst(
 
 - x_arg:
 
-  `(length-1 character)` An argument name for x. The automatic value
+  `(length-1 character)` An argument name for `x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
@@ -83,3 +83,10 @@ This function has three important distinctions from
 
 - `NULL` values can be rejected as part of the call to this function
   (with `allow_null = FALSE`).
+
+## See also
+
+Other list functions:
+[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
