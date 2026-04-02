@@ -226,4 +226,3 @@ test_that("stabilize_present() works as an element spec in stabilize_lst() (#110
     class = .compile_dash("stbl", "error", "bad_null")
   )
 })
-

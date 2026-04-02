@@ -485,5 +485,3 @@ specify_logical <- specify_lgl
 #' @export
 #' @rdname specify_lgl
 specify_logical_scalar <- specify_lgl_scalar
-
-
