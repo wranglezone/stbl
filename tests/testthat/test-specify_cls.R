@@ -114,7 +114,10 @@ test_that("specify_chr_scalar defaults to allow_null = FALSE (#197)", {
 test_that("specify_chr_scalar defaults to allow_zero_length = FALSE (#197)", {
   checker <- specify_chr_scalar()
   expect_pkg_error_classes(checker(character(0)), "stbl", "bad_empty")
-  expect_identical(checker(character(0), allow_zero_length = TRUE), character(0))
+  expect_identical(
+    checker(character(0), allow_zero_length = TRUE),
+    character(0)
+  )
 })
 
 test_that("specify_dbl can build a value checker (#148)", {
@@ -190,7 +193,10 @@ test_that("specify_fct_scalar defaults to allow_null = FALSE (#197)", {
 test_that("specify_fct_scalar defaults to allow_zero_length = FALSE (#197)", {
   checker <- specify_fct_scalar()
   expect_pkg_error_classes(checker(character(0)), "stbl", "bad_empty")
-  expect_identical(checker(character(0), allow_zero_length = TRUE), factor(character(0)))
+  expect_identical(
+    checker(character(0), allow_zero_length = TRUE),
+    factor(character(0))
+  )
 })
 
 test_that("specify_int can build a value checker (#149)", {
