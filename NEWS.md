@@ -12,7 +12,7 @@
 
 ## Breaking changes
 
-* `to_chr_scalar()`, `to_dbl_scalar()`, `to_fct_scalar()`, `to_int_scalar()`, `to_lgl_scalar()`, `stabilize_chr_scalar()`, `stabilize_dbl_scalar()`, `stabilize_fct_scalar()`, `stabilize_int_scalar()`, and `stabilize_lgl_scalar()` (and their synonyms) now default to `allow_null = FALSE` and `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or `allow_zero_length = TRUE` to restore the previous behavior (#189).
+* `to_chr_scalar()`, `to_dbl_scalar()`, `to_fct_scalar()`, `to_int_scalar()`, `to_lgl_scalar()`, `stabilize_chr_scalar()`, `stabilize_dbl_scalar()`, `stabilize_fct_scalar()`, `stabilize_int_scalar()`, `stabilize_lgl_scalar()`, `specify_chr_scalar()`, `specify_dbl_scalar()`, `specify_fct_scalar()`, `specify_int_scalar()`, and `specify_lgl_scalar()` (and their synonyms) now default to `allow_null = FALSE` and `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or `allow_zero_length = TRUE` to restore the previous behavior (#189, #197).
 
 ## Potential breaking changes
 

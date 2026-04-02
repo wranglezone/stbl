@@ -16,8 +16,8 @@ specify_chr(
 )
 
 specify_chr_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   regex = NULL
 )
@@ -31,8 +31,8 @@ specify_character(
 )
 
 specify_character_scalar(
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
   allow_na = TRUE,
   regex = NULL
 )
