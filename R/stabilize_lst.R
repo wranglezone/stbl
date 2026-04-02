@@ -81,9 +81,9 @@ stabilize_lst <- function(
   .check_specs_named(element_specs, call = .call)
 
   required_names <- names(element_specs)
-  nms <- names(.x) %||% character(length(.x))
-  is_unnamed <- nms == ""
-  is_extra_named <- !is_unnamed & !(nms %in% required_names)
+  nms <- rlang::names2(.x)
+  is_unnamed <- !rlang::have_name(.x)
+  is_extra_named <- rlang::have_name(.x) & !(nms %in% required_names)
 
   for (nm in required_names) {
     if (!nm %in% nms) {
