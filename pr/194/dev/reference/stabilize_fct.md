@@ -215,7 +215,7 @@ to_factor_scalar(
 
 - x_arg:
 
-  `(length-1 character)` An argument name for x. The automatic value
+  `(length-1 character)` An argument name for `x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
