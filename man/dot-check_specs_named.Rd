@@ -4,10 +4,10 @@
 \alias{.check_specs_named}
 \title{Check that all elements of a spec list are named}
 \usage{
-.check_specs_named(specs, call = caller_env())
+.check_specs_named(..., call = caller_env())
 }
 \arguments{
-\item{specs}{\code{(list)} A named list of specification functions from \code{...}.}
+\item{...}{Spec functions forwarded from \code{stabilize_lst()}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

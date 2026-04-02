@@ -19,7 +19,8 @@
 
 \item{direction}{\code{(character)} One of \code{"low"} or \code{"high"}.}
 
-\item{target_value}{\code{(numeric)} The value against which \code{x} is being compared.}
+\item{target_value}{\code{(numeric)} The value against which \code{x} is being
+compared.}
 
 \item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
 value will work in most cases, or pass it through from higher-level

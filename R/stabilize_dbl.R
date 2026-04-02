@@ -198,7 +198,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 #' @param x `(numeric)` The vector being checked.
 #' @param failure_locations `(integer)` Indices where the check failed.
 #' @param direction `(character)` One of `"low"` or `"high"`.
-#' @param target_value `(numeric)` The value against which `x` is being compared.
+#' @param target_value `(numeric)` The value against which `x` is being
+#'   compared.
 #' @inheritParams .shared-params
 #'
 #' @returns A named character vector for `.stbl_abort()`.

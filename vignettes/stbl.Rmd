@@ -94,7 +94,8 @@ register_user(
   email_address = "test@example.com", 
   age = 42, 
   is_premium_member = TRUE, 
-  interests = list("R", "hiking") # This is a list, but becomes a character vector
+  # This is a list, but becomes a character vector
+  interests = list("R", "hiking") 
 ) |> str()
 ```
 

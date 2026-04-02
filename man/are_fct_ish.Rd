@@ -45,7 +45,8 @@ of its input can be safely coerced to a factor. \code{is_factor_ish()} is a
 synonym of \code{is_fct_ish()}.
 }
 \examples{
-# When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are not.
+# When `levels` is `NULL`, atomic vectors are fct_ish, but nested lists are
+# not.
 are_fct_ish(c("a", 1, NA))
 is_fct_ish(c("a", 1, NA))
 are_fct_ish(list("a", list("b", "c")))

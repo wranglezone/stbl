@@ -256,8 +256,8 @@ than \code{to_int()}. \code{stabilise_int()}, \code{stabilize_integer()}, and
 
 \code{stabilize_int_scalar()} and \code{to_int_scalar()} are optimized to check for
 length-1 integer vectors. \code{stabilise_int_scalar},
-\code{stabilize_integer_scalar()}, and \code{stabilise_integer_scalar} are synonyms of
-\code{stabilize_int_scalar()}, and \code{to_integer_scalar()} is a synonym of
+\code{stabilize_integer_scalar()}, and \code{stabilise_integer_scalar} are synonyms
+of \code{stabilize_int_scalar()}, and \code{to_integer_scalar()} is a synonym of
 \code{to_int_scalar()}.
 }
 \examples{

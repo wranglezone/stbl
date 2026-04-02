@@ -183,6 +183,54 @@ test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
   )
 })
 
+test_that(".check_duplicate_names(): errors on duplicate names by default (#110)", {
+  expect_error(
+    stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
+    class = .compile_dash("stbl", "error", "duplicate_names")
+  )
+  expect_snapshot(
+    stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
+    error = TRUE
+  )
+})
+
+test_that(".check_duplicate_names(): allows duplicates with .allow_duplicate_names = TRUE (#110)", {
+  given <- list(a = 1L, a = 2L)
+  expect_identical(
+    stabilize_lst(
+      given,
+      .named = specify_int_scalar(),
+      .allow_duplicate_names = TRUE
+    ),
+    given
+  )
+})
+
+test_that(".check_duplicate_names(): reports all duplicate name groups (#110)", {
+  expect_snapshot(
+    stabilize_lst(
+      list(a = 1L, b = 2L, a = 3L, b = 4L),
+      .named = specify_int_scalar()
+    ),
+    error = TRUE
+  )
+})
+
+test_that(".check_duplicate_names(): unnamed elements do not count as duplicates (#110)", {
+  expect_error(
+    stabilize_lst(
+      list(a = 1L, 2L, a = 3L),
+      .named = specify_int_scalar(),
+      .unnamed = specify_int_scalar()
+    ),
+    class = .compile_dash("stbl", "error", "duplicate_names")
+  )
+})
+
 test_that("stabilize_list() exists (#110)", {
   expect_no_error(stabilize_list(NULL))
 })

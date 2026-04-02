@@ -36,7 +36,7 @@
       stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar())
     Condition
       Error:
-      ! `list(count = "not-an-int")$count` <character> must be coercible to <integer>
+      ! `list(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1
 
@@ -91,5 +91,32 @@
       stabilize_lst(list(aes = list(x = mtcars, y = "hp")), aes = spec_aes)
     Condition
       Error:
-      ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))$aes$x` <data.frame> to <character>.
+      ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))[["aes"]][["x"]]` <data.frame> to <character>.
+
+# .check_duplicate_names(): errors on duplicate names by default (#110)
+
+    Code
+      stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar())
+    Condition
+      Error:
+      ! `list(a = 1L, a = 2L)` must not contain duplicate names.
+      x Duplicate name: "a"
+
+---
+
+    Code
+      wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar())
+    Condition
+      Error in `wrapped_stabilize_lst()`:
+      ! `val` must not contain duplicate names.
+      x Duplicate name: "a"
+
+# .check_duplicate_names(): reports all duplicate name groups (#110)
+
+    Code
+      stabilize_lst(list(a = 1L, b = 2L, a = 3L, b = 4L), .named = specify_int_scalar())
+    Condition
+      Error:
+      ! `list(a = 1L, b = 2L, a = 3L, b = 4L)` must not contain duplicate names.
+      x Duplicate names: "a" and "b"
 

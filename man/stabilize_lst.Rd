@@ -12,6 +12,7 @@ stabilize_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -25,6 +26,7 @@ stabilize_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -38,6 +40,7 @@ stabilise_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -51,6 +54,7 @@ stabilise_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -74,6 +78,10 @@ named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}.
 all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
 will cause an error.}
 
+\item{.allow_duplicate_names}{\verb{(length-1 logical)} Should \code{.x} be allowed to
+have duplicate names? If \code{FALSE} (default), an error is thrown when any
+named element of \code{.x} shares a name with another.}
+
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
 \item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
@@ -82,15 +90,15 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
+\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{.x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
-messages. Use this if you remove a special class from \code{x} before checking
+\item{.x_class}{\verb{(length-1 character)} The class name of \code{.x} to use in error
+messages. Use this if you remove a special class from \code{.x} before checking
 its coercion, but want the error message to match the original class.}
 }
 \value{
@@ -129,6 +137,14 @@ try(stabilize_lst(NULL, .allow_null = FALSE))
 
 # Enforce size constraints
 try(stabilize_lst(list(a = 1L), .min_size = 2))
+
+# Reject duplicate names by default; opt in to allow them
+try(stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()))
+stabilize_lst(
+  list(a = 1L, a = 2L),
+  .named = specify_int_scalar(),
+  .allow_duplicate_names = TRUE
+)
 }
 \seealso{
 Other list functions: 
