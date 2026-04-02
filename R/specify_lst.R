@@ -18,11 +18,17 @@
 #'
 #' @examples
 #' stabilize_config <- specify_lst(
-#'   name = specify_chr_scalar(),
-#'   .min_size = 1
+#'   name = specify_chr_scalar(allow_na = FALSE),
+#'   version = stabilize_int_scalar,
+#'   debug = specify_lgl_scalar(allow_na = FALSE),
+#'   .unnamed = stabilize_chr_scalar
 #' )
-#' stabilize_config(list(name = "myapp"))
-#' try(stabilize_config(list()))
+#' stabilize_config(list(name = "myapp", version = 1L, debug = FALSE, "extra"))
+#' try(
+#'   stabilize_config(
+#'     list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))
+#'   )
+#' )
 specify_lst <- function(
   ...,
   .named = NULL,
@@ -63,4 +69,3 @@ specify_lst <- function(
 #' @export
 #' @rdname specify_lst
 specify_list <- specify_lst
-

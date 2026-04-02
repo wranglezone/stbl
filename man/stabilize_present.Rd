@@ -39,7 +39,7 @@ stabilize_present("any value")
 stabilize_present(list(1, 2, 3))
 try(stabilize_present(NULL))
 
-# Use directly as a named element spec in stabilize_lst()
+# Use as a named element spec in stabilize_lst()
 stabilize_lst(list(data = mtcars), data = stabilize_present)
 }
 \seealso{
