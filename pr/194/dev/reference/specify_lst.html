@@ -68,35 +68,34 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Named <code><a href="specify_chr.html">specify_*()</a></code> functions for required named
-elements of <code>x</code>. Each name corresponds to a required element in <code>x</code>, and
+elements of <code>.x</code>. Each name corresponds to a required element in <code>.x</code>, and
 the function is used to validate that element.</p></dd>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
 <dd><p>A single <code><a href="specify_chr.html">specify_*()</a></code> function to validate all
-named elements of <code>x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
+named elements of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
 (default), any extra named elements will cause an error.</p></dd>
 
 
 <dt id="arg--unnamed">.unnamed<a class="anchor" aria-label="anchor" href="#arg--unnamed"></a></dt>
 <dd><p>A single <code><a href="specify_chr.html">specify_*()</a></code> function to validate
-all unnamed elements of <code>x</code>. If <code>NULL</code> (default), any unnamed elements
+all unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unnamed elements
 will cause an error.</p></dd>
 
 
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
-<dd><p><code>(length-1 logical)</code> Is <code>NULL</code> an acceptable value?
-Defaults to <code>TRUE</code>.</p></dd>
+<dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
 
 <dt id="arg--min-size">.min_size<a class="anchor" aria-label="anchor" href="#arg--min-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The minimum size of the list. Tested
-using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+<dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
+size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 
 <dt id="arg--max-size">.max_size<a class="anchor" aria-label="anchor" href="#arg--max-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The maximum size of the list. Tested
-using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+<dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
+size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -110,7 +109,8 @@ you want to provide additional context or functionality.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other list functions:
-<code><a href="stabilize_lst.html">stabilize_lst()</a></code></p>
+<code><a href="stabilize_lst.html">stabilize_lst()</a></code>,
+<code><a href="to_lst.html">to_lst()</a></code></p>
 <p>Other specification functions:
 <code><a href="specify_chr.html">specify_chr()</a></code>,
 <code><a href="specify_dbl.html">specify_dbl()</a></code>,

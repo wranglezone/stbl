@@ -33,15 +33,15 @@ specify_list(
 
   Named
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `x`. Each name corresponds to
-  a required element in `x`, and the function is used to validate that
-  element.
+  functions for required named elements of `.x`. Each name corresponds
+  to a required element in `.x`, and the function is used to validate
+  that element.
 
 - .named:
 
   A single
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `x` that are *not*
+  function to validate all named elements of `.x` that are *not*
   explicitly listed in `...`. If `NULL` (default), any extra named
   elements will cause an error.
 
@@ -49,22 +49,23 @@ specify_list(
 
   A single
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `x`. If `NULL` (default),
-  any unnamed elements will cause an error.
+  function to validate all unnamed elements of `.x`. If `NULL`
+  (default), any unnamed elements will cause an error.
 
 - .allow_null:
 
-  `(length-1 logical)` Is `NULL` an acceptable value? Defaults to
-  `TRUE`.
+  `(length-1 logical)` Is NULL an acceptable value?
 
 - .min_size:
 
-  `(length-1 integer)` The minimum size of the list. Tested using
+  `(length-1 integer)` The minimum size of the object. Object size will
+  be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .max_size:
 
-  `(length-1 integer)` The maximum size of the list. Tested using
+  `(length-1 integer)` The maximum size of the object. Object size will
+  be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 ## Value
@@ -80,7 +81,8 @@ provide additional context or functionality.
 ## See also
 
 Other list functions:
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

@@ -1,90 +1,90 @@
 # Ensure a list argument meets expectations
 
 `stabilize_lst()` validates the structure and contents of a list. It can
-check that specific named elements are present and valid, that unnamed
-elements conform to a shared rule, and that extra named elements conform
-to a shared rule. `stabilise_lst()`, `stabilize_list()`, and
+check that specific named elements are present and valid, that extra
+named elements conform to a shared rule, and that unnamed elements
+conform to a shared rule. `stabilise_lst()`, `stabilize_list()`, and
 `stabilise_list()` are synonyms of `stabilize_lst()`.
 
 ## Usage
 
 ``` r
 stabilize_lst(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilize_list(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilise_lst(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 
 stabilise_list(
-  x,
+  .x,
   ...,
   .named = NULL,
   .unnamed = NULL,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .x_arg = caller_arg(x),
+  .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(x),
+  .x_class = object_type(.x),
   .element_specs = NULL
 )
 ```
 
 ## Arguments
 
-- x:
+- .x:
 
-  The list to validate.
+  The argument to stabilize.
 
 - ...:
 
   Named
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `x`. Each name corresponds to
-  a required element in `x`, and the function is used to validate that
-  element.
+  functions for required named elements of `.x`. Each name corresponds
+  to a required element in `.x`, and the function is used to validate
+  that element.
 
 - .named:
 
   A single
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `x` that are *not*
+  function to validate all named elements of `.x` that are *not*
   explicitly listed in `...`. If `NULL` (default), any extra named
   elements will cause an error.
 
@@ -92,27 +92,28 @@ stabilise_list(
 
   A single
   [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `x`. If `NULL` (default),
-  any unnamed elements will cause an error.
+  function to validate all unnamed elements of `.x`. If `NULL`
+  (default), any unnamed elements will cause an error.
 
 - .allow_null:
 
-  `(length-1 logical)` Is `NULL` an acceptable value? Defaults to
-  `TRUE`.
+  `(length-1 logical)` Is NULL an acceptable value?
 
 - .min_size:
 
-  `(length-1 integer)` The minimum size of the list. Tested using
+  `(length-1 integer)` The minimum size of the object. Object size will
+  be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .max_size:
 
-  `(length-1 integer)` The maximum size of the list. Tested using
+  `(length-1 integer)` The maximum size of the object. Object size will
+  be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
+  `(length-1 character)` An argument name for x. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
@@ -141,7 +142,8 @@ The validated list.
 ## See also
 
 Other list functions:
-[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
