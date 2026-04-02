@@ -71,17 +71,17 @@
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param x The argument to stabilize.
 #' @param .x The argument to stabilize.
-#' @param x_arg `(length-1 character)` An argument name for x. The automatic
+#' @param x_arg `(length-1 character)` An argument name for `x`. The automatic
 #'   value will work in most cases, or pass it through from higher-level
 #'   functions to make error messages clearer in unexported functions.
-#' @param .x_arg `(length-1 character)` An argument name for x. The automatic
+#' @param .x_arg `(length-1 character)` An argument name for `.x`. The automatic
 #'   value will work in most cases, or pass it through from higher-level
 #'   functions to make error messages clearer in unexported functions.
 #' @param x_class `(length-1 character)` The class name of `x` to use in error
 #'   messages. Use this if you remove a special class from `x` before checking
 #'   its coercion, but want the error message to match the original class.
-#' @param .x_class `(length-1 character)` The class name of `x` to use in error
-#'   messages. Use this if you remove a special class from `x` before checking
+#' @param .x_class `(length-1 character)` The class name of `.x` to use in error
+#'   messages. Use this if you remove a special class from `.x` before checking
 #'   its coercion, but want the error message to match the original class.
 #'
 #' @name .shared-params
