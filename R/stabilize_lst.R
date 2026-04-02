@@ -15,9 +15,6 @@
 #' @param .unnamed A single [`specify_*()`][specify_chr] function to validate
 #'   all unnamed elements of `.x`. If `NULL` (default), any unnamed elements
 #'   will cause an error.
-#' @param .element_specs `(named list)` For internal use by [specify_lst()]. A
-#'   named list of element specification functions that is merged with the
-#'   specifications provided via `...`.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list.
@@ -61,8 +58,7 @@ stabilize_lst <- function(
   .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(.x),
-  .element_specs = NULL
+  .x_class = object_type(.x)
 ) {
   force(.x_arg)
   force(.call)
@@ -81,7 +77,7 @@ stabilize_lst <- function(
     call = .call
   )
 
-  element_specs <- c(.element_specs, list(...))
+  element_specs <- list(...)
   .check_specs_named(element_specs, call = .call)
 
   required_names <- names(element_specs)

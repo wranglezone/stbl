@@ -93,11 +93,3 @@
       Error:
       ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))$aes$x` <data.frame> to <character>.
 
-# specify_present() errors for NULL (#110)
-
-    Code
-      check_present(NULL)
-    Condition
-      Error:
-      ! `NULL` must not be <NULL>.
-
