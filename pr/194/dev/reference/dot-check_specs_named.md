@@ -5,14 +5,15 @@ Check that all elements of a spec list are named
 ## Usage
 
 ``` r
-.check_specs_named(specs, call = caller_env())
+.check_specs_named(..., call = caller_env())
 ```
 
 ## Arguments
 
-- specs:
+- ...:
 
-  `(list)` A named list of specification functions from `...`.
+  Spec functions forwarded from
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md).
 
 - call:
 

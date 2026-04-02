@@ -57,6 +57,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -70,6 +71,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -83,6 +85,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -96,6 +99,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -131,6 +135,12 @@ all unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unn
 will cause an error.</p></dd>
 
 
+<dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should <code>.x</code> be allowed to
+have duplicate names? If <code>FALSE</code> (default), an error is thrown when any
+named element of <code>.x</code> shares a name with another.</p></dd>
+
+
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
@@ -146,7 +156,7 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>x</code>. The automatic
+<dd><p><code>(length-1 character)</code> An argument name for <code>.x</code>. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.</p></dd>
 
@@ -157,8 +167,8 @@ source of error messages.</p></dd>
 
 
 <dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of <code>x</code> to use in error
-messages. Use this if you remove a special class from <code>x</code> before checking
+<dd><p><code>(length-1 character)</code> The class name of <code>.x</code> to use in error
+messages. Use this if you remove a special class from <code>.x</code> before checking
 its coercion, but want the error message to match the original class.</p></dd>
 
 </dl></div>
@@ -272,6 +282,23 @@ its coercion, but want the error message to match the original class.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>, .min_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `list(a = 1L)` must have size &gt;= 2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> 1 is too small.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Reject duplicate names by default; opt in to allow them</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1L</span>, a <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span>, .named <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `list(a = 1L, a = 2L)` must not contain duplicate names.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Duplicate name: <span style="color: #0000BB;">"a"</span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1L</span>, a <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .named <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

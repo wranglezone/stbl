@@ -14,6 +14,7 @@ stabilize_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -27,6 +28,7 @@ stabilize_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -40,6 +42,7 @@ stabilise_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -53,6 +56,7 @@ stabilise_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -91,6 +95,12 @@ stabilise_list(
   function to validate all unnamed elements of `.x`. If `NULL`
   (default), any unnamed elements will cause an error.
 
+- .allow_duplicate_names:
+
+  `(length-1 logical)` Should `.x` be allowed to have duplicate names?
+  If `FALSE` (default), an error is thrown when any named element of
+  `.x` shares a name with another.
+
 - .allow_null:
 
   `(length-1 logical)` Is NULL an acceptable value?
@@ -109,7 +119,7 @@ stabilise_list(
 
 - .x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
+  `(length-1 character)` An argument name for `.x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
@@ -120,9 +130,10 @@ stabilise_list(
 
 - .x_class:
 
-  `(length-1 character)` The class name of `x` to use in error messages.
-  Use this if you remove a special class from `x` before checking its
-  coercion, but want the error message to match the original class.
+  `(length-1 character)` The class name of `.x` to use in error
+  messages. Use this if you remove a special class from `.x` before
+  checking its coercion, but want the error message to match the
+  original class.
 
 ## Value
 
@@ -235,4 +246,21 @@ try(stabilize_lst(NULL, .allow_null = FALSE))
 try(stabilize_lst(list(a = 1L), .min_size = 2))
 #> Error in eval(expr, envir) : `list(a = 1L)` must have size >= 2.
 #> ✖ 1 is too small.
+
+# Reject duplicate names by default; opt in to allow them
+try(stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()))
+#> Error in eval(expr, envir) : 
+#>   `list(a = 1L, a = 2L)` must not contain duplicate names.
+#> ✖ Duplicate name: "a"
+stabilize_lst(
+  list(a = 1L, a = 2L),
+  .named = specify_int_scalar(),
+  .allow_duplicate_names = TRUE
+)
+#> $a
+#> [1] 1
+#> 
+#> $a
+#> [1] 2
+#> 
 ```

@@ -17,10 +17,6 @@ to make them easier to import and to find.
 
   `(length-1 logical)` Is NULL an acceptable value?
 
-- .allow_null:
-
-  `(length-1 logical)` Is NULL an acceptable value?
-
 - allow_zero_length:
 
   `(length-1 logical)` Are zero-length vectors acceptable?
@@ -30,11 +26,6 @@ to make them easier to import and to find.
   The `are_*_ish` function to apply to each element.
 
 - call:
-
-  `(environment)` The execution environment to mention as the source of
-  error messages.
-
-- .call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.
@@ -95,24 +86,12 @@ to make them easier to import and to find.
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
-- .min_size:
-
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
 - min_value:
 
   `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
   (default) values are not checked.
 
 - max_size:
-
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- .max_size:
 
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
@@ -182,19 +161,9 @@ to make them easier to import and to find.
 
   The argument to stabilize.
 
-- .x:
-
-  The argument to stabilize.
-
 - x_arg:
 
   `(length-1 character)` An argument name for `x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
-
-- .x_arg:
-
-  `(length-1 character)` An argument name for `.x`. The automatic value
   will work in most cases, or pass it through from higher-level
   functions to make error messages clearer in unexported functions.
 
@@ -203,10 +172,3 @@ to make them easier to import and to find.
   `(length-1 character)` The class name of `x` to use in error messages.
   Use this if you remove a special class from `x` before checking its
   coercion, but want the error message to match the original class.
-
-- .x_class:
-
-  `(length-1 character)` The class name of `.x` to use in error
-  messages. Use this if you remove a special class from `.x` before
-  checking its coercion, but want the error message to match the
-  original class.

@@ -58,10 +58,6 @@ make them easier to import and to find.</p>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
 
-<dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
-<dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
-
-
 <dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
 <dd><p><code>(length-1 logical)</code> Are zero-length vectors
 acceptable?</p></dd>
@@ -72,11 +68,6 @@ acceptable?</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
-<dd><p><code>(environment)</code> The execution environment to mention as the
-source of error messages.</p></dd>
-
-
-<dt id="arg--call">.call<a class="anchor" aria-label="anchor" href="#arg--call"></a></dt>
 <dd><p><code>(environment)</code> The execution environment to mention as the
 source of error messages.</p></dd>
 
@@ -135,22 +126,12 @@ evaluate variables in error messages.</p></dd>
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 
-<dt id="arg--min-size">.min_size<a class="anchor" aria-label="anchor" href="#arg--min-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
-
-
 <dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
 <dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
 <code>NULL</code> (default) values are not checked.</p></dd>
 
 
 <dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
-
-
-<dt id="arg--max-size">.max_size<a class="anchor" aria-label="anchor" href="#arg--max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
@@ -218,18 +199,8 @@ coercion.</p></dd>
 <dd><p>The argument to stabilize.</p></dd>
 
 
-<dt id="arg--x">.x<a class="anchor" aria-label="anchor" href="#arg--x"></a></dt>
-<dd><p>The argument to stabilize.</p></dd>
-
-
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p><code>(length-1 character)</code> An argument name for <code>x</code>. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.</p></dd>
-
-
-<dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>.x</code>. The automatic
 value will work in most cases, or pass it through from higher-level
 functions to make error messages clearer in unexported functions.</p></dd>
 
@@ -237,12 +208,6 @@ functions to make error messages clearer in unexported functions.</p></dd>
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
 <dd><p><code>(length-1 character)</code> The class name of <code>x</code> to use in error
 messages. Use this if you remove a special class from <code>x</code> before checking
-its coercion, but want the error message to match the original class.</p></dd>
-
-
-<dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of <code>.x</code> to use in error
-messages. Use this if you remove a special class from <code>.x</code> before checking
 its coercion, but want the error message to match the original class.</p></dd>
 
 </dl></div>

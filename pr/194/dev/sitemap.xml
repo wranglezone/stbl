@@ -21,6 +21,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_int_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_duplicate_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_function_allowed.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_is_not_primitive.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
@@ -69,6 +70,10 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_num_from_complex.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_extra_named_elements.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_named_elements.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_required_elements.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_unnamed_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/grapes-and-and-grapes.html</loc></url>
