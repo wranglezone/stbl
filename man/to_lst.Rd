@@ -68,6 +68,7 @@ throw an error, rather than returning \code{list(NULL)}.
 \seealso{
 Other list functions: 
 \code{\link{specify_lst}()},
-\code{\link{stabilize_lst}()}
+\code{\link{stabilize_lst}()},
+\code{\link{stabilize_present}()}
 }
 \concept{list functions}

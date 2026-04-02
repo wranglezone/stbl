@@ -50,25 +50,3 @@ test_that("specify_list() exists (#110)", {
   expect_no_error(specify_list())
 })
 
-# specify_present ----
-
-test_that("specify_present() returns any non-NULL value unchanged (#110)", {
-  check_present <- specify_present()
-  expect_identical(check_present("hello"), "hello")
-  expect_identical(check_present(1L), 1L)
-  expect_identical(check_present(list(a = 1)), list(a = 1))
-  expect_identical(check_present(mtcars), mtcars)
-  expect_s3_class(check_present, "stbl_specified_fn")
-})
-
-test_that("specify_present() errors for NULL (#110)", {
-  check_present <- specify_present()
-  expect_error(
-    check_present(NULL),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
-  expect_snapshot(
-    check_present(NULL),
-    error = TRUE
-  )
-})

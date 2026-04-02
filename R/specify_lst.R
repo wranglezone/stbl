@@ -64,38 +64,3 @@ specify_lst <- function(
 #' @rdname specify_lst
 specify_list <- specify_lst
 
-# present ----
-
-#' Create a specified "present" validator function
-#'
-#' `specify_present()` creates a function that validates that an element is
-#' present (i.e., not `NULL`). Any non-`NULL` value passes. This is useful
-#' when you need to require a named list element without imposing any type
-#' constraints on its value.
-#'
-#' @returns A function of class `"stbl_specified_fn"` that errors if the value
-#'   is `NULL` and returns it unchanged otherwise.
-#' @family specification functions
-#' @export
-#'
-#' @examples
-#' check_present <- specify_present()
-#' check_present("any value")
-#' check_present(list(1, 2, 3))
-#' try(check_present(NULL))
-specify_present <- function() {
-  structure(
-    function(
-      x,
-      x_arg = caller_arg(x),
-      call = caller_env(),
-      x_class = object_type(x)
-    ) {
-      if (is.null(x)) {
-        .stop_null(x_arg = x_arg, call = call)
-      }
-      x
-    },
-    class = c("stbl_specified_fn", "function")
-  )
-}

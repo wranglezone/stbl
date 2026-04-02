@@ -30,8 +30,8 @@
 #'   age = specify_int_scalar()
 #' )
 #'
-#' # Allow any non-NULL element with specify_present()
-#' stabilize_lst(list(data = mtcars), data = specify_present())
+#' # Allow any non-NULL element with stabilize_present
+#' stabilize_lst(list(data = mtcars), data = stabilize_present)
 #'
 #' # Allow extra named elements via .named
 #' stabilize_lst(
@@ -157,6 +157,40 @@ stabilise_lst <- stabilize_lst
 #' @export
 #' @rdname stabilize_lst
 stabilise_list <- stabilize_lst
+
+# present ----
+
+#' Require a value to be non-NULL
+#'
+#' `stabilize_present()` validates that a value is not `NULL`. Any non-`NULL`
+#' value passes through unchanged. This is useful as an element specification
+#' in [stabilize_lst()] when you need to require a named element without
+#' imposing any type constraints on its value.
+#'
+#' @inheritParams .shared-params
+#' @returns The value, unchanged.
+#' @family list functions
+#' @family stabilization functions
+#' @export
+#'
+#' @examples
+#' stabilize_present("any value")
+#' stabilize_present(list(1, 2, 3))
+#' try(stabilize_present(NULL))
+#'
+#' # Use directly as a named element spec in stabilize_lst()
+#' stabilize_lst(list(data = mtcars), data = stabilize_present)
+stabilize_present <- function(
+  x,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (is.null(x)) {
+    .stop_null(x_arg = x_arg, call = call)
+  }
+  x
+}
 
 #' Check that all elements of a spec list are named
 #'

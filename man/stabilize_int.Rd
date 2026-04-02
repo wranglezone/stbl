@@ -302,7 +302,8 @@ Other stabilization functions:
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_lgl}()},
-\code{\link{stabilize_lst}()}
+\code{\link{stabilize_lst}()},
+\code{\link{stabilize_present}()}
 }
 \concept{integer functions}
 \concept{stabilization functions}

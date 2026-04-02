@@ -107,8 +107,7 @@ Other specification functions:
 \code{\link{specify_dbl}()},
 \code{\link{specify_fct}()},
 \code{\link{specify_lgl}()},
-\code{\link{specify_lst}()},
-\code{\link{specify_present}()}
+\code{\link{specify_lst}()}
 }
 \concept{integer functions}
 \concept{specification functions}

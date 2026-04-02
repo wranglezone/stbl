@@ -17,8 +17,7 @@ stabilize_lst(
   .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(.x),
-  .element_specs = NULL
+  .x_class = object_type(.x)
 )
 
 stabilize_list(
@@ -31,8 +30,7 @@ stabilize_list(
   .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(.x),
-  .element_specs = NULL
+  .x_class = object_type(.x)
 )
 
 stabilise_lst(
@@ -45,8 +43,7 @@ stabilise_lst(
   .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(.x),
-  .element_specs = NULL
+  .x_class = object_type(.x)
 )
 
 stabilise_list(
@@ -59,8 +56,7 @@ stabilise_list(
   .max_size = NULL,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
-  .x_class = object_type(.x),
-  .element_specs = NULL
+  .x_class = object_type(.x)
 )
 }
 \arguments{
@@ -96,10 +92,6 @@ source of error messages.}
 \item{.x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
 messages. Use this if you remove a special class from \code{x} before checking
 its coercion, but want the error message to match the original class.}
-
-\item{.element_specs}{\verb{(named list)} For internal use by \code{\link[=specify_lst]{specify_lst()}}. A
-named list of element specification functions that is merged with the
-specifications provided via \code{...}.}
 }
 \value{
 The validated list.
@@ -119,8 +111,8 @@ stabilize_lst(
   age = specify_int_scalar()
 )
 
-# Allow any non-NULL element with specify_present()
-stabilize_lst(list(data = mtcars), data = specify_present())
+# Allow any non-NULL element with stabilize_present
+stabilize_lst(list(data = mtcars), data = stabilize_present)
 
 # Allow extra named elements via .named
 stabilize_lst(
@@ -141,6 +133,7 @@ try(stabilize_lst(list(a = 1L), .min_size = 2))
 \seealso{
 Other list functions: 
 \code{\link{specify_lst}()},
+\code{\link{stabilize_present}()},
 \code{\link{to_lst}()}
 
 Other stabilization functions: 
@@ -149,7 +142,8 @@ Other stabilization functions:
 \code{\link{stabilize_dbl}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()}
+\code{\link{stabilize_lgl}()},
+\code{\link{stabilize_present}()}
 }
 \concept{list functions}
 \concept{stabilization functions}

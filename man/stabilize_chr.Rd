@@ -262,7 +262,8 @@ Other stabilization functions:
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
 \code{\link{stabilize_lgl}()},
-\code{\link{stabilize_lst}()}
+\code{\link{stabilize_lst}()},
+\code{\link{stabilize_present}()}
 }
 \concept{character functions}
 \concept{stabilization functions}

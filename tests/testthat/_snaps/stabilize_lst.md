@@ -93,3 +93,11 @@
       Error:
       ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))$aes$x` <data.frame> to <character>.
 
+# stabilize_present() errors for NULL (#110)
+
+    Code
+      stabilize_present(NULL)
+    Condition
+      Error:
+      ! `NULL` must not be <NULL>.
+
