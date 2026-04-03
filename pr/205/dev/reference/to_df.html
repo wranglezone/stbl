@@ -51,7 +51,8 @@ signaled. <code>to_data_frame()</code> is a synonym of <code>to_df()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  x_expr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">to_data_frame</span><span class="op">(</span></span>
@@ -59,7 +60,8 @@ signaled. <code>to_data_frame()</code> is a synonym of <code>to_df()</code>.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  x_expr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class '`NULL`'</span></span>
@@ -95,6 +97,14 @@ source of error messages.</p></dd>
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.</p></dd>
+
+
+<dt id="arg-x-expr">x_expr<a class="anchor" aria-label="anchor" href="#arg-x-expr"></a></dt>
+<dd><p><code>(language)</code> The unevaluated expression for <code>x</code>, captured via
+<code>substitute(x)</code> in the calling function. This is used internally to produce
+accurate column names and to determine whether <code>x</code> was passed as a named
+symbol. In most cases the automatic default is correct; only set this
+explicitly when you need to override expression propagation.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
@@ -155,9 +165,37 @@ match the original class.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_df</span><span class="op">(</span><span class="cn">NULL</span>, allow_null <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `NULL` must not be <span style="color: #0000BB;">&lt;NULL&gt;</span>.</span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_df</span><span class="op">(</span><span class="st">"not a data frame"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_df</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't coerce `"not a data frame"` <span style="color: #0000BB;">&lt;character&gt;</span> to <span style="color: #0000BB;">&lt;data.frame&gt;</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't coerce `c("a", "b", "c")` <span style="color: #0000BB;">&lt;character&gt;</span> to <span style="color: #0000BB;">&lt;data.frame&gt;</span>.</span>
+<span class="r-in"><span><span class="fu">to_df</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    letters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7        g</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8        h</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9        i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10       j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11       k</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12       l</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13       m</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14       n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15       o</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16       p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17       q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18       r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19       s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20       t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21       u</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22       v</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23       w</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24       x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25       y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26       z</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

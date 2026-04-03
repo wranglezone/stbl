@@ -4,6 +4,19 @@
 
 ### New features
 
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) now
+  coerces atomic vectors (character, integer, numeric, logical, complex,
+  raw, and factor) to single-column data frames when they are supplied
+  as named objects (e.g. `to_df(letters)`). Inline expressions such as
+  `to_df(c("a", "b", "c"))` are rejected with an informative error to
+  avoid data frames with syntactically ugly column names
+  ([\#203](https://github.com/wranglezone/stbl/issues/203)).
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) now
+  detects jagged lists (where elements have incompatible lengths) before
+  calling
+  [`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html),
+  producing a clear error message that identifies the offending element
+  lengths ([\#203](https://github.com/wranglezone/stbl/issues/203)).
 - New
   [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and

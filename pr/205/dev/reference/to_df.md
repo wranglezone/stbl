@@ -12,7 +12,8 @@ to_df(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x)
+  x_class = object_type(x),
+  x_expr = substitute(x)
 )
 
 to_data_frame(
@@ -20,7 +21,8 @@ to_data_frame(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x)
+  x_class = object_type(x),
+  x_expr = substitute(x)
 )
 
 # S3 method for class '`NULL`'
@@ -57,6 +59,15 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
   to use in error messages. Use this if you remove a special class from
   the object before checking its coercion, but want the error message to
   match the original class.
+
+- x_expr:
+
+  `(language)` The unevaluated expression for `x`, captured via
+  `substitute(x)` in the calling function. This is used internally to
+  produce accurate column names and to determine whether `x` was passed
+  as a named symbol. In most cases the automatic default is correct;
+  only set this explicitly when you need to override expression
+  propagation.
 
 - allow_null:
 
@@ -116,7 +127,35 @@ to_df(NULL)
 #> NULL
 try(to_df(NULL, allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-try(to_df("not a data frame"))
+try(to_df(c("a", "b", "c")))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `"not a data frame"` <character> to <data.frame>.
+#>   Can't coerce `c("a", "b", "c")` <character> to <data.frame>.
+to_df(letters)
+#>    letters
+#> 1        a
+#> 2        b
+#> 3        c
+#> 4        d
+#> 5        e
+#> 6        f
+#> 7        g
+#> 8        h
+#> 9        i
+#> 10       j
+#> 11       k
+#> 12       l
+#> 13       m
+#> 14       n
+#> 15       o
+#> 16       p
+#> 17       q
+#> 18       r
+#> 19       s
+#> 20       t
+#> 21       u
+#> 22       v
+#> 23       w
+#> 24       x
+#> 25       y
+#> 26       z
 ```

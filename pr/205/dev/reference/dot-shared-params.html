@@ -212,6 +212,14 @@ stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.</p></dd>
 
+
+<dt id="arg-x-expr">x_expr<a class="anchor" aria-label="anchor" href="#arg-x-expr"></a></dt>
+<dd><p><code>(language)</code> The unevaluated expression for <code>x</code>, captured via
+<code>substitute(x)</code> in the calling function. This is used internally to produce
+accurate column names and to determine whether <code>x</code> was passed as a named
+symbol. In most cases the automatic default is correct; only set this
+explicitly when you need to override expression propagation.</p></dd>
+
 </dl></div>
 
   </main></div>
