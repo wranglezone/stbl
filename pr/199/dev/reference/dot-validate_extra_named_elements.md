@@ -31,7 +31,11 @@ Validate or reject extra named elements
 
 - named_spec:
 
-  A spec function, or `NULL` to disallow extra named elements.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc), or `NULL` to disallow extra named elements.
 
 - .x_arg:
 

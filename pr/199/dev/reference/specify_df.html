@@ -67,15 +67,18 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
 
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Named <code><a href="specify_chr.html">specify_*()</a></code> functions for required named
-columns of <code>.x</code>. Each name corresponds to a required column in <code>.x</code>, and
-the function is used to validate that column.</p></dd>
+<dd><p>Named stabilizer functions, such as <code>stabilize_*</code> functions
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by <code>specify_*()</code> functions
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a required column in <code>.x</code>,
+and the function is used to validate that column.</p></dd>
 
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
-<dd><p>A single <code>specify_*()</code> function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc) to
-validate all columns of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If
-<code>NULL</code> (default), any extra columns will cause an error.</p></dd>
+<dd><p>A single stabilizer function, such as a <code>stabilize_*</code>
+function (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
+function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all
+columns of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
+(default), any extra columns will cause an error.</p></dd>
 
 
 <dt id="arg--col-names">.col_names<a class="anchor" aria-label="anchor" href="#arg--col-names"></a></dt>

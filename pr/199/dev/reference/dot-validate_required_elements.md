@@ -16,7 +16,13 @@ Validate required named elements against their spec functions
 
 - element_specs:
 
-  `(list)` Named list of spec functions from `...`.
+  `(list)` Named list of stabilizer functions, such as `stabilize_*`
+  functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). Each name corresponds to a required element in `.x`, and the
+  function is used to validate that element.
 
 - nms:
 

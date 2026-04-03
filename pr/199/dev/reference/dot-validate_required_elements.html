@@ -52,7 +52,11 @@
 
 
 <dt id="arg-element-specs">element_specs<a class="anchor" aria-label="anchor" href="#arg-element-specs"></a></dt>
-<dd><p><code>(list)</code> Named list of spec functions from <code>...</code>.</p></dd>
+<dd><p><code>(list)</code> Named list of stabilizer functions, such as
+<code>stabilize_*</code> functions (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by
+<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a
+required element in <code>.x</code>, and the function is used to validate that
+element.</p></dd>
 
 
 <dt id="arg-nms">nms<a class="anchor" aria-label="anchor" href="#arg-nms"></a></dt>

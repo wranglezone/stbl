@@ -31,18 +31,22 @@ specify_data_frame(
 
 - ...:
 
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named columns of `.x`. Each name corresponds to
-  a required column in `.x`, and the function is used to validate that
-  column.
+  Named stabilizer functions, such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). Each name corresponds to a required column in `.x`, and the
+  function is used to validate that column.
 
 - .extra_cols:
 
-  A single `specify_*()` function
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc) to validate all columns of `.x` that are *not* explicitly listed
-  in `...`. If `NULL` (default), any extra columns will cause an error.
+  etc). This function is used to validate all columns of `.x` that are
+  *not* explicitly listed in `...`. If `NULL` (default), any extra
+  columns will cause an error.
 
 - .col_names:
 

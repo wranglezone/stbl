@@ -12,11 +12,12 @@ Check that all elements of a spec list are named
 
 - ...:
 
-  Named `specify_*()` functions
+  Named stabilizer functions, such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc) for required named elements of `.x`. Each name corresponds to a
-  required element in `.x`, and the function is used to validate that
-  element.
+  etc). Each name corresponds to a required element in `.x`, and the
+  function is used to validate that element.
 
 - .call:
 

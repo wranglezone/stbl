@@ -16,10 +16,12 @@ Validate or reject unnamed elements
 
 - .unnamed:
 
-  A single `specify_*()` function
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc) to validate all unnamed elements of `.x`. If `NULL` (default),
-  any unnamed elements will cause an error.
+  etc). This function is used to validate all unnamed elements of `.x`.
+  If `NULL` (default), any unnamed elements will cause an error.
 
 - .x_arg:
 

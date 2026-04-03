@@ -71,18 +71,22 @@ stabilise_data_frame(
 
 - ...:
 
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named columns of `.x`. Each name corresponds to
-  a required column in `.x`, and the function is used to validate that
-  column.
+  Named stabilizer functions, such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). Each name corresponds to a required column in `.x`, and the
+  function is used to validate that column.
 
 - .extra_cols:
 
-  A single `specify_*()` function
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc) to validate all columns of `.x` that are *not* explicitly listed
-  in `...`. If `NULL` (default), any extra columns will cause an error.
+  etc). This function is used to validate all columns of `.x` that are
+  *not* explicitly listed in `...`. If `NULL` (default), any extra
+  columns will cause an error.
 
 - .col_names:
 
@@ -166,7 +170,11 @@ stabilize_df(
 #> 1 Alice  30  99.5
 
 # Check required column names without validating contents
-stabilize_df(mtcars, .col_names = c("mpg", "cyl"), .extra_cols = stabilize_present)
+stabilize_df(
+  mtcars,
+  .col_names = c("mpg", "cyl"),
+  .extra_cols = stabilize_present
+)
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 #> Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4

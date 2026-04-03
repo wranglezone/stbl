@@ -117,15 +117,18 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Named <code><a href="specify_chr.html">specify_*()</a></code> functions for required named
-columns of <code>.x</code>. Each name corresponds to a required column in <code>.x</code>, and
-the function is used to validate that column.</p></dd>
+<dd><p>Named stabilizer functions, such as <code>stabilize_*</code> functions
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by <code>specify_*()</code> functions
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a required column in <code>.x</code>,
+and the function is used to validate that column.</p></dd>
 
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
-<dd><p>A single <code>specify_*()</code> function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc) to
-validate all columns of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If
-<code>NULL</code> (default), any extra columns will cause an error.</p></dd>
+<dd><p>A single stabilizer function, such as a <code>stabilize_*</code>
+function (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
+function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all
+columns of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
+(default), any extra columns will cause an error.</p></dd>
 
 
 <dt id="arg--col-names">.col_names<a class="anchor" aria-label="anchor" href="#arg--col-names"></a></dt>
@@ -209,7 +212,11 @@ match the original class.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice  30  99.5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check required column names without validating contents</span></span></span>
-<span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span><span class="va">mtcars</span>, .col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span>, .extra_cols <span class="op">=</span> <span class="va">stabilize_present</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  .col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .extra_cols <span class="op">=</span> <span class="va">stabilize_present</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span>
