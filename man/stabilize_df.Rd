@@ -82,26 +82,25 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
-\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The
-automatic value will work in most cases, or pass it through from
-higher-level functions to make error messages clearer in unexported
-functions.}
+\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
+value will work in most cases, or pass it through from higher-level
+functions to make error messages clearer in unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{.x_class}{\verb{(length-1 character)} The class name of \code{.x} to use in
-error messages. Use this if you remove a special class from \code{.x} before
-checking its coercion, but want the error message to match the original
-class.}
+\item{.x_class}{\verb{(length-1 character)} The class name of \code{.x} to use in error
+messages. Use this if you remove a special class from \code{.x} before checking
+its coercion, but want the error message to match the original class.}
 }
 \value{
 The validated data frame.
 }
 \description{
 \code{stabilize_df()} validates the structure and contents of a data frame. It
-first verifies that the input is a data frame and then uses
-\code{\link[=stabilize_lst]{stabilize_lst()}} to apply stabilization rules to each column.
+can check that specific named columns are present and valid, that extra
+columns conform to a shared rule, that required column names are present,
+and that the row count is within specified bounds.
 \code{stabilise_df()}, \code{stabilize_data_frame()}, and \code{stabilise_data_frame()} are
 synonyms of \code{stabilize_df()}.
 }
@@ -131,12 +130,20 @@ try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))
 stabilize_df(NULL)
 try(stabilize_df(NULL, .allow_null = FALSE))
 
-# Non-data-frame inputs are rejected
-try(stabilize_df(list(a = 1L)))
+# Coercible inputs such as named lists are accepted
+stabilize_df(
+  list(name = "Alice", age = 30L),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar()
+)
+
+# Non-coercible inputs are rejected
+try(stabilize_df("not a data frame"))
 }
 \seealso{
 Other data frame functions: 
-\code{\link{specify_df}()}
+\code{\link{specify_df}()},
+\code{\link{to_df}()}
 
 Other stabilization functions: 
 \code{\link{stabilize_arg}()},

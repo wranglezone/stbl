@@ -1,5 +1,3 @@
-# df ----
-
 #' Create a specified data frame stabilizer function
 #'
 #' `specify_df()` creates a function that will call [stabilize_df()] with the

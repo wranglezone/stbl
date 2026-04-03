@@ -66,7 +66,8 @@ try(stabilize_person_df(data.frame(name = "Alice")))
 }
 \seealso{
 Other data frame functions: 
-\code{\link{stabilize_df}()}
+\code{\link{stabilize_df}()},
+\code{\link{to_df}()}
 
 Other specification functions: 
 \code{\link{specify_chr}()},

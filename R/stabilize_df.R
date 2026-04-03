@@ -1,8 +1,9 @@
 #' Ensure a data frame argument meets expectations
 #'
 #' `stabilize_df()` validates the structure and contents of a data frame. It
-#' first verifies that the input is a data frame and then uses
-#' [stabilize_lst()] to apply stabilization rules to each column.
+#' can check that specific named columns are present and valid, that extra
+#' columns conform to a shared rule, that required column names are present,
+#' and that the row count is within specified bounds.
 #' `stabilise_df()`, `stabilize_data_frame()`, and `stabilise_data_frame()` are
 #' synonyms of `stabilize_df()`.
 #'
@@ -19,15 +20,7 @@
 #'   `.x`. If `NULL` (default), the row count is not checked.
 #' @param .max_rows `(length-1 integer)` The maximum number of rows allowed in
 #'   `.x`. If `NULL` (default), the row count is not checked.
-#' @param .x_arg `(length-1 character)` An argument name for `.x`. The
-#'   automatic value will work in most cases, or pass it through from
-#'   higher-level functions to make error messages clearer in unexported
-#'   functions.
-#' @param .x_class `(length-1 character)` The class name of `.x` to use in
-#'   error messages. Use this if you remove a special class from `.x` before
-#'   checking its coercion, but want the error message to match the original
-#'   class.
-#' @inheritParams .shared-params
+#' @inheritParams stabilize_lst
 #'
 #' @returns The validated data frame.
 #' @family data frame functions
@@ -60,8 +53,15 @@
 #' stabilize_df(NULL)
 #' try(stabilize_df(NULL, .allow_null = FALSE))
 #'
-#' # Non-data-frame inputs are rejected
-#' try(stabilize_df(list(a = 1L)))
+#' # Coercible inputs such as named lists are accepted
+#' stabilize_df(
+#'   list(name = "Alice", age = 30L),
+#'   name = specify_chr_scalar(),
+#'   age = specify_int_scalar()
+#' )
+#'
+#' # Non-coercible inputs are rejected
+#' try(stabilize_df("not a data frame"))
 stabilize_df <- function(
   .x,
   ...,
@@ -81,14 +81,7 @@ stabilize_df <- function(
     return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
   }
 
-  if (!is.data.frame(.x)) {
-    .stop_cant_coerce(
-      from_class = .x_class,
-      to_class = "data.frame",
-      x_arg = .x_arg,
-      call = .call
-    )
-  }
+  .x <- to_df(.x, x_arg = .x_arg, call = .call)
 
   .check_df_rows(
     .x,

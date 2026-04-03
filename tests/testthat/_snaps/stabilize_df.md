@@ -14,21 +14,21 @@
       Error in `wrapped_stabilize_df()`:
       ! `val` must not be <NULL>.
 
-# stabilize_df() errors for non-data-frame input (#199)
+# stabilize_df() errors for non-coercible input (#199)
 
     Code
-      stabilize_df(list(a = 1L))
+      stabilize_df("not a data frame")
     Condition
       Error:
-      ! Can't coerce `list(a = 1L)` <list> to <data.frame>.
+      ! Can't coerce `"not a data frame"` <character> to <data.frame>.
 
 ---
 
     Code
-      wrapped_stabilize_df(list(a = 1L))
+      wrapped_stabilize_df("not a data frame")
     Condition
       Error in `wrapped_stabilize_df()`:
-      ! Can't coerce `val` <list> to <data.frame>.
+      ! Can't coerce `val` <character> to <data.frame>.
 
 # stabilize_df() errors when required column is missing (#199)
 

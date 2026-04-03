@@ -17,23 +17,31 @@ test_that("stabilize_df() respects .allow_null (#199)", {
   )
 })
 
-test_that("stabilize_df() errors for non-data-frame input (#199)", {
-  expect_error(
-    stabilize_df(list(a = 1L)),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
-  )
-  expect_snapshot(
-    stabilize_df(list(a = 1L)),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_stabilize_df(list(a = 1L)),
-    error = TRUE
-  )
+test_that("stabilize_df() errors for non-coercible input (#199)", {
   expect_error(
     stabilize_df("not a data frame"),
     class = .compile_dash("stbl", "error", "coerce", "data.frame")
   )
+  expect_snapshot(
+    stabilize_df("not a data frame"),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_stabilize_df("not a data frame"),
+    error = TRUE
+  )
+})
+
+test_that("stabilize_df() coerces a named list to a data frame (#199)", {
+  given_list <- list(name = "Alice", age = 30L)
+  result <- stabilize_df(
+    given_list,
+    name = specify_chr_scalar(),
+    age = specify_int_scalar()
+  )
+  expect_s3_class(result, "data.frame")
+  expect_identical(result$name, "Alice")
+  expect_identical(result$age, 30L)
 })
 
 test_that("stabilize_df() returns a valid data frame unchanged (#199)", {
