@@ -24,17 +24,17 @@ specify_list(
 )
 }
 \arguments{
-\item{...}{Named \code{\link[=specify_chr]{specify_*()}} functions for required named
-elements of \code{.x}. Each name corresponds to a required element in \code{.x}, and
-the function is used to validate that element.}
+\item{...}{Named \verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc) for required
+named elements of \code{.x}. Each name corresponds to a required element in
+\code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single \code{\link[=specify_chr]{specify_*()}} function to validate all
-named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra named elements will cause an error.}
+\item{.named}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
+validate all named elements of \code{.x} that are \emph{not} explicitly listed in
+\code{...}. If \code{NULL} (default), any extra named elements will cause an error.}
 
-\item{.unnamed}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
-will cause an error.}
+\item{.unnamed}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
+validate all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed
+elements will cause an error.}
 
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 

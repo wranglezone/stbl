@@ -4,12 +4,14 @@
 \alias{.check_specs_named}
 \title{Check that all elements of a spec list are named}
 \usage{
-.check_specs_named(..., call = caller_env())
+.check_specs_named(..., .call = caller_env())
 }
 \arguments{
-\item{...}{Spec functions forwarded from \code{stabilize_lst()}.}
+\item{...}{Named \verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc) for required
+named elements of \code{.x}. Each name corresponds to a required element in
+\code{.x}, and the function is used to validate that element.}
 
-\item{call}{\code{(environment)} The execution environment to mention as the
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{

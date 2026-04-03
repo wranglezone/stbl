@@ -9,12 +9,12 @@
   nms,
   is_extra_named,
   named_spec,
-  x_arg,
-  call
+  .x_arg,
+  .call
 )
 }
 \arguments{
-\item{.x}{\code{(list)} The list being validated.}
+\item{.x}{The argument to stabilize.}
 
 \item{nms}{\code{(character)} Result of \code{rlang::names2(.x)}.}
 
@@ -24,19 +24,18 @@ positions.}
 \item{named_spec}{A spec function, or \code{NULL} to disallow extra named
 elements.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
-\item{call}{\code{(environment)} The execution environment to mention as the
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{
 The updated list.
 }
 \description{
-Extra named elements are those not listed in \code{...} (i.e. \code{is_extra_named} is
-\code{TRUE}). If \code{named_spec} is \code{NULL}, throws an error reporting their names.
-Otherwise applies \code{named_spec} to each.
+Validate or reject extra named elements
 }
 \keyword{internal}

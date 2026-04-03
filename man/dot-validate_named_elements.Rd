@@ -4,27 +4,36 @@
 \alias{.validate_named_elements}
 \title{Validate all named elements (required and extra)}
 \usage{
-.validate_named_elements(.x, ..., .named, .allow_duplicate_names, x_arg, call)
+.validate_named_elements(
+  .x,
+  ...,
+  .named,
+  .allow_duplicate_names,
+  .x_arg,
+  .call
+)
 }
 \arguments{
-\item{.x}{\code{(list)} The list being validated.}
+\item{.x}{The argument to stabilize.}
 
-\item{...}{Named spec functions for required elements (forwarded from
-\code{stabilize_lst()}).}
+\item{...}{Named \verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc) for required
+named elements of \code{.x}. Each name corresponds to a required element in
+\code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single \code{\link[=specify_chr]{specify_*()}} function to validate all
-named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra named elements will cause an error.}
+\item{.named}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
+validate all named elements of \code{.x} that are \emph{not} explicitly listed in
+\code{...}. If \code{NULL} (default), any extra named elements will cause an error.}
 
 \item{.allow_duplicate_names}{\verb{(length-1 logical)} Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
-\item{call}{\code{(environment)} The execution environment to mention as the
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{
