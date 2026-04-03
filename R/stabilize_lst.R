@@ -166,11 +166,15 @@ NULL
 #' @keywords internal
 .call_specified_fn <- function(spec_fn, .x, .x_arg, .call) {
   fmls <- rlang::fn_fmls_names(spec_fn)
-  x_arg_nm <- fmls[grepl("^[.]?x_arg$", fmls)]
-  call_nm <- fmls[grepl("^[.]?call$", fmls)]
+  x_arg_nm <- grep("^[.]?x_arg$", fmls, value = TRUE)
+  call_nm <- grep("^[.]?call$", fmls, value = TRUE)
   args <- list(.x)
-  if (length(x_arg_nm)) args[[x_arg_nm[[1L]]]] <- .x_arg
-  if (length(call_nm)) args[[call_nm[[1L]]]] <- .call
+  if (length(x_arg_nm)) {
+    args[[x_arg_nm[[1L]]]] <- .x_arg
+  }
+  if (length(call_nm)) {
+    args[[call_nm[[1L]]]] <- .call
+  }
   do.call(spec_fn, args)
 }
 
