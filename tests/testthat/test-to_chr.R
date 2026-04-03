@@ -207,7 +207,7 @@ test_that("to_chr_scalar() respects allow_null (#22, #189)", {
   )
 })
 
-test_that("to_chr_scalar respects allow_zero_length (#22, #189)", {
+test_that("to_chr_scalar respects allow_zero_length (#22, #43, #45, #189)", {
   given <- character()
   expect_error(
     to_chr_scalar(given),

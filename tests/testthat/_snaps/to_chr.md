@@ -144,7 +144,7 @@
       Error in `wrapped_to_chr_scalar()`:
       ! `val` must not be <NULL>.
 
-# to_chr_scalar respects allow_zero_length (#22, #189)
+# to_chr_scalar respects allow_zero_length (#22, #43, #45, #189)
 
     Code
       to_chr_scalar(given)

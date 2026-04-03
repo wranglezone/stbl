@@ -1,4 +1,4 @@
-# .to_null() errors when NULL isn't allowed
+# .to_null() errors when NULL isn't allowed (#129)
 
     Code
       .to_null(given, allow_null = FALSE)
@@ -14,7 +14,7 @@
       Error in `wrapped_to_null()`:
       ! `val` must not be <NULL>.
 
-# .to_null() errors for bad allow_null
+# .to_null() errors for bad allow_null (#129)
 
     Code
       .to_null(NULL, allow_null = NULL)
@@ -42,7 +42,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1
 
-# .to_null() errors informatively for missing value
+# .to_null() errors informatively for missing value (#129)
 
     Code
       .to_null()

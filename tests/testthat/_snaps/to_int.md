@@ -160,7 +160,7 @@
       Error in `wrapped_to_int_scalar()`:
       ! `val` must not be <NULL>.
 
-# to_int_scalar respects allow_zero_length (#12, #189)
+# to_int_scalar respects allow_zero_length (#12, #43, #45, #189)
 
     Code
       to_int_scalar(given)

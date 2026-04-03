@@ -1,4 +1,4 @@
-test_that(".check_na() works", {
+test_that(".check_na() works (#95)", {
   expect_null(.check_na(1))
   expect_null(.check_na(NA))
   expect_null(.check_na(c(1, 2), allow_na = FALSE))
@@ -12,7 +12,7 @@ test_that(".check_na() works", {
   )
 })
 
-test_that(".check_size() works", {
+test_that(".check_size() works (#95)", {
   expect_null(.check_size(1:5, NULL, NULL))
   expect_null(.check_size(1:5, 1, 10))
   expect_error(
@@ -27,7 +27,7 @@ test_that(".check_size() works", {
   expect_snapshot(.check_size(1:5, 1, 4), error = TRUE)
 })
 
-test_that(".check_scalar() works", {
+test_that(".check_scalar() works (#95)", {
   expect_null(.check_scalar(1))
   expect_null(.check_scalar(NULL))
   expect_null(.check_scalar(character()))
@@ -63,7 +63,7 @@ test_that(".is_allowed_null() checks whether value is NULL and ok", {
   expect_false(wrapper(given, allow_null = FALSE))
 })
 
-test_that(".check_x_no_more_than_y() works", {
+test_that(".check_x_no_more_than_y() works (#95)", {
   expect_null(.check_x_no_more_than_y(1, 2))
   expect_null(.check_x_no_more_than_y(2, 2))
   expect_null(.check_x_no_more_than_y(NULL, 2))

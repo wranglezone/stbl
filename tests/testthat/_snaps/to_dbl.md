@@ -140,7 +140,7 @@
       Error in `wrapped_to_dbl_scalar()`:
       ! `val` must not be <NULL>.
 
-# to_dbl_scalar respects allow_zero_length (#23, #189)
+# to_dbl_scalar respects allow_zero_length (#23, #43, #45, #189)
 
     Code
       to_dbl_scalar(given)

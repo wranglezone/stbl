@@ -38,7 +38,7 @@ test_that("specify_cls builds the expected function snapshot with at least one a
   expect_snapshot(no_null, transform = clean_function_snapshot)
 })
 
-test_that("The function built via specify_cls errors informatively for duplicated args (#150, #161)", {
+test_that("The function built via specify_cls errors informatively for duplicated args (#150, #153, #161)", {
   no_null <- specify_cls("chr", list(allow_null = FALSE))
   expect_pkg_error_classes(
     {

@@ -1,4 +1,4 @@
-# .check_na() works
+# .check_na() works (#95)
 
     Code
       .check_na(c(1, NA), allow_na = FALSE)
@@ -7,7 +7,7 @@
       ! `c(1, NA)` must not contain NA values.
       * NA locations: 2
 
-# .check_size() works
+# .check_size() works (#95)
 
     Code
       .check_size(1:5, 6, 10)
@@ -25,7 +25,7 @@
       ! `1:5` must have size <= 4.
       x 5 is too big.
 
-# .check_scalar() works
+# .check_scalar() works (#95)
 
     Code
       .check_scalar(1:2)
@@ -52,7 +52,7 @@
       ! `character()` must be a single <character (non-empty)>.
       x `character()` has no values.
 
-# .check_x_no_more_than_y() works
+# .check_x_no_more_than_y() works (#95)
 
     Code
       .check_x_no_more_than_y(2, 1)

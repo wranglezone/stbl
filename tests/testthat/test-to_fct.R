@@ -12,7 +12,7 @@ test_that("to_fct() deals with levels of fcts (#62)", {
   expect_identical(to_fct(given, levels = "a", to_na = "b"), expected)
 })
 
-test_that("to_fct() throws errors for bad levels (#62, #177)", {
+test_that("to_fct() throws errors for bad levels (#62, #67, #177)", {
   expect_error(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
     class = .compile_dash("stbl", "error", "fct_levels")
@@ -119,7 +119,7 @@ test_that("to_fct_scalar() provides informative error messages (#62)", {
   expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
 })
 
-test_that("to_fct_scalar respects allow_zero_length (#62, #189)", {
+test_that("to_fct_scalar respects allow_zero_length (#62, #43, #45, #189)", {
   given <- factor()
   expect_error(
     to_fct_scalar(given),
