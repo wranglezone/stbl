@@ -53,3 +53,12 @@ test_that("specify_df() allows additional specs via ... (#142)", {
 test_that("specify_data_frame() exists (#142)", {
   expect_no_error(specify_data_frame())
 })
+
+test_that("specify_df() accepts columns named 'x_arg', 'call', 'x_class' (#204)", {
+  spec <- specify_df(
+    x_arg = specify_chr_scalar(),
+    call = specify_chr_scalar()
+  )
+  given <- data.frame(x_arg = "foo", call = "bar")
+  expect_identical(spec(given), given)
+})

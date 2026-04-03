@@ -152,6 +152,32 @@ NULL
 
 ## functions ----
 
+#' Call a spec function with properly-named context arguments
+#'
+#' Stabilizer functions use either `x_arg`/`call` or `.x_arg`/`.call` as
+#' parameter names depending on how they were created. This helper finds the
+#' relevant formal name for each argument independently using
+#' `rlang::fn_fmls_names()` and dispatches accordingly.
+#'
+#' @param spec_fn A stabilizer function.
+#' @param .x The value to validate.
+#' @inheritParams stabilize_lst
+#' @returns The validated value.
+#' @keywords internal
+.call_specified_fn <- function(spec_fn, .x, .x_arg, .call) {
+  fmls <- rlang::fn_fmls_names(spec_fn)
+  x_arg_nm <- grep("^[.]?x_arg$", fmls, value = TRUE)
+  call_nm <- grep("^[.]?call$", fmls, value = TRUE)
+  args <- list(.x)
+  if (length(x_arg_nm)) {
+    args[[x_arg_nm[[1L]]]] <- .x_arg
+  }
+  if (length(call_nm)) {
+    args[[call_nm[[1L]]]] <- .call
+  }
+  do.call(spec_fn, args)
+}
+
 #' Validate all named elements (required and extra)
 #'
 #' Computes element name metadata and delegates to
@@ -221,7 +247,12 @@ NULL
       # duplicates
       nm_arg <- if (length(positions) == 1L) deparse(nm) else i
       element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-      .x[[i]] <- element_specs[[nm]](.x[[i]], x_arg = element_arg, call = .call)
+      .x[[i]] <- .call_specified_fn(
+        element_specs[[nm]],
+        .x[[i]],
+        .x_arg = element_arg,
+        .call = .call
+      )
     }
   }
   .x
@@ -254,7 +285,12 @@ NULL
   }
   for (i in which(is_unnamed)) {
     element_arg <- paste0(.x_arg, "[[", i, "]]")
-    .x[[i]] <- .unnamed(.x[[i]], x_arg = element_arg, call = .call)
+    .x[[i]] <- .call_specified_fn(
+      .unnamed,
+      .x[[i]],
+      .x_arg = element_arg,
+      .call = .call
+    )
   }
   .x
 }
@@ -295,7 +331,12 @@ NULL
     # Use name-based path when unambiguous; fall back to position for duplicates
     nm_arg <- if (!nm %in% dup_extra_nms) deparse(nm) else i
     element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-    .x[[i]] <- named_spec(.x[[i]], x_arg = element_arg, call = .call)
+    .x[[i]] <- .call_specified_fn(
+      named_spec,
+      .x[[i]],
+      .x_arg = element_arg,
+      .call = .call
+    )
   }
   .x
 }

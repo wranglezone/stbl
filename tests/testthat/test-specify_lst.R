@@ -49,3 +49,22 @@ test_that("specify_lst() respects .allow_null (#110)", {
 test_that("specify_list() exists (#110)", {
   expect_no_error(specify_list())
 })
+
+test_that("specify_lst() accepts elements named 'x_arg', 'call', 'x_class' (#204)", {
+  spec <- specify_lst(
+    x_arg = specify_chr_scalar(),
+    call = specify_chr_scalar(),
+    x_class = specify_chr_scalar()
+  )
+  given <- list(x_arg = "foo", call = "bar", x_class = "baz")
+  expect_identical(spec(given), given)
+})
+
+test_that("stabilize_lst() with nested specify_lst() propagates errors correctly (#204)", {
+  inner_spec <- specify_lst(a = specify_int_scalar())
+  given_bad <- list(outer = list(a = "not-int"))
+  expect_error(
+    stabilize_lst(given_bad, outer = inner_spec),
+    class = .compile_dash("stbl", "error", "incompatible_type")
+  )
+})
