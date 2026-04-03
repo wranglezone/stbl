@@ -62,9 +62,44 @@ test_that("to_df() errors for non-coercible types (#201)", {
     to_df("not a data frame"),
     error = TRUE
   )
-  expect_snapshot(
-    wrapped_to_df("not a data frame"),
-    error = TRUE
+})
+
+test_that("to_df() coerces a named character vector to a data frame (#203)", {
+  result <- to_df(letters)
+  expect_s3_class(result, "data.frame")
+  expect_identical(nrow(result), 26L)
+  expect_identical(names(result), "letters")
+  expect_identical(result$letters, letters)
+})
+
+test_that("to_df() coerces other named vector types to a data frame (#203)", {
+  my_int <- 1:5
+  result_int <- to_df(my_int)
+  expect_s3_class(result_int, "data.frame")
+  expect_identical(names(result_int), "my_int")
+  expect_identical(result_int$my_int, my_int)
+
+  my_num <- c(1.5, 2.5)
+  result_num <- to_df(my_num)
+  expect_s3_class(result_num, "data.frame")
+  expect_identical(names(result_num), "my_num")
+  expect_identical(result_num$my_num, my_num)
+
+  my_lgl <- c(TRUE, FALSE)
+  result_lgl <- to_df(my_lgl)
+  expect_s3_class(result_lgl, "data.frame")
+  expect_identical(names(result_lgl), "my_lgl")
+  expect_identical(result_lgl$my_lgl, my_lgl)
+})
+
+test_that("to_df() errors for inline vector expressions (#203)", {
+  expect_error(
+    to_df(c("a", "b", "c")),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
+  expect_error(
+    to_df(c(1.5, 2.5)),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
   )
 })
 

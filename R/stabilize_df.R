@@ -81,6 +81,7 @@ stabilize_df <- function(
   .call = caller_env(),
   .x_class = object_type(.x)
 ) {
+  .x_expr <- substitute(.x)
   force(.x_arg)
   force(.call)
 
@@ -88,7 +89,7 @@ stabilize_df <- function(
     return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
   }
 
-  .x <- to_df(.x, x_arg = .x_arg, call = .call)
+  .x <- to_df(.x, x_arg = .x_arg, call = .call, x_expr = .x_expr)
 
   .check_df_rows(
     .x,

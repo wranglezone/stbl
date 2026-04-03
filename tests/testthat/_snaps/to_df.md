@@ -21,6 +21,8 @@
     Condition
       Error:
       ! Can't coerce `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
+      i All list elements must have equal length (or length 1).
+      x Element lengths: a = 3, b = 2.
 
 ---
 
@@ -29,6 +31,8 @@
     Condition
       Error in `wrapped_to_df()`:
       ! Can't coerce `val` <list> to <data.frame>.
+      i All list elements must have equal length (or length 1).
+      x Element lengths: a = 3, b = 2.
 
 # to_df() errors for non-coercible types (#201)
 
@@ -37,12 +41,4 @@
     Condition
       Error:
       ! Can't coerce `"not a data frame"` <character> to <data.frame>.
-
----
-
-    Code
-      wrapped_to_df("not a data frame")
-    Condition
-      Error in `wrapped_to_df()`:
-      ! Can't coerce `val` <character> to <data.frame>.
 

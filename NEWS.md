@@ -2,6 +2,8 @@
 
 ## New features
 
+* `to_df()` now coerces atomic vectors (character, integer, numeric, logical, complex, raw, and factor) to single-column data frames when they are supplied as named objects (e.g. `to_df(letters)`). Inline expressions such as `to_df(c("a", "b", "c"))` are rejected with an informative error to avoid data frames with syntactically ugly column names (#203).
+* `to_df()` now detects jagged lists (where elements have incompatible lengths) before calling `as.data.frame()`, producing a clear error message that identifies the offending element lengths (#203).
 * New `stabilize_df()` and `specify_df()` to validate data frame structure and contents (#142). `to_df()` coerces compatible inputs such as named lists to data frames.
 * New function `to_df()` (and synonym `to_data_frame()`) to coerce an object to a data frame (#201).
 * New `stabilize_lst()` and `specify_lst()` to validate list structure and contents and create pre-configured list validators for nested validation (#110).

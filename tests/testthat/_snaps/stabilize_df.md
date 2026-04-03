@@ -32,11 +32,12 @@
 
     Code
       (expect_pkg_error_classes(wrapped_stabilize_df("not a data frame"), "stbl",
-      "coerce", "data.frame"))
+      "bad_named"))
     Output
-      <error/stbl-error-coerce-data.frame>
+      <error/stbl-error-bad_named>
       Error in `wrapped_stabilize_df()`:
-      ! Can't coerce `val` <character> to <data.frame>.
+      ! `val` must not contain extra named elements.
+      x Extra element: "val"
 
 # stabilize_df() errors when required column is missing (#142)
 
