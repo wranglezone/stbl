@@ -57,7 +57,7 @@ to_df.list <- function(
   x_class = object_type(x)
 ) {
   try_fetch(
-    as.data.frame(x),
+    as.data.frame(x, ...),
     error = function(cnd) {
       .stop_cant_coerce(
         from_class = x_class,
