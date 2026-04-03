@@ -24,13 +24,11 @@ test_that("stabilize_df() errors for non-coercible input (#142)", {
     "coerce",
     "data.frame"
   )
-  # When called through a wrapper, the argument appears as a symbol; the string
-  # is coerced to a one-column data frame and stabilize_df then rejects the
-  # unexpected column.
   expect_pkg_error_snapshot(
     wrapped_stabilize_df("not a data frame"),
     "stbl",
-    "bad_named"
+    "coerce",
+    "data.frame"
   )
 })
 

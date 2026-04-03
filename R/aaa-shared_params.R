@@ -71,11 +71,6 @@
 #'   stabilized to use in error messages. Use this if you remove a special class
 #'   from the object before checking its coercion, but want the error message to
 #'   match the original class.
-#' @param x_expr `(language)` The unevaluated expression for `x`, captured via
-#'   `substitute(x)` in the calling function. This is used internally to produce
-#'   accurate column names and to determine whether `x` was passed as a named
-#'   symbol. In most cases the automatic default is correct; only set this
-#'   explicitly when you need to override expression propagation.
 #'
 #' @name .shared-params
 #' @keywords internal

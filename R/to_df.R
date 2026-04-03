@@ -23,8 +23,7 @@ to_df <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
   UseMethod("to_df")
 }
@@ -93,8 +92,7 @@ to_df.default <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
   .stop_cant_coerce(
     from_class = x_class,
@@ -135,9 +133,9 @@ to_df.character <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -154,9 +152,9 @@ to_df.integer <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -173,9 +171,9 @@ to_df.numeric <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -192,9 +190,9 @@ to_df.logical <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -211,9 +209,9 @@ to_df.complex <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -230,9 +228,9 @@ to_df.raw <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,
@@ -249,9 +247,9 @@ to_df.factor <- function(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 ) {
+  x_expr <- substitute(x)
   .to_df_vector(
     x,
     x_expr = x_expr,

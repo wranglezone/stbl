@@ -11,8 +11,7 @@ to_df(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 )
 
 to_data_frame(
@@ -20,8 +19,7 @@ to_data_frame(
   ...,
   x_arg = caller_arg(x),
   call = caller_env(),
-  x_class = object_type(x),
-  x_expr = substitute(x)
+  x_class = object_type(x)
 )
 
 \method{to_df}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
@@ -43,12 +41,6 @@ source of error messages.}
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
-
-\item{x_expr}{\code{(language)} The unevaluated expression for \code{x}, captured via
-\code{substitute(x)} in the calling function. This is used internally to produce
-accurate column names and to determine whether \code{x} was passed as a named
-symbol. In most cases the automatic default is correct; only set this
-explicitly when you need to override expression propagation.}
 
 \item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 }

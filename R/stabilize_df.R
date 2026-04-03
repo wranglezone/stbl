@@ -81,7 +81,6 @@ stabilize_df <- function(
   .call = caller_env(),
   .x_class = object_type(.x)
 ) {
-  .x_expr <- substitute(.x)
   force(.x_arg)
   force(.call)
 
@@ -89,7 +88,16 @@ stabilize_df <- function(
     return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
   }
 
-  .x <- to_df(.x, x_arg = .x_arg, call = .call, x_expr = .x_expr)
+  if (!is.data.frame(.x) && !is.list(.x)) {
+    .stop_cant_coerce(
+      from_class = .x_class,
+      to_class = "data.frame",
+      x_arg = .x_arg,
+      call = .call
+    )
+  }
+
+  .x <- to_df(.x, x_arg = .x_arg, call = .call)
 
   .check_df_rows(
     .x,
