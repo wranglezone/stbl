@@ -4,7 +4,7 @@
 #' returning it silently if so. Otherwise an informative error message is
 #' signaled. `to_data_frame()` is a synonym of `to_df()`.
 #'
-#' @param ... Arguments passed to methods.
+#' @param ... Arguments passed to [base::as.data.frame()] or other methods.
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a data frame.

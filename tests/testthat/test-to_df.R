@@ -1,12 +1,12 @@
-test_that("to_df() returns a data frame unchanged (#199)", {
+test_that("to_df() returns a data frame unchanged (#201)", {
   expect_identical(to_df(mtcars), mtcars)
 })
 
-test_that("to_df() returns NULL for NULL input by default (#199)", {
+test_that("to_df() returns NULL for NULL input by default (#201)", {
   expect_null(to_df(NULL))
 })
 
-test_that("to_df() respects allow_null (#199)", {
+test_that("to_df() respects allow_null (#201)", {
   expect_error(
     to_df(NULL, allow_null = FALSE),
     class = .compile_dash("stbl", "error", "bad_null")
@@ -21,7 +21,7 @@ test_that("to_df() respects allow_null (#199)", {
   )
 })
 
-test_that("to_df() coerces a named list to a data frame (#199)", {
+test_that("to_df() coerces a named list to a data frame (#201)", {
   given <- list(name = "Alice", age = 30L)
   result <- to_df(given)
   expect_s3_class(result, "data.frame")
@@ -29,7 +29,7 @@ test_that("to_df() coerces a named list to a data frame (#199)", {
   expect_identical(result$age, 30L)
 })
 
-test_that("to_df() coerces a list of equal-length vectors to a data frame (#199)", {
+test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)", {
   given <- list(x = 1:3, y = letters[1:3])
   result <- to_df(given)
   expect_s3_class(result, "data.frame")
@@ -38,7 +38,7 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#199)
   expect_identical(result$y, letters[1:3])
 })
 
-test_that("to_df() errors for a list with incompatible column lengths (#199)", {
+test_that("to_df() errors for a list with incompatible column lengths (#201)", {
   expect_error(
     to_df(list(a = 1:3, b = 1:2)),
     class = .compile_dash("stbl", "error", "coerce", "data.frame")
@@ -53,7 +53,7 @@ test_that("to_df() errors for a list with incompatible column lengths (#199)", {
   )
 })
 
-test_that("to_df() errors for non-coercible types (#199)", {
+test_that("to_df() errors for non-coercible types (#201)", {
   expect_error(
     to_df("not a data frame"),
     class = .compile_dash("stbl", "error", "coerce", "data.frame")
@@ -68,6 +68,6 @@ test_that("to_df() errors for non-coercible types (#199)", {
   )
 })
 
-test_that("to_data_frame() exists (#199)", {
+test_that("to_data_frame() exists (#201)", {
   expect_identical(to_data_frame(mtcars), mtcars)
 })

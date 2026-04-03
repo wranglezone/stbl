@@ -27,7 +27,7 @@ to_data_frame(
 \arguments{
 \item{x}{The argument to stabilize.}
 
-\item{...}{Arguments passed to methods.}
+\item{...}{Arguments passed to \code{\link[base:as.data.frame]{base::as.data.frame()}} or other methods.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
