@@ -1,18 +1,18 @@
 #' Ensure a data frame argument meets expectations
 #'
-#' `stabilize_df()` validates the structure and contents of a data frame. It
-#' can check that specific named columns are present and valid, that extra
-#' columns conform to a shared rule, that required column names are present,
-#' and that the row count is within specified bounds.
-#' `stabilise_df()`, `stabilize_data_frame()`, and `stabilise_data_frame()` are
-#' synonyms of `stabilize_df()`.
+#' `stabilize_df()` validates the structure and contents of a data frame. It can
+#' check that specific named columns are present and valid, that extra columns
+#' conform to a shared rule, that required column names are present, and that
+#' the row count is within specified bounds. `stabilise_df()`,
+#' `stabilize_data_frame()`, and `stabilise_data_frame()` are synonyms of
+#' `stabilize_df()`.
 #'
 #' @param ... Named [`specify_*()`][specify_chr] functions for required named
 #'   columns of `.x`. Each name corresponds to a required column in `.x`, and
 #'   the function is used to validate that column.
-#' @param .extra_cols A single [`specify_*()`][specify_chr] function to validate
-#'   all columns of `.x` that are *not* explicitly listed in `...`. If `NULL`
-#'   (default), any extra columns will cause an error.
+#' @param .extra_cols A single `specify_*()` function ([specify_chr()], etc) to
+#'   validate all columns of `.x` that are *not* explicitly listed in `...`. If
+#'   `NULL` (default), any extra columns will cause an error.
 #' @param .col_names `(character)` A character vector of column names that must
 #'   be present in `.x`. Any columns listed here that are absent from `.x` will
 #'   cause an error. Unlike `...`, this does not validate the column contents.
@@ -20,7 +20,7 @@
 #'   `.x`. If `NULL` (default), the row count is not checked.
 #' @param .max_rows `(length-1 integer)` The maximum number of rows allowed in
 #'   `.x`. If `NULL` (default), the row count is not checked.
-#' @inheritParams stabilize_lst
+#' @inheritParams .shared-params
 #'
 #' @returns The validated data frame.
 #' @family data frame functions
@@ -93,9 +93,9 @@ stabilize_df <- function(
 
   .check_df_col_names(.x, col_names = .col_names, x_arg = .x_arg, call = .call)
 
-  .check_specs_named(..., call = .call)
+  .check_specs_named(..., .call = .call)
   x_lst <- stabilize_lst(
-    as.list(.x),
+    .x,
     ...,
     .named = .extra_cols,
     .x_arg = .x_arg,

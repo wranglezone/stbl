@@ -91,7 +91,7 @@ stabilize_lst <- function(
     call = .call
   )
 
-  .check_specs_named(..., call = .call)
+  .check_specs_named(..., .call = .call)
   .x <- .validate_named_elements(
     .x,
     ...,
@@ -323,10 +323,11 @@ NULL
 #' @returns `NULL`, invisibly, if all elements are named.
 #' @keywords internal
 .check_specs_named <- function(..., .call = caller_env()) {
-  specs <- list(...)
-  if (!length(specs)) {
+  if (!...length()) {
     return(invisible(NULL))
   }
+
+  specs <- list(...)
   nms <- names(specs) %||% character(length(specs))
   if (any(nms == "")) {
     .stbl_abort(

@@ -66,9 +66,9 @@ stabilise_data_frame(
 columns of \code{.x}. Each name corresponds to a required column in \code{.x}, and
 the function is used to validate that column.}
 
-\item{.extra_cols}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra columns will cause an error.}
+\item{.extra_cols}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
+validate all columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If
+\code{NULL} (default), any extra columns will cause an error.}
 
 \item{.col_names}{\code{(character)} A character vector of column names that must
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
@@ -99,12 +99,12 @@ match the original class.}
 The validated data frame.
 }
 \description{
-\code{stabilize_df()} validates the structure and contents of a data frame. It
-can check that specific named columns are present and valid, that extra
-columns conform to a shared rule, that required column names are present,
-and that the row count is within specified bounds.
-\code{stabilise_df()}, \code{stabilize_data_frame()}, and \code{stabilise_data_frame()} are
-synonyms of \code{stabilize_df()}.
+\code{stabilize_df()} validates the structure and contents of a data frame. It can
+check that specific named columns are present and valid, that extra columns
+conform to a shared rule, that required column names are present, and that
+the row count is within specified bounds. \code{stabilise_df()},
+\code{stabilize_data_frame()}, and \code{stabilise_data_frame()} are synonyms of
+\code{stabilize_df()}.
 }
 \examples{
 # Basic validation: required columns with type specs
