@@ -23,9 +23,9 @@ source of error messages.}
 The validated value.
 }
 \description{
-Stabilizer functions produced by \verb{specify_*()} use \code{.x_arg} and \code{.call} as
-parameter names, while user-defined stabilizer functions may use the
-unprefixed \code{x_arg} and \code{call}. This helper checks \code{rlang::fn_fmls_names()}
-to determine which convention the function uses and dispatches accordingly.
+Stabilizer functions use either \code{x_arg}/\code{call} or \code{.x_arg}/\code{.call} as
+parameter names depending on how they were created. This helper finds the
+relevant formal name for each argument independently using
+\code{rlang::fn_fmls_names()} and dispatches accordingly.
 }
 \keyword{internal}

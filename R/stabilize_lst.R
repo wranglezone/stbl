@@ -154,10 +154,10 @@ NULL
 
 #' Call a spec function with properly-named context arguments
 #'
-#' Stabilizer functions produced by `specify_*()` use `.x_arg` and `.call` as
-#' parameter names, while user-defined stabilizer functions may use the
-#' unprefixed `x_arg` and `call`. This helper checks `rlang::fn_fmls_names()`
-#' to determine which convention the function uses and dispatches accordingly.
+#' Stabilizer functions use either `x_arg`/`call` or `.x_arg`/`.call` as
+#' parameter names depending on how they were created. This helper finds the
+#' relevant formal name for each argument independently using
+#' `rlang::fn_fmls_names()` and dispatches accordingly.
 #'
 #' @param spec_fn A stabilizer function.
 #' @param .x The value to validate.
@@ -166,11 +166,12 @@ NULL
 #' @keywords internal
 .call_specified_fn <- function(spec_fn, .x, .x_arg, .call) {
   fmls <- rlang::fn_fmls_names(spec_fn)
-  if (".x_arg" %in% fmls) {
-    spec_fn(.x, .x_arg = .x_arg, .call = .call)
-  } else {
-    spec_fn(.x, x_arg = .x_arg, call = .call)
-  }
+  x_arg_nm <- fmls[grepl("^[.]?x_arg$", fmls)]
+  call_nm <- fmls[grepl("^[.]?call$", fmls)]
+  args <- list(.x)
+  if (length(x_arg_nm)) args[[x_arg_nm[[1L]]]] <- .x_arg
+  if (length(call_nm)) args[[call_nm[[1L]]]] <- .call
+  do.call(spec_fn, args)
 }
 
 #' Validate all named elements (required and extra)
