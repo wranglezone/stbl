@@ -133,6 +133,20 @@
   [`to_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
   : Ensure a logical argument meets expectations
 
+## data frames
+
+- [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  [`specify_data_frame()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  : Create a specified data frame stabilizer function
+- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  [`stabilise_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  [`stabilize_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  [`stabilise_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  : Ensure a data frame argument meets expectations
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
+  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
+  : Ensure a data frame argument meets expectations
+
 ## lists
 
 - [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)

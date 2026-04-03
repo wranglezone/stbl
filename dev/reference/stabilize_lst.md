@@ -74,26 +74,31 @@ stabilise_list(
 
 - ...:
 
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `.x`. Each name corresponds
-  to a required element in `.x`, and the function is used to validate
-  that element.
+  Named stabilizer functions, such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). Each name corresponds to a required element in `.x`, and the
+  function is used to validate that element.
 
 - .named:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). This function is used to validate all named elements of `.x`
+  that are *not* explicitly listed in `...`. If `NULL` (default), any
+  extra named elements will cause an error.
 
 - .unnamed:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). This function is used to validate all unnamed elements of `.x`.
+  If `NULL` (default), any unnamed elements will cause an error.
 
 - .allow_duplicate_names:
 
@@ -119,9 +124,10 @@ stabilise_list(
 
 - .x_arg:
 
-  `(length-1 character)` An argument name for `.x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
 - .call:
 
@@ -130,10 +136,10 @@ stabilise_list(
 
 - .x_class:
 
-  `(length-1 character)` The class name of `.x` to use in error
-  messages. Use this if you remove a special class from `.x` before
-  checking its coercion, but want the error message to match the
-  original class.
+  `(length-1 character)` The class name of the argument being stabilized
+  to use in error messages. Use this if you remove a special class from
+  the object before checking its coercion, but want the error message to
+  match the original class.
 
 ## Value
 
@@ -150,6 +156,7 @@ Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),

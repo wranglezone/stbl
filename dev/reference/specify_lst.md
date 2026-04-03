@@ -31,26 +31,31 @@ specify_list(
 
 - ...:
 
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `.x`. Each name corresponds
-  to a required element in `.x`, and the function is used to validate
-  that element.
+  Named stabilizer functions, such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or functions produced by `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). Each name corresponds to a required element in `.x`, and the
+  function is used to validate that element.
 
 - .named:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). This function is used to validate all named elements of `.x`
+  that are *not* explicitly listed in `...`. If `NULL` (default), any
+  extra named elements will cause an error.
 
 - .unnamed:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc). This function is used to validate all unnamed elements of `.x`.
+  If `NULL` (default), any unnamed elements will cause an error.
 
 - .allow_null:
 
@@ -88,6 +93,7 @@ Other list functions:
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)

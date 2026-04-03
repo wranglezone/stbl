@@ -310,9 +310,10 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>x</code>. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.</p></dd>
+<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
@@ -321,9 +322,10 @@ source of error messages.</p></dd>
 
 
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of <code>x</code> to use in error
-messages. Use this if you remove a special class from <code>x</code> before checking
-its coercion, but want the error message to match the original class.</p></dd>
+<dd><p><code>(length-1 character)</code> The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.</p></dd>
 
 
 <dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
@@ -343,6 +345,7 @@ acceptable?</p></dd>
 <p>Other stabilization functions:
 <code><a href="stabilize_arg.html">stabilize_arg()</a></code>,
 <code><a href="stabilize_chr.html">stabilize_chr()</a></code>,
+<code><a href="stabilize_df.html">stabilize_df()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
 <code><a href="stabilize_lgl.html">stabilize_lgl()</a></code>,

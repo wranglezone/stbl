@@ -1,8 +1,6 @@
 # Validate or reject extra named elements
 
-Extra named elements are those not listed in `...` (i.e.
-`is_extra_named` is `TRUE`). If `named_spec` is `NULL`, throws an error
-reporting their names. Otherwise applies `named_spec` to each.
+Validate or reject extra named elements
 
 ## Usage
 
@@ -12,8 +10,8 @@ reporting their names. Otherwise applies `named_spec` to each.
   nms,
   is_extra_named,
   named_spec,
-  x_arg,
-  call
+  .x_arg,
+  .call
 )
 ```
 
@@ -21,7 +19,7 @@ reporting their names. Otherwise applies `named_spec` to each.
 
 - .x:
 
-  `(list)` The list being validated.
+  The argument to stabilize.
 
 - nms:
 
@@ -33,15 +31,20 @@ reporting their names. Otherwise applies `named_spec` to each.
 
 - named_spec:
 
-  A spec function, or `NULL` to disallow extra named elements.
+  A single stabilizer function, such as a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc) or a function produced by a `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc), or `NULL` to disallow extra named elements.
 
-- x_arg:
+- .x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
-- call:
+- .call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.

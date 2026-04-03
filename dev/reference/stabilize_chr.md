@@ -204,9 +204,10 @@ to_character_scalar(
 
 - x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
 - call:
 
@@ -215,9 +216,10 @@ to_character_scalar(
 
 - x_class:
 
-  `(length-1 character)` The class name of `x` to use in error messages.
-  Use this if you remove a special class from `x` before checking its
-  coercion, but want the error message to match the original class.
+  `(length-1 character)` The class name of the argument being stabilized
+  to use in error messages. Use this if you remove a special class from
+  the object before checking its coercion, but want the error message to
+  match the original class.
 
 - allow_zero_length:
 
@@ -250,6 +252,7 @@ Other character functions:
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),

@@ -21,6 +21,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_int_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_col_names.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_rows.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_duplicate_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_function_allowed.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_is_not_primitive.html</loc></url>
@@ -55,6 +57,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
@@ -86,6 +89,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_dbl.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_df.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
@@ -93,12 +97,14 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dbl.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_df.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stbl-package.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/to_df.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_lst.html</loc></url>
 </urlset>
 
