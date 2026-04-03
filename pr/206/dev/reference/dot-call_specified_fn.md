@@ -1,11 +1,10 @@
 # Call a spec function with properly-named context arguments
 
-Stabilizer functions produced by `specify_*()` use `.x_arg` and `.call`
-as parameter names, while user-defined stabilizer functions may use the
-unprefixed `x_arg` and `call`. This helper checks
+Stabilizer functions use either `x_arg`/`call` or `.x_arg`/`.call` as
+parameter names depending on how they were created. This helper finds
+the relevant formal name for each argument independently using
 [`rlang::fn_fmls_names()`](https://rlang.r-lib.org/reference/fn_fmls.html)
-to determine which convention the function uses and dispatches
-accordingly.
+and dispatches accordingly.
 
 ## Usage
 
