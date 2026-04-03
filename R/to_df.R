@@ -147,25 +147,6 @@ to_df.character <- function(
 }
 
 #' @export
-to_df.integer <- function(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  x_expr <- substitute(x)
-  .to_df_vector(
-    x,
-    x_expr = x_expr,
-    x_arg = x_arg,
-    call = call,
-    x_class = x_class,
-    ...
-  )
-}
-
-#' @export
 to_df.numeric <- function(
   x,
   ...,
