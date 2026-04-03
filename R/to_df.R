@@ -57,11 +57,8 @@ to_df.list <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (length(x) > 0L) {
-    .check_all_named(x, x_arg = x_arg, call = call)
-    .check_not_jagged(x, x_arg = x_arg, call = call, x_class = x_class)
-  }
-
+  .check_all_named(x, x_arg = x_arg, call = call)
+  .check_not_jagged(x, x_arg = x_arg, call = call, x_class = x_class)
   as.data.frame(x, ...)
 }
 
