@@ -4,6 +4,20 @@
 
 ### New features
 
+- [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  now use dot-prefixed parameter names (`.x_arg`, `.call`, `.x_class`)
+  in the generated function signature, so list elements or data frame
+  columns named `x_arg`, `call`, or `x_class` no longer conflict
+  ([\#204](https://github.com/wranglezone/stbl/issues/204)).
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  now correctly dispatches to nested
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  (and
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md))
+  validators, enabling nested list validation
+  ([\#204](https://github.com/wranglezone/stbl/issues/204)).
 - [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) now
   handles atomic vectors provided as named objects
   (e.g. `to_df(letters)`) and provides informative error messages in

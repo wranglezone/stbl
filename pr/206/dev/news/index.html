@@ -38,6 +38,10 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>
+<code><a href="../reference/specify_df.html">specify_df()</a></code> and <code><a href="../reference/specify_lst.html">specify_lst()</a></code> now use dot-prefixed parameter names (<code>.x_arg</code>, <code>.call</code>, <code>.x_class</code>) in the generated function signature, so list elements or data frame columns named <code>x_arg</code>, <code>call</code>, or <code>x_class</code> no longer conflict (<a href="https://github.com/wranglezone/stbl/issues/204" class="external-link">#204</a>).</li>
+<li>
+<code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code> now correctly dispatches to nested <code><a href="../reference/specify_lst.html">specify_lst()</a></code> (and <code><a href="../reference/specify_df.html">specify_df()</a></code>) validators, enabling nested list validation (<a href="https://github.com/wranglezone/stbl/issues/204" class="external-link">#204</a>).</li>
+<li>
 <code><a href="../reference/to_df.html">to_df()</a></code> now handles atomic vectors provided as named objects (e.g. <code>to_df(letters)</code>) and provides informative error messages in additional cases, such as jagged lists (<a href="https://github.com/wranglezone/stbl/issues/203" class="external-link">#203</a>).</li>
 <li>New <code><a href="../reference/stabilize_df.html">stabilize_df()</a></code> and <code><a href="../reference/specify_df.html">specify_df()</a></code> to validate data frame structure and contents (<a href="https://github.com/wranglezone/stbl/issues/142" class="external-link">#142</a>). <code><a href="../reference/to_df.html">to_df()</a></code> coerces compatible inputs such as named lists to data frames.</li>
 <li>New function <code><a href="../reference/to_df.html">to_df()</a></code> (and synonym <code><a href="../reference/to_df.html">to_data_frame()</a></code>) to coerce an object to a data frame (<a href="https://github.com/wranglezone/stbl/issues/201" class="external-link">#201</a>).</li>
