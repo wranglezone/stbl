@@ -118,21 +118,21 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Named <code><a href="specify_chr.html">specify_*()</a></code> functions for required named
-elements of <code>.x</code>. Each name corresponds to a required element in <code>.x</code>, and
-the function is used to validate that element.</p></dd>
+<dd><p>Named <code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc) for required
+named elements of <code>.x</code>. Each name corresponds to a required element in
+<code>.x</code>, and the function is used to validate that element.</p></dd>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
-<dd><p>A single <code><a href="specify_chr.html">specify_*()</a></code> function to validate all
-named elements of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
-(default), any extra named elements will cause an error.</p></dd>
+<dd><p>A single <code>specify_*()</code> function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc) to
+validate all named elements of <code>.x</code> that are <em>not</em> explicitly listed in
+<code>...</code>. If <code>NULL</code> (default), any extra named elements will cause an error.</p></dd>
 
 
 <dt id="arg--unnamed">.unnamed<a class="anchor" aria-label="anchor" href="#arg--unnamed"></a></dt>
-<dd><p>A single <code><a href="specify_chr.html">specify_*()</a></code> function to validate
-all unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unnamed elements
-will cause an error.</p></dd>
+<dd><p>A single <code>specify_*()</code> function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc) to
+validate all unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unnamed
+elements will cause an error.</p></dd>
 
 
 <dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>
@@ -156,9 +156,10 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>.x</code>. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.</p></dd>
+<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.</p></dd>
 
 
 <dt id="arg--call">.call<a class="anchor" aria-label="anchor" href="#arg--call"></a></dt>
@@ -167,9 +168,10 @@ source of error messages.</p></dd>
 
 
 <dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of <code>.x</code> to use in error
-messages. Use this if you remove a special class from <code>.x</code> before checking
-its coercion, but want the error message to match the original class.</p></dd>
+<dd><p><code>(length-1 character)</code> The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.</p></dd>
 
 </dl></div>
     <div class="section level2">

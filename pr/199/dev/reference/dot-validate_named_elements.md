@@ -8,27 +8,37 @@ and
 ## Usage
 
 ``` r
-.validate_named_elements(.x, ..., .named, .allow_duplicate_names, x_arg, call)
+.validate_named_elements(
+  .x,
+  ...,
+  .named,
+  .allow_duplicate_names,
+  .x_arg,
+  .call
+)
 ```
 
 ## Arguments
 
 - .x:
 
-  `(list)` The list being validated.
+  The argument to stabilize.
 
 - ...:
 
-  Named spec functions for required elements (forwarded from
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)).
+  Named `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) for required named elements of `.x`. Each name corresponds to a
+  required element in `.x`, and the function is used to validate that
+  element.
 
 - .named:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all named elements of `.x` that are *not* explicitly
+  listed in `...`. If `NULL` (default), any extra named elements will
+  cause an error.
 
 - .allow_duplicate_names:
 
@@ -36,13 +46,14 @@ and
   If `FALSE` (default), an error is thrown when any named element of
   `.x` shares a name with another.
 
-- x_arg:
+- .x_arg:
 
-  `(length-1 character)` An argument name for `.x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
-- call:
+- .call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.

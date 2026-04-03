@@ -16,7 +16,7 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 to_lst(x, ...)
 
 # Default S3 method
-to_lst(x, ...)
+to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 # S3 method for class '`NULL`'
 to_lst(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
@@ -45,9 +45,10 @@ to_lst(
 
 - x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
 - call:
 
@@ -68,7 +69,7 @@ The argument as a list.
 
 ## Details
 
-This function has three important distinctions from
+This function has important distinctions from
 [`base::as.list()`](https://rdrr.io/r/base/list.html):
 
 - Functions can be rejected as part of the call to this function (with

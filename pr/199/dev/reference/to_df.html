@@ -75,13 +75,14 @@ signaled. <code>to_data_frame()</code> is a synonym of <code>to_df()</code>.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed to methods.</p></dd>
+<dd><p>Arguments passed to <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">base::as.data.frame()</a></code> or other methods.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>x</code>. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.</p></dd>
+<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
@@ -90,9 +91,10 @@ source of error messages.</p></dd>
 
 
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of <code>x</code> to use in error
-messages. Use this if you remove a special class from <code>x</code> before checking
-its coercion, but want the error message to match the original class.</p></dd>
+<dd><p><code>(length-1 character)</code> The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>

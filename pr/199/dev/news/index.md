@@ -8,12 +8,16 @@
   [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and
   [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
-  to validate data frame structure and contents, including column-level
-  validators, row count constraints (`.min_rows`, `.max_rows`), and
-  required column name checks (`.col_names`)
-  ([\#199](https://github.com/wranglezone/stbl/issues/199)).
+  to validate data frame structure and contents
+  ([\#142](https://github.com/wranglezone/stbl/issues/142)).
   [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) coerces
   compatible inputs such as named lists to data frames.
+- New function
+  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) (and
+  synonym
+  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md))
+  to coerce an object to a data frame
+  ([\#201](https://github.com/wranglezone/stbl/issues/201)).
 - New
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and

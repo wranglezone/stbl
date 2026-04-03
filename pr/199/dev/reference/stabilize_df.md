@@ -79,11 +79,10 @@ stabilise_data_frame(
 
 - .extra_cols:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all columns of `.x` that are *not* explicitly
-  listed in `...`. If `NULL` (default), any extra columns will cause an
-  error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all columns of `.x` that are *not* explicitly listed
+  in `...`. If `NULL` (default), any extra columns will cause an error.
 
 - .col_names:
 
@@ -107,9 +106,10 @@ stabilise_data_frame(
 
 - .x_arg:
 
-  `(length-1 character)` An argument name for `.x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
 - .call:
 
@@ -118,10 +118,10 @@ stabilise_data_frame(
 
 - .x_class:
 
-  `(length-1 character)` The class name of `.x` to use in error
-  messages. Use this if you remove a special class from `.x` before
-  checking its coercion, but want the error message to match the
-  original class.
+  `(length-1 character)` The class name of the argument being stabilized
+  to use in error messages. Use this if you remove a special class from
+  the object before checking its coercion, but want the error message to
+  match the original class.
 
 ## Value
 

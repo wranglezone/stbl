@@ -1,34 +1,34 @@
 # Validate or reject unnamed elements
 
-If unnamed elements exist and `unnamed_spec` is `NULL`, throws an error
-reporting their positions. Otherwise applies `unnamed_spec` to each.
+Validate or reject unnamed elements
 
 ## Usage
 
 ``` r
-.validate_unnamed_elements(.x, .unnamed, x_arg, call)
+.validate_unnamed_elements(.x, .unnamed, .x_arg, .call)
 ```
 
 ## Arguments
 
 - .x:
 
-  `(list)` The list being validated.
+  The argument to stabilize.
 
 - .unnamed:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all unnamed elements of `.x`. If `NULL` (default),
+  any unnamed elements will cause an error.
 
-- x_arg:
+- .x_arg:
 
-  `(length-1 character)` An argument name for `.x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
-- call:
+- .call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.

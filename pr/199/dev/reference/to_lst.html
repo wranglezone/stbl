@@ -54,7 +54,7 @@ message is signaled. <code>to_list()</code> is a synonym of <code>to_lst()</code
 <span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
-<span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class '`NULL`'</span></span>
 <span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, allow_null <span class="op">=</span> <span class="cn">TRUE</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -82,9 +82,10 @@ message is signaled. <code>to_list()</code> is a synonym of <code>to_lst()</code
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> An argument name for <code>x</code>. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.</p></dd>
+<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
@@ -106,8 +107,7 @@ source of error messages.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function has three important distinctions from
-<code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::as.list()</a></code>:</p><ul><li><p>Functions can be rejected as part of the call to this function (with
+    <p>This function has important distinctions from <code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::as.list()</a></code>:</p><ul><li><p>Functions can be rejected as part of the call to this function (with
 <code>coerce_function = FALSE</code>, the default). If they are allowed, they'll be
 coerced to a list concatenating their formals and body (as with
 <code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::as.list()</a></code>.</p></li>

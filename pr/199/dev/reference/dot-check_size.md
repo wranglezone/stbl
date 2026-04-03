@@ -30,9 +30,10 @@ is within the bounds of `min_size` and `max_size`.
 
 - x_arg:
 
-  `(length-1 character)` An argument name for `x`. The automatic value
-  will work in most cases, or pass it through from higher-level
-  functions to make error messages clearer in unexported functions.
+  `(length-1 character)` The name of the argument being stabilized to
+  use in error messages. The automatic value will work in most cases, or
+  pass it through from higher-level functions to make error messages
+  clearer in unexported functions.
 
 - call:
 

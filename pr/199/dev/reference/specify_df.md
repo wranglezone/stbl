@@ -39,11 +39,10 @@ specify_data_frame(
 
 - .extra_cols:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all columns of `.x` that are *not* explicitly
-  listed in `...`. If `NULL` (default), any extra columns will cause an
-  error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all columns of `.x` that are *not* explicitly listed
+  in `...`. If `NULL` (default), any extra columns will cause an error.
 
 - .col_names:
 

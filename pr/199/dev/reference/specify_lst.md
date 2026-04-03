@@ -31,26 +31,26 @@ specify_list(
 
 - ...:
 
-  Named
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  functions for required named elements of `.x`. Each name corresponds
-  to a required element in `.x`, and the function is used to validate
-  that element.
+  Named `specify_*()` functions
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) for required named elements of `.x`. Each name corresponds to a
+  required element in `.x`, and the function is used to validate that
+  element.
 
 - .named:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all named elements of `.x` that are *not*
-  explicitly listed in `...`. If `NULL` (default), any extra named
-  elements will cause an error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all named elements of `.x` that are *not* explicitly
+  listed in `...`. If `NULL` (default), any extra named elements will
+  cause an error.
 
 - .unnamed:
 
-  A single
-  [`specify_*()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  function to validate all unnamed elements of `.x`. If `NULL`
-  (default), any unnamed elements will cause an error.
+  A single `specify_*()` function
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc) to validate all unnamed elements of `.x`. If `NULL` (default),
+  any unnamed elements will cause an error.
 
 - .allow_null:
 
