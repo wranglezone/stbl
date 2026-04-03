@@ -15,7 +15,7 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 \method{to_lst}{list}(x, ...)
 
-\method{to_lst}{default}(x, ...)
+\method{to_lst}{default}(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 \method{to_lst}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
@@ -53,8 +53,7 @@ information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_list()} is a synonym of \code{to_lst()}.
 }
 \details{
-This function has three important distinctions from
-\code{\link[base:list]{base::as.list()}}:
+This function has important distinctions from \code{\link[base:list]{base::as.list()}}:
 \itemize{
 \item Functions can be rejected as part of the call to this function (with
 \code{coerce_function = FALSE}, the default). If they are allowed, they'll be
