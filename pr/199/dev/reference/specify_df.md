@@ -78,7 +78,8 @@ provide additional context or functionality.
 ## See also
 
 Other data frame functions:
-[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

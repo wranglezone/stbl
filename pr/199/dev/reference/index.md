@@ -143,6 +143,9 @@
   [`stabilize_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   [`stabilise_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   : Ensure a data frame argument meets expectations
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
+  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
+  : Ensure a data frame argument meets expectations
 
 ## lists
 

@@ -1,11 +1,11 @@
 # Ensure a data frame argument meets expectations
 
 `stabilize_df()` validates the structure and contents of a data frame.
-It first verifies that the input is a data frame and then uses
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
-to apply stabilization rules to each column. `stabilise_df()`,
-`stabilize_data_frame()`, and `stabilise_data_frame()` are synonyms of
-`stabilize_df()`.
+It can check that specific named columns are present and valid, that
+extra columns conform to a shared rule, that required column names are
+present, and that the row count is within specified bounds.
+`stabilise_df()`, `stabilize_data_frame()`, and `stabilise_data_frame()`
+are synonyms of `stabilize_df()`.
 
 ## Usage
 
@@ -130,7 +130,8 @@ The validated data frame.
 ## See also
 
 Other data frame functions:
-[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
@@ -212,8 +213,17 @@ stabilize_df(NULL)
 try(stabilize_df(NULL, .allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 
-# Non-data-frame inputs are rejected
-try(stabilize_df(list(a = 1L)))
+# Coercible inputs such as named lists are accepted
+stabilize_df(
+  list(name = "Alice", age = 30L),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar()
+)
+#>    name age
+#> 1 Alice  30
+
+# Non-coercible inputs are rejected
+try(stabilize_df("not a data frame"))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `list(a = 1L)` <list> to <data.frame>.
+#>   Can't coerce `"not a data frame"` <character> to <data.frame>.
 ```
