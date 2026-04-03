@@ -4,6 +4,11 @@
 
 ### New features
 
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) now
+  handles atomic vectors provided as named objects
+  (e.g. `to_df(letters)`) and provides informative error messages in
+  additional cases, such as jagged lists
+  ([\#203](https://github.com/wranglezone/stbl/issues/203)).
 - New
   [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and
