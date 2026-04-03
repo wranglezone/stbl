@@ -19,6 +19,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_dbl_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_int_ish_chr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_col_names.html</loc></url>
@@ -27,6 +28,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_function_allowed.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_is_not_primitive.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_not_jagged.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_size.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_specs_named.html</loc></url>
