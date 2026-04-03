@@ -206,3 +206,63 @@
     )
   }
 }
+
+#' Check that all list elements are named
+#'
+#' @inheritParams .shared-params
+#' @returns `NULL`, invisibly, if all elements have names.
+#' @keywords internal
+.check_all_named <- function(x, x_arg = caller_arg(x), call = caller_env()) {
+  if (rlang::is_named(x)) {
+    return(invisible(NULL))
+  }
+  .stop_must(
+    "must have all elements named.",
+    x_arg = x_arg,
+    call = call,
+    subclass = "bad_named"
+  )
+}
+
+#' Check that list elements do not have jagged (unequal non-1) lengths
+#'
+#' Expected to be called after `.check_all_named()`, so `names(x)` is
+#' guaranteed to be non-`NULL`. Length-1 elements are excluded from the check
+#' because they recycle to any length in `as.data.frame()`.
+#'
+#' @inheritParams .shared-params
+#' @returns `NULL`, invisibly, if the list is not jagged.
+#' @keywords internal
+.check_not_jagged <- function(
+  x,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (!length(x)) {
+    return(invisible(NULL))
+  }
+  lens <- lengths(x)
+  non_one <- lens[lens != 1L]
+  if (length(unique(non_one)) <= 1L) {
+    return(invisible(NULL))
+  }
+  max_len <- max(non_one)
+  short_mask <- lens < max_len & lens > 1L
+  short_nms <- names(x)[short_mask]
+  short_lens <- lens[short_mask]
+  short_pairs <- paste(paste0(short_nms, " = ", short_lens), collapse = ", ")
+  main_msg <- .glue2(
+    "Can't coerce {.arg [x_arg]} {.cls [x_class]} to {.cls data.frame}."
+  )
+  .stbl_abort(
+    message = c(
+      main_msg,
+      i = "All list elements must have length {max_len} or 1.",
+      x = "Short elements: {short_pairs}."
+    ),
+    subclass = "jagged",
+    call = call,
+    message_env = rlang::current_env()
+  )
+}

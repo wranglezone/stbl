@@ -58,29 +58,8 @@ to_df.list <- function(
   x_class = object_type(x)
 ) {
   if (length(x) > 0L) {
-    lens <- lengths(x)
-    non_one <- lens[lens != 1L]
-    if (length(unique(non_one)) > 1L) {
-      nms <- names(x)
-      if (is.null(nms)) {
-        nms <- paste0("[[", seq_along(x), "]]")
-      }
-      elem_pairs <- paste(
-        paste0(nms[lens != 1L], " = ", non_one),
-        collapse = ", "
-      )
-      .stop_cant_coerce(
-        from_class = x_class,
-        to_class = "data.frame",
-        x_arg = x_arg,
-        call = call,
-        additional_msg = c(
-          i = "All list elements must have equal length (or length 1).",
-          x = "Element lengths: {elem_pairs}."
-        ),
-        message_env = rlang::current_env()
-      )
-    }
+    .check_all_named(x, x_arg = x_arg, call = call)
+    .check_not_jagged(x, x_arg = x_arg, call = call, x_class = x_class)
   }
 
   as.data.frame(x, ...)

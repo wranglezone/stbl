@@ -41,7 +41,7 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)
 test_that("to_df() errors for a list with incompatible column lengths (#201)", {
   expect_error(
     to_df(list(a = 1:3, b = 1:2)),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+    class = .compile_dash("stbl", "error", "jagged")
   )
   expect_snapshot(
     to_df(list(a = 1:3, b = 1:2)),
@@ -49,6 +49,17 @@ test_that("to_df() errors for a list with incompatible column lengths (#201)", {
   )
   expect_snapshot(
     wrapped_to_df(list(a = 1:3, b = 1:2)),
+    error = TRUE
+  )
+})
+
+test_that("to_df() errors for an unnamed list (#203)", {
+  expect_error(
+    to_df(list(1, 2)),
+    class = .compile_dash("stbl", "error", "bad_named")
+  )
+  expect_snapshot(
+    to_df(list(1, 2)),
     error = TRUE
   )
 })
