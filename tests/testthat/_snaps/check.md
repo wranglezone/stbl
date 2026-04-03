@@ -73,3 +73,21 @@
       x Can't convert some values due to incompatible values.
       * Locations: 2 and 4
 
+# .check_all_named() works (#203)
+
+    Code
+      .check_all_named(list(1, 2))
+    Condition
+      Error:
+      ! `list(1, 2)` must have all elements named.
+
+# .check_not_jagged() works (#203)
+
+    Code
+      .check_not_jagged(list(a = 1:3, b = 1:2))
+    Condition
+      Error:
+      ! Can't coerce `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
+      i All list elements must have length 3 or 1.
+      x Short elements: b = 2.
+

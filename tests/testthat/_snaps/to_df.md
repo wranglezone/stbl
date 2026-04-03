@@ -50,3 +50,11 @@
       Error:
       ! Can't coerce `"not a data frame"` <character> to <data.frame>.
 
+# to_df.default() errors for non-coercible types (#201)
+
+    Code
+      to_df(as.Date("2024-01-01"))
+    Condition
+      Error:
+      ! Can't coerce `as.Date("2024-01-01")` <Date> to <data.frame>.
+

@@ -86,6 +86,15 @@ test_that("to_df() coerces named vector types to a data frame (#203)", {
 
   my_lgl <- c(TRUE, FALSE)
   expect_identical(to_df(my_lgl), data.frame(my_lgl = my_lgl))
+
+  my_cplx <- complex(real = 1:2, imaginary = 3:4)
+  expect_identical(to_df(my_cplx), data.frame(my_cplx = my_cplx))
+
+  my_raw <- as.raw(c(1L, 2L))
+  expect_identical(to_df(my_raw), data.frame(my_raw = my_raw))
+
+  my_fct <- factor(c("a", "b"))
+  expect_identical(to_df(my_fct), data.frame(my_fct = my_fct))
 })
 
 test_that("to_df() errors for inline vector expressions (#203)", {
@@ -96,6 +105,17 @@ test_that("to_df() errors for inline vector expressions (#203)", {
   expect_error(
     to_df(c(1.5, 2.5)),
     class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
+})
+
+test_that("to_df.default() errors for non-coercible types (#201)", {
+  expect_error(
+    to_df(as.Date("2024-01-01")),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
+  expect_snapshot(
+    to_df(as.Date("2024-01-01")),
+    error = TRUE
   )
 })
 
