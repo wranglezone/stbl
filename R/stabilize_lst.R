@@ -242,7 +242,12 @@ NULL
       # duplicates
       nm_arg <- if (length(positions) == 1L) deparse(nm) else i
       element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-      .x[[i]] <- .call_specified_fn(element_specs[[nm]], .x[[i]], .x_arg = element_arg, .call = .call)
+      .x[[i]] <- .call_specified_fn(
+        element_specs[[nm]],
+        .x[[i]],
+        .x_arg = element_arg,
+        .call = .call
+      )
     }
   }
   .x
@@ -275,7 +280,12 @@ NULL
   }
   for (i in which(is_unnamed)) {
     element_arg <- paste0(.x_arg, "[[", i, "]]")
-    .x[[i]] <- .call_specified_fn(.unnamed, .x[[i]], .x_arg = element_arg, .call = .call)
+    .x[[i]] <- .call_specified_fn(
+      .unnamed,
+      .x[[i]],
+      .x_arg = element_arg,
+      .call = .call
+    )
   }
   .x
 }
@@ -316,7 +326,12 @@ NULL
     # Use name-based path when unambiguous; fall back to position for duplicates
     nm_arg <- if (!nm %in% dup_extra_nms) deparse(nm) else i
     element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-    .x[[i]] <- .call_specified_fn(named_spec, .x[[i]], .x_arg = element_arg, .call = .call)
+    .x[[i]] <- .call_specified_fn(
+      named_spec,
+      .x[[i]],
+      .x_arg = element_arg,
+      .call = .call
+    )
   }
   .x
 }
