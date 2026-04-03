@@ -114,3 +114,29 @@ test_that(".check_cast_failures() works", {
     error = TRUE
   )
 })
+
+test_that(".check_all_named() works (#203)", {
+  expect_null(.check_all_named(list(a = 1, b = 2)))
+  expect_error(
+    .check_all_named(list(1, 2)),
+    class = .compile_dash("stbl", "error", "bad_named")
+  )
+  expect_snapshot(
+    .check_all_named(list(1, 2)),
+    error = TRUE
+  )
+})
+
+test_that(".check_not_jagged() works (#203)", {
+  expect_null(.check_not_jagged(list()))
+  expect_null(.check_not_jagged(list(a = 1, b = 2)))
+  expect_null(.check_not_jagged(list(a = 1:3, b = 1:3)))
+  expect_error(
+    .check_not_jagged(list(a = 1:3, b = 1:2)),
+    class = .compile_dash("stbl", "error", "jagged")
+  )
+  expect_snapshot(
+    .check_not_jagged(list(a = 1:3, b = 1:2)),
+    error = TRUE
+  )
+})

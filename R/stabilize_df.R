@@ -88,7 +88,7 @@ stabilize_df <- function(
     return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
   }
 
-  .x <- to_df(.x, x_arg = .x_arg, call = .call)
+  .x <- rlang::inject(to_df(!!.x, x_arg = .x_arg, call = .call))
 
   .check_df_rows(
     .x,

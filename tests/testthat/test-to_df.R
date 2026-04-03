@@ -41,7 +41,7 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)
 test_that("to_df() errors for a list with incompatible column lengths (#201)", {
   expect_error(
     to_df(list(a = 1:3, b = 1:2)),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+    class = .compile_dash("stbl", "error", "jagged")
   )
   expect_snapshot(
     to_df(list(a = 1:3, b = 1:2)),
@@ -49,6 +49,17 @@ test_that("to_df() errors for a list with incompatible column lengths (#201)", {
   )
   expect_snapshot(
     wrapped_to_df(list(a = 1:3, b = 1:2)),
+    error = TRUE
+  )
+})
+
+test_that("to_df() errors for an unnamed list (#203)", {
+  expect_error(
+    to_df(list(1, 2)),
+    class = .compile_dash("stbl", "error", "bad_named")
+  )
+  expect_snapshot(
+    to_df(list(1, 2)),
     error = TRUE
   )
 })
@@ -62,8 +73,48 @@ test_that("to_df() errors for non-coercible types (#201)", {
     to_df("not a data frame"),
     error = TRUE
   )
+})
+
+test_that("to_df() coerces named vector types to a data frame (#203)", {
+  expect_identical(to_df(letters), data.frame(letters = letters))
+
+  my_int <- 1:5
+  expect_identical(to_df(my_int), data.frame(my_int = my_int))
+
+  my_dbl <- c(1.5, 2.5)
+  expect_identical(to_df(my_dbl), data.frame(my_dbl = my_dbl))
+
+  my_lgl <- c(TRUE, FALSE)
+  expect_identical(to_df(my_lgl), data.frame(my_lgl = my_lgl))
+
+  my_cplx <- complex(real = 1:2, imaginary = 3:4)
+  expect_identical(to_df(my_cplx), data.frame(my_cplx = my_cplx))
+
+  my_raw <- as.raw(c(1L, 2L))
+  expect_identical(to_df(my_raw), data.frame(my_raw = my_raw))
+
+  my_fct <- factor(c("a", "b"))
+  expect_identical(to_df(my_fct), data.frame(my_fct = my_fct))
+})
+
+test_that("to_df() errors for inline vector expressions (#203)", {
+  expect_error(
+    to_df(c("a", "b", "c")),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
+  expect_error(
+    to_df(c(1.5, 2.5)),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
+})
+
+test_that("to_df.default() errors for non-coercible types (#201)", {
+  expect_error(
+    to_df(as.Date("2024-01-01")),
+    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+  )
   expect_snapshot(
-    wrapped_to_df("not a data frame"),
+    to_df(as.Date("2024-01-01")),
     error = TRUE
   )
 })

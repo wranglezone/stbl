@@ -2,6 +2,7 @@
 
 ## New features
 
+* `to_df()` now handles atomic vectors provided as named objects (e.g. `to_df(letters)`) and provides informative error messages in additional cases, such as jagged lists (#203).
 * New `stabilize_df()` and `specify_df()` to validate data frame structure and contents (#142). `to_df()` coerces compatible inputs such as named lists to data frames.
 * New function `to_df()` (and synonym `to_data_frame()`) to coerce an object to a data frame (#201).
 * New `stabilize_lst()` and `specify_lst()` to validate list structure and contents and create pre-configured list validators for nested validation (#110).

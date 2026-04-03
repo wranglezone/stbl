@@ -57,7 +57,8 @@ to_df(mtcars)
 to_df(list(name = "Alice", age = 30L))
 to_df(NULL)
 try(to_df(NULL, allow_null = FALSE))
-try(to_df("not a data frame"))
+try(to_df(c("a", "b", "c")))
+to_df(letters)
 }
 \seealso{
 Other data frame functions: 
