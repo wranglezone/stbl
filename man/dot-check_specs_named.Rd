@@ -7,8 +7,9 @@
 .check_specs_named(..., .call = caller_env())
 }
 \arguments{
-\item{...}{Named \verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc) for required
-named elements of \code{.x}. Each name corresponds to a required element in
+\item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
 \code{.x}, and the function is used to validate that element.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the

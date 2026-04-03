@@ -21,7 +21,9 @@
 \item{is_extra_named}{\code{(logical)} Element-wise indicator of extra named
 positions.}
 
-\item{named_spec}{A spec function, or \code{NULL} to disallow extra named
+\item{named_spec}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), or \code{NULL} to disallow extra named
 elements.}
 
 \item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized

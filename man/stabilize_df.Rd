@@ -62,13 +62,16 @@ stabilise_data_frame(
 \arguments{
 \item{.x}{The argument to stabilize.}
 
-\item{...}{Named \code{\link[=specify_chr]{specify_*()}} functions for required named
-columns of \code{.x}. Each name corresponds to a required column in \code{.x}, and
-the function is used to validate that column.}
+\item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required column in \code{.x},
+and the function is used to validate that column.}
 
-\item{.extra_cols}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
-validate all columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If
-\code{NULL} (default), any extra columns will cause an error.}
+\item{.extra_cols}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
+columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
+(default), any extra columns will cause an error.}
 
 \item{.col_names}{\code{(character)} A character vector of column names that must
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
@@ -123,7 +126,11 @@ stabilize_df(
 )
 
 # Check required column names without validating contents
-stabilize_df(mtcars, .col_names = c("mpg", "cyl"), .extra_cols = stabilize_present)
+stabilize_df(
+  mtcars,
+  .col_names = c("mpg", "cyl"),
+  .extra_cols = stabilize_present
+)
 
 # Enforce row count constraints
 try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))

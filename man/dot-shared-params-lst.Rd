@@ -4,12 +4,18 @@
 \alias{.shared-params-lst}
 \title{Shared params for list helpers}
 \arguments{
-\item{element_specs}{\code{(list)} Named list of spec functions from \code{...}.}
+\item{element_specs}{\code{(list)} Named list of stabilizer functions, such as
+\verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by
+\verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a
+required element in \code{.x}, and the function is used to validate that
+element.}
 
 \item{is_extra_named}{\code{(logical)} Element-wise indicator of extra named
 positions.}
 
-\item{named_spec}{A spec function, or \code{NULL} to disallow extra named
+\item{named_spec}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), or \code{NULL} to disallow extra named
 elements.}
 
 \item{nms}{\code{(character)} Result of \code{rlang::names2(.x)}.}

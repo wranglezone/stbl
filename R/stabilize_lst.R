@@ -6,15 +6,20 @@
 #' shared rule. `stabilise_lst()`, `stabilize_list()`, and `stabilise_list()`
 #' are synonyms of `stabilize_lst()`.
 #'
-#' @param ... Named `specify_*()` functions ([specify_chr()], etc) for required
-#'   named elements of `.x`. Each name corresponds to a required element in
+#' @param ... Named stabilizer functions, such as `stabilize_*` functions
+#'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
+#'   ([specify_chr()], etc). Each name corresponds to a required element in
 #'   `.x`, and the function is used to validate that element.
-#' @param .named A single `specify_*()` function ([specify_chr()], etc) to
-#'   validate all named elements of `.x` that are *not* explicitly listed in
-#'   `...`. If `NULL` (default), any extra named elements will cause an error.
-#' @param .unnamed A single `specify_*()` function ([specify_chr()], etc) to
-#'   validate all unnamed elements of `.x`. If `NULL` (default), any unnamed
-#'   elements will cause an error.
+#' @param .named A single stabilizer function, such as a `stabilize_*` function
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
+#'   ([specify_chr()], etc). This function is used to validate all named
+#'   elements of `.x` that are *not* explicitly listed in `...`. If `NULL`
+#'   (default), any extra named elements will cause an error.
+#' @param .unnamed A single stabilizer function, such as a `stabilize_*`
+#'   function ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc). This function is used to validate all
+#'   unnamed elements of `.x`. If `NULL` (default), any unnamed elements will
+#'   cause an error.
 #' @param .allow_duplicate_names `(length-1 logical)` Should `.x` be allowed to
 #'   have duplicate names? If `FALSE` (default), an error is thrown when any
 #'   named element of `.x` shares a name with another.
@@ -128,10 +133,16 @@ stabilise_list <- stabilize_lst
 
 #' Shared params for list helpers
 #'
-#' @param element_specs `(list)` Named list of spec functions from `...`.
+#' @param element_specs `(list)` Named list of stabilizer functions, such as
+#'   `stabilize_*` functions ([stabilize_chr()], etc) or functions produced by
+#'   `specify_*()` functions ([specify_chr()], etc). Each name corresponds to a
+#'   required element in `.x`, and the function is used to validate that
+#'   element.
 #' @param is_extra_named `(logical)` Element-wise indicator of extra named
 #'   positions.
-#' @param named_spec A spec function, or `NULL` to disallow extra named
+#' @param named_spec A single stabilizer function, such as a `stabilize_*`
+#'   function ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc), or `NULL` to disallow extra named
 #'   elements.
 #' @param nms `(character)` Result of `rlang::names2(.x)`.
 #'

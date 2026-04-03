@@ -7,12 +7,15 @@
 #' `stabilize_data_frame()`, and `stabilise_data_frame()` are synonyms of
 #' `stabilize_df()`.
 #'
-#' @param ... Named [`specify_*()`][specify_chr] functions for required named
-#'   columns of `.x`. Each name corresponds to a required column in `.x`, and
-#'   the function is used to validate that column.
-#' @param .extra_cols A single `specify_*()` function ([specify_chr()], etc) to
-#'   validate all columns of `.x` that are *not* explicitly listed in `...`. If
-#'   `NULL` (default), any extra columns will cause an error.
+#' @param ... Named stabilizer functions, such as `stabilize_*` functions
+#'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
+#'   ([specify_chr()], etc). Each name corresponds to a required column in `.x`,
+#'   and the function is used to validate that column.
+#' @param .extra_cols A single stabilizer function, such as a `stabilize_*`
+#'   function ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc). This function is used to validate all
+#'   columns of `.x` that are *not* explicitly listed in `...`. If `NULL`
+#'   (default), any extra columns will cause an error.
 #' @param .col_names `(character)` A character vector of column names that must
 #'   be present in `.x`. Any columns listed here that are absent from `.x` will
 #'   cause an error. Unlike `...`, this does not validate the column contents.
@@ -44,7 +47,11 @@
 #' )
 #'
 #' # Check required column names without validating contents
-#' stabilize_df(mtcars, .col_names = c("mpg", "cyl"), .extra_cols = stabilize_present)
+#' stabilize_df(
+#'   mtcars,
+#'   .col_names = c("mpg", "cyl"),
+#'   .extra_cols = stabilize_present
+#' )
 #'
 #' # Enforce row count constraints
 #' try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))

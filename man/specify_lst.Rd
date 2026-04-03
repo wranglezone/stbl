@@ -24,17 +24,22 @@ specify_list(
 )
 }
 \arguments{
-\item{...}{Named \verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc) for required
-named elements of \code{.x}. Each name corresponds to a required element in
+\item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
 \code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
-validate all named elements of \code{.x} that are \emph{not} explicitly listed in
-\code{...}. If \code{NULL} (default), any extra named elements will cause an error.}
+\item{.named}{A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all named
+elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
+(default), any extra named elements will cause an error.}
 
-\item{.unnamed}{A single \verb{specify_*()} function (\code{\link[=specify_chr]{specify_chr()}}, etc) to
-validate all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed
-elements will cause an error.}
+\item{.unnamed}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
+unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
+cause an error.}
 
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
