@@ -1,4 +1,4 @@
-test_that(".stbl_abort() throws the expected error", {
+test_that(".stbl_abort() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stbl_abort("A message.", "a_subclass"),
     "stbl",
@@ -10,7 +10,7 @@ test_that(".stbl_abort() throws the expected error", {
   )
 })
 
-test_that(".stop_cant_coerce() throws the expected error", {
+test_that(".stop_cant_coerce() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env()),
     "stbl",
@@ -23,7 +23,7 @@ test_that(".stop_cant_coerce() throws the expected error", {
   )
 })
 
-test_that(".stop_cant_coerce() uses additional_msg when provided", {
+test_that(".stop_cant_coerce() uses additional_msg when provided (#95)", {
   expect_snapshot(
     .stop_cant_coerce(
       "character",
@@ -36,7 +36,7 @@ test_that(".stop_cant_coerce() uses additional_msg when provided", {
   )
 })
 
-test_that(".stop_must() throws the expected error", {
+test_that(".stop_must() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stop_must("must be a foo.", "my_arg", rlang::current_env()),
     "stbl",
@@ -48,7 +48,7 @@ test_that(".stop_must() throws the expected error", {
   )
 })
 
-test_that(".stop_must() handles subclasses", {
+test_that(".stop_must() handles subclasses (#95)", {
   expect_pkg_error_classes(
     .stop_must(
       "must be a foo.",
@@ -70,7 +70,7 @@ test_that(".stop_must() handles subclasses", {
   )
 })
 
-test_that(".stop_must() uses additional_msg when provided", {
+test_that(".stop_must() uses additional_msg when provided (#95)", {
   expect_snapshot(
     .stop_must(
       "must be a foo.",
@@ -82,14 +82,14 @@ test_that(".stop_must() uses additional_msg when provided", {
   )
 })
 
-test_that(".define_main_msg() works", {
+test_that(".define_main_msg() works (#95)", {
   expect_equal(
     .define_main_msg("my_arg", "must be a foo."),
     "{.arg my_arg} must be a foo."
   )
 })
 
-test_that(".stop_null() throws the expected error", {
+test_that(".stop_null() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stop_null("my_arg", rlang::current_env()),
     "stbl",
@@ -101,7 +101,7 @@ test_that(".stop_null() throws the expected error", {
   )
 })
 
-test_that(".stop_null() passes dots", {
+test_that(".stop_null() passes dots (#95)", {
   expect_pkg_error_classes(
     .stop_null("my_arg", rlang::current_env(), .internal = TRUE),
     "stbl",
@@ -111,7 +111,7 @@ test_that(".stop_null() passes dots", {
   # about the messaging.
 })
 
-test_that(".stop_incompatible() throws the expected error", {
+test_that(".stop_incompatible() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stop_incompatible(
       "character",
@@ -137,7 +137,7 @@ test_that(".stop_incompatible() throws the expected error", {
   )
 })
 
-test_that(".stop_incompatible() passes dots", {
+test_that(".stop_incompatible() passes dots (#95)", {
   expect_pkg_error_classes(
     .stop_incompatible(
       "character",

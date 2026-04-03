@@ -66,17 +66,22 @@ stabilise_list(
 \arguments{
 \item{.x}{The argument to stabilize.}
 
-\item{...}{Named \code{\link[=specify_chr]{specify_*()}} functions for required named
-elements of \code{.x}. Each name corresponds to a required element in \code{.x}, and
-the function is used to validate that element.}
+\item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
+\code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single \code{\link[=specify_chr]{specify_*()}} function to validate all
-named elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
+\item{.named}{A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all named
+elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
 (default), any extra named elements will cause an error.}
 
-\item{.unnamed}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
-will cause an error.}
+\item{.unnamed}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
+unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
+cause an error.}
 
 \item{.allow_duplicate_names}{\verb{(length-1 logical)} Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
@@ -90,16 +95,18 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{.x_class}{\verb{(length-1 character)} The class name of \code{.x} to use in error
-messages. Use this if you remove a special class from \code{.x} before checking
-its coercion, but want the error message to match the original class.}
+\item{.x_class}{\verb{(length-1 character)} The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.}
 }
 \value{
 The validated list.
@@ -156,6 +163,7 @@ Other stabilization functions:
 \code{\link{stabilize_arg}()},
 \code{\link{stabilize_chr}()},
 \code{\link{stabilize_dbl}()},
+\code{\link{stabilize_df}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
 \code{\link{stabilize_lgl}()},

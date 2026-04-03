@@ -4,8 +4,7 @@
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_list()` is a synonym of `to_lst()`.
 #'
-#' @details This function has three important distinctions from
-#'   [base::as.list()]:
+#' @details This function has important distinctions from [base::as.list()]:
 #' - Functions can be rejected as part of the call to this function (with
 #'   `coerce_function = FALSE`, the default). If they are allowed, they'll be
 #'   coerced to a list concatenating their formals and body (as with
@@ -42,7 +41,7 @@ to_lst.list <- function(x, ...) {
 
 #' @export
 #' @rdname to_lst
-to_lst.default <- function(x, ...) {
+to_lst.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   as.list(x, ...)
 }
 

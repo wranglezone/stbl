@@ -2,7 +2,7 @@ test_that("stabilize_fct() works (#62)", {
   expect_identical(stabilize_fct(letters), factor(letters))
 })
 
-test_that("stabilize_fct() throws errors for bad levels (#62)", {
+test_that("stabilize_fct() throws errors for bad levels (#62, #67)", {
   expect_error(
     stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
     class = .compile_dash("stbl", "error", "fct_levels")

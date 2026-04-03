@@ -4,7 +4,7 @@ test_that("stabilize_arg() returns its inputs for default settings (#11)", {
   expect_identical(stabilize_arg(NULL), NULL)
 })
 
-test_that("stabilize_arg() complains about weird args (#11)", {
+test_that("stabilize_arg() complains about weird args (#11, #58, #99)", {
   # This error is from rlang, so just watch for that error class
   expect_error(
     stabilize_arg(1L, new_arg = "red"),
@@ -20,7 +20,7 @@ test_that("stabilize_arg() complains about weird args (#11)", {
   )
 })
 
-test_that("stabilize_arg() rejects NULLs when asked (#11)", {
+test_that("stabilize_arg() rejects NULLs when asked (#11, #58, #99)", {
   given <- NULL
   expect_error(
     stabilize_arg(given, allow_null = FALSE),
@@ -36,7 +36,7 @@ test_that("stabilize_arg() rejects NULLs when asked (#11)", {
   )
 })
 
-test_that("stabilize_arg() checks NAs (#11)", {
+test_that("stabilize_arg() checks NAs (#11, #58, #99)", {
   given <- 1:8
   expect_identical(stabilize_arg(given, allow_na = FALSE), given)
 
@@ -55,7 +55,7 @@ test_that("stabilize_arg() checks NAs (#11)", {
   )
 })
 
-test_that("stabilize_arg() checks size args (#11)", {
+test_that("stabilize_arg() checks size args (#11, #58, #99)", {
   given <- TRUE
   expect_true(stabilize_arg(given, min_size = 1, max_size = 1))
 
@@ -73,7 +73,7 @@ test_that("stabilize_arg() checks size args (#11)", {
   )
 })
 
-test_that("stabilize_arg() checks min_size (#11)", {
+test_that("stabilize_arg() checks min_size (#11, #58, #99)", {
   given <- 1:3
   expect_identical(
     stabilize_arg(given, min_size = 1, max_size = 10),
@@ -94,7 +94,7 @@ test_that("stabilize_arg() checks min_size (#11)", {
   )
 })
 
-test_that("stabilize_arg() checks max_size (#11)", {
+test_that("stabilize_arg() checks max_size (#11, #58)", {
   given <- 1:3
   expect_error(
     stabilize_arg(given, max_size = 2),
@@ -116,7 +116,7 @@ test_that("stabilize_arg_scalar() allows length-1 args through (#12)", {
   expect_identical(stabilize_arg_scalar(given), given)
 })
 
-test_that("stabilize_arg_scalar() errors for non-scalars (#12)", {
+test_that("stabilize_arg_scalar() errors for non-scalars (#12, #58)", {
   given <- 1:10
   expect_error(
     stabilize_arg_scalar(given),
@@ -132,7 +132,7 @@ test_that("stabilize_arg_scalar() errors for non-scalars (#12)", {
   )
 })
 
-test_that("stabilize_arg_scalar() respects allow_null (#12)", {
+test_that("stabilize_arg_scalar() respects allow_null (#12, #58)", {
   given <- NULL
   expect_error(
     stabilize_arg_scalar(given, allow_null = FALSE),
@@ -148,7 +148,7 @@ test_that("stabilize_arg_scalar() respects allow_null (#12)", {
   )
 })
 
-test_that("stabilize_arg_scalar() errors on weird internal arg values (#12)", {
+test_that("stabilize_arg_scalar() errors on weird internal arg values (#12, #58)", {
   given <- NULL
   expect_error(
     stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE)),

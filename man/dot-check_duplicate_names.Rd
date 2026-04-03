@@ -4,27 +4,27 @@
 \alias{.check_duplicate_names}
 \title{Check for duplicate names in a list}
 \usage{
-.check_duplicate_names(.x, .allow_duplicate_names, x_arg, call)
+.check_duplicate_names(.x, .allow_duplicate_names, .x_arg, .call)
 }
 \arguments{
-\item{.x}{\code{(list)} The list being validated.}
+\item{.x}{The argument to stabilize.}
 
 \item{.allow_duplicate_names}{\verb{(length-1 logical)} Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
-\item{call}{\code{(environment)} The execution environment to mention as the
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{
 \code{NULL}, invisibly, if the check passes.
 }
 \description{
-If \code{.allow_duplicate_names} is \code{FALSE}, throws an error when any named
-element of \code{.x} shares a name with another named element.
+Check for duplicate names in a list
 }
 \keyword{internal}

@@ -11,9 +11,10 @@
 
 \item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

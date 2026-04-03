@@ -1,4 +1,4 @@
-test_that("object_type returns expected types", {
+test_that("object_type returns expected types (#95)", {
   expect_identical(
     object_type(factor(letters)),
     "factor"

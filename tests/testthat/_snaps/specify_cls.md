@@ -33,7 +33,7 @@
       attr(,"class")
       [1] "stbl_specified_fn" "function"         
 
-# The function built via specify_cls errors informatively for duplicated args (#150, #161)
+# The function built via specify_cls errors informatively for duplicated args (#150, #153, #161)
 
     Code
       no_null(NULL, allow_null = FALSE)

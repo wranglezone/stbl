@@ -1,4 +1,4 @@
-# stabilize_arg() complains about weird args (#11)
+# stabilize_arg() complains about weird args (#11, #58, #99)
 
     Code
       stabilize_arg(1L, new_arg = "red")
@@ -18,7 +18,7 @@
       x Problematic argument:
       * new_arg = "red"
 
-# stabilize_arg() rejects NULLs when asked (#11)
+# stabilize_arg() rejects NULLs when asked (#11, #58, #99)
 
     Code
       stabilize_arg(given, allow_null = FALSE)
@@ -34,7 +34,7 @@
       Error in `wrapped_stabilize_arg()`:
       ! `val` must not be <NULL>.
 
-# stabilize_arg() checks NAs (#11)
+# stabilize_arg() checks NAs (#11, #58, #99)
 
     Code
       stabilize_arg(given, allow_na = FALSE)
@@ -52,7 +52,7 @@
       ! `val` must not contain NA values.
       * NA locations: 4 and 7
 
-# stabilize_arg() checks size args (#11)
+# stabilize_arg() checks size args (#11, #58, #99)
 
     Code
       stabilize_arg(given, min_size = 2, max_size = 1)
@@ -72,7 +72,7 @@
       * `min_size` = 2
       * `max_size` = 1
 
-# stabilize_arg() checks min_size (#11)
+# stabilize_arg() checks min_size (#11, #58, #99)
 
     Code
       stabilize_arg(given, min_size = 11)
@@ -90,7 +90,7 @@
       ! `val` must have size >= 11.
       x 3 is too small.
 
-# stabilize_arg() checks max_size (#11)
+# stabilize_arg() checks max_size (#11, #58)
 
     Code
       stabilize_arg(given, max_size = 2)
@@ -108,7 +108,7 @@
       ! `val` must have size <= 2.
       x 3 is too big.
 
-# stabilize_arg_scalar() errors for non-scalars (#12)
+# stabilize_arg_scalar() errors for non-scalars (#12, #58)
 
     Code
       stabilize_arg_scalar(given)
@@ -126,7 +126,7 @@
       ! `val` must be a single <integer>.
       x `val` has 10 values.
 
-# stabilize_arg_scalar() respects allow_null (#12)
+# stabilize_arg_scalar() respects allow_null (#12, #58)
 
     Code
       stabilize_arg_scalar(given, allow_null = FALSE)
@@ -144,7 +144,7 @@
       ! `val` must be a single <non-NULL>.
       x `val` has no values.
 
-# stabilize_arg_scalar() errors on weird internal arg values (#12)
+# stabilize_arg_scalar() errors on weird internal arg values (#12, #58)
 
     Code
       stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE))

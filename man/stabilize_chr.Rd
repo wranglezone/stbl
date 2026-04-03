@@ -180,16 +180,18 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
-messages. Use this if you remove a special class from \code{x} before checking
-its coercion, but want the error message to match the original class.}
+\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.}
 
 \item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
@@ -259,6 +261,7 @@ Other character functions:
 Other stabilization functions: 
 \code{\link{stabilize_arg}()},
 \code{\link{stabilize_dbl}()},
+\code{\link{stabilize_df}()},
 \code{\link{stabilize_fct}()},
 \code{\link{stabilize_int}()},
 \code{\link{stabilize_lgl}()},

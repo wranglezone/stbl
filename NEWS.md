@@ -2,6 +2,8 @@
 
 ## New features
 
+* New `stabilize_df()` and `specify_df()` to validate data frame structure and contents (#142). `to_df()` coerces compatible inputs such as named lists to data frames.
+* New function `to_df()` (and synonym `to_data_frame()`) to coerce an object to a data frame (#201).
 * New `stabilize_lst()` and `specify_lst()` to validate list structure and contents and create pre-configured list validators for nested validation (#110).
 * New `stabilize_present()` validates that a value is non-`NULL` without imposing any type constraints (#110).
 * New `expect_pkg_error_snapshot()` function to snapshot-test the full error output of `pkg_abort()`-style errors in one step, combining `expect_snapshot()` with `expect_pkg_error_classes()` (#188).

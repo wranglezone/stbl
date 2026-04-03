@@ -1,4 +1,4 @@
-# .stbl_abort() throws the expected error
+# .stbl_abort() throws the expected error (#95)
 
     Code
       .stbl_abort("A message.", "a_subclass")
@@ -6,7 +6,7 @@
       Error:
       ! A message.
 
-# .stop_cant_coerce() throws the expected error
+# .stop_cant_coerce() throws the expected error (#95)
 
     Code
       .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env())
@@ -14,7 +14,7 @@
       Error:
       ! Can't coerce `my_arg` <character> to <integer>.
 
-# .stop_cant_coerce() uses additional_msg when provided
+# .stop_cant_coerce() uses additional_msg when provided (#95)
 
     Code
       .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env(),
@@ -24,7 +24,7 @@
       ! Can't coerce `my_arg` <character> to <integer>.
       x An extra message.
 
-# .stop_must() throws the expected error
+# .stop_must() throws the expected error (#95)
 
     Code
       .stop_must("must be a foo.", "my_arg", rlang::current_env())
@@ -32,7 +32,7 @@
       Error:
       ! `my_arg` must be a foo.
 
-# .stop_must() handles subclasses
+# .stop_must() handles subclasses (#95)
 
     Code
       .stop_must("must be a foo.", "my_arg", rlang::current_env(), subclass = "my_custom_class")
@@ -40,7 +40,7 @@
       Error:
       ! `my_arg` must be a foo.
 
-# .stop_must() uses additional_msg when provided
+# .stop_must() uses additional_msg when provided (#95)
 
     Code
       .stop_must("must be a foo.", "my_arg", rlang::current_env(), additional_msg = c(
@@ -50,7 +50,7 @@
       ! `my_arg` must be a foo.
       * Some details.
 
-# .stop_null() throws the expected error
+# .stop_null() throws the expected error (#95)
 
     Code
       .stop_null("my_arg", rlang::current_env())
@@ -58,7 +58,7 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_incompatible() throws the expected error
+# .stop_incompatible() throws the expected error (#95)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
@@ -69,7 +69,7 @@
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
 
-# .stop_incompatible() passes dots
+# .stop_incompatible() passes dots (#95)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),

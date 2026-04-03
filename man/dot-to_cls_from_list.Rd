@@ -23,16 +23,18 @@
 
 \item{...}{Arguments passed to methods.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of \code{x} to use in error
-messages. Use this if you remove a special class from \code{x} before checking
-its coercion, but want the error message to match the original class.}
+\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+stabilized to use in error messages. Use this if you remove a special class
+from the object before checking its coercion, but want the error message to
+match the original class.}
 }
 \value{
 \code{x} coerced to the target class.

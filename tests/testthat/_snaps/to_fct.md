@@ -1,4 +1,4 @@
-# to_fct() throws errors for bad levels (#62, #177)
+# to_fct() throws errors for bad levels (#62, #67, #177)
 
     Code
       to_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
@@ -102,7 +102,7 @@
       ! `val` must be a single <factor>.
       x `val` has 26 values.
 
-# to_fct_scalar respects allow_zero_length (#62, #189)
+# to_fct_scalar respects allow_zero_length (#62, #43, #45, #189)
 
     Code
       to_fct_scalar(given)

@@ -1,4 +1,4 @@
-# stabilize_fct() throws errors for bad levels (#62)
+# stabilize_fct() throws errors for bad levels (#62, #67)
 
     Code
       stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b")

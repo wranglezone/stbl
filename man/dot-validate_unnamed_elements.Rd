@@ -4,27 +4,29 @@
 \alias{.validate_unnamed_elements}
 \title{Validate or reject unnamed elements}
 \usage{
-.validate_unnamed_elements(.x, .unnamed, x_arg, call)
+.validate_unnamed_elements(.x, .unnamed, .x_arg, .call)
 }
 \arguments{
-\item{.x}{\code{(list)} The list being validated.}
+\item{.x}{The argument to stabilize.}
 
-\item{.unnamed}{A single \code{\link[=specify_chr]{specify_*()}} function to validate
-all unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements
-will cause an error.}
+\item{.unnamed}{A single stabilizer function, such as a \verb{stabilize_*}
+function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
+unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
+cause an error.}
 
-\item{x_arg}{\verb{(length-1 character)} An argument name for \code{.x}. The automatic
-value will work in most cases, or pass it through from higher-level
-functions to make error messages clearer in unexported functions.}
+\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+to use in error messages. The automatic value will work in most cases, or
+pass it through from higher-level functions to make error messages clearer
+in unexported functions.}
 
-\item{call}{\code{(environment)} The execution environment to mention as the
+\item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{
 The updated list.
 }
 \description{
-If unnamed elements exist and \code{unnamed_spec} is \code{NULL}, throws an error
-reporting their positions. Otherwise applies \code{unnamed_spec} to each.
+Validate or reject unnamed elements
 }
 \keyword{internal}
