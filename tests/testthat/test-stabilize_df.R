@@ -79,11 +79,17 @@ test_that("stabilize_df() errors when required column is missing (#199)", {
 
 test_that("stabilize_df() errors informatively when column fails validation (#199)", {
   expect_error(
-    stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar()),
+    stabilize_df(
+      data.frame(count = "not-an-int"),
+      count = specify_int_scalar()
+    ),
     class = .compile_dash("stbl", "error", "incompatible_type")
   )
   expect_snapshot(
-    stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar()),
+    stabilize_df(
+      data.frame(count = "not-an-int"),
+      count = specify_int_scalar()
+    ),
     error = TRUE
   )
 })
@@ -105,7 +111,11 @@ test_that("stabilize_df() errors on extra columns by default (#199)", {
 
 test_that("stabilize_df() allows extra columns with .extra_cols (#199)", {
   given <- data.frame(a = 1L, b = 2L)
-  result <- stabilize_df(given, a = specify_int_scalar(), .extra_cols = stabilize_present)
+  result <- stabilize_df(
+    given,
+    a = specify_int_scalar(),
+    .extra_cols = stabilize_present
+  )
   expect_identical(result, given)
 })
 
@@ -134,7 +144,11 @@ test_that("stabilize_df() enforces .min_rows (#199)", {
     error = TRUE
   )
   expect_snapshot(
-    wrapped_stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present),
+    wrapped_stabilize_df(
+      mtcars[0, ],
+      .min_rows = 1,
+      .extra_cols = stabilize_present
+    ),
     error = TRUE
   )
 })
@@ -156,17 +170,30 @@ test_that("stabilize_df() enforces .max_rows (#199)", {
 
 test_that("stabilize_df() passes with valid row counts (#199)", {
   expect_no_error(
-    stabilize_df(mtcars, .min_rows = 32, .max_rows = 32, .extra_cols = stabilize_present)
+    stabilize_df(
+      mtcars,
+      .min_rows = 32,
+      .max_rows = 32,
+      .extra_cols = stabilize_present
+    )
   )
 })
 
 test_that("stabilize_df() enforces .col_names (#199)", {
   expect_error(
-    stabilize_df(data.frame(a = 1L), .col_names = c("a", "b"), .extra_cols = stabilize_present),
+    stabilize_df(
+      data.frame(a = 1L),
+      .col_names = c("a", "b"),
+      .extra_cols = stabilize_present
+    ),
     class = .compile_dash("stbl", "error", "missing_cols")
   )
   expect_snapshot(
-    stabilize_df(data.frame(a = 1L), .col_names = c("a", "b"), .extra_cols = stabilize_present),
+    stabilize_df(
+      data.frame(a = 1L),
+      .col_names = c("a", "b"),
+      .extra_cols = stabilize_present
+    ),
     error = TRUE
   )
 })
@@ -239,7 +266,10 @@ test_that("specify_df() creates a working validator (#199)", {
 })
 
 test_that("specify_df() errors when required column is missing (#199)", {
-  validator <- specify_df(name = specify_chr_scalar(), age = specify_int_scalar())
+  validator <- specify_df(
+    name = specify_chr_scalar(),
+    age = specify_int_scalar()
+  )
   expect_error(
     validator(data.frame(name = "Alice")),
     class = .compile_dash("stbl", "error", "missing_element")
@@ -255,7 +285,10 @@ test_that("specify_df() passes through .min_rows, .max_rows (#199)", {
 })
 
 test_that("specify_df() passes through .col_names (#199)", {
-  validator <- specify_df(.col_names = c("a", "b"), .extra_cols = stabilize_present)
+  validator <- specify_df(
+    .col_names = c("a", "b"),
+    .extra_cols = stabilize_present
+  )
   expect_error(
     validator(data.frame(a = 1L)),
     class = .compile_dash("stbl", "error", "missing_cols")
