@@ -35,9 +35,9 @@ specify_df <- function(
     function(
       .x,
       ...,
-      x_arg = caller_arg(.x),
-      call = caller_env(),
-      x_class = object_type(.x)
+      .x_arg = caller_arg(.x),
+      .call = caller_env(),
+      .x_class = object_type(.x)
     ) {
       rlang::inject(
         stabilize_df(
@@ -49,9 +49,9 @@ specify_df <- function(
           .min_rows = .min_rows,
           .max_rows = .max_rows,
           .allow_null = .allow_null,
-          .x_arg = x_arg,
-          .call = call,
-          .x_class = x_class
+          .x_arg = .x_arg,
+          .call = .call,
+          .x_class = .x_class
         )
       )
     },

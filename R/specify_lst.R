@@ -42,9 +42,9 @@ specify_lst <- function(
     function(
       .x,
       ...,
-      x_arg = caller_arg(.x),
-      call = caller_env(),
-      x_class = object_type(.x)
+      .x_arg = caller_arg(.x),
+      .call = caller_env(),
+      .x_class = object_type(.x)
     ) {
       rlang::inject(
         stabilize_lst(
@@ -56,9 +56,9 @@ specify_lst <- function(
           .allow_null = .allow_null,
           .min_size = .min_size,
           .max_size = .max_size,
-          .x_arg = x_arg,
-          .call = call,
-          .x_class = x_class
+          .x_arg = .x_arg,
+          .call = .call,
+          .x_class = .x_class
         )
       )
     },

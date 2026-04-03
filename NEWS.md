@@ -2,6 +2,8 @@
 
 ## New features
 
+* `specify_df()` and `specify_lst()` now use dot-prefixed parameter names (`.x_arg`, `.call`, `.x_class`) in the generated function signature, so list elements or data frame columns named `x_arg`, `call`, or `x_class` no longer conflict (#204).
+* `stabilize_lst()` now correctly dispatches to nested `specify_lst()` (and `specify_df()`) validators, enabling nested list validation (#204).
 * `to_df()` now handles atomic vectors provided as named objects (e.g. `to_df(letters)`) and provides informative error messages in additional cases, such as jagged lists (#203).
 * New `stabilize_df()` and `specify_df()` to validate data frame structure and contents (#142). `to_df()` coerces compatible inputs such as named lists to data frames.
 * New function `to_df()` (and synonym `to_data_frame()`) to coerce an object to a data frame (#201).

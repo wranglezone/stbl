@@ -152,6 +152,27 @@ NULL
 
 ## functions ----
 
+#' Call a spec function with properly-named context arguments
+#'
+#' Stabilizer functions produced by `specify_*()` use `.x_arg` and `.call` as
+#' parameter names, while user-defined stabilizer functions may use the
+#' unprefixed `x_arg` and `call`. This helper checks `rlang::fn_fmls_names()`
+#' to determine which convention the function uses and dispatches accordingly.
+#'
+#' @param spec_fn A stabilizer function.
+#' @param .x The value to validate.
+#' @inheritParams stabilize_lst
+#' @returns The validated value.
+#' @keywords internal
+.call_specified_fn <- function(spec_fn, .x, .x_arg, .call) {
+  fmls <- rlang::fn_fmls_names(spec_fn)
+  if (".x_arg" %in% fmls) {
+    spec_fn(.x, .x_arg = .x_arg, .call = .call)
+  } else {
+    spec_fn(.x, x_arg = .x_arg, call = .call)
+  }
+}
+
 #' Validate all named elements (required and extra)
 #'
 #' Computes element name metadata and delegates to
@@ -221,7 +242,7 @@ NULL
       # duplicates
       nm_arg <- if (length(positions) == 1L) deparse(nm) else i
       element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-      .x[[i]] <- element_specs[[nm]](.x[[i]], x_arg = element_arg, call = .call)
+      .x[[i]] <- .call_specified_fn(element_specs[[nm]], .x[[i]], .x_arg = element_arg, .call = .call)
     }
   }
   .x
@@ -254,7 +275,7 @@ NULL
   }
   for (i in which(is_unnamed)) {
     element_arg <- paste0(.x_arg, "[[", i, "]]")
-    .x[[i]] <- .unnamed(.x[[i]], x_arg = element_arg, call = .call)
+    .x[[i]] <- .call_specified_fn(.unnamed, .x[[i]], .x_arg = element_arg, .call = .call)
   }
   .x
 }
@@ -295,7 +316,7 @@ NULL
     # Use name-based path when unambiguous; fall back to position for duplicates
     nm_arg <- if (!nm %in% dup_extra_nms) deparse(nm) else i
     element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
-    .x[[i]] <- named_spec(.x[[i]], x_arg = element_arg, call = .call)
+    .x[[i]] <- .call_specified_fn(named_spec, .x[[i]], .x_arg = element_arg, .call = .call)
   }
   .x
 }
