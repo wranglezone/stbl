@@ -15,7 +15,7 @@ Depends:
 Imports:
     cli (>= 3.4.0),
     glue,
-    rlang (>= 1.0.2.9003),
+    rlang (>= 1.0.3),
     vctrs
 Suggests:
     astgrepr,
