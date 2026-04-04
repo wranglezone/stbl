@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/api2r/stbl/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/wranglezone/stbl/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -80,7 +80,8 @@
 <span>  <span class="va">my_arg_name</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">my_old_fun</span><span class="op">(</span><span class="st">"1"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in my_arg_name + 1: non-numeric argument to binary operator</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in `my_arg_name + 1`:</span></span>
+<span><span class="co">#&gt; ! non-numeric argument to binary operator</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="with-stbl">With stbl:<a class="anchor" aria-label="anchor" href="#with-stbl"></a>
@@ -124,15 +125,15 @@
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
-<p>Please note that the stbl project is released with a <a href="https://stbl.api2r.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the stbl project is released with a <a href="https://stbl.wrangle.zone/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=stbl" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/api2r/stbl/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/api2r/stbl/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/wranglezone/stbl/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/wranglezone/stbl/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -178,7 +179,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
