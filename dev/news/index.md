@@ -2,85 +2,6 @@
 
 ## stbl (development version)
 
-### New features
-
-- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) now
-  handles atomic vectors provided as named objects
-  (e.g. `to_df(letters)`) and provides informative error messages in
-  additional cases, such as jagged lists
-  ([\#203](https://github.com/wranglezone/stbl/issues/203)).
-- New
-  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
-  and
-  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
-  to validate data frame structure and contents
-  ([\#142](https://github.com/wranglezone/stbl/issues/142)).
-  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) coerces
-  compatible inputs such as named lists to data frames.
-- New function
-  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) (and
-  synonym
-  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md))
-  to coerce an object to a data frame
-  ([\#201](https://github.com/wranglezone/stbl/issues/201)).
-- New
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
-  and
-  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
-  to validate list structure and contents and create pre-configured list
-  validators for nested validation
-  ([\#110](https://github.com/wranglezone/stbl/issues/110)).
-- New
-  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
-  validates that a value is non-`NULL` without imposing any type
-  constraints ([\#110](https://github.com/wranglezone/stbl/issues/110)).
-- New
-  [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
-  function to snapshot-test the full error output of
-  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)-style
-  errors in one step, combining `expect_snapshot()` with
-  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
-  ([\#188](https://github.com/wranglezone/stbl/issues/188)).
-- New condition functions:
-  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
-  throws errors with a standardized, opinionated collection of classes,
-  and
-  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
-  checks that an error with the expected set of classes is thrown
-  ([\#136](https://github.com/wranglezone/stbl/issues/136)).
-- New specification functions: `specify_*()` creates a “stbl-specified
-  function” (class `"stbl_specified_fn"`), a call to the corresponding
-  `stabilize_*()` function with arguments pre-filled. For example,
-  `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")`
-  creates a `stabilize_email()` function that calls
-  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  with `regex = "^[^@]+@[^@]+\\.[^@]+$"`, which could then be used to
-  stabilize email addresses
-  ([\#147](https://github.com/wranglezone/stbl/issues/147),
-  [\#148](https://github.com/wranglezone/stbl/issues/148),
-  [\#149](https://github.com/wranglezone/stbl/issues/149),
-  [\#150](https://github.com/wranglezone/stbl/issues/150),
-  [\#151](https://github.com/wranglezone/stbl/issues/151)).
-- New function
-  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) (and
-  synonym
-  [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)) to
-  coerce an object to a list, with conditional checks for `NULL` and
-  functions ([\#157](https://github.com/wranglezone/stbl/issues/157),
-  [\#166](https://github.com/wranglezone/stbl/issues/166)).
-- New synonym functions for all class functions. For example
-  [`to_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  is now a synonym for
-  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  and
-  [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
-  is a synonym for
-  [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
-  ([\#164](https://github.com/wranglezone/stbl/issues/164)). In
-  addition, `stabilise_*()` synonyms have been added for all
-  `stabilize_*()` functions
-  ([\#167](https://github.com/wranglezone/stbl/issues/167)).
-
 ### Breaking changes
 
 - [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
@@ -113,6 +34,79 @@
   a more specific subclass was already included), and therefore should
   not impact most if any code
   ([\#136](https://github.com/wranglezone/stbl/issues/136)).
+
+### New features
+
+- New long-form and British-spelling synonym functions for all class
+  functions. For example,
+  [`to_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  is a synonym for
+  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+  for
+  [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+  and `stabilise_*()` for all `stabilize_*()` functions
+  ([\#164](https://github.com/wranglezone/stbl/issues/164),
+  [\#167](https://github.com/wranglezone/stbl/issues/167)).
+- New
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
+  checks that an error with the expected set of classes is thrown by
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md),
+  and
+  [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
+  snapshot-tests the full error output in one step by combining
+  `expect_snapshot()` with
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
+  ([\#136](https://github.com/wranglezone/stbl/issues/136),
+  [\#188](https://github.com/wranglezone/stbl/issues/188)). New
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
+  throws errors with a standardized, opinionated collection of classes
+  ([\#136](https://github.com/wranglezone/stbl/issues/136)).
+- New specification functions: `specify_*()` creates a
+  `"stbl_specified_fn"`, a call to the corresponding `stabilize_*()`
+  function with arguments pre-filled. For example,
+  `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")`
+  creates a `stabilize_email()` function that validates email addresses
+  ([\#147](https://github.com/wranglezone/stbl/issues/147),
+  [\#148](https://github.com/wranglezone/stbl/issues/148),
+  [\#149](https://github.com/wranglezone/stbl/issues/149),
+  [\#150](https://github.com/wranglezone/stbl/issues/150),
+  [\#151](https://github.com/wranglezone/stbl/issues/151),
+  [\#153](https://github.com/wranglezone/stbl/issues/153),
+  [\#161](https://github.com/wranglezone/stbl/issues/161)).
+- New
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  and
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  validate data frame structure and contents
+  ([\#142](https://github.com/wranglezone/stbl/issues/142)).
+- New
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  validate list structure and contents and create pre-configured
+  validators for nested validation
+  ([\#110](https://github.com/wranglezone/stbl/issues/110),
+  [\#204](https://github.com/wranglezone/stbl/issues/204)).
+- New
+  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  validates that a value is non-`NULL` without imposing any type
+  constraints ([\#110](https://github.com/wranglezone/stbl/issues/110)).
+- New [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) (and
+  synonym
+  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md))
+  coerces compatible objects to a data frame, including named lists and
+  named atomic vectors (e.g., `to_df(letters)`), with informative errors
+  for incompatible inputs such as jagged lists
+  ([\#142](https://github.com/wranglezone/stbl/issues/142),
+  [\#201](https://github.com/wranglezone/stbl/issues/201),
+  [\#203](https://github.com/wranglezone/stbl/issues/203)).
+- New [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+  (and synonym
+  [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md))
+  coerces an object to a list, with conditional checks for `NULL` and
+  functions ([\#157](https://github.com/wranglezone/stbl/issues/157),
+  [\#166](https://github.com/wranglezone/stbl/issues/166)).
 
 ### Other changes
 
