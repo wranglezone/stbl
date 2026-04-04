@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9004</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,17 +35,20 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0" id="stbl-030">stbl 0.3.0<a class="anchor" aria-label="anchor" href="#stbl-030"></a></h2>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
 <ul><li>
 <code><a href="../reference/stabilize_chr.html">to_chr_scalar()</a></code>, <code><a href="../reference/stabilize_dbl.html">to_dbl_scalar()</a></code>, <code><a href="../reference/stabilize_fct.html">to_fct_scalar()</a></code>, <code><a href="../reference/stabilize_int.html">to_int_scalar()</a></code>, <code><a href="../reference/stabilize_lgl.html">to_lgl_scalar()</a></code>, <code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code>, <code><a href="../reference/stabilize_dbl.html">stabilize_dbl_scalar()</a></code>, <code><a href="../reference/stabilize_fct.html">stabilize_fct_scalar()</a></code>, <code><a href="../reference/stabilize_int.html">stabilize_int_scalar()</a></code>, <code><a href="../reference/stabilize_lgl.html">stabilize_lgl_scalar()</a></code>, <code><a href="../reference/specify_chr.html">specify_chr_scalar()</a></code>, <code><a href="../reference/specify_dbl.html">specify_dbl_scalar()</a></code>, <code><a href="../reference/specify_fct.html">specify_fct_scalar()</a></code>, <code><a href="../reference/specify_int.html">specify_int_scalar()</a></code>, and <code><a href="../reference/specify_lgl.html">specify_lgl_scalar()</a></code> (and their synonyms) now default to <code>allow_null = FALSE</code> and <code>allow_zero_length = FALSE</code>. Pass <code>allow_null = TRUE</code> or <code>allow_zero_length = TRUE</code> to restore the previous behavior (<a href="https://github.com/wranglezone/stbl/issues/189" class="external-link">#189</a>, <a href="https://github.com/wranglezone/stbl/issues/197" class="external-link">#197</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="potential-breaking-changes-development-version">Potential breaking changes<a class="anchor" aria-label="anchor" href="#potential-breaking-changes-development-version"></a></h3>
+<h3 id="potential-breaking-changes-0-3-0">Potential breaking changes<a class="anchor" aria-label="anchor" href="#potential-breaking-changes-0-3-0"></a></h3>
 <ul><li>Several conditions that formerly included a subclass of “stbl-error-must” no longer include that subclass. This only occurs when “stbl-error-must” was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (<a href="https://github.com/wranglezone/stbl/issues/136" class="external-link">#136</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-3-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
 <ul><li>New long-form and British-spelling synonym functions for all class functions. For example, <code><a href="../reference/stabilize_chr.html">to_character()</a></code> is a synonym for <code><a href="../reference/stabilize_chr.html">to_chr()</a></code>, <code><a href="../reference/specify_lgl.html">specify_logical()</a></code> for <code><a href="../reference/specify_lgl.html">specify_lgl()</a></code>, and <code>stabilise_*()</code> for all <code>stabilize_*()</code> functions (<a href="https://github.com/wranglezone/stbl/issues/164" class="external-link">#164</a>, <a href="https://github.com/wranglezone/stbl/issues/167" class="external-link">#167</a>).</li>
 <li>New <code><a href="../reference/expect_pkg_error_classes.html">expect_pkg_error_classes()</a></code> checks that an error with the expected set of classes is thrown by <code><a href="../reference/pkg_abort.html">pkg_abort()</a></code>, and <code><a href="../reference/expect_pkg_error_snapshot.html">expect_pkg_error_snapshot()</a></code> snapshot-tests the full error output in one step by combining <code>expect_snapshot()</code> with <code><a href="../reference/expect_pkg_error_classes.html">expect_pkg_error_classes()</a></code> (<a href="https://github.com/wranglezone/stbl/issues/136" class="external-link">#136</a>, <a href="https://github.com/wranglezone/stbl/issues/188" class="external-link">#188</a>). New <code><a href="../reference/pkg_abort.html">pkg_abort()</a></code> throws errors with a standardized, opinionated collection of classes (<a href="https://github.com/wranglezone/stbl/issues/136" class="external-link">#136</a>).</li>
 <li>New specification functions: <code>specify_*()</code> creates a <code>"stbl_specified_fn"</code>, a call to the corresponding <code>stabilize_*()</code> function with arguments pre-filled. For example, <code>stabilize_email &lt;- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")</code> creates a <code>stabilize_email()</code> function that validates email addresses (<a href="https://github.com/wranglezone/stbl/issues/147" class="external-link">#147</a>, <a href="https://github.com/wranglezone/stbl/issues/148" class="external-link">#148</a>, <a href="https://github.com/wranglezone/stbl/issues/149" class="external-link">#149</a>, <a href="https://github.com/wranglezone/stbl/issues/150" class="external-link">#150</a>, <a href="https://github.com/wranglezone/stbl/issues/151" class="external-link">#151</a>, <a href="https://github.com/wranglezone/stbl/issues/153" class="external-link">#153</a>, <a href="https://github.com/wranglezone/stbl/issues/161" class="external-link">#161</a>).</li>
@@ -56,7 +59,7 @@
 <li>New <code><a href="../reference/to_lst.html">to_lst()</a></code> (and synonym <code><a href="../reference/to_lst.html">to_list()</a></code>) coerces an object to a list, with conditional checks for <code>NULL</code> and functions (<a href="https://github.com/wranglezone/stbl/issues/157" class="external-link">#157</a>, <a href="https://github.com/wranglezone/stbl/issues/166" class="external-link">#166</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-changes-development-version">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-development-version"></a></h3>
+<h3 id="other-changes-0-3-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-0-3-0"></a></h3>
 <ul><li>Revised the “Getting started with stbl” vignette to clarify what happens at each step (<a href="https://github.com/wranglezone/stbl/issues/139" class="external-link">#139</a>, <a href="https://github.com/wranglezone/stbl/issues/143" class="external-link">#143</a>, <a href="https://github.com/wranglezone/stbl/issues/144" class="external-link">#144</a>).</li>
 <li>Clarified error messages (<a href="https://github.com/wranglezone/stbl/issues/176" class="external-link">#176</a>, <a href="https://github.com/wranglezone/stbl/issues/177" class="external-link">#177</a>).</li>
 </ul></div>

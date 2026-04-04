@@ -2,6 +2,8 @@
 
 ## stbl (development version)
 
+## stbl 0.3.0
+
 ### Breaking changes
 
 - [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
