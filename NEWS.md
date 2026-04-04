@@ -1,25 +1,23 @@
 # stbl (development version)
 
-## New features
-
-* `to_df()` now handles atomic vectors provided as named objects (e.g. `to_df(letters)`) and provides informative error messages in additional cases, such as jagged lists (#203).
-* New `stabilize_df()` and `specify_df()` to validate data frame structure and contents (#142). `to_df()` coerces compatible inputs such as named lists to data frames.
-* New function `to_df()` (and synonym `to_data_frame()`) to coerce an object to a data frame (#201).
-* New `stabilize_lst()` and `specify_lst()` to validate list structure and contents and create pre-configured list validators for nested validation (#110).
-* New `stabilize_present()` validates that a value is non-`NULL` without imposing any type constraints (#110).
-* New `expect_pkg_error_snapshot()` function to snapshot-test the full error output of `pkg_abort()`-style errors in one step, combining `expect_snapshot()` with `expect_pkg_error_classes()` (#188).
-* New condition functions: `pkg_abort()` throws errors with a standardized, opinionated collection of classes, and `expect_pkg_error_classes()` checks that an error with the expected set of classes is thrown (#136).
-* New specification functions: `specify_*()` creates a "stbl-specified function" (class `"stbl_specified_fn"`), a call to the corresponding `stabilize_*()` function with arguments pre-filled. For example, `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")` creates a `stabilize_email()` function that calls `stabilize_chr()` with `regex = "^[^@]+@[^@]+\\.[^@]+$"`, which could then be used to stabilize email addresses (#147, #148, #149, #150, #151).
-* New function `to_lst()` (and synonym `to_list()`) to coerce an object to a list, with conditional checks for `NULL` and functions (#157, #166).
-* New synonym functions for all class functions. For example `to_character()` is now a synonym for `to_chr()`, and `specify_logical()` is a synonym for `specify_lgl()` (#164). In addition, `stabilise_*()` synonyms have been added for all `stabilize_*()` functions (#167).
-
 ## Breaking changes
 
 * `to_chr_scalar()`, `to_dbl_scalar()`, `to_fct_scalar()`, `to_int_scalar()`, `to_lgl_scalar()`, `stabilize_chr_scalar()`, `stabilize_dbl_scalar()`, `stabilize_fct_scalar()`, `stabilize_int_scalar()`, `stabilize_lgl_scalar()`, `specify_chr_scalar()`, `specify_dbl_scalar()`, `specify_fct_scalar()`, `specify_int_scalar()`, and `specify_lgl_scalar()` (and their synonyms) now default to `allow_null = FALSE` and `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or `allow_zero_length = TRUE` to restore the previous behavior (#189, #197).
 
 ## Potential breaking changes
 
-* Several conditions that formerly included a subclass of "stbl-error-must" no longer include that subclass. This only occurs when "stbl-error-must" was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (#136). 
+* Several conditions that formerly included a subclass of "stbl-error-must" no longer include that subclass. This only occurs when "stbl-error-must" was not the most specific subclass (i.e., when a more specific subclass was already included), and therefore should not impact most if any code (#136).
+
+## New features
+
+* New long-form and British-spelling synonym functions for all class functions. For example, `to_character()` is a synonym for `to_chr()`, `specify_logical()` for `specify_lgl()`, and `stabilise_*()` for all `stabilize_*()` functions (#164, #167).
+* New `expect_pkg_error_classes()` checks that an error with the expected set of classes is thrown by `pkg_abort()`, and `expect_pkg_error_snapshot()` snapshot-tests the full error output in one step by combining `expect_snapshot()` with `expect_pkg_error_classes()` (#136, #188). New `pkg_abort()` throws errors with a standardized, opinionated collection of classes (#136).
+* New specification functions: `specify_*()` creates a `"stbl_specified_fn"`, a call to the corresponding `stabilize_*()` function with arguments pre-filled. For example, `stabilize_email <- specify_chr(regex = "^[^@]+@[^@]+\\.[^@]+$")` creates a `stabilize_email()` function that validates email addresses (#147, #148, #149, #150, #151, #153, #161).
+* New `stabilize_df()` and `specify_df()` validate data frame structure and contents (#142).
+* New `stabilize_lst()` and `specify_lst()` validate list structure and contents and create pre-configured validators for nested validation (#110, #204).
+* New `stabilize_present()` validates that a value is non-`NULL` without imposing any type constraints (#110).
+* New `to_df()` (and synonym `to_data_frame()`) coerces compatible objects to a data frame, including named lists and named atomic vectors (e.g., `to_df(letters)`), with informative errors for incompatible inputs such as jagged lists (#142, #201, #203).
+* New `to_lst()` (and synonym `to_list()`) coerces an object to a list, with conditional checks for `NULL` and functions (#157, #166).
 
 ## Other changes
 
