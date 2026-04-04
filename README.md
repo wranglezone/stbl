@@ -73,7 +73,8 @@ my_old_fun <- function(my_arg_name) {
   my_arg_name + 1
 }
 my_old_fun("1")
-#> Error in my_arg_name + 1: non-numeric argument to binary operator
+#> Error in `my_arg_name + 1`:
+#> ! non-numeric argument to binary operator
 ```
 
 ### With stbl:
