@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/v0.3.0/DESCRIPTION)
 
 Harmon J (2026). *stbl: Stabilize Function Arguments*. R package version
 0.3.0, <https://stbl.wrangle.zone/>.
