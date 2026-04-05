@@ -4,6 +4,8 @@
 
 ## stbl 0.3.0
 
+CRAN release: 2026-04-04
+
 ### Breaking changes
 
 - [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
