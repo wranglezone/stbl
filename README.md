@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# stbl
+# stbl <a href="https://stbl.wrangle.zone/"><img src="man/figures/logo.svg" align="right" height="278" alt="stbl website" /></a>
 
 <!-- badges: start -->
 
