@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# stbl
+# stbl <a href="https://stbl.wrangle.zone/"><img src="man/figures/logo.svg" align="right" height="278" alt="stbl website" /></a>
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
