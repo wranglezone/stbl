@@ -2,6 +2,29 @@
 
 ## stbl (development version)
 
+- New
+  [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
+  signals classed messages with an opinionated class hierarchy,
+  mirroring
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
+  New
+  [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
+  tests that a message with the expected set of classes is thrown, and
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
+  snapshot-tests the full message output in one step
+  ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+- New
+  [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md)
+  signals classed warnings with an opinionated class hierarchy,
+  mirroring
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
+  New
+  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
+  tests that a warning with the expected set of classes is thrown, and
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  snapshot-tests the full warning output in one step
+  ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+
 ## stbl 0.3.0
 
 CRAN release: 2026-04-04
