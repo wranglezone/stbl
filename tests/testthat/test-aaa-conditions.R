@@ -10,6 +10,28 @@ test_that(".stbl_abort() throws the expected error (#95)", {
   )
 })
 
+test_that(".stbl_warn() throws the expected warning (#213)", {
+  expect_pkg_warning_classes(
+    .stbl_warn("A message.", "a_subclass"),
+    "stbl",
+    "a_subclass"
+  )
+  expect_snapshot(
+    .stbl_warn("A message.", "a_subclass")
+  )
+})
+
+test_that(".stbl_inform() throws the expected message (#213)", {
+  expect_pkg_message_classes(
+    .stbl_inform("A message.", "a_subclass"),
+    "stbl",
+    "a_subclass"
+  )
+  expect_snapshot(
+    .stbl_inform("A message.", "a_subclass")
+  )
+})
+
 test_that(".stop_cant_coerce() throws the expected error (#95)", {
   expect_pkg_error_classes(
     .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env()),
