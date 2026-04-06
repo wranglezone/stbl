@@ -69,8 +69,9 @@ SEXP stbl_lgl_from_chr(SEXP x) {
     }
 
     /* Try parsing as a double using R's own parser (matches as.double() behaviour).
-       Reject NaN so that e.g. "NaN" is treated as invalid (R's as.double("NaN")
-       returns NaN which R considers NA, so are_dbl_ish("NaN") is FALSE). */
+       Reject NaN: R treats NaN as NA (is.na(NaN) == TRUE), so are_dbl_ish("NaN")
+       is FALSE and "NaN" is not a valid logical.  Inf/-Inf are accepted because
+       is.na(Inf) == FALSE and to_lgl("Inf") == TRUE in R. */
     char* endptr;
     double dval = R_strtod(s, &endptr);
     /* endptr == s means no numeric characters were consumed at all */
@@ -79,7 +80,9 @@ SEXP stbl_lgl_from_chr(SEXP x) {
       p_valid[i]  = 0;
       continue;
     }
-    /* Skip trailing whitespace: R's coercion to double accepts it */
+    /* Skip trailing whitespace: R's coercion to double accepts it.
+       The loop is safe because s is a null-terminated C string and '\0' is
+       not a whitespace character, so the loop always terminates. */
     while (isspace((unsigned char)*endptr)) endptr++;
     if (*endptr == '\0' && !ISNAN(dval)) {
       p_result[i] = (dval != 0.0) ? 1 : 0;
