@@ -30,9 +30,9 @@ static int is_false_str(const char* s) {
 /*
  * Single-pass character-to-logical conversion.
  *
- * Returns a list of two logical vectors of length(x):
- *   [[1]] result: the converted logical values (NA where conversion failed)
- *   [[2]] valid:  TRUE for elements that converted successfully, FALSE otherwise
+ * Returns a named list of two logical vectors of length(x):
+ *   $result: the converted logical values (NA where conversion failed)
+ *   $valid:  TRUE for elements that converted successfully, FALSE otherwise
  *
  * Recognises (case-insensitively): "TRUE"/"T" -> TRUE, "FALSE"/"F" -> FALSE,
  * NA_STRING -> NA (valid), and any string parseable as a finite non-NaN double
@@ -96,6 +96,10 @@ SEXP stbl_lgl_from_chr(SEXP x) {
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, valid);
-  UNPROTECT(3);
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+  UNPROTECT(4);
   return out;
 }

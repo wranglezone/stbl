@@ -45,7 +45,7 @@ to_lgl.character <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lgl_from_chr, x)
-  failures <- !res[[2L]]
+  failures <- !res[["valid"]]
   .check_cast_failures(
     failures,
     x_class,
@@ -55,7 +55,7 @@ to_lgl.character <- function(
     call
   )
 
-  return(res[[1L]])
+  return(res[["result"]])
 }
 
 #' @export
