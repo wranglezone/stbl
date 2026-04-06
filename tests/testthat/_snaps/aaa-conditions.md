@@ -6,6 +6,21 @@
       Error:
       ! A message.
 
+# .stbl_warn() throws the expected warning (#213)
+
+    Code
+      .stbl_warn("A message.", "a_subclass")
+    Condition
+      Warning:
+      A message.
+
+# .stbl_inform() throws the expected message (#213)
+
+    Code
+      .stbl_inform("A message.", "a_subclass")
+    Message
+      A message.
+
 # .stop_cant_coerce() throws the expected error (#95)
 
     Code

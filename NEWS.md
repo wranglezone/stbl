@@ -2,6 +2,7 @@
 
 * New `pkg_inform()` signals classed messages with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` tests that a message with the expected set of classes is thrown, and `expect_pkg_message_snapshot()` snapshot-tests the full message output in one step (#213).
 * New `pkg_warn()` signals classed warnings with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_warning_classes()` tests that a warning with the expected set of classes is thrown, and `expect_pkg_warning_snapshot()` snapshot-tests the full warning output in one step (#213).
+* `are_lgl_ish()` and `to_lgl()` for character input are now implemented in C. Benchmarks show >5x speedup for large character vectors (#218).
 
 # stbl 0.3.0
 
