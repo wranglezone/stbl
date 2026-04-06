@@ -28,23 +28,17 @@ static int is_false_str(const char* s) {
 }
 
 /*
- * Single-pass character-to-logical conversion.
+ * Core single-pass character-to-logical conversion.
  *
- * Returns a named list of two logical vectors of length(x):
- *   $result: the converted logical values (NA where conversion failed)
- *   $valid:  TRUE for elements that converted successfully, FALSE otherwise
+ * Fills p_result[0..n-1] and p_valid[0..n-1]:
+ *   p_result: the converted logical values (NA_LOGICAL where conversion failed)
+ *   p_valid:  1 for elements that converted successfully, 0 otherwise
  *
  * Recognises (case-insensitively): "TRUE"/"T" -> TRUE, "FALSE"/"F" -> FALSE,
  * NA_STRING -> NA (valid), and any string parseable as a finite non-NaN double
  * (via R_strtod) -> (double != 0.0).  Everything else is invalid.
  */
-SEXP stbl_lgl_from_chr(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
-  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
-  int* p_result = LOGICAL(result);
-  int* p_valid  = LOGICAL(valid);
-
+static void chr_to_lgl_core(SEXP x, R_xlen_t n, int* p_result, int* p_valid) {
   for (R_xlen_t i = 0; i < n; i++) {
     SEXP xi = STRING_ELT(x, i);
 
@@ -92,6 +86,20 @@ SEXP stbl_lgl_from_chr(SEXP x) {
       p_valid[i]  = 0;
     }
   }
+}
+
+/*
+ * ffi_chr_to_lgl: internal FFI entry point used by stbl itself.
+ *
+ * Returns a named list of two logical vectors of length(x):
+ *   $result: the converted logical values (NA where conversion failed)
+ *   $valid:  TRUE for elements that converted successfully, FALSE otherwise
+ */
+SEXP ffi_chr_to_lgl(SEXP x) {
+  R_xlen_t n = XLENGTH(x);
+  SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
+  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
+  chr_to_lgl_core(x, n, LOGICAL(result), LOGICAL(valid));
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(out, 0, result);
@@ -102,4 +110,34 @@ SEXP stbl_lgl_from_chr(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(4);
   return out;
+}
+
+/*
+ * stbl_chr_to_lgl: public API entry point.
+ *
+ * Returns a logical vector of length(x) with the converted values
+ * (NA where conversion failed).
+ */
+SEXP stbl_chr_to_lgl(SEXP x) {
+  R_xlen_t n = XLENGTH(x);
+  SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
+  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
+  chr_to_lgl_core(x, n, LOGICAL(result), LOGICAL(valid));
+  UNPROTECT(2);
+  return result;
+}
+
+/*
+ * stbl_chr_are_lglish: public API entry point.
+ *
+ * Returns a logical vector of length(x) that is TRUE for elements that can
+ * be coerced to logical, FALSE otherwise.
+ */
+SEXP stbl_chr_are_lglish(SEXP x) {
+  R_xlen_t n = XLENGTH(x);
+  SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
+  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
+  chr_to_lgl_core(x, n, LOGICAL(result), LOGICAL(valid));
+  UNPROTECT(2);
+  return valid;
 }

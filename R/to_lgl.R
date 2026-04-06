@@ -44,7 +44,7 @@ to_lgl.character <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(stbl_lgl_from_chr, x)
+  res <- .Call(ffi_chr_to_lgl, x)
   failures <- !res[["valid"]]
   .check_cast_failures(
     failures,

@@ -71,7 +71,7 @@ are_lgl_ish.numeric <- function(x, ...) {
 
 #' @export
 are_lgl_ish.character <- function(x, ...) {
-  .Call(stbl_lgl_from_chr, x)[["valid"]]
+  .Call(ffi_chr_to_lgl, x)[["valid"]]
 }
 
 #' @export

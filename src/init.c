@@ -2,10 +2,14 @@
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
 
-SEXP stbl_lgl_from_chr(SEXP x);
+SEXP ffi_chr_to_lgl(SEXP x);
+SEXP stbl_chr_to_lgl(SEXP x);
+SEXP stbl_chr_are_lglish(SEXP x);
 
 static const R_CallMethodDef callMethods[] = {
-  {"stbl_lgl_from_chr", (DL_FUNC) &stbl_lgl_from_chr, 1},
+  {"ffi_chr_to_lgl",     (DL_FUNC) &ffi_chr_to_lgl,     1},
+  {"stbl_chr_to_lgl",    (DL_FUNC) &stbl_chr_to_lgl,    1},
+  {"stbl_chr_are_lglish",(DL_FUNC) &stbl_chr_are_lglish, 1},
   {NULL, NULL, 0}
 };
 
