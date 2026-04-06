@@ -66,7 +66,7 @@ are_int_ish.NULL <- function(x, ...) {
 
 #' @export
 are_int_ish.double <- function(x, ...) {
-  is.na(x) | (!is.infinite(x) & (x == floor(x)))
+  .Call(stbl_dbl_are_intish, x)
 }
 
 #' @export

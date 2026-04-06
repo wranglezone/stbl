@@ -10,9 +10,13 @@ test_that("are_int_ish() works for logicals (#93)", {
   expect_identical(are_int_ish(c(TRUE, FALSE, NA)), rep(TRUE, 3))
 })
 
-test_that("are_int_ish() works for doubles (#93)", {
+test_that("are_int_ish() works for doubles (#93, #217)", {
   expect_identical(are_int_ish(c(1, 2.0, NA)), c(TRUE, TRUE, TRUE))
   expect_identical(are_int_ish(c(1.1, Inf, -Inf)), c(FALSE, FALSE, FALSE))
+  # NaN is treated as NA
+  expect_true(are_int_ish(NaN))
+  # Out-of-range doubles cannot be coerced to integer
+  expect_false(are_int_ish(2147483648))
 })
 
 test_that("are_int_ish() works for characters (#93)", {
