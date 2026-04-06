@@ -75,8 +75,9 @@ to_int.character <- function(
     call = call
   )
   if (coerce_character) {
-    .check_chr_to_int_failures(x, x_class, x_arg, call)
-    return(suppressWarnings(as.integer(x)))
+    res <- .Call(ffi_chr_to_int, x)
+    .check_chr_to_int_failures(res, x_class, x_arg, call)
+    return(res[["result"]])
   }
   .stop_cant_coerce(
     from_class = x_class,
@@ -161,17 +162,20 @@ to_integer_scalar <- to_int_scalar
 
 #' Check for character to integer coercion failures
 #'
+#' @param res A list returned by `ffi_chr_to_int`, with elements
+#'   `result`, `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
 #'
 #' @returns `NULL`, invisibly, if `x` passes all checks.
 #' @keywords internal
-.check_chr_to_int_failures <- function(x, x_class, x_arg, call) {
-  failures <- .are_not_int_ish_chr(x)
-  if (!any(failures)) {
+.check_chr_to_int_failures <- function(res, x_class, x_arg, call) {
+  non_number <- res[["non_number"]]
+  bad_precision <- res[["bad_precision"]]
+  if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
   }
   .check_cast_failures(
-    failures[, "non_number"],
+    non_number,
     x_class,
     integer(),
     "incompatible values",
@@ -181,7 +185,7 @@ to_integer_scalar <- to_int_scalar
   .stop_incompatible(
     x_class,
     integer(),
-    failures[, "bad_precision"],
+    bad_precision,
     due_to = "loss of precision",
     x_arg,
     call

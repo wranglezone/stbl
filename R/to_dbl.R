@@ -75,16 +75,16 @@ to_dbl.character <- function(
     call = call
   )
   if (coerce_character) {
-    failures <- .are_not_dbl_ish_chr(x)
+    res <- .Call(ffi_chr_to_dbl, x)
     .check_cast_failures(
-      failures,
+      !res[["valid"]],
       x_class,
       double(),
       "incompatible values",
       x_arg,
       call
     )
-    return(suppressWarnings(as.double(x)))
+    return(res[["result"]])
   }
   .stop_cant_coerce(
     from_class = x_class,

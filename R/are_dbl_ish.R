@@ -80,19 +80,7 @@ are_dbl_ish.character <- function(x, ..., coerce_character = TRUE) {
   if (!to_lgl_scalar(coerce_character)) {
     return(rep(FALSE, length(x)))
   }
-
-  !.are_not_dbl_ish_chr(x)
-}
-
-#' Check for character to double coercion failures
-#'
-#' @inheritParams .shared-params-check
-#' @returns A logical vector where `TRUE` indicates a failure.
-#' @keywords internal
-.are_not_dbl_ish_chr <- function(x) {
-  cast_dbl <- suppressWarnings(as.double(x))
-  x_na <- is.na(x)
-  xor(x_na, is.na(cast_dbl))
+  .Call(stbl_chr_are_dblish, x)
 }
 
 
