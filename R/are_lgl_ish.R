@@ -71,12 +71,12 @@ are_lgl_ish.numeric <- function(x, ...) {
 
 #' @export
 are_lgl_ish.character <- function(x, ...) {
-  .Call(ffi_chr_to_lgl, x)[["valid"]]
+  .Call(stbl_chr_are_lglish, x)
 }
 
 #' @export
 are_lgl_ish.factor <- function(x, ...) {
-  are_lgl_ish(as.character(x), ...)
+  are_lgl_ish.character(as.character(x), ...)
 }
 
 #' @export

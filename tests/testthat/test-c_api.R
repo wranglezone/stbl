@@ -26,18 +26,3 @@ test_that(".chr_to_lgl() converts numeric strings (#218)", {
 test_that(".chr_to_lgl() returns NA for invalid strings (#218)", {
   expect_identical(.chr_to_lgl(c("a", "", "NaN")), c(NA, NA, NA))
 })
-
-test_that(".chr_are_lglish() returns TRUE for convertible strings (#218)", {
-  expect_identical(
-    .chr_are_lglish(c("TRUE", "FALSE", "T", "F", "true", "false", "0", "1")),
-    rep(TRUE, 8)
-  )
-})
-
-test_that(".chr_are_lglish() returns TRUE for NA (#218)", {
-  expect_identical(.chr_are_lglish(NA_character_), TRUE)
-})
-
-test_that(".chr_are_lglish() returns FALSE for invalid strings (#218)", {
-  expect_identical(.chr_are_lglish(c("a", "", "NaN")), c(FALSE, FALSE, FALSE))
-})
