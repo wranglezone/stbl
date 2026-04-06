@@ -94,6 +94,34 @@ pkg_abort <- function(
   )
 }
 
+#' Compile a warning class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#'
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_warning_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "warning",
+    ...
+  )
+}
+
+#' Compile a message class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#'
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_message_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "message",
+    ...
+  )
+}
+
 #' Test package error classes
 #'
 #' When you use [pkg_abort()] to signal errors, you can use this function to

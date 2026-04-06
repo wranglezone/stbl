@@ -38,6 +38,70 @@ rlang::caller_env
   )
 }
 
+#' Signal a warning with standards applied
+#'
+#' A wrapper around [cli::cli_warn()] to throw classed warnings.
+#'
+#' @param message (`character`) The message for the new warning. Messages will
+#'   be formatted with [cli::cli_bullets()].
+#' @param subclass (`character`) Class(es) to assign to the warning. Will be
+#'   prefixed by "stbl-warning-".
+#' @param ... Additional parameters passed to [cli::cli_warn()] and on to
+#'   [rlang::warn()].
+#' @inheritParams .shared-params
+#'
+#' @keywords internal
+.stbl_warn <- function(
+  message,
+  subclass,
+  call = caller_env(),
+  message_env = call,
+  parent = NULL,
+  ...
+) {
+  pkg_warn(
+    "stbl",
+    message = message,
+    subclass = subclass,
+    call = call,
+    message_env = message_env,
+    parent = parent,
+    ...
+  )
+}
+
+#' Signal a message with standards applied
+#'
+#' A wrapper around [cli::cli_inform()] to throw classed messages.
+#'
+#' @param message (`character`) The message for the new message condition.
+#'   Messages will be formatted with [cli::cli_bullets()].
+#' @param subclass (`character`) Class(es) to assign to the message. Will be
+#'   prefixed by "stbl-message-".
+#' @param ... Additional parameters passed to [cli::cli_inform()] and on to
+#'   [rlang::inform()].
+#' @inheritParams .shared-params
+#'
+#' @keywords internal
+.stbl_inform <- function(
+  message,
+  subclass,
+  call = caller_env(),
+  message_env = call,
+  parent = NULL,
+  ...
+) {
+  pkg_inform(
+    "stbl",
+    message = message,
+    subclass = subclass,
+    call = call,
+    message_env = message_env,
+    parent = parent,
+    ...
+  )
+}
+
 #' Abort with a standardized "can't coerce" message
 #'
 #' @param from_class `(length-1 character)` The class of the object that failed
