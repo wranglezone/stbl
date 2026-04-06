@@ -24,6 +24,15 @@
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   snapshot-tests the full warning output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+- [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
+  and
+  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  for character input now use a single-pass C implementation
+  (`stbl_lgl_from_chr`), eliminating the duplicate
+  [`toupper()`](https://rdrr.io/r/base/chartr.html) call that was the
+  main performance bottleneck. Benchmarks show \>5x speedup for large
+  character vectors
+  ([\#218](https://github.com/wranglezone/stbl/issues/218)).
 
 ## stbl 0.3.0
 
