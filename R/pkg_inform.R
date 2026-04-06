@@ -1,3 +1,17 @@
+#' Compile a message class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#'
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_message_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "message",
+    ...
+  )
+}
+
 #' Signal a message with standards applied
 #'
 #' A wrapper around [cli::cli_inform()] to throw classed messages, with an

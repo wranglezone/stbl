@@ -1,3 +1,17 @@
+#' Compile a warning class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#'
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_warning_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "warning",
+    ...
+  )
+}
+
 #' Signal a warning with standards applied
 #'
 #' A wrapper around [cli::cli_warn()] to throw classed warnings, with an
