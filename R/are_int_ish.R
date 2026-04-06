@@ -80,24 +80,7 @@ are_int_ish.character <- function(x, ..., coerce_character = TRUE) {
   if (!to_lgl_scalar(coerce_character)) {
     return(rep(FALSE, length(x)))
   }
-
-  failures <- .are_not_int_ish_chr(x)
-  unname(!apply(failures, 1, any))
-}
-
-#' Check for character to integer coercion failures
-#'
-#' @inheritParams .shared-params-check
-#' @returns A logical matrix with two columns: `non_number` and `bad_precision`.
-#' @keywords internal
-.are_not_int_ish_chr <- function(x) {
-  cast_int <- suppressWarnings(as.integer(x))
-  cast_dbl <- suppressWarnings(as.double(x))
-  x_na <- is.na(x)
-  cbind(
-    non_number = .are_not_dbl_ish_chr(x),
-    bad_precision = cast_int != cast_dbl & !x_na
-  )
+  .Call(stbl_chr_are_intish, x)
 }
 
 #' @export

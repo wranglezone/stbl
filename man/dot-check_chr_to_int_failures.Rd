@@ -4,10 +4,11 @@
 \alias{.check_chr_to_int_failures}
 \title{Check for character to integer coercion failures}
 \usage{
-.check_chr_to_int_failures(x, x_class, x_arg, call)
+.check_chr_to_int_failures(res, x_class, x_arg, call)
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{res}{A list returned by \code{ffi_chr_to_int}, with elements
+\code{result}, \code{non_number}, and \code{bad_precision}.}
 
 \item{x_class}{\verb{(length-1 character)} The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
