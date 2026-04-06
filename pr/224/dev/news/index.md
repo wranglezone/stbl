@@ -24,6 +24,18 @@
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   snapshot-tests the full warning output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+- [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
+  and
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  for character input are now implemented in C. Benchmarks show a
+  significant speedup for large character vectors
+  ([\#220](https://github.com/wranglezone/stbl/issues/220)).
+- [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  and
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  for character input are now implemented in C. Benchmarks show \>10x
+  speedup for large character vectors
+  ([\#220](https://github.com/wranglezone/stbl/issues/220)).
 - [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
   and
   [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
