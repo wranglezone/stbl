@@ -10,3 +10,6 @@ inst/doc
 scratch.R
 .positai
 tests/testthat/_problems
+src/*.o
+src/*.so
+src/*.dll
