@@ -39,3 +39,9 @@ reference:
   - pkg_abort
   - expect_pkg_error_classes
   - expect_pkg_error_snapshot
+  - pkg_warn
+  - expect_pkg_warning_classes
+  - expect_pkg_warning_snapshot
+  - pkg_inform
+  - expect_pkg_message_classes
+  - expect_pkg_message_snapshot
