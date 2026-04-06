@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @useDynLib stbl, .registration = TRUE
 #' @importFrom cli format_inline
 #' @importFrom cli no
 #' @importFrom cli qty

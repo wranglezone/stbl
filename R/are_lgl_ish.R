@@ -71,8 +71,7 @@ are_lgl_ish.numeric <- function(x, ...) {
 
 #' @export
 are_lgl_ish.character <- function(x, ...) {
-  cast <- as.logical(toupper(x))
-  !xor(is.na(x), is.na(cast)) | are_dbl_ish(x, ...)
+  .Call(stbl_lgl_from_chr, x)[[2L]]
 }
 
 #' @export

@@ -44,7 +44,8 @@ to_lgl.character <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  failures <- !are_lgl_ish.character(x)
+  res <- .Call(stbl_lgl_from_chr, x)
+  failures <- !res[[2L]]
   .check_cast_failures(
     failures,
     x_class,
@@ -54,17 +55,7 @@ to_lgl.character <- function(
     call
   )
 
-  res <- as.logical(toupper(x))
-  not_coerced <- is.na(res) & !is.na(x)
-  res[not_coerced] <- as.logical(to_dbl(
-    x[not_coerced],
-    x_arg = x_arg,
-    call = call,
-    x_class = x_class,
-    ...
-  ))
-
-  return(res)
+  return(res[[1L]])
 }
 
 #' @export
