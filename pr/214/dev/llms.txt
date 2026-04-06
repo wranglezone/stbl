@@ -300,6 +300,18 @@ contributing to this project, you agree to abide by its terms.
   : Test package error classes
 - [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
   : Snapshot-test a package error
+- [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md) :
+  Signal a warning with standards applied
+- [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
+  : Test package warning classes
+- [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  : Snapshot-test a package warning
+- [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
+  : Signal a message with standards applied
+- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
+  : Test package message classes
+- [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
+  : Snapshot-test a package message
 
 # Articles
 

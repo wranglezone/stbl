@@ -45,6 +45,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_dash.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_condition_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_error_classes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_message_classes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_warning_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_specification_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-define_main_msg.html</loc></url>
@@ -65,6 +67,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_inform.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_warn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
@@ -83,11 +87,17 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_unnamed_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/grapes-and-and-grapes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/index.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/injection-operator.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/object_type.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_abort.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/pkg_inform.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/pkg_warn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/reexports.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
