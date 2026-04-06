@@ -50,7 +50,10 @@ test_that(".chr_to_int() returns NA for strings with fractional parts (#220)", {
 })
 
 test_that(".chr_to_int() returns NA for non-number strings (#220)", {
-  expect_identical(.chr_to_int(c("a", "", "NaN")), c(NA_integer_, NA_integer_, NA_integer_))
+  expect_identical(
+    .chr_to_int(c("a", "", "NaN")),
+    c(NA_integer_, NA_integer_, NA_integer_)
+  )
 })
 
 test_that(".chr_to_int() returns NA for Inf strings (#220)", {
@@ -76,5 +79,8 @@ test_that(".chr_to_dbl() passes NA through (#220)", {
 })
 
 test_that(".chr_to_dbl() returns NA for invalid strings (#220)", {
-  expect_identical(.chr_to_dbl(c("a", "", "NaN")), c(NA_real_, NA_real_, NA_real_))
+  expect_identical(
+    .chr_to_dbl(c("a", "", "NaN")),
+    c(NA_real_, NA_real_, NA_real_)
+  )
 })

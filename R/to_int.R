@@ -169,7 +169,7 @@ to_integer_scalar <- to_int_scalar
 #' @returns `NULL`, invisibly, if `x` passes all checks.
 #' @keywords internal
 .check_chr_to_int_failures <- function(res, x_class, x_arg, call) {
-  non_number    <- res[["non_number"]]
+  non_number <- res[["non_number"]]
   bad_precision <- res[["bad_precision"]]
   if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
