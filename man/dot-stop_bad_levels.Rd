@@ -25,11 +25,9 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-This function is called for its side effect of throwing an error and
-does not return a value.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
-Throws a standardized error when values are not found in the provided factor
-levels.
+Stop for bad factor levels
 }
 \keyword{internal}

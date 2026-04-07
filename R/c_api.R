@@ -11,3 +11,7 @@
 .chr_to_dbl <- function(x) {
   .Call(stbl_chr_to_dbl, x)
 }
+
+.dbl_to_int <- function(x) {
+  .Call(stbl_dbl_to_int, x)
+}

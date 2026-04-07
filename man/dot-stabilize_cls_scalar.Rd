@@ -60,7 +60,6 @@ match the original class.}
 \code{x} as a scalar of the target class with all checks passed.
 }
 \description{
-A helper used by the \verb{stabilize_*_scalar()} functions to provide a standard
-set of checks.
+Stabilize a scalar object of a specific class
 }
 \keyword{internal}

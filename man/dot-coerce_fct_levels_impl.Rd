@@ -31,7 +31,6 @@ source of error messages.}
 \code{x} as a factor with the specified levels.
 }
 \description{
-Checks for values in \code{x} that are not present in \code{levels} and throws an error
-if any are found.
+Core implementation for applying factor levels
 }
 \keyword{internal}

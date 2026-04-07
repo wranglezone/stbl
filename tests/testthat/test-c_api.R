@@ -84,3 +84,24 @@ test_that(".chr_to_dbl() returns NA for invalid strings (#221)", {
     c(NA_real_, NA_real_, NA_real_)
   )
 })
+
+test_that(".dbl_to_int() converts integer-valued doubles (#217)", {
+  expect_identical(
+    .dbl_to_int(c(1.0, 2.0, -3.0, 0.0)),
+    c(1L, 2L, -3L, 0L)
+  )
+})
+
+test_that(".dbl_to_int() passes NA and NaN through (#217)", {
+  expect_identical(.dbl_to_int(NA_real_), NA_integer_)
+  expect_identical(.dbl_to_int(NaN), NA_integer_)
+})
+
+test_that(".dbl_to_int() returns NA for fractional doubles (#217)", {
+  expect_identical(.dbl_to_int(c(1.5, 2.9)), c(NA_integer_, NA_integer_))
+})
+
+test_that(".dbl_to_int() returns NA for Inf and out-of-range values (#217)", {
+  expect_identical(.dbl_to_int(c(Inf, -Inf)), c(NA_integer_, NA_integer_))
+  expect_identical(.dbl_to_int(2147483648), NA_integer_)
+})

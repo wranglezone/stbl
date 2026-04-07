@@ -75,8 +75,7 @@ to_lst.function <- function(
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes the check.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_function_allowed <- function(
   x,
@@ -93,9 +92,7 @@ to_lst.function <- function(
 #'
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
-#'
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_function <- function(x_arg, call) {
   .stop_must(
@@ -110,8 +107,7 @@ to_lst.function <- function(
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes the check.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_is_not_primitive <- function(
   x,

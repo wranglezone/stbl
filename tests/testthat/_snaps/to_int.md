@@ -14,6 +14,46 @@
       Error in `wrapped_to_int()`:
       ! `val` must not be <NULL>.
 
+# to_int() errors for dbls that would lose precision (#2, #217)
+
+    Code
+      to_int(given)
+    Condition
+      Error:
+      ! `given` <double> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      wrapped_to_int(given)
+    Condition
+      Error in `wrapped_to_int()`:
+      ! `val` <double> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      to_int(given)
+    Condition
+      Error:
+      ! `given` <double> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      wrapped_to_int(given)
+    Condition
+      Error in `wrapped_to_int()`:
+      ! `val` <double> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
 # to_int() respects coerce_character (#14)
 
     Code

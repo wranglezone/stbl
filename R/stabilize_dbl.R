@@ -201,7 +201,6 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 #' @param target_value `(numeric)` The value against which `x` is being
 #'   compared.
 #' @inheritParams .shared-params
-#'
 #' @returns A named character vector for `.stbl_abort()`.
 #' @keywords internal
 .describe_failure_dbl_value <- function(

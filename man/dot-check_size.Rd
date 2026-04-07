@@ -24,10 +24,9 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} passes the check.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
-Checks if the size of \code{x} (from \code{\link[vctrs:vec_size]{vctrs::vec_size()}}) is within the bounds of
-\code{min_size} and \code{max_size}.
+Check the size of an object
 }
 \keyword{internal}

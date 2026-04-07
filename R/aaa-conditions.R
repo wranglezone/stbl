@@ -8,8 +8,6 @@ rlang::caller_env
 
 #' Signal an error with standards applied
 #'
-#' A wrapper around [cli::cli_abort()] to throw classed errors.
-#'
 #' @param message (`character`) The message for the new error. Messages will be
 #'   formatted with [cli::cli_bullets()].
 #' @param subclass (`character`) Class(es) to assign to the error. Will be
@@ -17,7 +15,7 @@ rlang::caller_env
 #' @param ... Additional parameters passed to [cli::cli_abort()] and on to
 #'   [rlang::abort()].
 #' @inheritParams .shared-params
-#'
+#' @inherit pkg_abort return
 #' @keywords internal
 .stbl_abort <- function(
   message,
@@ -40,8 +38,6 @@ rlang::caller_env
 
 #' Signal a warning with standards applied
 #'
-#' A wrapper around [cli::cli_warn()] to throw classed warnings.
-#'
 #' @param message (`character`) The message for the new warning. Messages will
 #'   be formatted with [cli::cli_bullets()].
 #' @param subclass (`character`) Class(es) to assign to the warning. Will be
@@ -49,7 +45,7 @@ rlang::caller_env
 #' @param ... Additional parameters passed to [cli::cli_warn()] and on to
 #'   [rlang::warn()].
 #' @inheritParams .shared-params
-#'
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stbl_warn <- function(
   message,
@@ -72,8 +68,6 @@ rlang::caller_env
 
 #' Signal a message with standards applied
 #'
-#' A wrapper around [cli::cli_inform()] to throw classed messages.
-#'
 #' @param message (`character`) The message for the new message condition.
 #'   Messages will be formatted with [cli::cli_bullets()].
 #' @param subclass (`character`) Class(es) to assign to the message. Will be
@@ -81,7 +75,7 @@ rlang::caller_env
 #' @param ... Additional parameters passed to [cli::cli_inform()] and on to
 #'   [rlang::inform()].
 #' @inheritParams .shared-params
-#'
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stbl_inform <- function(
   message,
@@ -111,9 +105,7 @@ rlang::caller_env
 #'   cli-formatted messages.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
-#'
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_cant_coerce <- function(
   from_class,
@@ -145,9 +137,7 @@ rlang::caller_env
 #'   messages.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
-#'
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_must <- function(
   msg,
@@ -174,7 +164,6 @@ rlang::caller_env
 #'
 #' @param msg `(character)` The core error message describing the requirement.
 #' @inheritParams .shared-params
-#'
 #' @returns A character string.
 #' @keywords internal
 .define_main_msg <- function(x_arg, msg) {
@@ -185,9 +174,7 @@ rlang::caller_env
 #'
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
-#'
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_null <- function(x_arg, call, parent = NULL, ...) {
   .stop_must(
@@ -209,9 +196,7 @@ rlang::caller_env
 #'   failure.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
-#'
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_incompatible <- function(
   x_class,

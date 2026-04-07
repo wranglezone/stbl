@@ -36,18 +36,34 @@ test_that("to_int() works for dbls (#2)", {
   expect_identical(to_int(given), expected)
 })
 
-test_that("to_int() errors for dbls that would lose precision (#2)", {
-  # These errors are from vctrs, so just watch for that error class
+test_that("to_int() errors for dbls that would lose precision (#2, #217)", {
   given <- as.double(1:10)
   given[[4]] <- 1.1
   expect_error(
     to_int(given),
-    class = "vctrs_error_cast_lossy"
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
+  )
+
   given[[4]] <- Inf
   expect_error(
     to_int(given),
-    class = "vctrs_error_cast_lossy"
+    class = .compile_dash("stbl", "error", "incompatible_type")
+  )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
   )
 })
 

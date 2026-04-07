@@ -1,8 +1,5 @@
 #' Coerce an object to a specific scalar class
 #'
-#' A helper that wraps around a `to_*_scalar()` function to provide a standard
-#' set of checks.
-#'
 #' @inheritParams .shared-params
 #' @returns `x` as a scalar of the target class.
 #' @keywords internal
@@ -45,9 +42,6 @@
 }
 
 #' Stabilize an object of a specific class
-#'
-#' A helper used by the `stabilize_*()` functions to provide a standard set of
-#' checks.
 #'
 #' @inheritParams .shared-params
 #' @returns `x` as a vector of the target class with all checks passed.
@@ -103,9 +97,6 @@
 }
 
 #' Stabilize a scalar object of a specific class
-#'
-#' A helper used by the `stabilize_*_scalar()` functions to provide a standard
-#' set of checks.
 #'
 #' @inheritParams .shared-params
 #' @returns `x` as a scalar of the target class with all checks passed.
@@ -170,9 +161,6 @@
 
 #' Coerce an object from a factor to a specific class
 #'
-#' A helper that wraps around a `to_*()` function to provide a standard way to
-#' coerce factors.
-#'
 #' @inheritParams .shared-params
 #' @returns `x` coerced to the target class.
 #' @keywords internal
@@ -209,9 +197,6 @@
 }
 
 #' Coerce an object from a complex to a numeric class
-#'
-#' A helper that wraps around a `to_*()` function to provide a standard way to
-#' coerce complex numbers.
 #'
 #' @inheritParams .shared-params
 #' @returns `x` coerced to the target class.

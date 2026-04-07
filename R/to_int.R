@@ -51,8 +51,16 @@ to_int.list <- function(
 }
 
 #' @export
-to_int.double <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, integer(), x_arg = x_arg, call = call)
+to_int.double <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  res <- .Call(ffi_dbl_to_int, x)
+  .check_dbl_to_int_failures(res, x_class, x_arg, call)
+  res[["result"]]
 }
 
 #' @export
@@ -165,8 +173,7 @@ to_integer_scalar <- to_int_scalar
 #' @param res A list returned by `ffi_chr_to_int`, with elements
 #'   `result`, `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_chr_to_int_failures <- function(res, x_class, x_arg, call) {
   non_number <- res[["non_number"]]
@@ -182,6 +189,28 @@ to_integer_scalar <- to_int_scalar
     x_arg,
     call
   )
+  .stop_incompatible(
+    x_class,
+    integer(),
+    bad_precision,
+    due_to = "loss of precision",
+    x_arg,
+    call
+  )
+}
+
+#' Check for double to integer coercion failures
+#'
+#' @param res A list returned by `ffi_dbl_to_int`, with elements
+#'   `result` and `bad_precision`.
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_dbl_to_int_failures <- function(res, x_class, x_arg, call) {
+  bad_precision <- res[["bad_precision"]]
+  if (!any(bad_precision)) {
+    return(invisible(NULL))
+  }
   .stop_incompatible(
     x_class,
     integer(),

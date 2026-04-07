@@ -139,7 +139,6 @@ stabilise_data_frame <- stabilize_df
 #' @param max_rows `(length-1 integer)` Maximum number of rows allowed, or
 #'   `NULL` to skip this check.
 #' @inheritParams .shared-params
-#'
 #' @returns `NULL`, invisibly, if the check passes.
 #' @keywords internal
 .check_df_rows <- function(.x, min_rows, max_rows, x_arg, call) {
@@ -186,7 +185,6 @@ stabilise_data_frame <- stabilize_df
 #' @param col_names `(character)` Column names that must be present in `.x`, or
 #'   `NULL` to skip this check.
 #' @inheritParams .shared-params
-#'
 #' @returns `NULL`, invisibly, if the check passes.
 #' @keywords internal
 .check_df_col_names <- function(.x, col_names, x_arg, call) {

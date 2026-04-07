@@ -24,7 +24,6 @@ throws an error, try installing the stringi package.}
 A logical vector of matches in \code{x} to \code{regex}.
 }
 \description{
-A wrapper around \code{\link[stringi:stri_detect]{stringi::stri_detect_regex()}} and \code{\link[base:grep]{base::grepl()}} that
-prefers the \code{stringi} implementation if the package is available.
+Detect a regex pattern in a character vector
 }
 \keyword{internal}

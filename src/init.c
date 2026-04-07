@@ -14,6 +14,10 @@ SEXP ffi_chr_to_dbl(SEXP x);
 SEXP stbl_chr_to_dbl(SEXP x);
 SEXP stbl_chr_are_dblish(SEXP x);
 
+SEXP ffi_dbl_to_int(SEXP x);
+SEXP stbl_dbl_to_int(SEXP x);
+SEXP stbl_dbl_are_intish(SEXP x);
+
 static const R_CallMethodDef callMethods[] = {
   {"ffi_chr_to_lgl",      (DL_FUNC) &ffi_chr_to_lgl,      1},
   {"stbl_chr_to_lgl",     (DL_FUNC) &stbl_chr_to_lgl,     1},
@@ -24,6 +28,9 @@ static const R_CallMethodDef callMethods[] = {
   {"ffi_chr_to_dbl",      (DL_FUNC) &ffi_chr_to_dbl,      1},
   {"stbl_chr_to_dbl",     (DL_FUNC) &stbl_chr_to_dbl,     1},
   {"stbl_chr_are_dblish", (DL_FUNC) &stbl_chr_are_dblish,  1},
+  {"ffi_dbl_to_int",      (DL_FUNC) &ffi_dbl_to_int,      1},
+  {"stbl_dbl_to_int",     (DL_FUNC) &stbl_dbl_to_int,     1},
+  {"stbl_dbl_are_intish", (DL_FUNC) &stbl_dbl_are_intish,  1},
   {NULL, NULL, 0}
 };
 

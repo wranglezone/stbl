@@ -22,8 +22,7 @@ source of error messages.}
 \code{\link[rlang:abort]{rlang::abort()}}.}
 }
 \value{
-This function is called for its side effect of throwing an error and
-does not return a value.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
 Abort because an argument must not be NULL

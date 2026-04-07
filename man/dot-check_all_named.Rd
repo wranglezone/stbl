@@ -18,7 +18,7 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if all elements have names.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
 Check that all list elements are named

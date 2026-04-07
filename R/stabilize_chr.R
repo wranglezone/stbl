@@ -181,7 +181,6 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #' @param rule `(length-1 character)` A regex rule (possibly with a `name` and
 #'   `negate` attribute).
 #' @inheritParams .shared-params
-#'
 #' @returns A character vector of error messages if the rule fails, otherwise
 #'   `NULL`.
 #' @keywords internal
@@ -205,9 +204,6 @@ stabilise_character_scalar <- stabilize_chr_scalar
 
 #' Detect a regex pattern in a character vector
 #'
-#' A wrapper around [stringi::stri_detect_regex()] and [base::grepl()] that
-#' prefers the `stringi` implementation if the package is available.
-#'
 #' @inheritParams .shared-params
 #' @returns A logical vector of matches in `x` to `regex`.
 #' @keywords internal
@@ -229,7 +225,6 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #' @param success `(logical)` A logical vector indicating which elements of `x`
 #'   passed the check.
 #' @param negate `(length-1 logical)` Was the check a negative one?
-#'
 #' @returns A named character vector to be used as `additional_msg` in
 #'   [.stop_must()].
 #' @keywords internal
