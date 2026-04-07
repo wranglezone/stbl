@@ -4,13 +4,14 @@
 /*
  * stbl_lst_to_chr: public API entry point.
  *
- * Fast-path conversion of a flat list of scalar character/logical/integer/
- * double values to a character vector.  Returns R_NilValue (NULL) if any
- * element is not a length-1 character scalar, so the R caller can fall back
- * to the general-purpose R implementation.
+ * Fast-path conversion of a flat list of scalar character values to a
+ * character vector.  Returns R_NilValue (NULL) if any element is not a
+ * length-1 character scalar, so the R caller can fall back to the
+ * general-purpose R implementation.
  *
- * Only character scalars are handled directly; other atomic types would
- * require format() or as.character() which is deferred to R.
+ * Only character scalars are handled directly; other atomic types (logical,
+ * integer, double) would require format() or as.character() which is deferred
+ * to R.
  */
 SEXP stbl_lst_to_chr(SEXP x) {
   R_xlen_t n = XLENGTH(x);

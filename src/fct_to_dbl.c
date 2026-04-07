@@ -11,9 +11,9 @@
  * Fills p_result[0..n-1] and p_valid[0..n-1] using the per-element integer
  * codes and pre-converted level values.
  *
- *   code 0 (NA_INTEGER maps to code 0 for factors) -> NA_REAL, valid = 1
- *   code k (1-indexed)                             -> level_result[k-1],
- *                                                     valid = level_valid[k-1]
+ *   code == NA_INTEGER  ->  NA_REAL, valid = 1 (NA elements are stored as
+ *                           NA_INTEGER in the factor's integer vector)
+ *   code k (1-indexed)  ->  level_result[k-1], valid = level_valid[k-1]
  */
 static void fct_to_dbl_core(SEXP x, R_xlen_t n,
                               double* p_result, int* p_valid) {
