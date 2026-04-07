@@ -51,13 +51,13 @@ to_dbl.list <- function(
 }
 
 #' @export
-to_dbl.integer <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, double(), x_arg = x_arg, call = call)
+to_dbl.integer <- function(x, ...) {
+  .Call(stbl_int_to_dbl, x)
 }
 
 #' @export
-to_dbl.logical <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, double(), x_arg = x_arg, call = call)
+to_dbl.logical <- function(x, ...) {
+  .Call(stbl_lgl_to_dbl, x)
 }
 
 #' @export
@@ -104,15 +104,24 @@ to_dbl.factor <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_cls_from_fct(
-    x,
-    to_cls_fn = to_dbl,
-    to_cls_args = list(...),
+  coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
+  if (coerce_factor) {
+    res <- .Call(ffi_fct_to_dbl, x)
+    .check_cast_failures(
+      !res[["valid"]],
+      x_class,
+      double(),
+      "incompatible values",
+      x_arg,
+      call
+    )
+    return(res[["result"]])
+  }
+  .stop_cant_coerce(
+    from_class = x_class,
     to_class = "double",
-    coerce_factor = coerce_factor,
     x_arg = x_arg,
-    call = call,
-    x_class = x_class
+    call = call
   )
 }
 
@@ -124,14 +133,16 @@ to_dbl.complex <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_num_from_complex(
-    x,
-    cast_fn = as.double,
-    to_type_obj = double(),
-    x_arg = x_arg,
-    call = call,
-    x_class = x_class
+  res <- .Call(ffi_cpx_to_dbl, x)
+  .check_cast_failures(
+    !res[["valid"]],
+    x_class,
+    double(),
+    "non-zero complex components",
+    x_arg,
+    call
   )
+  return(res[["result"]])
 }
 
 #' @export

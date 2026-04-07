@@ -76,7 +76,7 @@ are_lgl_ish.character <- function(x, ...) {
 
 #' @export
 are_lgl_ish.factor <- function(x, ...) {
-  are_lgl_ish.character(as.character(x), ...)
+  .Call(stbl_fct_are_lglish, x)
 }
 
 #' @export

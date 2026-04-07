@@ -64,8 +64,8 @@ to_int.double <- function(
 }
 
 #' @export
-to_int.logical <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, integer(), x_arg = x_arg, call = call)
+to_int.logical <- function(x, ...) {
+  .Call(stbl_lgl_to_int, x)
 }
 
 #' @export
@@ -105,15 +105,17 @@ to_int.factor <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_cls_from_fct(
-    x,
-    to_cls_fn = to_int,
-    to_cls_args = list(...),
+  coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
+  if (coerce_factor) {
+    res <- .Call(ffi_fct_to_int, x)
+    .check_chr_to_int_failures(res, x_class, x_arg, call)
+    return(res[["result"]])
+  }
+  .stop_cant_coerce(
+    from_class = x_class,
     to_class = "integer",
-    coerce_factor = coerce_factor,
     x_arg = x_arg,
-    call = call,
-    x_class = x_class
+    call = call
   )
 }
 
@@ -125,14 +127,9 @@ to_int.complex <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_num_from_complex(
-    x,
-    cast_fn = as.integer,
-    to_type_obj = integer(),
-    x_arg = x_arg,
-    call = call,
-    x_class = x_class
-  )
+  res <- .Call(ffi_cpx_to_int, x)
+  .check_cpx_to_int_failures(res, x_class, x_arg, call)
+  return(res[["result"]])
 }
 
 #' @export
@@ -211,6 +208,37 @@ to_integer_scalar <- to_int_scalar
   if (!any(bad_precision)) {
     return(invisible(NULL))
   }
+  .stop_incompatible(
+    x_class,
+    integer(),
+    bad_precision,
+    due_to = "loss of precision",
+    x_arg,
+    call
+  )
+}
+
+#' Check for complex to integer coercion failures
+#'
+#' @param res A list returned by `ffi_cpx_to_int`, with elements
+#'   `result`, `non_number`, and `bad_precision`.
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_cpx_to_int_failures <- function(res, x_class, x_arg, call) {
+  non_number <- res[["non_number"]]
+  bad_precision <- res[["bad_precision"]]
+  if (!any(non_number) && !any(bad_precision)) {
+    return(invisible(NULL))
+  }
+  .check_cast_failures(
+    non_number,
+    x_class,
+    integer(),
+    "non-zero complex components",
+    x_arg,
+    call
+  )
   .stop_incompatible(
     x_class,
     integer(),

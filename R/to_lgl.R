@@ -32,8 +32,8 @@ to_lgl.NULL <- function(
 }
 
 #' @export
-to_lgl.numeric <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  return(as.logical(x))
+to_lgl.numeric <- function(x, ...) {
+  .Call(stbl_dbl_to_lgl, x)
 }
 
 #' @export
@@ -66,15 +66,17 @@ to_lgl.factor <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  return(
-    to_lgl.character(
-      as.character(x),
-      ...,
-      x_arg = x_arg,
-      call = call,
-      x_class = x_class
-    )
+  res <- .Call(ffi_fct_to_lgl, x)
+  failures <- !res[["valid"]]
+  .check_cast_failures(
+    failures,
+    x_class,
+    logical(),
+    "incompatible values",
+    x_arg,
+    call
   )
+  return(res[["result"]])
 }
 
 #' @export
