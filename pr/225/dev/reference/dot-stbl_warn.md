@@ -1,8 +1,6 @@
 # Signal a warning with standards applied
 
-A wrapper around
-[`cli::cli_warn()`](https://cli.r-lib.org/reference/cli_abort.html) to
-throw classed warnings.
+Signal a warning with standards applied
 
 ## Usage
 
@@ -53,3 +51,7 @@ throw classed warnings.
   [`cli::cli_warn()`](https://cli.r-lib.org/reference/cli_abort.html)
   and on to
   [`rlang::warn()`](https://rlang.r-lib.org/reference/abort.html).
+
+## Value
+
+`NULL` invisibly (called for side effects).

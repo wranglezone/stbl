@@ -1,7 +1,6 @@
 # Stabilize an object of a specific class
 
-A helper used by the `stabilize_*()` functions to provide a standard set
-of checks.
+Stabilize an object of a specific class
 
 ## Usage
 

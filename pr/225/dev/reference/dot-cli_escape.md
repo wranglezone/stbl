@@ -1,9 +1,6 @@
 # Escape curly braces for safe printing with cli
 
-Replaces single curly braces (`{`, `}`) with double curly braces (`{{`,
-`}}`) so that they are interpreted as literal characters by
-[`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html) and
-not as expressions to be evaluated.
+Escape curly braces for safe printing with cli
 
 ## Usage
 

@@ -1,7 +1,6 @@
 # Stop for bad factor levels
 
-Throws a standardized error when values are not found in the provided
-factor levels.
+Stop for bad factor levels
 
 ## Usage
 
@@ -42,5 +41,4 @@ factor levels.
 
 ## Value
 
-This function is called for its side effect of throwing an error and
-does not return a value.
+`NULL` invisibly (called for side effects).

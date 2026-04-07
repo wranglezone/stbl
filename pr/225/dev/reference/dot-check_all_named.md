@@ -28,4 +28,4 @@ Check that all list elements are named
 
 ## Value
 
-`NULL`, invisibly, if all elements have names.
+`NULL` invisibly (called for side effects).

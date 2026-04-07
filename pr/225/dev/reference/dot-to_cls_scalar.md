@@ -1,7 +1,6 @@
 # Coerce an object to a specific scalar class
 
-A helper that wraps around a `to_*_scalar()` function to provide a
-standard set of checks.
+Coerce an object to a specific scalar class
 
 ## Usage
 

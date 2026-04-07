@@ -59,6 +59,10 @@ pkg_abort(
   and on to
   [`rlang::abort()`](https://rlang.r-lib.org/reference/abort.html).
 
+## Value
+
+`NULL` invisibly (called for side effects).
+
 ## Examples
 
 ``` r

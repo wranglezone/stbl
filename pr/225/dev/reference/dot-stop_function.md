@@ -24,5 +24,4 @@ Abort because an argument must not be a function
 
 ## Value
 
-This function is called for its side effect of throwing an error and
-does not return a value.
+`NULL` invisibly (called for side effects).

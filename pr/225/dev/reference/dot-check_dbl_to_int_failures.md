@@ -36,4 +36,4 @@ Check for double to integer coercion failures
 
 ## Value
 
-`NULL`, invisibly, if `x` passes all checks.
+`NULL` invisibly (called for side effects).

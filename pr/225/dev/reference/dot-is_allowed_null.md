@@ -25,4 +25,5 @@ Check if a value is NULL and NULLs are allowed
 
 ## Value
 
-`(length-1 logical)` `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`.
+`(length-1 logical)` `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`,
+else `FALSE`.
