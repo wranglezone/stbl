@@ -52,12 +52,12 @@ to_dbl.list <- function(
 
 #' @export
 to_dbl.integer <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vctrs::vec_cast(x, double(), x_arg = x_arg, call = call)
+  vec_cast(x, double(), x_arg = x_arg, call = call)
 }
 
 #' @export
 to_dbl.logical <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vctrs::vec_cast(x, double(), x_arg = x_arg, call = call)
+  vec_cast(x, double(), x_arg = x_arg, call = call)
 }
 
 #' @export
@@ -136,7 +136,7 @@ to_dbl.complex <- function(
 
 #' @export
 to_dbl.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vctrs::vec_cast(x, double(), x_arg = x_arg, call = call)
+  vec_cast(x, double(), x_arg = x_arg, call = call)
 }
 
 #' @export
