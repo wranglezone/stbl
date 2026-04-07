@@ -67,6 +67,10 @@ SEXP stbl_lst_to_lgl(SEXP x);
 SEXP stbl_lst_to_chr(SEXP x);
 SEXP stbl_lst_to_fct(SEXP x);
 
+/* range checks */
+SEXP stbl_check_min_dbl(SEXP x, SEXP min_val);
+SEXP stbl_check_max_dbl(SEXP x, SEXP max_val);
+
 static const R_CallMethodDef callMethods[] = {
   /* chr -> * */
   {"ffi_chr_to_lgl",       (DL_FUNC) &ffi_chr_to_lgl,       1},
@@ -117,6 +121,9 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_lst_to_lgl",      (DL_FUNC) &stbl_lst_to_lgl,      1},
   {"stbl_lst_to_chr",      (DL_FUNC) &stbl_lst_to_chr,      1},
   {"stbl_lst_to_fct",      (DL_FUNC) &stbl_lst_to_fct,      1},
+  /* range checks */
+  {"stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl,   2},
+  {"stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl,   2},
   {NULL, NULL, 0}
 };
 
