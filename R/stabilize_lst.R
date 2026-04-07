@@ -154,11 +154,6 @@ NULL
 
 #' Call a spec function with properly-named context arguments
 #'
-#' Stabilizer functions use either `x_arg`/`call` or `.x_arg`/`.call` as
-#' parameter names depending on how they were created. This helper finds the
-#' relevant formal name for each argument independently using
-#' `rlang::fn_fmls_names()` and dispatches accordingly.
-#'
 #' @param spec_fn A stabilizer function.
 #' @param .x The value to validate.
 #' @inheritParams stabilize_lst
@@ -179,9 +174,6 @@ NULL
 }
 
 #' Validate all named elements (required and extra)
-#'
-#' Computes element name metadata and delegates to
-#' `.validate_required_elements()` and `.validate_extra_named_elements()`.
 #'
 #' @inheritParams stabilize_lst
 #' @returns The updated list.

@@ -10,6 +10,9 @@
 #' @param ... Additional parameters passed to [cli::cli_abort()] and on to
 #'   [rlang::abort()].
 #' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @export
+#'
 #' @examples
 #' try(pkg_abort("stbl", "This is a test error", "test_subclass"))
 #' tryCatch(
@@ -24,8 +27,6 @@
 #'     "Caught a specific subclass of stbl error."
 #'   }
 #' )
-#'
-#' @export
 pkg_abort <- function(
   package,
   message,
@@ -48,7 +49,6 @@ pkg_abort <- function(
 #' Compile an error class chain
 #'
 #' @inheritParams .compile_pkg_condition_classes
-#'
 #' @returns A character vector of classes.
 #' @keywords internal
 .compile_pkg_error_classes <- function(package, ...) {
@@ -70,6 +70,8 @@ pkg_abort <- function(
 #' @returns The classes of the error invisibly on success or the error on
 #'   failure. Unlike most testthat expectations, this expectation cannot be
 #'   usefully chained.
+#' @export
+#'
 #' @examplesIf rlang::is_installed("testthat")
 #' expect_pkg_error_classes(
 #'   pkg_abort("stbl", "This is a test error", "test_subclass"),
@@ -83,7 +85,6 @@ pkg_abort <- function(
 #'     "different_subclass"
 #'   )
 #' )
-#' @export
 expect_pkg_error_classes <- function(
   object,
   package,
@@ -122,7 +123,6 @@ expect_pkg_error_classes <- function(
 #' @inheritParams expect_pkg_error_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
-#'
 #' @export
 expect_pkg_error_snapshot <- function(
   object,

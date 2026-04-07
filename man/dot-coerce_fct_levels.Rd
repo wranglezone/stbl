@@ -31,6 +31,6 @@ source of error messages.}
 \code{x} as a factor with specified levels and NAs.
 }
 \description{
-A wrapper around level-coercion helpers.
+Coerce to factor with specified levels
 }
 \keyword{internal}

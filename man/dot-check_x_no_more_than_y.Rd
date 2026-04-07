@@ -28,7 +28,7 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} is not greater than \code{y}.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
 Check that one value is not greater than another

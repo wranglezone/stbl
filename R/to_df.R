@@ -80,14 +80,9 @@ to_df.default <- function(
 
 #' Coerce a vector to a one-column data frame
 #'
-#' Called by `to_df.*` methods for atomic vector types. Succeeds only when `x`
-#' was supplied as a named symbol (variable), not as an inline expression. This
-#' prevents data frames with syntactically ugly column names.
-#'
 #' @param x_expr `(language)` The unevaluated expression for `x`, captured via
 #'   `substitute(x)` in the calling method.
 #' @inheritParams .shared-params
-#'
 #' @returns A one-column data frame.
 #' @keywords internal
 .to_df_vector <- function(x, x_expr, x_arg, call, x_class, ...) {

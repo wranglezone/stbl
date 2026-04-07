@@ -13,8 +13,6 @@
 The messages with curly braces escaped.
 }
 \description{
-Replaces single curly braces (\verb{\{}, \verb{\}}) with double curly braces (\verb{\{\{},
-\verb{\}\}}) so that they are interpreted as literal characters by
-\code{\link[cli:cli_abort]{cli::cli_abort()}} and not as expressions to be evaluated.
+Escape curly braces for safe printing with cli
 }
 \keyword{internal}

@@ -18,6 +18,6 @@ source of error messages.}
 \code{x} with specified values converted to \code{NA}.
 }
 \description{
-A helper that converts specified values in \code{x} to \code{NA}.
+Coerce specified values to NA
 }
 \keyword{internal}

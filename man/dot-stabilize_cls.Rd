@@ -63,7 +63,6 @@ match the original class.}
 \code{x} as a vector of the target class with all checks passed.
 }
 \description{
-A helper used by the \verb{stabilize_*()} functions to provide a standard set of
-checks.
+Stabilize an object of a specific class
 }
 \keyword{internal}

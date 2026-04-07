@@ -23,7 +23,6 @@ source of error messages.}
 \code{NULL} or an error.
 }
 \description{
-If \code{allow_null} is \code{TRUE}, coerce \code{x} to \code{NULL}. Otherwise throw an
-informative error.
+Ensure an argument is NULL
 }
 \keyword{internal}

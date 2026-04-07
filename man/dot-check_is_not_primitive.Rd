@@ -18,7 +18,7 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} passes the check.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
 Error if an object is a primitive function

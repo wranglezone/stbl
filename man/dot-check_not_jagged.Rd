@@ -28,11 +28,9 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-\code{NULL}, invisibly, if the list is not jagged.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
-Expected to be called after \code{.check_all_named()}, so \code{names(x)} is
-guaranteed to be non-\code{NULL}. Length-1 elements are excluded from the check
-because they recycle to any length in \code{as.data.frame()}.
+Check that list elements do not have jagged (unequal non-1) lengths
 }
 \keyword{internal}

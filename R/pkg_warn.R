@@ -1,17 +1,3 @@
-#' Compile a warning class chain
-#'
-#' @inheritParams .compile_pkg_condition_classes
-#'
-#' @returns A character vector of classes.
-#' @keywords internal
-.compile_pkg_warning_classes <- function(package, ...) {
-  .compile_pkg_condition_classes(
-    package,
-    "warning",
-    ...
-  )
-}
-
 #' Signal a warning with standards applied
 #'
 #' A wrapper around [cli::cli_warn()] to throw classed warnings, with an
@@ -24,6 +10,9 @@
 #' @param ... Additional parameters passed to [cli::cli_warn()] and on to
 #'   [rlang::warn()].
 #' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @export
+#'
 #' @examples
 #' pkg_warn("stbl", "This is a test warning", "test_subclass")
 #' withCallingHandlers(
@@ -40,8 +29,6 @@
 #'     invokeRestart("muffleWarning")
 #'   }
 #' )
-#'
-#' @export
 pkg_warn <- function(
   package,
   message,
@@ -61,6 +48,19 @@ pkg_warn <- function(
   )
 }
 
+#' Compile a warning class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_warning_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "warning",
+    ...
+  )
+}
+
 #' Test package warning classes
 #'
 #' When you use [pkg_warn()] to signal warnings, you can use this function to
@@ -72,6 +72,8 @@ pkg_warn <- function(
 #' @returns The classes of the warning invisibly on success or the warning on
 #'   failure. Unlike most testthat expectations, this expectation cannot be
 #'   usefully chained.
+#' @export
+#'
 #' @examplesIf rlang::is_installed("testthat")
 #' expect_pkg_warning_classes(
 #'   pkg_warn("stbl", "This is a test warning", "test_subclass"),
@@ -85,7 +87,6 @@ pkg_warn <- function(
 #'     "different_subclass"
 #'   )
 #' )
-#' @export
 expect_pkg_warning_classes <- function(
   object,
   package,
@@ -124,7 +125,6 @@ expect_pkg_warning_classes <- function(
 #' @inheritParams expect_pkg_warning_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
-#'
 #' @export
 expect_pkg_warning_snapshot <- function(
   object,

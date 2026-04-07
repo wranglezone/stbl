@@ -28,6 +28,9 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
+\value{
+\code{NULL} invisibly (called for side effects).
+}
 \description{
 Check for coercion failures and stop if any are found
 }

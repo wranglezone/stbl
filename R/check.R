@@ -1,12 +1,8 @@
 #' Check for NA values
 #'
-#' Checks for `NA` values in `x`, throwing an error if any are found and
-#' `allow_na` is `FALSE`.
-#'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes the check.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_na <- function(
   x,
@@ -36,13 +32,9 @@
 
 #' Check the size of an object
 #'
-#' Checks if the size of `x` (from [vctrs::vec_size()]) is within the bounds of
-#' `min_size` and `max_size`.
-#'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes the check.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_size <- function(
   x,
@@ -91,13 +83,9 @@
 
 #' Check if an object is a scalar
 #'
-#' Checks if an object is a scalar, allowing for `NULL` and zero-length vectors
-#' if specified.
-#'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes the check.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_scalar <- function(
   x,
@@ -149,9 +137,8 @@
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
 #' @returns `(length-1 logical)` `TRUE` if `x` is `NULL` and `allow_null` is
-#'   `TRUE`.
+#'   `TRUE`, else `FALSE`.
 #' @keywords internal
 .is_allowed_null <- function(x, allow_null = TRUE, call = caller_env()) {
   allow_null <- to_lgl_scalar(allow_null, call = call)
@@ -164,8 +151,7 @@
 #' @param y_arg `(length-1 character)` The name of the `y` argument.
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` is not greater than `y`.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_x_no_more_than_y <- function(
   x,
@@ -193,6 +179,7 @@
 #' @param failures `(logical)` A logical vector where `TRUE` indicates a
 #'   coercion failure.
 #' @inheritParams .stop_incompatible
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_cast_failures <- function(failures, x_class, to, due_to, x_arg, call) {
   if (any(failures)) {
@@ -210,7 +197,7 @@
 #' Check that all list elements are named
 #'
 #' @inheritParams .shared-params
-#' @returns `NULL`, invisibly, if all elements have names.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_all_named <- function(x, x_arg = caller_arg(x), call = caller_env()) {
   if (rlang::is_named(x)) {
@@ -226,12 +213,8 @@
 
 #' Check that list elements do not have jagged (unequal non-1) lengths
 #'
-#' Expected to be called after `.check_all_named()`, so `names(x)` is
-#' guaranteed to be non-`NULL`. Length-1 elements are excluded from the check
-#' because they recycle to any length in `as.data.frame()`.
-#'
 #' @inheritParams .shared-params
-#' @returns `NULL`, invisibly, if the list is not jagged.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_not_jagged <- function(
   x,

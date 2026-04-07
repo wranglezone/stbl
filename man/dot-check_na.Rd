@@ -20,10 +20,9 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} passes the check.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
-Checks for \code{NA} values in \code{x}, throwing an error if any are found and
-\code{allow_na} is \code{FALSE}.
+Check for NA values
 }
 \keyword{internal}

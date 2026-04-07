@@ -35,10 +35,9 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} passes the check.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
-Checks if an object is a scalar, allowing for \code{NULL} and zero-length vectors
-if specified.
+Check if an object is a scalar
 }
 \keyword{internal}

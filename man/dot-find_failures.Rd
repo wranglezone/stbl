@@ -19,6 +19,6 @@ An integer vector of failure locations, or \code{NULL} if there are no
 failures or the check is skipped.
 }
 \description{
-Run \code{check_fn(x, check_value)} if \code{check_value} isn't \code{NULL}.
+Safely find failure locations in a vector
 }
 \keyword{internal}

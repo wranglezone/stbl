@@ -36,6 +36,9 @@ evaluate variables in error messages.}
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}} and on to
 \code{\link[rlang:abort]{rlang::abort()}}.}
 }
+\value{
+\code{NULL} invisibly (called for side effects).
+}
 \description{
 A wrapper around \code{\link[cli:cli_abort]{cli::cli_abort()}} to throw classed errors, with an
 opinionated framework of error classes.
@@ -54,5 +57,4 @@ tryCatch(
     "Caught a specific subclass of stbl error."
   }
 )
-
 }

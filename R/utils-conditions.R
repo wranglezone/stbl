@@ -3,7 +3,6 @@
 #' @param ... `(character)` Components of the class name, from least-specific to
 #'   most.
 #' @inheritParams .shared-params
-#'
 #' @returns A character vector.
 #' @keywords internal
 .compile_pkg_condition_classes <- function(package, ...) {

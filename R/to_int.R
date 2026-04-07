@@ -173,8 +173,7 @@ to_integer_scalar <- to_int_scalar
 #' @param res A list returned by `ffi_chr_to_int`, with elements
 #'   `result`, `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_chr_to_int_failures <- function(res, x_class, x_arg, call) {
   non_number <- res[["non_number"]]
@@ -205,8 +204,7 @@ to_integer_scalar <- to_int_scalar
 #' @param res A list returned by `ffi_dbl_to_int`, with elements
 #'   `result` and `bad_precision`.
 #' @inheritParams .shared-params
-#'
-#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_dbl_to_int_failures <- function(res, x_class, x_arg, call) {
   bad_precision <- res[["bad_precision"]]

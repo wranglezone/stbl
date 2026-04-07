@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_fct.R
 \name{.fast_false}
 \alias{.fast_false}
-\title{Always return FALSE}
+\title{Force slow path in \code{.to_cls_scalar()}}
 \usage{
 .fast_false(x)
 }
@@ -13,7 +13,6 @@
 \code{FALSE}, always.
 }
 \description{
-A helper to force the slow path in \code{\link[=.to_cls_scalar]{.to_cls_scalar()}} for factors, since
-\code{rlang::is_scalar_factor()} does not exist.
+Force slow path in \code{.to_cls_scalar()}
 }
 \keyword{internal}

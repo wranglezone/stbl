@@ -49,7 +49,6 @@ match the original class.}
 \code{x} as a scalar of the target class.
 }
 \description{
-A helper that wraps around a \verb{to_*_scalar()} function to provide a standard
-set of checks.
+Coerce an object to a specific scalar class
 }
 \keyword{internal}

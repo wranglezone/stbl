@@ -24,7 +24,7 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-\code{NULL}, invisibly, if \code{x} passes all checks.
+\code{NULL} invisibly (called for side effects).
 }
 \description{
 Check for double to integer coercion failures

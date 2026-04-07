@@ -1,17 +1,3 @@
-#' Compile a message class chain
-#'
-#' @inheritParams .compile_pkg_condition_classes
-#'
-#' @returns A character vector of classes.
-#' @keywords internal
-.compile_pkg_message_classes <- function(package, ...) {
-  .compile_pkg_condition_classes(
-    package,
-    "message",
-    ...
-  )
-}
-
 #' Signal a message with standards applied
 #'
 #' A wrapper around [cli::cli_inform()] to throw classed messages, with an
@@ -24,6 +10,9 @@
 #' @param ... Additional parameters passed to [cli::cli_inform()] and on to
 #'   [rlang::inform()].
 #' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @export
+#'
 #' @examples
 #' pkg_inform("stbl", "This is a test message", "test_subclass")
 #' withCallingHandlers(
@@ -40,8 +29,6 @@
 #'     invokeRestart("muffleMessage")
 #'   }
 #' )
-#'
-#' @export
 pkg_inform <- function(
   package,
   message,
@@ -61,6 +48,19 @@ pkg_inform <- function(
   )
 }
 
+#' Compile a message class chain
+#'
+#' @inheritParams .compile_pkg_condition_classes
+#' @returns A character vector of classes.
+#' @keywords internal
+.compile_pkg_message_classes <- function(package, ...) {
+  .compile_pkg_condition_classes(
+    package,
+    "message",
+    ...
+  )
+}
+
 #' Test package message classes
 #'
 #' When you use [pkg_inform()] to signal messages, you can use this function to
@@ -72,6 +72,8 @@ pkg_inform <- function(
 #' @returns The classes of the message invisibly on success or the message on
 #'   failure. Unlike most testthat expectations, this expectation cannot be
 #'   usefully chained.
+#' @export
+#'
 #' @examplesIf rlang::is_installed("testthat")
 #' expect_pkg_message_classes(
 #'   pkg_inform("stbl", "This is a test message", "test_subclass"),
@@ -85,7 +87,6 @@ pkg_inform <- function(
 #'     "different_subclass"
 #'   )
 #' )
-#' @export
 expect_pkg_message_classes <- function(
   object,
   package,

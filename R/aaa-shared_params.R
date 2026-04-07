@@ -83,3 +83,8 @@ NULL
 #' @name .shared-params-check
 #' @keywords internal
 NULL
+
+#' Shared return for condition functions
+#' @name .shared-return-conditions
+#' @returns `NULL` invisibly (called for side effects).
+NULL

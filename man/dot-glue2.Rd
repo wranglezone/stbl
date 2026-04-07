@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{.glue2}
 \alias{.glue2}
-\title{A wrapper for \code{glue::glue} with custom delimiters}
+\title{A wrapper for \code{glue::glue} with bracket delimiters}
 \usage{
 .glue2(..., env = caller_env())
 }
@@ -17,9 +17,6 @@ are acceptable.}
 A character string with evaluated expressions.
 }
 \description{
-This wrapper sets the \code{.open} and \code{.close} arguments of \code{\link[glue:glue]{glue::glue()}} to \code{[}
-and \verb{]}, respectively. This allows for safe use of glue interpolation
-within messages that will be processed by \code{\link[cli:cli_abort]{cli::cli_abort()}}, which uses \verb{\{}
-and \verb{\}} for its own styling.
+A wrapper for \code{glue::glue} with bracket delimiters
 }
 \keyword{internal}

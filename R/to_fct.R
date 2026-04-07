@@ -104,8 +104,6 @@ to_fct.default <- function(
 
 #' Coerce to factor with specified levels
 #'
-#' A wrapper around level-coercion helpers.
-#'
 #' @inheritParams .shared-params
 #' @returns `x` as a factor with specified levels and NAs.
 #' @keywords internal
@@ -123,8 +121,6 @@ to_fct.default <- function(
 
 #' Coerce specified values to NA
 #'
-#' A helper that converts specified values in `x` to `NA`.
-#'
 #' @inheritParams .shared-params
 #' @returns `x` with specified values converted to `NA`.
 #' @keywords internal
@@ -137,9 +133,6 @@ to_fct.default <- function(
 }
 
 #' Core implementation for applying factor levels
-#'
-#' Checks for values in `x` that are not present in `levels` and throws an error
-#' if any are found.
 #'
 #' @inheritParams .shared-params
 #' @returns `x` as a factor with the specified levels.
@@ -165,14 +158,10 @@ to_fct.default <- function(
 
 #' Stop for bad factor levels
 #'
-#' Throws a standardized error when values are not found in the provided factor
-#' levels.
-#'
 #' @param bad_casts `(logical)` A logical vector indicating which elements of
 #'   `x` are not in the allowed levels.
 #' @inheritParams .shared-params
-#' @returns This function is called for its side effect of throwing an error and
-#'   does not return a value.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_bad_levels <- function(x, bad_casts, levels, to_na, x_arg, call) {
   bad_values <- unique(x[bad_casts])
@@ -228,10 +217,7 @@ to_fct_scalar <- function(
 #' @rdname stabilize_fct
 to_factor_scalar <- to_fct_scalar
 
-#' Always return FALSE
-#'
-#' A helper to force the slow path in [`.to_cls_scalar()`] for factors, since
-#' `rlang::is_scalar_factor()` does not exist.
+#' Force slow path in `.to_cls_scalar()`
 #'
 #' @param x An object (ignored).
 #' @returns `FALSE`, always.

@@ -47,7 +47,6 @@ match the original class.}
 \code{x} coerced to the target class.
 }
 \description{
-A helper that wraps around a \verb{to_*()} function to provide a standard way to
-coerce factors.
+Coerce an object from a factor to a specific class
 }
 \keyword{internal}

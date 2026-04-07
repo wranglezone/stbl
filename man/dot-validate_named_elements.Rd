@@ -43,7 +43,6 @@ source of error messages.}
 The updated list.
 }
 \description{
-Computes element name metadata and delegates to
-\code{.validate_required_elements()} and \code{.validate_extra_named_elements()}.
+Validate all named elements (required and extra)
 }
 \keyword{internal}

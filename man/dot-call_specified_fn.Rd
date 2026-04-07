@@ -23,9 +23,6 @@ source of error messages.}
 The validated value.
 }
 \description{
-Stabilizer functions use either \code{x_arg}/\code{call} or \code{.x_arg}/\code{.call} as
-parameter names depending on how they were created. This helper finds the
-relevant formal name for each argument independently using
-\code{rlang::fn_fmls_names()} and dispatches accordingly.
+Call a spec function with properly-named context arguments
 }
 \keyword{internal}
