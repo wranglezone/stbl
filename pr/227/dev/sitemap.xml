@@ -21,6 +21,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cpx_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_dbl_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_col_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_rows.html</loc></url>
