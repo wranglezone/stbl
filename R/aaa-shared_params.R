@@ -87,4 +87,5 @@ NULL
 #' Shared return for condition functions
 #' @name .shared-return-conditions
 #' @returns `NULL` invisibly (called for side effects).
+#' @keywords internal
 NULL

@@ -9,3 +9,4 @@
 \description{
 Shared return for condition functions
 }
+\keyword{internal}
