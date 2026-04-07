@@ -43,10 +43,27 @@ test_that("to_int() errors for dbls that would lose precision (#2, #217)", {
     to_int(given),
     class = .compile_dash("stbl", "error", "incompatible_type")
   )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
+  )
+
   given[[4]] <- Inf
   expect_error(
     to_int(given),
     class = .compile_dash("stbl", "error", "incompatible_type")
+  )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
   )
 })
 
