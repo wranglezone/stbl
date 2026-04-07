@@ -170,7 +170,9 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   } else {
     .Call(stbl_check_min_dbl, x, min_value)
   }
-  max_failure_locations <- if (is.null(max_value)) NULL else {
+  max_failure_locations <- if (is.null(max_value)) {
+    NULL
+  } else {
     .Call(stbl_check_max_dbl, x, max_value)
   }
   if (is.null(min_failure_locations) && is.null(max_failure_locations)) {
