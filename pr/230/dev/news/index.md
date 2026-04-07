@@ -31,6 +31,9 @@
   [\#219](https://github.com/wranglezone/stbl/issues/219),
   [\#221](https://github.com/wranglezone/stbl/issues/221),
   [\#226](https://github.com/wranglezone/stbl/issues/226)).
+- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  now displays unexpected values in quotes in its error message
+  ([\#66](https://github.com/wranglezone/stbl/issues/66)).
 
 ## stbl 0.3.0
 
