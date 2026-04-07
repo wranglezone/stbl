@@ -51,7 +51,13 @@ to_int.list <- function(
 }
 
 #' @export
-to_int.double <- function(x, ..., x_arg = caller_arg(x), call = caller_env(), x_class = object_type(x)) {
+to_int.double <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
   res <- .Call(ffi_dbl_to_int, x)
   .check_dbl_to_int_failures(res, x_class, x_arg, call)
   res[["result"]]
