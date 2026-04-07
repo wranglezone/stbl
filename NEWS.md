@@ -3,6 +3,7 @@
 * New `pkg_inform()` signals classed messages with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` tests that a message with the expected set of classes is thrown, and `expect_pkg_message_snapshot()` snapshot-tests the full message output in one step (#213).
 * New `pkg_warn()` signals classed warnings with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_warning_classes()` tests that a warning with the expected set of classes is thrown, and `expect_pkg_warning_snapshot()` snapshot-tests the full warning output in one step (#213).
 * Many `are_*_ish()` and `to_*()` methods are now implemented in C. Benchmarks show a significant speedup (about 3-20x) for large vectors (#217, #218, #219, #221, #226).
+* `to_fct()` now displays unexpected values in quotes in its error message (#66).
 
 # stbl 0.3.0
 
