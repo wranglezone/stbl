@@ -90,13 +90,12 @@ are_dbl_ish.factor <- function(x, ..., coerce_factor = TRUE) {
   if (!to_lgl_scalar(coerce_factor)) {
     return(rep(FALSE, length(x)))
   }
-  are_dbl_ish(as.character(x), ...)
+  .Call(stbl_fct_are_dblish, x)
 }
 
 #' @export
 are_dbl_ish.complex <- function(x, ...) {
-  # The imaginary part must be zero. The real part is already a double.
-  is.na(x) | (Im(x) == 0)
+  .Call(stbl_cpx_are_dblish, x)
 }
 
 #' @export

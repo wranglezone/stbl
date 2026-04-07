@@ -89,13 +89,12 @@ are_int_ish.factor <- function(x, ..., coerce_factor = TRUE) {
   if (!to_lgl_scalar(coerce_factor)) {
     return(rep(FALSE, length(x)))
   }
-  are_int_ish(as.character(x), ...)
+  .Call(stbl_fct_are_intish, x)
 }
 
 #' @export
 are_int_ish.complex <- function(x, ...) {
-  # The imaginary part must be zero, and the real part must be int-ish.
-  are_dbl_ish(x, ...) & are_int_ish(Re(x), ...)
+  .Call(stbl_cpx_are_intish, x)
 }
 
 #' @export
