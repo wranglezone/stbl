@@ -1,6 +1,6 @@
 # Unexported wrappers around the public C routines, used to drive test coverage.
 
-# chr -> * ----------------------------------------------------------------- ----
+# chr -> * ----
 
 .chr_to_lgl <- function(x) {
   .Call(stbl_chr_to_lgl, x)
@@ -18,7 +18,7 @@
   .Call(stbl_chr_are_fctish, x, levels, to_na)
 }
 
-# dbl -> * ----------------------------------------------------------------- ----
+# dbl -> * ----
 
 .dbl_to_int <- function(x) {
   .Call(stbl_dbl_to_int, x)
@@ -28,13 +28,13 @@
   .Call(stbl_dbl_to_lgl, x)
 }
 
-# int -> * ----------------------------------------------------------------- ----
+# int -> * ----
 
 .int_to_dbl <- function(x) {
   .Call(stbl_int_to_dbl, x)
 }
 
-# lgl -> * ----------------------------------------------------------------- ----
+# lgl -> * ----
 
 .lgl_to_dbl <- function(x) {
   .Call(stbl_lgl_to_dbl, x)
@@ -44,7 +44,7 @@
   .Call(stbl_lgl_to_int, x)
 }
 
-# cpx -> * ----------------------------------------------------------------- ----
+# cpx -> * ----
 
 .cpx_to_dbl <- function(x) {
   .Call(stbl_cpx_to_dbl, x)
@@ -54,7 +54,7 @@
   .Call(stbl_cpx_to_int, x)
 }
 
-# fct -> * ----------------------------------------------------------------- ----
+# fct -> * ----
 
 .fct_to_dbl <- function(x) {
   .Call(stbl_fct_to_dbl, x)
@@ -72,7 +72,7 @@
   .Call(stbl_fct_are_fctish, x, levels, to_na)
 }
 
-# lst -> * ----------------------------------------------------------------- ----
+# lst -> * ----
 
 .lst_to_dbl <- function(x) {
   .Call(stbl_lst_to_dbl, x)

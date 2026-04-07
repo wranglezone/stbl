@@ -230,7 +230,10 @@ test_that(".fct_to_int() passes NA factor element through (#226)", {
 })
 
 test_that(".fct_to_int() returns NA for non-integer levels (#226)", {
-  expect_identical(.fct_to_int(factor(c("a", "1.5"))), c(NA_integer_, NA_integer_))
+  expect_identical(
+    .fct_to_int(factor(c("a", "1.5"))),
+    c(NA_integer_, NA_integer_)
+  )
 })
 
 # fct -> lgl --------------------------------------------------------------- ----
@@ -367,7 +370,10 @@ test_that(".lst_to_lgl() returns NULL for unsupported types (#226)", {
 # lst -> chr --------------------------------------------------------------- ----
 
 test_that(".lst_to_chr() converts a flat list of character scalars (#226)", {
-  expect_identical(.lst_to_chr(list("a", "b", NA_character_)), c("a", "b", NA_character_))
+  expect_identical(
+    .lst_to_chr(list("a", "b", NA_character_)),
+    c("a", "b", NA_character_)
+  )
 })
 
 test_that(".lst_to_chr() returns NULL for non-character elements (#226)", {
@@ -381,7 +387,10 @@ test_that(".lst_to_chr() returns NULL for non-scalar elements (#226)", {
 # lst -> fct --------------------------------------------------------------- ----
 
 test_that(".lst_to_fct() converts a flat list of character scalars (#226)", {
-  expect_identical(.lst_to_fct(list("a", "b", NA_character_)), c("a", "b", NA_character_))
+  expect_identical(
+    .lst_to_fct(list("a", "b", NA_character_)),
+    c("a", "b", NA_character_)
+  )
 })
 
 test_that(".lst_to_fct() returns NULL for non-character elements (#226)", {
