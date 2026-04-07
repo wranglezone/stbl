@@ -60,6 +60,10 @@ pkg_inform(
   and on to
   [`rlang::inform()`](https://rlang.r-lib.org/reference/abort.html).
 
+## Value
+
+`NULL` invisibly (called for side effects).
+
 ## Examples
 
 ``` r

@@ -28,4 +28,4 @@ Error if an object is a primitive function
 
 ## Value
 
-`NULL`, invisibly, if `x` passes the check.
+`NULL` invisibly (called for side effects).

@@ -1,10 +1,6 @@
 # Check that list elements do not have jagged (unequal non-1) lengths
 
-Expected to be called after
-[`.check_all_named()`](https://stbl.wrangle.zone/dev/reference/dot-check_all_named.md),
-so `names(x)` is guaranteed to be non-`NULL`. Length-1 elements are
-excluded from the check because they recycle to any length in
-[`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html).
+Check that list elements do not have jagged (unequal non-1) lengths
 
 ## Usage
 
@@ -44,4 +40,4 @@ excluded from the check because they recycle to any length in
 
 ## Value
 
-`NULL`, invisibly, if the list is not jagged.
+`NULL` invisibly (called for side effects).

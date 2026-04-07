@@ -1,9 +1,6 @@
 # Validate all named elements (required and extra)
 
-Computes element name metadata and delegates to
-[`.validate_required_elements()`](https://stbl.wrangle.zone/dev/reference/dot-validate_required_elements.md)
-and
-[`.validate_extra_named_elements()`](https://stbl.wrangle.zone/dev/reference/dot-validate_extra_named_elements.md).
+Validate all named elements (required and extra)
 
 ## Usage
 

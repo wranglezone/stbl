@@ -1,9 +1,6 @@
 # Coerce a vector to a one-column data frame
 
-Called by `to_df.*` methods for atomic vector types. Succeeds only when
-`x` was supplied as a named symbol (variable), not as an inline
-expression. This prevents data frames with syntactically ugly column
-names.
+Coerce a vector to a one-column data frame
 
 ## Usage
 

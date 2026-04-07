@@ -1,10 +1,6 @@
 # Call a spec function with properly-named context arguments
 
-Stabilizer functions use either `x_arg`/`call` or `.x_arg`/`.call` as
-parameter names depending on how they were created. This helper finds
-the relevant formal name for each argument independently using
-[`rlang::fn_fmls_names()`](https://rlang.r-lib.org/reference/fn_fmls.html)
-and dispatches accordingly.
+Call a spec function with properly-named context arguments
 
 ## Usage
 

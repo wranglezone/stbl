@@ -1,19 +1,19 @@
-# Check for coercion failures and stop if any are found
+# Check for double to integer coercion failures
 
-Check for coercion failures and stop if any are found
+Check for double to integer coercion failures
 
 ## Usage
 
 ``` r
-.check_cast_failures(failures, x_class, to, due_to, x_arg, call)
+.check_dbl_to_int_failures(res, x_class, x_arg, call)
 ```
 
 ## Arguments
 
-- failures:
+- res:
 
-  `(logical)` A logical vector where `TRUE` indicates a coercion
-  failure.
+  A list returned by `ffi_dbl_to_int`, with elements `result` and
+  `bad_precision`.
 
 - x_class:
 
@@ -21,14 +21,6 @@ Check for coercion failures and stop if any are found
   to use in error messages. Use this if you remove a special class from
   the object before checking its coercion, but want the error message to
   match the original class.
-
-- to:
-
-  The target object for the coercion.
-
-- due_to:
-
-  `(length-1 character)` A string describing the reason for the failure.
 
 - x_arg:
 

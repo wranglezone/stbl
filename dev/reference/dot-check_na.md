@@ -1,7 +1,6 @@
 # Check for NA values
 
-Checks for `NA` values in `x`, throwing an error if any are found and
-`allow_na` is `FALSE`.
+Check for NA values
 
 ## Usage
 
@@ -33,4 +32,4 @@ Checks for `NA` values in `x`, throwing an error if any are found and
 
 ## Value
 
-`NULL`, invisibly, if `x` passes the check.
+`NULL` invisibly (called for side effects).

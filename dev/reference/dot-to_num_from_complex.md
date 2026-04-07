@@ -1,7 +1,6 @@
 # Coerce an object from a complex to a numeric class
 
-A helper that wraps around a `to_*()` function to provide a standard way
-to coerce complex numbers.
+Coerce an object from a complex to a numeric class
 
 ## Usage
 

@@ -312,8 +312,9 @@ to_int(NULL)
 #> NULL
 try(to_int(c(1, 2, 3.1, 4, 5.2)))
 #> Error in eval(expr, envir) : 
-#>   Can't convert from `c(1, 2, 3.1, 4, 5.2)` <double> to <integer> due to loss of precision.
-#> • Locations: 3, 5
+#>   `c(1, 2, 3.1, 4, 5.2)` <double> must be coercible to <integer>
+#> ✖ Can't convert some values due to loss of precision.
+#> • Locations: 3 and 5
 try(to_int("1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"1"` <character> to <integer>.

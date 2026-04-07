@@ -1,7 +1,6 @@
 # Stabilize a scalar object of a specific class
 
-A helper used by the `stabilize_*_scalar()` functions to provide a
-standard set of checks.
+Stabilize a scalar object of a specific class
 
 ## Usage
 

@@ -1,8 +1,6 @@
 # Signal a message with standards applied
 
-A wrapper around
-[`cli::cli_inform()`](https://cli.r-lib.org/reference/cli_abort.html) to
-throw classed messages.
+Signal a message with standards applied
 
 ## Usage
 
@@ -53,3 +51,7 @@ throw classed messages.
   [`cli::cli_inform()`](https://cli.r-lib.org/reference/cli_abort.html)
   and on to
   [`rlang::inform()`](https://rlang.r-lib.org/reference/abort.html).
+
+## Value
+
+`NULL` invisibly (called for side effects).

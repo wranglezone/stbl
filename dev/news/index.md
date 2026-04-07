@@ -31,9 +31,14 @@
   [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
   and
   [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
-  for character input are now implemented in C. Benchmarks show a
-  significant speedup (about 5-20x) for large character vectors
-  ([\#218](https://github.com/wranglezone/stbl/issues/218),
+  for character input and
+  [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
+  and
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  for double input are now implemented in C. Benchmarks show a
+  significant speedup (about 3-20x) for large vectors
+  ([\#217](https://github.com/wranglezone/stbl/issues/217),
+  [\#218](https://github.com/wranglezone/stbl/issues/218),
   [\#219](https://github.com/wranglezone/stbl/issues/219),
   [\#221](https://github.com/wranglezone/stbl/issues/221)).
 

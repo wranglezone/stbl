@@ -1,8 +1,6 @@
 # Signal an error with standards applied
 
-A wrapper around
-[`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html) to
-throw classed errors.
+Signal an error with standards applied
 
 ## Usage
 
@@ -53,3 +51,7 @@ throw classed errors.
   [`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html)
   and on to
   [`rlang::abort()`](https://rlang.r-lib.org/reference/abort.html).
+
+## Value
+
+`NULL` invisibly (called for side effects).

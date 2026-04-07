@@ -60,6 +60,10 @@ pkg_warn(
   and on to
   [`rlang::warn()`](https://rlang.r-lib.org/reference/abort.html).
 
+## Value
+
+`NULL` invisibly (called for side effects).
+
 ## Examples
 
 ``` r

@@ -1,8 +1,6 @@
 # Check the size of an object
 
-Checks if the size of `x` (from
-[`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html))
-is within the bounds of `min_size` and `max_size`.
+Check the size of an object
 
 ## Usage
 
@@ -42,4 +40,4 @@ is within the bounds of `min_size` and `max_size`.
 
 ## Value
 
-`NULL`, invisibly, if `x` passes the check.
+`NULL` invisibly (called for side effects).

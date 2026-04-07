@@ -1,11 +1,8 @@
-# A wrapper for `glue::glue` with custom delimiters
+# A wrapper for `glue::glue` with bracket delimiters
 
-This wrapper sets the `.open` and `.close` arguments of
-[`glue::glue()`](https://glue.tidyverse.org/reference/glue.html) to `[`
-and `]`, respectively. This allows for safe use of glue interpolation
-within messages that will be processed by
-[`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html),
-which uses `{` and `}` for its own styling.
+A wrapper for
+[`glue::glue`](https://glue.tidyverse.org/reference/glue.html) with
+bracket delimiters
 
 ## Usage
 

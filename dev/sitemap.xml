@@ -21,6 +21,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_dbl_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_col_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_rows.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_duplicate_names.html</loc></url>
@@ -62,6 +63,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-return-conditions.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.html</loc></url>
