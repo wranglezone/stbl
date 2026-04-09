@@ -34,9 +34,8 @@
 - [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
   and
   [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
-  now use a C implementation for min/max range checks, eliminating
-  intermediate logical vector allocations and improving throughput for
-  large vectors
+  now use a C implementation for min/max range checks, improving
+  throughput for large vectors
   ([\#220](https://github.com/wranglezone/stbl/issues/220)).
 
 ## stbl 0.3.0
