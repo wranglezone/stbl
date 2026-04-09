@@ -93,3 +93,13 @@
 .lst_to_fct <- function(x) {
   .Call(stbl_lst_to_fct, x)
 }
+
+# range checks ----
+
+.check_min_dbl <- function(x, min_val) {
+  .Call(stbl_check_min_dbl, x, min_val)
+}
+
+.check_max_dbl <- function(x, max_val) {
+  .Call(stbl_check_max_dbl, x, max_val)
+}

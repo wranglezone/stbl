@@ -400,3 +400,47 @@ test_that(".lst_to_fct() returns NULL for non-character elements (#226)", {
 test_that(".lst_to_fct() returns NULL for non-scalar elements (#226)", {
   expect_null(.lst_to_fct(list(c("a", "b"))))
 })
+
+# range checks ------------------------------------------------------------- ----
+
+test_that(".check_min_dbl() returns NULL when all values pass (#220)", {
+  expect_null(.check_min_dbl(c(1.0, 2.0, 3.0), 1.0))
+  expect_null(.check_min_dbl(double(0), 0.0))
+})
+
+test_that(".check_min_dbl() returns failure indices for values below min (#220)", {
+  expect_identical(.check_min_dbl(c(1.0, 2.0, 3.0), 2.0), 1L)
+  expect_identical(.check_min_dbl(c(0.0, 1.0, 2.0, 3.0), 2.0), c(1L, 2L))
+})
+
+test_that(".check_min_dbl() treats NA as passing (#220)", {
+  expect_null(.check_min_dbl(c(NA_real_, 2.0), 1.0))
+  expect_identical(.check_min_dbl(c(NA_real_, 0.5), 1.0), 2L)
+})
+
+test_that(".check_min_dbl() handles integer input (#220)", {
+  expect_null(.check_min_dbl(c(2L, 3L), 1.0))
+  expect_identical(.check_min_dbl(c(1L, 2L, 3L), 2.0), 1L)
+  expect_null(.check_min_dbl(c(NA_integer_, 2L), 1.0))
+})
+
+test_that(".check_max_dbl() returns NULL when all values pass (#220)", {
+  expect_null(.check_max_dbl(c(1.0, 2.0, 3.0), 3.0))
+  expect_null(.check_max_dbl(double(0), 0.0))
+})
+
+test_that(".check_max_dbl() returns failure indices for values above max (#220)", {
+  expect_identical(.check_max_dbl(c(1.0, 2.0, 3.0), 2.0), 3L)
+  expect_identical(.check_max_dbl(c(1.0, 2.0, 3.0, 4.0), 2.0), c(3L, 4L))
+})
+
+test_that(".check_max_dbl() treats NA as passing (#220)", {
+  expect_null(.check_max_dbl(c(NA_real_, 1.0), 2.0))
+  expect_identical(.check_max_dbl(c(NA_real_, 3.0), 2.0), 2L)
+})
+
+test_that(".check_max_dbl() handles integer input (#220)", {
+  expect_null(.check_max_dbl(c(1L, 2L), 3.0))
+  expect_identical(.check_max_dbl(c(1L, 2L, 3L), 2.0), 3L)
+  expect_null(.check_max_dbl(c(NA_integer_, 1L), 2.0))
+})
