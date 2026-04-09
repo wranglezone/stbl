@@ -165,14 +165,10 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 ) {
   min_value <- to_dbl_scalar(min_value, allow_null = TRUE, call = call)
   max_value <- to_dbl_scalar(max_value, allow_null = TRUE, call = call)
-  min_failure_locations <- if (is.null(min_value)) {
-    NULL
-  } else {
+  min_failure_locations <- if (!is.null(min_value)) {
     .Call(stbl_check_min_dbl, x, min_value)
   }
-  max_failure_locations <- if (is.null(max_value)) {
-    NULL
-  } else {
+  max_failure_locations <- if (!is.null(max_value)) {
     .Call(stbl_check_max_dbl, x, max_value)
   }
   if (is.null(min_failure_locations) && is.null(max_failure_locations)) {
