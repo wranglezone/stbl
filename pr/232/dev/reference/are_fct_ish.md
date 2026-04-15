@@ -104,9 +104,9 @@ is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 
 # `max_levels` limits distinct non-`NA` values across the whole vector.
 are_fct_ish(c("a", "b", "c"), max_levels = 2)
-#> [1] FALSE FALSE FALSE
+#> [1] TRUE TRUE TRUE
 is_fct_ish(c("a", "b", "c"), max_levels = 2)
-#> [1] FALSE
+#> [1] TRUE
 
 # Factors are also checked against the specified levels.
 are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
