@@ -22,6 +22,11 @@ Check for values that would be lost during factor coercion
 
   `(character)` Values to convert to `NA`.
 
+- max_levels:
+
+  `(length-1 numeric)` Maximum number of distinct non-`NA` values
+  allowed across the whole vector after applying `to_na`.
+
 ## Value
 
 A logical vector where `TRUE` indicates a failure.

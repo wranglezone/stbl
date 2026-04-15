@@ -51,8 +51,7 @@ are_fct_ish(
 - max_levels:
 
   `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`. Defaults to
-  `Inf` (no limit).
+  allowed across the whole vector after applying `to_na`.
 
 - depth:
 

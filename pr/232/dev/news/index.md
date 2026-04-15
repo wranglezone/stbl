@@ -35,8 +35,8 @@
   and
   [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accept a `max_levels` argument to limit the number of unique
-  non-`NA` values allowed across the full vector after applying `to_na`
-  (#noissue).
+  non-`NA` levels
+  ([\#231](https://github.com/wranglezone/stbl/issues/231)).
 - [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
   and
   [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
