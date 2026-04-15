@@ -35,8 +35,7 @@ is_factor_ish(x, ...)
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
 \item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
-values allowed across the whole vector after applying \code{to_na}. Defaults to
-\code{Inf} (no limit).}
+values allowed across the whole vector after applying \code{to_na}.}
 
 \item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
 set this parameter.}

@@ -36,6 +36,8 @@
 #'   `NULL` (default) values are not checked.
 #' @param max_size `(length-1 integer)` The maximum size of the object. Object
 #'   size will be tested using [vctrs::vec_size()].
+#' @param max_levels `(length-1 numeric)` Maximum number of distinct non-`NA`
+#'   values allowed across the whole vector after applying `to_na`.
 #' @param max_value `(length-1 numeric)` The highest allowed value for `x`. If
 #'   `NULL` (default) values are not checked.
 #' @param package `(length-1 character)` The name of the package to use in

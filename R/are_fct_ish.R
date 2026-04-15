@@ -10,9 +10,6 @@
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#' @param max_levels `(length-1 numeric)` Maximum number of distinct non-`NA`
-#'   values allowed across the whole vector after applying `to_na`. Defaults to
-#'   `Inf` (no limit).
 #'
 #' @returns `are_fct_ish()` returns a logical vector with the same length as the
 #'   input. `is_fct_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`) for
