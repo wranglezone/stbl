@@ -8,22 +8,15 @@
 \alias{are_fct_ish.default}
 \title{Check if an object can be safely coerced to a factor}
 \usage{
-are_fct_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
+are_fct_ish(x, ..., levels = NULL, to_na = character())
 
-is_fct_ish(x, ...)
+is_fct_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
-are_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
+are_factor_ish(x, ..., levels = NULL, to_na = character())
 
-is_factor_ish(x, ...)
+is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
-\method{are_fct_ish}{default}(
-  x,
-  ...,
-  levels = NULL,
-  to_na = character(),
-  max_levels = Inf,
-  depth = 1
-)
+\method{are_fct_ish}{default}(x, ..., levels = NULL, to_na = character(), depth = 1)
 }
 \arguments{
 \item{x}{The object to check.}
@@ -71,7 +64,6 @@ are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 
 # `max_levels` limits distinct non-`NA` values across the whole vector.
-are_fct_ish(c("a", "b", "c"), max_levels = 2)
 is_fct_ish(c("a", "b", "c"), max_levels = 2)
 
 # Factors are also checked against the specified levels.

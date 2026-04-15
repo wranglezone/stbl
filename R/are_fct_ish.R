@@ -46,8 +46,16 @@ are_fct_ish <- function(x, ..., levels = NULL, to_na = character()) {
 
 #' @export
 #' @rdname are_fct_ish
-is_fct_ish <- function(x, ...) {
-  all(are_fct_ish(x, ...))
+is_fct_ish <- function(
+  x,
+  ...,
+  levels = NULL,
+  to_na = character(),
+  max_levels = Inf
+) {
+  all(are_fct_ish(x, ..., levels = levels, to_na = to_na)) &&
+    (is.infinite(max_levels) ||
+      length(unique(setdiff(x, c(to_na, NA)))) <= max_levels)
 }
 
 #' @export

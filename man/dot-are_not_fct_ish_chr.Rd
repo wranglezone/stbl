@@ -4,7 +4,7 @@
 \alias{.are_not_fct_ish_chr}
 \title{Check for values that would be lost during factor coercion}
 \usage{
-.are_not_fct_ish_chr(x, levels, to_na = character(), max_levels = Inf)
+.are_not_fct_ish_chr(x, levels, to_na = character())
 }
 \arguments{
 \item{x}{The object to check.}
@@ -12,9 +12,6 @@
 \item{levels}{\code{(character)} The desired factor levels.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
-
-\item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
-values allowed across the whole vector after applying \code{to_na}.}
 }
 \value{
 A logical vector where \code{TRUE} indicates a failure.
