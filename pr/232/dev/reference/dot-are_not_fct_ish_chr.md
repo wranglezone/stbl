@@ -5,7 +5,7 @@ Check for values that would be lost during factor coercion
 ## Usage
 
 ``` r
-.are_not_fct_ish_chr(x, levels, to_na = character(), max_levels = Inf)
+.are_not_fct_ish_chr(x, levels, to_na = character())
 ```
 
 ## Arguments
@@ -21,11 +21,6 @@ Check for values that would be lost during factor coercion
 - to_na:
 
   `(character)` Values to convert to `NA`.
-
-- max_levels:
-
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
 
 ## Value
 
