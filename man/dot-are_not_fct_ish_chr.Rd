@@ -4,7 +4,7 @@
 \alias{.are_not_fct_ish_chr}
 \title{Check for values that would be lost during factor coercion}
 \usage{
-.are_not_fct_ish_chr(x, levels, to_na = character())
+.are_not_fct_ish_chr(x, levels, to_na = character(), max_levels = Inf)
 }
 \arguments{
 \item{x}{The object to check.}

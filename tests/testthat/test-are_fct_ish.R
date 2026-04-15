@@ -31,6 +31,25 @@ test_that("are_fct_ish() works with to_na (#93)", {
   )
 })
 
+test_that("are_fct_ish() supports max_levels across whole vector (#noissue)", {
+  expect_identical(
+    are_fct_ish(c("a", "b", "a"), max_levels = 2),
+    rep(TRUE, 3)
+  )
+  expect_identical(
+    are_fct_ish(c("a", "b", "c"), max_levels = 2),
+    rep(FALSE, 3)
+  )
+  expect_identical(
+    are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z", max_levels = 2),
+    rep(TRUE, 3)
+  )
+  expect_identical(
+    are_fct_ish(c("a", NA, "b"), max_levels = 1),
+    c(FALSE, TRUE, FALSE)
+  )
+})
+
 test_that(".are_not_fct_ish_chr() works (#93)", {
   expect_identical(
     .are_not_fct_ish_chr(letters[1:3], levels = c("a", "b")),
@@ -43,6 +62,10 @@ test_that(".are_not_fct_ish_chr() works (#93)", {
   expect_identical(
     .are_not_fct_ish_chr(letters, levels = NULL),
     rep(FALSE, 26)
+  )
+  expect_identical(
+    .are_not_fct_ish_chr(c("a", NA, "b"), levels = NULL, max_levels = 1),
+    c(TRUE, FALSE, TRUE)
   )
 })
 
@@ -69,6 +92,12 @@ test_that("is_fct_ish() works (#93)", {
   expect_true(is_fct_ish(letters))
   expect_true(is_fct_ish(NULL))
   expect_false(is_fct_ish(letters, levels = "a"))
+})
+
+test_that("is_fct_ish() supports max_levels (#noissue)", {
+  expect_true(is_fct_ish(c("a", "b"), max_levels = 2))
+  expect_false(is_fct_ish(c("a", "b"), max_levels = 1))
+  expect_true(is_fct_ish(c("a", "z"), to_na = "z", max_levels = 1))
 })
 
 test_that("are_factor_ish() exists (#164)", {
