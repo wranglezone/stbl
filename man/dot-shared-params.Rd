@@ -56,6 +56,9 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
+\item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
+values allowed across the whole vector after applying \code{to_na}.}
+
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 

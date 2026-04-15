@@ -34,6 +34,9 @@
 #' are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #' is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #'
+#' # `max_levels` limits distinct non-`NA` values across the whole vector.
+#' is_fct_ish(c("a", "b", "c"), max_levels = 2)
+#'
 #' # Factors are also checked against the specified levels.
 #' are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 #' is_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
@@ -43,8 +46,16 @@ are_fct_ish <- function(x, ..., levels = NULL, to_na = character()) {
 
 #' @export
 #' @rdname are_fct_ish
-is_fct_ish <- function(x, ...) {
-  all(are_fct_ish(x, ...))
+is_fct_ish <- function(
+  x,
+  ...,
+  levels = NULL,
+  to_na = character(),
+  max_levels = Inf
+) {
+  all(are_fct_ish(x, ..., levels = levels, to_na = to_na)) &&
+    (is.infinite(max_levels) ||
+      length(unique(setdiff(to_chr(x), c(to_na, NA_character_)))) <= max_levels)
 }
 
 #' @export

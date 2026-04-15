@@ -71,6 +71,12 @@ test_that("is_fct_ish() works (#93)", {
   expect_false(is_fct_ish(letters, levels = "a"))
 })
 
+test_that("is_fct_ish() supports max_levels (#231)", {
+  expect_true(is_fct_ish(c("a", "b"), max_levels = 2))
+  expect_false(is_fct_ish(c("a", "b"), max_levels = 1))
+  expect_true(is_fct_ish(c("a", "z"), to_na = "z", max_levels = 1))
+})
+
 test_that("are_factor_ish() exists (#164)", {
   expect_no_error(are_factor_ish())
 })

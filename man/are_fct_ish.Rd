@@ -10,11 +10,11 @@
 \usage{
 are_fct_ish(x, ..., levels = NULL, to_na = character())
 
-is_fct_ish(x, ...)
+is_fct_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 are_factor_ish(x, ..., levels = NULL, to_na = character())
 
-is_factor_ish(x, ...)
+is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 \method{are_fct_ish}{default}(x, ..., levels = NULL, to_na = character(), depth = 1)
 }
@@ -26,6 +26,9 @@ is_factor_ish(x, ...)
 \item{levels}{\code{(character)} The desired factor levels.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
+
+\item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
+values allowed across the whole vector after applying \code{to_na}.}
 
 \item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
 set this parameter.}
@@ -59,6 +62,9 @@ is_fct_ish(c("a", "b", "c"), levels = c("a", "b"))
 # The `to_na` argument allows some values to be treated as `NA`.
 are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
+
+# `max_levels` limits distinct non-`NA` values across the whole vector.
+is_fct_ish(c("a", "b", "c"), max_levels = 2)
 
 # Factors are also checked against the specified levels.
 are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
