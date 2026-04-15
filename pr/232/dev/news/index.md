@@ -32,7 +32,7 @@
   [\#221](https://github.com/wranglezone/stbl/issues/221),
   [\#226](https://github.com/wranglezone/stbl/issues/226)).
 - [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
-  now accept a `max_levels` argument to limit the number of unique
+  now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
   ([\#231](https://github.com/wranglezone/stbl/issues/231)).
 - [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
