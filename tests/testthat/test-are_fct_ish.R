@@ -41,7 +41,12 @@ test_that("are_fct_ish() supports max_levels across whole vector (#noissue)", {
     rep(FALSE, 3)
   )
   expect_identical(
-    are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z", max_levels = 2),
+    are_fct_ish(
+      c("a", "b", "z"),
+      levels = c("a", "b"),
+      to_na = "z",
+      max_levels = 2
+    ),
     rep(TRUE, 3)
   )
   expect_identical(
