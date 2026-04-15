@@ -35,19 +35,12 @@
 #' is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #'
 #' # `max_levels` limits distinct non-`NA` values across the whole vector.
-#' are_fct_ish(c("a", "b", "c"), max_levels = 2)
 #' is_fct_ish(c("a", "b", "c"), max_levels = 2)
 #'
 #' # Factors are also checked against the specified levels.
 #' are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 #' is_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
-are_fct_ish <- function(
-  x,
-  ...,
-  levels = NULL,
-  to_na = character(),
-  max_levels = Inf
-) {
+are_fct_ish <- function(x, ..., levels = NULL, to_na = character()) {
   UseMethod("are_fct_ish")
 }
 
@@ -66,31 +59,13 @@ are_factor_ish <- are_fct_ish
 is_factor_ish <- is_fct_ish
 
 #' @export
-are_fct_ish.factor <- function(
-  x,
-  ...,
-  levels = NULL,
-  to_na = character(),
-  max_levels = Inf
-) {
-  are_fct_ish(
-    as.character(x),
-    ...,
-    levels = levels,
-    to_na = to_na,
-    max_levels = max_levels
-  )
+are_fct_ish.factor <- function(x, ..., levels = NULL, to_na = character()) {
+  are_fct_ish(as.character(x), ..., levels = levels, to_na = to_na)
 }
 
 #' @export
-are_fct_ish.character <- function(
-  x,
-  ...,
-  levels = NULL,
-  to_na = character(),
-  max_levels = Inf
-) {
-  !.are_not_fct_ish_chr(x, levels, to_na, max_levels)
+are_fct_ish.character <- function(x, ..., levels = NULL, to_na = character()) {
+  !.are_not_fct_ish_chr(x, levels, to_na)
 }
 
 #' Check for values that would be lost during factor coercion
@@ -99,22 +74,12 @@ are_fct_ish.character <- function(
 #' @inheritParams .shared-params
 #' @returns A logical vector where `TRUE` indicates a failure.
 #' @keywords internal
-.are_not_fct_ish_chr <- function(
-  x,
-  levels,
-  to_na = character(),
-  max_levels = Inf
-) {
-  max_levels <- to_dbl_scalar(max_levels)
-  if (length(to_na)) {
-    x[x %in% to_na] <- NA
-  }
-  non_missing <- !is.na(x)
-  if (is.finite(max_levels) && length(unique(x[non_missing])) > max_levels) {
-    return(non_missing)
-  }
+.are_not_fct_ish_chr <- function(x, levels, to_na = character()) {
   if (is.null(levels)) {
     return(rep(FALSE, length(x)))
+  }
+  if (length(to_na)) {
+    x[x %in% to_na] <- NA
   }
   was_na <- is.na(x)
   cast <- factor(x, levels = levels)
@@ -133,31 +98,15 @@ are_fct_ish.default <- function(
   ...,
   levels = NULL,
   to_na = character(),
-  max_levels = Inf,
   depth = 1
 ) {
   if (rlang::is_atomic(x)) {
-    return(
-      are_fct_ish(
-        as.character(x),
-        ...,
-        levels = levels,
-        to_na = to_na,
-        max_levels = max_levels
-      )
-    )
+    return(are_fct_ish(as.character(x), ..., levels = levels, to_na = to_na))
   }
 
   if (!rlang::is_vector(x) || depth != 1) {
     return(FALSE)
   }
 
-  .elements_are_cls_ish(
-    x,
-    are_fct_ish,
-    ...,
-    levels = levels,
-    to_na = to_na,
-    max_levels = max_levels
-  )
+  .elements_are_cls_ish(x, are_fct_ish, ..., levels = levels, to_na = to_na)
 }
