@@ -97,6 +97,11 @@ to make them easier to import and to find.
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
+- max_levels:
+
+  `(length-1 numeric)` Maximum number of distinct non-`NA` values
+  allowed across the whole vector after applying `to_na`.
+
 - max_value:
 
   `(length-1 numeric)` The highest allowed value for `x`. If `NULL`

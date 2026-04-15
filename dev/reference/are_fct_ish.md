@@ -13,11 +13,11 @@ elements of its input can be safely coerced to a factor.
 ``` r
 are_fct_ish(x, ..., levels = NULL, to_na = character())
 
-is_fct_ish(x, ...)
+is_fct_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 are_factor_ish(x, ..., levels = NULL, to_na = character())
 
-is_factor_ish(x, ...)
+is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 # Default S3 method
 are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
@@ -40,6 +40,11 @@ are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
 - to_na:
 
   `(character)` Values to convert to `NA`.
+
+- max_levels:
+
+  `(length-1 numeric)` Maximum number of distinct non-`NA` values
+  allowed across the whole vector after applying `to_na`.
 
 - depth:
 
@@ -89,6 +94,10 @@ are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #> [1] TRUE TRUE TRUE
 is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #> [1] TRUE
+
+# `max_levels` limits distinct non-`NA` values across the whole vector.
+is_fct_ish(c("a", "b", "c"), max_levels = 2)
+#> [1] FALSE
 
 # Factors are also checked against the specified levels.
 are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
