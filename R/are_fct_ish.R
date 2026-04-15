@@ -55,7 +55,7 @@ is_fct_ish <- function(
 ) {
   all(are_fct_ish(x, ..., levels = levels, to_na = to_na)) &&
     (is.infinite(max_levels) ||
-      length(unique(setdiff(x, c(to_na, NA)))) <= max_levels)
+      length(unique(setdiff(to_chr(x), c(to_na, NA_character_)))) <= max_levels)
 }
 
 #' @export
