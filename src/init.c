@@ -131,4 +131,48 @@ void R_init_stbl(DllInfo* dll) {
   R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
   R_forceSymbols(dll, TRUE);
+
+  /* chr -> * */
+  R_RegisterCCallable("stbl", "stbl_chr_to_lgl",      (DL_FUNC) &stbl_chr_to_lgl);
+  R_RegisterCCallable("stbl", "stbl_chr_are_lglish",  (DL_FUNC) &stbl_chr_are_lglish);
+  R_RegisterCCallable("stbl", "stbl_chr_to_int",      (DL_FUNC) &stbl_chr_to_int);
+  R_RegisterCCallable("stbl", "stbl_chr_are_intish",  (DL_FUNC) &stbl_chr_are_intish);
+  R_RegisterCCallable("stbl", "stbl_chr_to_dbl",      (DL_FUNC) &stbl_chr_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_chr_are_dblish",  (DL_FUNC) &stbl_chr_are_dblish);
+  R_RegisterCCallable("stbl", "stbl_chr_are_fctish",  (DL_FUNC) &stbl_chr_are_fctish);
+  /* dbl -> * */
+  R_RegisterCCallable("stbl", "stbl_dbl_to_int",      (DL_FUNC) &stbl_dbl_to_int);
+  R_RegisterCCallable("stbl", "stbl_dbl_are_intish",  (DL_FUNC) &stbl_dbl_are_intish);
+  R_RegisterCCallable("stbl", "stbl_dbl_to_lgl",      (DL_FUNC) &stbl_dbl_to_lgl);
+  R_RegisterCCallable("stbl", "stbl_dbl_are_lglish",  (DL_FUNC) &stbl_dbl_are_lglish);
+  /* int -> * */
+  R_RegisterCCallable("stbl", "stbl_int_to_dbl",      (DL_FUNC) &stbl_int_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_int_are_dblish",  (DL_FUNC) &stbl_int_are_dblish);
+  /* lgl -> * */
+  R_RegisterCCallable("stbl", "stbl_lgl_to_dbl",      (DL_FUNC) &stbl_lgl_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_lgl_are_dblish",  (DL_FUNC) &stbl_lgl_are_dblish);
+  R_RegisterCCallable("stbl", "stbl_lgl_to_int",      (DL_FUNC) &stbl_lgl_to_int);
+  R_RegisterCCallable("stbl", "stbl_lgl_are_intish",  (DL_FUNC) &stbl_lgl_are_intish);
+  /* cpx -> * */
+  R_RegisterCCallable("stbl", "stbl_cpx_to_dbl",      (DL_FUNC) &stbl_cpx_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_cpx_are_dblish",  (DL_FUNC) &stbl_cpx_are_dblish);
+  R_RegisterCCallable("stbl", "stbl_cpx_to_int",      (DL_FUNC) &stbl_cpx_to_int);
+  R_RegisterCCallable("stbl", "stbl_cpx_are_intish",  (DL_FUNC) &stbl_cpx_are_intish);
+  /* fct -> * */
+  R_RegisterCCallable("stbl", "stbl_fct_to_dbl",      (DL_FUNC) &stbl_fct_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_fct_are_dblish",  (DL_FUNC) &stbl_fct_are_dblish);
+  R_RegisterCCallable("stbl", "stbl_fct_to_int",      (DL_FUNC) &stbl_fct_to_int);
+  R_RegisterCCallable("stbl", "stbl_fct_are_intish",  (DL_FUNC) &stbl_fct_are_intish);
+  R_RegisterCCallable("stbl", "stbl_fct_to_lgl",      (DL_FUNC) &stbl_fct_to_lgl);
+  R_RegisterCCallable("stbl", "stbl_fct_are_lglish",  (DL_FUNC) &stbl_fct_are_lglish);
+  R_RegisterCCallable("stbl", "stbl_fct_are_fctish",  (DL_FUNC) &stbl_fct_are_fctish);
+  /* lst -> * */
+  R_RegisterCCallable("stbl", "stbl_lst_to_dbl",      (DL_FUNC) &stbl_lst_to_dbl);
+  R_RegisterCCallable("stbl", "stbl_lst_to_int",      (DL_FUNC) &stbl_lst_to_int);
+  R_RegisterCCallable("stbl", "stbl_lst_to_lgl",      (DL_FUNC) &stbl_lst_to_lgl);
+  R_RegisterCCallable("stbl", "stbl_lst_to_chr",      (DL_FUNC) &stbl_lst_to_chr);
+  R_RegisterCCallable("stbl", "stbl_lst_to_fct",      (DL_FUNC) &stbl_lst_to_fct);
+  /* range checks */
+  R_RegisterCCallable("stbl", "stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl);
+  R_RegisterCCallable("stbl", "stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl);
 }
