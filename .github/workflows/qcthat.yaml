@@ -62,7 +62,7 @@ jobs:
         with:
           use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
-          extra-packages: Gilead-BioStats/qcthat@main local::.
+          extra-packages: Gilead-BioStats/qcthat@dev local::.
 
       - name: Manage User Acceptance Testing
         if: >-
