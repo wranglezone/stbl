@@ -24,6 +24,12 @@
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   snapshot-tests the full warning output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+- The C functions underlying `are_*_ish()`, `to_*()`, and range checks
+  are now registered as C callables via `R_RegisterCCallable()`, making
+  them available to other packages. Include `inst/include/stbl.h` and
+  `inst/include/stbl.c` in a dependent package and call
+  `stbl_init_api()` at load time to use them
+  ([\#235](https://github.com/wranglezone/stbl/issues/235)).
 - Many `are_*_ish()` and `to_*()` methods are now implemented in C.
   Benchmarks show a significant speedup (about 3-20x) for large vectors
   ([\#217](https://github.com/wranglezone/stbl/issues/217),
