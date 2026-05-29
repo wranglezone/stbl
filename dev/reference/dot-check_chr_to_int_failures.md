@@ -12,7 +12,7 @@ Check for character to integer coercion failures
 
 - res:
 
-  A list returned by `ffi_chr_to_int`, with elements `result`,
+  A list returned by `stbl_chr_to_int`, with elements `result`,
   `non_number`, and `bad_precision`.
 
 - x_class:

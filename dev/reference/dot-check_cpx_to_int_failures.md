@@ -12,7 +12,7 @@ Check for complex to integer coercion failures
 
 - res:
 
-  A list returned by `ffi_cpx_to_int`, with elements `result`,
+  A list returned by `stbl_cpx_to_int`, with elements `result`,
   `non_number`, and `bad_precision`.
 
 - x_class:

@@ -12,7 +12,7 @@ Check for double to integer coercion failures
 
 - res:
 
-  A list returned by `ffi_dbl_to_int`, with elements `result` and
+  A list returned by `stbl_dbl_to_int`, with elements `result` and
   `bad_precision`.
 
 - x_class:
