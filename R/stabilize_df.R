@@ -54,7 +54,9 @@
 #' )
 #'
 #' # Enforce row count constraints
-#' try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))
+#' try(
+#'   stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+#' )
 #'
 #' # NULL is allowed by default
 #' stabilize_df(NULL)
