@@ -3,7 +3,7 @@
 * New `pkg_inform()` signals classed messages with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` tests that a message with the expected set of classes is thrown, and `expect_pkg_message_snapshot()` snapshot-tests the full message output in one step (#213).
 * New `pkg_warn()` signals classed warnings with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_warning_classes()` tests that a warning with the expected set of classes is thrown, and `expect_pkg_warning_snapshot()` snapshot-tests the full warning output in one step (#213).
 * The C functions underlying `are_*_ish()`, `to_*()`, and range checks are now registered as C callables, making them available to other packages. Include `inst/include/stbl.h` and `inst/include/stbl.c` in a dependent package and call `stbl_init_api()` at load time to use them. `stbl_*_to_*` C callables return a named list `list(result = <type>, valid = <lgl>)`, with the coerced value in `result` (with `NA` for invalid conversions) and a logical vector indicating whether the conversion was successful in `valid` (#235, #237).
-* Many `are_*_ish()` and `to_*()` methods are now implemented in C. Benchmarks show a significant speedup (about 3-20x) for large vectors (#217, #218, #219, #221, #226).
+* Many `are_*_ish()` and `to_*()` methods are now implemented in C. Benchmarks show a significant speedup (about 3-20x) for large vectors (#217, #218, #219, #221, #226, #239).
 * `is_fct_ish()` now accepts a `max_levels` argument to limit the number of unique non-`NA` levels (#231).
 * `stabilize_dbl()` and `stabilize_int()` now use a C implementation for min/max range checks, improving throughput for large vectors (#220).
 

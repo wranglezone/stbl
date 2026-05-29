@@ -1,5 +1,4 @@
-#include <R.h>
-#include <Rinternals.h>
+#include "stbl.h"
 
 /*
  * stbl_lst_to_fct: public API entry point.
@@ -12,7 +11,8 @@
  * Two input shapes are accepted:
  *
  *   1. A flat list of scalars (any length).  Each element must be a
- *      length-1 character scalar or length-1 factor; other types produce
+ *      length-1 character scalar or length-1 factor (or a singly-nested
+ *      list that unwraps to one); other types produce
  *      NA_character_ / valid = FALSE.
  *
  *   2. A one-element list whose single element is either:
@@ -24,20 +24,6 @@
  * side; this function only assembles the character vector of labels.
  */
 
-/* Build the standard list(result, valid) output SEXP. Caller must have
- * already PROTECTed result and valid. */
-static SEXP lst_to_fct_build_out(SEXP result, SEXP valid) {
-  SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
-  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
-  SET_VECTOR_ELT(out, 0, result);
-  SET_VECTOR_ELT(out, 1, valid);
-  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
-  Rf_setAttrib(out, R_NamesSymbol, names);
-  UNPROTECT(2);
-  return out;
-}
-
 SEXP stbl_lst_to_fct(SEXP x) {
   R_xlen_t n = XLENGTH(x);
 
@@ -45,7 +31,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
    * vector or factor of length != 1. */
   if (n == 1) {
     SEXP elem = VECTOR_ELT(x, 0);
-    R_xlen_t m = XLENGTH(elem);
+    R_xlen_t m = Rf_isVectorAtomic(elem) ? XLENGTH(elem) : 0;
     if (m != 1) {
       if (TYPEOF(elem) == STRSXP) {
         /* Character vector: pass strings through, all valid. */
@@ -53,7 +39,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         int* p_v = LOGICAL(valid);
         for (R_xlen_t j = 0; j < m; j++) p_v[j] = 1;
-        SEXP out = lst_to_fct_build_out(result, valid);
+        SEXP out = stbl_lst_build_out(result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -69,21 +55,26 @@ SEXP stbl_lst_to_fct(SEXP x) {
             codes[j] == NA_INTEGER ? NA_STRING : STRING_ELT(levels, codes[j] - 1));
           p_v[j] = 1;
         }
-        SEXP out = lst_to_fct_build_out(result, valid);
+        SEXP out = stbl_lst_build_out(result, valid);
         UNPROTECT(2);
         return out;
       }
     }
   }
 
-  /* Flat list of scalars: existing per-element logic. */
+  /* Flat list of scalars: per-element logic with VECSXP unwrapping. */
   SEXP result = PROTECT(Rf_allocVector(STRSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
   int* p_v = LOGICAL(valid);
 
   for (R_xlen_t i = 0; i < n; i++) {
-    SEXP elem = VECTOR_ELT(x, i);
-    if (XLENGTH(elem) == 1 && Rf_isFactor(elem)) {
+    SEXP elem = stbl_lst_unwrap_elem(VECTOR_ELT(x, i));
+    if (elem == R_NilValue || !Rf_isVectorAtomic(elem) || XLENGTH(elem) != 1) {
+      SET_STRING_ELT(result, i, NA_STRING);
+      p_v[i] = 0;
+      continue;
+    }
+    if (Rf_isFactor(elem)) {
       /* Length-1 factor: resolve the integer code to its character label. */
       int code = INTEGER(elem)[0];
       if (code == NA_INTEGER) {
@@ -93,7 +84,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
         SET_STRING_ELT(result, i, STRING_ELT(levels, code - 1));
       }
       p_v[i] = 1;
-    } else if (XLENGTH(elem) != 1 || TYPEOF(elem) != STRSXP) {
+    } else if (TYPEOF(elem) != STRSXP) {
       SET_STRING_ELT(result, i, NA_STRING);
       p_v[i] = 0;
     } else {
@@ -102,7 +93,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
     }
   }
 
-  SEXP out = lst_to_fct_build_out(result, valid);
+  SEXP out = stbl_lst_build_out(result, valid);
   UNPROTECT(2);
   return out;
 }

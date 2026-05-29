@@ -12,8 +12,9 @@
  * Two input shapes are accepted:
  *
  *   1. A flat list of scalars (any length).  Each element must be a
- *      length-1 atomic value coercible to double; elements that are not
- *      produce NA_real_ / valid = FALSE.
+ *      length-1 atomic value coercible to double (or a singly-nested
+ *      list that unwraps to one); elements that are not produce
+ *      NA_real_ / valid = FALSE.
  *
  *   2. A one-element list whose single element is a coercible atomic
  *      vector of any length.  The vector is unpacked and each of its
@@ -27,6 +28,7 @@
  *   character -> chr_to_dbl (valid if parseable as a number)
  *   complex   -> cpx_to_dbl (valid if Im == 0 or NA)
  *   factor    -> fct_to_dbl via level string (valid if level is numeric)
+ *   nested list (VECSXP length 1) -> unwrap and apply above rules
  *   other / multi-element in a non-singleton list: NA_real_, valid = FALSE
  */
 
@@ -89,20 +91,6 @@ static void lst_to_dbl_fill_vec(SEXP elem, R_xlen_t m,
   }
 }
 
-/* Build the standard list(result, valid) output SEXP. Caller must have
- * already PROTECTed result and valid. */
-static SEXP lst_to_dbl_build_out(SEXP result, SEXP valid) {
-  SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
-  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
-  SET_VECTOR_ELT(out, 0, result);
-  SET_VECTOR_ELT(out, 1, valid);
-  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
-  Rf_setAttrib(out, R_NamesSymbol, names);
-  UNPROTECT(2);
-  return out;
-}
-
 SEXP stbl_lst_to_dbl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
 
@@ -110,7 +98,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
    * atomic vector of length != 1. */
   if (n == 1) {
     SEXP elem = VECTOR_ELT(x, 0);
-    R_xlen_t m = XLENGTH(elem);
+    R_xlen_t m = Rf_isVectorAtomic(elem) ? XLENGTH(elem) : 0;
     if (m != 1) {
       SEXPTYPE t = TYPEOF(elem);
       int coercible = (t == REALSXP || t == INTSXP || t == LGLSXP ||
@@ -119,22 +107,22 @@ SEXP stbl_lst_to_dbl(SEXP x) {
         SEXP result = PROTECT(Rf_allocVector(REALSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP,  m));
         lst_to_dbl_fill_vec(elem, m, REAL(result), LOGICAL(valid));
-        SEXP out = lst_to_dbl_build_out(result, valid);
+        SEXP out = stbl_lst_build_out(result, valid);
         UNPROTECT(2);
         return out;
       }
     }
   }
 
-  /* Flat list of scalars: existing per-element logic. */
+  /* Flat list of scalars: per-element logic with VECSXP unwrapping. */
   SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
   double* p_r = REAL(result);
   int*    p_v = LOGICAL(valid);
 
   for (R_xlen_t i = 0; i < n; i++) {
-    SEXP elem = VECTOR_ELT(x, i);
-    if (XLENGTH(elem) != 1) {
+    SEXP elem = stbl_lst_unwrap_elem(VECTOR_ELT(x, i));
+    if (elem == R_NilValue || !Rf_isVectorAtomic(elem) || XLENGTH(elem) != 1) {
       p_r[i] = NA_REAL;
       p_v[i] = 0;
       continue;
@@ -200,7 +188,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
     }
   }
 
-  SEXP out = lst_to_dbl_build_out(result, valid);
+  SEXP out = stbl_lst_build_out(result, valid);
   UNPROTECT(2);
   return out;
 }

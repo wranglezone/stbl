@@ -471,6 +471,17 @@ test_that(".lst_to_dbl() marks non-coercible single-element as not valid (#237)"
   expect_identical(res[["valid"]], FALSE)
 })
 
+test_that(".lst_to_dbl() unwraps singly-nested lists (#239)", {
+  res <- .lst_to_dbl(list(list(1.0), 1.0))
+  expect_identical(res[["result"]], rep(1.0, 2))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() marks multiply-nested lists as not valid (#239)", {
+  res <- .lst_to_dbl(list(list(c(1.0, 2.0)), 1.0))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
+
 test_that(".lst_to_dbl() marks non-scalar elements in multi-element lists as not valid (#226, #237)", {
   res <- .lst_to_dbl(list(c(1.0, 2.0), 3.0))
   expect_identical(res[["result"]], c(NA_real_, 3.0))
@@ -569,6 +580,17 @@ test_that(".lst_to_int() marks non-coercible single-element as not valid (#226, 
   expect_identical(res[["valid"]], FALSE)
 })
 
+test_that(".lst_to_int() unwraps singly-nested lists (#239)", {
+  res <- .lst_to_int(list(list(1L), 1L))
+  expect_identical(res[["result"]], rep(1L, 2))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_int() marks multiply-nested lists as not valid (#239)", {
+  res <- .lst_to_int(list(list(c(1L, 2L)), 1L))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
+
 test_that(".lst_to_int() marks non-scalar elements in multi-element lists as not valid (#226, #237)", {
   res <- .lst_to_int(list(c(1L, 2L), 3L))
   expect_identical(res[["result"]], c(NA_integer_, 3L))
@@ -631,6 +653,17 @@ test_that(".lst_to_lgl() marks non-coercible single-element as not valid (#226, 
   expect_identical(res[["valid"]], FALSE)
 })
 
+test_that(".lst_to_lgl() unwraps singly-nested lists (#239)", {
+  res <- .lst_to_lgl(list(list(TRUE), TRUE))
+  expect_identical(res[["result"]], rep(TRUE, 2))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_lgl() marks multiply-nested lists as not valid (#239)", {
+  res <- .lst_to_lgl(list(list(c(TRUE, FALSE)), TRUE))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
+
 test_that(".lst_to_lgl() marks non-scalar elements in multi-element lists as not valid (#226, #237)", {
   res <- .lst_to_lgl(list(c(TRUE, FALSE), TRUE))
   expect_identical(res[["result"]], c(NA, TRUE))
@@ -651,19 +684,16 @@ test_that(".lst_to_chr() passes NA_character_ through; valid TRUE (#226, #237)",
   expect_identical(res[["valid"]], TRUE)
 })
 
-test_that(".lst_to_chr() marks non-character scalars as not valid (#226, #237)", {
+test_that(".lst_to_chr() converts non-character atomic scalars to strings (#226, #237, #239)", {
   res <- .lst_to_chr(list(1.0, 1L, TRUE))
-  expect_identical(
-    res[["result"]],
-    c(NA_character_, NA_character_, NA_character_)
-  )
-  expect_identical(res[["valid"]], c(FALSE, FALSE, FALSE))
+  expect_identical(res[["result"]], c("1", "1", "TRUE"))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
 })
 
-test_that(".lst_to_chr() marks factor elements as not valid (#226, #237)", {
+test_that(".lst_to_chr() converts factor elements via their level labels (#226, #237, #239)", {
   res <- .lst_to_chr(list(factor("a")))
-  expect_identical(res[["result"]], NA_character_)
-  expect_identical(res[["valid"]], FALSE)
+  expect_identical(res[["result"]], "a")
+  expect_identical(res[["valid"]], TRUE)
 })
 
 test_that(".lst_to_chr() unpacks a one-element list with a character vector (#237)", {
@@ -684,6 +714,18 @@ test_that(".lst_to_chr() marks non-scalar elements in multi-element lists as not
   expect_identical(res[["valid"]], c(FALSE, TRUE))
 })
 
+
+test_that(".lst_to_chr() unwraps singly-nested lists (#239)", {
+  res <- .lst_to_chr(list(list("a"), "b"))
+  expect_identical(res[["result"]], c("a", "b"))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_chr() marks multiply-nested lists as not valid (#239)", {
+  res <- .lst_to_chr(list(list("a", "b"), "c"))
+  expect_identical(res[["result"]], c(NA_character_, "c"))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
 # lst -> fct -------------------------------------------------------------------
 
 test_that(".lst_to_fct() passes character scalars through; valid TRUE (#226, #237)", {
@@ -734,6 +776,17 @@ test_that(".lst_to_fct() marks non-character/factor single-element vectors as no
 test_that(".lst_to_fct() marks non-scalar elements in multi-element lists as not valid (#226, #237)", {
   res <- .lst_to_fct(list(c("a", "b"), "c"))
   expect_identical(res[["result"]], c(NA_character_, "c"))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
+
+test_that(".lst_to_fct() unwraps singly-nested lists (#239)", {
+  res <- .lst_to_fct(list(list("a"), "b"))
+  expect_identical(res[["result"]], c("a", "b"))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_fct() marks multiply-nested lists as not valid (#239)", {
+  res <- .lst_to_fct(list(list("a", "b"), "c"))
   expect_identical(res[["valid"]], c(FALSE, TRUE))
 })
 
