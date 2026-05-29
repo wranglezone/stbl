@@ -399,10 +399,40 @@ test_that(".fct_are_fctish() treats NA as fctish regardless of levels (#237)", {
 
 # lst -> dbl ---------------------------------------------------------------- ----
 
-test_that(".lst_to_dbl() converts a flat list of numeric scalars (#237)", {
+test_that(".lst_to_dbl() converts a flat list of numeric/lgl/int scalars (#237)", {
   res <- .lst_to_dbl(list(1.0, 2L, TRUE))
   expect_identical(res[["result"]], c(1.0, 2.0, 1.0))
   expect_identical(res[["valid"]],  c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() converts numeric character strings (#237)", {
+  res <- .lst_to_dbl(list("1.5", "Inf", "-3.14"))
+  expect_identical(res[["result"]], c(1.5, Inf, -3.14))
+  expect_identical(res[["valid"]],  c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() marks non-parseable character strings as not valid (#237)", {
+  res <- .lst_to_dbl(list("a"))
+  expect_identical(res[["result"]], NA_real_)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_dbl() converts complex with Im == 0 (#237)", {
+  res <- .lst_to_dbl(list(1 + 0i, -2 + 0i))
+  expect_identical(res[["result"]], c(1.0, -2.0))
+  expect_identical(res[["valid"]],  c(TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() marks complex with Im != 0 as not valid (#237)", {
+  res <- .lst_to_dbl(list(1 + 2i))
+  expect_identical(res[["result"]], 1.0)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_dbl() converts factor elements via their level strings (#237)", {
+  res <- .lst_to_dbl(list(factor("1.5"), factor("a")))
+  expect_identical(res[["result"]], c(1.5, NA_real_))
+  expect_identical(res[["valid"]],  c(TRUE, FALSE))
 })
 
 test_that(".lst_to_dbl() passes NA through; valid TRUE (#237)", {
@@ -411,14 +441,14 @@ test_that(".lst_to_dbl() passes NA through; valid TRUE (#237)", {
   expect_identical(res[["valid"]],  TRUE)
 })
 
-test_that(".lst_to_dbl() marks non-scalar elements as not valid (#237)", {
-  res <- .lst_to_dbl(list(c(1.0, 2.0)))
+test_that(".lst_to_dbl() passes NA_character_ through; valid TRUE (#237)", {
+  res <- .lst_to_dbl(list(NA_character_))
   expect_identical(res[["result"]], NA_real_)
-  expect_identical(res[["valid"]],  FALSE)
+  expect_identical(res[["valid"]],  TRUE)
 })
 
-test_that(".lst_to_dbl() marks unsupported types as not valid (#237)", {
-  res <- .lst_to_dbl(list("a"))
+test_that(".lst_to_dbl() marks non-scalar elements as not valid (#237)", {
+  res <- .lst_to_dbl(list(c(1.0, 2.0)))
   expect_identical(res[["result"]], NA_real_)
   expect_identical(res[["valid"]],  FALSE)
 })
@@ -437,8 +467,50 @@ test_that(".lst_to_int() converts whole-number doubles (#237)", {
   expect_identical(res[["valid"]],  c(TRUE, TRUE))
 })
 
+test_that(".lst_to_int() converts integer-valued character strings (#237)", {
+  res <- .lst_to_int(list("1", "2", "3"))
+  expect_identical(res[["result"]], c(1L, 2L, 3L))
+  expect_identical(res[["valid"]],  c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_int() marks fractional character strings as not valid (#237)", {
+  res <- .lst_to_int(list("1.5"))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_int() marks non-number character strings as not valid (#237)", {
+  res <- .lst_to_int(list("a"))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_int() converts complex with Im == 0 and whole Re (#237)", {
+  res <- .lst_to_int(list(2 + 0i))
+  expect_identical(res[["result"]], 2L)
+  expect_identical(res[["valid"]],  TRUE)
+})
+
+test_that(".lst_to_int() marks complex with Im != 0 as not valid (#237)", {
+  res <- .lst_to_int(list(1 + 2i))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_int() converts factor elements via their level strings (#237)", {
+  res <- .lst_to_int(list(factor("2"), factor("1.5")))
+  expect_identical(res[["result"]], c(2L, NA_integer_))
+  expect_identical(res[["valid"]],  c(TRUE, FALSE))
+})
+
 test_that(".lst_to_int() passes NA through; valid TRUE (#237)", {
   res <- .lst_to_int(list(NA_integer_))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]],  TRUE)
+})
+
+test_that(".lst_to_int() passes NA_character_ through; valid TRUE (#237)", {
+  res <- .lst_to_int(list(NA_character_))
   expect_identical(res[["result"]], NA_integer_)
   expect_identical(res[["valid"]],  TRUE)
 })
@@ -463,8 +535,32 @@ test_that(".lst_to_lgl() converts a flat list of lgl/int/dbl scalars (#237)", {
   expect_identical(res[["valid"]],  c(TRUE, TRUE,  TRUE))
 })
 
+test_that(".lst_to_lgl() converts lgl-ish character strings (#237)", {
+  res <- .lst_to_lgl(list("TRUE", "FALSE", "T", "F", "1", "0"))
+  expect_identical(res[["result"]], c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE))
+  expect_identical(res[["valid"]],  rep(TRUE, 6))
+})
+
+test_that(".lst_to_lgl() marks non-lgl character strings as not valid (#237)", {
+  res <- .lst_to_lgl(list("a"))
+  expect_identical(res[["result"]], NA)
+  expect_identical(res[["valid"]],  FALSE)
+})
+
+test_that(".lst_to_lgl() converts factor elements via their level strings (#237)", {
+  res <- .lst_to_lgl(list(factor("TRUE"), factor("a")))
+  expect_identical(res[["result"]], c(TRUE, NA))
+  expect_identical(res[["valid"]],  c(TRUE, FALSE))
+})
+
 test_that(".lst_to_lgl() passes NA through; valid TRUE (#237)", {
   res <- .lst_to_lgl(list(NA))
+  expect_identical(res[["result"]], NA)
+  expect_identical(res[["valid"]],  TRUE)
+})
+
+test_that(".lst_to_lgl() passes NA_character_ through; valid TRUE (#237)", {
+  res <- .lst_to_lgl(list(NA_character_))
   expect_identical(res[["result"]], NA)
   expect_identical(res[["valid"]],  TRUE)
 })
@@ -472,52 +568,6 @@ test_that(".lst_to_lgl() passes NA through; valid TRUE (#237)", {
 test_that(".lst_to_lgl() marks non-scalar elements as not valid (#237)", {
   res <- .lst_to_lgl(list(c(TRUE, FALSE)))
   expect_identical(res[["result"]], NA)
-  expect_identical(res[["valid"]],  FALSE)
-})
-
-test_that(".lst_to_lgl() marks unsupported types as not valid (#237)", {
-  res <- .lst_to_lgl(list("a"))
-  expect_identical(res[["result"]], NA)
-  expect_identical(res[["valid"]],  FALSE)
-})
-
-# lst -> chr ---------------------------------------------------------------- ----
-
-test_that(".lst_to_chr() converts a flat list of character scalars (#237)", {
-  res <- .lst_to_chr(list("a", "b", NA_character_))
-  expect_identical(res[["result"]], c("a", "b", NA_character_))
-  expect_identical(res[["valid"]],  c(TRUE, TRUE, TRUE))
-})
-
-test_that(".lst_to_chr() marks non-character elements as not valid (#237)", {
-  res <- .lst_to_chr(list(1L))
-  expect_identical(res[["result"]], NA_character_)
-  expect_identical(res[["valid"]],  FALSE)
-})
-
-test_that(".lst_to_chr() marks non-scalar elements as not valid (#237)", {
-  res <- .lst_to_chr(list(c("a", "b")))
-  expect_identical(res[["result"]], NA_character_)
-  expect_identical(res[["valid"]],  FALSE)
-})
-
-# lst -> fct ---------------------------------------------------------------- ----
-
-test_that(".lst_to_fct() converts a flat list of character scalars (#237)", {
-  res <- .lst_to_fct(list("a", "b", NA_character_))
-  expect_identical(res[["result"]], c("a", "b", NA_character_))
-  expect_identical(res[["valid"]],  c(TRUE, TRUE, TRUE))
-})
-
-test_that(".lst_to_fct() marks non-character elements as not valid (#237)", {
-  res <- .lst_to_fct(list(1L))
-  expect_identical(res[["result"]], NA_character_)
-  expect_identical(res[["valid"]],  FALSE)
-})
-
-test_that(".lst_to_fct() marks non-scalar elements as not valid (#237)", {
-  res <- .lst_to_fct(list(c("a", "b")))
-  expect_identical(res[["result"]], NA_character_)
   expect_identical(res[["valid"]],  FALSE)
 })
 

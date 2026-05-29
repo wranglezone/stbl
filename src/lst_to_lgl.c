@@ -1,16 +1,20 @@
-#include <R.h>
-#include <Rinternals.h>
-#include <R_ext/Arith.h>
+#include "stbl.h"
 
 /*
  * stbl_lst_to_lgl: public API entry point.
  *
- * Fast-path conversion of a flat list to a named list:
+ * Converts a flat list to a named list:
  *   $result: logical vector of length(x)
- *   $valid:  logical vector -- TRUE for elements that were length-1
- *            logical/integer/double scalars, FALSE otherwise
+ *   $valid:  logical vector -- TRUE for elements that were successfully
+ *            converted, FALSE otherwise
  *
- * Elements that fail produce NA in $result and FALSE in $valid.
+ * Applies the same per-element coercion logic as stbl_y_to_lgl:
+ *   logical   -> direct (always valid)
+ *   integer   -> dbl_to_lgl integer path (always valid)
+ *   double    -> dbl_to_lgl (always valid)
+ *   character -> chr_to_lgl (valid if TRUE/FALSE/T/F/numeric string)
+ *   factor    -> fct_to_lgl via level string (valid if level is lgl-ish)
+ *   other / length != 1: NA, valid = FALSE
  */
 SEXP stbl_lst_to_lgl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
@@ -27,6 +31,23 @@ SEXP stbl_lst_to_lgl(SEXP x) {
       continue;
     }
 
+    /* Detect factors before dispatching on TYPEOF, since factors are INTSXP. */
+    if (TYPEOF(elem) == INTSXP) {
+      SEXP levels = Rf_getAttrib(elem, R_LevelsSymbol);
+      if (!Rf_isNull(levels)) {
+        int code = INTEGER(elem)[0];
+        if (code == NA_INTEGER) {
+          p_r[i] = NA_LOGICAL;
+          p_v[i] = 1;
+        } else {
+          SEXP lvl = PROTECT(Rf_ScalarString(STRING_ELT(levels, code - 1)));
+          stbl_chr_to_lgl_core(lvl, 1, &p_r[i], &p_v[i]);
+          UNPROTECT(1);
+        }
+        continue;
+      }
+    }
+
     switch (TYPEOF(elem)) {
       case LGLSXP: {
         p_r[i] = LOGICAL(elem)[0];
@@ -41,12 +62,12 @@ SEXP stbl_lst_to_lgl(SEXP x) {
       }
       case REALSXP: {
         double v = REAL(elem)[0];
-        if (ISNAN(v)) {
-          p_r[i] = NA_LOGICAL;
-        } else {
-          p_r[i] = (v != 0.0) ? 1 : 0;
-        }
+        p_r[i] = ISNAN(v) ? NA_LOGICAL : (v != 0.0 ? 1 : 0);
         p_v[i] = 1;
+        break;
+      }
+      case STRSXP: {
+        stbl_chr_to_lgl_core(elem, 1, &p_r[i], &p_v[i]);
         break;
       }
       default:
