@@ -2,19 +2,6 @@
 
 ## stbl (development version)
 
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  and
-  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
-  list methods now use C routines for coercion, improving performance.
-  Singly-nested lists (e.g., `list(list("a"), "b")`) are now flattened
-  correctly. Non-character scalar types (e.g., doubles, integers,
-  logicals) in
-  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  are now correctly converted to strings rather than being rejected
-  ([\#239](https://github.com/wranglezone/stbl/issues/239)).
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
   signals classed messages with an opinionated class hierarchy,
@@ -53,7 +40,8 @@
   [\#218](https://github.com/wranglezone/stbl/issues/218),
   [\#219](https://github.com/wranglezone/stbl/issues/219),
   [\#221](https://github.com/wranglezone/stbl/issues/221),
-  [\#226](https://github.com/wranglezone/stbl/issues/226)).
+  [\#226](https://github.com/wranglezone/stbl/issues/226),
+  [\#239](https://github.com/wranglezone/stbl/issues/239)).
 - [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
