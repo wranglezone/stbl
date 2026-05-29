@@ -210,7 +210,9 @@ stabilize_df(
 #> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 
 # Enforce row count constraints
-try(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present))
+try(
+  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+)
 #> Error in eval(expr, envir) : 
 #>   `mtcars[0, ]` must have at least 1 row.
 #> ✖ 0 is too few.

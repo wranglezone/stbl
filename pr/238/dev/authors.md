@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/fix-237-standardize_c_api/DESCRIPTION)
 
 Harmon J (2026). *stbl: Stabilize Function Arguments*. R package version
-0.3.0.9001, <https://stbl.wrangle.zone/>.
+0.3.0.9002, <https://stbl.wrangle.zone/>.
 
     @Manual{,
       title = {stbl: Stabilize Function Arguments},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.3.0.9001},
+      note = {R package version 0.3.0.9002},
       url = {https://stbl.wrangle.zone/},
     }
