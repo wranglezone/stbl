@@ -98,17 +98,17 @@ stabilize_3_to_5(c(3.3, 4.4, 5))
 try(stabilize_3_to_5(c(1:6)))
 }
 \seealso{
-Other double functions: 
-\code{\link{are_dbl_ish}()},
-\code{\link{stabilize_dbl}()}
+Other double functions:
+\code{\link[=are_dbl_ish]{are_dbl_ish()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_df}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lgl}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{double functions}
 \concept{specification functions}

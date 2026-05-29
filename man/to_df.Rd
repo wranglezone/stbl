@@ -61,8 +61,8 @@ try(to_df(c("a", "b", "c")))
 to_df(letters)
 }
 \seealso{
-Other data frame functions: 
-\code{\link{specify_df}()},
-\code{\link{stabilize_df}()}
+Other data frame functions:
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=stabilize_df]{stabilize_df()}}
 }
 \concept{data frame functions}

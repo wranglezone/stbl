@@ -98,17 +98,17 @@ stabilize_3_to_5(c(3:5))
 try(stabilize_3_to_5(c(1:6)))
 }
 \seealso{
-Other integer functions: 
-\code{\link{are_int_ish}()},
-\code{\link{stabilize_int}()}
+Other integer functions:
+\code{\link[=are_int_ish]{are_int_ish()}},
+\code{\link[=stabilize_int]{stabilize_int()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_dbl}()},
-\code{\link{specify_df}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_lgl}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{integer functions}
 \concept{specification functions}

@@ -83,17 +83,17 @@ stabilize_email("stbl@example.com")
 try(stabilize_email("not-an-email-address"))
 }
 \seealso{
-Other character functions: 
-\code{\link{are_chr_ish}()},
-\code{\link{stabilize_chr}()}
+Other character functions:
+\code{\link[=are_chr_ish]{are_chr_ish()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}}
 
-Other specification functions: 
-\code{\link{specify_dbl}()},
-\code{\link{specify_df}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lgl}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{character functions}
 \concept{specification functions}

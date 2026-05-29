@@ -74,15 +74,15 @@ are_dbl_ish(c(1 + 1i, 1 + 0i, NA))
 is_dbl_ish(c(1 + 1i, 1 + 0i, NA))
 }
 \seealso{
-Other double functions: 
-\code{\link{specify_dbl}()},
-\code{\link{stabilize_dbl}()}
+Other double functions:
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}}
 
-Other check functions: 
-\code{\link{are_chr_ish}()},
-\code{\link{are_fct_ish}()},
-\code{\link{are_int_ish}()},
-\code{\link{are_lgl_ish}()}
+Other check functions:
+\code{\link[=are_chr_ish]{are_chr_ish()}},
+\code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=are_int_ish]{are_int_ish()}},
+\code{\link[=are_lgl_ish]{are_lgl_ish()}}
 }
 \concept{check functions}
 \concept{double functions}

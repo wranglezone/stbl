@@ -81,17 +81,17 @@ stabilize_lowercase_letter(c("s", "t", "b", "l"))
 try(stabilize_lowercase_letter("A"))
 }
 \seealso{
-Other factor functions: 
-\code{\link{are_fct_ish}()},
-\code{\link{stabilize_fct}()}
+Other factor functions:
+\code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=stabilize_fct]{stabilize_fct()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_dbl}()},
-\code{\link{specify_df}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lgl}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{factor functions}
 \concept{specification functions}

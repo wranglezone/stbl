@@ -30,7 +30,7 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 \arguments{
 \item{x}{The argument to stabilize.}
 
-\item{...}{Arguments passed to \code{\link[base:list]{base::as.list()}} or other methods.}
+\item{...}{Arguments passed to \code{\link[base:as.list]{base::as.list()}} or other methods.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -53,22 +53,22 @@ information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_list()} is a synonym of \code{to_lst()}.
 }
 \details{
-This function has important distinctions from \code{\link[base:list]{base::as.list()}}:
+This function has important distinctions from \code{\link[base:as.list]{base::as.list()}}:
 \itemize{
 \item Functions can be rejected as part of the call to this function (with
 \code{coerce_function = FALSE}, the default). If they are allowed, they'll be
 coerced to a list concatenating their formals and body (as with
-\code{\link[base:list]{base::as.list()}}.
-\item Primitive functions (such as \code{\link[base:NA]{base::is.na()}} or \code{\link[base:list]{base::is.list()}}) always
+\code{\link[base:as.list]{base::as.list()}}.
+\item Primitive functions (such as \code{\link[base:is.na]{base::is.na()}} or \code{\link[base:is.list]{base::is.list()}}) always
 throw an error, rather than returning \code{list(NULL)}.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).
 }
 }
 \seealso{
-Other list functions: 
-\code{\link{specify_lst}()},
-\code{\link{stabilize_lst}()},
-\code{\link{stabilize_present}()}
+Other list functions:
+\code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_present]{stabilize_present()}}
 }
 \concept{list functions}

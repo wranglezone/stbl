@@ -150,19 +150,19 @@ stabilize_df(
 try(stabilize_df("not a data frame"))
 }
 \seealso{
-Other data frame functions: 
-\code{\link{specify_df}()},
-\code{\link{to_df}()}
+Other data frame functions:
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=to_df]{to_df()}}
 
-Other stabilization functions: 
-\code{\link{stabilize_arg}()},
-\code{\link{stabilize_chr}()},
-\code{\link{stabilize_dbl}()},
-\code{\link{stabilize_fct}()},
-\code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()},
-\code{\link{stabilize_lst}()},
-\code{\link{stabilize_present}()}
+Other stabilization functions:
+\code{\link[=stabilize_arg]{stabilize_arg()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_present]{stabilize_present()}}
 }
 \concept{data frame functions}
 \concept{stabilization functions}

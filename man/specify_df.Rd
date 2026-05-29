@@ -68,17 +68,17 @@ stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 try(stabilize_person_df(data.frame(name = "Alice")))
 }
 \seealso{
-Other data frame functions: 
-\code{\link{stabilize_df}()},
-\code{\link{to_df}()}
+Other data frame functions:
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=to_df]{to_df()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_dbl}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lgl}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{data frame functions}
 \concept{specification functions}

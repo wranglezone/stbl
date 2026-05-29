@@ -225,7 +225,7 @@ length-1 factors. \code{stabilise_fct_scalar}, \code{stabilize_factor_scalar()},
 \code{to_factor_scalar()} is a synonym of \code{to_fct_scalar()}.
 }
 \details{
-These functions have important differences from \code{\link[base:factor]{base::as.factor()}}
+These functions have important differences from \code{\link[base:as.factor]{base::as.factor()}}
 and \code{\link[base:factor]{base::factor()}}:
 \itemize{
 \item Values are never silently coerced to \code{NA} unless they are explicitly
@@ -254,19 +254,19 @@ try(stabilize_fct_scalar(letters))
 try(stabilize_fct_scalar("c", levels = c("a", "b")))
 }
 \seealso{
-Other factor functions: 
-\code{\link{are_fct_ish}()},
-\code{\link{specify_fct}()}
+Other factor functions:
+\code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=specify_fct]{specify_fct()}}
 
-Other stabilization functions: 
-\code{\link{stabilize_arg}()},
-\code{\link{stabilize_chr}()},
-\code{\link{stabilize_dbl}()},
-\code{\link{stabilize_df}()},
-\code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()},
-\code{\link{stabilize_lst}()},
-\code{\link{stabilize_present}()}
+Other stabilization functions:
+\code{\link[=stabilize_arg]{stabilize_arg()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_present]{stabilize_present()}}
 }
 \concept{factor functions}
 \concept{stabilization functions}

@@ -217,7 +217,7 @@ synonym of \code{to_chr_scalar()}.
 }
 \details{
 These functions have two important differences from
-\code{\link[base:character]{base::as.character()}}:
+\code{\link[base:as.character]{base::as.character()}}:
 \itemize{
 \item \code{list}s and \code{data.frame}s are \emph{not} coerced to character. In base R, such
 objects are coerced to character representations of their elements. For
@@ -254,19 +254,19 @@ try(stabilize_chr_scalar(NULL))
 stabilize_chr_scalar(NULL, allow_null = TRUE)
 }
 \seealso{
-Other character functions: 
-\code{\link{are_chr_ish}()},
-\code{\link{specify_chr}()}
+Other character functions:
+\code{\link[=are_chr_ish]{are_chr_ish()}},
+\code{\link[=specify_chr]{specify_chr()}}
 
-Other stabilization functions: 
-\code{\link{stabilize_arg}()},
-\code{\link{stabilize_dbl}()},
-\code{\link{stabilize_df}()},
-\code{\link{stabilize_fct}()},
-\code{\link{stabilize_int}()},
-\code{\link{stabilize_lgl}()},
-\code{\link{stabilize_lst}()},
-\code{\link{stabilize_present}()}
+Other stabilization functions:
+\code{\link[=stabilize_arg]{stabilize_arg()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_present]{stabilize_present()}}
 }
 \concept{character functions}
 \concept{stabilization functions}
