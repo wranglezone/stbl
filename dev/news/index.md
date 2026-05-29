@@ -40,7 +40,8 @@
   [\#218](https://github.com/wranglezone/stbl/issues/218),
   [\#219](https://github.com/wranglezone/stbl/issues/219),
   [\#221](https://github.com/wranglezone/stbl/issues/221),
-  [\#226](https://github.com/wranglezone/stbl/issues/226)).
+  [\#226](https://github.com/wranglezone/stbl/issues/226),
+  [\#239](https://github.com/wranglezone/stbl/issues/239)).
 - [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
