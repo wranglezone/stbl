@@ -7,7 +7,7 @@
  * Fast-path conversion of a flat list to a named list:
  *   $result: character vector of length(x) suitable for factor construction
  *   $valid:  logical vector -- TRUE for elements that were length-1
- *            character scalars, FALSE otherwise
+ *            character scalars OR length-1 factors, FALSE otherwise
  *
  * Factor creation (assigning levels, integer codes) must be done on the R
  * side; this function only assembles the character vector of values.
@@ -21,7 +21,17 @@ SEXP stbl_lst_to_fct(SEXP x) {
 
   for (R_xlen_t i = 0; i < n; i++) {
     SEXP elem = VECTOR_ELT(x, i);
-    if (XLENGTH(elem) != 1 || TYPEOF(elem) != STRSXP) {
+    if (XLENGTH(elem) == 1 && Rf_isFactor(elem)) {
+      /* Length-1 factor: resolve the integer code to its character label. */
+      int code = INTEGER(elem)[0];
+      if (code == NA_INTEGER) {
+        SET_STRING_ELT(result, i, NA_STRING);
+      } else {
+        SEXP levels = Rf_getAttrib(elem, R_LevelsSymbol);
+        SET_STRING_ELT(result, i, STRING_ELT(levels, code - 1));
+      }
+      p_v[i] = 1;
+    } else if (XLENGTH(elem) != 1 || TYPEOF(elem) != STRSXP) {
       SET_STRING_ELT(result, i, NA_STRING);
       p_v[i] = 0;
     } else {
