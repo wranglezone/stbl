@@ -4,17 +4,79 @@
 /*
  * stbl_lst_to_fct: public API entry point.
  *
- * Fast-path conversion of a flat list to a named list:
- *   $result: character vector of length(x) suitable for factor construction
- *   $valid:  logical vector -- TRUE for elements that were length-1
- *            character scalars OR length-1 factors, FALSE otherwise
+ * Converts a list to a named list:
+ *   $result: character vector of values suitable for factor construction
+ *   $valid:  logical vector -- TRUE for elements that were successfully
+ *            converted, FALSE otherwise
+ *
+ * Two input shapes are accepted:
+ *
+ *   1. A flat list of scalars (any length).  Each element must be a
+ *      length-1 character scalar or length-1 factor; other types produce
+ *      NA_character_ / valid = FALSE.
+ *
+ *   2. A one-element list whose single element is either:
+ *      - a character vector of any length (strings passed through as-is),
+ *      - a factor of any length (level labels extracted).
+ *      All elements produce valid = TRUE.
  *
  * Factor creation (assigning levels, integer codes) must be done on the R
- * side; this function only assembles the character vector of values.
- * Elements that fail produce NA_character_ in $result and FALSE in $valid.
+ * side; this function only assembles the character vector of labels.
  */
+
+/* Build the standard list(result, valid) output SEXP. Caller must have
+ * already PROTECTed result and valid. */
+static SEXP lst_to_fct_build_out(SEXP result, SEXP valid) {
+  SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_VECTOR_ELT(out, 0, result);
+  SET_VECTOR_ELT(out, 1, valid);
+  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+  UNPROTECT(2);
+  return out;
+}
+
 SEXP stbl_lst_to_fct(SEXP x) {
   R_xlen_t n = XLENGTH(x);
+
+  /* Single-vector unpack: one-element list whose element is a character
+   * vector or factor of length != 1. */
+  if (n == 1) {
+    SEXP elem = VECTOR_ELT(x, 0);
+    R_xlen_t m = XLENGTH(elem);
+    if (m != 1) {
+      if (TYPEOF(elem) == STRSXP) {
+        /* Character vector: pass strings through, all valid. */
+        SEXP result = PROTECT(elem);
+        SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
+        int* p_v = LOGICAL(valid);
+        for (R_xlen_t j = 0; j < m; j++) p_v[j] = 1;
+        SEXP out = lst_to_fct_build_out(result, valid);
+        UNPROTECT(2);
+        return out;
+      }
+      if (Rf_isFactor(elem)) {
+        /* Factor: extract character labels, all valid. */
+        SEXP result = PROTECT(Rf_allocVector(STRSXP, m));
+        SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
+        SEXP levels = Rf_getAttrib(elem, R_LevelsSymbol);
+        int* codes  = INTEGER(elem);
+        int* p_v    = LOGICAL(valid);
+        for (R_xlen_t j = 0; j < m; j++) {
+          SET_STRING_ELT(result, j,
+            codes[j] == NA_INTEGER ? NA_STRING : STRING_ELT(levels, codes[j] - 1));
+          p_v[j] = 1;
+        }
+        SEXP out = lst_to_fct_build_out(result, valid);
+        UNPROTECT(2);
+        return out;
+      }
+    }
+  }
+
+  /* Flat list of scalars: existing per-element logic. */
   SEXP result = PROTECT(Rf_allocVector(STRSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
   int* p_v = LOGICAL(valid);
@@ -40,13 +102,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
     }
   }
 
-  SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
-  SET_VECTOR_ELT(out, 0, result);
-  SET_VECTOR_ELT(out, 1, valid);
-  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
-  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
-  Rf_setAttrib(out, R_NamesSymbol, names);
-  UNPROTECT(4);
+  SEXP out = lst_to_fct_build_out(result, valid);
+  UNPROTECT(2);
   return out;
 }
