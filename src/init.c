@@ -13,6 +13,7 @@ SEXP stbl_chr_to_dbl(SEXP x);
 SEXP stbl_chr_are_dblish(SEXP x);
 
 SEXP stbl_chr_are_fctish(SEXP x, SEXP levels, SEXP to_na);
+SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered);
 
 /* dbl -> * */
 SEXP stbl_dbl_to_int(SEXP x);
@@ -21,9 +22,17 @@ SEXP stbl_dbl_are_intish(SEXP x);
 SEXP stbl_dbl_to_lgl(SEXP x);
 SEXP stbl_dbl_are_lglish(SEXP x);
 
+SEXP stbl_dbl_to_chr(SEXP x);
+SEXP stbl_dbl_are_chrish(SEXP x);
+
 /* int -> * */
 SEXP stbl_int_to_dbl(SEXP x);
 SEXP stbl_int_are_dblish(SEXP x);
+
+SEXP stbl_int_to_chr(SEXP x);
+SEXP stbl_int_are_chrish(SEXP x);
+
+SEXP stbl_int_to_fct(SEXP value, SEXP levels, SEXP ordered);
 
 /* lgl -> * */
 SEXP stbl_lgl_to_dbl(SEXP x);
@@ -31,6 +40,9 @@ SEXP stbl_lgl_are_dblish(SEXP x);
 
 SEXP stbl_lgl_to_int(SEXP x);
 SEXP stbl_lgl_are_intish(SEXP x);
+
+SEXP stbl_lgl_to_chr(SEXP x);
+SEXP stbl_lgl_are_chrish(SEXP x);
 
 /* cpx -> * */
 SEXP stbl_cpx_to_dbl(SEXP x);
@@ -50,6 +62,9 @@ SEXP stbl_fct_to_lgl(SEXP x);
 SEXP stbl_fct_are_lglish(SEXP x);
 
 SEXP stbl_fct_are_fctish(SEXP x, SEXP levels, SEXP to_na);
+
+SEXP stbl_fct_to_chr(SEXP x);
+SEXP stbl_fct_are_chrish(SEXP x);
 
 /* lst -> * */
 SEXP stbl_lst_to_dbl(SEXP x);
@@ -71,19 +86,27 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_chr_to_dbl",      (DL_FUNC) &stbl_chr_to_dbl,      1},
   {"stbl_chr_are_dblish",  (DL_FUNC) &stbl_chr_are_dblish,  1},
   {"stbl_chr_are_fctish",  (DL_FUNC) &stbl_chr_are_fctish,  3},
+  {"stbl_chr_to_fct",      (DL_FUNC) &stbl_chr_to_fct,      3},
   /* dbl -> * */
   {"stbl_dbl_to_int",      (DL_FUNC) &stbl_dbl_to_int,      1},
   {"stbl_dbl_are_intish",  (DL_FUNC) &stbl_dbl_are_intish,  1},
   {"stbl_dbl_to_lgl",      (DL_FUNC) &stbl_dbl_to_lgl,      1},
   {"stbl_dbl_are_lglish",  (DL_FUNC) &stbl_dbl_are_lglish,  1},
+  {"stbl_dbl_to_chr",      (DL_FUNC) &stbl_dbl_to_chr,      1},
+  {"stbl_dbl_are_chrish",  (DL_FUNC) &stbl_dbl_are_chrish,  1},
   /* int -> * */
   {"stbl_int_to_dbl",      (DL_FUNC) &stbl_int_to_dbl,      1},
   {"stbl_int_are_dblish",  (DL_FUNC) &stbl_int_are_dblish,  1},
+  {"stbl_int_to_chr",      (DL_FUNC) &stbl_int_to_chr,      1},
+  {"stbl_int_are_chrish",  (DL_FUNC) &stbl_int_are_chrish,  1},
+  {"stbl_int_to_fct",      (DL_FUNC) &stbl_int_to_fct,      3},
   /* lgl -> * */
   {"stbl_lgl_to_dbl",      (DL_FUNC) &stbl_lgl_to_dbl,      1},
   {"stbl_lgl_are_dblish",  (DL_FUNC) &stbl_lgl_are_dblish,  1},
   {"stbl_lgl_to_int",      (DL_FUNC) &stbl_lgl_to_int,      1},
   {"stbl_lgl_are_intish",  (DL_FUNC) &stbl_lgl_are_intish,  1},
+  {"stbl_lgl_to_chr",      (DL_FUNC) &stbl_lgl_to_chr,      1},
+  {"stbl_lgl_are_chrish",  (DL_FUNC) &stbl_lgl_are_chrish,  1},
   /* cpx -> * */
   {"stbl_cpx_to_dbl",      (DL_FUNC) &stbl_cpx_to_dbl,      1},
   {"stbl_cpx_are_dblish",  (DL_FUNC) &stbl_cpx_are_dblish,  1},
@@ -97,6 +120,8 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_fct_to_lgl",      (DL_FUNC) &stbl_fct_to_lgl,      1},
   {"stbl_fct_are_lglish",  (DL_FUNC) &stbl_fct_are_lglish,  1},
   {"stbl_fct_are_fctish",  (DL_FUNC) &stbl_fct_are_fctish,  3},
+  {"stbl_fct_to_chr",      (DL_FUNC) &stbl_fct_to_chr,      1},
+  {"stbl_fct_are_chrish",  (DL_FUNC) &stbl_fct_are_chrish,  1},
   /* lst -> * */
   {"stbl_lst_to_dbl",      (DL_FUNC) &stbl_lst_to_dbl,      1},
   {"stbl_lst_to_int",      (DL_FUNC) &stbl_lst_to_int,      1},
@@ -122,19 +147,27 @@ void R_init_stbl(DllInfo* dll) {
   R_RegisterCCallable("stbl", "stbl_chr_to_dbl",      (DL_FUNC) &stbl_chr_to_dbl);
   R_RegisterCCallable("stbl", "stbl_chr_are_dblish",  (DL_FUNC) &stbl_chr_are_dblish);
   R_RegisterCCallable("stbl", "stbl_chr_are_fctish",  (DL_FUNC) &stbl_chr_are_fctish);
+  R_RegisterCCallable("stbl", "stbl_chr_to_fct",      (DL_FUNC) &stbl_chr_to_fct);
   /* dbl -> * */
   R_RegisterCCallable("stbl", "stbl_dbl_to_int",      (DL_FUNC) &stbl_dbl_to_int);
   R_RegisterCCallable("stbl", "stbl_dbl_are_intish",  (DL_FUNC) &stbl_dbl_are_intish);
   R_RegisterCCallable("stbl", "stbl_dbl_to_lgl",      (DL_FUNC) &stbl_dbl_to_lgl);
   R_RegisterCCallable("stbl", "stbl_dbl_are_lglish",  (DL_FUNC) &stbl_dbl_are_lglish);
+  R_RegisterCCallable("stbl", "stbl_dbl_to_chr",      (DL_FUNC) &stbl_dbl_to_chr);
+  R_RegisterCCallable("stbl", "stbl_dbl_are_chrish",  (DL_FUNC) &stbl_dbl_are_chrish);
   /* int -> * */
   R_RegisterCCallable("stbl", "stbl_int_to_dbl",      (DL_FUNC) &stbl_int_to_dbl);
   R_RegisterCCallable("stbl", "stbl_int_are_dblish",  (DL_FUNC) &stbl_int_are_dblish);
+  R_RegisterCCallable("stbl", "stbl_int_to_chr",      (DL_FUNC) &stbl_int_to_chr);
+  R_RegisterCCallable("stbl", "stbl_int_are_chrish",  (DL_FUNC) &stbl_int_are_chrish);
+  R_RegisterCCallable("stbl", "stbl_int_to_fct",      (DL_FUNC) &stbl_int_to_fct);
   /* lgl -> * */
   R_RegisterCCallable("stbl", "stbl_lgl_to_dbl",      (DL_FUNC) &stbl_lgl_to_dbl);
   R_RegisterCCallable("stbl", "stbl_lgl_are_dblish",  (DL_FUNC) &stbl_lgl_are_dblish);
   R_RegisterCCallable("stbl", "stbl_lgl_to_int",      (DL_FUNC) &stbl_lgl_to_int);
   R_RegisterCCallable("stbl", "stbl_lgl_are_intish",  (DL_FUNC) &stbl_lgl_are_intish);
+  R_RegisterCCallable("stbl", "stbl_lgl_to_chr",      (DL_FUNC) &stbl_lgl_to_chr);
+  R_RegisterCCallable("stbl", "stbl_lgl_are_chrish",  (DL_FUNC) &stbl_lgl_are_chrish);
   /* cpx -> * */
   R_RegisterCCallable("stbl", "stbl_cpx_to_dbl",      (DL_FUNC) &stbl_cpx_to_dbl);
   R_RegisterCCallable("stbl", "stbl_cpx_are_dblish",  (DL_FUNC) &stbl_cpx_are_dblish);
@@ -148,6 +181,8 @@ void R_init_stbl(DllInfo* dll) {
   R_RegisterCCallable("stbl", "stbl_fct_to_lgl",      (DL_FUNC) &stbl_fct_to_lgl);
   R_RegisterCCallable("stbl", "stbl_fct_are_lglish",  (DL_FUNC) &stbl_fct_are_lglish);
   R_RegisterCCallable("stbl", "stbl_fct_are_fctish",  (DL_FUNC) &stbl_fct_are_fctish);
+  R_RegisterCCallable("stbl", "stbl_fct_to_chr",      (DL_FUNC) &stbl_fct_to_chr);
+  R_RegisterCCallable("stbl", "stbl_fct_are_chrish",  (DL_FUNC) &stbl_fct_are_chrish);
   /* lst -> * */
   R_RegisterCCallable("stbl", "stbl_lst_to_dbl",      (DL_FUNC) &stbl_lst_to_dbl);
   R_RegisterCCallable("stbl", "stbl_lst_to_int",      (DL_FUNC) &stbl_lst_to_int);

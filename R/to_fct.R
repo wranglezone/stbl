@@ -40,7 +40,6 @@ to_fct.character <- function(
 ) {
   return(.coerce_fct_levels(x, levels, to_na, x_arg, call))
 }
-
 #' @export
 #' @rdname stabilize_fct
 to_fct.NULL <- function(

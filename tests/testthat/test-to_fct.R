@@ -138,3 +138,29 @@ test_that("to_factor() exists (#164)", {
 test_that("to_factor_scalar() exists (#164)", {
   expect_no_error(to_factor_scalar("a"))
 })
+
+test_that("to_fct() works for ints via C (#241)", {
+  given <- c(1L, 2L, 1L)
+  expected <- factor(c("1", "2", "1"))
+  expect_identical(to_fct(given), expected)
+
+  given[[2]] <- NA_integer_
+  expected <- factor(c("1", NA, "1"))
+  expect_identical(to_fct(given), expected)
+})
+
+test_that("to_fct() errors for ints with unexpected levels (#241)", {
+  given <- c(1L, 2L, 3L)
+  expect_error(
+    to_fct(given, levels = c("1", "2")),
+    class = .compile_dash("stbl", "error", "fct_levels")
+  )
+  expect_snapshot(
+    to_fct(given, levels = c("1", "2")),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_fct(given, levels = c("1", "2")),
+    error = TRUE
+  )
+})

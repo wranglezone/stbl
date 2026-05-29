@@ -226,3 +226,35 @@ test_that("to_character() exists (#164)", {
 test_that("to_character_scalar() exists (#164)", {
   expect_no_error(to_character_scalar(TRUE))
 })
+
+test_that("to_chr() works for ints via C (#241)", {
+  expect_identical(to_chr(1L), "1")
+  expect_identical(to_chr(1:5), as.character(1:5))
+  expect_identical(to_chr(NA_integer_), NA_character_)
+})
+
+test_that("to_chr() works for lgls via C (#241)", {
+  expect_identical(to_chr(TRUE), "TRUE")
+  expect_identical(to_chr(FALSE), "FALSE")
+  expect_identical(to_chr(NA), NA_character_)
+  expect_identical(
+    to_chr(c(TRUE, FALSE, NA)),
+    c("TRUE", "FALSE", NA_character_)
+  )
+})
+
+test_that("to_chr() works for dbls via C (#241)", {
+  expect_identical(to_chr(1.5), "1.5")
+  expect_identical(to_chr(NA_real_), NA_character_)
+  expect_identical(to_chr(Inf), "Inf")
+  expect_identical(to_chr(-Inf), "-Inf")
+  expect_identical(to_chr(NaN), "NaN")
+})
+
+test_that("to_chr() works for fcts via C (#241)", {
+  given <- factor(c("a", "b", NA, "a"))
+  expect_identical(to_chr(given), c("a", "b", NA_character_, "a"))
+
+  given <- factor(c("x", "y"), levels = c("x", "y", "z"))
+  expect_identical(to_chr(given), c("x", "y"))
+})
