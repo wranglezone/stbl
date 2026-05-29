@@ -258,36 +258,3 @@ test_that(".to_num_from_complex() works (#23)", {
     class = .compile_dash("stbl", "error", "incompatible_type")
   )
 })
-
-test_that(".to_cls_from_list() works (#128)", {
-  to_fn <- function(x, ...) as.character(x)
-  expect_identical(
-    .to_cls_from_list(list(1, "b"), to_fn, "character"),
-    c("1", "b")
-  )
-  expect_identical(
-    .to_cls_from_list(list(list(1), "b"), to_fn, "character"),
-    c("1", "b")
-  )
-  expect_error(
-    .to_cls_from_list(list(1, 1:5), to_fn, "character"),
-    class = .compile_dash("stbl", "error", "coerce", "character")
-  )
-})
-
-test_that(".to_cls_from_list() works for single-element lists (#128)", {
-  to_fn <- function(x, ...) as.character(x)
-  # This tests the `if (length(flat) == 1)` block
-  expect_identical(
-    .to_cls_from_list(list("a"), to_fn, "character"),
-    "a"
-  )
-  expect_identical(
-    .to_cls_from_list(list(list("a")), to_fn, "character"),
-    "a"
-  )
-  expect_identical(
-    .to_cls_from_list(list(1L), to_fn, "character"),
-    "1"
-  )
-})

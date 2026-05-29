@@ -189,4 +189,37 @@ static inline void stbl_chr_to_lgl_core(SEXP x, R_xlen_t n,
   }
 }
 
+/*
+ * Recursively unwrap singly-nested lists to reach a leaf element.
+ *
+ * If x is a VECSXP with exactly one element, unwraps that element and
+ * recurses.  Returns R_NilValue when a VECSXP has length != 1, signalling
+ * that the element cannot be reduced to a single scalar.  Non-list values
+ * are returned unchanged.
+ */
+static inline SEXP stbl_lst_unwrap_elem(SEXP x) {
+  while (TYPEOF(x) == VECSXP) {
+    if (XLENGTH(x) != 1) return R_NilValue;
+    x = VECTOR_ELT(x, 0);
+  }
+  return x;
+}
+
+/*
+ * Build the standard list(result = ..., valid = ...) return value used by
+ * all stbl_lst_to_* routines.  Caller must have already PROTECTed both
+ * result and valid.
+ */
+static inline SEXP stbl_lst_build_out(SEXP result, SEXP valid) {
+  SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_VECTOR_ELT(out, 0, result);
+  SET_VECTOR_ELT(out, 1, valid);
+  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+  UNPROTECT(2);
+  return out;
+}
+
 #endif /* STBL_H */

@@ -223,23 +223,17 @@
   return(cast)
 }
 
-#' Coerce a list to a specific class
+
+#' Check list coercion failures and error if any element could not be converted
 #'
+#' @param valid `(logical)` The `valid` vector returned by a `stbl_lst_to_*`
+#'   C routine.
 #' @inheritParams .shared-params
-#' @returns `x` coerced to the target class.
+#' @inherit .shared-return-conditions return
 #' @keywords internal
-.to_cls_from_list <- function(
-  x,
-  to_cls_fn,
-  to_class,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  flat <- unlist(x)
-  if (!is.list(flat) && length(flat) == length(x)) {
-    return(to_cls_fn(flat, ..., x_arg = x_arg, call = call, x_class = x_class))
+.check_lst_failures <- function(valid, to_class, x_class, x_arg, call) {
+  if (all(valid)) {
+    return(invisible(NULL))
   }
   .stop_cant_coerce(
     from_class = x_class,

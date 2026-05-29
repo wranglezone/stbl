@@ -87,15 +87,9 @@ to_lgl.list <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_cls_from_list(
-    x,
-    to_lgl,
-    "logical",
-    ...,
-    x_arg = x_arg,
-    call = call,
-    x_class = x_class
-  )
+  res <- .Call(stbl_lst_to_lgl, x)
+  .check_lst_failures(res[["valid"]], "logical", x_class, x_arg, call)
+  res[["result"]]
 }
 
 #' @export
