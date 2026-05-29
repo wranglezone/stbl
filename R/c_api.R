@@ -1,4 +1,5 @@
 # Unexported wrappers around the public C routines, used to drive test coverage.
+# Each to_* wrapper returns the raw list(result, valid) from the C callable.
 
 # chr -> * ----
 
@@ -28,10 +29,18 @@
   .Call(stbl_dbl_to_lgl, x)
 }
 
+.dbl_are_lglish <- function(x) {
+  .Call(stbl_dbl_are_lglish, x)
+}
+
 # int -> * ----
 
 .int_to_dbl <- function(x) {
   .Call(stbl_int_to_dbl, x)
+}
+
+.int_are_dblish <- function(x) {
+  .Call(stbl_int_are_dblish, x)
 }
 
 # lgl -> * ----
@@ -42,6 +51,14 @@
 
 .lgl_to_int <- function(x) {
   .Call(stbl_lgl_to_int, x)
+}
+
+.lgl_are_dblish <- function(x) {
+  .Call(stbl_lgl_are_dblish, x)
+}
+
+.lgl_are_intish <- function(x) {
+  .Call(stbl_lgl_are_intish, x)
 }
 
 # cpx -> * ----

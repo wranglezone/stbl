@@ -35,13 +35,13 @@ static void fct_to_lgl_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_fct_to_lgl: internal FFI entry point used by stbl itself.
+ * stbl_fct_to_lgl: public API entry point.
  *
  * Returns a named list of two vectors of length(x):
- *   $result: logical — the converted values (NA where conversion failed)
- *   $valid:  logical — TRUE for elements that converted successfully
+ *   $result: logical -- the converted values (NA where conversion failed)
+ *   $valid:  logical -- TRUE for elements that converted successfully
  */
-SEXP ffi_fct_to_lgl(SEXP x) {
+SEXP stbl_fct_to_lgl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -56,20 +56,6 @@ SEXP ffi_fct_to_lgl(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(4);
   return out;
-}
-
-/*
- * stbl_fct_to_lgl: public API entry point.
- *
- * Returns a logical vector of length(x) (NA where conversion failed).
- */
-SEXP stbl_fct_to_lgl(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result = PROTECT(Rf_allocVector(LGLSXP, n));
-  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
-  fct_to_lgl_core(x, n, LOGICAL(result), LOGICAL(valid));
-  UNPROTECT(2);
-  return result;
 }
 
 /*

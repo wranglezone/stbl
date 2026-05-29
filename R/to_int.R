@@ -58,14 +58,14 @@ to_int.double <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(ffi_dbl_to_int, x)
+  res <- .Call(stbl_dbl_to_int, x)
   .check_dbl_to_int_failures(res, x_class, x_arg, call)
   res[["result"]]
 }
 
 #' @export
 to_int.logical <- function(x, ...) {
-  .Call(stbl_lgl_to_int, x)
+  .Call(stbl_lgl_to_int, x)[["result"]]
 }
 
 #' @export
@@ -83,7 +83,7 @@ to_int.character <- function(
     call = call
   )
   if (coerce_character) {
-    res <- .Call(ffi_chr_to_int, x)
+    res <- .Call(stbl_chr_to_int, x)
     .check_chr_to_int_failures(res, x_class, x_arg, call)
     return(res[["result"]])
   }
@@ -107,7 +107,7 @@ to_int.factor <- function(
 ) {
   coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
   if (coerce_factor) {
-    res <- .Call(ffi_fct_to_int, x)
+    res <- .Call(stbl_fct_to_int, x)
     .check_chr_to_int_failures(res, x_class, x_arg, call)
     return(res[["result"]])
   }
@@ -127,7 +127,7 @@ to_int.complex <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(ffi_cpx_to_int, x)
+  res <- .Call(stbl_cpx_to_int, x)
   .check_cpx_to_int_failures(res, x_class, x_arg, call)
   return(res[["result"]])
 }
@@ -167,7 +167,7 @@ to_integer_scalar <- to_int_scalar
 
 #' Check for character to integer coercion failures
 #'
-#' @param res A list returned by `ffi_chr_to_int`, with elements
+#' @param res A list returned by `stbl_chr_to_int`, with elements
 #'   `result`, `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
@@ -198,7 +198,7 @@ to_integer_scalar <- to_int_scalar
 
 #' Check for double to integer coercion failures
 #'
-#' @param res A list returned by `ffi_dbl_to_int`, with elements
+#' @param res A list returned by `stbl_dbl_to_int`, with elements
 #'   `result` and `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
@@ -220,7 +220,7 @@ to_integer_scalar <- to_int_scalar
 
 #' Check for complex to integer coercion failures
 #'
-#' @param res A list returned by `ffi_cpx_to_int`, with elements
+#' @param res A list returned by `stbl_cpx_to_int`, with elements
 #'   `result`, `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return

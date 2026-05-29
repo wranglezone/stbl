@@ -18,15 +18,28 @@ static void int_to_dbl_core(SEXP x, R_xlen_t n, double* p_result) {
 /*
  * stbl_int_to_dbl: public API entry point.
  *
- * Returns a double vector of length(x). NA_integer_ passes through as
- * NA_real_; all other values are cast exactly.
+ * Returns a named list of two vectors of length(x):
+ *   $result: double -- NA_integer_ passes through as NA_real_; all other values cast exactly
+ *   $valid:  logical -- always TRUE (every integer is dbl-ish)
  */
 SEXP stbl_int_to_dbl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
   int_to_dbl_core(x, n, REAL(result));
-  UNPROTECT(1);
-  return result;
+
+  SEXP valid = PROTECT(Rf_allocVector(LGLSXP, n));
+  int* p = LOGICAL(valid);
+  for (R_xlen_t i = 0; i < n; i++) p[i] = 1;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  SET_VECTOR_ELT(out, 0, result);
+  SET_VECTOR_ELT(out, 1, valid);
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+  UNPROTECT(4);
+  return out;
 }
 
 /*

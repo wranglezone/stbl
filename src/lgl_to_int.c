@@ -19,15 +19,28 @@ static void lgl_to_int_core(SEXP x, R_xlen_t n, int* p_result) {
 /*
  * stbl_lgl_to_int: public API entry point.
  *
- * Returns an integer vector of length(x). NA passes through; TRUE -> 1L;
- * FALSE -> 0L.
+ * Returns a named list of two vectors of length(x):
+ *   $result: integer -- NA passes through; TRUE -> 1L; FALSE -> 0L
+ *   $valid:  logical -- always TRUE (every logical is int-ish)
  */
 SEXP stbl_lgl_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result = PROTECT(Rf_allocVector(INTSXP, n));
   lgl_to_int_core(x, n, INTEGER(result));
-  UNPROTECT(1);
-  return result;
+
+  SEXP valid = PROTECT(Rf_allocVector(LGLSXP, n));
+  int* p = LOGICAL(valid);
+  for (R_xlen_t i = 0; i < n; i++) p[i] = 1;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  SET_VECTOR_ELT(out, 0, result);
+  SET_VECTOR_ELT(out, 1, valid);
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_STRING_ELT(names, 0, Rf_mkChar("result"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("valid"));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+  UNPROTECT(4);
+  return out;
 }
 
 /*

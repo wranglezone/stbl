@@ -54,13 +54,13 @@ static void chr_to_dbl_core(SEXP x, R_xlen_t n, double* p_result, int* p_valid) 
 }
 
 /*
- * ffi_chr_to_dbl: internal FFI entry point used by stbl itself.
+ * stbl_chr_to_dbl: public API entry point.
  *
  * Returns a named list of two vectors of length(x):
- *   $result: double — the converted values (NA_real_ where conversion failed)
- *   $valid:  logical — TRUE for elements that converted successfully
+ *   $result: double -- the converted values (NA_real_ where conversion failed)
+ *   $valid:  logical -- TRUE for elements that converted successfully
  */
-SEXP ffi_chr_to_dbl(SEXP x) {
+SEXP stbl_chr_to_dbl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -75,21 +75,6 @@ SEXP ffi_chr_to_dbl(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(4);
   return out;
-}
-
-/*
- * stbl_chr_to_dbl: public API entry point.
- *
- * Returns a double vector of length(x) with the converted values
- * (NA_real_ where conversion failed).
- */
-SEXP stbl_chr_to_dbl(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
-  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
-  chr_to_dbl_core(x, n, REAL(result), LOGICAL(valid));
-  UNPROTECT(2);
-  return result;
 }
 
 /*

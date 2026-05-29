@@ -41,14 +41,14 @@ static void fct_to_int_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_fct_to_int: internal FFI entry point used by stbl itself.
+ * stbl_fct_to_int: public API entry point.
  *
  * Returns a named list of three vectors of length(x):
- *   $result:        integer — converted values (NA_integer_ where failed)
- *   $non_number:    logical — TRUE for level strings not parseable as numbers
- *   $bad_precision: logical — TRUE for numeric levels not representable as int
+ *   $result:        integer -- converted values (NA_integer_ where failed)
+ *   $non_number:    logical -- TRUE for level strings not parseable as numbers
+ *   $bad_precision: logical -- TRUE for numeric levels not representable as int
  */
-SEXP ffi_fct_to_int(SEXP x) {
+SEXP stbl_fct_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
   SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -67,22 +67,6 @@ SEXP ffi_fct_to_int(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(5);
   return out;
-}
-
-/*
- * stbl_fct_to_int: public API entry point.
- *
- * Returns an integer vector of length(x) (NA_integer_ where failed).
- */
-SEXP stbl_fct_to_int(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
-  SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
-  SEXP bad_precision = PROTECT(Rf_allocVector(LGLSXP, n));
-  fct_to_int_core(x, n, INTEGER(result), LOGICAL(non_number),
-                  LOGICAL(bad_precision));
-  UNPROTECT(3);
-  return result;
 }
 
 /*

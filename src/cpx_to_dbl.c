@@ -41,13 +41,13 @@ static void cpx_to_dbl_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_cpx_to_dbl: internal FFI entry point used by stbl itself.
+ * stbl_cpx_to_dbl: public API entry point.
  *
  * Returns a named list of two vectors of length(x):
- *   $result: double — the converted values (NA_real_ for NA inputs)
- *   $valid:  logical — TRUE for elements that are dbl-ish (Im == 0 or NA)
+ *   $result: double -- the converted values (NA_real_ for NA inputs)
+ *   $valid:  logical -- TRUE for elements that are dbl-ish (Im == 0 or NA)
  */
-SEXP ffi_cpx_to_dbl(SEXP x) {
+SEXP stbl_cpx_to_dbl(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -62,21 +62,6 @@ SEXP ffi_cpx_to_dbl(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(4);
   return out;
-}
-
-/*
- * stbl_cpx_to_dbl: public API entry point.
- *
- * Returns a double vector of length(x) with the real parts (NA_real_ for NA
- * inputs). No error is raised; elements with Im != 0 still return Re(x).
- */
-SEXP stbl_cpx_to_dbl(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result = PROTECT(Rf_allocVector(REALSXP, n));
-  SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, n));
-  cpx_to_dbl_core(x, n, REAL(result), LOGICAL(valid));
-  UNPROTECT(2);
-  return result;
 }
 
 /*
