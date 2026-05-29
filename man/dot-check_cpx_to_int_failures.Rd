@@ -7,7 +7,7 @@
 .check_cpx_to_int_failures(res, x_class, x_arg, call)
 }
 \arguments{
-\item{res}{A list returned by \code{ffi_cpx_to_int}, with elements
+\item{res}{A list returned by \code{stbl_cpx_to_int}, with elements
 \code{result}, \code{non_number}, and \code{bad_precision}.}
 
 \item{x_class}{\verb{(length-1 character)} The class name of the argument being

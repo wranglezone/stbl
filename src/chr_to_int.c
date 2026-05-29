@@ -60,7 +60,7 @@ static void chr_to_int_core(SEXP x, R_xlen_t n,
       continue;
     }
 
-    /* Valid number — check if it is representable as an R integer */
+    /* Valid number -- check if it is representable as an R integer */
     p_non_number[i] = 0;
 
     if (!R_FINITE(dval) || dval < STBL_INT_MIN || dval > STBL_INT_MAX) {
@@ -72,7 +72,7 @@ static void chr_to_int_core(SEXP x, R_xlen_t n,
 
     int ival = (int)dval;
     if ((double)ival != dval) {
-      /* Fractional part — converting would lose precision */
+      /* Fractional part -- converting would lose precision */
       p_result[i]        = NA_INTEGER;
       p_bad_precision[i] = 1;
       continue;
@@ -84,14 +84,14 @@ static void chr_to_int_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_chr_to_int: internal FFI entry point used by stbl itself.
+ * stbl_chr_to_int: public API entry point.
  *
  * Returns a named list of three vectors of length(x):
- *   $result:        integer — the converted values (NA_integer_ where conversion failed)
- *   $non_number:    logical — TRUE for elements not parseable as a number
- *   $bad_precision: logical — TRUE for valid numbers that cannot be represented as integers
+ *   $result:        integer -- the converted values (NA_integer_ where conversion failed)
+ *   $non_number:    logical -- TRUE for elements not parseable as a number
+ *   $bad_precision: logical -- TRUE for valid numbers that cannot be represented as integers
  */
-SEXP ffi_chr_to_int(SEXP x) {
+SEXP stbl_chr_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
   SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -109,22 +109,6 @@ SEXP ffi_chr_to_int(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(5);
   return out;
-}
-
-/*
- * stbl_chr_to_int: public API entry point.
- *
- * Returns an integer vector of length(x) with the converted values
- * (NA_integer_ where conversion failed).
- */
-SEXP stbl_chr_to_int(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
-  SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
-  SEXP bad_precision = PROTECT(Rf_allocVector(LGLSXP, n));
-  chr_to_int_core(x, n, INTEGER(result), LOGICAL(non_number), LOGICAL(bad_precision));
-  UNPROTECT(3);
-  return result;
 }
 
 /*

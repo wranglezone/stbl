@@ -75,18 +75,18 @@ try(
 )
 }
 \seealso{
-Other list functions: 
-\code{\link{stabilize_lst}()},
-\code{\link{stabilize_present}()},
-\code{\link{to_lst}()}
+Other list functions:
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_present]{stabilize_present()}},
+\code{\link[=to_lst]{to_lst()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_dbl}()},
-\code{\link{specify_df}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lgl}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lgl]{specify_lgl()}}
 }
 \concept{list functions}
 \concept{specification functions}

@@ -68,14 +68,14 @@ static void cpx_to_int_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_cpx_to_int: internal FFI entry point used by stbl itself.
+ * stbl_cpx_to_int: public API entry point.
  *
  * Returns a named list of three vectors of length(x):
- *   $result:        integer — converted values (NA_integer_ where failed)
- *   $non_number:    logical — TRUE for elements with Im != 0
- *   $bad_precision: logical — TRUE for elements where Im==0 but Re is not int-ish
+ *   $result:        integer -- converted values (NA_integer_ where failed)
+ *   $non_number:    logical -- TRUE for elements with Im != 0
+ *   $bad_precision: logical -- TRUE for elements where Im==0 but Re is not int-ish
  */
-SEXP ffi_cpx_to_int(SEXP x) {
+SEXP stbl_cpx_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
   SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -94,23 +94,6 @@ SEXP ffi_cpx_to_int(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(5);
   return out;
-}
-
-/*
- * stbl_cpx_to_int: public API entry point.
- *
- * Returns an integer vector of length(x) (NA_integer_ where conversion
- * failed).
- */
-SEXP stbl_cpx_to_int(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
-  SEXP non_number    = PROTECT(Rf_allocVector(LGLSXP, n));
-  SEXP bad_precision = PROTECT(Rf_allocVector(LGLSXP, n));
-  cpx_to_int_core(x, n, INTEGER(result), LOGICAL(non_number),
-                  LOGICAL(bad_precision));
-  UNPROTECT(3);
-  return result;
 }
 
 /*

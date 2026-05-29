@@ -33,7 +33,7 @@ to_lgl.NULL <- function(
 
 #' @export
 to_lgl.numeric <- function(x, ...) {
-  .Call(stbl_dbl_to_lgl, x)
+  .Call(stbl_dbl_to_lgl, x)[["result"]]
 }
 
 #' @export
@@ -44,7 +44,7 @@ to_lgl.character <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(ffi_chr_to_lgl, x)
+  res <- .Call(stbl_chr_to_lgl, x)
   failures <- !res[["valid"]]
   .check_cast_failures(
     failures,
@@ -66,7 +66,7 @@ to_lgl.factor <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(ffi_fct_to_lgl, x)
+  res <- .Call(stbl_fct_to_lgl, x)
   failures <- !res[["valid"]]
   .check_cast_failures(
     failures,

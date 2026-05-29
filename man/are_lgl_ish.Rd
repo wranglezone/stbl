@@ -60,15 +60,15 @@ are_lgl_ish(list(TRUE, 0, "F", "a"))
 is_lgl_ish(list(TRUE, 0, "F", "a"))
 }
 \seealso{
-Other logical functions: 
-\code{\link{specify_lgl}()},
-\code{\link{stabilize_lgl}()}
+Other logical functions:
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}}
 
-Other check functions: 
-\code{\link{are_chr_ish}()},
-\code{\link{are_dbl_ish}()},
-\code{\link{are_fct_ish}()},
-\code{\link{are_int_ish}()}
+Other check functions:
+\code{\link[=are_chr_ish]{are_chr_ish()}},
+\code{\link[=are_dbl_ish]{are_dbl_ish()}},
+\code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=are_int_ish]{are_int_ish()}}
 }
 \concept{check functions}
 \concept{logical functions}

@@ -12,6 +12,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{rlang}{\code{\link[rlang]{caller_arg}}, \code{\link[rlang:stack]{caller_env}}}
+  \item{rlang}{\code{\link[rlang:caller_arg]{caller_arg()}}, \code{\link[rlang:caller_env]{caller_env()}}}
 }}
 

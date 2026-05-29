@@ -54,15 +54,15 @@ are_chr_ish(list("a", 1, list(1, 2)))
 is_chr_ish(list("a", 1, list(1, 2)))
 }
 \seealso{
-Other character functions: 
-\code{\link{specify_chr}()},
-\code{\link{stabilize_chr}()}
+Other character functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}}
 
-Other check functions: 
-\code{\link{are_dbl_ish}()},
-\code{\link{are_fct_ish}()},
-\code{\link{are_int_ish}()},
-\code{\link{are_lgl_ish}()}
+Other check functions:
+\code{\link[=are_dbl_ish]{are_dbl_ish()}},
+\code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=are_int_ish]{are_int_ish()}},
+\code{\link[=are_lgl_ish]{are_lgl_ish()}}
 }
 \concept{character functions}
 \concept{check functions}

@@ -33,14 +33,14 @@ evaluate variables in error messages.}
 \item{parent}{A parent condition, as you might create during a
 \code{\link[rlang:try_fetch]{rlang::try_fetch()}}. See \code{\link[rlang:abort]{rlang::abort()}} for additional information.}
 
-\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_inform()}} and on to
-\code{\link[rlang:abort]{rlang::inform()}}.}
+\item{...}{Additional parameters passed to \code{\link[cli:cli_inform]{cli::cli_inform()}} and on to
+\code{\link[rlang:inform]{rlang::inform()}}.}
 }
 \value{
 \code{NULL} invisibly (called for side effects).
 }
 \description{
-A wrapper around \code{\link[cli:cli_abort]{cli::cli_inform()}} to throw classed messages, with an
+A wrapper around \code{\link[cli:cli_inform]{cli::cli_inform()}} to throw classed messages, with an
 opinionated framework of message classes.
 }
 \examples{

@@ -68,17 +68,17 @@ stabilize_few_lgl(c(TRUE, "False", TRUE))
 try(stabilize_few_lgl(rep(TRUE, 10)))
 }
 \seealso{
-Other logical functions: 
-\code{\link{are_lgl_ish}()},
-\code{\link{stabilize_lgl}()}
+Other logical functions:
+\code{\link[=are_lgl_ish]{are_lgl_ish()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}}
 
-Other specification functions: 
-\code{\link{specify_chr}()},
-\code{\link{specify_dbl}()},
-\code{\link{specify_df}()},
-\code{\link{specify_fct}()},
-\code{\link{specify_int}()},
-\code{\link{specify_lst}()}
+Other specification functions:
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=specify_int]{specify_int()}},
+\code{\link[=specify_lst]{specify_lst()}}
 }
 \concept{logical functions}
 \concept{specification functions}

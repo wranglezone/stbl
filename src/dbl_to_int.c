@@ -47,13 +47,13 @@ static void dbl_to_int_core(SEXP x, R_xlen_t n,
 }
 
 /*
- * ffi_dbl_to_int: internal FFI entry point used by stbl itself.
+ * stbl_dbl_to_int: public API entry point.
  *
  * Returns a named list of two vectors of length(x):
- *   $result:        integer — the converted values (NA_integer_ where conversion failed)
- *   $bad_precision: logical — TRUE for values that cannot be represented as integers
+ *   $result:        integer -- the converted values (NA_integer_ where conversion failed)
+ *   $bad_precision: logical -- TRUE for values that cannot be represented as integers
  */
-SEXP ffi_dbl_to_int(SEXP x) {
+SEXP stbl_dbl_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
   SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
   SEXP bad_precision = PROTECT(Rf_allocVector(LGLSXP, n));
@@ -68,21 +68,6 @@ SEXP ffi_dbl_to_int(SEXP x) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(4);
   return out;
-}
-
-/*
- * stbl_dbl_to_int: public API entry point.
- *
- * Returns an integer vector of length(x) with the converted values
- * (NA_integer_ where conversion failed).
- */
-SEXP stbl_dbl_to_int(SEXP x) {
-  R_xlen_t n = XLENGTH(x);
-  SEXP result        = PROTECT(Rf_allocVector(INTSXP, n));
-  SEXP bad_precision = PROTECT(Rf_allocVector(LGLSXP, n));
-  dbl_to_int_core(x, n, INTEGER(result), LOGICAL(bad_precision));
-  UNPROTECT(2);
-  return result;
 }
 
 /*

@@ -52,12 +52,12 @@ to_dbl.list <- function(
 
 #' @export
 to_dbl.integer <- function(x, ...) {
-  .Call(stbl_int_to_dbl, x)
+  .Call(stbl_int_to_dbl, x)[["result"]]
 }
 
 #' @export
 to_dbl.logical <- function(x, ...) {
-  .Call(stbl_lgl_to_dbl, x)
+  .Call(stbl_lgl_to_dbl, x)[["result"]]
 }
 
 #' @export
@@ -75,7 +75,7 @@ to_dbl.character <- function(
     call = call
   )
   if (coerce_character) {
-    res <- .Call(ffi_chr_to_dbl, x)
+    res <- .Call(stbl_chr_to_dbl, x)
     .check_cast_failures(
       !res[["valid"]],
       x_class,
@@ -106,7 +106,7 @@ to_dbl.factor <- function(
 ) {
   coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
   if (coerce_factor) {
-    res <- .Call(ffi_fct_to_dbl, x)
+    res <- .Call(stbl_fct_to_dbl, x)
     .check_cast_failures(
       !res[["valid"]],
       x_class,
@@ -133,7 +133,7 @@ to_dbl.complex <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  res <- .Call(ffi_cpx_to_dbl, x)
+  res <- .Call(stbl_cpx_to_dbl, x)
   .check_cast_failures(
     !res[["valid"]],
     x_class,
