@@ -222,4 +222,29 @@ static inline SEXP stbl_lst_build_out(SEXP result, SEXP valid) {
   return out;
 }
 
+/*
+ * Set the class and levels attributes on a pre-populated integer codes SEXP,
+ * making it a factor or ordered factor.  Caller must PROTECT codes before
+ * calling; this function is internally balanced (no net change to the protect
+ * stack on return).
+ *
+ * lev:        STRSXP of level labels (need not be protected by caller; it is
+ *             only read, not stored beyond Rf_setAttrib's own bookkeeping).
+ * is_ordered: non-zero to produce an ordered factor.
+ */
+static inline void stbl_set_factor_attribs(SEXP codes, SEXP lev, int is_ordered) {
+  Rf_setAttrib(codes, R_LevelsSymbol, lev);
+  if (is_ordered) {
+    SEXP cls = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(cls, 0, Rf_mkChar("ordered"));
+    SET_STRING_ELT(cls, 1, Rf_mkChar("factor"));
+    Rf_setAttrib(codes, R_ClassSymbol, cls);
+    UNPROTECT(1);
+  } else {
+    SEXP cls = PROTECT(Rf_mkString("factor"));
+    Rf_setAttrib(codes, R_ClassSymbol, cls);
+    UNPROTECT(1);
+  }
+}
+
 #endif /* STBL_H */

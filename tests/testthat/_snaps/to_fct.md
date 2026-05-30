@@ -117,7 +117,7 @@
       to_fct(given, levels = c("1", "2"))
     Condition
       Error:
-      ! Each value of `<fct>` must be in the expected levels.
+      ! Each value of `<chr>` must be in the expected levels.
       i Allowed levels: "1" and "2".
       x Unexpected values: "3".
 
@@ -127,7 +127,7 @@
       wrapped_to_fct(given, levels = c("1", "2"))
     Condition
       Error in `wrapped_to_fct()`:
-      ! Each value of `<fct>` must be in the expected levels.
+      ! Each value of `<chr>` must be in the expected levels.
       i Allowed levels: "1" and "2".
       x Unexpected values: "3".
 

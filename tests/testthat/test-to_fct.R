@@ -164,3 +164,9 @@ test_that("to_fct() errors for ints with unexpected levels (#241)", {
     error = TRUE
   )
 })
+
+test_that("to_fct() sorts integer levels numerically not lexicographically (#241)", {
+  given <- c(1L, 10L, 2L)
+  result <- to_fct(given)
+  expect_identical(levels(result), c("1", "2", "10"))
+})

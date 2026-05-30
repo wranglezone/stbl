@@ -1,31 +1,7 @@
-#include <R.h>
-#include <Rinternals.h>
-#include <stdlib.h>
+
+#include "stbl.h"
+#include <R_ext/Utils.h>
 #include <string.h>
-
-/* Comparator for qsort: sorts SEXP (CHARSXP) pointers by string content. */
-static int cmp_charsxp(const void* a, const void* b) {
-  return strcmp(CHAR(*(const SEXP*)a), CHAR(*(const SEXP*)b));
-}
-
-/*
- * Build a factor SEXP from pre-allocated integer codes and a levels vector.
- * Caller must PROTECT both codes and lev before calling this.
- *
- * is_ordered: non-zero to produce an ordered factor.
- */
-static void set_factor_attribs(SEXP codes, SEXP lev, int is_ordered) {
-  Rf_setAttrib(codes, R_LevelsSymbol, lev);
-  if (is_ordered) {
-    SEXP cls = PROTECT(Rf_allocVector(STRSXP, 2));
-    SET_STRING_ELT(cls, 0, Rf_mkChar("ordered"));
-    SET_STRING_ELT(cls, 1, Rf_mkChar("factor"));
-    Rf_setAttrib(codes, R_ClassSymbol, cls);
-    UNPROTECT(1);
-  } else {
-    Rf_setAttrib(codes, R_ClassSymbol, Rf_mkString("factor"));
-  }
-}
 
 /*
  * stbl_chr_to_fct: public API entry point.
@@ -34,7 +10,8 @@ static void set_factor_attribs(SEXP codes, SEXP lev, int is_ordered) {
  *
  *   value:   character vector to convert
  *   levels:  character vector of target levels, or R_NilValue (infer from
- *            data using sort(unique(value)), matching R's factor() semantics)
+ *            data using locale-aware sort(unique(value)), matching
+ *            R's factor() semantics)
  *   ordered: length-1 logical; TRUE to produce an ordered factor
  *
  * Returns a named list of two vectors of length(value):
@@ -50,7 +27,7 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
   int own_levels = 0;
 
   if (Rf_isNull(levels)) {
-    /* Infer levels: collect unique non-NA strings, then sort. */
+    /* Collect unique non-NA CHARSXP pointers (R interns strings). */
     SEXP* uniq = (SEXP*) R_alloc(n, sizeof(SEXP));
     R_xlen_t nuniq = 0;
     for (R_xlen_t i = 0; i < n; i++) {
@@ -62,9 +39,15 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
       }
       if (!seen) uniq[nuniq++] = xi;
     }
-    qsort(uniq, (size_t)nuniq, sizeof(SEXP), cmp_charsxp);
+    /* Build a temporary STRSXP and sort it with locale-aware R_orderVector1. */
+    SEXP tmp = PROTECT(Rf_allocVector(STRSXP, nuniq));
+    for (R_xlen_t k = 0; k < nuniq; k++) SET_STRING_ELT(tmp, k, uniq[k]);
+    int* order = (int*) R_alloc((size_t)nuniq, sizeof(int));
+    R_orderVector1(order, (int)nuniq, tmp, TRUE, FALSE);
     lev = PROTECT(Rf_allocVector(STRSXP, nuniq));
-    for (R_xlen_t k = 0; k < nuniq; k++) SET_STRING_ELT(lev, k, uniq[k]);
+    for (R_xlen_t k = 0; k < nuniq; k++)
+      SET_STRING_ELT(lev, k, STRING_ELT(tmp, order[k]));
+    UNPROTECT(1); /* tmp */
     own_levels = 1;
   } else {
     lev = levels;
@@ -86,7 +69,7 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
     }
     int found = 0;
     for (R_xlen_t k = 0; k < nlev; k++) {
-      /* R interns strings; pointer equality is a safe fast path. */
+      /* R interns strings; pointer equality is a valid fast path. */
       if (STRING_ELT(lev, k) == xi) {
         p_codes[i] = (int)(k + 1);
         p_valid[i] = 1;
@@ -100,7 +83,7 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
     }
   }
 
-  set_factor_attribs(codes, lev, is_ordered);
+  stbl_set_factor_attribs(codes, lev, is_ordered);
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(out, 0, codes);
