@@ -111,3 +111,23 @@
       ! `given` must be a single <factor (non-empty)>.
       x `given` has no values.
 
+# to_fct() errors for ints with unexpected levels (#241)
+
+    Code
+      to_fct(given, levels = c("1", "2"))
+    Condition
+      Error:
+      ! Each value of `<chr>` must be in the expected levels.
+      i Allowed levels: "1" and "2".
+      x Unexpected values: "3".
+
+---
+
+    Code
+      wrapped_to_fct(given, levels = c("1", "2"))
+    Condition
+      Error in `wrapped_to_fct()`:
+      ! Each value of `<chr>` must be in the expected levels.
+      i Allowed levels: "1" and "2".
+      x Unexpected values: "3".
+

@@ -42,6 +42,31 @@ to_fct.character <- function(
 }
 
 #' @export
+to_fct.integer <- function(
+  x,
+  ...,
+  levels = NULL,
+  to_na = character(),
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (is.null(levels)) {
+    # Use stbl_int_to_fct for numerically-ordered levels, then pass those
+    # levels explicitly to .coerce_fct_levels so to_na and error handling
+    # work correctly without re-sorting as strings.
+    fct <- .Call(stbl_int_to_fct, x, NULL, FALSE)
+    return(.coerce_fct_levels(
+      fct[["result"]],
+      levels(fct[["result"]]),
+      to_na,
+      x_arg,
+      call
+    ))
+  }
+  x <- .Call(stbl_int_to_chr, x)[["result"]]
+  return(.coerce_fct_levels(x, levels, to_na, x_arg, call))
+}
+#' @export
 #' @rdname stabilize_fct
 to_fct.NULL <- function(
   x,

@@ -10,3 +10,4 @@ inst/doc
 scratch.R
 .positai
 tests/testthat/_problems
+tests/testthat/testthat-problems.rds

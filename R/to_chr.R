@@ -20,6 +20,26 @@ to_chr.character <- function(x, ...) {
 }
 
 #' @export
+to_chr.integer <- function(x, ...) {
+  .Call(stbl_int_to_chr, x)[["result"]]
+}
+
+#' @export
+to_chr.double <- function(x, ...) {
+  .Call(stbl_dbl_to_chr, x)[["result"]]
+}
+
+#' @export
+to_chr.logical <- function(x, ...) {
+  .Call(stbl_lgl_to_chr, x)[["result"]]
+}
+
+#' @export
+to_chr.factor <- function(x, ...) {
+  .Call(stbl_fct_to_chr, x)[["result"]]
+}
+
+#' @export
 #' @rdname stabilize_chr
 to_chr.NULL <- function(
   x,

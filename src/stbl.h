@@ -23,7 +23,7 @@
  *
  * NA strings pass through as NA_REAL (valid). NaN is rejected.
  */
-static inline void stbl_chr_to_dbl_core(SEXP x, R_xlen_t n,
+static inline void chr_to_dbl_core(SEXP x, R_xlen_t n,
                                          double* p_result, int* p_valid) {
   for (R_xlen_t i = 0; i < n; i++) {
     SEXP xi = STRING_ELT(x, i);
@@ -63,7 +63,7 @@ static inline void stbl_chr_to_dbl_core(SEXP x, R_xlen_t n,
  * Fills p_result[0..n-1], p_non_number[0..n-1], p_bad_precision[0..n-1].
  * NA strings pass through as NA_INTEGER (both flags 0).
  */
-static inline void stbl_chr_to_int_core(SEXP x, R_xlen_t n,
+static inline void chr_to_int_core(SEXP x, R_xlen_t n,
                                          int* p_result,
                                          int* p_non_number,
                                          int* p_bad_precision) {
@@ -118,7 +118,7 @@ static inline void stbl_chr_to_int_core(SEXP x, R_xlen_t n,
 }
 
 /* Case-insensitive check for "T" or "TRUE" */
-static inline int stbl_is_true_str(const char* s) {
+static inline int is_true_str(const char* s) {
   if ((s[0] == 'T' || s[0] == 't') && s[1] == '\0') return 1;
   if ((s[0] == 'T' || s[0] == 't') &&
       (s[1] == 'R' || s[1] == 'r') &&
@@ -129,7 +129,7 @@ static inline int stbl_is_true_str(const char* s) {
 }
 
 /* Case-insensitive check for "F" or "FALSE" */
-static inline int stbl_is_false_str(const char* s) {
+static inline int is_false_str(const char* s) {
   if ((s[0] == 'F' || s[0] == 'f') && s[1] == '\0') return 1;
   if ((s[0] == 'F' || s[0] == 'f') &&
       (s[1] == 'A' || s[1] == 'a') &&
@@ -146,7 +146,7 @@ static inline int stbl_is_false_str(const char* s) {
  * Fills p_result[0..n-1] and p_valid[0..n-1].
  * NA strings pass through as NA_LOGICAL (valid).
  */
-static inline void stbl_chr_to_lgl_core(SEXP x, R_xlen_t n,
+static inline void chr_to_lgl_core(SEXP x, R_xlen_t n,
                                          int* p_result, int* p_valid) {
   for (R_xlen_t i = 0; i < n; i++) {
     SEXP xi = STRING_ELT(x, i);
@@ -159,13 +159,13 @@ static inline void stbl_chr_to_lgl_core(SEXP x, R_xlen_t n,
 
     const char* s = CHAR(xi);
 
-    if (stbl_is_true_str(s)) {
+    if (is_true_str(s)) {
       p_result[i] = 1;
       p_valid[i]  = 1;
       continue;
     }
 
-    if (stbl_is_false_str(s)) {
+    if (is_false_str(s)) {
       p_result[i] = 0;
       p_valid[i]  = 1;
       continue;
@@ -197,7 +197,7 @@ static inline void stbl_chr_to_lgl_core(SEXP x, R_xlen_t n,
  * that the element cannot be reduced to a single scalar.  Non-list values
  * are returned unchanged.
  */
-static inline SEXP stbl_lst_unwrap_elem(SEXP x) {
+static inline SEXP lst_unwrap_elem(SEXP x) {
   while (TYPEOF(x) == VECSXP) {
     if (XLENGTH(x) != 1) return R_NilValue;
     x = VECTOR_ELT(x, 0);
@@ -207,10 +207,10 @@ static inline SEXP stbl_lst_unwrap_elem(SEXP x) {
 
 /*
  * Build the standard list(result = ..., valid = ...) return value used by
- * all stbl_lst_to_* routines.  Caller must have already PROTECTed both
+ * all stbl_lst_to_* routines. Caller must have already PROTECTed both
  * result and valid.
  */
-static inline SEXP stbl_lst_build_out(SEXP result, SEXP valid) {
+static inline SEXP lst_build_out(SEXP result, SEXP valid) {
   SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
   SET_VECTOR_ELT(out, 0, result);
@@ -220,6 +220,31 @@ static inline SEXP stbl_lst_build_out(SEXP result, SEXP valid) {
   Rf_setAttrib(out, R_NamesSymbol, names);
   UNPROTECT(2);
   return out;
+}
+
+/*
+ * Set the class and levels attributes on a pre-populated integer codes SEXP,
+ * making it a factor or ordered factor.  Caller must PROTECT codes before
+ * calling; this function is internally balanced (no net change to the protect
+ * stack on return).
+ *
+ * lev:        STRSXP of level labels (need not be protected by caller; it is
+ *             only read, not stored beyond Rf_setAttrib's own bookkeeping).
+ * is_ordered: non-zero to produce an ordered factor.
+ */
+static inline void set_factor_attribs (SEXP codes, SEXP lev, int is_ordered) {
+  Rf_setAttrib(codes, R_LevelsSymbol, lev);
+  if (is_ordered) {
+    SEXP cls = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(cls, 0, Rf_mkChar("ordered"));
+    SET_STRING_ELT(cls, 1, Rf_mkChar("factor"));
+    Rf_setAttrib(codes, R_ClassSymbol, cls);
+    UNPROTECT(1);
+  } else {
+    SEXP cls = PROTECT(Rf_mkString("factor"));
+    Rf_setAttrib(codes, R_ClassSymbol, cls);
+    UNPROTECT(1);
+  }
 }
 
 #endif /* STBL_H */

@@ -45,7 +45,7 @@ static void lst_to_dbl_fill_vec(SEXP elem, R_xlen_t m,
         SET_STRING_ELT(lvl_strs, j,
           codes[j] == NA_INTEGER ? NA_STRING : STRING_ELT(levels, codes[j] - 1));
       }
-      stbl_chr_to_dbl_core(lvl_strs, m, p_r, p_v);
+      chr_to_dbl_core(lvl_strs, m, p_r, p_v);
       UNPROTECT(1);
       return;
     }
@@ -74,7 +74,7 @@ static void lst_to_dbl_fill_vec(SEXP elem, R_xlen_t m,
       break;
     }
     case STRSXP: {
-      stbl_chr_to_dbl_core(elem, m, p_r, p_v);
+      chr_to_dbl_core(elem, m, p_r, p_v);
       break;
     }
     case CPLXSXP: {
@@ -107,7 +107,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
         SEXP result = PROTECT(Rf_allocVector(REALSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP,  m));
         lst_to_dbl_fill_vec(elem, m, REAL(result), LOGICAL(valid));
-        SEXP out = stbl_lst_build_out(result, valid);
+        SEXP out = lst_build_out(result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -121,7 +121,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
   int*    p_v = LOGICAL(valid);
 
   for (R_xlen_t i = 0; i < n; i++) {
-    SEXP elem = stbl_lst_unwrap_elem(VECTOR_ELT(x, i));
+    SEXP elem = lst_unwrap_elem(VECTOR_ELT(x, i));
     if (elem == R_NilValue || !Rf_isVectorAtomic(elem) || XLENGTH(elem) != 1) {
       p_r[i] = NA_REAL;
       p_v[i] = 0;
@@ -138,7 +138,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
           p_v[i] = 1;
         } else {
           SEXP lvl = PROTECT(Rf_ScalarString(STRING_ELT(levels, code - 1)));
-          stbl_chr_to_dbl_core(lvl, 1, &p_r[i], &p_v[i]);
+          chr_to_dbl_core(lvl, 1, &p_r[i], &p_v[i]);
           UNPROTECT(1);
         }
         continue;
@@ -164,7 +164,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
         break;
       }
       case STRSXP: {
-        stbl_chr_to_dbl_core(elem, 1, &p_r[i], &p_v[i]);
+        chr_to_dbl_core(elem, 1, &p_r[i], &p_v[i]);
         break;
       }
       case CPLXSXP: {
@@ -188,7 +188,7 @@ SEXP stbl_lst_to_dbl(SEXP x) {
     }
   }
 
-  SEXP out = stbl_lst_build_out(result, valid);
+  SEXP out = lst_build_out(result, valid);
   UNPROTECT(2);
   return out;
 }

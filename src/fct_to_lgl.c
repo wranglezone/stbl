@@ -17,7 +17,7 @@ static void fct_to_lgl_core(SEXP x, R_xlen_t n,
   int* level_result = (int*) R_alloc(nlev, sizeof(int));
   int* level_valid  = (int*) R_alloc(nlev, sizeof(int));
   if (nlev > 0) {
-    stbl_chr_to_lgl_core(levels, nlev, level_result, level_valid);
+    chr_to_lgl_core(levels, nlev, level_result, level_valid);
   }
 
   int* codes = INTEGER(x);

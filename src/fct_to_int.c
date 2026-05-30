@@ -20,7 +20,7 @@ static void fct_to_int_core(SEXP x, R_xlen_t n,
   int* level_non_number    = (int*) R_alloc(nlev, sizeof(int));
   int* level_bad_precision = (int*) R_alloc(nlev, sizeof(int));
   if (nlev > 0) {
-    stbl_chr_to_int_core(levels, nlev, level_result, level_non_number,
+    chr_to_int_core(levels, nlev, level_result, level_non_number,
                          level_bad_precision);
   }
 
