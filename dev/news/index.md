@@ -2,6 +2,12 @@
 
 ## stbl (development version)
 
+- `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
+  `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,
+  `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and
+  `stbl_lgl_are_chrish()` are now available as registered C callables,
+  completing the `*_to_chr` and `*_to_fct` families in the C API
+  ([\#241](https://github.com/wranglezone/stbl/issues/241)).
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
   signals classed messages with an opinionated class hierarchy,
