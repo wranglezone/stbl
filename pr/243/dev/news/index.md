@@ -9,7 +9,14 @@
   completing the `*_to_chr` and `*_to_fct` families in the C API.
   [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
   gains specific methods for `double`, `factor`, `integer`, and
-  `logical` inputs backed by these new C functions
+  `logical` inputs backed by these new C functions.
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  gains a specific `integer` method that uses `stbl_int_to_fct()` with
+  numerically-ordered levels (e.g., `1:10` produces levels
+  `"1","2",..."10"` rather than `"1","10","2",...`). `stbl_chr_to_fct()`
+  now uses `R_orderVector1` for locale-aware level ordering when levels
+  are inferred, and `stbl_fct_to_chr()` now guards against malformed
+  out-of-range factor codes
   ([\#241](https://github.com/wranglezone/stbl/issues/241)).
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
