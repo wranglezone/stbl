@@ -24,7 +24,7 @@ static void fct_to_dbl_core(SEXP x, R_xlen_t n,
   double* level_result = (double*) R_alloc(nlev, sizeof(double));
   int*    level_valid  = (int*)    R_alloc(nlev, sizeof(int));
   if (nlev > 0) {
-    stbl_chr_to_dbl_core(levels, nlev, level_result, level_valid);
+    chr_to_dbl_core(levels, nlev, level_result, level_valid);
   }
 
   int* codes = INTEGER(x);

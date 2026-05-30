@@ -47,7 +47,7 @@ static void lst_to_int_fill_vec(SEXP elem, R_xlen_t m, int* p_r, int* p_v) {
       }
       int* p_nn = (int*)R_alloc(m, sizeof(int));
       int* p_bp = (int*)R_alloc(m, sizeof(int));
-      stbl_chr_to_int_core(lvl_strs, m, p_r, p_nn, p_bp);
+      chr_to_int_core(lvl_strs, m, p_r, p_nn, p_bp);
       for (R_xlen_t j = 0; j < m; j++) p_v[j] = !p_nn[j] && !p_bp[j];
       UNPROTECT(1);
       return;
@@ -83,7 +83,7 @@ static void lst_to_int_fill_vec(SEXP elem, R_xlen_t m, int* p_r, int* p_v) {
     case STRSXP: {
       int* p_nn = (int*)R_alloc(m, sizeof(int));
       int* p_bp = (int*)R_alloc(m, sizeof(int));
-      stbl_chr_to_int_core(elem, m, p_r, p_nn, p_bp);
+      chr_to_int_core(elem, m, p_r, p_nn, p_bp);
       for (R_xlen_t j = 0; j < m; j++) p_v[j] = !p_nn[j] && !p_bp[j];
       break;
     }
@@ -123,7 +123,7 @@ SEXP stbl_lst_to_int(SEXP x) {
         SEXP result = PROTECT(Rf_allocVector(INTSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         lst_to_int_fill_vec(elem, m, INTEGER(result), LOGICAL(valid));
-        SEXP out = stbl_lst_build_out(result, valid);
+        SEXP out = lst_build_out(result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -137,7 +137,7 @@ SEXP stbl_lst_to_int(SEXP x) {
   int* p_v = LOGICAL(valid);
 
   for (R_xlen_t i = 0; i < n; i++) {
-    SEXP elem = stbl_lst_unwrap_elem(VECTOR_ELT(x, i));
+    SEXP elem = lst_unwrap_elem(VECTOR_ELT(x, i));
     if (elem == R_NilValue || !Rf_isVectorAtomic(elem) || XLENGTH(elem) != 1) {
       p_r[i] = NA_INTEGER;
       p_v[i] = 0;
@@ -155,7 +155,7 @@ SEXP stbl_lst_to_int(SEXP x) {
         } else {
           SEXP lvl = PROTECT(Rf_ScalarString(STRING_ELT(levels, code - 1)));
           int non_number, bad_precision;
-          stbl_chr_to_int_core(lvl, 1, &p_r[i], &non_number, &bad_precision);
+          chr_to_int_core(lvl, 1, &p_r[i], &non_number, &bad_precision);
           p_v[i] = !non_number && !bad_precision;
           UNPROTECT(1);
         }
@@ -192,7 +192,7 @@ SEXP stbl_lst_to_int(SEXP x) {
       }
       case STRSXP: {
         int non_number, bad_precision;
-        stbl_chr_to_int_core(elem, 1, &p_r[i], &non_number, &bad_precision);
+        chr_to_int_core(elem, 1, &p_r[i], &non_number, &bad_precision);
         p_v[i] = !non_number && !bad_precision;
         break;
       }
@@ -224,7 +224,7 @@ SEXP stbl_lst_to_int(SEXP x) {
     }
   }
 
-  SEXP out = stbl_lst_build_out(result, valid);
+  SEXP out = lst_build_out(result, valid);
   UNPROTECT(2);
   return out;
 }

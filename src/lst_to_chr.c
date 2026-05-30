@@ -69,7 +69,7 @@ SEXP stbl_lst_to_chr(SEXP x) {
       SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
       int* p_v = LOGICAL(valid);
       for (R_xlen_t j = 0; j < m; j++) p_v[j] = 1;
-      SEXP out = stbl_lst_build_out(result, valid);
+      SEXP out = lst_build_out(result, valid);
       UNPROTECT(2);
       return out;
     }
@@ -81,7 +81,7 @@ SEXP stbl_lst_to_chr(SEXP x) {
   int* p_v = LOGICAL(valid);
 
   for (R_xlen_t i = 0; i < n; i++) {
-    SEXP elem = stbl_lst_unwrap_elem(VECTOR_ELT(x, i));
+    SEXP elem = lst_unwrap_elem(VECTOR_ELT(x, i));
     if (elem == R_NilValue || !Rf_isVectorAtomic(elem) || XLENGTH(elem) != 1) {
       SET_STRING_ELT(result, i, NA_STRING);
       p_v[i] = 0;
@@ -92,7 +92,7 @@ SEXP stbl_lst_to_chr(SEXP x) {
     p_v[i] = valid_elem;
   }
 
-  SEXP out = stbl_lst_build_out(result, valid);
+  SEXP out = lst_build_out(result, valid);
   UNPROTECT(2);
   return out;
 }
