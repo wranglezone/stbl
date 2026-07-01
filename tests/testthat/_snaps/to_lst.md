@@ -14,6 +14,26 @@
       Error in `wrapped_to_lst()`:
       ! `val` must not be <NULL>.
 
+# to_lst() rejects unused dots for methods that ignore them (#200)
+
+    Code
+      to_lst(list(a = 1L), new_arg = "red")
+    Condition
+      Error:
+      ! `...` must be empty.
+      x Problematic argument:
+      * new_arg = "red"
+
+---
+
+    Code
+      wrapped_to_lst(list(a = 1L), new_arg = "red")
+    Condition
+      Error in `wrapped_to_lst()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * new_arg = "red"
+
 # to_lst() errors by default for functions (#157)
 
     Code

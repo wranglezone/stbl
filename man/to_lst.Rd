@@ -13,7 +13,7 @@ to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
-\method{to_lst}{list}(x, ...)
+\method{to_lst}{list}(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 \method{to_lst}{default}(x, ..., x_arg = caller_arg(x), call = caller_env())
 

@@ -33,7 +33,13 @@ to_df <- function(
 to_data_frame <- to_df
 
 #' @export
-to_df.data.frame <- function(x, ...) {
+to_df.data.frame <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  check_dots_empty0(..., call = call)
   x
 }
 
@@ -46,6 +52,7 @@ to_df.NULL <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  check_dots_empty0(..., call = call)
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
 }
 

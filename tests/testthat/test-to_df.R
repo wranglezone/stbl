@@ -21,6 +21,25 @@ test_that("to_df() respects allow_null (#201)", {
   )
 })
 
+test_that("to_df() rejects unused dots for methods that ignore them (#200)", {
+  expect_error(
+    to_df(mtcars, new_arg = "red"),
+    class = "rlib_error_dots_nonempty"
+  )
+  expect_error(
+    to_df(NULL, new_arg = "red"),
+    class = "rlib_error_dots_nonempty"
+  )
+  expect_snapshot(
+    to_df(mtcars, new_arg = "red"),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_df(mtcars, new_arg = "red"),
+    error = TRUE
+  )
+})
+
 test_that("to_df() coerces a named list to a data frame (#201)", {
   given <- list(name = "Alice", age = 30L)
   result <- to_df(given)
