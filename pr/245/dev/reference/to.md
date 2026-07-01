@@ -16,6 +16,29 @@ to(
   call = caller_env(),
   x_class = object_type(x)
 )
+
+# S3 method for class 'factor'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'list'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# Default S3 method
+to(x, .to, ...)
 ```
 
 ## Arguments
