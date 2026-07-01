@@ -38,7 +38,14 @@ to(
 )
 
 # Default S3 method
-to(x, .to, ...)
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
