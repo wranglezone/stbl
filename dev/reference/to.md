@@ -121,7 +121,7 @@ to(
 
 - ...:
 
-  Aguments passed to methods and on to `to_*()` functions.
+  Arguments passed to methods and on to `to_*()` functions.
 
 - x_arg:
 
