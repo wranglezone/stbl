@@ -2,17 +2,10 @@
 
 ## stbl (development version)
 
-- New [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) is a fast
-  drop-in replacement for
-  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
-  It coerces `x` to the type of `.to` by dispatching on the class of
-  `.to`. Logical, integer, double, and character targets use a new C
-  implementation (`stbl_to()`) for maximum speed. Factor and list
-  targets delegate to
-  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
-  and [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md),
-  preserving their full argument sets. `stbl_to()` is also registered as
-  a C callable in the public C API for use by packages such as tibblify
+- New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+  coerces `x` to the type of `.to` by dispatching on the class of `.to`.
+  `stbl_to()` is also registered as a C callable in the public C API for
+  use by packages such as tibblify
   ([\#182](https://github.com/wranglezone/stbl/issues/182)).
 - `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
   `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,

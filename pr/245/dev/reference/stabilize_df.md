@@ -135,6 +135,7 @@ The validated data frame.
 
 Other data frame functions:
 [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
 Other stabilization functions:

@@ -1,11 +1,7 @@
 # Convert a value to a target type
 
-`to()` is a drop-in replacement for
-[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
-It coerces `x` to the type of `.to`, dispatching on the class of `.to`
-and delegating to the appropriate `to_*()` function so that the full
-argument set (e.g., `coerce_character`, `levels`, `to_na`) is available
-via `...`.
+`to()` coerces `x` to the type of `.to`, dispatching on the class of
+`.to` to the appropriate `to_*()` function.
 
 ## Usage
 
@@ -14,40 +10,6 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class 'logical'
-to(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class 'integer'
-to(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class 'numeric'
-to(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -58,7 +20,26 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'double'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'data.frame'
+to(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -70,8 +51,26 @@ to(
   .to,
   ...,
   levels = NULL,
-  to_na = character(),
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'integer'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'logical'
+to(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -82,7 +81,16 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class '`NULL`'
+to(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -113,11 +121,7 @@ to(
 
 - ...:
 
-  Arguments passed to methods.
-
-- allow_null:
-
-  `(length-1 logical)` Is NULL an acceptable value?
+  Aguments passed to methods and on to `to_*()` functions.
 
 - x_arg:
 
@@ -142,20 +146,9 @@ to(
 
   `(character)` The desired factor levels.
 
-- to_na:
-
-  `(character)` Values to convert to `NA`.
-
 ## Value
 
 `x` coerced to the type of `.to`.
-
-## Details
-
-The `stbl_to()` C function is also part of stbl's public C API
-(`inst/include/stbl.h`), allowing packages like tibblify to call it from
-their own C code as a fast alternative to
-[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
 
 ## See also
 
@@ -189,6 +182,11 @@ Other list functions:
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
 [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+
+Other data frame functions:
+[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
 ## Examples
 
