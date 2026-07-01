@@ -52,6 +52,7 @@ The value, unchanged.
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other stabilization functions:

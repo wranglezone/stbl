@@ -101,7 +101,8 @@ provide additional context or functionality.
 
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
-[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other specification functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),

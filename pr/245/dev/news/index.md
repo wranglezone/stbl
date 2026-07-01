@@ -2,12 +2,29 @@
 
 ## stbl (development version)
 
+- New [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) is a fast
+  drop-in replacement for
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
+  It coerces `x` to the type of `.to` by dispatching on the class of
+  `.to`. Logical, integer, double, and character targets use a new C
+  implementation (`stbl_to()`) for maximum speed. Factor and list
+  targets delegate to
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+  and [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md),
+  preserving their full argument sets. `stbl_to()` is also registered as
+  a C callable in the public C API for use by packages such as tibblify
+  ([\#182](https://github.com/wranglezone/stbl/issues/182)).
 - `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
   `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,
   `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and
   `stbl_lgl_are_chrish()` are now available as registered C callables,
   completing the `*_to_chr` and `*_to_fct` families in the C API
   ([\#241](https://github.com/wranglezone/stbl/issues/241)).
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
+  error on unused `...` in built-in methods that would have previously
+  silently discarded extra arguments
+  ([\#200](https://github.com/wranglezone/stbl/issues/200)).
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
   signals classed messages with an opinionated class hierarchy,

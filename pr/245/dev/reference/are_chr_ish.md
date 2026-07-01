@@ -48,7 +48,8 @@ for the entire vector.
 
 Other character functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other check functions:
 [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),

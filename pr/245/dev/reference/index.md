@@ -1,5 +1,10 @@
 # Package index
 
+## to
+
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
+  value to a target type
+
 ## character vectors
 
 - [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)

@@ -211,7 +211,8 @@ The argument as a logical vector.
 
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
