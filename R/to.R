@@ -41,23 +41,45 @@ to <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_type <- typeof(.to)
-  # factor and list targets need their R-level wrappers (levels, to_na, etc.)
-  if (to_type == "integer" && inherits(.to, "factor")) {
-    return(
-      to_fct(
-        x,
-        ...,
-        levels = levels(.to),
-        x_arg = x_arg,
-        call = call,
-        x_class = x_class
-      )
-    )
-  }
-  if (to_type == "list") {
-    return(to_lst(x, ..., x_arg = x_arg, call = call))
-  }
+  UseMethod("to", .to)
+}
+
+#' @export
+#' @rdname to
+to.factor <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_fct(
+    x,
+    ...,
+    levels = levels(.to),
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
+#' @rdname to
+to.list <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_lst(x, ..., x_arg = x_arg, call = call)
+}
+
+#' @export
+#' @rdname to
+to.default <- function(x, .to, ...) {
   # Primitive types (lgl, int, dbl, chr): fast C dispatch
   .Call(stbl_to, x, .to)
 }

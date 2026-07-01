@@ -2,6 +2,9 @@
 % Please edit documentation in R/to.R
 \name{to}
 \alias{to}
+\alias{to.factor}
+\alias{to.list}
+\alias{to.default}
 \title{Convert a value to a target type}
 \usage{
 to(
@@ -12,6 +15,26 @@ to(
   call = caller_env(),
   x_class = object_type(x)
 )
+
+\method{to}{factor}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{list}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{default}(x, .to, ...)
 }
 \arguments{
 \item{x}{The argument to stabilize.}
