@@ -111,6 +111,8 @@
   [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
   [`to_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
   : Ensure an integer argument meets expectations
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
+  value to a target type
 
 ## logical vectors
 

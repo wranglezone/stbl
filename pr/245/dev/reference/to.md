@@ -1,9 +1,11 @@
 # Convert a value to a target type
 
-`to()` is a fast drop-in replacement for
+`to()` is a drop-in replacement for
 [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
 It coerces `x` to the type of `.to`, dispatching on the class of `.to`
-and calling the appropriate `to_*()` function.
+and delegating to the appropriate `to_*()` function so that the full
+argument set (e.g., `coerce_character`, `levels`, `to_na`) is available
+via `...`.
 
 ## Usage
 
@@ -12,6 +14,51 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'logical'
+to(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'integer'
+to(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'numeric'
+to(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'character'
+to(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -22,6 +69,9 @@ to(
   x,
   .to,
   ...,
+  levels = NULL,
+  to_na = character(),
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -32,6 +82,7 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -64,6 +115,10 @@ to(
 
   Arguments passed to methods.
 
+- allow_null:
+
+  `(length-1 logical)` Is NULL an acceptable value?
+
 - x_arg:
 
   `(length-1 character)` The name of the argument being stabilized to
@@ -83,19 +138,19 @@ to(
   the object before checking its coercion, but want the error message to
   match the original class.
 
+- levels:
+
+  `(character)` The desired factor levels.
+
+- to_na:
+
+  `(character)` Values to convert to `NA`.
+
 ## Value
 
 `x` coerced to the type of `.to`.
 
 ## Details
-
-For factor and list targets, `to()` delegates to
-[`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
-and [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
-respectively so that their full argument sets (e.g., `levels`, `to_na`)
-are available via `...`. For logical, integer, double, and character
-targets, conversion is performed directly in C via `stbl_to()` for
-maximum speed.
 
 The `stbl_to()` C function is also part of stbl's public C API
 (`inst/include/stbl.h`), allowing packages like tibblify to call it from
