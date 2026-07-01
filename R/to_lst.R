@@ -35,7 +35,8 @@ to_list <- to_lst
 
 #' @export
 #' @rdname to_lst
-to_lst.list <- function(x, ...) {
+to_lst.list <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
+  check_dots_empty0(..., call = call)
   x
 }
 
@@ -54,6 +55,7 @@ to_lst.NULL <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  check_dots_empty0(..., call = call)
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
 }
 
@@ -66,6 +68,7 @@ to_lst.function <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  check_dots_empty0(..., call = call)
   .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
   .check_is_not_primitive(x, x_arg = x_arg, call = call)
   as.list(x, ...)

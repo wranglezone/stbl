@@ -14,3 +14,5 @@
 ^\.claude$
 ^AGENTS\.md$
 ^\.positai$
+^[.]?air[.]toml$
+^\.vscode$
