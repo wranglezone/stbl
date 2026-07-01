@@ -49,8 +49,8 @@ to <- function(
         x,
         ...,
         levels = levels(.to),
-        x_arg  = x_arg,
-        call   = call,
+        x_arg = x_arg,
+        call = call,
         x_class = x_class
       )
     )
