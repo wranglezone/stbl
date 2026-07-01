@@ -34,7 +34,14 @@ to(
   x_class = object_type(x)
 )
 
-\method{to}{default}(x, .to, ...)
+\method{to}{default}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
 }
 \arguments{
 \item{x}{The argument to stabilize.}

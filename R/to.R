@@ -79,7 +79,14 @@ to.list <- function(
 
 #' @export
 #' @rdname to
-to.default <- function(x, .to, ...) {
+to.default <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
   # Primitive types (lgl, int, dbl, chr): fast C dispatch
   .Call(stbl_to, x, .to)
 }
