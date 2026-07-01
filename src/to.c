@@ -279,5 +279,5 @@ SEXP stbl_to(SEXP x, SEXP to) {
       Rf_error("Unsupported target type in stbl_to().");
   }
 
-  return R_NilValue; /* unreachable */
+  return R_NilValue; /* not reached: all switch cases above return or error */
 }
