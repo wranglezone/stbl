@@ -8,6 +8,11 @@
   `stbl_lgl_are_chrish()` are now available as registered C callables,
   completing the `*_to_chr` and `*_to_fct` families in the C API
   ([\#241](https://github.com/wranglezone/stbl/issues/241)).
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
+  error on unused `...` in built-in methods that would otherwise
+  silently discard extra arguments
+  ([\#200](https://github.com/wranglezone/stbl/issues/200)).
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
   signals classed messages with an opinionated class hierarchy,
