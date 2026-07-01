@@ -14,6 +14,26 @@
       Error in `wrapped_to_df()`:
       ! `val` must not be <NULL>.
 
+# to_df() rejects unused dots for methods that ignore them (#200)
+
+    Code
+      to_df(mtcars, new_arg = "red")
+    Condition
+      Error:
+      ! `...` must be empty.
+      x Problematic argument:
+      * new_arg = "red"
+
+---
+
+    Code
+      wrapped_to_df(mtcars, new_arg = "red")
+    Condition
+      Error in `wrapped_to_df()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * new_arg = "red"
+
 # to_df() errors for a list with incompatible column lengths (#201)
 
     Code
