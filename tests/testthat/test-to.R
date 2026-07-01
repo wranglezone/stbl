@@ -180,12 +180,54 @@ test_that("to() passes levels through from factor .to (#182)", {
   expect_identical(levels(result), c("x", "y", "z"))
 })
 
+test_that("to() respects explicit levels argument in to.factor (#182)", {
+  proto <- factor(levels = c("a", "b", "c"))
+  result <- to("a", proto, levels = c("a", "b"))
+  expect_identical(levels(result), c("a", "b"))
+})
+
+test_that("to() respects to_na argument in to.factor (#182)", {
+  proto <- factor(levels = c("a", "b", "c"))
+  result <- to(c("a", "b"), proto, to_na = "b")
+  expect_true(is.na(result[[2L]]))
+})
+
 # to list (R-level) ------------------------------------------------------------
 
 test_that("to() converts to list (#182)", {
   result <- to(1:3, list())
   expect_type(result, "list")
   expect_length(result, 3L)
+})
+
+# allow_null -------------------------------------------------------------------
+
+test_that("to() returns NULL by default when x is NULL (#182)", {
+  expect_null(to(NULL, integer()))
+  expect_null(to(NULL, double()))
+  expect_null(to(NULL, character()))
+  expect_null(to(NULL, logical()))
+  expect_null(to(NULL, factor()))
+  expect_null(to(NULL, list()))
+})
+
+test_that("to() errors when x is NULL and allow_null = FALSE (#182)", {
+  expect_error(to(NULL, integer(), allow_null = FALSE))
+  expect_error(to(NULL, double(), allow_null = FALSE))
+  expect_error(to(NULL, character(), allow_null = FALSE))
+  expect_error(to(NULL, logical(), allow_null = FALSE))
+  expect_error(to(NULL, factor(), allow_null = FALSE))
+  expect_error(to(NULL, list(), allow_null = FALSE))
+})
+
+# coerce_character -------------------------------------------------------------
+
+test_that("to() respects coerce_character = FALSE for integer target (#182)", {
+  expect_error(to("1", integer(), coerce_character = FALSE))
+})
+
+test_that("to() respects coerce_character = FALSE for double target (#182)", {
+  expect_error(to("1.5", double(), coerce_character = FALSE))
 })
 
 # unsupported ------------------------------------------------------------------

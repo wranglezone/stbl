@@ -1,16 +1,11 @@
 #' Convert a value to a target type
 #'
-#' `to()` is a fast drop-in replacement for [vctrs::vec_cast()]. It coerces
-#' `x` to the type of `.to`, dispatching on the class of `.to` and calling the
-#' appropriate `to_*()` function.
+#' `to()` is a drop-in replacement for [vctrs::vec_cast()]. It coerces `x` to
+#' the type of `.to`, dispatching on the class of `.to` and delegating to the
+#' appropriate `to_*()` function so that the full argument set (e.g.,
+#' `coerce_character`, `levels`, `to_na`) is available via `...`.
 #'
-#' @details For factor and list targets, `to()` delegates to [to_fct()] and
-#'   [to_lst()] respectively so that their full argument sets (e.g., `levels`,
-#'   `to_na`) are available via `...`. For logical, integer, double, and
-#'   character targets, conversion is performed directly in C via `stbl_to()`
-#'   for maximum speed.
-#'
-#'   The `stbl_to()` C function is also part of stbl's public C API
+#' @details The `stbl_to()` C function is also part of stbl's public C API
 #'   (`inst/include/stbl.h`), allowing packages like tibblify to call it from
 #'   their own C code as a fast alternative to `vctrs::vec_cast()`.
 #'
@@ -37,6 +32,7 @@ to <- function(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -46,18 +42,94 @@ to <- function(
 
 #' @export
 #' @rdname to
-to.factor <- function(
+to.logical <- function(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
+  to_lgl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.integer <- function(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
+  to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.numeric <- function(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
+  to_dbl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.character <- function(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
+  to_chr(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.factor <- function(
+  x,
+  .to,
+  ...,
+  levels = NULL,
+  to_na = character(),
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
+  levels <- levels %||% levels(.to)
   to_fct(
     x,
     ...,
-    levels = levels(.to),
+    levels = levels,
+    to_na = to_na,
     x_arg = x_arg,
     call = call,
     x_class = x_class
@@ -70,10 +142,14 @@ to.list <- function(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (is.null(x)) {
+    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
+  }
   to_lst(x, ..., x_arg = x_arg, call = call)
 }
 
@@ -87,6 +163,10 @@ to.default <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  # Primitive types (lgl, int, dbl, chr): fast C dispatch
-  .Call(stbl_to, x, .to)
+  .stop_cant_coerce(
+    from_class = x_class,
+    to_class = object_type(.to),
+    x_arg = x_arg,
+    call = call
+  )
 }

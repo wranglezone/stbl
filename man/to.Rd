@@ -2,6 +2,10 @@
 % Please edit documentation in R/to.R
 \name{to}
 \alias{to}
+\alias{to.logical}
+\alias{to.integer}
+\alias{to.numeric}
+\alias{to.character}
 \alias{to.factor}
 \alias{to.list}
 \alias{to.default}
@@ -11,6 +15,47 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{logical}(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{integer}(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{numeric}(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{character}(
+  x,
+  .to,
+  ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -20,6 +65,9 @@ to(
   x,
   .to,
   ...,
+  levels = NULL,
+  to_na = character(),
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -29,6 +77,7 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,6 +100,8 @@ to(
 
 \item{...}{Arguments passed to methods.}
 
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
@@ -63,22 +114,21 @@ source of error messages.}
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
+
+\item{levels}{\code{(character)} The desired factor levels.}
+
+\item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 }
 \value{
 \code{x} coerced to the type of \code{.to}.
 }
 \description{
-\code{to()} is a fast drop-in replacement for \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}. It coerces
-\code{x} to the type of \code{.to}, dispatching on the class of \code{.to} and calling the
-appropriate \verb{to_*()} function.
+\code{to()} is a drop-in replacement for \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}. It coerces \code{x} to
+the type of \code{.to}, dispatching on the class of \code{.to} and delegating to the
+appropriate \verb{to_*()} function so that the full argument set (e.g.,
+\code{coerce_character}, \code{levels}, \code{to_na}) is available via \code{...}.
 }
 \details{
-For factor and list targets, \code{to()} delegates to \code{\link[=to_fct]{to_fct()}} and
-\code{\link[=to_lst]{to_lst()}} respectively so that their full argument sets (e.g., \code{levels},
-\code{to_na}) are available via \code{...}. For logical, integer, double, and
-character targets, conversion is performed directly in C via \code{stbl_to()}
-for maximum speed.
-
 The \code{stbl_to()} C function is also part of stbl's public C API
 (\code{inst/include/stbl.h}), allowing packages like tibblify to call it from
 their own C code as a fast alternative to \code{vctrs::vec_cast()}.
