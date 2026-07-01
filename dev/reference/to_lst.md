@@ -13,7 +13,7 @@ to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 # S3 method for class 'list'
-to_lst(x, ...)
+to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 # Default S3 method
 to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
