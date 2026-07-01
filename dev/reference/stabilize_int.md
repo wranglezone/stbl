@@ -287,7 +287,8 @@ The argument as an integer vector.
 
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
-[`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
+[`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),

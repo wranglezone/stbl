@@ -247,7 +247,8 @@ These functions have two important differences from
 
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
-[`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+[`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),

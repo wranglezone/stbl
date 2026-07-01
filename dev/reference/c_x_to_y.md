@@ -53,6 +53,8 @@ Call the C routine to convert a vector to another type
 
 .lst_to_fct(x)
 
+.stbl_to(x, to)
+
 .check_min_dbl(x, min_val)
 
 .check_max_dbl(x, max_val)

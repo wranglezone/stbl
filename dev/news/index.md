@@ -2,6 +2,11 @@
 
 ## stbl (development version)
 
+- New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+  coerces `x` to the type of `.to` by dispatching on the class of `.to`.
+  `stbl_to()` is also registered as a C callable in the public C API for
+  use by packages such as tibblify
+  ([\#182](https://github.com/wranglezone/stbl/issues/182)).
 - `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
   `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,
   `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and

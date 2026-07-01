@@ -100,7 +100,8 @@ provide additional context or functionality.
 
 Other factor functions:
 [`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
-[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
