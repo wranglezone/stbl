@@ -2,12 +2,14 @@
 % Please edit documentation in R/to.R
 \name{to}
 \alias{to}
-\alias{to.logical}
-\alias{to.integer}
-\alias{to.numeric}
 \alias{to.character}
+\alias{to.double}
+\alias{to.data.frame}
 \alias{to.factor}
+\alias{to.integer}
+\alias{to.logical}
 \alias{to.list}
+\alias{to.NULL}
 \alias{to.default}
 \title{Convert a value to a target type}
 \usage{
@@ -15,37 +17,6 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to}{logical}(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to}{integer}(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to}{numeric}(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -55,7 +26,24 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{double}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{data.frame}(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,8 +54,24 @@ to(
   .to,
   ...,
   levels = NULL,
-  to_na = character(),
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{integer}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{logical}(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -77,7 +81,15 @@ to(
   x,
   .to,
   ...,
-  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{`NULL`}(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -100,8 +112,6 @@ to(
 
 \item{...}{Arguments passed to methods.}
 
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
-
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
@@ -116,8 +126,6 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 
 \item{levels}{\code{(character)} The desired factor levels.}
-
-\item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 }
 \value{
 \code{x} coerced to the type of \code{.to}.

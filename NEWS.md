@@ -1,6 +1,6 @@
 # stbl (development version)
 
-* New `to()` is a fast drop-in replacement for `vctrs::vec_cast()`. It coerces `x` to the type of `.to` by dispatching on the class of `.to`. Logical, integer, double, and character targets use a new C implementation (`stbl_to()`) for maximum speed. Factor and list targets delegate to `to_fct()` and `to_lst()`, preserving their full argument sets. `stbl_to()` is also registered as a C callable in the public C API for use by packages such as tibblify (#182).
+* New function `to()` coerces `x` to the type of `.to` by dispatching on the class of `.to`. `stbl_to()` is also registered as a C callable in the public C API for use by packages such as tibblify (#182).
 * `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()` are now available as registered C callables, completing the `*_to_chr` and `*_to_fct` families in the C API (#241).
 * `to_df()` and `to_lst()` now error on unused `...` in built-in methods that would have previously silently discarded extra arguments (#200).
 * New `pkg_inform()` signals classed messages with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` tests that a message with the expected set of classes is thrown, and `expect_pkg_message_snapshot()` snapshot-tests the full message output in one step (#213).

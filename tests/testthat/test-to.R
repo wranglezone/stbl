@@ -220,6 +220,39 @@ test_that("to() errors when x is NULL and allow_null = FALSE (#182)", {
   expect_error(to(NULL, list(), allow_null = FALSE))
 })
 
+# to data frame ----------------------------------------------------------------
+
+test_that("to() passes data frame through unchanged with data frame target (#182)", {
+  df <- mtcars
+  expect_identical(to(df, mtcars[0, ]), df)
+})
+
+test_that("to() converts list to data frame (#182)", {
+  given <- list(name = c("Alice", "Bob"), age = c(30L, 25L))
+  result <- to(given, data.frame())
+  expect_s3_class(result, "data.frame")
+  expect_equal(names(result), c("name", "age"))
+})
+
+test_that("to() converts vector to data frame (#182)", {
+  given <- c("a", "b", "c")
+  result <- to(given, data.frame())
+  expected <- data.frame(x = c("a", "b", "c"), stringsAsFactors = FALSE)
+  expect_identical(result, expected)
+})
+
+# to NULL (target) --------------------------------------------------------------
+
+test_that("to() returns NULL when .to is NULL (#182)", {
+  expect_null(to(1L, NULL))
+  expect_null(to("x", NULL))
+  expect_null(to(c(1, 2, 3), NULL))
+})
+
+test_that("to() errors when .to is NULL and allow_null = FALSE (#182)", {
+  expect_error(to(1L, NULL, allow_null = FALSE))
+})
+
 # coerce_character -------------------------------------------------------------
 
 test_that("to() respects coerce_character = FALSE for integer target (#182)", {
@@ -233,5 +266,6 @@ test_that("to() respects coerce_character = FALSE for double target (#182)", {
 # unsupported ------------------------------------------------------------------
 
 test_that("to() errors for unsupported target types (#182)", {
-  expect_error(to(1L, NULL))
+  to(1L, mean) |>
+    expect_pkg_error_classes("stbl", "coerce", "function")
 })

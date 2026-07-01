@@ -32,7 +32,6 @@ to <- function(
   x,
   .to,
   ...,
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -42,70 +41,47 @@ to <- function(
 
 #' @export
 #' @rdname to
-to.logical <- function(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
-  to_lgl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
-}
-
-#' @export
-#' @rdname to
-to.integer <- function(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
-  to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
-}
-
-#' @export
-#' @rdname to
-to.numeric <- function(
-  x,
-  .to,
-  ...,
-  allow_null = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
-  to_dbl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
-}
-
-#' @export
-#' @rdname to
 to.character <- function(
   x,
   .to,
   ...,
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
   to_chr(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.double <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_dbl(
+    x,
+    ...,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
+#' @rdname to
+to.data.frame <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_df(x, ..., x_arg = x_arg, call = call)
 }
 
 #' @export
@@ -115,21 +91,47 @@ to.factor <- function(
   .to,
   ...,
   levels = NULL,
-  to_na = character(),
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
   levels <- levels %||% levels(.to)
   to_fct(
     x,
     ...,
     levels = levels,
-    to_na = to_na,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
+#' @rdname to
+to.integer <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.logical <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_lgl(
+    x,
+    ...,
     x_arg = x_arg,
     call = call,
     x_class = x_class
@@ -142,15 +144,24 @@ to.list <- function(
   x,
   .to,
   ...,
-  allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (is.null(x)) {
-    return(.to_null(x, allow_null = allow_null, x_arg = x_arg, call = call))
-  }
   to_lst(x, ..., x_arg = x_arg, call = call)
+}
+
+#' @export
+#' @rdname to
+to.NULL <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  .to_null(x, ..., x_arg = x_arg, call = call)
 }
 
 #' @export
