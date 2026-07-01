@@ -1,16 +1,11 @@
 #' Convert a value to a target type
 #'
-#' `to()` is a drop-in replacement for [vctrs::vec_cast()]. It coerces `x` to
-#' the type of `.to`, dispatching on the class of `.to` and delegating to the
-#' appropriate `to_*()` function so that the full argument set (e.g.,
-#' `coerce_character`, `levels`, `to_na`) is available via `...`.
+#' `to()` coerces `x` to the type of `.to`, dispatching on the class of `.to`
+#' to the appropriate `to_*()` function.
 #'
-#' @details The `stbl_to()` C function is also part of stbl's public C API
-#'   (`inst/include/stbl.h`), allowing packages like tibblify to call it from
-#'   their own C code as a fast alternative to `vctrs::vec_cast()`.
-#'
-#' @param .to A prototype that determines the target type (e.g.,
-#'   `integer()`, `factor(levels = c("a", "b"))`).
+#' @param .to A prototype that determines the target type (e.g., `integer()`,
+#'   `factor(levels = c("a", "b"))`).
+#' @param ... Aguments passed to methods and on to `to_*()` functions.
 #' @inheritParams .shared-params
 #'
 #' @returns `x` coerced to the type of `.to`.
@@ -20,6 +15,7 @@
 #' @family logical functions
 #' @family factor functions
 #' @family list functions
+#' @family data frame functions
 #' @export
 #'
 #' @examples

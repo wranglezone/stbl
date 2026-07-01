@@ -70,6 +70,7 @@ try(stabilize_person_df(data.frame(name = "Alice")))
 \seealso{
 Other data frame functions:
 \code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_df]{to_df()}}
 
 Other specification functions:

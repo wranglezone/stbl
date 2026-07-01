@@ -107,10 +107,10 @@ to(
 \arguments{
 \item{x}{The argument to stabilize.}
 
-\item{.to}{A prototype that determines the target type (e.g.,
-\code{integer()}, \code{factor(levels = c("a", "b"))}).}
+\item{.to}{A prototype that determines the target type (e.g., \code{integer()},
+\code{factor(levels = c("a", "b"))}).}
 
-\item{...}{Arguments passed to methods.}
+\item{...}{Aguments passed to methods and on to \verb{to_*()} functions.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -131,15 +131,8 @@ match the original class.}
 \code{x} coerced to the type of \code{.to}.
 }
 \description{
-\code{to()} is a drop-in replacement for \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}. It coerces \code{x} to
-the type of \code{.to}, dispatching on the class of \code{.to} and delegating to the
-appropriate \verb{to_*()} function so that the full argument set (e.g.,
-\code{coerce_character}, \code{levels}, \code{to_na}) is available via \code{...}.
-}
-\details{
-The \code{stbl_to()} C function is also part of stbl's public C API
-(\code{inst/include/stbl.h}), allowing packages like tibblify to call it from
-their own C code as a fast alternative to \code{vctrs::vec_cast()}.
+\code{to()} coerces \code{x} to the type of \code{.to}, dispatching on the class of \code{.to}
+to the appropriate \verb{to_*()} function.
 }
 \examples{
 to(1L, double())
@@ -179,8 +172,14 @@ Other list functions:
 \code{\link[=stabilize_lst]{stabilize_lst()}},
 \code{\link[=stabilize_present]{stabilize_present()}},
 \code{\link[=to_lst]{to_lst()}}
+
+Other data frame functions:
+\code{\link[=specify_df]{specify_df()}},
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=to_df]{to_df()}}
 }
 \concept{character functions}
+\concept{data frame functions}
 \concept{double functions}
 \concept{factor functions}
 \concept{integer functions}

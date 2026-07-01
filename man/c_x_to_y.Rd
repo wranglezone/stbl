@@ -26,6 +26,7 @@
 \alias{.lst_to_lgl}
 \alias{.lst_to_chr}
 \alias{.lst_to_fct}
+\alias{.stbl_to}
 \alias{.check_min_dbl}
 \alias{.check_max_dbl}
 \title{Call the C routine to convert a vector to another type}
@@ -77,6 +78,8 @@
 .lst_to_chr(x)
 
 .lst_to_fct(x)
+
+.stbl_to(x, to)
 
 .check_min_dbl(x, min_val)
 

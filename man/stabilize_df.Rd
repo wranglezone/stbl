@@ -154,6 +154,7 @@ try(stabilize_df("not a data frame"))
 \seealso{
 Other data frame functions:
 \code{\link[=specify_df]{specify_df()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_df]{to_df()}}
 
 Other stabilization functions:

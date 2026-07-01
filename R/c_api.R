@@ -147,6 +147,13 @@
   .Call(stbl_lst_to_fct, x)
 }
 
+# stbl_to ----
+
+#' @rdname c_x_to_y
+.stbl_to <- function(x, to) {
+  .Call(stbl_to, x, to)
+}
+
 # range checks ----
 
 #' @rdname c_x_to_y
