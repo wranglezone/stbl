@@ -61,6 +61,9 @@ SEXP (*stbl_lst_to_fct)(SEXP)                 = NULL;
 SEXP (*stbl_check_min_dbl)(SEXP, SEXP)        = NULL;
 SEXP (*stbl_check_max_dbl)(SEXP, SEXP)        = NULL;
 
+/* to */
+SEXP (*stbl_to)(SEXP, SEXP)                   = NULL;
+
 void stbl_init_api(void) {
   /* chr -> * */
   stbl_chr_to_lgl     = (SEXP (*)(SEXP))             R_GetCCallable("stbl", "stbl_chr_to_lgl");
@@ -115,4 +118,6 @@ void stbl_init_api(void) {
   /* range checks */
   stbl_check_min_dbl  = (SEXP (*)(SEXP, SEXP))       R_GetCCallable("stbl", "stbl_check_min_dbl");
   stbl_check_max_dbl  = (SEXP (*)(SEXP, SEXP))       R_GetCCallable("stbl", "stbl_check_max_dbl");
+  /* to */
+  stbl_to             = (SEXP (*)(SEXP, SEXP))        R_GetCCallable("stbl", "stbl_to");
 }

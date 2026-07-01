@@ -295,7 +295,8 @@ stabilize_dbl_scalar(NULL, allow_null = TRUE)
 \seealso{
 Other double functions:
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},
-\code{\link[=specify_dbl]{specify_dbl()}}
+\code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=to]{to()}}
 
 Other stabilization functions:
 \code{\link[=stabilize_arg]{stabilize_arg()}},

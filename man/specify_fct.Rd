@@ -83,7 +83,8 @@ try(stabilize_lowercase_letter("A"))
 \seealso{
 Other factor functions:
 \code{\link[=are_fct_ish]{are_fct_ish()}},
-\code{\link[=stabilize_fct]{stabilize_fct()}}
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=to]{to()}}
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},

@@ -100,7 +100,8 @@ try(stabilize_3_to_5(c(1:6)))
 \seealso{
 Other double functions:
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},
-\code{\link[=stabilize_dbl]{stabilize_dbl()}}
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=to]{to()}}
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},

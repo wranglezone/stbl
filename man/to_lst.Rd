@@ -69,6 +69,7 @@ throw an error, rather than returning \code{list(NULL)}.
 Other list functions:
 \code{\link[=specify_lst]{specify_lst()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}}
+\code{\link[=stabilize_present]{stabilize_present()}},
+\code{\link[=to]{to()}}
 }
 \concept{list functions}

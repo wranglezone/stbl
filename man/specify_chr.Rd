@@ -85,7 +85,8 @@ try(stabilize_email("not-an-email-address"))
 \seealso{
 Other character functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
-\code{\link[=stabilize_chr]{stabilize_chr()}}
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=to]{to()}}
 
 Other specification functions:
 \code{\link[=specify_dbl]{specify_dbl()}},

@@ -157,6 +157,7 @@ stabilize_lst(
 Other list functions:
 \code{\link[=specify_lst]{specify_lst()}},
 \code{\link[=stabilize_present]{stabilize_present()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
 Other stabilization functions:

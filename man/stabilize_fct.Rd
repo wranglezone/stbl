@@ -256,7 +256,8 @@ try(stabilize_fct_scalar("c", levels = c("a", "b")))
 \seealso{
 Other factor functions:
 \code{\link[=are_fct_ish]{are_fct_ish()}},
-\code{\link[=specify_fct]{specify_fct()}}
+\code{\link[=specify_fct]{specify_fct()}},
+\code{\link[=to]{to()}}
 
 Other stabilization functions:
 \code{\link[=stabilize_arg]{stabilize_arg()}},

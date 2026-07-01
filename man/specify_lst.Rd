@@ -78,6 +78,7 @@ try(
 Other list functions:
 \code{\link[=stabilize_lst]{stabilize_lst()}},
 \code{\link[=stabilize_present]{stabilize_present()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
 Other specification functions:
