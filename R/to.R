@@ -5,7 +5,7 @@
 #'
 #' @param .to A prototype that determines the target type (e.g., `integer()`,
 #'   `factor(levels = c("a", "b"))`).
-#' @param ... Aguments passed to methods and on to `to_*()` functions.
+#' @param ... Arguments passed to methods and on to `to_*()` functions.
 #' @inheritParams .shared-params
 #'
 #' @returns `x` coerced to the type of `.to`.
