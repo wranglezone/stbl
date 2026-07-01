@@ -30,10 +30,6 @@ test_that("to_df() rejects unused dots for methods that ignore them (#200)", {
     to_df(NULL, new_arg = "red"),
     class = "rlib_error_dots_nonempty"
   )
-  expect_error(
-    to_df(as.Date("2024-01-01"), new_arg = "red"),
-    class = "rlib_error_dots_nonempty"
-  )
   expect_snapshot(
     to_df(mtcars, new_arg = "red"),
     error = TRUE

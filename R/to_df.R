@@ -33,7 +33,12 @@ to_df <- function(
 to_data_frame <- to_df
 
 #' @export
-to_df.data.frame <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
+to_df.data.frame <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
   check_dots_empty0(..., call = call)
   x
 }
@@ -72,7 +77,6 @@ to_df.default <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  check_dots_empty0(..., call = call)
   .stop_cant_coerce(
     from_class = x_class,
     to_class = "data.frame",

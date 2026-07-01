@@ -8,6 +8,6 @@ docs
 exploration
 inst/doc
 scratch.R
-.positai
+.posit/assistant
 tests/testthat/_problems
 tests/testthat/testthat-problems.rds
