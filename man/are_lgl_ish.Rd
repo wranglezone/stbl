@@ -62,7 +62,8 @@ is_lgl_ish(list(TRUE, 0, "F", "a"))
 \seealso{
 Other logical functions:
 \code{\link[=specify_lgl]{specify_lgl()}},
-\code{\link[=stabilize_lgl]{stabilize_lgl()}}
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=to]{to()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

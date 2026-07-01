@@ -790,6 +790,285 @@ test_that(".lst_to_fct() marks multiply-nested lists as not valid (#239)", {
   expect_identical(res[["valid"]], c(FALSE, TRUE))
 })
 
+# stbl_to ----------------------------------------------------------------------
+
+# passthrough: same type returns x unchanged
+test_that(".stbl_to() returns lgl unchanged when to is lgl", {
+  expect_identical(.stbl_to(c(TRUE, FALSE, NA), TRUE), c(TRUE, FALSE, NA))
+})
+
+test_that(".stbl_to() returns int unchanged when to is int", {
+  expect_identical(.stbl_to(1L, 0L), 1L)
+})
+
+test_that(".stbl_to() returns dbl unchanged when to is dbl", {
+  expect_identical(.stbl_to(1.5, 0.0), 1.5)
+})
+
+test_that(".stbl_to() returns chr unchanged when to is chr", {
+  expect_identical(.stbl_to("a", ""), "a")
+})
+
+# NULL passes through
+test_that(".stbl_to() passes NULL through for all target types", {
+  expect_null(.stbl_to(NULL, TRUE))
+  expect_null(.stbl_to(NULL, 1L))
+  expect_null(.stbl_to(NULL, 1.0))
+  expect_null(.stbl_to(NULL, ""))
+})
+
+# -> logical
+test_that(".stbl_to() converts int to lgl", {
+  expect_identical(.stbl_to(c(0L, 1L, NA_integer_), TRUE), c(FALSE, TRUE, NA))
+})
+
+test_that(".stbl_to() converts dbl to lgl", {
+  expect_identical(.stbl_to(c(0.0, 1.5, NA_real_), TRUE), c(FALSE, TRUE, NA))
+})
+
+test_that(".stbl_to() converts chr to lgl", {
+  expect_identical(
+    .stbl_to(c("TRUE", "FALSE", "T", "F"), TRUE),
+    c(TRUE, FALSE, TRUE, FALSE)
+  )
+})
+
+test_that(".stbl_to() errors on non-coercible chr to lgl", {
+  expect_error(.stbl_to("a", TRUE), "Can't convert to <logical>.")
+})
+
+test_that(".stbl_to() converts factor to lgl", {
+  expect_identical(.stbl_to(factor(c("TRUE", "FALSE")), TRUE), c(TRUE, FALSE))
+})
+
+test_that(".stbl_to() converts list to lgl", {
+  expect_identical(.stbl_to(list(TRUE, 0L, 1.0), TRUE), c(TRUE, FALSE, TRUE))
+})
+
+# -> integer
+test_that(".stbl_to() converts lgl to int", {
+  expect_identical(.stbl_to(c(TRUE, FALSE, NA), 0L), c(1L, 0L, NA_integer_))
+})
+
+test_that(".stbl_to() converts whole-number dbl to int", {
+  expect_identical(.stbl_to(c(1.0, 2.0), 0L), c(1L, 2L))
+})
+
+test_that(".stbl_to() errors on fractional dbl to int", {
+  expect_error(
+    .stbl_to(1.5, 0L),
+    "Can't convert <double> to <integer> due to loss of precision."
+  )
+})
+
+test_that(".stbl_to() converts chr integer strings to int", {
+  expect_identical(.stbl_to(c("1", "2"), 0L), c(1L, 2L))
+})
+
+test_that(".stbl_to() errors on non-number chr to int", {
+  expect_error(
+    .stbl_to("a", 0L),
+    "Can't convert <character> to <integer>: incompatible values."
+  )
+})
+
+test_that(".stbl_to() converts factor integer levels to int", {
+  expect_identical(.stbl_to(factor(c("1", "2")), 0L), c(1L, 2L))
+})
+
+test_that(".stbl_to() converts list to int", {
+  expect_identical(.stbl_to(list(1L, TRUE), 0L), c(1L, 1L))
+})
+
+test_that(".stbl_to() converts cpx with Im == 0 to int", {
+  expect_identical(.stbl_to(c(1 + 0i, -3 + 0i), 0L), c(1L, -3L))
+})
+
+test_that(".stbl_to() errors on cpx with Im != 0 to int", {
+  expect_error(
+    .stbl_to(1 + 2i, 0L),
+    "Can't convert <complex> to <integer>: incompatible values."
+  )
+})
+
+test_that(".stbl_to() errors on fractional cpx to int", {
+  expect_error(
+    .stbl_to(1.5 + 0i, 0L),
+    "Can't convert <complex> to <integer> due to loss of precision."
+  )
+})
+
+# -> double
+test_that(".stbl_to() converts int to dbl", {
+  expect_identical(.stbl_to(c(1L, 2L, NA_integer_), 0.0), c(1.0, 2.0, NA_real_))
+})
+
+test_that(".stbl_to() converts lgl to dbl", {
+  expect_identical(.stbl_to(c(TRUE, FALSE, NA), 0.0), c(1.0, 0.0, NA_real_))
+})
+
+test_that(".stbl_to() converts chr numeric strings to dbl", {
+  expect_identical(.stbl_to(c("1.5", "-3.14"), 0.0), c(1.5, -3.14))
+})
+
+test_that(".stbl_to() errors on non-numeric chr to dbl", {
+  expect_error(.stbl_to("a", 0.0), "Can't convert to <double>.")
+})
+
+test_that(".stbl_to() converts factor numeric levels to dbl", {
+  expect_identical(.stbl_to(factor(c("1.5", "2.0")), 0.0), c(1.5, 2.0))
+})
+
+test_that(".stbl_to() converts list to dbl", {
+  expect_identical(.stbl_to(list(1.0, 2L), 0.0), c(1.0, 2.0))
+})
+
+test_that(".stbl_to() converts cpx with Im == 0 to dbl", {
+  expect_identical(.stbl_to(c(1 + 0i, -2 + 0i), 0.0), c(1.0, -2.0))
+})
+
+test_that(".stbl_to() errors on cpx with Im != 0 to dbl", {
+  expect_error(.stbl_to(1 + 2i, 0.0), "Can't convert to <double>.")
+})
+
+# -> character
+test_that(".stbl_to() converts int to chr", {
+  expect_identical(
+    .stbl_to(c(1L, -3L, NA_integer_), ""),
+    c("1", "-3", NA_character_)
+  )
+})
+
+test_that(".stbl_to() converts dbl to chr", {
+  expect_identical(.stbl_to(c(1.5, NA_real_), ""), c("1.5", NA_character_))
+})
+
+test_that(".stbl_to() converts lgl to chr", {
+  expect_identical(
+    .stbl_to(c(TRUE, FALSE, NA), ""),
+    c("TRUE", "FALSE", NA_character_)
+  )
+})
+
+test_that(".stbl_to() converts factor to chr", {
+  expect_identical(.stbl_to(factor(c("a", "b")), ""), c("a", "b"))
+})
+
+test_that(".stbl_to() converts list of chr scalars to chr", {
+  expect_identical(.stbl_to(list("a", "b"), ""), c("a", "b"))
+})
+
+# unsupported target types
+test_that(".stbl_to() errors on list target", {
+  expect_error(.stbl_to("a", list()), "List targets are not supported")
+})
+
+# -> factor --------------------------------------------------------------------
+
+test_that(".stbl_to() converts chr to fct, inferring levels", {
+  out <- .stbl_to(c("b", "a", "b"), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(as.character(out), c("b", "a", "b"))
+  expect_identical(levels(out), c("a", "b"))
+})
+
+test_that(".stbl_to() converts chr to fct, respecting levels from `to`", {
+  out <- .stbl_to(c("a", "b"), factor(NA_character_, levels = c("b", "a")))
+  expect_identical(levels(out), c("b", "a"))
+  expect_identical(as.character(out), c("a", "b"))
+})
+
+test_that(".stbl_to() errors on chr to fct when value not in levels", {
+  expect_error(
+    .stbl_to("c", factor(NA_character_, levels = c("a", "b"))),
+    "Can't convert to <factor>."
+  )
+})
+
+test_that(".stbl_to() converts int to fct, inferring levels", {
+  out <- .stbl_to(c(2L, 1L, 2L), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(levels(out), c("1", "2"))
+})
+
+test_that(".stbl_to() converts int to fct, respecting levels from `to`", {
+  out <- .stbl_to(c(1L, 2L), factor(NA_character_, levels = c("2", "1")))
+  expect_identical(levels(out), c("2", "1"))
+})
+
+test_that(".stbl_to() converts dbl to fct, inferring levels", {
+  out <- .stbl_to(c(1.5, 2.5), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(as.character(out), c("1.5", "2.5"))
+})
+
+test_that(".stbl_to() converts lgl to fct, inferring levels", {
+  out <- .stbl_to(c(TRUE, FALSE), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(as.character(out), c("TRUE", "FALSE"))
+})
+
+test_that(".stbl_to() converts fct to fct, inferring levels", {
+  out <- .stbl_to(factor(c("b", "a")), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(as.character(out), c("b", "a"))
+})
+
+test_that(".stbl_to() converts fct to fct, respecting levels from `to`", {
+  out <- .stbl_to(
+    factor(c("a", "b")),
+    factor(NA_character_, levels = c("b", "a"))
+  )
+  expect_identical(levels(out), c("b", "a"))
+})
+
+test_that(".stbl_to() converts lst to fct, inferring levels", {
+  out <- .stbl_to(list("b", "a"), factor())
+  expect_s3_class(out, "factor")
+  expect_identical(as.character(out), c("b", "a"))
+})
+
+test_that(".stbl_to() produces an ordered factor when `to` is ordered", {
+  out <- .stbl_to(c("a", "b"), ordered(NA_character_, levels = c("a", "b")))
+  expect_s3_class(out, "ordered")
+  expect_identical(levels(out), c("a", "b"))
+})
+
+test_that(".stbl_to() produces an unordered factor when `to` is unordered", {
+  out <- .stbl_to(c("a", "b"), factor(NA_character_, levels = c("a", "b")))
+  expect_false(is.ordered(out))
+})
+
+test_that(".stbl_to() passes NA through in fct conversion", {
+  out <- .stbl_to(c("a", NA_character_), factor())
+  expect_identical(is.na(out), c(FALSE, TRUE))
+})
+
+# unsupported source and target types
+test_that(".stbl_to() errors on raw source -> lgl target", {
+  expect_error(.stbl_to(as.raw(1), TRUE), "Can't convert to <logical>.")
+})
+
+test_that(".stbl_to() errors on raw source -> int target", {
+  expect_error(.stbl_to(as.raw(1), 1L), "Can't convert to <integer>.")
+})
+
+test_that(".stbl_to() errors on raw source -> dbl target", {
+  expect_error(.stbl_to(as.raw(1), 1.0), "Can't convert to <double>.")
+})
+
+test_that(".stbl_to() errors on raw source -> chr target", {
+  expect_error(.stbl_to(as.raw(1), ""), "Can't convert to <character>.")
+})
+
+test_that(".stbl_to() errors on cpx source -> fct target", {
+  expect_error(.stbl_to(1 + 0i, factor()), "Can't convert to <factor>.")
+})
+
+test_that(".stbl_to() errors on raw target", {
+  expect_error(.stbl_to(1L, as.raw(0)), "Unsupported target type in stbl_to().")
+})
+
 # range checks -----------------------------------------------------------------
 
 test_that(".check_min_dbl() returns NULL when all values pass (#220)", {

@@ -256,7 +256,8 @@ stabilize_chr_scalar(NULL, allow_null = TRUE)
 \seealso{
 Other character functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
-\code{\link[=specify_chr]{specify_chr()}}
+\code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=to]{to()}}
 
 Other stabilization functions:
 \code{\link[=stabilize_arg]{stabilize_arg()}},

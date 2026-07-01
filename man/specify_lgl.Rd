@@ -70,7 +70,8 @@ try(stabilize_few_lgl(rep(TRUE, 10)))
 \seealso{
 Other logical functions:
 \code{\link[=are_lgl_ish]{are_lgl_ish()}},
-\code{\link[=stabilize_lgl]{stabilize_lgl()}}
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=to]{to()}}
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},

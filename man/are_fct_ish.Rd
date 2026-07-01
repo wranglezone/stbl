@@ -73,7 +73,8 @@ is_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 \seealso{
 Other factor functions:
 \code{\link[=specify_fct]{specify_fct()}},
-\code{\link[=stabilize_fct]{stabilize_fct()}}
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=to]{to()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

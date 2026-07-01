@@ -65,6 +65,9 @@ extern SEXP (*stbl_lst_to_fct)(SEXP);
 extern SEXP (*stbl_check_min_dbl)(SEXP, SEXP);
 extern SEXP (*stbl_check_max_dbl)(SEXP, SEXP);
 
+/* to */
+extern SEXP (*stbl_to)(SEXP, SEXP);
+
 void stbl_init_api(void);
 
 #endif /* STBL_API_H */

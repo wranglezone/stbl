@@ -77,6 +77,9 @@ SEXP stbl_lst_to_fct(SEXP x);
 SEXP stbl_check_min_dbl(SEXP x, SEXP min_val);
 SEXP stbl_check_max_dbl(SEXP x, SEXP max_val);
 
+/* to */
+SEXP stbl_to(SEXP x, SEXP to);
+
 static const R_CallMethodDef callMethods[] = {
   /* chr -> * */
   {"stbl_chr_to_lgl",      (DL_FUNC) &stbl_chr_to_lgl,      1},
@@ -131,6 +134,8 @@ static const R_CallMethodDef callMethods[] = {
   /* range checks */
   {"stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl,   2},
   {"stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl,   2},
+  /* to */
+  {"stbl_to",              (DL_FUNC) &stbl_to,              2},
   {NULL, NULL, 0}
 };
 
@@ -192,4 +197,6 @@ void R_init_stbl(DllInfo* dll) {
   /* range checks */
   R_RegisterCCallable("stbl", "stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl);
   R_RegisterCCallable("stbl", "stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl);
+  /* to */
+  R_RegisterCCallable("stbl", "stbl_to",              (DL_FUNC) &stbl_to);
 }

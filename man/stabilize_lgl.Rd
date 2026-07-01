@@ -226,7 +226,8 @@ stabilize_lgl_scalar(NULL, allow_null = TRUE)
 \seealso{
 Other logical functions:
 \code{\link[=are_lgl_ish]{are_lgl_ish()}},
-\code{\link[=specify_lgl]{specify_lgl()}}
+\code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=to]{to()}}
 
 Other stabilization functions:
 \code{\link[=stabilize_arg]{stabilize_arg()}},

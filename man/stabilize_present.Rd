@@ -48,6 +48,7 @@ stabilize_lst(list(data = mtcars), data = stabilize_present)
 Other list functions:
 \code{\link[=specify_lst]{specify_lst()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
 Other stabilization functions:
