@@ -110,7 +110,7 @@ to(
 \item{.to}{A prototype that determines the target type (e.g., \code{integer()},
 \code{factor(levels = c("a", "b"))}).}
 
-\item{...}{Aguments passed to methods and on to \verb{to_*()} functions.}
+\item{...}{Arguments passed to methods and on to \verb{to_*()} functions.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
