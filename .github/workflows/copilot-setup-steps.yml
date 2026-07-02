@@ -24,8 +24,8 @@ jobs:
 
       - uses: api2r/actions/install@v1
         with:
-          use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: copilot
           needs: build, check, website
           # Extra packages include things referenced in skills, to make sure the
           # agent has them available.
