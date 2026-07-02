@@ -27,12 +27,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: ./.github/workflows/install
+      - uses: api2r/actions/install@v1
         with:
           use-container: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: website
-          extra-packages: any::pkgdown gilead-biostats/qcthat local::.
+          extra-packages: any::pkgdown gilead-biostats/qcthat local::. any::glue
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
