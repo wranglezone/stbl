@@ -1,73 +1,42 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+# name: pkgdown.yaml
+# version: 0.1.0
+# Description: Triggers the core pkgdown deployment and cleanup workflows. Based on https://raw.githubusercontent.com/Gilead-BioStats/gsm.utils/refs/heads/actions-v1/workflow_templates/pkgdown-all.yaml v0.4.1
+name: pkgdown-all
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
-    branches: [main]
-  release:
-    types: [published]
+    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
-
-name: pkgdown
-
+    inputs:
+      mode:
+        description: "Mode to run: deploy or cleanup"
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+          - deploy
+          - cleanup
+      pr-number:
+        description: "Pull request number. Leave blank to deploy to a branch."
+        type: string
+      pkgdown-dev-mode:
+        description: "Whether pkgdown should operate in dev mode."
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
-  pkgdown:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/api2r/pkgskills-ci:release
-    # Only restrict concurrency for non-PR jobs
-    concurrency:
-      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: api2r/actions/install@v1
-        with:
-          use-container: "true"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          needs: website
-          extra-packages: any::pkgdown gilead-biostats/qcthat local::. any::glue
-
-      - name: Build site
-        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
-        shell: Rscript {0}
-
-      - name: Deploy PR preview 🧪
-        if: github.event_name == 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.8.0
-        with:
-          clean: false
-          branch: gh-pages
-          folder: docs
-          target-folder: pr/${{ github.event.number }}
-
-      - name: Comment with PR site URL 🌐
-        if: github.event_name == 'pull_request'
-        run: |
-          intPRNumber <- ${{ github.event.pull_request.number }}
-          strOwner <- tolower(qcthat::GetGHOwner())
-          strRepo <- qcthat::GetGHRepo()
-          strURL <- glue::glue(
-            "https://{strOwner}.github.io/{strRepo}/pr/{intPRNumber}/dev"
-          )
-          print(paste("🌐 URL:", strURL))
-          qcthat::CommentIssue(
-            intPRNumber,
-            glue::glue("🌐 [PR pkgdown deployed]({strURL})"),
-            NULL
-          )
-        shell: Rscript {0}
-
-      - name: Deploy to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.8.0
-        with:
-          clean: false
-          branch: gh-pages
-          folder: docs
+  call-pkgdown-core:
+    uses: Gilead-BioStats/gsm.utils/.github/workflows/pkgdown-core.yaml@actions-v1
+    with:
+      # These inputs only actually matter for workflow_dispatch; otherwise
+      # they're automatically determined.
+      mode: ${{ inputs.mode }}
+      pr-number: ${{ inputs.pr-number }}
+      pkgdown-dev-mode: ${{ inputs.pkgdown-dev-mode == true }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      app-id: ${{ secrets.PKGDOWN_APP_ID }}
+      app-private-key: ${{ secrets.PKGDOWN_APP_PRIVATE_KEY }}

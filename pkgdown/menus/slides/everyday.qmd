@@ -1,0 +1,194 @@
+---
+title: |
+  <img src="slide_images/logo.png" alt="stbl hex logo" width="42%" style="float: left;">The Design of Everyday R Functions
+execute:
+  eval: false
+  echo: true
+format:
+  revealjs:
+    theme: dark
+    logo: slide_images/favicon-96x96.png
+    footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
+    link-external-newwindow: true
+    transition: slide
+    incremental: false
+---
+
+## "All artificial things are designed"
+
+- Don Norman, *The Design of Everyday Things*
+- Physical objects, digital interfaces, *and code*
+- If users struggle, it's a design flaw
+
+::: notes
+The key insight: design failure vs. user error. When someone pushes a pull door, we blame the door, not the person. Same should apply to code.
+:::
+
+## R developers ≈ users
+
+- Most languages have "developers" and "users"
+- Most R developers are users
+- We write packages for ourselves and people like us
+- We feel the pain of every confusing API
+
+::: notes
+- The useR! conference name is a perfect encapsulation of R's community ethos. It's a pun that captures everything: we are the users.
+- This is the key differentiator. Python package authors often think of themselves as library developers. R package authors are much more likely to be domain experts who happen to write R.
+:::
+
+## Three principles of good function design
+
+1. **Signify:** Make it obvious what a function does.
+2. **Forgive:** Coerce when it's safe.
+3. **Explain:** Tell users how to fix their mistakes.
+
+::: notes
+These map loosely to Norman's concepts: signifiers, forgiveness/constraints, and feedback.
+:::
+
+## Principle 1: Signify
+
+- Names should telegraph intent
+- Argument names, order, and defaults signal usage
+
+::: notes
+Need a good example that isn't insulting, so maybe a fake bad function. It can be the function we build through examples.
+:::
+
+## A confusing function
+
+```r
+my_function <- function(x, y) {
+  mean(x + y)
+}
+```
+
+::: notes
+- What does the function do?
+- What is x?
+- What is y?
+:::
+
+## Signify intent through names
+
+TODO: Give the function a better name
+
+```r
+my_function <- function(sequence, additional_cost) {
+  mean(sequence + additional_cost)
+}
+```
+
+::: notes
+- Better argument names signal intent.
+- Find a more-real example to use here!
+:::
+
+## Principle 2: Forgive
+
+> Be liberal in what you accept,  
+> conservative in what you return.
+
+- Coerce when it's safe and unambiguous
+- Fail clearly when it's not
+
+::: notes
+Postel's Law comes from networking (the original TCP spec), but it's a perfect philosophy for function argument handling. Accept "1", accept 1.0, accept TRUE — but always give back a proper integer.
+:::
+
+## to_int()
+
+TODO: Show error without stbl here.
+
+```r
+my_function <- function(sequence, additional_cost) {
+  sequence        <- stbl::to_int(sequence)
+  additional_cost <- stbl::to_int(additional_cost)
+  mean(sequence + additional_cost)
+}
+
+# sequence read from a CSV — comes in as character
+sequence <- c("1", "2", "3")
+my_function(sequence, additional_cost = 5)
+#> [1] 7
+```
+
+::: notes
+to_int() handles the coercion silently: character "1" becomes integer 1L, whole-number doubles too. Without to_int(), the CSV-loaded character vector would crash with the unhelpful error.
+:::
+
+## Principle 3: Explain
+
+- Don't just fail, *explain*
+- What went wrong?
+- How do I fix it?
+
+::: notes
+Norman calls this "feedback." When a door doesn't open, a well-designed door gives you tactile feedback. Functions should do the same with error messages.
+:::
+
+## Errors: before and after
+
+```r
+# Back to the original bad call...
+my_function(letters, 1)
+```
+
+**Without stbl:**
+```r
+Error in `sequence + additional_cost`:
+! non-numeric argument to binary operator
+```
+
+**With stbl:**
+```r
+Error in `my_function()`:
+! `sequence` <character> must be coercible to <integer>
+x Can't convert some values due to incompatible values.
+* Locations: 1, 2, 3, 4, 5, 6, 7, 8, …, 25, and 26
+```
+
+::: notes
+The stbl error names the argument, its actual type, and exactly why coercion failed. The base R error points at the binary operator inside the function body — invisible to the caller.
+:::
+
+## One more thing: AI agents
+
+- Agents are function users too
+- Good signifiers → agents call functions correctly
+- Clear errors → agents can self-correct
+- Design once, benefit twice
+
+::: notes
+This is increasingly important. When an agent calls your function and gets a confusing error, it can't ask a colleague. A well-designed error message is the only lifeline.
+:::
+
+## stbl
+
+```r
+# Fast coercion
+to_int("1")
+
+# Check coercibility
+is_int_ish(1.0)
+are_int_ish(c(1, 1.5, 2))
+
+# Validate and coerce
+stabilize_int(x, min_value = 0L)
+
+# Pre-configured validators
+check_count <- specify_int(min_value = 0L)
+```
+
+::: notes
+Quick overview of the package families. Each one serves a different use case depending on how much validation and error-handling you need.
+:::
+
+## Your functions are designed things
+
+- Every name, argument, and error message is a design choice
+- Design for your users, even (especially) if that's just future you
+
+::: notes
+Closing call to action. The audience are R users — they write functions. This is immediately actionable.
+:::
