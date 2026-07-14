@@ -96,6 +96,7 @@ to_fn(NULL)
 \seealso{
 Other function functions:
 \code{\link[=is_fn_ish]{is_fn_ish()}},
-\code{\link[=specify_fn]{specify_fn()}}
+\code{\link[=specify_fn]{specify_fn()}},
+\code{\link[=to]{to()}}
 }
 \concept{function functions}

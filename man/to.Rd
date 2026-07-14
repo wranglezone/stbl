@@ -6,6 +6,7 @@
 \alias{to.double}
 \alias{to.data.frame}
 \alias{to.factor}
+\alias{to.function}
 \alias{to.integer}
 \alias{to.logical}
 \alias{to.list}
@@ -54,6 +55,15 @@ to(
   .to,
   ...,
   levels = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{`function`}(
+  x,
+  .to,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -140,6 +150,7 @@ to(1.0, integer())
 to(TRUE, character())
 to("1", integer())
 to(c("a", "b"), factor(levels = c("a", "b", "c")))
+to("mean", mean)
 }
 \seealso{
 Other character functions:
@@ -167,6 +178,11 @@ Other factor functions:
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}}
 
+Other function functions:
+\code{\link[=is_fn_ish]{is_fn_ish()}},
+\code{\link[=specify_fn]{specify_fn()}},
+\code{\link[=to_fn]{to_fn()}}
+
 Other list functions:
 \code{\link[=specify_lst]{specify_lst()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
@@ -182,6 +198,7 @@ Other data frame functions:
 \concept{data frame functions}
 \concept{double functions}
 \concept{factor functions}
+\concept{function functions}
 \concept{integer functions}
 \concept{list functions}
 \concept{logical functions}

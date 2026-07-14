@@ -35,6 +35,7 @@ try(to_pkg_fn(NULL))
 \seealso{
 Other function functions:
 \code{\link[=is_fn_ish]{is_fn_ish()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_fn]{to_fn()}}
 
 Other specification functions:
