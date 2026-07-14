@@ -41,6 +41,10 @@ reference:
 - contents:
   - matches("df")
   - matches("data_frame")
+- title: functions
+- contents:
+  - matches("fn")
+  - matches("function")
 - title: lists
 - contents:
   - matches("lst")

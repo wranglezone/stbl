@@ -1,5 +1,9 @@
 # stbl (development version)
 
+* New `is_fn_ish()` checks whether an object can be safely coerced to a function by `to_fn()`. `is_function_ish()` is a synonym (#250).
+* New `specify_fn()` creates a pre-configured `to_fn()` wrapper with arguments baked in. `specify_function()` is a synonym (#250).
+* New `to_fn()` coerces character strings (including namespaced `"pkg::fn"` names), formulas, and functions to a function. `to_function()` is a synonym (#250).
+
 * New function `to()` coerces `x` to the type of `.to` by dispatching on the class of `.to`. `stbl_to()` is also registered as a C callable in the public C API for use by packages such as tibblify (#182).
 * `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()` are now available as registered C callables, completing the `*_to_chr` and `*_to_fct` families in the C API (#241).
 * `to_df()` and `to_lst()` now error on unused `...` in built-in methods that would have previously silently discarded extra arguments (#200).

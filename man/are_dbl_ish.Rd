@@ -83,7 +83,8 @@ Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
 \code{\link[=are_fct_ish]{are_fct_ish()}},
 \code{\link[=are_int_ish]{are_int_ish()}},
-\code{\link[=are_lgl_ish]{are_lgl_ish()}}
+\code{\link[=are_lgl_ish]{are_lgl_ish()}},
+\code{\link[=is_fn_ish]{is_fn_ish()}}
 }
 \concept{check functions}
 \concept{double functions}
