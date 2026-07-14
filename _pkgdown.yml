@@ -4,27 +4,39 @@ development:
 template:
   bootstrap: 5
 lang: en-US
-
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - slides
+    - news
+    right:
+    - search
+    - github
+    - lightswitch
+  components:
+    slides:
+      text: Slides
+      menu:
+      - text: The Design of Everyday R Functions
+        href: slides/everyday.html
 reference:
 - title: to
-- contents:
-  - to
+- contents: to
 - title: character vectors
 - contents:
   - matches("chr")
   - regex_must_match
 - title: double vectors
-- contents:
-  - matches("dbl")
+- contents: matches("dbl")
 - title: factors
-- contents:
-  - matches("fct")
+- contents: matches("fct")
 - title: integer vectors
-- contents:
-  - matches("int")
+- contents: matches("int")
 - title: logical vectors
-- contents:
-  - matches("lgl")
+- contents: matches("lgl")
 - title: data frames
 - contents:
   - matches("df")
