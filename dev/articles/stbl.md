@@ -1,6 +1,7 @@
 # Getting started with stbl
 
 ``` r
+
 library(stbl)
 ```
 
@@ -21,6 +22,7 @@ vulnerable to bad inputs that could cause cryptic errors later on or
 send corrupt data to our external service.
 
 ``` r
+
 register_user <- function(username,
                           email_address,
                           age,
@@ -47,6 +49,7 @@ will convert inputs that are character-like (like factors or a simple
 list of strings) into a proper character vector.
 
 ``` r
+
 register_user <- function(username,
                           email_address,
                           age,
@@ -68,6 +71,7 @@ The function still returns the list when `interests` is a character
 vector:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -89,6 +93,7 @@ register_user(
 It also works when `interests` is a list of strings:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -109,6 +114,7 @@ If the input is something that cannot be reasonably flattened to a
 character vector, it fails with a helpful error message:
 
 ``` r
+
 # Fails because the list contains a function, which is not character-like.
 register_user(
   username = "test_user", 
@@ -134,6 +140,7 @@ These functions are liberal in what they accept. For example,
 understands that `1`, `"T"`, and `"True"` all mean `TRUE`.
 
 ``` r
+
 register_user <- function(username,
                           email_address,
                           age,
@@ -156,6 +163,7 @@ register_user <- function(username,
 When everything follows the rules, `register_user()` works:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -178,6 +186,7 @@ For example, when age is not a single value, `register_user()` throws an
 error:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -194,6 +203,7 @@ Likewise, this next example fails because “forty-two” cannot be
 converted to an integer:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -223,6 +233,7 @@ need these additional checks.
 This is our final, fully stabilized function:
 
 ``` r
+
 register_user <- function(username,
                           email_address,
                           age,
@@ -266,6 +277,7 @@ register_user <- function(username,
 When all of the inputs follow the expectations, the call succeeds:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -287,6 +299,7 @@ When the username has a space, `register_user()` fails with an
 informative error message:
 
 ``` r
+
 register_user(
   username = "test user", 
   email_address = "test@example.com", 
@@ -302,6 +315,7 @@ register_user(
 This example fails because the email address is invalid:
 
 ``` r
+
 register_user(
   username = "test_user", 
   email_address = "not-a-valid-email", 

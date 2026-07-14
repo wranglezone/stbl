@@ -24,6 +24,7 @@ Install the released version of stbl from
 [CRAN](https://cran.r-project.org/):
 
 ``` r
+
 install.packages("stbl")
 ```
 
@@ -31,6 +32,7 @@ Install the development version of stbl from
 [GitHub](https://github.com/):
 
 ``` r
+
 # install.packages("pak")
 pak::pak("wranglezone/stbl")
 ```
@@ -51,6 +53,7 @@ Without the argument-stabilizers provided in stbl, error messages can be
 cryptic, and errors trigger when you might not want them to.
 
 ``` r
+
 my_old_fun <- function(my_arg_name) {
   my_arg_name + 1
 }
@@ -64,6 +67,7 @@ my_old_fun("1")
 stbl helps to ensure that arguments are what you expect them to be.
 
 ``` r
+
 my_fun <- function(my_arg_name) {
   my_arg_name <- stbl::to_int(my_arg_name)
   my_arg_name + 1
@@ -75,6 +79,7 @@ my_fun("1")
 Failures are reported with helpful messages.
 
 ``` r
+
 my_fun("1.1")
 #> Error in `my_fun()`:
 #> ! `my_arg_name` <character> must be coercible to <integer>
@@ -85,6 +90,7 @@ my_fun("1.1")
 The errors help locate issues within vectors.
 
 ``` r
+
 my_fun(c("1", "2", "3.1", "4", "5.2"))
 #> Error in `my_fun()`:
 #> ! `my_arg_name` <character> must be coercible to <integer>
