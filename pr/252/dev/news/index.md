@@ -3,10 +3,19 @@
 ## stbl (development version)
 
 - New
-  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md)
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  is a vectorized predicate that checks each element of a character
+  vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and
+  returns `TRUE` for functions and formulas.
+  [`are_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  is a synonym
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
+- New
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   checks whether an object can be safely coerced to a function by
   [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md).
-  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md)
+  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   is a synonym
   ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
@@ -19,11 +28,11 @@
   is a synonym
   ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
-- New [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
-  coerces character strings (including namespaced `"pkg::fn"` names),
-  formulas, and functions to a function.
-  [`to_function()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) is
-  a synonym ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+- [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) now uses
+  a C implementation for character coercion. The error message for
+  unknown function names now reads `"could not find function"` instead
+  of `"object ... of mode 'function' was not found"`
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
 - New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
   coerces `x` to the type of `.to` by dispatching on the class of `.to`.

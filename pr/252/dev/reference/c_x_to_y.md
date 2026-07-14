@@ -5,6 +5,10 @@ Call the C routine to convert a vector to another type
 ## Usage
 
 ``` r
+.chr_are_fnish(x)
+
+.chr_to_fn(x, definition_env = rlang::global_env())
+
 .chr_to_lgl(x)
 
 .chr_to_int(x)

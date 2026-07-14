@@ -96,6 +96,16 @@ to the appropriate <code>to_*()</code> function.</p>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class '`function`'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for class 'integer'</span></span>
 <span><span class="fu">to</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
@@ -213,6 +223,10 @@ match the original class.</p></dd>
 <code><a href="are_fct_ish.html">are_fct_ish()</a></code>,
 <code><a href="specify_fct.html">specify_fct()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code></p>
+<p>Other function functions:
+<code><a href="are_fn_ish.html">are_fn_ish()</a></code>,
+<code><a href="specify_fn.html">specify_fn()</a></code>,
+<code><a href="to_fn.html">to_fn()</a></code></p>
 <p>Other list functions:
 <code><a href="specify_lst.html">specify_lst()</a></code>,
 <code><a href="stabilize_lst.html">stabilize_lst()</a></code>,
@@ -237,6 +251,11 @@ match the original class.</p></dd>
 <span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span>levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: a b c</span>
+<span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"mean"</span>, <span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("mean")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5650d02e0d30&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

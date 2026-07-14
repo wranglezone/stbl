@@ -14,6 +14,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_chr_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_dbl_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_fct_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/are_fn_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_int_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_lgl_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/c_x_to_y.html</loc></url>
@@ -98,7 +99,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/grapes-and-and-grapes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/index.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/injection-operator.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/is_fn_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/object_type.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_abort.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_inform.html</loc></url>

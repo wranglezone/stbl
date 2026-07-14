@@ -108,8 +108,9 @@ character method. When the input is a length-0 character vector,
 ## See also
 
 Other function functions:
-[`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md),
-[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md)
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 ## Examples
 
@@ -117,24 +118,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55b17143fd30>
+#> <bytecode: 0x5650d02e0d30>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x55b176b10fc8>
+#> <environment: 0x5650d73932e8>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55b17143fd30>
+#> <bytecode: 0x5650d02e0d30>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x55b170deb948>
+#> <bytecode: 0x5650cfc8c948>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL

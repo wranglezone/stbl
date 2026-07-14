@@ -67,9 +67,9 @@ Other factor functions:
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
 [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
 [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
-[`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md),
-[`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md)
+[`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
 
 ## Examples
 

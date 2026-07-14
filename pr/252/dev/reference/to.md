@@ -56,6 +56,16 @@ to(
   x_class = object_type(x)
 )
 
+# S3 method for class '`function`'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 # S3 method for class 'integer'
 to(
   x,
@@ -177,6 +187,11 @@ Other factor functions:
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
 
+Other function functions:
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md),
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
+
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
@@ -202,4 +217,9 @@ to("1", integer())
 to(c("a", "b"), factor(levels = c("a", "b", "c")))
 #> [1] a b
 #> Levels: a b c
+to("mean", mean)
+#> function (x, ...) 
+#> UseMethod("mean")
+#> <bytecode: 0x5650d02e0d30>
+#> <environment: namespace:base>
 ```

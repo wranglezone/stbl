@@ -40,7 +40,8 @@ additional context or functionality.
 ## See also
 
 Other function functions:
-[`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
 
 Other specification functions:
@@ -59,7 +60,7 @@ to_pkg_fn <- specify_fn(definition_env = asNamespace("stats"))
 to_pkg_fn("median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x55b170deb948>
+#> <bytecode: 0x5650cfc8c948>
 #> <environment: namespace:stats>
 try(to_pkg_fn(NULL))
 #> NULL

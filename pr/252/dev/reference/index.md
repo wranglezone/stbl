@@ -156,8 +156,10 @@
 
 ## functions
 
-- [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md)
-  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/is_fn_ish.md)
+- [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  [`are_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   : Check if an object can be safely coerced to a function
 - [`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md)
   [`specify_function()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md)
@@ -165,6 +167,8 @@
 - [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
   [`to_function()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) :
   Coerce to a function
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
+  value to a target type
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list argument meets expectations
