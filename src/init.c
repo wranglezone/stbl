@@ -2,6 +2,10 @@
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
 
+/* chr -> fn */
+SEXP stbl_chr_are_fnish(SEXP x);
+SEXP stbl_chr_to_fn(SEXP x, SEXP definition_env);
+
 /* chr -> * */
 SEXP stbl_chr_to_lgl(SEXP x);
 SEXP stbl_chr_are_lglish(SEXP x);
@@ -81,6 +85,9 @@ SEXP stbl_check_max_dbl(SEXP x, SEXP max_val);
 SEXP stbl_to(SEXP x, SEXP to);
 
 static const R_CallMethodDef callMethods[] = {
+  /* chr -> fn */
+  {"stbl_chr_are_fnish",   (DL_FUNC) &stbl_chr_are_fnish,   1},
+  {"stbl_chr_to_fn",       (DL_FUNC) &stbl_chr_to_fn,       2},
   /* chr -> * */
   {"stbl_chr_to_lgl",      (DL_FUNC) &stbl_chr_to_lgl,      1},
   {"stbl_chr_are_lglish",  (DL_FUNC) &stbl_chr_are_lglish,  1},
@@ -144,6 +151,9 @@ void R_init_stbl(DllInfo* dll) {
   R_useDynamicSymbols(dll, FALSE);
   R_forceSymbols(dll, TRUE);
 
+  /* chr -> fn */
+  R_RegisterCCallable("stbl", "stbl_chr_are_fnish",  (DL_FUNC) &stbl_chr_are_fnish);
+  R_RegisterCCallable("stbl", "stbl_chr_to_fn",      (DL_FUNC) &stbl_chr_to_fn);
   /* chr -> * */
   R_RegisterCCallable("stbl", "stbl_chr_to_lgl",      (DL_FUNC) &stbl_chr_to_lgl);
   R_RegisterCCallable("stbl", "stbl_chr_are_lglish",  (DL_FUNC) &stbl_chr_are_lglish);

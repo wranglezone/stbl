@@ -19,16 +19,16 @@
     Code
       to_fn("not_a_real_function_xyz")
     Condition
-      Error in `get()`:
-      ! object 'not_a_real_function_xyz' of mode 'function' was not found
+      Error in `to_fn.character()`:
+      ! could not find function "not_a_real_function_xyz"
 
 ---
 
     Code
       wrapped_to_fn("not_a_real_function_xyz")
     Condition
-      Error in `get()`:
-      ! object 'not_a_real_function_xyz' of mode 'function' was not found
+      Error in `to_fn.character()`:
+      ! could not find function "not_a_real_function_xyz"
 
 # to_fn() errors for length > 1 character input (#250)
 

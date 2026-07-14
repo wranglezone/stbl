@@ -179,7 +179,7 @@ Other factor functions:
 \code{\link[=stabilize_fct]{stabilize_fct()}}
 
 Other function functions:
-\code{\link[=is_fn_ish]{is_fn_ish()}},
+\code{\link[=are_fn_ish]{are_fn_ish()}},
 \code{\link[=specify_fn]{specify_fn()}},
 \code{\link[=to_fn]{to_fn()}}
 

@@ -99,3 +99,19 @@ test_that("to_fn() errors informatively for non-coercible types (#250)", {
 test_that("to_function() exists (#250)", {
   expect_no_error(to_function("mean"))
 })
+
+# C callables ------------------------------------------------------------------
+
+test_that(".chr_to_fn() works via C callable (#250)", {
+  expect_identical(.chr_to_fn("mean"), mean)
+  expect_identical(.chr_to_fn("base::mean"), mean)
+  expect_identical(.chr_to_fn("stats::median"), stats::median)
+  expect_error(.chr_to_fn("not_a_real_fn_xyz"))
+})
+
+test_that(".chr_are_fnish() works via C callable (#250)", {
+  expect_equal(
+    .chr_are_fnish(c("mean", "pkg::fn", NA, "", "1 bad")),
+    c(TRUE, TRUE, FALSE, FALSE, FALSE)
+  )
+})

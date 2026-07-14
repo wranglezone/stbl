@@ -62,9 +62,9 @@ Other character functions:
 Other check functions:
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},
 \code{\link[=are_fct_ish]{are_fct_ish()}},
+\code{\link[=are_fn_ish]{are_fn_ish()}},
 \code{\link[=are_int_ish]{are_int_ish()}},
-\code{\link[=are_lgl_ish]{are_lgl_ish()}},
-\code{\link[=is_fn_ish]{is_fn_ish()}}
+\code{\link[=are_lgl_ish]{are_lgl_ish()}}
 }
 \concept{character functions}
 \concept{check functions}

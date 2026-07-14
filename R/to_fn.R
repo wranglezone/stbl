@@ -85,18 +85,8 @@ to_fn.character <- function(
       message_env = rlang::current_env()
     )
   }
-  if (grepl("::", x, fixed = TRUE)) {
-    parts <- strsplit(x, "::", fixed = TRUE)[[1L]]
-    return(
-      rlang::as_function(
-        parts[[2L]],
-        env = asNamespace(parts[[1L]]),
-        arg = x_arg,
-        call = call
-      )
-    )
-  }
-  rlang::as_function(x, env = definition_env, arg = x_arg, call = call)
+  # Length == 1: delegate to C
+  .Call(stbl_chr_to_fn, x, definition_env)
 }
 
 #' @export

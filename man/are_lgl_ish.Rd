@@ -69,8 +69,8 @@ Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},
 \code{\link[=are_fct_ish]{are_fct_ish()}},
-\code{\link[=are_int_ish]{are_int_ish()}},
-\code{\link[=is_fn_ish]{is_fn_ish()}}
+\code{\link[=are_fn_ish]{are_fn_ish()}},
+\code{\link[=are_int_ish]{are_int_ish()}}
 }
 \concept{check functions}
 \concept{logical functions}
