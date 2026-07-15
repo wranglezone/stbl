@@ -9,13 +9,8 @@
 #' length-0 character vector, `to_fn()` returns `NULL` (subject to
 #' `allow_null`). An input of length > 1 is always an error.
 #'
-#' @param allow_null `(length-1 logical)` Is `NULL` an acceptable return value?
-#'   When `TRUE` (the default), a length-0 character input or a `NULL` input
-#'   returns `NULL`. When `FALSE`, those inputs throw an error.
 #' @param definition_env `(environment)` The environment in which to look up
-#'   function names. Defaults to [rlang::global_env()]. This argument is named
-#'   `definition_env` to avoid confusion with [rlang::fn_env()], which returns
-#'   the environment *enclosed* by an existing function. This argument is
+#'   function name. Defaults to [rlang::global_env()]. This argument is
 #'   ignored when the input is a namespaced string of the form `"pkg::fn"`, in
 #'   which case the package namespace is used instead.
 #' @inheritParams .shared-params

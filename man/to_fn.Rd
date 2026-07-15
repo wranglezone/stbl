@@ -63,14 +63,10 @@ stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
 
-\item{allow_null}{\verb{(length-1 logical)} Is \code{NULL} an acceptable return value?
-When \code{TRUE} (the default), a length-0 character input or a \code{NULL} input
-returns \code{NULL}. When \code{FALSE}, those inputs throw an error.}
+\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
 \item{definition_env}{\code{(environment)} The environment in which to look up
-function names. Defaults to \code{\link[rlang:global_env]{rlang::global_env()}}. This argument is named
-\code{definition_env} to avoid confusion with \code{\link[rlang:fn_env]{rlang::fn_env()}}, which returns
-the environment \emph{enclosed} by an existing function. This argument is
+function name. Defaults to \code{\link[rlang:global_env]{rlang::global_env()}}. This argument is
 ignored when the input is a namespaced string of the form \code{"pkg::fn"}, in
 which case the package namespace is used instead.}
 }
