@@ -2,22 +2,53 @@
 
 ## stbl (development version)
 
+- New
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  is a vectorized predicate that checks each element of a character
+  vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and
+  returns `TRUE` for functions and formulas.
+  [`are_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  is a synonym
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
+- New
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  checks whether an object can be safely coerced to a function by
+  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md).
+  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  is a synonym
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
+- New `specify_fn()` creates a pre-configured
+  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) wrapper
+  with arguments baked in. `specify_function()` is a synonym
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
+- [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) now uses
+  a C implementation for character coercion. The error message for
+  unknown function names now reads `"could not find function"` instead
+  of `"object ... of mode 'function' was not found"`
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
 - New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
   coerces `x` to the type of `.to` by dispatching on the class of `.to`.
   `stbl_to()` is also registered as a C callable in the public C API for
   use by packages such as tibblify
   ([\#182](https://github.com/wranglezone/stbl/issues/182)).
+
 - `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
   `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,
   `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and
   `stbl_lgl_are_chrish()` are now available as registered C callables,
   completing the `*_to_chr` and `*_to_fct` families in the C API
   ([\#241](https://github.com/wranglezone/stbl/issues/241)).
+
 - [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
   [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
   error on unused `...` in built-in methods that would have previously
   silently discarded extra arguments
   ([\#200](https://github.com/wranglezone/stbl/issues/200)).
+
 - New
   [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
   signals classed messages with an opinionated class hierarchy,
@@ -29,6 +60,7 @@
   [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
   snapshot-tests the full message output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+
 - New
   [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md)
   signals classed warnings with an opinionated class hierarchy,
@@ -40,6 +72,7 @@
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   snapshot-tests the full warning output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+
 - The C functions underlying `are_*_ish()`, `to_*()`, and range checks
   are now registered as C callables, making them available to other
   packages. Include `inst/include/stbl.h` and `inst/include/stbl.c` in a
@@ -50,6 +83,7 @@
   indicating whether the conversion was successful in `valid`
   ([\#235](https://github.com/wranglezone/stbl/issues/235),
   [\#237](https://github.com/wranglezone/stbl/issues/237)).
+
 - Many `are_*_ish()` and `to_*()` methods are now implemented in C.
   Benchmarks show a significant speedup (about 3-20x) for large vectors
   ([\#217](https://github.com/wranglezone/stbl/issues/217),
@@ -58,10 +92,12 @@
   [\#221](https://github.com/wranglezone/stbl/issues/221),
   [\#226](https://github.com/wranglezone/stbl/issues/226),
   [\#239](https://github.com/wranglezone/stbl/issues/239)).
+
 - [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
   ([\#231](https://github.com/wranglezone/stbl/issues/231)).
+
 - [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
   and
   [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)

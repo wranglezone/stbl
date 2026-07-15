@@ -14,6 +14,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_chr_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_dbl_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_fct_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/are_fn_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_int_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_lgl_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/c_x_to_y.html</loc></url>
@@ -123,6 +124,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stbl-package.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_df.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/to_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/slides/everyday.html</loc></url>
 </urlset>
