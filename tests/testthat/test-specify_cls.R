@@ -10,7 +10,6 @@ test_that("specify_cls builds the expected function with no args (#150)", {
 })
 
 test_that("specify_cls builds the expected function snapshot with no args (#150)", {
-  skip_on_covr()
   baseline <- specify_cls("chr")
   expect_snapshot(baseline, transform = clean_function_snapshot)
 })
@@ -33,7 +32,6 @@ test_that("specify_cls builds the expected function with at least one arg (#150,
 })
 
 test_that("specify_cls builds the expected function snapshot with at least one arg (#150, #161)", {
-  skip_on_covr()
   no_null <- specify_cls("chr", list(allow_null = FALSE))
   expect_snapshot(no_null, transform = clean_function_snapshot)
 })
@@ -70,7 +68,6 @@ test_that("specify_cls can build a scalar specifier (#150)", {
 })
 
 test_that("specify_cls builds the expected scalar function snapshot (#150)", {
-  skip_on_covr()
   scalar_checker <- specify_cls("chr", scalar = TRUE)
   expect_snapshot(scalar_checker, transform = clean_function_snapshot)
 })

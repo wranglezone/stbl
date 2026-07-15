@@ -132,8 +132,57 @@ test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
   )
 })
 
+test_that(".is_covr_count_call() identifies covr counter calls (#253)", {
+  count_sym <- call(":::", as.symbol("covr"), as.symbol("count"))
+  expect_true(.is_covr_count_call(as.call(list(count_sym, "key"))))
+  expect_false(.is_covr_count_call(quote(some_fn("key"))))
+  expect_false(.is_covr_count_call(quote(covr::count("key"))))
+  expect_false(.is_covr_count_call(123L))
+})
+
+test_that(".strip_covr_from_expr() removes covr counter wrappers (#253)", {
+  count_sym <- call(":::", as.symbol("covr"), as.symbol("count"))
+  make_wrapped <- function(key, val) {
+    call("if", TRUE, call("{", as.call(list(count_sym, key)), val))
+  }
+  # Simple case: wrapped call
+  expect_identical(
+    .strip_covr_from_expr(make_wrapped("k1", quote(to_fn(NULL)))),
+    quote(to_fn(NULL))
+  )
+  # Nested: wrapped arguments within a wrapped call
+  instrumented <- call(
+    "to_fn",
+    make_wrapped("k1", NULL),
+    allow_null = make_wrapped("k2", FALSE)
+  )
+  expect_identical(
+    .strip_covr_from_expr(instrumented),
+    quote(to_fn(NULL, allow_null = FALSE))
+  )
+  # Degenerate case: counter-only block (empty splice site) -> NULL
+  counter_only <- call("if", TRUE, call("{", as.call(list(count_sym, "k3"))))
+  expect_null(.strip_covr_from_expr(counter_only))
+  # NULL results are dropped from `{` blocks
+  block_with_counter_only <- call(
+    "{",
+    counter_only,
+    quote(to_fn(NULL))
+  )
+  expect_identical(
+    .strip_covr_from_expr(block_with_counter_only),
+    quote({
+      to_fn(NULL)
+    })
+  )
+  # Non-covr expressions are unchanged
+  expect_identical(
+    .strip_covr_from_expr(quote(to_fn(NULL))),
+    quote(to_fn(NULL))
+  )
+})
+
 test_that("expect_pkg_error_snapshot() snapshots error class and message (#188)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     pkg_abort("stbl", "A snapshot error.", "snapshot_subclass"),
     "stbl",
@@ -142,7 +191,6 @@ test_that("expect_pkg_error_snapshot() snapshots error class and message (#188)"
 })
 
 test_that("expect_pkg_error_snapshot() works with multiple class components (#188)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     pkg_abort("stbl", "A nested error.", c("outer", "inner")),
     "stbl",
@@ -152,7 +200,6 @@ test_that("expect_pkg_error_snapshot() works with multiple class components (#18
 })
 
 test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#188)", {
-  skip_on_covr()
   # Simulate calling from another package where expect_pkg_error_classes
   # isn't directly available in the caller's environment.
   foreign_env <- new.env(parent = baseenv())

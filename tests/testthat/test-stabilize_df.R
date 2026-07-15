@@ -3,7 +3,6 @@ test_that("stabilize_df() returns NULL for NULL input by default (#142)", {
 })
 
 test_that("stabilize_df() respects .allow_null (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(NULL, .allow_null = FALSE),
     "stbl",
@@ -17,7 +16,6 @@ test_that("stabilize_df() respects .allow_null (#142)", {
 })
 
 test_that("stabilize_df() errors for non-coercible input (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df("not a data frame"),
     "stbl",
@@ -63,7 +61,6 @@ test_that("stabilize_df() coerces compatible column types (#142)", {
 })
 
 test_that("stabilize_df() errors when required column is missing (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(data.frame(foo = "a"), name = specify_chr_scalar()),
     "stbl",
@@ -72,7 +69,6 @@ test_that("stabilize_df() errors when required column is missing (#142)", {
 })
 
 test_that("stabilize_df() errors informatively when column fails validation (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(count = "not-an-int"),
@@ -84,7 +80,6 @@ test_that("stabilize_df() errors informatively when column fails validation (#14
 })
 
 test_that("stabilize_df() errors on extra columns by default (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(data.frame(a = 1L, b = 2L), a = specify_int_scalar()),
     "stbl",
@@ -103,7 +98,6 @@ test_that("stabilize_df() allows extra columns with .extra_cols (#142)", {
 })
 
 test_that("stabilize_df() validates extra columns with .extra_cols (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L, b = "not-int"),
@@ -127,7 +121,6 @@ test_that("stabilize_df() enforces .min_rows (#142)", {
 })
 
 test_that("stabilize_df() enforces .min_rows (snapshot) (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(
       mtcars[0, ],
@@ -151,7 +144,6 @@ test_that("stabilize_df() enforces .max_rows (#142)", {
 })
 
 test_that("stabilize_df() enforces .max_rows (snapshot) (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(
       mtcars,
@@ -193,7 +185,6 @@ test_that("stabilize_df() enforces .col_names (#142)", {
 })
 
 test_that("stabilize_df() enforces .col_names (snapshot) (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L),
@@ -235,7 +226,6 @@ test_that("stabilize_df() works with no column specs and .extra_cols (#142)", {
 })
 
 test_that("stabilize_df() with unnamed specs errors informatively (#142)", {
-  skip_on_covr()
   expect_pkg_error_snapshot(
     stabilize_df(data.frame(a = 1L), specify_int_scalar()),
     "stbl",

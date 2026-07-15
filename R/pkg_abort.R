@@ -105,6 +105,72 @@ expect_pkg_error_classes <- function(
   )
 }
 
+#' Check if an expression is a covr counter call
+#'
+#' covr instruments code by wrapping expressions in
+#' `if (TRUE) { covr:::count(key); original }` blocks. This checks whether
+#' `expr` is the `covr:::count(key)` part.
+#'
+#' @param expr An R expression.
+#' @returns `TRUE` if `expr` is a covr counter call, `FALSE` otherwise.
+#' @keywords internal
+.is_covr_count_call <- function(expr) {
+  is.call(expr) &&
+    identical(
+      expr[[1L]],
+      call(":::", as.symbol("covr"), as.symbol("count"))
+    )
+}
+
+#' Strip covr counter wrappers from an expression
+#'
+#' covr instruments code for coverage by wrapping expressions in
+#' `if (TRUE) { covr:::count(key); original }` blocks. This function
+#' recursively removes those wrappers so that snapshotted code remains stable
+#' across normal and coverage runs.
+#'
+#' @param expr An R expression (e.g. as returned by [rlang::enexpr()]).
+#' @returns The expression with all covr counter blocks removed.
+#' @keywords internal
+.strip_covr_from_expr <- function(expr) {
+  if (is.null(expr) || !is.call(expr)) {
+    return(expr)
+  }
+  # Detect covr wrapper: if (TRUE) { covr:::count(key); ... }
+  if (
+    identical(expr[[1L]], as.name("if")) &&
+      length(expr) == 3L &&
+      isTRUE(expr[[2L]])
+  ) {
+    inner <- expr[[3L]]
+    if (
+      is.call(inner) &&
+        identical(inner[[1L]], as.name("{")) &&
+        .is_covr_count_call(inner[[2L]])
+    ) {
+      if (length(inner) == 3L) {
+        # Normal case: { counter; original } -> unwrap to original
+        return(.strip_covr_from_expr(inner[[3L]]))
+      }
+      if (length(inner) == 2L) {
+        # Degenerate case: { counter } only, produced when covr instruments a
+        # splice site (e.g. `!!!list()`) that expands to nothing. Signal the
+        # parent `{` block to drop this statement entirely.
+        return(NULL)
+      }
+    }
+  }
+  # For `{` blocks, filter out any NULL results (statements dropped above).
+  if (identical(expr[[1L]], as.name("{"))) {
+    stmts <- Filter(
+      Negate(is.null),
+      lapply(as.list(expr[-1L]), .strip_covr_from_expr)
+    )
+    return(as.call(c(list(as.name("{")), stmts)))
+  }
+  as.call(lapply(as.list(expr), .strip_covr_from_expr))
+}
+
 #' Snapshot-test a package error
 #'
 #' A convenience wrapper around [testthat::expect_snapshot()] and
@@ -134,27 +200,32 @@ expect_pkg_error_snapshot <- function(
 ) {
   # nocov start
   rlang::check_installed("testthat", "to snapshot-test package errors")
-  obj_expr <- rlang::enexpr(object)
-  transform_expr <- rlang::enexpr(transform)
+  obj_expr <- .strip_covr_from_expr(rlang::enexpr(object))
   error_class_components <- rlang::list2(...)
-  # Inject into a child of the caller's env that can find
+  # Build in a child of the caller's env that can find
   # expect_pkg_error_classes, so this works even when the caller's package
   # doesn't attach stbl.
   inject_env <- new.env(parent = env)
   inject_env$expect_pkg_error_classes <- expect_pkg_error_classes
-  rlang::inject(
-    testthat::expect_snapshot(
-      {
-        (expect_pkg_error_classes(
-          !!obj_expr,
-          !!package,
-          !!!error_class_components
-        ))
-      },
-      transform = !!transform_expr,
-      variant = !!variant
+  # Build the call to expect_snapshot() at runtime with rlang::call2() so it
+  # carries no source-reference attributes. covr attaches counter calls to
+  # source references; a runtime-built expression has none, so the snapshot
+  # Code section stays stable across normal and coverage runs.
+  snap_call <- rlang::call2(
+    "expect_snapshot",
+    rlang::call2(
+      "(",
+      rlang::call2(
+        "expect_pkg_error_classes",
+        obj_expr,
+        package,
+        !!!error_class_components
+      )
     ),
-    env = inject_env
+    transform = transform,
+    variant = variant,
+    .ns = "testthat"
   )
+  eval(snap_call, envir = inject_env)
   # nocov end
 }
