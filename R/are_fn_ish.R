@@ -59,7 +59,15 @@ are_function_ish <- are_fn_ish
 #' @export
 #' @rdname are_fn_ish
 is_fn_ish <- function(x, ...) {
-  is.function(x) || (rlang::is_string(x) && !is.na(x)) || rlang::is_formula(x)
+  if (is.function(x) || rlang::is_formula(x)) {
+    return(TRUE)
+  }
+  # Use the same C-level syntactic check as are_fn_ish.character() so that
+  # invalid colon patterns (e.g. "base:mean") are correctly rejected.
+  if (rlang::is_string(x) && !is.na(x)) {
+    return(isTRUE(.Call(stbl_chr_are_fnish, x)))
+  }
+  FALSE
 }
 
 #' @export

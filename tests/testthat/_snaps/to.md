@@ -4,5 +4,5 @@
       to(1L, mean)
     Condition
       Error:
-      ! Can't convert `1L`, an integer vector, to a function.
+      ! Can't coerce `1L` <integer> to <function>.
 

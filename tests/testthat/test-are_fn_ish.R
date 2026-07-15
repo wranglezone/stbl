@@ -30,6 +30,14 @@ test_that("is_fn_ish() returns FALSE for length != 1 character (#250)", {
   expect_false(is_fn_ish(NA_character_))
 })
 
+test_that("is_fn_ish() returns FALSE with bad ':' usage (#250)", {
+  expect_false(is_fn_ish("base:mean"))
+  expect_false(is_fn_ish("base::mean::thing"))
+  expect_false(is_fn_ish("base::mean:thing"))
+  expect_false(is_fn_ish("base:mean:thing"))
+  expect_false(is_fn_ish("base:mean::thing"))
+})
+
 test_that("is_function_ish() exists (#250)", {
   expect_identical(is_function_ish(mean), is_fn_ish(mean))
 })

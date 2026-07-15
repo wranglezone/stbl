@@ -38,6 +38,28 @@ static int is_valid_r_name(const char* s) {
 }
 
 /*
+ * Validate colon usage in a potential function name.
+ *
+ * Accepts either no colons at all, or exactly one "::" with non-empty
+ * tokens on both sides and no other ":" anywhere.  All other patterns
+ * (bare ":", multiple "::", mixed ":" and "::") are rejected.
+ *
+ * Returns 1 if the colon usage is valid, 0 otherwise.
+ */
+static int is_valid_colon_usage(const char* s) {
+  const char* first_colon = strchr(s, ':');
+  if (first_colon == NULL) return 1;            /* no colons: fine          */
+
+  const char* dcolon = strstr(s, "::");
+  if (dcolon == NULL)                  return 0; /* ":" but no "::"          */
+  if (first_colon < dcolon)            return 0; /* lone ":" before "::"     */
+  if (dcolon == s)                     return 0; /* "::" at start, empty pkg */
+  if (*(dcolon + 2) == '\0')           return 0; /* "::" at end, empty fn    */
+  if (strchr(dcolon + 2, ':') != NULL) return 0; /* more ":" after "::"      */
+  return 1;
+}
+
+/*
  * Single-pass element-wise check: is each string a syntactically valid
  * function name (bare identifier or "pkg::fn")?
  *
@@ -53,13 +75,11 @@ static void chr_are_fnish_core(SEXP x, R_xlen_t n, int* p_result) {
     const char* s = CHAR(xi);
     if (*s == '\0') { p_result[i] = 0; continue; }
 
+    if (!is_valid_colon_usage(s)) { p_result[i] = 0; continue; }
+
+    /* Valid colon usage: either a "pkg::fn" shape or a bare identifier */
     const char* sep = strstr(s, "::");
-    if (sep != NULL) {
-      /* Both sides of "::" must be non-empty */
-      p_result[i] = (sep > s && *(sep + 2) != '\0') ? 1 : 0;
-    } else {
-      p_result[i] = is_valid_r_name(s) ? 1 : 0;
-    }
+    p_result[i] = (sep != NULL) ? 1 : is_valid_r_name(s);
   }
 }
 
@@ -160,21 +180,8 @@ SEXP stbl_chr_to_fn(SEXP x, SEXP definition_env) {
   const char* s = CHAR(xi);
   if (*s == '\0') Rf_error("Can't convert \"\" to a function.");
 
-  /* Validate colon usage: must be absent, or exactly one "::" with
-   * non-empty identifiers on both sides and no other ":" anywhere. */
-  {
-    const char* first_colon = strchr(s, ':');
-    if (first_colon != NULL) {
-      const char* dcolon = strstr(s, "::");
-      int invalid =
-        dcolon == NULL           ||  /* ":" but no "::"          */
-        first_colon < dcolon     ||  /* lone ":" before "::"     */
-        dcolon == s              ||  /* "::" at start, empty pkg */
-        *(dcolon + 2) == '\0'    ||  /* "::" at end, empty fn    */
-        strchr(dcolon + 2, ':') != NULL; /* more ":" after "::"  */
-      if (invalid) stbl_signal_invalid_fn_name();
-    }
-  }
+  /* Validate colon usage via shared helper */
+  if (!is_valid_colon_usage(s)) stbl_signal_invalid_fn_name();
 
   const char* sep = strstr(s, "::");
   if (sep != NULL) {
