@@ -64,6 +64,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-glue2.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-has_regex_pattern.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_covr_count_call.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
@@ -80,6 +81,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_must.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_null.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-strip_covr_from_expr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_from_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_df_vector.html</loc></url>

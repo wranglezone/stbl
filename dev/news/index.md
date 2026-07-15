@@ -2,6 +2,17 @@
 
 ## stbl (development version)
 
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
+  and
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  now produce stable snapshots when run under
+  `devtools::test_coverage_active_file()`.
+  [`specify_cls()`](https://stbl.wrangle.zone/dev/reference/specify_cls.md)
+  and related `specify_*()` functions now also produce stable
+  function-body snapshots under coverage
+  ([\#253](https://github.com/wranglezone/stbl/issues/253)).
+
 - New
   [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   is a vectorized predicate that checks each element of a character
