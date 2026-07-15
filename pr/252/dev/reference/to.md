@@ -189,7 +189,6 @@ Other factor functions:
 
 Other function functions:
 [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
-[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md),
 [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
 
 Other list functions:
@@ -220,6 +219,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x558282e5a130>
+#> <bytecode: 0x55c2a888f130>
 #> <environment: namespace:base>
 ```

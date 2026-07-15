@@ -131,7 +131,6 @@ Other specification functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
 

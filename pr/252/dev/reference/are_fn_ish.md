@@ -70,7 +70,6 @@ them to `NULL` only as a permissive special case controlled by
 ## See also
 
 Other function functions:
-[`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
 

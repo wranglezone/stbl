@@ -19,13 +19,9 @@
   is a synonym
   ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
-- New
-  [`specify_fn()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md)
-  creates a pre-configured
+- New `specify_fn()` creates a pre-configured
   [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) wrapper
-  with arguments baked in.
-  [`specify_function()`](https://stbl.wrangle.zone/dev/reference/specify_fn.md)
-  is a synonym
+  with arguments baked in. `specify_function()` is a synonym
   ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
 - [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) now uses
