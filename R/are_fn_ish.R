@@ -12,9 +12,9 @@
 #' `are_fn_ish()` returns `TRUE` for:
 #' - Functions (including lambda functions created with `~` or `\()`)
 #' - Formulas (one-sided or two-sided, coercible via [rlang::as_function()])
-#' - Character strings that are syntactically valid function names — either a
+#' - Character strings that are syntactically valid function names: either a
 #'   bare name (`"mean"`) or a namespaced name (`"pkg::fn"`). The check is
-#'   syntactic: it does not verify that the named function exists in any
+#'   syntactic; it does not verify that the named function exists in any
 #'   environment.
 #'
 #' `is_fn_ish()` returns `TRUE` for objects that [to_fn()] can coerce without
@@ -62,8 +62,6 @@ is_fn_ish <- function(x, ...) {
   if (is.function(x) || rlang::is_formula(x)) {
     return(TRUE)
   }
-  # Use the same C-level syntactic check as are_fn_ish.character() so that
-  # invalid colon patterns (e.g. "base:mean") are correctly rejected.
   if (rlang::is_string(x) && !is.na(x)) {
     return(isTRUE(.Call(stbl_chr_are_fnish, x)))
   }
