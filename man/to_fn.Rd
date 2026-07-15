@@ -41,7 +41,8 @@ to_function(
   ...,
   definition_env = rlang::global_env(),
   x_arg = caller_arg(x),
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 }
 \arguments{
@@ -96,7 +97,6 @@ to_fn(NULL)
 \seealso{
 Other function functions:
 \code{\link[=are_fn_ish]{are_fn_ish()}},
-\code{\link[=specify_fn]{specify_fn()}},
 \code{\link[=to]{to()}}
 }
 \concept{function functions}

@@ -90,7 +90,6 @@ Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},
 \code{\link[=specify_dbl]{specify_dbl()}},
 \code{\link[=specify_df]{specify_df()}},
-\code{\link[=specify_fn]{specify_fn()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
 \code{\link[=specify_lst]{specify_lst()}}

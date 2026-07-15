@@ -180,7 +180,6 @@ Other factor functions:
 
 Other function functions:
 \code{\link[=are_fn_ish]{are_fn_ish()}},
-\code{\link[=specify_fn]{specify_fn()}},
 \code{\link[=to_fn]{to_fn()}}
 
 Other list functions:

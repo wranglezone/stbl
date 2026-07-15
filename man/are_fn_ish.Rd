@@ -72,7 +72,6 @@ is_fn_ish(1L)
 }
 \seealso{
 Other function functions:
-\code{\link[=specify_fn]{specify_fn()}},
 \code{\link[=to]{to()}},
 \code{\link[=to_fn]{to_fn()}}
 
