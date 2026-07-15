@@ -60,7 +60,7 @@ to_pkg_fn <- specify_fn(definition_env = asNamespace("stats"))
 to_pkg_fn("median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x5650cfc8c948>
+#> <bytecode: 0x5582828079d8>
 #> <environment: namespace:stats>
 try(to_pkg_fn(NULL))
 #> NULL
