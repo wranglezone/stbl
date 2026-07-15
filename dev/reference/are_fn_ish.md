@@ -45,9 +45,9 @@ input. `is_fn_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`).
 - Formulas (one-sided or two-sided, coercible via
   [`rlang::as_function()`](https://rlang.r-lib.org/reference/as_function.html))
 
-- Character strings that are syntactically valid function names — either
+- Character strings that are syntactically valid function names: either
   a bare name (`"mean"`) or a namespaced name (`"pkg::fn"`). The check
-  is syntactic: it does not verify that the named function exists in any
+  is syntactic; it does not verify that the named function exists in any
   environment.
 
 `is_fn_ish()` returns `TRUE` for objects that

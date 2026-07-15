@@ -88,9 +88,9 @@ input. <code>is_fn_ish()</code> returns a <code>length-1 logical</code> (<code>T
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>are_fn_ish()</code> returns <code>TRUE</code> for:</p><ul><li><p>Functions (including lambda functions created with <code>~</code> or <code>\()</code>)</p></li>
 <li><p>Formulas (one-sided or two-sided, coercible via <code><a href="https://rlang.r-lib.org/reference/as_function.html" class="external-link">rlang::as_function()</a></code>)</p></li>
-<li><p>Character strings that are syntactically valid function names — either a
+<li><p>Character strings that are syntactically valid function names: either a
 bare name (<code>"mean"</code>) or a namespaced name (<code>"pkg::fn"</code>). The check is
-syntactic: it does not verify that the named function exists in any
+syntactic; it does not verify that the named function exists in any
 environment.</p></li>
 </ul><p><code>is_fn_ish()</code> returns <code>TRUE</code> for objects that <code><a href="to_fn.html">to_fn()</a></code> can coerce without
 error (assuming a matching function exists in the search path):</p><ul><li><p>Functions (including lambda functions created with <code>~</code> or <code>\()</code>)</p></li>
