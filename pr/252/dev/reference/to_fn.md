@@ -78,20 +78,15 @@ to_fn(
 
 - allow_null:
 
-  `(length-1 logical)` Is `NULL` an acceptable return value? When `TRUE`
-  (the default), a length-0 character input or a `NULL` input returns
-  `NULL`. When `FALSE`, those inputs throw an error.
+  `(length-1 logical)` Is NULL an acceptable value?
 
 - definition_env:
 
-  `(environment)` The environment in which to look up function names.
+  `(environment)` The environment in which to look up function name.
   Defaults to
   [`rlang::global_env()`](https://rlang.r-lib.org/reference/search_envs.html).
-  This argument is named `definition_env` to avoid confusion with
-  [`rlang::fn_env()`](https://rlang.r-lib.org/reference/fn_env.html),
-  which returns the environment *enclosed* by an existing function. This
-  argument is ignored when the input is a namespaced string of the form
-  `"pkg::fn"`, in which case the package namespace is used instead.
+  This argument is ignored when the input is a namespaced string of the
+  form `"pkg::fn"`, in which case the package namespace is used instead.
 
 ## Value
 
@@ -118,24 +113,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55c2a888f130>
+#> <bytecode: 0x5594eef24130>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x55c2b0093ca8>
+#> <environment: 0x5594f58ab808>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55c2a888f130>
+#> <bytecode: 0x5594eef24130>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x55c2a823c9d8>
+#> <bytecode: 0x5594ee8d19d8>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL
