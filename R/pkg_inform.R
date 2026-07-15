@@ -137,27 +137,28 @@ expect_pkg_message_snapshot <- function(
 ) {
   # nocov start
   rlang::check_installed("testthat", "to snapshot-test package messages")
-  obj_expr <- rlang::enexpr(object)
-  transform_expr <- rlang::enexpr(transform)
+  obj_expr <- .strip_covr_from_expr(rlang::enexpr(object))
   message_class_components <- rlang::list2(...)
-  # Inject into a child of the caller's env that can find
+  # Build in a child of the caller's env that can find
   # expect_pkg_message_classes, so this works even when the caller's package
   # doesn't attach stbl.
   inject_env <- new.env(parent = env)
   inject_env$expect_pkg_message_classes <- expect_pkg_message_classes
-  rlang::inject(
-    testthat::expect_snapshot(
-      {
-        (expect_pkg_message_classes(
-          !!obj_expr,
-          !!package,
-          !!!message_class_components
-        ))
-      },
-      transform = !!transform_expr,
-      variant = !!variant
+  snap_call <- rlang::call2(
+    "expect_snapshot",
+    rlang::call2(
+      "(",
+      rlang::call2(
+        "expect_pkg_message_classes",
+        obj_expr,
+        package,
+        !!!message_class_components
+      )
     ),
-    env = inject_env
+    transform = transform,
+    variant = variant,
+    .ns = "testthat"
   )
+  eval(snap_call, envir = inject_env)
   # nocov end
 }

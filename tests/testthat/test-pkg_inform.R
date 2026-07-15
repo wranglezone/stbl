@@ -92,7 +92,6 @@ test_that("expect_pkg_message_classes() tests expressions for classes (#213)", {
 })
 
 test_that("expect_pkg_message_snapshot() snapshots message class and message (#213)", {
-  skip_on_covr()
   expect_pkg_message_snapshot(
     pkg_inform("stbl", "A snapshot message.", "snapshot_subclass"),
     "stbl",
@@ -101,7 +100,6 @@ test_that("expect_pkg_message_snapshot() snapshots message class and message (#2
 })
 
 test_that("expect_pkg_message_snapshot() works with multiple class components (#213)", {
-  skip_on_covr()
   expect_pkg_message_snapshot(
     pkg_inform("stbl", "A nested message.", c("outer", "inner")),
     "stbl",
@@ -111,7 +109,6 @@ test_that("expect_pkg_message_snapshot() works with multiple class components (#
 })
 
 test_that("expect_pkg_message_snapshot() works from an env without stbl attached (#213)", {
-  skip_on_covr()
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_inform <- pkg_inform
   foreign_env$expect_pkg_message_snapshot <- expect_pkg_message_snapshot

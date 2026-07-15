@@ -43,6 +43,7 @@ specify_cls <- function(
     # in by the user are already present in the constructed function.
     factory_arg_names <- names(factory_args)
     check_dupes <- rlang::exprs({
+      # nocov start
       duplicated_args <- intersect(...names(), !!factory_arg_names)
       if (length(duplicated_args)) {
         stbl::pkg_abort(
@@ -54,7 +55,7 @@ specify_cls <- function(
           subclass = "duplicate_args"
         )
       }
-    })
+    }) # nocov end
   }
   return(check_dupes)
 }
@@ -93,6 +94,22 @@ specify_cls <- function(
   x <- "x"
   x_arg <- "x_arg"
   x_class <- "x_class"
+  # Strip any covr counter wrappers that may have been injected into the body
+  # expression by coverage instrumentation (covr wraps statements inside
+  # rlang::expr() blocks at the source level, causing them to appear in the
+  # printed function body and destabilise snapshots).
+  fn_body <- .strip_covr_from_expr(rlang::expr({
+    # nocov start
+    !!!check_dupes
+    stbl::`!!`(stabilizer)(
+      x,
+      !!!factory_args,
+      ...,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    )
+  })) # nocov end
   structure(
     rlang::new_function(
       as.pairlist(alist(
@@ -102,17 +119,7 @@ specify_cls <- function(
         call = rlang::caller_env(),
         x_class = stbl::object_type(x)
       )),
-      rlang::expr({
-        !!!check_dupes
-        stbl::`!!`(stabilizer)(
-          x,
-          !!!factory_args,
-          ...,
-          x_arg = x_arg,
-          call = call,
-          x_class = x_class
-        )
-      }),
+      fn_body,
       env = call
     ),
     class = c("stbl_specified_fn", "function")

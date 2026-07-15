@@ -19,6 +19,7 @@ Imports:
     vctrs
 Suggests:
     astgrepr,
+    covr,
     knitr,
     rmarkdown,
     stringi,
