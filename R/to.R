@@ -14,6 +14,7 @@
 #' @family integer functions
 #' @family logical functions
 #' @family factor functions
+#' @family function functions
 #' @family list functions
 #' @family data frame functions
 #' @export
@@ -24,6 +25,7 @@
 #' to(TRUE, character())
 #' to("1", integer())
 #' to(c("a", "b"), factor(levels = c("a", "b", "c")))
+#' to("mean", mean)
 to <- function(
   x,
   .to,
@@ -100,6 +102,19 @@ to.factor <- function(
     call = call,
     x_class = x_class
   )
+}
+
+#' @export
+#' @rdname to
+to.function <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_fn(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
 #' @export

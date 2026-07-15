@@ -2,6 +2,18 @@
 # Each to_* wrapper returns list(result = <type>, valid = <lgl>) from the C
 # callable.
 
+# chr -> fn ----
+
+#' @rdname c_x_to_y
+.chr_are_fnish <- function(x) {
+  .Call(stbl_chr_are_fnish, x)
+}
+
+#' @rdname c_x_to_y
+.chr_to_fn <- function(x, definition_env = rlang::global_env()) {
+  .Call(stbl_chr_to_fn, x, definition_env)
+}
+
 # chr -> * ----
 
 #' Call the C routine to convert a vector to another type

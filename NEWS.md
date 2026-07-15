@@ -1,5 +1,10 @@
 # stbl (development version)
 
+* New `are_fn_ish()` is a vectorized predicate that checks each element of a character vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and returns `TRUE` for functions and formulas. `are_function_ish()` is a synonym (#250).
+* New `is_fn_ish()` checks whether an object can be safely coerced to a function by `to_fn()`. `is_function_ish()` is a synonym (#250).
+* New `specify_fn()` creates a pre-configured `to_fn()` wrapper with arguments baked in. `specify_function()` is a synonym (#250).
+* `to_fn()` now uses a C implementation for character coercion. The error message for unknown function names now reads `"could not find function"` instead of `"object ... of mode 'function' was not found"` (#250).
+
 * New function `to()` coerces `x` to the type of `.to` by dispatching on the class of `.to`. `stbl_to()` is also registered as a C callable in the public C API for use by packages such as tibblify (#182).
 * `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()` are now available as registered C callables, completing the `*_to_chr` and `*_to_fct` families in the C API (#241).
 * `to_df()` and `to_lst()` now error on unused `...` in built-in methods that would have previously silently discarded extra arguments (#200).

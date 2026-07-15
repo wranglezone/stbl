@@ -263,9 +263,28 @@ test_that("to() respects coerce_character = FALSE for double target (#182)", {
   expect_error(to("1.5", double(), coerce_character = FALSE))
 })
 
+# to function ------------------------------------------------------------------
+
+test_that("to() converts character to function (#250)", {
+  expect_identical(to("mean", mean), mean)
+  expect_identical(to("stats::median", mean), stats::median)
+})
+
+test_that("to() passes function through unchanged (#250)", {
+  expect_identical(to(mean, mean), mean)
+})
+
+test_that("to() converts formula to function (#250)", {
+  expect_identical(to(~ . + 1, mean), rlang::as_function(~ . + 1))
+})
+
+test_that("to() errors for non-coercible types to function (#250)", {
+  expect_snapshot(to(1L, mean), error = TRUE)
+})
+
 # unsupported ------------------------------------------------------------------
 
 test_that("to() errors for unsupported target types (#182)", {
-  to(1L, mean) |>
-    expect_pkg_error_classes("stbl", "coerce", "function")
+  to(1L, as.raw(1L)) |>
+    expect_pkg_error_classes("stbl", "coerce", "raw")
 })
