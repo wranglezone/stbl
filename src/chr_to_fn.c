@@ -78,6 +78,71 @@ SEXP stbl_chr_are_fnish(SEXP x) {
 }
 
 /*
+ * Build and signal a classed error condition from C so that R-side
+ * try_fetch() handlers can catch it by class name.  Calling stop() with a
+ * condition object always unwinds -- these helpers never return.
+ */
+static void stbl_signal_classed_error(const char* cls0) {
+  SEXP nms = PROTECT(Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(nms, 0, Rf_mkChar("message"));
+
+  SEXP cond = PROTECT(Rf_allocVector(VECSXP, 1));
+  SET_VECTOR_ELT(cond, 0, Rf_mkString(cls0)); /* message = class name */
+  Rf_setAttrib(cond, R_NamesSymbol, nms);
+
+  SEXP cls = PROTECT(Rf_allocVector(STRSXP, 3));
+  SET_STRING_ELT(cls, 0, Rf_mkChar(cls0));
+  SET_STRING_ELT(cls, 1, Rf_mkChar("error"));
+  SET_STRING_ELT(cls, 2, Rf_mkChar("condition"));
+  Rf_setAttrib(cond, R_ClassSymbol, cls);
+
+  /* UNPROTECT is unreachable after this */
+  Rf_eval(Rf_lang2(Rf_install("stop"), cond), R_BaseEnv);
+}
+
+static void stbl_signal_invalid_fn_name(void) {
+  stbl_signal_classed_error("stbl_invalid_function_name");
+}
+
+static void stbl_signal_unknown_function(void) {
+  stbl_signal_classed_error("stbl_unknown_function");
+}
+
+/* ---------------------------------------------------------------------------
+ * R_tryCatchError wrappers for namespace + function lookup.
+ *
+ * Rf_findFun() and R_FindNamespace() call Rf_error() internally when they
+ * fail.  We wrap them with R_tryCatchError() so that any plain error can be
+ * re-signaled as a classed stbl_unknown_function condition that the R-side
+ * try_fetch() can catch by name.
+ * --------------------------------------------------------------------------*/
+
+struct fn_lookup_data {
+  const char* pkg;    /* NULL for bare-name lookup     */
+  const char* fn;
+  SEXP        env;    /* used when pkg is NULL         */
+  SEXP        result;
+};
+
+static SEXP do_fn_lookup(void* data_) {
+  struct fn_lookup_data* d = (struct fn_lookup_data*)data_;
+  if (d->pkg != NULL) {
+    SEXP pkg_str = PROTECT(Rf_mkString(d->pkg));
+    SEXP ns      = PROTECT(R_FindNamespace(pkg_str));
+    d->result    = Rf_findFun(Rf_install(d->fn), ns);
+    UNPROTECT(2);
+  } else {
+    d->result = Rf_findFun(Rf_install(d->fn), d->env);
+  }
+  return R_NilValue;
+}
+
+static SEXP handle_fn_not_found(SEXP cond, void* data_) {
+  stbl_signal_unknown_function(); /* always unwinds */
+  return R_NilValue;              /* unreachable    */
+}
+
+/*
  * stbl_chr_to_fn: public API entry point.
  *
  * Converts a length-1 character string to a function.  Length checks and
@@ -95,22 +160,34 @@ SEXP stbl_chr_to_fn(SEXP x, SEXP definition_env) {
   const char* s = CHAR(xi);
   if (*s == '\0') Rf_error("Can't convert \"\" to a function.");
 
+  /* Validate colon usage: must be absent, or exactly one "::" with
+   * non-empty identifiers on both sides and no other ":" anywhere. */
+  {
+    const char* first_colon = strchr(s, ':');
+    if (first_colon != NULL) {
+      const char* dcolon = strstr(s, "::");
+      int invalid =
+        dcolon == NULL           ||  /* ":" but no "::"          */
+        first_colon < dcolon     ||  /* lone ":" before "::"     */
+        dcolon == s              ||  /* "::" at start, empty pkg */
+        *(dcolon + 2) == '\0'    ||  /* "::" at end, empty fn    */
+        strchr(dcolon + 2, ':') != NULL; /* more ":" after "::"  */
+      if (invalid) stbl_signal_invalid_fn_name();
+    }
+  }
+
   const char* sep = strstr(s, "::");
   if (sep != NULL) {
     size_t pkg_len = (size_t)(sep - s);
     char* pkg = (char*)R_alloc(pkg_len + 1, sizeof(char));
     strncpy(pkg, s, pkg_len);
     pkg[pkg_len] = '\0';
-    const char* fn_name = sep + 2;
-
-    SEXP pkg_str = PROTECT(Rf_mkString(pkg));
-    SEXP ns      = PROTECT(R_FindNamespace(pkg_str));
-    SEXP sym     = Rf_install(fn_name);
-    SEXP fn      = Rf_findFun(sym, ns);
-    UNPROTECT(2);
-    return fn;
+    struct fn_lookup_data d = {pkg, sep + 2, R_NilValue, R_NilValue};
+    R_tryCatchError(do_fn_lookup, &d, handle_fn_not_found, NULL);
+    return d.result;
   }
 
-  SEXP sym = Rf_install(s);
-  return Rf_findFun(sym, definition_env);
+  struct fn_lookup_data d = {NULL, s, definition_env, R_NilValue};
+  R_tryCatchError(do_fn_lookup, &d, handle_fn_not_found, NULL);
+  return d.result;
 }

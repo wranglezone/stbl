@@ -14,17 +14,16 @@ test_that("to_fn() works for NULL (#250)", {
 })
 
 test_that("to_fn() respects allow_null for NULL input (#250)", {
-  expect_error(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn(NULL, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
-  expect_snapshot(
-    to_fn(NULL, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fn(NULL, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -37,6 +36,35 @@ test_that("to_fn() works for namespaced character names (#250)", {
   expect_identical(to_fn("stats::median"), stats::median)
 })
 
+test_that("to_fn() fails cleanly for weird ':' use in character names (#250)", {
+  skip_on_covr()
+  expect_pkg_error_snapshot(
+    to_fn("base:mean"),
+    "stbl",
+    "invalid_function_name"
+  )
+  expect_pkg_error_snapshot(
+    to_fn("base::mean::thing"),
+    "stbl",
+    "invalid_function_name"
+  )
+  expect_pkg_error_snapshot(
+    to_fn("base::mean:thing"),
+    "stbl",
+    "invalid_function_name"
+  )
+  expect_pkg_error_snapshot(
+    to_fn("base:mean:thing"),
+    "stbl",
+    "invalid_function_name"
+  )
+  expect_pkg_error_snapshot(
+    to_fn("base:mean::thing"),
+    "stbl",
+    "invalid_function_name"
+  )
+})
+
 test_that("to_fn() respects definition_env for character input (#250)", {
   local_fn <- function(x) x * 2
   e <- new.env()
@@ -45,54 +73,59 @@ test_that("to_fn() respects definition_env for character input (#250)", {
 })
 
 test_that("to_fn() errors informatively for unknown character names (#250)", {
-  expect_snapshot(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn("not_a_real_function_xyz"),
-    error = TRUE
+    "stbl",
+    "unknown_function"
   )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fn("not_a_real_function_xyz"),
-    error = TRUE
+    "stbl",
+    "unknown_function"
   )
 })
 
 test_that("to_fn() errors for length > 1 character input (#250)", {
-  expect_error(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn(c("mean", "sum")),
-    class = .compile_dash("stbl", "error", "non_scalar")
+    "stbl",
+    "non_scalar"
   )
-  expect_snapshot(
-    to_fn(c("mean", "sum")),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fn(c("mean", "sum")),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
 test_that("to_fn() respects allow_null for length-0 character input (#250)", {
   expect_null(to_fn(character()))
-  expect_error(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn(character(), allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
-  expect_snapshot(
-    to_fn(character(), allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("to_fn() errors informatively for bad namespaced names (#250)", {
-  expect_snapshot(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn("nonexistent_pkg::mean"),
-    error = TRUE
+    "stbl",
+    "unknown_function"
   )
 })
 
 test_that("to_fn() errors informatively for non-coercible types (#250)", {
-  expect_snapshot(
+  skip_on_covr()
+  expect_pkg_error_snapshot(
     to_fn(1L),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "function"
   )
 })
 

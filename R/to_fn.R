@@ -85,8 +85,28 @@ to_fn.character <- function(
       message_env = rlang::current_env()
     )
   }
-  # Length == 1: delegate to C
-  .Call(stbl_chr_to_fn, x, definition_env)
+  try_fetch(
+    .Call(stbl_chr_to_fn, x, definition_env),
+    stbl_invalid_function_name = function(cnd) {
+      .stop_must(
+        "must be a valid function name.",
+        x_arg = x_arg,
+        call = call,
+        subclass = "invalid_function_name",
+        message_env = rlang::current_env()
+      )
+    },
+    stbl_unknown_function = function(cnd) {
+      .stop_must(
+        "must be the name of a known function.",
+        x_arg = x_arg,
+        call = call,
+        additional_msg = c(x = "Can't find function {.fn {x}}."),
+        subclass = "unknown_function",
+        message_env = rlang::current_env()
+      )
+    }
+  )
 }
 
 #' @export
@@ -96,7 +116,18 @@ to_fn.default <- function(
   ...,
   definition_env = rlang::global_env(),
   x_arg = caller_arg(x),
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
-  rlang::as_function(x, env = definition_env, arg = x_arg, call = call)
+  try_fetch(
+    rlang::as_function(x, env = definition_env, arg = x_arg, call = call),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = "function",
+        x_arg = x_arg,
+        call = call
+      )
+    }
+  )
 }
