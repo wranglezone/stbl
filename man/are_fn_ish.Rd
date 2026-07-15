@@ -38,9 +38,9 @@ synonym of \code{is_fn_ish()}.
 \itemize{
 \item Functions (including lambda functions created with \code{~} or \verb{\\()})
 \item Formulas (one-sided or two-sided, coercible via \code{\link[rlang:as_function]{rlang::as_function()}})
-\item Character strings that are syntactically valid function names — either a
+\item Character strings that are syntactically valid function names: either a
 bare name (\code{"mean"}) or a namespaced name (\code{"pkg::fn"}). The check is
-syntactic: it does not verify that the named function exists in any
+syntactic; it does not verify that the named function exists in any
 environment.
 }
 
