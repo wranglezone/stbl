@@ -247,4 +247,10 @@ static inline void set_factor_attribs (SEXP codes, SEXP lev, int is_ordered) {
   }
 }
 
+/*
+ * Build and signal a classed error condition from C (defined in signal.c).
+ * See that file for full documentation.
+ */
+SEXP signal_classed_error(const char* cls0);
+
 #endif /* STBL_H */

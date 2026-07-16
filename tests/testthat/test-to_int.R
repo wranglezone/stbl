@@ -144,6 +144,37 @@ test_that("to_int() errors informatively for bad complexes (#2)", {
   )
 })
 
+test_that("to_int() errors for complexes that would lose precision (#noissue)", {
+  given <- as.complex(1:10)
+  given[[4]] <- 1.5 + 0i
+  expect_error(
+    to_int(given),
+    class = .compile_dash("stbl", "error", "incompatible_type")
+  )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
+  )
+
+  given[[4]] <- Inf + 0i
+  expect_error(
+    to_int(given),
+    class = .compile_dash("stbl", "error", "incompatible_type")
+  )
+  expect_snapshot(
+    to_int(given),
+    error = TRUE
+  )
+  expect_snapshot(
+    wrapped_to_int(given),
+    error = TRUE
+  )
+})
+
 test_that("to_int() works for factors (#4)", {
   expected <- c(1L, 3L, 5L, 7L)
   given <- factor(expected)
