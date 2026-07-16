@@ -25,6 +25,15 @@
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
 #'
+#' Named functions are converted to their string name. If the function comes
+#' from a package namespace, the result is a `"pkg::fn"` string. For example,
+#' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
+#'
+#' When `to_chr()` is called inside a wrapper function, the captured name is
+#' that of the wrapper's parameter, not the original call-site symbol. Use
+#' `rlang::enquo()` and pass the quosure explicitly via `x_quo` when writing
+#' wrapper functions that need to preserve the original name.
+#'
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a character vector.
@@ -39,6 +48,11 @@
 #' to_chr(1 + 0i)
 #' to_chr(NULL)
 #' try(to_chr(NULL, allow_null = FALSE))
+#'
+#' # Named functions are converted to their string name.
+#' to_chr(mean)
+#' to_chr(base::mean)
+#' try(to_chr(function(x) x))
 #'
 #' to_chr_scalar("a")
 #' try(to_chr_scalar(letters))
@@ -69,9 +83,11 @@ stabilize_chr <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  x_quo <- rlang::enquo(x)
   .stabilize_cls(
     x,
     to_cls_fn = to_chr,
+    to_cls_args = list(x_quo = x_quo),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(regex = regex),
     allow_null = allow_null,
@@ -110,9 +126,11 @@ stabilize_chr_scalar <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  x_quo <- rlang::enquo(x)
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_chr_scalar,
+    to_cls_scalar_args = list(x_quo = x_quo),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(regex = regex),
     allow_null = allow_null,

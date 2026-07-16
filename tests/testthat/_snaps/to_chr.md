@@ -14,23 +14,16 @@
       Error in `wrapped_to_chr()`:
       ! `val` must not be <NULL>.
 
-# to_chr() fails gracefully for weird cases (#22)
+# to_chr.function() errors for anonymous functions (#251)
 
     Code
-      to_chr(given)
+      to_chr(function(x) x)
     Condition
       Error:
-      ! Can't coerce `given` <function> to <character>.
+      ! Can't coerce `function(x) x` <function> to <character>.
+      i Anonymous functions can't be converted to a string name.
 
----
-
-    Code
-      wrapped_to_chr(given)
-    Condition
-      Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <function> to <character>.
-
----
+# to_chr() fails gracefully for weird cases (#22)
 
     Code
       to_chr(given)

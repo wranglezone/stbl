@@ -65,6 +65,10 @@
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param x The argument to stabilize.
+#' @param x_quo `(quosure)` The captured expression of `x`, created by
+#'   [rlang::enquo()]. Set automatically. Pass explicitly in wrapper functions
+#'   to preserve the original call-site symbol for function-to-string
+#'   conversion.
 #' @param x_arg `(length-1 character)` The name of the argument being stabilized
 #'   to use in error messages. The automatic value will work in most cases, or
 #'   pass it through from higher-level functions to make error messages clearer

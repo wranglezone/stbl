@@ -79,21 +79,46 @@ test_that("to_chr() tries to flatten lists (#22)", {
   )
 })
 
-test_that("to_chr() fails gracefully for weird cases (#22)", {
+test_that("to_chr.function() converts named functions (#251)", {
+  expect_identical(to_chr(mean), "base::mean")
+  expect_identical(to_chr(abs), "base::abs") # primitive
+  expect_identical(to_chr(base::mean), "base::mean") # qualified call
+
+  # User-defined function: returns its name
+  my_fn <- function(x) x + 1
+  expect_identical(to_chr(my_fn), "my_fn")
+
+  # Aliased: function held under a name not in its namespace, returns the name
   given <- mean
+  expect_identical(to_chr(given), "given")
+
+  # Aliased: name exists in namespace but body differs
+  local({
+    abs <- mean
+    expect_identical(to_chr(abs), "abs")
+  })
+
+  # Works through the full chr family
+  expect_identical(to_chr_scalar(mean), "base::mean")
+  expect_identical(stabilize_chr(mean), "base::mean")
+  expect_identical(stabilize_chr_scalar(mean), "base::mean")
+
+  # Wrapper limitation: inner variable name is returned (documented behaviour)
+  expect_identical(wrapped_to_chr(mean), "val")
+})
+
+test_that("to_chr.function() errors for anonymous functions (#251)", {
   expect_error(
-    to_chr(given),
+    to_chr(function(x) x),
     class = .compile_dash("stbl", "error", "coerce", "character")
   )
-  expect_snapshot(
-    to_chr(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_chr(given),
-    error = TRUE
-  )
+  expect_snapshot(to_chr(function(x) x), error = TRUE)
 
+  # Inside a wrapper the expression becomes the parameter name, so no error.
+  expect_identical(wrapped_to_chr(function(x) x), "val")
+})
+
+test_that("to_chr() fails gracefully for weird cases (#22)", {
   given <- list(mean)
   expect_error(
     to_chr(given),
