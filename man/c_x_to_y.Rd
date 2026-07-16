@@ -8,17 +8,26 @@
 \alias{.chr_to_int}
 \alias{.chr_to_dbl}
 \alias{.chr_are_fctish}
+\alias{.dbl_to_chr}
+\alias{.dbl_are_chrish}
 \alias{.dbl_to_int}
 \alias{.dbl_to_lgl}
 \alias{.dbl_are_lglish}
+\alias{.int_to_chr}
+\alias{.int_are_chrish}
+\alias{.int_to_fct}
 \alias{.int_to_dbl}
 \alias{.int_are_dblish}
+\alias{.lgl_to_chr}
+\alias{.lgl_are_chrish}
 \alias{.lgl_to_dbl}
 \alias{.lgl_to_int}
 \alias{.lgl_are_dblish}
 \alias{.lgl_are_intish}
 \alias{.cpx_to_dbl}
 \alias{.cpx_to_int}
+\alias{.fct_to_chr}
+\alias{.fct_are_chrish}
 \alias{.fct_to_dbl}
 \alias{.fct_to_int}
 \alias{.fct_to_lgl}
@@ -45,15 +54,29 @@
 
 .chr_are_fctish(x, levels = NULL, to_na = character())
 
+.dbl_to_chr(x)
+
+.dbl_are_chrish(x)
+
 .dbl_to_int(x)
 
 .dbl_to_lgl(x)
 
 .dbl_are_lglish(x)
 
+.int_to_chr(x)
+
+.int_are_chrish(x)
+
+.int_to_fct(x, to = NULL, ordered = FALSE)
+
 .int_to_dbl(x)
 
 .int_are_dblish(x)
+
+.lgl_to_chr(x)
+
+.lgl_are_chrish(x)
 
 .lgl_to_dbl(x)
 
@@ -66,6 +89,10 @@
 .cpx_to_dbl(x)
 
 .cpx_to_int(x)
+
+.fct_to_chr(x)
+
+.fct_are_chrish(x)
 
 .fct_to_dbl(x)
 

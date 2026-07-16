@@ -342,6 +342,12 @@ test_that(".fct_to_lgl() marks non-logical levels as not valid (#226, #237)", {
   expect_identical(res[["valid"]], c(FALSE, TRUE))
 })
 
+test_that(".fct_to_lgl() converts numeric levels with trailing whitespace (#noissue)", {
+  res <- .fct_to_lgl(factor(c("1 ", "0 ")))
+  expect_identical(res[["result"]], c(TRUE, FALSE))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
 # chr -> fct (are_fctish) ------------------------------------------------------
 
 test_that(".chr_are_fctish() returns all TRUE when levels is NULL (#226, #237)", {
@@ -755,6 +761,12 @@ test_that(".lst_to_fct() marks factor elements as valid (#226, #237)", {
   expect_identical(res[["valid"]], TRUE)
 })
 
+test_that(".lst_to_fct() treats NA factor element as NA_character_ and valid (#noissue)", {
+  res <- .lst_to_fct(list(factor(NA_character_)))
+  expect_identical(res[["result"]], NA_character_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
 test_that(".lst_to_fct() unpacks a one-element list with a character vector (#237)", {
   res <- .lst_to_fct(list(c("a", "b")))
   expect_identical(res[["result"]], c("a", "b"))
@@ -1111,4 +1123,262 @@ test_that(".check_max_dbl() handles integer input (#220)", {
   expect_null(.check_max_dbl(c(1L, 2L), 3.0))
   expect_identical(.check_max_dbl(c(1L, 2L, 3L), 2.0), 3L)
   expect_null(.check_max_dbl(c(NA_integer_, 1L), 2.0))
+})
+
+# dbl -> chr -------------------------------------------------------------------
+
+test_that(".dbl_to_chr() converts doubles to character (#noissue)", {
+  res <- .dbl_to_chr(c(1.5, -3.14, NA_real_))
+  expect_identical(res[["result"]], c("1.5", "-3.14", NA_character_))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+# dbl -> chr (are_chrish) ------------------------------------------------------
+
+test_that(".dbl_are_chrish() returns all TRUE (#noissue)", {
+  expect_identical(.dbl_are_chrish(c(1.5, NA_real_, Inf)), rep(TRUE, 3))
+})
+
+# int -> chr -------------------------------------------------------------------
+
+test_that(".int_to_chr() converts integers to character (#noissue)", {
+  res <- .int_to_chr(c(1L, -3L, NA_integer_))
+  expect_identical(res[["result"]], c("1", "-3", NA_character_))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+# int -> chr (are_chrish) ------------------------------------------------------
+
+test_that(".int_are_chrish() returns all TRUE (#noissue)", {
+  expect_identical(.int_are_chrish(c(1L, NA_integer_, 0L)), rep(TRUE, 3))
+})
+
+# lgl -> chr -------------------------------------------------------------------
+
+test_that(".lgl_to_chr() converts logicals to character (#noissue)", {
+  res <- .lgl_to_chr(c(TRUE, FALSE, NA))
+  expect_identical(res[["result"]], c("TRUE", "FALSE", NA_character_))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+# lgl -> chr (are_chrish) ------------------------------------------------------
+
+test_that(".lgl_are_chrish() returns all TRUE (#noissue)", {
+  expect_identical(.lgl_are_chrish(c(TRUE, FALSE, NA)), rep(TRUE, 3))
+})
+
+# fct -> chr -------------------------------------------------------------------
+
+test_that(".fct_to_chr() handles a malformed factor code gracefully (#noissue)", {
+  # A factor with a code that exceeds the number of levels is malformed.
+  bad_fct <- structure(3L, levels = c("a", "b"), class = "factor")
+  res <- .fct_to_chr(bad_fct)
+  expect_identical(res[["result"]], NA_character_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+# fct -> chr (are_chrish) ------------------------------------------------------
+
+test_that(".fct_are_chrish() returns TRUE for valid and NA codes (#noissue)", {
+  expect_identical(
+    .fct_are_chrish(factor(c("a", "b", NA))),
+    c(TRUE, TRUE, TRUE)
+  )
+})
+
+test_that(".fct_are_chrish() returns FALSE for out-of-range factor codes (#noissue)", {
+  bad_fct <- structure(c(1L, 3L), levels = c("a", "b"), class = "factor")
+  expect_identical(.fct_are_chrish(bad_fct), c(TRUE, FALSE))
+})
+
+# fct -> fct (are_fctish, to_na) -----------------------------------------------
+
+test_that(".fct_are_fctish() treats to_na values as fctish (#noissue)", {
+  f <- factor(c("a", "z", NA))
+  expect_identical(
+    .fct_are_fctish(f, levels = c("a", "b"), to_na = "z"),
+    c(TRUE, TRUE, TRUE)
+  )
+})
+
+# int -> fct -------------------------------------------------------------------
+
+test_that(".int_to_fct() marks integers not matching any level as not valid (#noissue)", {
+  res <- .int_to_fct(5L, c("1", "2"), FALSE)
+  expect_true(is.na(res[["result"]]))
+  expect_identical(res[["valid"]], FALSE)
+})
+
+# chr -> fn (dotted name) ------------------------------------------------------
+
+test_that(".chr_to_fn() works for dot-prefixed function names (#noissue)", {
+  expect_identical(.chr_to_fn(".libPaths"), .libPaths)
+})
+
+test_that(".chr_are_fnish() returns TRUE for a dot-prefixed identifier (#noissue)", {
+  expect_identical(.chr_are_fnish(".foo"), TRUE)
+})
+
+# lst -> dbl (fill_vec paths) --------------------------------------------------
+
+test_that(".lst_to_dbl() unpacks a one-element list with a logical vector (#noissue)", {
+  res <- .lst_to_dbl(list(c(TRUE, FALSE, NA)))
+  expect_identical(res[["result"]], c(1.0, 0.0, NA_real_))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() unpacks a one-element list with a complex vector (#noissue)", {
+  res <- .lst_to_dbl(list(c(1 + 0i, -2 + 0i)))
+  expect_identical(res[["result"]], c(1.0, -2.0))
+  expect_identical(res[["valid"]], c(TRUE, TRUE))
+})
+
+test_that(".lst_to_dbl() unpacks a one-element list with a factor vector (#noissue)", {
+  res <- .lst_to_dbl(list(factor(c("1.5", "a"))))
+  expect_identical(res[["result"]], c(1.5, NA_real_))
+  expect_identical(res[["valid"]], c(TRUE, FALSE))
+})
+
+test_that(".lst_to_dbl() passes NA factor element through; valid TRUE (#noissue)", {
+  res <- .lst_to_dbl(list(factor(NA_character_)))
+  expect_identical(res[["result"]], NA_real_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+test_that(".lst_to_dbl() passes NA complex through; valid TRUE (#noissue)", {
+  res <- .lst_to_dbl(list(NA_complex_))
+  expect_identical(res[["result"]], NA_real_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+test_that(".lst_to_dbl() marks non-atomic scalar elements as not valid (#noissue)", {
+  res <- .lst_to_dbl(list(as.raw(1)))
+  expect_identical(res[["result"]], NA_real_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_dbl() marks NaN strings as not valid (#noissue)", {
+  res <- .lst_to_dbl(list("NaN"))
+  expect_identical(res[["result"]], NA_real_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+# lst -> int (fill_vec paths) --------------------------------------------------
+
+test_that(".lst_to_int() unpacks a one-element list with a logical vector (#noissue)", {
+  res <- .lst_to_int(list(c(TRUE, FALSE, NA)))
+  expect_identical(res[["result"]], c(1L, 0L, NA_integer_))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_int() unpacks a one-element list with a factor vector (#noissue)", {
+  res <- .lst_to_int(list(factor(c("1", "a"))))
+  expect_identical(res[["result"]], c(1L, NA_integer_))
+  expect_identical(res[["valid"]], c(TRUE, FALSE))
+})
+
+test_that(".lst_to_int() unpacks a one-element list with a complex vector (#noissue)", {
+  res <- .lst_to_int(list(c(2 + 0i, 1 + 1i)))
+  expect_identical(res[["result"]], c(2L, NA_integer_))
+  expect_identical(res[["valid"]], c(TRUE, FALSE))
+})
+
+test_that(".lst_to_int() unpacks one-element list with fractional-real complex vector (#noissue)", {
+  res <- .lst_to_int(list(c(1.5 + 0i, 2 + 0i)))
+  expect_identical(res[["result"]], c(NA_integer_, 2L))
+  expect_identical(res[["valid"]], c(FALSE, TRUE))
+})
+
+test_that(".lst_to_int() unpacks one-element list with fractional double vector (#noissue)", {
+  res <- .lst_to_int(list(c(1.0, 1.5)))
+  expect_identical(res[["result"]], c(1L, NA_integer_))
+  expect_identical(res[["valid"]], c(TRUE, FALSE))
+})
+
+test_that(".lst_to_int() passes NA factor element through; valid TRUE (#noissue)", {
+  res <- .lst_to_int(list(factor(NA_character_)))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+test_that(".lst_to_int() passes NA complex through; valid TRUE (#noissue)", {
+  res <- .lst_to_int(list(NA_complex_))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+test_that(".lst_to_int() marks fractional complex scalar as not valid (#noissue)", {
+  res <- .lst_to_int(list(1.5 + 0i))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_int() marks non-atomic scalar elements as not valid (#noissue)", {
+  res <- .lst_to_int(list(as.raw(1)))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_int() marks NaN strings as not valid (#noissue)", {
+  res <- .lst_to_int(list("NaN"))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_int() marks Inf strings as not valid (#noissue)", {
+  res <- .lst_to_int(list("Inf"))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_int() passes NA double through; valid TRUE (#noissue)", {
+  res <- .lst_to_int(list(NA_real_))
+  expect_identical(res[["result"]], NA_integer_)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+# lst -> lgl (fill_vec paths) --------------------------------------------------
+
+test_that(".lst_to_lgl() unpacks a one-element list with an integer vector (#noissue)", {
+  res <- .lst_to_lgl(list(c(0L, 1L, NA_integer_)))
+  expect_identical(res[["result"]], c(FALSE, TRUE, NA))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_lgl() unpacks a one-element list with a double vector (#noissue)", {
+  res <- .lst_to_lgl(list(c(0.0, 1.5, NA_real_)))
+  expect_identical(res[["result"]], c(FALSE, TRUE, NA))
+  expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
+})
+
+test_that(".lst_to_lgl() unpacks a one-element list with a factor vector (#noissue)", {
+  res <- .lst_to_lgl(list(factor(c("TRUE", "a", NA))))
+  expect_identical(res[["result"]], c(TRUE, NA, NA))
+  expect_identical(res[["valid"]], c(TRUE, FALSE, TRUE))
+})
+
+test_that(".lst_to_lgl() passes NA factor element through; valid TRUE (#noissue)", {
+  res <- .lst_to_lgl(list(factor(NA_character_)))
+  expect_identical(res[["result"]], NA)
+  expect_identical(res[["valid"]], TRUE)
+})
+
+test_that(".lst_to_lgl() marks non-atomic scalar elements as not valid (#noissue)", {
+  res <- .lst_to_lgl(list(as.raw(1)))
+  expect_identical(res[["result"]], NA)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".lst_to_lgl() marks NaN numeric strings as not valid (#noissue)", {
+  res <- .lst_to_lgl(list("NaN"))
+  expect_identical(res[["result"]], NA)
+  expect_identical(res[["valid"]], FALSE)
+})
+
+# lst -> chr (default branch) --------------------------------------------------
+
+test_that(".lst_to_chr() marks raw scalar elements as not valid (#noissue)", {
+  res <- .lst_to_chr(list(as.raw(1)))
+  expect_identical(res[["result"]], NA_character_)
+  expect_identical(res[["valid"]], FALSE)
 })

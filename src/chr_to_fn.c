@@ -1,5 +1,4 @@
-#include <R.h>
-#include <Rinternals.h>
+#include "stbl.h"
 #include <R_ext/Rdynload.h>
 #include <ctype.h>
 #include <string.h>
@@ -97,37 +96,6 @@ SEXP stbl_chr_are_fnish(SEXP x) {
   return result;
 }
 
-/*
- * Build and signal a classed error condition from C so that R-side
- * try_fetch() handlers can catch it by class name.  Calling stop() with a
- * condition object always unwinds -- these helpers never return.
- */
-static void stbl_signal_classed_error(const char* cls0) {
-  SEXP nms = PROTECT(Rf_allocVector(STRSXP, 1));
-  SET_STRING_ELT(nms, 0, Rf_mkChar("message"));
-
-  SEXP cond = PROTECT(Rf_allocVector(VECSXP, 1));
-  SET_VECTOR_ELT(cond, 0, Rf_mkString(cls0)); /* message = class name */
-  Rf_setAttrib(cond, R_NamesSymbol, nms);
-
-  SEXP cls = PROTECT(Rf_allocVector(STRSXP, 3));
-  SET_STRING_ELT(cls, 0, Rf_mkChar(cls0));
-  SET_STRING_ELT(cls, 1, Rf_mkChar("error"));
-  SET_STRING_ELT(cls, 2, Rf_mkChar("condition"));
-  Rf_setAttrib(cond, R_ClassSymbol, cls);
-
-  /* UNPROTECT is unreachable after this */
-  Rf_eval(Rf_lang2(Rf_install("stop"), cond), R_BaseEnv);
-}
-
-static void stbl_signal_invalid_fn_name(void) {
-  stbl_signal_classed_error("stbl_invalid_function_name");
-}
-
-static void stbl_signal_unknown_function(void) {
-  stbl_signal_classed_error("stbl_unknown_function");
-}
-
 /* ---------------------------------------------------------------------------
  * R_tryCatchError wrappers for namespace + function lookup.
  *
@@ -158,8 +126,7 @@ static SEXP do_fn_lookup(void* data_) {
 }
 
 static SEXP handle_fn_not_found(SEXP cond, void* data_) {
-  stbl_signal_unknown_function(); /* always unwinds */
-  return R_NilValue;              /* unreachable    */
+  return signal_classed_error("stbl_unknown_function");
 }
 
 /*
@@ -181,7 +148,8 @@ SEXP stbl_chr_to_fn(SEXP x, SEXP definition_env) {
   if (*s == '\0') Rf_error("Can't convert \"\" to a function.");
 
   /* Validate colon usage via shared helper */
-  if (!is_valid_colon_usage(s)) stbl_signal_invalid_fn_name();
+  if (!is_valid_colon_usage(s))
+    return signal_classed_error("stbl_invalid_function_name");
 
   const char* sep = strstr(s, "::");
   if (sep != NULL) {

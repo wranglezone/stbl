@@ -50,6 +50,16 @@
 # dbl -> * ----
 
 #' @rdname c_x_to_y
+.dbl_to_chr <- function(x) {
+  .Call(stbl_dbl_to_chr, x)
+}
+
+#' @rdname c_x_to_y
+.dbl_are_chrish <- function(x) {
+  .Call(stbl_dbl_are_chrish, x)
+}
+
+#' @rdname c_x_to_y
 .dbl_to_int <- function(x) {
   .Call(stbl_dbl_to_int, x)
 }
@@ -67,6 +77,21 @@
 # int -> * ----
 
 #' @rdname c_x_to_y
+.int_to_chr <- function(x) {
+  .Call(stbl_int_to_chr, x)
+}
+
+#' @rdname c_x_to_y
+.int_are_chrish <- function(x) {
+  .Call(stbl_int_are_chrish, x)
+}
+
+#' @rdname c_x_to_y
+.int_to_fct <- function(x, to = NULL, ordered = FALSE) {
+  .Call(stbl_int_to_fct, x, to, ordered)
+}
+
+#' @rdname c_x_to_y
 .int_to_dbl <- function(x) {
   .Call(stbl_int_to_dbl, x)
 }
@@ -77,6 +102,16 @@
 }
 
 # lgl -> * ----
+
+#' @rdname c_x_to_y
+.lgl_to_chr <- function(x) {
+  .Call(stbl_lgl_to_chr, x)
+}
+
+#' @rdname c_x_to_y
+.lgl_are_chrish <- function(x) {
+  .Call(stbl_lgl_are_chrish, x)
+}
 
 #' @rdname c_x_to_y
 .lgl_to_dbl <- function(x) {
@@ -111,6 +146,16 @@
 }
 
 # fct -> * ----
+
+#' @rdname c_x_to_y
+.fct_to_chr <- function(x) {
+  .Call(stbl_fct_to_chr, x)
+}
+
+#' @rdname c_x_to_y
+.fct_are_chrish <- function(x) {
+  .Call(stbl_fct_are_chrish, x)
+}
 
 #' @rdname c_x_to_y
 .fct_to_dbl <- function(x) {

@@ -130,6 +130,46 @@
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
 
+# to_int() errors for complexes that would lose precision (#noissue)
+
+    Code
+      to_int(given)
+    Condition
+      Error:
+      ! `given` <complex> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      wrapped_to_int(given)
+    Condition
+      Error in `wrapped_to_int()`:
+      ! `val` <complex> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      to_int(given)
+    Condition
+      Error:
+      ! `given` <complex> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
+---
+
+    Code
+      wrapped_to_int(given)
+    Condition
+      Error in `wrapped_to_int()`:
+      ! `val` <complex> must be coercible to <integer>
+      x Can't convert some values due to loss of precision.
+      * Locations: 4
+
 # to_int() respects coerce_factor (#14)
 
     Code
