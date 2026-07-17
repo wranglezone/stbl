@@ -107,26 +107,30 @@ to_character <- to_chr
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  fn <- rlang::eval_tidy(x)
   x_expr <- rlang::quo_get_expr(x)
-
-  # Handle namespaced functions.
-  if (rlang::is_call(x_expr, "::")) {
-    return(paste0(
-      rlang::as_string(x_expr[[2]]),
-      "::",
-      rlang::as_string(x_expr[[3]])
-    ))
+  if (rlang::is_call(x_expr, c("::", ":::"))) {
+    return(.chr_from_op_call(x_expr))
   }
-  if (rlang::is_call(x_expr, ":::")) {
-    return(paste0(
-      rlang::as_string(x_expr[[2]]),
-      ":::",
-      rlang::as_string(x_expr[[3]])
-    ))
-  }
+  .stop_if_anon_fn(x_expr, x_class = x_class, x_arg = x_arg, call = call)
+  .chr_from_fn_sym(x, x_name = rlang::as_string(x_expr))
+}
 
-  # Fail for anonymous functions.
+#' Build a string from a `::` or `:::` call expression
+#'
+#' @param x_expr A `::` or `:::` call expression.
+#' @returns A length-1 character string, e.g. `"base::mean"`.
+#' @keywords internal
+.chr_from_op_call <- function(x_expr) {
+  op <- rlang::as_string(x_expr[[1]])
+  paste0(rlang::as_string(x_expr[[2]]), op, rlang::as_string(x_expr[[3]]))
+}
+
+#' Error if a function expression is anonymous (not a symbol)
+#'
+#' @param x_expr The expression from the quosure.
+#' @inheritParams .shared-params
+#' @keywords internal
+.stop_if_anon_fn <- function(x_expr, x_class, x_arg, call) {
   if (!rlang::is_symbol(x_expr)) {
     .stop_cant_coerce(
       from_class = x_class,
@@ -138,27 +142,41 @@ to_character <- to_chr
       )
     )
   }
+}
 
-  x_name <- rlang::as_string(x_expr)
-
-  # If the function is not from a package namespace, return the name as-is.
+#' Return the name of a function
+#'
+#' @param x A quosure wrapping the function.
+#' @param x_name The name used to refer to the function at the call site.
+#' @returns A length-1 character string.
+#' @keywords internal
+.chr_from_fn_sym <- function(x, x_name) {
+  fn <- rlang::eval_tidy(x)
   fn_env <- rlang::fn_env(fn)
   if (!rlang::is_namespace(fn_env)) {
     return(x_name)
   }
+  .maybe_qualify_fn_name(fn, fn_env, x_name)
+}
 
-  pkg_name <- sub("^namespace:", "", rlang::env_name(fn_env))
-
-  # Verify x_name refers to the same function in its namespace. This guards
-  # against aliased functions (e.g., `abs <- mean; to_chr(abs)`).
+#' Return a package-qualified name if the name resolves to the same function
+#'
+#' @param fn The function.
+#' @param fn_env The namespace environment of `fn`.
+#' @param x_name The name used to refer to `fn` at the call site.
+#' @returns `"pkg::x_name"` if `x_name` resolves to `fn` in `fn_env`, otherwise
+#'   `x_name`.
+#' @keywords internal
+.maybe_qualify_fn_name <- function(fn, fn_env, x_name) {
+  # Guard against corner-case aliased functions (e.g.,
+  # `abs <- mean; to_chr(abs)`).
   if (
     rlang::env_has(fn_env, x_name, inherit = FALSE) &&
       .same_fn(fn, rlang::env_get(fn_env, x_name, inherit = FALSE))
   ) {
+    pkg_name <- sub("^namespace:", "", rlang::env_name(fn_env))
     return(paste0(pkg_name, "::", x_name))
   }
-
-  # The name doesn't match the namespace function — return without namespace.
   x_name
 }
 
