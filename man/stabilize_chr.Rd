@@ -11,8 +11,6 @@
 \alias{stabilise_character_scalar}
 \alias{to_chr}
 \alias{to_character}
-\alias{to_chr.NULL}
-\alias{to_chr.function}
 \alias{to_chr_scalar}
 \alias{to_character_scalar}
 \title{Ensure a character argument meets expectations}
@@ -120,7 +118,6 @@ stabilise_character_scalar(
 to_chr(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -129,18 +126,6 @@ to_chr(
 to_character(
   x,
   ...,
-  x_quo = rlang::enquo(x),
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to_chr}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
-
-\method{to_chr}{`function`}(
-  x,
-  ...,
-  x_quo = rlang::enquo(x),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -149,7 +134,6 @@ to_character(
 to_chr_scalar(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -160,7 +144,6 @@ to_chr_scalar(
 to_character_scalar(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -209,11 +192,6 @@ match the original class.}
 
 \item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
 acceptable?}
-
-\item{x_quo}{\code{(quosure)} The captured expression of \code{x}, created by
-\code{\link[rlang:enquo]{rlang::enquo()}}. Set automatically. Pass explicitly in wrapper functions
-to preserve the original call-site symbol for function-to-string
-conversion.}
 }
 \value{
 The argument as a character vector.
@@ -250,10 +228,14 @@ Named functions are converted to their string name. If the function comes
 from a package namespace, the result is a \code{"pkg::fn"} string. For example,
 \code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an error.
 
-When \code{to_chr()} is called inside a wrapper function, the captured name is
-that of the wrapper's parameter, not the original call-site symbol. Use
-\code{rlang::enquo()} and pass the quosure explicitly via \code{x_quo} when writing
-wrapper functions that need to preserve the original name.
+To preserve the original call-site symbol when \code{to_chr()} is called inside
+a wrapper function, use the embrace operator \code{{{ }}}. For example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{my_wrapper <- function(fn) \{
+  to_chr(\{\{ fn \}\})
+\}
+my_wrapper(mean)  # Returns "base::mean"
+}\if{html}{\out{</div>}}
 }
 \examples{
 to_chr("a")

@@ -98,11 +98,6 @@ coercion.}
 
 \item{x}{The argument to stabilize.}
 
-\item{x_quo}{\code{(quosure)} The captured expression of \code{x}, created by
-\code{\link[rlang:enquo]{rlang::enquo()}}. Set automatically. Pass explicitly in wrapper functions
-to preserve the original call-site symbol for function-to-string
-conversion.}
-
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer

@@ -3,59 +3,64 @@
 to_chr <- function(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  # Force x_quo before UseMethod forces x, so to_chr.function() can recover
-  # the original expression even after dispatch.
-  force(x_quo)
+  x_quo <- rlang::enquo(x)
   if (is.function(x)) {
-    return(to_chr.function(
-      x = x,
-      ...,
-      x_quo = x_quo,
-      x_arg = x_arg,
-      call = call,
-      x_class = x_class
-    ))
+    force(x_class)
+    x <- x_quo
   }
-  UseMethod("to_chr")
+  .to_chr_impl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
 #' @export
 #' @rdname stabilize_chr
 to_character <- to_chr
 
+#' Internal S3 implementation of to_chr
+#'
+#' @inheritParams .shared-params
+#' @returns The argument coerced to character.
+#' @keywords internal
+.to_chr_impl <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  UseMethod(".to_chr_impl")
+}
+
 #' @export
-to_chr.character <- function(x, ...) {
+.to_chr_impl.character <- function(x, ...) {
   return(x)
 }
 
 #' @export
-to_chr.integer <- function(x, ...) {
+.to_chr_impl.integer <- function(x, ...) {
   .Call(stbl_int_to_chr, x)[["result"]]
 }
 
 #' @export
-to_chr.double <- function(x, ...) {
+.to_chr_impl.double <- function(x, ...) {
   .Call(stbl_dbl_to_chr, x)[["result"]]
 }
 
 #' @export
-to_chr.logical <- function(x, ...) {
+.to_chr_impl.logical <- function(x, ...) {
   .Call(stbl_lgl_to_chr, x)[["result"]]
 }
 
 #' @export
-to_chr.factor <- function(x, ...) {
+.to_chr_impl.factor <- function(x, ...) {
   .Call(stbl_fct_to_chr, x)[["result"]]
 }
 
 #' @export
-#' @rdname stabilize_chr
-to_chr.NULL <- function(
+.to_chr_impl.NULL <- function(
   x,
   ...,
   allow_null = TRUE,
@@ -66,7 +71,7 @@ to_chr.NULL <- function(
 }
 
 #' @export
-to_chr.list <- function(
+.to_chr_impl.list <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -79,7 +84,7 @@ to_chr.list <- function(
 }
 
 #' @export
-to_chr.data.frame <- function(
+.to_chr_impl.data.frame <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -95,28 +100,33 @@ to_chr.data.frame <- function(
 }
 
 #' @export
-#' @rdname stabilize_chr
-#' @inheritParams .shared-params
-to_chr.function <- function(
+.to_chr_impl.quosure <- function(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  x_expr <- rlang::quo_get_expr(x_quo)
+  fn <- rlang::eval_tidy(x)
+  x_expr <- rlang::quo_get_expr(x)
 
-  # Handle pkg::fn or pkg:::fn expressions (e.g., to_chr(base::mean)).
-  if (rlang::is_call(x_expr, c("::", ":::"))) {
+  # Handle namespaced functions.
+  if (rlang::is_call(x_expr, "::")) {
     return(paste0(
       rlang::as_string(x_expr[[2]]),
       "::",
       rlang::as_string(x_expr[[3]])
     ))
   }
+  if (rlang::is_call(x_expr, ":::")) {
+    return(paste0(
+      rlang::as_string(x_expr[[2]]),
+      ":::",
+      rlang::as_string(x_expr[[3]])
+    ))
+  }
 
-  # Only named (symbol) functions can be converted. Anonymous functions can't.
+  # Fail for anonymous functions.
   if (!rlang::is_symbol(x_expr)) {
     .stop_cant_coerce(
       from_class = x_class,
@@ -132,7 +142,7 @@ to_chr.function <- function(
   x_name <- rlang::as_string(x_expr)
 
   # If the function is not from a package namespace, return the name as-is.
-  fn_env <- rlang::fn_env(x)
+  fn_env <- rlang::fn_env(fn)
   if (!rlang::is_namespace(fn_env)) {
     return(x_name)
   }
@@ -143,7 +153,7 @@ to_chr.function <- function(
   # against aliased functions (e.g., `abs <- mean; to_chr(abs)`).
   if (
     rlang::env_has(fn_env, x_name, inherit = FALSE) &&
-      .same_fn(x, rlang::env_get(fn_env, x_name, inherit = FALSE))
+      .same_fn(fn, rlang::env_get(fn_env, x_name, inherit = FALSE))
   ) {
     return(paste0(pkg_name, "::", x_name))
   }
@@ -165,8 +175,8 @@ to_chr.function <- function(
     identical(rlang::fn_fmls(x), rlang::fn_fmls(y))
 }
 
-#' @export
-to_chr.default <- function(
+#' @keywords internal
+.to_chr_impl.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -191,19 +201,22 @@ to_chr.default <- function(
 to_chr_scalar <- function(
   x,
   ...,
-  x_quo = rlang::enquo(x),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  force(x_quo)
+  x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
   .to_cls_scalar(
     x,
     is_rlang_cls_scalar = is_scalar_character,
     to_cls_fn = to_chr,
-    to_cls_args = list(x_quo = x_quo, ...),
+    to_cls_args = list(...),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,

@@ -14,7 +14,7 @@
       Error in `wrapped_to_chr()`:
       ! `val` must not be <NULL>.
 
-# to_chr.function() errors for anonymous functions (#251)
+# to_chr() errors for anonymous functions (#251)
 
     Code
       to_chr(function(x) x)

@@ -29,10 +29,15 @@
 #' from a package namespace, the result is a `"pkg::fn"` string. For example,
 #' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
 #'
-#' When `to_chr()` is called inside a wrapper function, the captured name is
-#' that of the wrapper's parameter, not the original call-site symbol. Use
-#' `rlang::enquo()` and pass the quosure explicitly via `x_quo` when writing
-#' wrapper functions that need to preserve the original name.
+#' To preserve the original call-site symbol when `to_chr()` is called inside
+#' a wrapper function, use the embrace operator `{{ }}`. For example:
+#'
+#' ```r
+#' my_wrapper <- function(fn) {
+#'   to_chr({{ fn }})
+#' }
+#' my_wrapper(mean)  # Returns "base::mean"
+#' ```
 #'
 #' @inheritParams .shared-params
 #'
@@ -84,10 +89,13 @@ stabilize_chr <- function(
   x_class = object_type(x)
 ) {
   x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
   .stabilize_cls(
     x,
     to_cls_fn = to_chr,
-    to_cls_args = list(x_quo = x_quo),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(regex = regex),
     allow_null = allow_null,
@@ -126,11 +134,15 @@ stabilize_chr_scalar <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # enquo() must precede is.function(); see to_chr() for explanation.
   x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_chr_scalar,
-    to_cls_scalar_args = list(x_quo = x_quo),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(regex = regex),
     allow_null = allow_null,

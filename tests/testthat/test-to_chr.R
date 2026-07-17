@@ -79,7 +79,7 @@ test_that("to_chr() tries to flatten lists (#22)", {
   )
 })
 
-test_that("to_chr.function() converts named functions (#251)", {
+test_that("to_chr() converts named functions (#251)", {
   expect_identical(to_chr(mean), "base::mean")
   expect_identical(to_chr(abs), "base::abs") # primitive
   expect_identical(to_chr(base::mean), "base::mean") # qualified call
@@ -103,18 +103,23 @@ test_that("to_chr.function() converts named functions (#251)", {
   expect_identical(stabilize_chr(mean), "base::mean")
   expect_identical(stabilize_chr_scalar(mean), "base::mean")
 
-  # Wrapper limitation: inner variable name is returned (documented behaviour)
+  # Without {{ }}, the wrapper's parameter name is returned
   expect_identical(wrapped_to_chr(mean), "val")
+
+  # With {{ }}, the original call-site symbol is preserved
+  wrapper_embrace <- function(fn) to_chr({{ fn }})
+  expect_identical(wrapper_embrace(mean), "base::mean")
+  expect_identical(wrapper_embrace(abs), "base::abs")
 })
 
-test_that("to_chr.function() errors for anonymous functions (#251)", {
+test_that("to_chr() errors for anonymous functions (#251)", {
   expect_error(
     to_chr(function(x) x),
     class = .compile_dash("stbl", "error", "coerce", "character")
   )
   expect_snapshot(to_chr(function(x) x), error = TRUE)
 
-  # Inside a wrapper the expression becomes the parameter name, so no error.
+  # Without {{ }}, the wrapper's parameter name is used, so no error
   expect_identical(wrapped_to_chr(function(x) x), "val")
 })
 
