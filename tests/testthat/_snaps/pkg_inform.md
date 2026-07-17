@@ -41,6 +41,17 @@
       Message:
       A nested message.
 
+# expect_pkg_message_snapshot() allows object definition inside expression (#234)
+
+    Code
+      (expect_pkg_message_classes({
+        result <- informs_and_returns()
+      }, "stbl", "return_subclass"))
+    Output
+      <message/stbl-message-return_subclass>
+      Message in `informs_and_returns()`:
+      A message with a return value.
+
 # expect_pkg_message_snapshot() works from an env without stbl attached (#213)
 
     Code

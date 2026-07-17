@@ -16,9 +16,10 @@ classes.}
 most.}
 }
 \value{
-The classes of the message invisibly on success or the message on
-failure. Unlike most testthat expectations, this expectation cannot be
-usefully chained.
+The message condition invisibly. Assignments made inside \code{object}
+(e.g. \code{result <- fn_that_informs()}) are visible to the caller after this
+function returns. Unlike most testthat expectations, this expectation
+cannot be usefully chained.
 }
 \description{
 When you use \code{\link[=pkg_inform]{pkg_inform()}} to signal messages, you can use this function to

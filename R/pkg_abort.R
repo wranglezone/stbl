@@ -183,9 +183,10 @@ expect_pkg_error_classes <- function(
 #' @param variant (`character(1)` or `NULL`) Optional snapshot variant name.
 #'   Passed through to [testthat::expect_snapshot()].
 #' @param env (`environment`) The environment in which `object` should be
-#'   evaluated. The actual evaluation will occur in a child of this environment,
-#'   with [expect_pkg_error_classes()] available even if this package is not
-#'   attached.
+#'   evaluated. Assignments made inside `object` are visible to the caller after
+#'   this function returns. [expect_pkg_error_classes()] is temporarily injected
+#'   into `env` if it is not already findable, so this works even when this
+#'   package is not attached.
 #' @inheritParams expect_pkg_error_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
@@ -202,11 +203,14 @@ expect_pkg_error_snapshot <- function(
   rlang::check_installed("testthat", "to snapshot-test package errors")
   obj_expr <- .strip_covr_from_expr(rlang::enexpr(object))
   error_class_components <- rlang::list2(...)
-  # Build in a child of the caller's env that can find
-  # expect_pkg_error_classes, so this works even when the caller's package
-  # doesn't attach stbl.
-  inject_env <- new.env(parent = env)
-  inject_env$expect_pkg_error_classes <- expect_pkg_error_classes
+  # Inject expect_pkg_error_classes into env if not already findable, so this
+  # works even when the caller's package doesn't attach stbl. Evaluating
+  # directly in env (rather than a child) ensures assignments inside object are
+  # visible to the caller after this function returns.
+  if (!exists("expect_pkg_error_classes", envir = env, inherits = TRUE)) {
+    env$expect_pkg_error_classes <- expect_pkg_error_classes
+    on.exit(rm("expect_pkg_error_classes", envir = env), add = TRUE)
+  }
   # Build the call to expect_snapshot() at runtime with rlang::call2() so it
   # carries no source-reference attributes. covr attaches counter calls to
   # source references; a runtime-built expression has none, so the snapshot
@@ -226,6 +230,6 @@ expect_pkg_error_snapshot <- function(
     variant = variant,
     .ns = "testthat"
   )
-  eval(snap_call, envir = inject_env)
+  eval(snap_call, envir = env)
   # nocov end
 }

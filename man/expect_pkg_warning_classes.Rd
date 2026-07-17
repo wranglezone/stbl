@@ -16,9 +16,10 @@ classes.}
 most.}
 }
 \value{
-The classes of the warning invisibly on success or the warning on
-failure. Unlike most testthat expectations, this expectation cannot be
-usefully chained.
+The warning condition invisibly. Assignments made inside \code{object}
+(e.g. \code{result <- fn_that_warns()}) are visible to the caller after this
+function returns. Unlike most testthat expectations, this expectation
+cannot be usefully chained.
 }
 \description{
 When you use \code{\link[=pkg_warn]{pkg_warn()}} to signal warnings, you can use this function to

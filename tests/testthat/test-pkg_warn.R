@@ -118,6 +118,21 @@ test_that("expect_pkg_warning_snapshot() works with multiple class components (#
   )
 })
 
+test_that("expect_pkg_warning_snapshot() allows object definition inside expression (#234)", {
+  warns_and_returns <- function() {
+    pkg_warn("stbl", "A warning with a return value.", "return_subclass")
+    "the return value"
+  }
+  expect_pkg_warning_snapshot(
+    {
+      result <- warns_and_returns()
+    },
+    "stbl",
+    "return_subclass"
+  )
+  expect_equal(result, "the return value")
+})
+
 test_that("expect_pkg_warning_snapshot() works from an env without stbl attached (#213)", {
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_warn <- pkg_warn

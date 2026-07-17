@@ -44,6 +44,17 @@
       Warning:
       A nested warning.
 
+# expect_pkg_warning_snapshot() allows object definition inside expression (#234)
+
+    Code
+      (expect_pkg_warning_classes({
+        result <- warns_and_returns()
+      }, "stbl", "return_subclass"))
+    Output
+      <warning/stbl-warning-return_subclass>
+      Warning in `warns_and_returns()`:
+      A warning with a return value.
+
 # expect_pkg_warning_snapshot() works from an env without stbl attached (#213)
 
     Code

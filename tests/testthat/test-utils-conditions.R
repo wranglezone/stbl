@@ -1,3 +1,36 @@
+test_that(".capture_first_pkg_condition() captures a condition and returns it invisibly (#234)", {
+  captured <- .capture_first_pkg_condition(
+    quote(warning("a warning")),
+    condition_name = "warning",
+    muffle_restart = "muffleWarning",
+    env = environment()
+  )
+  expect_s3_class(captured, "warning")
+  expect_match(conditionMessage(captured), "a warning")
+})
+
+test_that(".capture_first_pkg_condition() returns NULL when no condition is signalled (#234)", {
+  expect_null(
+    .capture_first_pkg_condition(
+      quote(1 + 1),
+      condition_name = "warning",
+      muffle_restart = "muffleWarning",
+      env = environment()
+    )
+  )
+})
+
+test_that(".capture_first_pkg_condition() evaluates obj_expr in env (#234)", {
+  env <- new.env(parent = environment())
+  .capture_first_pkg_condition(
+    quote(x <- 42),
+    condition_name = "warning",
+    muffle_restart = "muffleWarning",
+    env = env
+  )
+  expect_equal(env$x, 42)
+})
+
 test_that(".compile_dash() pastes with a dash separator (#213)", {
   expect_equal(.compile_dash("a", "b"), "a-b")
   expect_equal(.compile_dash("pkg", "error", "sub"), "pkg-error-sub")

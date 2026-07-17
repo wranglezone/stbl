@@ -108,6 +108,21 @@ test_that("expect_pkg_message_snapshot() works with multiple class components (#
   )
 })
 
+test_that("expect_pkg_message_snapshot() allows object definition inside expression (#234)", {
+  informs_and_returns <- function() {
+    pkg_inform("stbl", "A message with a return value.", "return_subclass")
+    "the return value"
+  }
+  expect_pkg_message_snapshot(
+    {
+      result <- informs_and_returns()
+    },
+    "stbl",
+    "return_subclass"
+  )
+  expect_equal(result, "the return value")
+})
+
 test_that("expect_pkg_message_snapshot() works from an env without stbl attached (#213)", {
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_inform <- pkg_inform
