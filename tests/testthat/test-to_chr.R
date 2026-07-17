@@ -24,17 +24,15 @@ test_that("to_chr() works for NULL (#22)", {
 
 test_that("to_chr() respects allow_null (#22)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(given, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
-  expect_snapshot(
-    to_chr(given, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr(given, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -113,11 +111,12 @@ test_that("to_chr() converts named functions (#251)", {
 })
 
 test_that("to_chr() errors for anonymous functions (#251)", {
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(function(x) x),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(to_chr(function(x) x), error = TRUE)
 
   # Without {{ }}, the wrapper's parameter name is used, so no error
   expect_identical(wrapped_to_chr(function(x) x), "val")
@@ -125,59 +124,59 @@ test_that("to_chr() errors for anonymous functions (#251)", {
 
 test_that("to_chr() fails gracefully for weird cases (#22)", {
   given <- list(mean)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(given),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(
-    to_chr(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr(given),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "character"
   )
 
   given <- list("x", mean)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(given),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(
-    to_chr(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr(given),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "character"
   )
 
   given <- mtcars
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(given),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(
-    to_chr(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr(given),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "character"
   )
 
   given <- list(a = 1, b = 1:5)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr(given),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(
-    to_chr(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr(given),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "character"
   )
 })
 
@@ -191,61 +190,54 @@ test_that("to_chr_scalar() allows length-1 chrs through (#22, #189)", {
 
 test_that("to_chr_scalar() errors for non-scalars (#22)", {
   given <- letters
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
+    "stbl",
+    "non_scalar"
   )
-  expect_snapshot(
-    to_chr_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
 test_that("to_chr_scalar() errors for uncoerceable types (#22)", {
   given <- list(a = 1:10)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr_scalar(given),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
-  expect_snapshot(
-    to_chr_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "character"
   )
 })
 
 test_that("to_chr_scalar() respects allow_null (#22, #189)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
-  expect_snapshot(
-    to_chr_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("to_chr_scalar respects allow_zero_length (#22, #43, #45, #189)", {
   given <- character()
-  expect_error(
+  expect_pkg_error_snapshot(
     to_chr_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_empty")
-  )
-  expect_snapshot(
-    to_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_empty"
   )
 })
 
@@ -312,4 +304,20 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
 
   # formula — splits into a 3-element vector: operator, LHS, RHS (see #259)
   expect_identical(to_chr(y ~ x), c("~", "y", "x"))
+})
+
+test_that("to_chr() errors for types that can't be coerced (#noissue)", {
+  given <- new.env()
+  expect_pkg_error_snapshot(
+    to_chr(given),
+    "stbl",
+    "coerce",
+    "character"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_chr(given),
+    "stbl",
+    "coerce",
+    "character"
+  )
 })
