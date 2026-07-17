@@ -13,6 +13,17 @@
   function-body snapshots under coverage
   ([\#253](https://github.com/wranglezone/stbl/issues/253)).
 
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  now converts named functions to their string name instead of erroring.
+  Package functions are returned as `"pkg::fn"` (e.g., `to_chr(mean)`
+  returns `"base::mean"`). Anonymous functions still produce an
+  informative error. This behavior extends to
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  and
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  ([\#251](https://github.com/wranglezone/stbl/issues/251)).
+
 - New
   [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   is a vectorized predicate that checks each element of a character

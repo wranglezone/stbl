@@ -192,9 +192,6 @@ synonym of <code>to_chr_scalar()</code>.</p>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for class '`NULL`'</span></span>
-<span><span class="fu">to_chr</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, allow_null <span class="op">=</span> <span class="cn">TRUE</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">to_chr_scalar</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
@@ -296,7 +293,16 @@ example, <code>as.character(list(1:3))</code> returns "1:10". In the unlikely ev
 that this is the expected behavior, use <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> instead.</p></li>
 <li><p><code>NULL</code> values can be rejected as part of the call to this function (with
 <code>allow_null = FALSE</code>).</p></li>
-</ul></div>
+</ul><p>Named functions are converted to their string name. If the function comes
+from a package namespace, the result is a <code>"pkg::fn"</code> string. For example,
+<code>to_chr(mean)</code> returns <code>"base::mean"</code>. Anonymous functions produce an error.</p>
+<p>To preserve the original call-site symbol when <code>to_chr()</code> is called inside
+a wrapper function, use the embrace operator <code>{{ }}</code>. For example:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">my_wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fn</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/stabilize_chr.html">to_chr</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">fn</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">my_wrapper</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>  <span class="co"># Returns "base::mean"</span></span></code></pre><p></p></div>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other character functions:
@@ -329,6 +335,16 @@ that this is the expected behavior, use <code><a href="https://rdrr.io/r/base/ch
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_chr</span><span class="op">(</span><span class="cn">NULL</span>, allow_null <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `NULL` must not be <span style="color: #0000BB;">&lt;NULL&gt;</span>.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Named functions are converted to their string name.</span></span></span>
+<span class="r-in"><span><span class="fu">to_chr</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "base::mean"</span>
+<span class="r-in"><span><span class="fu">to_chr</span><span class="op">(</span><span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "base::mean"</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_chr</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't coerce `function(x) x` <span style="color: #0000BB;">&lt;function&gt;</span> to <span style="color: #0000BB;">&lt;character&gt;</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Anonymous functions can't be converted to a string name.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">to_chr_scalar</span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>

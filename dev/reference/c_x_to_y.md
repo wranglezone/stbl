@@ -17,15 +17,29 @@ Call the C routine to convert a vector to another type
 
 .chr_are_fctish(x, levels = NULL, to_na = character())
 
+.dbl_to_chr(x)
+
+.dbl_are_chrish(x)
+
 .dbl_to_int(x)
 
 .dbl_to_lgl(x)
 
 .dbl_are_lglish(x)
 
+.int_to_chr(x)
+
+.int_are_chrish(x)
+
+.int_to_fct(x, to = NULL, ordered = FALSE)
+
 .int_to_dbl(x)
 
 .int_are_dblish(x)
+
+.lgl_to_chr(x)
+
+.lgl_are_chrish(x)
 
 .lgl_to_dbl(x)
 
@@ -38,6 +52,10 @@ Call the C routine to convert a vector to another type
 .cpx_to_dbl(x)
 
 .cpx_to_int(x)
+
+.fct_to_chr(x)
+
+.fct_are_chrish(x)
 
 .fct_to_dbl(x)
 

@@ -40,6 +40,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_value_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_value_dbl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_x_no_more_than_y.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-chr_from_fn_sym.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-chr_from_op_call.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-cli_escape.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-cli_mark.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-coerce_fct_levels.html</loc></url>
@@ -66,6 +68,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_covr_count_call.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-same_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
@@ -78,10 +82,12 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_must.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-strip_covr_from_expr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_chr_impl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_from_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_df_vector.html</loc></url>
