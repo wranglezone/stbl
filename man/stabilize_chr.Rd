@@ -11,7 +11,6 @@
 \alias{stabilise_character_scalar}
 \alias{to_chr}
 \alias{to_character}
-\alias{to_chr.NULL}
 \alias{to_chr_scalar}
 \alias{to_character_scalar}
 \title{Ensure a character argument meets expectations}
@@ -132,8 +131,6 @@ to_character(
   x_class = object_type(x)
 )
 
-\method{to_chr}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
-
 to_chr_scalar(
   x,
   ...,
@@ -226,6 +223,19 @@ that this is the expected behavior, use \code{as.character()} instead.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).
 }
+
+Named functions are converted to their string name. If the function comes
+from a package namespace, the result is a \code{"pkg::fn"} string. For example,
+\code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an error.
+
+To preserve the original call-site symbol when \code{to_chr()} is called inside
+a wrapper function, use the embrace operator \code{{{ }}}. For example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{my_wrapper <- function(fn) \{
+  to_chr(\{\{ fn \}\})
+\}
+my_wrapper(mean)  # Returns "base::mean"
+}\if{html}{\out{</div>}}
 }
 \examples{
 to_chr("a")
@@ -234,6 +244,11 @@ to_chr(1:10)
 to_chr(1 + 0i)
 to_chr(NULL)
 try(to_chr(NULL, allow_null = FALSE))
+
+# Named functions are converted to their string name.
+to_chr(mean)
+to_chr(base::mean)
+try(to_chr(function(x) x))
 
 to_chr_scalar("a")
 try(to_chr_scalar(letters))

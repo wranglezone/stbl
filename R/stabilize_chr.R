@@ -25,6 +25,20 @@
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
 #'
+#' Named functions are converted to their string name. If the function comes
+#' from a package namespace, the result is a `"pkg::fn"` string. For example,
+#' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
+#'
+#' To preserve the original call-site symbol when `to_chr()` is called inside
+#' a wrapper function, use the embrace operator `{{ }}`. For example:
+#'
+#' ```r
+#' my_wrapper <- function(fn) {
+#'   to_chr({{ fn }})
+#' }
+#' my_wrapper(mean)  # Returns "base::mean"
+#' ```
+#'
 #' @inheritParams .shared-params
 #'
 #' @returns The argument as a character vector.
@@ -39,6 +53,11 @@
 #' to_chr(1 + 0i)
 #' to_chr(NULL)
 #' try(to_chr(NULL, allow_null = FALSE))
+#'
+#' # Named functions are converted to their string name.
+#' to_chr(mean)
+#' to_chr(base::mean)
+#' try(to_chr(function(x) x))
 #'
 #' to_chr_scalar("a")
 #' try(to_chr_scalar(letters))
@@ -69,6 +88,11 @@ stabilize_chr <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
   .stabilize_cls(
     x,
     to_cls_fn = to_chr,
@@ -110,6 +134,12 @@ stabilize_chr_scalar <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # enquo() must precede is.function(); see to_chr() for explanation.
+  x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_chr_scalar,
