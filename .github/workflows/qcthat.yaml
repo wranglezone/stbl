@@ -58,4 +58,4 @@ jobs:
       milestone: ${{ github.event.pull_request.milestone.title || inputs.milestone || '' }}
       tag: ${{ github.event.release.tag_name || inputs.tag || '' }}
       issue-number: ${{ github.event.issue.number || inputs.issue-number || '' }}
-      qcthat-ref: ${{ inputs.qcthat-ref || '@latest' }}
+      qcthat-ref: ${{ inputs.qcthat-ref || '@*release' }}
