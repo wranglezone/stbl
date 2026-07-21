@@ -237,6 +237,30 @@ test_that(".to_cls_from_fct() works (#23)", {
   )
 })
 
+test_that(".check_lst_failures() returns NULL when all elements are valid (#noissue)", {
+  result <- .check_lst_failures(
+    c(TRUE, TRUE, TRUE),
+    to_class = "character",
+    x_class = "list",
+    x_arg = "x",
+    call = rlang::current_env()
+  )
+  expect_null(result)
+})
+
+test_that(".check_lst_failures() errors when any element is invalid (#noissue)", {
+  expect_error(
+    .check_lst_failures(
+      c(TRUE, FALSE),
+      to_class = "character",
+      x_class = "list",
+      x_arg = "x",
+      call = rlang::current_env()
+    ),
+    class = .compile_dash("stbl", "error", "coerce", "character")
+  )
+})
+
 test_that(".to_num_from_complex() works (#23)", {
   # Happy path
   expect_equal(

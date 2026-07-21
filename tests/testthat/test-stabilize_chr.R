@@ -241,6 +241,11 @@ test_that("stabilize_chr_scalar() works with regex that contains braces (#52)", 
   )
 })
 
+test_that("stabilize_chr() and stabilize_chr_scalar() work when x is a function (#noissue)", {
+  expect_identical(stabilize_chr(mean), "base::mean")
+  expect_identical(stabilize_chr_scalar(mean), "base::mean")
+})
+
 test_that("stabilise_chr() exists (#167)", {
   expect_no_error(stabilise_chr(TRUE))
 })
