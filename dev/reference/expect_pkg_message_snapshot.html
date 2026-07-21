@@ -90,9 +90,10 @@ Passed through to <code><a href="https://testthat.r-lib.org/reference/expect_sna
 
 <dt id="arg-env">env<a class="anchor" aria-label="anchor" href="#arg-env"></a></dt>
 <dd><p>(<code>environment</code>) The environment in which <code>object</code> should be
-evaluated. The actual evaluation will occur in a child of this environment,
-with <code><a href="expect_pkg_message_classes.html">expect_pkg_message_classes()</a></code> available even if this package is not
-attached.</p></dd>
+evaluated. Assignments made inside <code>object</code> are visible to the caller after
+this function returns. <code><a href="expect_pkg_message_classes.html">expect_pkg_message_classes()</a></code> is temporarily
+injected into <code>env</code> if it is not already findable, so this works even when
+this package is not attached.</p></dd>
 
 </dl></div>
     <div class="section level2">

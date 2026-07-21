@@ -21,6 +21,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_regex_rule.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_first_pkg_condition.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
@@ -61,6 +62,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_dbl_value_multi.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_dbl_value_single.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-elements_are_cls_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-expect_pkg_condition_snapshot.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-fast_false.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-glue2.html</loc></url>

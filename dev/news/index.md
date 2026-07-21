@@ -2,6 +2,17 @@
 
 ## stbl (development version)
 
+- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
+  and
+  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
+  now support assignments inside `object`
+  (e.g. `result <- fn_that_warns()`).
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
+  and
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  inherit the same fix
+  ([\#234](https://github.com/wranglezone/stbl/issues/234)).
+
 - [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
   [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
   and

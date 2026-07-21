@@ -1,39 +1,51 @@
-# Snapshot-test a package warning
+# Snapshot-test a package condition
 
-A convenience wrapper around
-[`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html)
-and
-[`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
-that captures both the warning class hierarchy and the user-facing
-message in a single snapshot.
+Snapshot-test a package condition
 
 ## Usage
 
 ``` r
-expect_pkg_warning_snapshot(
-  object,
+.expect_pkg_condition_snapshot(
+  obj_expr,
   package,
-  ...,
-  transform = NULL,
-  variant = NULL,
-  env = caller_env()
+  class_components,
+  expect_fn_name,
+  expect_fn,
+  check_installed_msg,
+  transform,
+  variant,
+  env
 )
 ```
 
 ## Arguments
 
-- object:
+- obj_expr:
 
-  An expression that is expected to throw a warning.
+  An unevaluated expression (from
+  [`rlang::enexpr()`](https://rlang.r-lib.org/reference/defusing-advanced.html)).
 
 - package:
 
   `(length-1 character)` The name of the package to use in classes.
 
-- ...:
+- class_components:
 
-  `(character)` Components of the class name, from least-specific to
-  most.
+  (`list`) Passed as `...` to `expect_fn`.
+
+- expect_fn_name:
+
+  (`character(1)`) Name of the class-checking expectation to look up or
+  inject into `env`.
+
+- expect_fn:
+
+  (`function`) The function to inject if not already findable.
+
+- check_installed_msg:
+
+  (`character(1)`) The `"to ..."` string passed to
+  [`rlang::check_installed()`](https://rlang.r-lib.org/reference/is_installed.html).
 
 - transform:
 

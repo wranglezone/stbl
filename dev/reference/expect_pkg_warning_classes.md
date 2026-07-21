@@ -28,9 +28,10 @@ expect_pkg_warning_classes(object, package, ...)
 
 ## Value
 
-The classes of the warning invisibly on success or the warning on
-failure. Unlike most testthat expectations, this expectation cannot be
-usefully chained.
+The warning condition invisibly. Assignments made inside `object` (e.g.
+`result <- fn_that_warns()`) are visible to the caller after this
+function returns. Unlike most testthat expectations, this expectation
+cannot be usefully chained.
 
 ## Examples
 
@@ -40,9 +41,6 @@ expect_pkg_warning_classes(
   "stbl",
   "test_subclass"
 )
-#> <warning/stbl-warning-test_subclass>
-#> Warning:
-#> This is a test warning
 try(
   expect_pkg_warning_classes(
     pkg_warn("stbl", "This is a test warning", "test_subclass"),
@@ -50,6 +48,6 @@ try(
     "different_subclass"
   )
 )
-#> Error : Expected `w` to have class "stbl-warning-different_subclass"/"stbl-warning"/"stbl-condition"/"rlang_warning"/"warning"/"condition".
+#> Error : Expected `captured` to have class "stbl-warning-different_subclass"/"stbl-warning"/"stbl-condition"/"rlang_warning"/"warning"/"condition".
 #> Actual class: "stbl-warning-test_subclass"/"stbl-warning"/"stbl-condition"/"rlang_warning"/"warning"/"condition".
 ```

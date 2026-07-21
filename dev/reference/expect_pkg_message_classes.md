@@ -28,9 +28,10 @@ expect_pkg_message_classes(object, package, ...)
 
 ## Value
 
-The classes of the message invisibly on success or the message on
-failure. Unlike most testthat expectations, this expectation cannot be
-usefully chained.
+The message condition invisibly. Assignments made inside `object` (e.g.
+`result <- fn_that_informs()`) are visible to the caller after this
+function returns. Unlike most testthat expectations, this expectation
+cannot be usefully chained.
 
 ## Examples
 
@@ -40,9 +41,6 @@ expect_pkg_message_classes(
   "stbl",
   "test_subclass"
 )
-#> <message/stbl-message-test_subclass>
-#> Message:
-#> This is a test message
 try(
   expect_pkg_message_classes(
     pkg_inform("stbl", "This is a test message", "test_subclass"),
@@ -50,6 +48,6 @@ try(
     "different_subclass"
   )
 )
-#> Error : Expected `m` to have class "stbl-message-different_subclass"/"stbl-message"/"stbl-condition"/"rlang_message"/"message"/"condition".
+#> Error : Expected `captured` to have class "stbl-message-different_subclass"/"stbl-message"/"stbl-condition"/"rlang_message"/"message"/"condition".
 #> Actual class: "stbl-message-test_subclass"/"stbl-message"/"stbl-condition"/"rlang_message"/"message"/"condition".
 ```

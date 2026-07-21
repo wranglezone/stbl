@@ -50,9 +50,11 @@ expect_pkg_error_snapshot(
 - env:
 
   (`environment`) The environment in which `object` should be evaluated.
-  The actual evaluation will occur in a child of this environment, with
+  Assignments made inside `object` are visible to the caller after this
+  function returns.
   [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
-  available even if this package is not attached.
+  is temporarily injected into `env` if it is not already findable, so
+  this works even when this package is not attached.
 
 ## Value
 
