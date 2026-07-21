@@ -165,6 +165,11 @@ test_that("to_fct() errors for ints with unexpected levels (#241)", {
   )
 })
 
+test_that("to_fct() works for logical vectors via default dispatch (#noissue)", {
+  given <- c(TRUE, FALSE, TRUE)
+  expect_identical(to_fct(given), factor(given))
+})
+
 test_that("to_fct() sorts integer levels numerically not lexicographically (#241)", {
   given <- c(1L, 10L, 2L)
   result <- to_fct(given)

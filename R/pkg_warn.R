@@ -69,9 +69,10 @@ pkg_warn <- function(
 #' @param object An expression that is expected to throw a warning.
 #' @inheritParams .compile_pkg_warning_classes
 #'
-#' @returns The classes of the warning invisibly on success or the warning on
-#'   failure. Unlike most testthat expectations, this expectation cannot be
-#'   usefully chained.
+#' @returns The warning condition invisibly. Assignments made inside `object`
+#'   (e.g. `result <- fn_that_warns()`) are visible to the caller after this
+#'   function returns. Unlike most testthat expectations, this expectation
+#'   cannot be usefully chained.
 #' @export
 #'
 #' @examplesIf rlang::is_installed("testthat")
@@ -99,12 +100,16 @@ expect_pkg_warning_classes <- function(
     "warning",
     "condition"
   )
-  rlang::try_fetch(
-    object,
-    warning = function(w) {
-      testthat::expect_s3_class(w, expected_classes, exact = TRUE)
-    }
+  captured <- .capture_first_pkg_condition(
+    rlang::enexpr(object),
+    condition_name = "warning",
+    muffle_restart = "muffleWarning",
+    env = parent.frame()
   )
+  if (!is.null(captured)) {
+    testthat::expect_s3_class(captured, expected_classes, exact = TRUE)
+  }
+  invisible(captured)
 }
 
 #' Snapshot-test a package warning
@@ -119,9 +124,10 @@ expect_pkg_warning_classes <- function(
 #' @param variant (`character(1)` or `NULL`) Optional snapshot variant name.
 #'   Passed through to [testthat::expect_snapshot()].
 #' @param env (`environment`) The environment in which `object` should be
-#'   evaluated. The actual evaluation will occur in a child of this environment,
-#'   with [expect_pkg_warning_classes()] available even if this package is not
-#'   attached.
+#'   evaluated. Assignments made inside `object` are visible to the caller after
+#'   this function returns. [expect_pkg_warning_classes()] is temporarily
+#'   injected into `env` if it is not already findable, so this works even when
+#'   this package is not attached.
 #' @inheritParams expect_pkg_warning_classes
 #'
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
@@ -135,29 +141,16 @@ expect_pkg_warning_snapshot <- function(
   env = caller_env()
 ) {
   # nocov start
-  rlang::check_installed("testthat", "to snapshot-test package warnings")
-  obj_expr <- .strip_covr_from_expr(rlang::enexpr(object))
-  warning_class_components <- rlang::list2(...)
-  # Build in a child of the caller's env that can find
-  # expect_pkg_warning_classes, so this works even when the caller's package
-  # doesn't attach stbl.
-  inject_env <- new.env(parent = env)
-  inject_env$expect_pkg_warning_classes <- expect_pkg_warning_classes
-  snap_call <- rlang::call2(
-    "expect_snapshot",
-    rlang::call2(
-      "(",
-      rlang::call2(
-        "expect_pkg_warning_classes",
-        obj_expr,
-        package,
-        !!!warning_class_components
-      )
-    ),
+  .expect_pkg_condition_snapshot(
+    obj_expr = .strip_covr_from_expr(rlang::enexpr(object)),
+    package = package,
+    class_components = rlang::list2(...),
+    expect_fn_name = "expect_pkg_warning_classes",
+    expect_fn = expect_pkg_warning_classes,
+    check_installed_msg = "to snapshot-test package warnings",
     transform = transform,
     variant = variant,
-    .ns = "testthat"
+    env = env
   )
-  eval(snap_call, envir = inject_env)
   # nocov end
 }

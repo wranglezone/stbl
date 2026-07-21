@@ -1,5 +1,6 @@
 # stbl (development version)
 
+* `expect_pkg_message_classes()` and `expect_pkg_warning_classes()` now support assignments inside `object` (e.g. `result <- fn_that_warns()`). `expect_pkg_message_snapshot()` and `expect_pkg_warning_snapshot()` inherit the same fix (#234).
 * `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce stable snapshots when run under `devtools::test_coverage_active_file()`. `specify_cls()` and related `specify_*()` functions now also produce stable function-body snapshots under coverage (#253).
 * `to_chr()` now converts named functions to their string name instead of erroring. Package functions are returned as `"pkg::fn"` (e.g., `to_chr(mean)` returns `"base::mean"`). Anonymous functions still produce an informative error. This behavior extends to `to_chr_scalar()`, `stabilize_chr()`, and `stabilize_chr_scalar()` (#251).
 * New `are_fn_ish()` is a vectorized predicate that checks each element of a character vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and returns `TRUE` for functions and formulas. `are_function_ish()` is a synonym (#250).

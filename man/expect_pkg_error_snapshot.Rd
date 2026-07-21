@@ -30,9 +30,10 @@ output (e.g. temp paths) before snapshot comparison. Passed through to
 Passed through to \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}}.}
 
 \item{env}{(\code{environment}) The environment in which \code{object} should be
-evaluated. The actual evaluation will occur in a child of this environment,
-with \code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}} available even if this package is not
-attached.}
+evaluated. Assignments made inside \code{object} are visible to the caller after
+this function returns. \code{\link[=expect_pkg_error_classes]{expect_pkg_error_classes()}} is temporarily injected
+into \code{env} if it is not already findable, so this works even when this
+package is not attached.}
 }
 \value{
 The result of \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}}, invisibly.
