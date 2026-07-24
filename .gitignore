@@ -11,3 +11,5 @@ scratch.R
 .posit/assistant
 tests/testthat/_problems
 tests/testthat/testthat-problems.rds
+
+/.quarto/
