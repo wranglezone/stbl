@@ -1,22 +1,26 @@
 # stbl (development version)
 
-* `expect_pkg_message_classes()` and `expect_pkg_warning_classes()` now support assignments inside `object` (e.g. `result <- fn_that_warns()`). `expect_pkg_message_snapshot()` and `expect_pkg_warning_snapshot()` inherit the same fix (#234).
-* `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce stable snapshots when run under `devtools::test_coverage_active_file()`. `specify_cls()` and related `specify_*()` functions now also produce stable function-body snapshots under coverage (#253).
-* `to_chr()` now converts named functions to their string name instead of erroring. Package functions are returned as `"pkg::fn"` (e.g., `to_chr(mean)` returns `"base::mean"`). Anonymous functions still produce an informative error. This behavior extends to `to_chr_scalar()`, `stabilize_chr()`, and `stabilize_chr_scalar()` (#251).
-* New `are_fn_ish()` is a vectorized predicate that checks each element of a character vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and returns `TRUE` for functions and formulas. `are_function_ish()` is a synonym (#250).
-* New `is_fn_ish()` checks whether an object can be safely coerced to a function by `to_fn()`. `is_function_ish()` is a synonym (#250).
-* New `specify_fn()` creates a pre-configured `to_fn()` wrapper with arguments baked in. `specify_function()` is a synonym (#250).
-* `to_fn()` now uses a C implementation for character coercion. The error message for unknown function names now reads `"could not find function"` instead of `"object ... of mode 'function' was not found"` (#250).
+## Breaking changes
 
-* New function `to()` coerces `x` to the type of `.to` by dispatching on the class of `.to`. `stbl_to()` is also registered as a C callable in the public C API for use by packages such as tibblify (#182).
-* `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()` are now available as registered C callables, completing the `*_to_chr` and `*_to_fct` families in the C API (#241).
-* `to_df()` and `to_lst()` now error on unused `...` in built-in methods that would have previously silently discarded extra arguments (#200).
-* New `pkg_inform()` signals classed messages with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` tests that a message with the expected set of classes is thrown, and `expect_pkg_message_snapshot()` snapshot-tests the full message output in one step (#213).
-* New `pkg_warn()` signals classed warnings with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_warning_classes()` tests that a warning with the expected set of classes is thrown, and `expect_pkg_warning_snapshot()` snapshot-tests the full warning output in one step (#213).
-* The C functions underlying `are_*_ish()`, `to_*()`, and range checks are now registered as C callables, making them available to other packages. Include `inst/include/stbl.h` and `inst/include/stbl.c` in a dependent package and call `stbl_init_api()` at load time to use them. `stbl_*_to_*` C callables return a named list `list(result = <type>, valid = <lgl>)`, with the coerced value in `result` (with `NA` for invalid conversions) and a logical vector indicating whether the conversion was successful in `valid` (#235, #237).
-* Many `are_*_ish()` and `to_*()` methods are now implemented in C. Benchmarks show a significant speedup (about 3-20x) for large vectors (#217, #218, #219, #221, #226, #239).
+* `to_df()` and `to_lst()` now error if extra arguments are passed in `...`. Previously, these extra arguments were silently discarded (#200).
+* `to_chr()` now converts named functions to a string representing their name instead of erroring. Package functions are returned as `"pkg::fn"` (e.g., `to_chr(mean)` returns `"base::mean"`). Anonymous functions still produce an informative error. This behavior extends to `to_chr_scalar()`, `stabilize_chr()`, and `stabilize_chr_scalar()` (#251).
+
+## New functions
+
+* New `pkg_inform()` and `pkg_warn()` signal classed messages and warnings, respectively, with an opinionated class hierarchy, mirroring `pkg_abort()`. New `expect_pkg_message_classes()` and `expect_pkg_warning_classes()` test that the expected classes are thrown, and `expect_pkg_message_snapshot()` and `expect_pkg_warning_snapshot()` snapshot-test the full output in one step (#213).
+* New function `to()` coerces `x` to the type of its `.to` argument. `stbl_to()` is also registered as a C callable in a new public C API (#182).
+* New `to_fn()`, `are_fn_ish()`, and `is_fn_ish()` add the `fn` type family to stbl. `to_fn()` coerces strings and symbols to functions. `is_fn_ish()` checks whether a single object can be safely coerced to a function. `are_fn_ish()` checks each element of a character vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) (#250).
+
+## Bug fixes
+
+* `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce stable snapshots when run under `devtools::test_coverage_active_file()`. `specify_cls()` and related `specify_*()` functions now also produce stable function-body snapshots under coverage (#253).
+* `expect_pkg_message_classes()` and `expect_pkg_warning_classes()` now support assignments inside `object` (e.g. `result <- fn_that_warns()`). `expect_pkg_message_snapshot()` and `expect_pkg_warning_snapshot()` inherit the same fix (#234).
+
+## Other changes
+
+* `are_*_ish()`, `to_*()`, `stabilize_dbl()`, and `stabilize_int()` are all significantly faster for large vectors, with benchmarks showing roughly 3–20× throughput improvements (#217, #218, #219, #220, #221, #226, #239).
+* The `are_*_ish()`, `to_*()`, and range-check functions are now registered as C callables, as are the `*_to_chr` and `*_to_fct` families (`stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()`) (#235, #237, #241).
 * `is_fct_ish()` now accepts a `max_levels` argument to limit the number of unique non-`NA` levels (#231).
-* `stabilize_dbl()` and `stabilize_int()` now use a C implementation for min/max range checks, improving throughput for large vectors (#220).
 
 # stbl 0.3.0
 
