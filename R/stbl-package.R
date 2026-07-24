@@ -2,12 +2,12 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @useDynLib stbl, .registration = TRUE
 #' @importFrom cli format_inline
 #' @importFrom cli no
 #' @importFrom cli qty
 #' @importFrom glue glue
 #' @importFrom rlang %||%
+#' @importFrom rlang :=
 #' @importFrom rlang check_dots_empty0
 #' @importFrom rlang inject
 #' @importFrom rlang is_scalar_character
@@ -18,5 +18,6 @@
 #' @importFrom rlang try_fetch
 #' @importFrom vctrs vec_cast
 #' @importFrom vctrs vec_size
+#' @useDynLib stbl, .registration = TRUE
 ## usethis namespace: end
 NULL
