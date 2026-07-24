@@ -2,16 +2,62 @@
 
 ## stbl (development version)
 
-- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
+### Breaking changes
+
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
+  error if extra arguments are passed in `...`. Previously, these extra
+  arguments were silently discarded
+  ([\#200](https://github.com/wranglezone/stbl/issues/200)).
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  now converts named functions to a string representing their name
+  instead of erroring. Package functions are returned as `"pkg::fn"`
+  (e.g., `to_chr(mean)` returns `"base::mean"`). Anonymous functions
+  still produce an informative error. This behavior extends to
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  and
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  ([\#251](https://github.com/wranglezone/stbl/issues/251)).
+
+### New functions
+
+- New
+  [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
+  and
+  [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md)
+  signal classed messages and warnings, respectively, with an
+  opinionated class hierarchy, mirroring
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
+  New
+  [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
   and
   [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
-  now support assignments inside `object`
-  (e.g. `result <- fn_that_warns()`).
+  test that the expected classes are thrown, and
   [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
   and
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
-  inherit the same fix
-  ([\#234](https://github.com/wranglezone/stbl/issues/234)).
+  snapshot-test the full output in one step
+  ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+- New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+  coerces `x` to the type of its `.to` argument. `stbl_to()` is also
+  registered as a C callable in a new public C API
+  ([\#182](https://github.com/wranglezone/stbl/issues/182)).
+- New [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md),
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+  and
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  add the `fn` type family to stbl.
+  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) coerces
+  strings and symbols to functions.
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  checks whether a single object can be safely coerced to a function.
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
+  checks each element of a character vector for syntactic fn-ishness
+  (bare name or `"pkg::fn"` form)
+  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
+
+### Bug fixes
 
 - [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
   [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
@@ -23,120 +69,45 @@
   and related `specify_*()` functions now also produce stable
   function-body snapshots under coverage
   ([\#253](https://github.com/wranglezone/stbl/issues/253)).
-
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  now converts named functions to their string name instead of erroring.
-  Package functions are returned as `"pkg::fn"` (e.g., `to_chr(mean)`
-  returns `"base::mean"`). Anonymous functions still produce an
-  informative error. This behavior extends to
-  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
   and
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  ([\#251](https://github.com/wranglezone/stbl/issues/251)).
-
-- New
-  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
-  is a vectorized predicate that checks each element of a character
-  vector for syntactic fn-ishness (bare name or `"pkg::fn"` form) and
-  returns `TRUE` for functions and formulas.
-  [`are_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
-  is a synonym
-  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
-
-- New
-  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
-  checks whether an object can be safely coerced to a function by
-  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md).
-  [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
-  is a synonym
-  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
-
-- New `specify_fn()` creates a pre-configured
-  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) wrapper
-  with arguments baked in. `specify_function()` is a synonym
-  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
-
-- [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) now uses
-  a C implementation for character coercion. The error message for
-  unknown function names now reads `"could not find function"` instead
-  of `"object ... of mode 'function' was not found"`
-  ([\#250](https://github.com/wranglezone/stbl/issues/250)).
-
-- New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
-  coerces `x` to the type of `.to` by dispatching on the class of `.to`.
-  `stbl_to()` is also registered as a C callable in the public C API for
-  use by packages such as tibblify
-  ([\#182](https://github.com/wranglezone/stbl/issues/182)).
-
-- `stbl_chr_to_fct()`, `stbl_dbl_to_chr()`, `stbl_dbl_are_chrish()`,
-  `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`, `stbl_int_to_chr()`,
-  `stbl_int_are_chrish()`, `stbl_int_to_fct()`, `stbl_lgl_to_chr()`, and
-  `stbl_lgl_are_chrish()` are now available as registered C callables,
-  completing the `*_to_chr` and `*_to_fct` families in the C API
-  ([\#241](https://github.com/wranglezone/stbl/issues/241)).
-
-- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
-  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
-  error on unused `...` in built-in methods that would have previously
-  silently discarded extra arguments
-  ([\#200](https://github.com/wranglezone/stbl/issues/200)).
-
-- New
-  [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
-  signals classed messages with an opinionated class hierarchy,
-  mirroring
-  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
-  New
-  [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
-  tests that a message with the expected set of classes is thrown, and
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
-  snapshot-tests the full message output in one step
-  ([\#213](https://github.com/wranglezone/stbl/issues/213)).
-
-- New
-  [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md)
-  signals classed warnings with an opinionated class hierarchy,
-  mirroring
-  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
-  New
   [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
-  tests that a warning with the expected set of classes is thrown, and
+  now support assignments inside `object`
+  (e.g. `result <- fn_that_warns()`).
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
+  and
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
-  snapshot-tests the full warning output in one step
-  ([\#213](https://github.com/wranglezone/stbl/issues/213)).
+  inherit the same fix
+  ([\#234](https://github.com/wranglezone/stbl/issues/234)).
 
-- The C functions underlying `are_*_ish()`, `to_*()`, and range checks
-  are now registered as C callables, making them available to other
-  packages. Include `inst/include/stbl.h` and `inst/include/stbl.c` in a
-  dependent package and call `stbl_init_api()` at load time to use them.
-  `stbl_*_to_*` C callables return a named list
-  `list(result = <type>, valid = <lgl>)`, with the coerced value in
-  `result` (with `NA` for invalid conversions) and a logical vector
-  indicating whether the conversion was successful in `valid`
-  ([\#235](https://github.com/wranglezone/stbl/issues/235),
-  [\#237](https://github.com/wranglezone/stbl/issues/237)).
+### Other changes
 
-- Many `are_*_ish()` and `to_*()` methods are now implemented in C.
-  Benchmarks show a significant speedup (about 3-20x) for large vectors
+- `are_*_ish()`, `to_*()`,
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  and
+  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+  are all significantly faster for large vectors, with benchmarks
+  showing roughly 3–20× throughput improvements
   ([\#217](https://github.com/wranglezone/stbl/issues/217),
   [\#218](https://github.com/wranglezone/stbl/issues/218),
   [\#219](https://github.com/wranglezone/stbl/issues/219),
+  [\#220](https://github.com/wranglezone/stbl/issues/220),
   [\#221](https://github.com/wranglezone/stbl/issues/221),
   [\#226](https://github.com/wranglezone/stbl/issues/226),
   [\#239](https://github.com/wranglezone/stbl/issues/239)).
-
+- The `are_*_ish()`, `to_*()`, and range-check functions are now
+  registered as C callables, as are the `*_to_chr` and `*_to_fct`
+  families (`stbl_chr_to_fct()`, `stbl_dbl_to_chr()`,
+  `stbl_dbl_are_chrish()`, `stbl_fct_to_chr()`, `stbl_fct_are_chrish()`,
+  `stbl_int_to_chr()`, `stbl_int_are_chrish()`, `stbl_int_to_fct()`,
+  `stbl_lgl_to_chr()`, and `stbl_lgl_are_chrish()`)
+  ([\#235](https://github.com/wranglezone/stbl/issues/235),
+  [\#237](https://github.com/wranglezone/stbl/issues/237),
+  [\#241](https://github.com/wranglezone/stbl/issues/241)).
 - [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
   ([\#231](https://github.com/wranglezone/stbl/issues/231)).
-
-- [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
-  and
-  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
-  now use a C implementation for min/max range checks, improving
-  throughput for large vectors
-  ([\#220](https://github.com/wranglezone/stbl/issues/220)).
 
 ## stbl 0.3.0
 
