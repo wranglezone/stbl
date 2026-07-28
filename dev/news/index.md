@@ -2,6 +2,8 @@
 
 ## stbl (development version)
 
+## stbl 0.4.0
+
 ### Breaking changes
 
 - [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.3.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,28 +38,31 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="stbl-040">stbl 0.4.0<a class="anchor" aria-label="anchor" href="#stbl-040"></a></h2>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-4-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-0"></a></h3>
 <ul><li>
 <code><a href="../reference/to_df.html">to_df()</a></code> and <code><a href="../reference/to_lst.html">to_lst()</a></code> now error if extra arguments are passed in <code>...</code>. Previously, these extra arguments were silently discarded (<a href="https://github.com/wranglezone/stbl/issues/200" class="external-link">#200</a>).</li>
 <li>
 <code><a href="../reference/stabilize_chr.html">to_chr()</a></code> now converts named functions to a string representing their name instead of erroring. Package functions are returned as <code>"pkg::fn"</code> (e.g., <code>to_chr(mean)</code> returns <code>"base::mean"</code>). Anonymous functions still produce an informative error. This behavior extends to <code><a href="../reference/stabilize_chr.html">to_chr_scalar()</a></code>, <code><a href="../reference/stabilize_chr.html">stabilize_chr()</a></code>, and <code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code> (<a href="https://github.com/wranglezone/stbl/issues/251" class="external-link">#251</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h3>
+<h3 id="new-functions-0-4-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-4-0"></a></h3>
 <ul><li>New <code><a href="../reference/pkg_inform.html">pkg_inform()</a></code> and <code><a href="../reference/pkg_warn.html">pkg_warn()</a></code> signal classed messages and warnings, respectively, with an opinionated class hierarchy, mirroring <code><a href="../reference/pkg_abort.html">pkg_abort()</a></code>. New <code><a href="../reference/expect_pkg_message_classes.html">expect_pkg_message_classes()</a></code> and <code><a href="../reference/expect_pkg_warning_classes.html">expect_pkg_warning_classes()</a></code> test that the expected classes are thrown, and <code><a href="../reference/expect_pkg_message_snapshot.html">expect_pkg_message_snapshot()</a></code> and <code><a href="../reference/expect_pkg_warning_snapshot.html">expect_pkg_warning_snapshot()</a></code> snapshot-test the full output in one step (<a href="https://github.com/wranglezone/stbl/issues/213" class="external-link">#213</a>).</li>
 <li>New function <code><a href="../reference/to.html">to()</a></code> coerces <code>x</code> to the type of its <code>.to</code> argument. <code>stbl_to()</code> is also registered as a C callable in a new public C API (<a href="https://github.com/wranglezone/stbl/issues/182" class="external-link">#182</a>).</li>
 <li>New <code><a href="../reference/to_fn.html">to_fn()</a></code>, <code><a href="../reference/are_fn_ish.html">are_fn_ish()</a></code>, and <code><a href="../reference/are_fn_ish.html">is_fn_ish()</a></code> add the <code>fn</code> type family to stbl. <code><a href="../reference/to_fn.html">to_fn()</a></code> coerces strings and symbols to functions. <code><a href="../reference/are_fn_ish.html">is_fn_ish()</a></code> checks whether a single object can be safely coerced to a function. <code><a href="../reference/are_fn_ish.html">are_fn_ish()</a></code> checks each element of a character vector for syntactic fn-ishness (bare name or <code>"pkg::fn"</code> form) (<a href="https://github.com/wranglezone/stbl/issues/250" class="external-link">#250</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-4-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0"></a></h3>
 <ul><li>
 <code><a href="../reference/expect_pkg_error_snapshot.html">expect_pkg_error_snapshot()</a></code>, <code><a href="../reference/expect_pkg_message_snapshot.html">expect_pkg_message_snapshot()</a></code>, and <code><a href="../reference/expect_pkg_warning_snapshot.html">expect_pkg_warning_snapshot()</a></code> now produce stable snapshots when run under <code>devtools::test_coverage_active_file()</code>. <code><a href="../reference/specify_cls.html">specify_cls()</a></code> and related <code>specify_*()</code> functions now also produce stable function-body snapshots under coverage (<a href="https://github.com/wranglezone/stbl/issues/253" class="external-link">#253</a>).</li>
 <li>
 <code><a href="../reference/expect_pkg_message_classes.html">expect_pkg_message_classes()</a></code> and <code><a href="../reference/expect_pkg_warning_classes.html">expect_pkg_warning_classes()</a></code> now support assignments inside <code>object</code> (e.g. <code>result &lt;- fn_that_warns()</code>). <code><a href="../reference/expect_pkg_message_snapshot.html">expect_pkg_message_snapshot()</a></code> and <code><a href="../reference/expect_pkg_warning_snapshot.html">expect_pkg_warning_snapshot()</a></code> inherit the same fix (<a href="https://github.com/wranglezone/stbl/issues/234" class="external-link">#234</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-changes-development-version">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-development-version"></a></h3>
+<h3 id="other-changes-0-4-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-0-4-0"></a></h3>
 <ul><li>
 <code>are_*_ish()</code>, <code>to_*()</code>, <code><a href="../reference/stabilize_dbl.html">stabilize_dbl()</a></code>, and <code><a href="../reference/stabilize_int.html">stabilize_int()</a></code> are all significantly faster for large vectors, with benchmarks showing roughly 3–20× throughput improvements (<a href="https://github.com/wranglezone/stbl/issues/217" class="external-link">#217</a>, <a href="https://github.com/wranglezone/stbl/issues/218" class="external-link">#218</a>, <a href="https://github.com/wranglezone/stbl/issues/219" class="external-link">#219</a>, <a href="https://github.com/wranglezone/stbl/issues/220" class="external-link">#220</a>, <a href="https://github.com/wranglezone/stbl/issues/221" class="external-link">#221</a>, <a href="https://github.com/wranglezone/stbl/issues/226" class="external-link">#226</a>, <a href="https://github.com/wranglezone/stbl/issues/239" class="external-link">#239</a>).</li>
 <li>The <code>are_*_ish()</code>, <code>to_*()</code>, and range-check functions are now registered as C callables, as are the <code>*_to_chr</code> and <code>*_to_fct</code> families (<code>stbl_chr_to_fct()</code>, <code>stbl_dbl_to_chr()</code>, <code>stbl_dbl_are_chrish()</code>, <code>stbl_fct_to_chr()</code>, <code>stbl_fct_are_chrish()</code>, <code>stbl_int_to_chr()</code>, <code>stbl_int_are_chrish()</code>, <code>stbl_int_to_fct()</code>, <code>stbl_lgl_to_chr()</code>, and <code>stbl_lgl_are_chrish()</code>) (<a href="https://github.com/wranglezone/stbl/issues/235" class="external-link">#235</a>, <a href="https://github.com/wranglezone/stbl/issues/237" class="external-link">#237</a>, <a href="https://github.com/wranglezone/stbl/issues/241" class="external-link">#241</a>).</li>
