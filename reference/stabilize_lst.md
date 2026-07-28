@@ -150,6 +150,7 @@ The validated list.
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
 [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
 
 Other stabilization functions:

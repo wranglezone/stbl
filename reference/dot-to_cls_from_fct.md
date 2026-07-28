@@ -1,7 +1,6 @@
 # Coerce an object from a factor to a specific class
 
-A helper that wraps around a `to_*()` function to provide a standard way
-to coerce factors.
+Coerce an object from a factor to a specific class
 
 ## Usage
 

@@ -1,6 +1,6 @@
 # Coerce specified values to NA
 
-A helper that converts specified values in `x` to `NA`.
+Coerce specified values to NA
 
 ## Usage
 

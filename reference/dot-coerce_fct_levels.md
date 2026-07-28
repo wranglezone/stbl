@@ -1,6 +1,6 @@
 # Coerce to factor with specified levels
 
-A wrapper around level-coercion helpers.
+Coerce to factor with specified levels
 
 ## Usage
 

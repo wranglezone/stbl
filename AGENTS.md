@@ -21,13 +21,13 @@ intelligently coerce compatible types (e.g., `"1"` to `1L`).
 
 ### Function families
 
-| Family          | Purpose                             | Speed  | Example                                     |
-|-----------------|-------------------------------------|--------|---------------------------------------------|
-| `to_*()`        | Fast type coercion                  | Fast   | `to_int("1")` → `1L`                        |
-| `is_*_ish()`    | Check if coercible (single logical) | Fast   | `is_int_ish(1.0)` → `TRUE`                  |
-| `are_*_ish()`   | Check if coercible (element-wise)   | Fast   | `are_int_ish(c(1, 1.5))` → `c(TRUE, FALSE)` |
-| `stabilize_*()` | Comprehensive validation            | Slower | `stabilize_int(x, min_value = 0)`           |
-| `specify_*()`   | Create pre-configured validators    | N/A    | `specify_int(min_value = 0)`                |
+| Family | Purpose | Speed | Example |
+|----|----|----|----|
+| `to_*()` | Fast type coercion | Fast | `to_int("1")` → `1L` |
+| `is_*_ish()` | Check if coercible (single logical) | Fast | `is_int_ish(1.0)` → `TRUE` |
+| `are_*_ish()` | Check if coercible (element-wise) | Fast | `are_int_ish(c(1, 1.5))` → `c(TRUE, FALSE)` |
+| `stabilize_*()` | Comprehensive validation | Slower | `stabilize_int(x, min_value = 0)` |
+| `specify_*()` | Create pre-configured validators | N/A | `specify_int(min_value = 0)` |
 
 **Supported types (but future development may add more):**
 `chr`/`character`, `dbl`/`double`, `int`/`integer`, `lgl`/`logical`,
@@ -127,12 +127,12 @@ Only report what you have changed.
 
 ## Skills
 
-| Triggers                                          | Path                                     |
-|---------------------------------------------------|------------------------------------------|
-| create GitHub issues                              | @.github/skills/create-issue/SKILL.md    |
-| document functions                                | @.github/skills/document/SKILL.md        |
-| from github                                       | @.github/skills/github/SKILL.md          |
-| implement issue / work on \#NNN                   | @.github/skills/implement-issue/SKILL.md |
-| writing R functions / API design / error handling | @.github/skills/r-code/SKILL.md          |
-| search / rewrite code                             | @.github/skills/search-code/SKILL.md     |
-| writing or reviewing tests                        | @.github/skills/tdd-workflow/SKILL.md    |
+| Triggers | Path |
+|----|----|
+| create GitHub issues | @.github/skills/create-issue/SKILL.md |
+| document functions | @.github/skills/document/SKILL.md |
+| from github | @.github/skills/github/SKILL.md |
+| implement issue / work on \#NNN | @.github/skills/implement-issue/SKILL.md |
+| writing R functions / API design / error handling | @.github/skills/r-code/SKILL.md |
+| search / rewrite code | @.github/skills/search-code/SKILL.md |
+| writing or reviewing tests | @.github/skills/tdd-workflow/SKILL.md |

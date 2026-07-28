@@ -8,15 +8,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/v0.3.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/main/DESCRIPTION)
 
 Harmon J (2026). *stbl: Stabilize Function Arguments*. R package version
-0.3.0, <https://stbl.wrangle.zone/>.
+0.4.0, <https://stbl.wrangle.zone/>.
 
     @Manual{,
       title = {stbl: Stabilize Function Arguments},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.3.0},
+      note = {R package version 0.4.0},
       url = {https://stbl.wrangle.zone/},
     }

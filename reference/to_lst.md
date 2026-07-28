@@ -13,7 +13,7 @@ to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 # S3 method for class 'list'
-to_lst(x, ...)
+to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 # Default S3 method
 to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
@@ -90,4 +90,5 @@ This function has important distinctions from
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)

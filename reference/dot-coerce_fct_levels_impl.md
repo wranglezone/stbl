@@ -1,7 +1,6 @@
 # Core implementation for applying factor levels
 
-Checks for values in `x` that are not present in `levels` and throws an
-error if any are found.
+Core implementation for applying factor levels
 
 ## Usage
 

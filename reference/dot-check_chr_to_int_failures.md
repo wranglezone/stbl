@@ -5,14 +5,15 @@ Check for character to integer coercion failures
 ## Usage
 
 ``` r
-.check_chr_to_int_failures(x, x_class, x_arg, call)
+.check_chr_to_int_failures(res, x_class, x_arg, call)
 ```
 
 ## Arguments
 
-- x:
+- res:
 
-  The argument to stabilize.
+  A list returned by `stbl_chr_to_int`, with elements `result`,
+  `non_number`, and `bad_precision`.
 
 - x_class:
 
@@ -35,4 +36,4 @@ Check for character to integer coercion failures
 
 ## Value
 
-`NULL`, invisibly, if `x` passes all checks.
+`NULL` invisibly (called for side effects).

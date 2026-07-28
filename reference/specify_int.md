@@ -123,7 +123,8 @@ provide additional context or functionality.
 
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
-[`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
+[`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),

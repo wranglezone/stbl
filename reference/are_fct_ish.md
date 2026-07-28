@@ -13,11 +13,11 @@ elements of its input can be safely coerced to a factor.
 ``` r
 are_fct_ish(x, ..., levels = NULL, to_na = character())
 
-is_fct_ish(x, ...)
+is_fct_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 are_factor_ish(x, ..., levels = NULL, to_na = character())
 
-is_factor_ish(x, ...)
+is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 # Default S3 method
 are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
@@ -41,6 +41,11 @@ are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
 
   `(character)` Values to convert to `NA`.
 
+- max_levels:
+
+  `(length-1 numeric)` Maximum number of distinct non-`NA` values
+  allowed across the whole vector after applying `to_na`.
+
 - depth:
 
   `(length-1 integer)` Current recursion depth. Do not manually set this
@@ -56,11 +61,13 @@ for the entire vector.
 
 Other factor functions:
 [`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
-[`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
+[`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
 [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
 
@@ -89,6 +96,10 @@ are_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #> [1] TRUE TRUE TRUE
 is_fct_ish(c("a", "b", "z"), levels = c("a", "b"), to_na = "z")
 #> [1] TRUE
+
+# `max_levels` limits distinct non-`NA` values across the whole vector.
+is_fct_ish(c("a", "b", "c"), max_levels = 2)
+#> [1] FALSE
 
 # Factors are also checked against the specified levels.
 are_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))

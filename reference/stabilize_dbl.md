@@ -287,7 +287,8 @@ The argument as a double vector.
 
 Other double functions:
 [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
-[`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md)
+[`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),

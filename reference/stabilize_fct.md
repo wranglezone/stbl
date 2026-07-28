@@ -256,7 +256,8 @@ These functions have important differences from
 
 Other factor functions:
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
-[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md)
+[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),

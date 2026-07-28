@@ -1,6 +1,6 @@
 # Safely find failure locations in a vector
 
-Run `check_fn(x, check_value)` if `check_value` isn't `NULL`.
+Safely find failure locations in a vector
 
 ## Usage
 

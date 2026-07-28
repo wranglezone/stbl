@@ -1,5 +1,10 @@
 # Package index
 
+## to
+
+- [`to()`](https://stbl.wrangle.zone/reference/to.md) : Convert a value
+  to a target type
+
 ## character vectors
 
 - [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md)
@@ -106,6 +111,8 @@
   [`to_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
   [`to_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
   : Ensure an integer argument meets expectations
+- [`to()`](https://stbl.wrangle.zone/reference/to.md) : Convert a value
+  to a target type
 
 ## logical vectors
 
@@ -147,6 +154,22 @@
   [`to_data_frame()`](https://stbl.wrangle.zone/reference/to_df.md) :
   Ensure a data frame argument meets expectations
 
+## functions
+
+- [`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  [`are_function_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  [`is_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  [`is_function_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  : Check if an object can be safely coerced to a function
+- [`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md)
+  [`to_function()`](https://stbl.wrangle.zone/reference/to_fn.md) :
+  Coerce to a function
+- [`to()`](https://stbl.wrangle.zone/reference/to.md) : Convert a value
+  to a target type
+- [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
+  [`to_list()`](https://stbl.wrangle.zone/reference/to_lst.md) : Ensure
+  a list argument meets expectations
+
 ## lists
 
 - [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
@@ -179,3 +202,15 @@
   : Test package error classes
 - [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_error_snapshot.md)
   : Snapshot-test a package error
+- [`pkg_warn()`](https://stbl.wrangle.zone/reference/pkg_warn.md) :
+  Signal a warning with standards applied
+- [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_classes.md)
+  : Test package warning classes
+- [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_snapshot.md)
+  : Snapshot-test a package warning
+- [`pkg_inform()`](https://stbl.wrangle.zone/reference/pkg_inform.md) :
+  Signal a message with standards applied
+- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_message_classes.md)
+  : Test package message classes
+- [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_message_snapshot.md)
+  : Snapshot-test a package message

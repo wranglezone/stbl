@@ -1,7 +1,6 @@
 # Check if an object is a scalar
 
-Checks if an object is a scalar, allowing for `NULL` and zero-length
-vectors if specified.
+Check if an object is a scalar
 
 ## Usage
 
@@ -51,4 +50,4 @@ vectors if specified.
 
 ## Value
 
-`NULL`, invisibly, if `x` passes the check.
+`NULL` invisibly (called for side effects).

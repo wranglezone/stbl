@@ -1,7 +1,6 @@
 # Ensure an argument is NULL
 
-If `allow_null` is `TRUE`, coerce `x` to `NULL`. Otherwise throw an
-informative error.
+Ensure an argument is NULL
 
 ## Usage
 

@@ -48,12 +48,14 @@ for the entire vector.
 
 Other logical functions:
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
+[`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
 [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md)
 
 ## Examples

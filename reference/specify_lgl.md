@@ -83,7 +83,8 @@ provide additional context or functionality.
 
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
+[`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),

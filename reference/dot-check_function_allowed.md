@@ -37,4 +37,4 @@ Check whether functions are allowed
 
 ## Value
 
-`NULL`, invisibly, if `x` passes the check.
+`NULL` invisibly (called for side effects).

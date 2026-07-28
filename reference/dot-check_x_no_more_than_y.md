@@ -42,4 +42,4 @@ Check that one value is not greater than another
 
 ## Value
 
-`NULL`, invisibly, if `x` is not greater than `y`.
+`NULL` invisibly (called for side effects).

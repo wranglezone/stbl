@@ -68,11 +68,13 @@ for the entire vector.
 
 Other double functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
-[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
 

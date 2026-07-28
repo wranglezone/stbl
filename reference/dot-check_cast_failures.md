@@ -41,3 +41,7 @@ Check for coercion failures and stop if any are found
 
   `(environment)` The execution environment to mention as the source of
   error messages.
+
+## Value
+
+`NULL` invisibly (called for side effects).

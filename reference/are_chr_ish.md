@@ -48,11 +48,13 @@ for the entire vector.
 
 Other character functions:
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-[`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
+[`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other check functions:
 [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
 

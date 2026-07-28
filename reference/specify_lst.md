@@ -88,6 +88,7 @@ provide additional context or functionality.
 Other list functions:
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
 [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
 
 Other specification functions:

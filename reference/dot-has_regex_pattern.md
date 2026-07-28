@@ -1,9 +1,6 @@
 # Detect a regex pattern in a character vector
 
-A wrapper around
-[`stringi::stri_detect_regex()`](https://rdrr.io/pkg/stringi/man/stri_detect.html)
-and [`base::grepl()`](https://rdrr.io/r/base/grep.html) that prefers the
-`stringi` implementation if the package is available.
+Detect a regex pattern in a character vector
 
 ## Usage
 

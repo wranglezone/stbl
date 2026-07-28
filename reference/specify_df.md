@@ -82,6 +82,7 @@ provide additional context or functionality.
 
 Other data frame functions:
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md)
 
 Other specification functions:

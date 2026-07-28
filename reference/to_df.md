@@ -70,7 +70,8 @@ The argument as a data frame.
 
 Other data frame functions:
 [`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
-[`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
+[`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 ## Examples
 

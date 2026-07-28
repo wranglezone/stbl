@@ -68,12 +68,14 @@ for the entire vector.
 
 Other integer functions:
 [`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
-[`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
+[`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
 [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
 
 ## Examples
