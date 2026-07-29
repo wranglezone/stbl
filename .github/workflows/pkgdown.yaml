@@ -7,6 +7,8 @@ on:
     branches: [main, dev]
   pull_request:
     types: [opened, synchronize, reopened, closed]
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       mode:
@@ -31,11 +33,9 @@ jobs:
   call-pkgdown-core:
     uses: Gilead-BioStats/gsm.utils/.github/workflows/pkgdown-core.yaml@actions-v1
     with:
-      # These inputs only actually matter for workflow_dispatch; otherwise
-      # they're automatically determined.
       mode: ${{ inputs.mode }}
       pr-number: ${{ inputs.pr-number }}
-      pkgdown-dev-mode: ${{ inputs.pkgdown-dev-mode == true }}
+      pkgdown-dev-mode: ${{ inputs.pkgdown-dev-mode == true || github.event_name != 'release' && github.event_name != 'workflow_dispatch' }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       app-id: ${{ secrets.PKGDOWN_APP_ID }}
