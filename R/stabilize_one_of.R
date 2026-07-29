@@ -1,13 +1,14 @@
 #' Try to coerce or validate x as one of several types
 #'
-#' `stabilize_one_of()` attempts to validate and coerce `x` using each
-#' function in `...` in order. It returns the result of the first function
-#' that succeeds. If all functions fail, an informative error that combines the
-#' individual failure messages is thrown. `stabilise_one_of()` is a synonym.
+#' @description `stabilize_one_of()` attempts to validate and coerce `x` using
+#'   each function in `...` in order. It returns the result of the first
+#'   function that succeeds. If all functions fail, an informative error that
+#'   combines the individual failure messages is thrown. `stabilise_one_of()` is
+#'   a synonym.
 #'
-#' `to_one_of()` is analogous to [to()]: it tries to coerce `x` to each type
-#' given in `...` (as a prototype such as `integer()` or `character()`) and
-#' returns the first successful result.
+#'   `to_one_of()` is analogous to [to()]: it tries to coerce `x` to each type
+#'   given in `...` (as a prototype such as `integer()` or `character()`) and
+#'   returns the first successful result.
 #'
 #' @param ... For `stabilize_one_of()`: unnamed stabilizer or coercion
 #'   functions, such as `stabilize_*` functions ([stabilize_chr()], etc.),
@@ -32,8 +33,11 @@
 #' # Coerces via the first matching function ("1" -> 1L)
 #' stabilize_one_of("1", stabilize_int, stabilize_chr)
 #'
+#' # A mixed list falls through to stabilize_chr because "a" can't be integer
+#' stabilize_one_of(list(1L, "a"), stabilize_int, stabilize_chr)
+#'
 #' # Errors with a combined message when all functions fail
-#' try(stabilize_one_of(list(), stabilize_int, stabilize_chr))
+#' try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
 stabilize_one_of <- function(
   x,
   ...,
