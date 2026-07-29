@@ -1,5 +1,9 @@
 # stbl (development version)
 
+## New functions
+
+* New `stabilize_one_of()` (and `stabilise_one_of()`) validates `x` by trying each unnamed stabilizer function in `...` in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New `to_one_of()` works analogously, accepting type prototypes (e.g. `integer()`, `character()`) in `...` and dispatching to [to()] (#215).
+
 # stbl 0.4.0
 
 ## Breaking changes
