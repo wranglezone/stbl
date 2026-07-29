@@ -52,6 +52,7 @@ Other list functions:
 \code{\link[=to_lst]{to_lst()}}
 
 Other stabilization functions:
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
 \code{\link[=stabilize_dbl]{stabilize_dbl()}},

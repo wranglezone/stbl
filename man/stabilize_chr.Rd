@@ -275,6 +275,7 @@ Other character functions:
 \code{\link[=to]{to()}}
 
 Other stabilization functions:
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_dbl]{stabilize_dbl()}},
 \code{\link[=stabilize_df]{stabilize_df()}},
