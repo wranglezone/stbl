@@ -8,7 +8,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
   release:
-    types: [released]
+    types: [published]
   workflow_dispatch:
     inputs:
       mode:
@@ -35,7 +35,7 @@ jobs:
     with:
       mode: ${{ inputs.mode }}
       pr-number: ${{ inputs.pr-number }}
-      pkgdown-dev-mode: ${{ inputs.pkgdown-dev-mode == true || github.event_name != 'release' }}
+      pkgdown-dev-mode: ${{ inputs.pkgdown-dev-mode == true || github.event_name != 'release' && github.event_name != 'workflow_dispatch' }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       app-id: ${{ secrets.PKGDOWN_APP_ID }}
