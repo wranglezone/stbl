@@ -6,6 +6,13 @@ that succeeds. If all functions fail, an informative error that combines
 the individual failure messages is thrown. `stabilise_one_of()` is a
 synonym.
 
+`to_one_of()` is analogous to
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
+coerce `x` to each type given in `...` (as a prototype such as
+[`integer()`](https://rdrr.io/r/base/integer.html) or
+[`character()`](https://rdrr.io/r/base/character.html)) and returns the
+first successful result.
+
 ## Usage
 
 ``` r
@@ -79,15 +86,6 @@ to_one_of(
 `x` coerced or validated by the first successful function or prototype
 in `...`.
 
-## Details
-
-`to_one_of()` is analogous to
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
-coerce `x` to each type given in `...` (as a prototype such as
-[`integer()`](https://rdrr.io/r/base/integer.html) or
-[`character()`](https://rdrr.io/r/base/character.html)) and returns the
-first successful result.
-
 ## See also
 
 Other stabilization functions:
@@ -116,9 +114,17 @@ stabilize_one_of("a", stabilize_int, stabilize_chr)
 stabilize_one_of("1", stabilize_int, stabilize_chr)
 #> [1] 1
 
+# A mixed list falls through to stabilize_chr because "a" can't be integer
+stabilize_one_of(list(1L, "a"), stabilize_int, stabilize_chr)
+#> [1] "1" "a"
+
 # Errors with a combined message when all functions fail
-try(stabilize_one_of(list(), stabilize_int, stabilize_chr))
-#> integer(0)
+try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
+#> Error in eval(expr, envir) : 
+#>   `list(1, TRUE, "23", "maybe")` must match at least one of the provided
+#> stabilizers.
+#> ✖ Can't coerce `list(1, TRUE, "23", "maybe")` <list> to <logical>.
+#> ✖ Can't coerce `list(1, TRUE, "23", "maybe")` <list> to <integer>.
 # to_one_of() uses prototypes instead of functions
 to_one_of(1L, integer(), character())
 #> [1] 1
