@@ -1,5 +1,3 @@
-# to_one_of() ----
-
 test_that("to_one_of() returns x unchanged when first prototype matches (#215)", {
   expect_identical(to_one_of(1L, integer(), character()), 1L)
 })

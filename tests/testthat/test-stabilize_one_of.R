@@ -1,5 +1,3 @@
-# stabilize_one_of() ----
-
 test_that("stabilize_one_of() returns x unchanged when first function succeeds (#215)", {
   expect_identical(stabilize_one_of(1L, stabilize_int, stabilize_chr), 1L)
 })
