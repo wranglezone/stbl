@@ -4,6 +4,8 @@
 
 ## stbl 0.4.0
 
+CRAN release: 2026-07-28
+
 ### Breaking changes
 
 - [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
