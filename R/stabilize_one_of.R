@@ -1,18 +1,18 @@
 #' Try to coerce or validate x as one of several types
 #'
-#' `stabilize_any_of()` attempts to validate and coerce `x` using each
+#' `stabilize_one_of()` attempts to validate and coerce `x` using each
 #' function in `...` in order. It returns the result of the first function
 #' that succeeds. If all functions fail, an informative error that combines the
-#' individual failure messages is thrown. `stabilise_any_of()` is a synonym.
+#' individual failure messages is thrown. `stabilise_one_of()` is a synonym.
 #'
-#' `to_any_of()` is analogous to [to()]: it tries to coerce `x` to each type
+#' `to_one_of()` is analogous to [to()]: it tries to coerce `x` to each type
 #' given in `...` (as a prototype such as `integer()` or `character()`) and
 #' returns the first successful result.
 #'
-#' @param ... For `stabilize_any_of()`: unnamed stabilizer or coercion
+#' @param ... For `stabilize_one_of()`: unnamed stabilizer or coercion
 #'   functions, such as `stabilize_*` functions ([stabilize_chr()], etc.),
 #'   `to_*` functions ([to_chr()], etc.), or functions produced by `specify_*()`
-#'   calls ([specify_chr()], etc.). For `to_any_of()`: prototype objects (e.g.
+#'   calls ([specify_chr()], etc.). For `to_one_of()`: prototype objects (e.g.
 #'   `integer()`, `character()`) that determine the target types to try, passed
 #'   as the `.to` argument of [to()].
 #' @inheritParams .shared-params
@@ -24,17 +24,17 @@
 #'
 #' @examples
 #' # Returns x unchanged when the first function succeeds
-#' stabilize_any_of(1L, stabilize_int, stabilize_chr)
+#' stabilize_one_of(1L, stabilize_int, stabilize_chr)
 #'
 #' # Falls through to stabilize_chr when stabilize_int fails
-#' stabilize_any_of("a", stabilize_int, stabilize_chr)
+#' stabilize_one_of("a", stabilize_int, stabilize_chr)
 #'
 #' # Coerces via the first matching function ("1" -> 1L)
-#' stabilize_any_of("1", stabilize_int, stabilize_chr)
+#' stabilize_one_of("1", stabilize_int, stabilize_chr)
 #'
 #' # Errors with a combined message when all functions fail
-#' try(stabilize_any_of(list(), stabilize_int, stabilize_chr))
-stabilize_any_of <- function(
+#' try(stabilize_one_of(list(), stabilize_int, stabilize_chr))
+stabilize_one_of <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -52,19 +52,19 @@ stabilize_any_of <- function(
 }
 
 #' @export
-#' @rdname stabilize_any_of
-stabilise_any_of <- stabilize_any_of
+#' @rdname stabilize_one_of
+stabilise_one_of <- stabilize_one_of
 
-#' @rdname stabilize_any_of
+#' @rdname stabilize_one_of
 #' @export
 #'
 #' @examples
-#' # to_any_of() uses prototypes instead of functions
-#' to_any_of(1L, integer(), character())
-#' to_any_of("a", integer(), character())
-#' to_any_of("1", integer(), character())
-#' try(to_any_of(list(), integer(), character()))
-to_any_of <- function(
+#' # to_one_of() uses prototypes instead of functions
+#' to_one_of(1L, integer(), character())
+#' to_one_of("a", integer(), character())
+#' to_one_of("1", integer(), character())
+#' try(to_one_of(list(), integer(), character()))
+to_one_of <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -89,7 +89,7 @@ to_any_of <- function(
     errors <- c(errors, list(result))
   }
 
-  .stop_cant_stabilize_any_of(errors = errors, x_arg = x_arg, call = call)
+  .stop_cant_stabilize_one_of(errors = errors, x_arg = x_arg, call = call)
 }
 
 # helpers ----
@@ -107,7 +107,7 @@ to_any_of <- function(
   .stbl_abort(
     c(
       "At least one function must be provided via `...`.",
-      i = "Supply stabilizer functions, or prototypes for `to_any_of()`."
+      i = "Supply stabilizer functions, or prototypes for `to_one_of()`."
     ),
     subclass = "empty_specs",
     call = .call
@@ -157,7 +157,7 @@ to_any_of <- function(
     }
     errors <- c(errors, list(result))
   }
-  .stop_cant_stabilize_any_of(errors = errors, x_arg = x_arg, call = call)
+  .stop_cant_stabilize_one_of(errors = errors, x_arg = x_arg, call = call)
 }
 
 #' Signal a combined error when no function succeeds
@@ -166,7 +166,7 @@ to_any_of <- function(
 #' @inheritParams stabilize_lst
 #' @returns Does not return; throws an error.
 #' @keywords internal
-.stop_cant_stabilize_any_of <- function(errors, x_arg, call) {
+.stop_cant_stabilize_one_of <- function(errors, x_arg, call) {
   # Take the first line of each error message to avoid deeply nested output.
   first_lines <- vapply(
     errors,
@@ -181,6 +181,6 @@ to_any_of <- function(
     x_arg = x_arg,
     additional_msg = additional_msg,
     call = call,
-    subclass = "cant_stabilize_any_of"
+    subclass = "cant_stabilize_one_of"
   )
 }

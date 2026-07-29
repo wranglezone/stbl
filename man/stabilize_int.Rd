@@ -300,7 +300,6 @@ Other integer functions:
 \code{\link[=to]{to()}}
 
 Other stabilization functions:
-\code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
 \code{\link[=stabilize_dbl]{stabilize_dbl()}},
@@ -308,6 +307,7 @@ Other stabilization functions:
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
 \code{\link[=stabilize_present]{stabilize_present()}}
 }
 \concept{integer functions}
