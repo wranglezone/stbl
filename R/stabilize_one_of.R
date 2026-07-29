@@ -127,6 +127,29 @@ stabilise_one_of <- stabilize_one_of
   .stop_cant_stabilize_one_of(errors = errors, x_arg = x_arg, call = call)
 }
 
+#' Extract a summary line from a stabilizer error condition
+#'
+#' Returns the first line of the condition message. If the condition carries a
+#' `"Locations:"` bullet in its `body` (as set by [.stop_incompatible()]), that
+#' text is appended in parentheses so callers can see which elements failed.
+#'
+#' @param e An error condition.
+#' @returns A single character string.
+#' @keywords internal
+.extract_stabilizer_msg <- function(e) {
+  first_line <- strsplit(conditionMessage(e), "\n")[[1L]][[1L]]
+  body <- e$body
+  if (!is.null(body)) {
+    # body is a named character vector; "*" bullets from .stop_incompatible()
+    # carry the "Locations: ..." text.
+    loc_idx <- which(names(body) == "*" & startsWith(body, "Locations:"))
+    if (length(loc_idx) > 0L) {
+      first_line <- paste0(first_line, " (", body[[loc_idx[[1L]]]], ")")
+    }
+  }
+  first_line
+}
+
 #' Signal a combined error when no function succeeds
 #'
 #' @param errors `(list)` List of error conditions from failed attempts.
@@ -134,15 +157,8 @@ stabilise_one_of <- stabilize_one_of
 #' @returns Does not return; throws an error.
 #' @keywords internal
 .stop_cant_stabilize_one_of <- function(errors, x_arg, call) {
-  # Take the first line of each error message to avoid deeply nested output.
-  first_lines <- vapply(
-    errors,
-    \(e) {
-      strsplit(conditionMessage(e), "\n")[[1L]][[1L]]
-    },
-    character(1L)
-  )
-  additional_msg <- stats::setNames(first_lines, rep("x", length(first_lines)))
+  msgs <- vapply(errors, .extract_stabilizer_msg, character(1L))
+  additional_msg <- stats::setNames(msgs, rep("x", length(msgs)))
   .stop_must(
     "must match at least one of the provided stabilizers.",
     x_arg = x_arg,

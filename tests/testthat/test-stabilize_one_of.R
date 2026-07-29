@@ -46,6 +46,21 @@ test_that("stabilize_one_of() errors with a combined message when all functions 
   )
 })
 
+test_that("stabilize_one_of() includes Locations from incompatible_type errors (#215)", {
+  # "a" fails lgl at position 1; "a" and "2" fail int at positions 1 and 3
+  x <- c("a", "2", "TRUE")
+  expect_pkg_error_snapshot(
+    stabilize_one_of(x, stabilize_lgl, stabilize_int),
+    "stbl",
+    "cant_stabilize_one_of"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_one_of(x, stabilize_lgl, stabilize_int),
+    "stbl",
+    "cant_stabilize_one_of"
+  )
+})
+
 test_that("stabilize_one_of() errors when ... is empty (#215)", {
   expect_pkg_error_snapshot(
     stabilize_one_of(1L),

@@ -23,6 +23,30 @@
       x `val` must not be <NULL>.
       x `val` must not be <NULL>.
 
+# stabilize_one_of() includes Locations from incompatible_type errors (#215)
+
+    Code
+      (expect_pkg_error_classes(stabilize_one_of(x, stabilize_lgl, stabilize_int),
+      "stbl", "cant_stabilize_one_of"))
+    Output
+      <error/stbl-error-cant_stabilize_one_of>
+      Error:
+      ! `x` must match at least one of the provided stabilizers.
+      x `x` <character> must be coercible to <logical> (Locations: 1)
+      x `x` <character> must be coercible to <integer> (Locations: 1 and 3)
+
+---
+
+    Code
+      (expect_pkg_error_classes(wrapped_stabilize_one_of(x, stabilize_lgl,
+        stabilize_int), "stbl", "cant_stabilize_one_of"))
+    Output
+      <error/stbl-error-cant_stabilize_one_of>
+      Error in `wrapped_stabilize_one_of()`:
+      ! `val` must match at least one of the provided stabilizers.
+      x `val` <character> must be coercible to <logical> (Locations: 1)
+      x `val` <character> must be coercible to <integer> (Locations: 1 and 3)
+
 # stabilize_one_of() errors when ... is empty (#215)
 
     Code
