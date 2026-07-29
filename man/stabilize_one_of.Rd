@@ -58,12 +58,12 @@ match the original class.}
 prototype in \code{...}.
 }
 \description{
-\code{stabilize_one_of()} attempts to validate and coerce \code{x} using each
-function in \code{...} in order. It returns the result of the first function
-that succeeds. If all functions fail, an informative error that combines the
-individual failure messages is thrown. \code{stabilise_one_of()} is a synonym.
-}
-\details{
+\code{stabilize_one_of()} attempts to validate and coerce \code{x} using
+each function in \code{...} in order. It returns the result of the first
+function that succeeds. If all functions fail, an informative error that
+combines the individual failure messages is thrown. \code{stabilise_one_of()} is
+a synonym.
+
 \code{to_one_of()} is analogous to \code{\link[=to]{to()}}: it tries to coerce \code{x} to each type
 given in \code{...} (as a prototype such as \code{integer()} or \code{character()}) and
 returns the first successful result.
@@ -78,8 +78,11 @@ stabilize_one_of("a", stabilize_int, stabilize_chr)
 # Coerces via the first matching function ("1" -> 1L)
 stabilize_one_of("1", stabilize_int, stabilize_chr)
 
+# A mixed list falls through to stabilize_chr because "a" can't be integer
+stabilize_one_of(list(1L, "a"), stabilize_int, stabilize_chr)
+
 # Errors with a combined message when all functions fail
-try(stabilize_one_of(list(), stabilize_int, stabilize_chr))
+try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
 # to_one_of() uses prototypes instead of functions
 to_one_of(1L, integer(), character())
 to_one_of("a", integer(), character())
