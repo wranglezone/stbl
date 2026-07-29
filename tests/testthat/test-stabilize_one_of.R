@@ -10,6 +10,11 @@ test_that("stabilize_one_of() coerces via the first matching function (#215)", {
 test_that("stabilize_one_of() falls through to the next function when first fails (#215)", {
   # "a" can't become integer, so stabilize_chr is tried
   expect_identical(stabilize_one_of("a", stabilize_int, stabilize_chr), "a")
+  # "a" in the list blocks stabilize_int for the whole vector, falling through to stabilize_chr
+  expect_identical(
+    stabilize_one_of(list(1L, "a"), stabilize_int, stabilize_chr),
+    c("1", "a")
+  )
 })
 
 test_that("stabilize_one_of() works with specify_* functions (#215)", {

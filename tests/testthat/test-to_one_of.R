@@ -8,6 +8,11 @@ test_that("to_one_of() coerces via the first matching prototype (#215)", {
 
 test_that("to_one_of() falls through to the next prototype when first fails (#215)", {
   expect_identical(to_one_of("a", integer(), character()), "a")
+  # "a" in the list blocks integer() for the whole vector, falling through to character()
+  expect_identical(
+    to_one_of(list("1", "a"), integer(), character()),
+    c("1", "a")
+  )
 })
 
 test_that("to_one_of() errors with a combined message when all prototypes fail (#215)", {
