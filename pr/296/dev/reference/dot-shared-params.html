@@ -110,6 +110,16 @@ the integer index of the factor.</p></dd>
 set this parameter.</p></dd>
 
 
+<dt id="arg-due-to">due_to<a class="anchor" aria-label="anchor" href="#arg-due-to"></a></dt>
+<dd><p><code>(length-1 character)</code> A string describing the reason for the
+failure.</p></dd>
+
+
+<dt id="arg-failures">failures<a class="anchor" aria-label="anchor" href="#arg-failures"></a></dt>
+<dd><p><code>(logical)</code> A logical vector indicating which elements
+failed.</p></dd>
+
+
 <dt id="arg-is-rlang-cls-scalar">is_rlang_cls_scalar<a class="anchor" aria-label="anchor" href="#arg-is-rlang-cls-scalar"></a></dt>
 <dd><p><code>(function)</code> An <code>is_scalar_*()</code> function from
 rlang, used for a fast path if <code>x</code> is already the right type.</p></dd>
@@ -170,6 +180,10 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is <em>not</em> matched,
 attach a <code>negate</code> attribute set to <code>TRUE</code>. If a complex regex pattern
 throws an error, try installing the stringi package.</p></dd>
+
+
+<dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
+<dd><p>The target object for the coercion.</p></dd>
 
 
 <dt id="arg-to-class">to_class<a class="anchor" aria-label="anchor" href="#arg-to-class"></a></dt>
