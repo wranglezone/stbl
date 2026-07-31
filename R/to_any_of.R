@@ -1,13 +1,13 @@
-#' @rdname stabilize_one_of
+#' @rdname stabilize_any_of
 #' @export
 #'
 #' @examples
-#' # to_one_of() uses prototypes instead of functions
-#' to_one_of(1L, integer(), character())
-#' to_one_of("a", integer(), character())
-#' to_one_of("1", integer(), character())
-#' try(to_one_of(list(), integer(), character()))
-to_one_of <- function(
+#' # to_any_of() uses prototypes instead of functions
+#' to_any_of(1L, integer(), character())
+#' to_any_of("a", integer(), character())
+#' to_any_of("1", integer(), character())
+#' try(to_any_of(list(), integer(), character()))
+to_any_of <- function(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -32,5 +32,5 @@ to_one_of <- function(
     errors <- c(errors, list(result))
   }
 
-  .stop_cant_stabilize_one_of(errors = errors, x_arg = x_arg, call = call)
+  .stop_cant_stabilize_any_of(errors = errors, x_arg = x_arg, call = call)
 }
