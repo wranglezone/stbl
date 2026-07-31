@@ -201,15 +201,6 @@
   [`stabilize_arg_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md)
   : Ensure an argument meets expectations
 
-## deprecated
-
-- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
-  :
-
-  Deprecated: use
-  [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
-  instead
-
 ## conditions
 
 - [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)

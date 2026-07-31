@@ -5,9 +5,9 @@
 ### Breaking changes
 
 - [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
-  was renamed to
+  is now named
   [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
-  because it doesn’t stabilize (coerce) its input; it only asserts that
+  since it doesn’t stabilize (coerce) its input; it only asserts that
   the input is not `NULL`. Calling
   [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   now throws a “deprecated”-classed error directing you to
