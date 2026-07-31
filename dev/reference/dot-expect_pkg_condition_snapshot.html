@@ -50,6 +50,7 @@
 <span>  <span class="va">expect_fn_name</span>,</span>
 <span>  <span class="va">expect_fn</span>,</span>
 <span>  <span class="va">check_installed_msg</span>,</span>
+<span>  <span class="va">error</span>,</span>
 <span>  <span class="va">transform</span>,</span>
 <span>  <span class="va">variant</span>,</span>
 <span>  <span class="va">env</span></span>
@@ -85,6 +86,12 @@ to look up or inject into <code>env</code>.</p></dd>
 <dt id="arg-check-installed-msg">check_installed_msg<a class="anchor" aria-label="anchor" href="#arg-check-installed-msg"></a></dt>
 <dd><p>(<code>character(1)</code>) The <code>"to ..."</code> string passed to
 <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code>.</p></dd>
+
+
+<dt id="arg-error">error<a class="anchor" aria-label="anchor" href="#arg-error"></a></dt>
+<dd><p>(<code>logical(1)</code>) Passed to <code><a href="https://testthat.r-lib.org/reference/expect_snapshot.html" class="external-link">testthat::expect_snapshot()</a></code>. Set to
+<code>TRUE</code> when snapshotting an error, so the error is captured rather than
+propagated.</p></dd>
 
 
 <dt id="arg-transform">transform<a class="anchor" aria-label="anchor" href="#arg-transform"></a></dt>

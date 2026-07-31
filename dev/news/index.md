@@ -4,6 +4,15 @@
 
 ### Breaking changes
 
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
+  and
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  now produce snapshots that mirror
+  [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html),
+  showing the bare expression under `Code` and the condition class
+  alongside its message. Existing snapshots must be re-accepted
+  ([\#301](https://github.com/wranglezone/stbl/issues/301)).
 - [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   is now named
   [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
