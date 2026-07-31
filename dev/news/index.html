@@ -39,6 +39,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
 <div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/stabilize_chr.html">to_chr()</a></code>, <code><a href="../reference/stabilize_dbl.html">to_dbl()</a></code>, <code><a href="../reference/stabilize_fct.html">to_fct()</a></code>, <code><a href="../reference/stabilize_int.html">to_int()</a></code>, and <code><a href="../reference/stabilize_lgl.html">to_lgl()</a></code> now throw an “incompatible type” error (with failing element locations) instead of a generic “can’t coerce” error when a list contains elements that can’t be converted (<a href="https://github.com/wranglezone/stbl/issues/273" class="external-link">#273</a>).</li>
+</ul></div>
+<div class="section level3">
 <h3 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h3>
 <ul><li>New <code><a href="../reference/stabilize_one_of.html">stabilize_one_of()</a></code> (and <code><a href="../reference/stabilize_one_of.html">stabilise_one_of()</a></code>) validates <code>x</code> by trying each unnamed stabilizer function in <code>...</code> in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New <code><a href="../reference/stabilize_one_of.html">to_one_of()</a></code> works analogously, accepting type prototypes (e.g. <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code>, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>) in <code>...</code> and dispatching to [to()] (<a href="https://github.com/wranglezone/stbl/issues/215" class="external-link">#215</a>).</li>
 </ul></div>

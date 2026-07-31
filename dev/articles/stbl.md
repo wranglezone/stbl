@@ -124,7 +124,9 @@ register_user(
   interests = list("R", mean)
 )
 #> Error in `register_user()`:
-#> ! Can't coerce `interests` <list> to <character>.
+#> ! `interests` <list> must be coercible to <character>
+#> ✖ Can't convert some values due to incompatible element types.
+#> • Locations: 2
 ```
 
 ## Step 2: Simple Scalar Coercion with `to_*_scalar()`

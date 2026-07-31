@@ -123,8 +123,10 @@ try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int)
 #> Error in eval(expr, envir) : 
 #>   `list(1, TRUE, "23", "maybe")` must match at least one of the provided
 #> stabilizers.
-#> ✖ Can't coerce `list(1, TRUE, "23", "maybe")` <list> to <logical>.
-#> ✖ Can't coerce `list(1, TRUE, "23", "maybe")` <list> to <integer>.
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <logical>
+#>   (Locations: 4)
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <integer>
+#>   (Locations: 4)
 # to_one_of() uses prototypes instead of functions
 to_one_of(1L, integer(), character())
 #> [1] 1

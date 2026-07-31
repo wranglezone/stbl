@@ -66,6 +66,14 @@ to make them easier to import and to find.
   `(length-1 integer)` Current recursion depth. Do not manually set this
   parameter.
 
+- due_to:
+
+  `(length-1 character)` A string describing the reason for the failure.
+
+- failures:
+
+  `(logical)` A logical vector indicating which elements failed.
+
 - is_rlang_cls_scalar:
 
   `(function)` An `is_scalar_*()` function from rlang, used for a fast
@@ -131,6 +139,10 @@ to make them easier to import and to find.
   displayed. To check that a pattern is *not* matched, attach a `negate`
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
+
+- to:
+
+  The target object for the coercion.
 
 - to_class:
 

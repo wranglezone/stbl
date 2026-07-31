@@ -2,6 +2,19 @@
 
 ## stbl (development version)
 
+### Bug fixes
+
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  and
+  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  now throw an “incompatible type” error (with failing element
+  locations) instead of a generic “can’t coerce” error when a list
+  contains elements that can’t be converted
+  ([\#273](https://github.com/wranglezone/stbl/issues/273)).
+
 ### New functions
 
 - New

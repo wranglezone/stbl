@@ -167,8 +167,10 @@ prototype in <code>...</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `list(1, TRUE, "23", "maybe")` must match at least one of the provided</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stabilizers.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Can't coerce `list(1, TRUE, "23", "maybe")` <span style="color: #0000BB;">&lt;list&gt;</span> to <span style="color: #0000BB;">&lt;logical&gt;</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Can't coerce `list(1, TRUE, "23", "maybe")` <span style="color: #0000BB;">&lt;list&gt;</span> to <span style="color: #0000BB;">&lt;integer&gt;</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `list(1, TRUE, "23", "maybe")` <span style="color: #0000BB;">&lt;list&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;logical&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   (Locations: 4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `list(1, TRUE, "23", "maybe")` <span style="color: #0000BB;">&lt;list&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;integer&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   (Locations: 4)</span>
 <span class="r-in"><span><span class="co"># to_one_of() uses prototypes instead of functions</span></span></span>
 <span class="r-in"><span><span class="fu">to_one_of</span><span class="op">(</span><span class="fl">1L</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>

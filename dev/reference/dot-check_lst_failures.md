@@ -6,7 +6,7 @@ converted
 ## Usage
 
 ``` r
-.check_lst_failures(valid, to_class, x_class, x_arg, call)
+.check_lst_failures(valid, to, x_class, x_arg, call)
 ```
 
 ## Arguments
@@ -16,9 +16,9 @@ converted
   `(logical)` The `valid` vector returned by a `stbl_lst_to_*` C
   routine.
 
-- to_class:
+- to:
 
-  `(length-1 character)` The name of the class to coerce to.
+  The target object for the coercion.
 
 - x_class:
 

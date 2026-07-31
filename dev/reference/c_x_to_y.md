@@ -96,6 +96,10 @@ Call the C routine to convert a vector to another type
 
   `(character)` Values to convert to `NA`.
 
+- to:
+
+  The target object for the coercion.
+
 ## Value
 
 `.x_to_y()`: A list with two elements: `result`, the converted vector,
