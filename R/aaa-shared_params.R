@@ -25,6 +25,10 @@
 #' @param coerce_function `(length-1 logical)` Should functions be coerced?
 #' @param depth `(length-1 integer)` Current recursion depth. Do not manually
 #'   set this parameter.
+#' @param due_to `(length-1 character)` A string describing the reason for the
+#'   failure.
+#' @param failures `(logical)` A logical vector indicating which elements
+#'   failed.
 #' @param is_rlang_cls_scalar `(function)` An `is_scalar_*()` function from
 #'   rlang, used for a fast path if `x` is already the right type.
 #' @param levels `(character)` The desired factor levels.
@@ -54,6 +58,7 @@
 #'   message that should be displayed. To check that a pattern is *not* matched,
 #'   attach a `negate` attribute set to `TRUE`. If a complex regex pattern
 #'   throws an error, try installing the stringi package.
+#' @param to The target object for the coercion.
 #' @param to_class `(length-1 character)` The name of the class to coerce to.
 #' @param to_cls_args `(list)` A list of additional arguments to pass to
 #'   `to_cls_fn()`.
