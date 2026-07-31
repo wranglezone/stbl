@@ -110,13 +110,14 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142)", {
 })
 
 test_that("stabilize_df() enforces .min_rows (#142)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_df(
       mtcars[0, ],
       .min_rows = 1,
       .extra_cols = stabilize_present
     ),
-    class = "stbl-error-too_few_rows"
+    "stbl",
+    "too_few_rows"
   )
 })
 
@@ -133,13 +134,14 @@ test_that("stabilize_df() enforces .min_rows (snapshot) (#142)", {
 })
 
 test_that("stabilize_df() enforces .max_rows (#142)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_df(
       mtcars,
       .max_rows = 5,
       .extra_cols = stabilize_present
     ),
-    class = "stbl-error-too_many_rows"
+    "stbl",
+    "too_many_rows"
   )
 })
 
@@ -174,13 +176,14 @@ test_that("stabilize_df() enforces .col_names (#142)", {
       .extra_cols = stabilize_present
     )
   )
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_df(
       data.frame(a = 1L),
       .col_names = c("a", "b"),
       .extra_cols = stabilize_present
     ),
-    class = "stbl-error-missing_cols"
+    "stbl",
+    "missing_cols"
   )
 })
 

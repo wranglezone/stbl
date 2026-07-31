@@ -189,11 +189,6 @@ rlang::caller_env
 
 #' Abort with an "incompatible type" message
 #'
-#' @param to The target object for the coercion.
-#' @param failures `(logical)` A logical vector indicating which elements
-#'   failed.
-#' @param due_to `(length-1 character)` A string describing the reason for the
-#'   failure.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return

@@ -106,6 +106,17 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
 
+# to_dbl() works for lists (#128, #273)
+
+    Code
+      (expect_pkg_error_classes(to_dbl(list(1.1, 1:5)), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
+      Error:
+      ! `list(1.1, 1:5)` <list> must be coercible to <double>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
+
 # to_dbl_scalar() provides informative error messages (#23)
 
     Code

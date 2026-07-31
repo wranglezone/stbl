@@ -122,33 +122,29 @@ test_that("to_chr() errors for anonymous functions (#251)", {
   expect_identical(wrapped_to_chr(function(x) x), "val")
 })
 
-test_that("to_chr() fails gracefully for weird cases (#22)", {
+test_that("to_chr() fails gracefully for weird cases (#22, #273)", {
   given <- list(mean)
   expect_pkg_error_snapshot(
     to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
   expect_pkg_error_snapshot(
     wrapped_to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
 
   given <- list("x", mean)
   expect_pkg_error_snapshot(
     to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
   expect_pkg_error_snapshot(
     wrapped_to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
 
   given <- mtcars
@@ -169,14 +165,12 @@ test_that("to_chr() fails gracefully for weird cases (#22)", {
   expect_pkg_error_snapshot(
     to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
   expect_pkg_error_snapshot(
     wrapped_to_chr(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
 })
 
@@ -202,19 +196,17 @@ test_that("to_chr_scalar() errors for non-scalars (#22)", {
   )
 })
 
-test_that("to_chr_scalar() errors for uncoerceable types (#22)", {
+test_that("to_chr_scalar() errors for uncoerceable types (#22, #273)", {
   given <- list(a = 1:10)
   expect_pkg_error_snapshot(
     to_chr_scalar(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
   expect_pkg_error_snapshot(
     wrapped_to_chr_scalar(given),
     "stbl",
-    "coerce",
-    "character"
+    "incompatible_type"
   )
 })
 

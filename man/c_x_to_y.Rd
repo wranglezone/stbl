@@ -124,6 +124,8 @@
 \item{levels}{\code{(character)} The desired factor levels.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
+
+\item{to}{The target object for the coercion.}
 }
 \value{
 \code{.x_to_y()}: A list with two elements: \code{result}, the converted

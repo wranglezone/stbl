@@ -40,7 +40,7 @@ to_dbl.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_dbl, x)
-  .check_lst_failures(res[["valid"]], "double", x_class, x_arg, call)
+  .check_lst_failures(res[["valid"]], double(), x_class, x_arg, call)
   res[["result"]]
 }
 

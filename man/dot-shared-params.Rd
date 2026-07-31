@@ -39,6 +39,12 @@ the integer index of the factor.}
 \item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
 set this parameter.}
 
+\item{due_to}{\verb{(length-1 character)} A string describing the reason for the
+failure.}
+
+\item{failures}{\code{(logical)} A logical vector indicating which elements
+failed.}
+
 \item{is_rlang_cls_scalar}{\verb{(function)} An \verb{is_scalar_*()} function from
 rlang, used for a fast path if \code{x} is already the right type.}
 
@@ -78,6 +84,8 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
+
+\item{to}{The target object for the coercion.}
 
 \item{to_class}{\verb{(length-1 character)} The name of the class to coerce to.}
 

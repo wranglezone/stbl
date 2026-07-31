@@ -13,9 +13,10 @@ test_that("to_fct() deals with levels of fcts (#62)", {
 })
 
 test_that("to_fct() throws errors for bad levels (#62, #67, #177)", {
-  expect_error(
+  expect_pkg_error_classes(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    class = .compile_dash("stbl", "error", "fct_levels")
+    "stbl",
+    "fct_levels"
   )
   expect_snapshot(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
@@ -44,9 +45,10 @@ test_that("to_fct() works for NULL (#62)", {
 
 test_that("to_fct() respects allow_null (#62)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_classes(
     to_fct(given, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
   expect_snapshot(
     to_fct(given, allow_null = FALSE),
@@ -58,7 +60,7 @@ test_that("to_fct() respects allow_null (#62)", {
   )
 })
 
-test_that("to_fct() works for lists (#64)", {
+test_that("to_fct() works for lists (#64, #273)", {
   expect_identical(
     to_fct(list("a", "b")),
     factor(c("a", "b"))
@@ -67,36 +69,35 @@ test_that("to_fct() works for lists (#64)", {
     to_fct(list(list("a"), "b")),
     factor(c("a", "b"))
   )
-  expect_error(
+  expect_pkg_error_snapshot(
     to_fct(list("a", 1:5)),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
+    "stbl",
+    "incompatible_type"
   )
 })
 
-test_that("to_fct() errors for things that can't be coerced (#62)", {
+test_that("to_fct() errors for things that can't be coerced (#62, #273)", {
   given <- mean
-  expect_error(
-    to_fct(given),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
-  )
+  expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor")
   expect_snapshot(to_fct(given), error = TRUE)
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
 
   given <- mtcars
-  expect_error(
-    to_fct(given),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
-  )
+  expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor")
   expect_snapshot(to_fct(given), error = TRUE)
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
 
   given <- list(a = 1, b = 1:5)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_fct(given),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
+    "stbl",
+    "incompatible_type"
   )
-  expect_snapshot(to_fct(given), error = TRUE)
-  expect_snapshot(wrapped_to_fct(given), error = TRUE)
+  expect_pkg_error_snapshot(
+    wrapped_to_fct(given),
+    "stbl",
+    "incompatible_type"
+  )
 })
 
 test_that("to_fct() treats numbers as text (#62)", {
@@ -111,20 +112,14 @@ test_that("to_fct_scalar() allows length-1 fcts through (#62)", {
 
 test_that("to_fct_scalar() provides informative error messages (#62)", {
   given <- letters
-  expect_error(
-    to_fct_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
-  )
+  expect_pkg_error_classes(to_fct_scalar(given), "stbl", "non_scalar")
   expect_snapshot(to_fct_scalar(given), error = TRUE)
   expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
 })
 
 test_that("to_fct_scalar respects allow_zero_length (#62, #43, #45, #189)", {
   given <- factor()
-  expect_error(
-    to_fct_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_empty")
-  )
+  expect_pkg_error_classes(to_fct_scalar(given), "stbl", "bad_empty")
   expect_snapshot(
     to_fct_scalar(given),
     error = TRUE
@@ -151,9 +146,10 @@ test_that("to_fct() works for ints via C (#241)", {
 
 test_that("to_fct() errors for ints with unexpected levels (#241)", {
   given <- c(1L, 2L, 3L)
-  expect_error(
+  expect_pkg_error_classes(
     to_fct(given, levels = c("1", "2")),
-    class = .compile_dash("stbl", "error", "fct_levels")
+    "stbl",
+    "fct_levels"
   )
   expect_snapshot(
     to_fct(given, levels = c("1", "2")),

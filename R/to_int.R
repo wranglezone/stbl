@@ -40,7 +40,7 @@ to_int.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_int, x)
-  .check_lst_failures(res[["valid"]], "integer", x_class, x_arg, call)
+  .check_lst_failures(res[["valid"]], integer(), x_class, x_arg, call)
   res[["result"]]
 }
 

@@ -3,9 +3,10 @@ test_that("stabilize_lst() returns NULL for NULL input by default (#110)", {
 })
 
 test_that("stabilize_lst() respects .allow_null (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(NULL, .allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
   expect_snapshot(
     stabilize_lst(NULL, .allow_null = FALSE),
@@ -38,9 +39,10 @@ test_that("stabilize_lst() validates required named elements (#110)", {
 })
 
 test_that("stabilize_lst() errors when required named element is missing (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(foo = "a"), name = specify_chr_scalar()),
-    class = .compile_dash("stbl", "error", "missing_element")
+    "stbl",
+    "missing_element"
   )
   expect_snapshot(
     stabilize_lst(list(foo = "a"), name = specify_chr_scalar()),
@@ -53,12 +55,13 @@ test_that("stabilize_lst() errors when required named element is missing (#110)"
 })
 
 test_that("stabilize_lst() errors informatively when element fails validation (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(
       list(count = "not-an-int"),
       count = specify_int_scalar()
     ),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
   expect_snapshot(
     stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar()),
@@ -67,9 +70,10 @@ test_that("stabilize_lst() errors informatively when element fails validation (#
 })
 
 test_that("stabilize_lst() errors on extra named elements by default (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(a = 1L, b = 2L)),
-    class = .compile_dash("stbl", "error", "bad_named")
+    "stbl",
+    "bad_named"
   )
   expect_snapshot(
     stabilize_lst(list(a = 1L, b = 2L)),
@@ -87,17 +91,15 @@ test_that("stabilize_lst() validates extra named elements with .named (#110)", {
     stabilize_lst(given, .named = specify_int_scalar()),
     given
   )
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(a = 1L, b = "not-int"), .named = specify_int_scalar()),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })
 
 test_that("stabilize_lst() errors on unnamed elements by default (#110)", {
-  expect_error(
-    stabilize_lst(list(1L, 2L)),
-    class = .compile_dash("stbl", "error", "bad_unnamed")
-  )
+  expect_pkg_error_classes(stabilize_lst(list(1L, 2L)), "stbl", "bad_unnamed")
   expect_snapshot(
     stabilize_lst(list(1L, 2L)),
     error = TRUE
@@ -114,9 +116,10 @@ test_that("stabilize_lst() validates unnamed elements with .unnamed (#110)", {
     stabilize_lst(given, .unnamed = specify_int_scalar()),
     given
   )
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(1L, "not-int"), .unnamed = specify_int_scalar()),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })
 
@@ -134,9 +137,10 @@ test_that("stabilize_lst() handles mixed named/unnamed lists (#110)", {
 })
 
 test_that("stabilize_lst() enforces .min_size (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(a = 1L), .named = specify_int_scalar(), .min_size = 2),
-    class = .compile_dash("stbl", "error", "size_too_small")
+    "stbl",
+    "size_too_small"
   )
   expect_snapshot(
     stabilize_lst(list(a = 1L), .named = specify_int_scalar(), .min_size = 2),
@@ -145,13 +149,14 @@ test_that("stabilize_lst() enforces .min_size (#110)", {
 })
 
 test_that("stabilize_lst() enforces .max_size (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L, b = 2L, c = 3L),
       .named = specify_int_scalar(),
       .max_size = 2
     ),
-    class = .compile_dash("stbl", "error", "size_too_large")
+    "stbl",
+    "size_too_large"
   )
 })
 
@@ -163,12 +168,14 @@ test_that("stabilize_lst() validates nested lists (#110)", {
     given
   )
   # data.frame can't be coerced to chr_scalar
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(
       list(aes = list(x = mtcars, y = "hp")),
       aes = spec_aes
     ),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    "stbl",
+    "coerce",
+    "character"
   )
   expect_snapshot(
     stabilize_lst(list(aes = list(x = mtcars, y = "hp")), aes = spec_aes),
@@ -177,16 +184,18 @@ test_that("stabilize_lst() validates nested lists (#110)", {
 })
 
 test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(1L), specify_int_scalar()),
-    class = .compile_dash("stbl", "error", "unnamed_spec")
+    "stbl",
+    "unnamed_spec"
   )
 })
 
 test_that(".check_duplicate_names(): errors on duplicate names by default (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
-    class = .compile_dash("stbl", "error", "duplicate_names")
+    "stbl",
+    "duplicate_names"
   )
   expect_snapshot(
     stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
@@ -221,13 +230,14 @@ test_that(".check_duplicate_names(): reports all duplicate name groups (#110)", 
 })
 
 test_that(".check_duplicate_names(): unnamed elements do not count as duplicates (#110)", {
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L, 2L, a = 3L),
       .named = specify_int_scalar(),
       .unnamed = specify_int_scalar()
     ),
-    class = .compile_dash("stbl", "error", "duplicate_names")
+    "stbl",
+    "duplicate_names"
   )
 })
 
