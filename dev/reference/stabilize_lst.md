@@ -148,12 +148,13 @@ The validated list.
 ## See also
 
 Other list functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other stabilization functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
@@ -161,8 +162,7 @@ Other stabilization functions:
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
 
 ## Examples
 
@@ -180,8 +180,8 @@ stabilize_lst(
 #> [1] 30
 #> 
 
-# Allow any non-NULL element with stabilize_present
-stabilize_lst(list(data = mtcars), data = stabilize_present)
+# Allow any non-NULL element with assert_present
+stabilize_lst(list(data = mtcars), data = assert_present)
 #> $data
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4

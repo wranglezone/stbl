@@ -2,6 +2,18 @@
 
 ## stbl (development version)
 
+### Breaking changes
+
+- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  is now named
+  [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
+  since it doesn’t stabilize (coerce) its input; it only asserts that
+  the input is not `NULL`. Calling
+  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+  now throws a “deprecated”-classed error directing you to
+  [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
+  ([\#299](https://github.com/wranglezone/stbl/issues/299)).
+
 ### Bug fixes
 
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),

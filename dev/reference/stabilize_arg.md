@@ -95,6 +95,7 @@ stabilize_arg_scalar(
 ## See also
 
 Other stabilization functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
@@ -102,8 +103,7 @@ Other stabilization functions:
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
 
 ## Examples
 

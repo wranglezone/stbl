@@ -189,11 +189,12 @@ match the original class.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other list functions:
+<code><a href="assert_present.html">assert_present()</a></code>,
 <code><a href="specify_lst.html">specify_lst()</a></code>,
-<code><a href="stabilize_present.html">stabilize_present()</a></code>,
 <code><a href="to.html">to()</a></code>,
 <code><a href="to_lst.html">to_lst()</a></code></p>
 <p>Other stabilization functions:
+<code><a href="assert_present.html">assert_present()</a></code>,
 <code><a href="stabilize_any_of.html">stabilize_any_of()</a></code>,
 <code><a href="stabilize_arg.html">stabilize_arg()</a></code>,
 <code><a href="stabilize_chr.html">stabilize_chr()</a></code>,
@@ -201,8 +202,7 @@ match the original class.</p></dd>
 <code><a href="stabilize_df.html">stabilize_df()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
-<code><a href="stabilize_lgl.html">stabilize_lgl()</a></code>,
-<code><a href="stabilize_present.html">stabilize_present()</a></code></p></div>
+<code><a href="stabilize_lgl.html">stabilize_lgl()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -220,8 +220,8 @@ match the original class.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Allow any non-NULL element with stabilize_present</span></span></span>
-<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">stabilize_present</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Allow any non-NULL element with assert_present</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">assert_present</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>

@@ -183,7 +183,7 @@
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list argument meets expectations
-- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+- [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   : Require a value to be non-NULL
 
 ## any type

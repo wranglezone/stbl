@@ -192,9 +192,9 @@ Other function functions:
 [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
 
 Other list functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other data frame functions:
@@ -219,6 +219,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55b3f85e02a0>
+#> <bytecode: 0x5598754092a0>
 #> <environment: namespace:base>
 ```

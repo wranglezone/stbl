@@ -139,6 +139,7 @@ Other data frame functions:
 [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
 Other stabilization functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
@@ -146,8 +147,7 @@ Other stabilization functions:
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
 
 ## Examples
 
@@ -166,7 +166,7 @@ stabilize_df(
   data.frame(name = "Alice", age = 30L, score = 99.5),
   name = specify_chr_scalar(),
   age = specify_int_scalar(),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 #>    name age score
 #> 1 Alice  30  99.5
@@ -175,7 +175,7 @@ stabilize_df(
 stabilize_df(
   mtcars,
   .col_names = c("mpg", "cyl"),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -213,7 +213,7 @@ stabilize_df(
 
 # Enforce row count constraints
 try(
-  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = assert_present)
 )
 #> Error in eval(expr, envir) : 
 #>   `mtcars[0, ]` must have at least 1 row.

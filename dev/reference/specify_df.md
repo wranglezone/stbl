@@ -99,7 +99,7 @@ Other specification functions:
 stabilize_person_df <- specify_df(
   name = specify_chr_scalar(allow_na = FALSE),
   age = specify_int_scalar(allow_na = FALSE),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 #>    name age score

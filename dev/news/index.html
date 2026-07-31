@@ -39,6 +39,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
 <div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/stabilize_present.html">stabilize_present()</a></code> is now named <code><a href="../reference/assert_present.html">assert_present()</a></code>, since it doesn’t stabilize (coerce) its input; it only asserts that the input is not <code>NULL</code>. Calling <code><a href="../reference/stabilize_present.html">stabilize_present()</a></code> now throws a “deprecated”-classed error directing you to <code><a href="../reference/assert_present.html">assert_present()</a></code> (<a href="https://github.com/wranglezone/stbl/issues/299" class="external-link">#299</a>).</li>
+</ul></div>
+<div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
 <ul><li>
 <code><a href="../reference/stabilize_chr.html">to_chr()</a></code>, <code><a href="../reference/stabilize_dbl.html">to_dbl()</a></code>, <code><a href="../reference/stabilize_fct.html">to_fct()</a></code>, <code><a href="../reference/stabilize_int.html">to_int()</a></code>, and <code><a href="../reference/stabilize_lgl.html">to_lgl()</a></code> now throw an “incompatible type” error (with failing element locations) instead of a generic “can’t coerce” error when a list contains elements that can’t be converted (<a href="https://github.com/wranglezone/stbl/issues/273" class="external-link">#273</a>).</li>

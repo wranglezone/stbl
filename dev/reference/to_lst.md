@@ -88,7 +88,7 @@ This function has important distinctions from
 ## See also
 
 Other list functions:
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
