@@ -5,7 +5,7 @@ Signal a combined error when no function succeeds
 ## Usage
 
 ``` r
-.stop_cant_stabilize_one_of(errors, x_arg, call)
+.stop_cant_stabilize_any_of(errors, x_arg, call)
 ```
 
 ## Arguments

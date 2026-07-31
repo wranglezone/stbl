@@ -18,19 +18,20 @@
 ### New functions
 
 - New
-  [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   (and
-  [`stabilise_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md))
+  [`stabilise_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md))
   validates `x` by trying each unnamed stabilizer function in `...` in
   order, returning the first successful result. If all functions fail,
   an informative error combining the individual failure messages is
   thrown. New
-  [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   works analogously, accepting type prototypes
   (e.g. [`integer()`](https://rdrr.io/r/base/integer.html),
   [`character()`](https://rdrr.io/r/base/character.html)) in `...` and
   dispatching to \[to()\]
-  ([\#215](https://github.com/wranglezone/stbl/issues/215)).
+  ([\#215](https://github.com/wranglezone/stbl/issues/215),
+  [\#285](https://github.com/wranglezone/stbl/issues/285)).
 
 ## stbl 0.4.0
 

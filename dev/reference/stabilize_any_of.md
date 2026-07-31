@@ -1,12 +1,12 @@
 # Try to coerce or validate x as one of several types
 
-`stabilize_one_of()` attempts to validate and coerce `x` using each
+`stabilize_any_of()` attempts to validate and coerce `x` using each
 function in `...` in order. It returns the result of the first function
 that succeeds. If all functions fail, an informative error that combines
-the individual failure messages is thrown. `stabilise_one_of()` is a
+the individual failure messages is thrown. `stabilise_any_of()` is a
 synonym.
 
-`to_one_of()` is analogous to
+`to_any_of()` is analogous to
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
 coerce `x` to each type given in `...` (as a prototype such as
 [`integer()`](https://rdrr.io/r/base/integer.html) or
@@ -16,7 +16,7 @@ first successful result.
 ## Usage
 
 ``` r
-stabilize_one_of(
+stabilize_any_of(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -24,7 +24,7 @@ stabilize_one_of(
   x_class = object_type(x)
 )
 
-stabilise_one_of(
+stabilise_any_of(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -32,7 +32,7 @@ stabilise_one_of(
   x_class = object_type(x)
 )
 
-to_one_of(
+to_any_of(
   x,
   ...,
   x_arg = caller_arg(x),
@@ -49,14 +49,14 @@ to_one_of(
 
 - ...:
 
-  For `stabilize_one_of()`: unnamed stabilizer or coercion functions,
+  For `stabilize_any_of()`: unnamed stabilizer or coercion functions,
   such as `stabilize_*` functions
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), `to_*` functions
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), or functions produced by `specify_*()` calls
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc.). For `to_one_of()`: prototype objects (e.g.
+  etc.). For `to_any_of()`: prototype objects (e.g.
   [`integer()`](https://rdrr.io/r/base/integer.html),
   [`character()`](https://rdrr.io/r/base/character.html)) that determine
   the target types to try, passed as the `.to` argument of
@@ -103,23 +103,23 @@ Other stabilization functions:
 
 ``` r
 # Returns x unchanged when the first function succeeds
-stabilize_one_of(1L, stabilize_int, stabilize_chr)
+stabilize_any_of(1L, stabilize_int, stabilize_chr)
 #> [1] 1
 
 # Falls through to stabilize_chr when stabilize_int fails
-stabilize_one_of("a", stabilize_int, stabilize_chr)
+stabilize_any_of("a", stabilize_int, stabilize_chr)
 #> [1] "a"
 
 # Coerces via the first matching function ("1" -> 1L)
-stabilize_one_of("1", stabilize_int, stabilize_chr)
+stabilize_any_of("1", stabilize_int, stabilize_chr)
 #> [1] 1
 
 # A mixed list falls through to stabilize_chr because "a" can't be integer
-stabilize_one_of(list(1L, "a"), stabilize_int, stabilize_chr)
+stabilize_any_of(list(1L, "a"), stabilize_int, stabilize_chr)
 #> [1] "1" "a"
 
 # Errors with a combined message when all functions fail
-try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
+try(stabilize_any_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
 #> Error in eval(expr, envir) : 
 #>   `list(1, TRUE, "23", "maybe")` must match at least one of the provided
 #> stabilizers.
@@ -127,13 +127,13 @@ try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int)
 #>   (Locations: 4)
 #> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <integer>
 #>   (Locations: 4)
-# to_one_of() uses prototypes instead of functions
-to_one_of(1L, integer(), character())
+# to_any_of() uses prototypes instead of functions
+to_any_of(1L, integer(), character())
 #> [1] 1
-to_one_of("a", integer(), character())
+to_any_of("a", integer(), character())
 #> [1] "a"
-to_one_of("1", integer(), character())
+to_any_of("1", integer(), character())
 #> [1] 1
-try(to_one_of(list(), integer(), character()))
+try(to_any_of(list(), integer(), character()))
 #> integer(0)
 ```

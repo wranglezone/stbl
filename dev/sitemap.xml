@@ -86,7 +86,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_warn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_one_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
@@ -127,6 +127,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dbl.html</loc></url>
@@ -135,7 +136,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stbl-package.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to.html</loc></url>
