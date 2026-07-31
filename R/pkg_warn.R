@@ -148,6 +148,7 @@ expect_pkg_warning_snapshot <- function(
     expect_fn_name = "expect_pkg_warning_classes",
     expect_fn = expect_pkg_warning_classes,
     check_installed_msg = "to snapshot-test package warnings",
+    error = FALSE,
     transform = transform,
     variant = variant,
     env = env

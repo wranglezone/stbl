@@ -101,7 +101,7 @@ test_that("expect_pkg_warning_classes() tests expressions for classes (#213)", {
   )
 })
 
-test_that("expect_pkg_warning_snapshot() snapshots warning class and message (#213)", {
+test_that("expect_pkg_warning_snapshot() snapshots warning class and message (#213, #301)", {
   expect_pkg_warning_snapshot(
     pkg_warn("stbl", "A snapshot warning.", "snapshot_subclass"),
     "stbl",
@@ -109,7 +109,7 @@ test_that("expect_pkg_warning_snapshot() snapshots warning class and message (#2
   )
 })
 
-test_that("expect_pkg_warning_snapshot() works with multiple class components (#213)", {
+test_that("expect_pkg_warning_snapshot() works with multiple class components (#213, #301)", {
   expect_pkg_warning_snapshot(
     pkg_warn("stbl", "A nested warning.", c("outer", "inner")),
     "stbl",
@@ -118,7 +118,7 @@ test_that("expect_pkg_warning_snapshot() works with multiple class components (#
   )
 })
 
-test_that("expect_pkg_warning_snapshot() allows object definition inside expression (#234)", {
+test_that("expect_pkg_warning_snapshot() allows object definition inside expression (#234, #301)", {
   warns_and_returns <- function() {
     pkg_warn("stbl", "A warning with a return value.", "return_subclass")
     "the return value"
@@ -133,7 +133,7 @@ test_that("expect_pkg_warning_snapshot() allows object definition inside express
   expect_equal(result, "the return value")
 })
 
-test_that("expect_pkg_warning_snapshot() works from an env without stbl attached (#213)", {
+test_that("expect_pkg_warning_snapshot() works from an env without stbl attached (#213, #301)", {
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_warn <- pkg_warn
   foreign_env$expect_pkg_warning_snapshot <- expect_pkg_warning_snapshot

@@ -24,44 +24,35 @@
       Warning in `wrapped_warn()`:
       This message comes from a custom environment.
 
-# expect_pkg_warning_snapshot() snapshots warning class and message (#213)
+# expect_pkg_warning_snapshot() snapshots warning class and message (#213, #301)
 
     Code
-      (expect_pkg_warning_classes(pkg_warn("stbl", "A snapshot warning.",
-        "snapshot_subclass"), "stbl", "snapshot_subclass"))
-    Output
-      <warning/stbl-warning-snapshot_subclass>
+      pkg_warn("stbl", "A snapshot warning.", "snapshot_subclass")
+    Condition <stbl-warning-snapshot_subclass>
       Warning:
       A snapshot warning.
 
-# expect_pkg_warning_snapshot() works with multiple class components (#213)
+# expect_pkg_warning_snapshot() works with multiple class components (#213, #301)
 
     Code
-      (expect_pkg_warning_classes(pkg_warn("stbl", "A nested warning.", c("outer",
-        "inner")), "stbl", "outer", "inner"))
-    Output
-      <warning/stbl-warning-outer-inner>
+      pkg_warn("stbl", "A nested warning.", c("outer", "inner"))
+    Condition <stbl-warning-outer-inner>
       Warning:
       A nested warning.
 
-# expect_pkg_warning_snapshot() allows object definition inside expression (#234)
+# expect_pkg_warning_snapshot() allows object definition inside expression (#234, #301)
 
     Code
-      (expect_pkg_warning_classes({
-        result <- warns_and_returns()
-      }, "stbl", "return_subclass"))
-    Output
-      <warning/stbl-warning-return_subclass>
+      result <- warns_and_returns()
+    Condition <stbl-warning-return_subclass>
       Warning in `warns_and_returns()`:
       A warning with a return value.
 
-# expect_pkg_warning_snapshot() works from an env without stbl attached (#213)
+# expect_pkg_warning_snapshot() works from an env without stbl attached (#213, #301)
 
     Code
-      (expect_pkg_warning_classes(pkg_warn("otherpkg", "Foreign env warning.",
-        "foreign_subclass"), "otherpkg", "foreign_subclass"))
-    Output
-      <warning/otherpkg-warning-foreign_subclass>
+      pkg_warn("otherpkg", "Foreign env warning.", "foreign_subclass")
+    Condition <otherpkg-warning-foreign_subclass>
       Warning:
       Foreign env warning.
 

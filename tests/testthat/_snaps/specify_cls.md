@@ -36,11 +36,8 @@
 # The function built via specify_cls errors informatively for duplicated args (#150, #153, #161)
 
     Code
-      (expect_pkg_error_classes({
-        no_null(NULL, allow_null = FALSE)
-      }, "stbl", "duplicate_args"))
-    Output
-      <error/stbl-error-duplicate_args>
+      no_null(NULL, allow_null = FALSE)
+    Condition <stbl-error-duplicate_args>
       Error in `no_null()`:
       ! Arguments passed via `...` cannot duplicate specification.
       i Duplicated arguments: `allow_null`

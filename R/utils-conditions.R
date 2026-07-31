@@ -42,6 +42,9 @@
 #' @param expect_fn (`function`) The function to inject if not already findable.
 #' @param check_installed_msg (`character(1)`) The `"to ..."` string passed to
 #'   [rlang::check_installed()].
+#' @param error (`logical(1)`) Passed to [testthat::expect_snapshot()]. Set to
+#'   `TRUE` when snapshotting an error, so the error is captured rather than
+#'   propagated.
 #' @inheritParams expect_pkg_warning_snapshot
 #' @returns The result of [testthat::expect_snapshot()], invisibly.
 #' @keywords internal
@@ -52,6 +55,7 @@
   expect_fn_name,
   expect_fn,
   check_installed_msg,
+  error,
   transform,
   variant,
   env
@@ -62,17 +66,21 @@
     env[[expect_fn_name]] <- expect_fn
     on.exit(rm(list = expect_fn_name, envir = env), add = TRUE)
   }
+  # Check the condition's class hierarchy first, then snapshot the bare
+  # expression so the snapshot mirrors testthat::expect_snapshot() output while
+  # still recording the class via cnd_class = TRUE (#301).
+  class_check_call <- rlang::call2(
+    expect_fn_name,
+    obj_expr,
+    package,
+    !!!class_components
+  )
+  eval(class_check_call, envir = env)
   snap_call <- rlang::call2(
     "expect_snapshot",
-    rlang::call2(
-      "(",
-      rlang::call2(
-        expect_fn_name,
-        obj_expr,
-        package,
-        !!!class_components
-      )
-    ),
+    obj_expr,
+    error = error,
+    cnd_class = TRUE,
     transform = transform,
     variant = variant,
     .ns = "testthat"

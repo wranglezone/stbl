@@ -1,10 +1,8 @@
 # stabilize_any_of() errors with a combined message when all functions fail (#215, #285)
 
     Code
-      (expect_pkg_error_classes(stabilize_any_of(NULL, specify_int(allow_null = FALSE),
-      specify_chr(allow_null = FALSE)), "stbl", "cant_stabilize_any_of"))
-    Output
-      <error/stbl-error-cant_stabilize_any_of>
+      stabilize_any_of(NULL, specify_int(allow_null = FALSE), specify_chr(allow_null = FALSE))
+    Condition <stbl-error-cant_stabilize_any_of>
       Error:
       ! `NULL` must match at least one of the provided stabilizers.
       x `NULL` must not be <NULL>.
@@ -13,11 +11,9 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_stabilize_any_of(NULL, specify_int(
-        allow_null = FALSE), specify_chr(allow_null = FALSE)), "stbl",
-      "cant_stabilize_any_of"))
-    Output
-      <error/stbl-error-cant_stabilize_any_of>
+      wrapped_stabilize_any_of(NULL, specify_int(allow_null = FALSE), specify_chr(
+        allow_null = FALSE))
+    Condition <stbl-error-cant_stabilize_any_of>
       Error in `wrapped_stabilize_any_of()`:
       ! `val` must match at least one of the provided stabilizers.
       x `val` must not be <NULL>.
@@ -26,10 +22,8 @@
 # stabilize_any_of() includes Locations from incompatible_type errors (#215, #285)
 
     Code
-      (expect_pkg_error_classes(stabilize_any_of(x, stabilize_lgl, stabilize_int),
-      "stbl", "cant_stabilize_any_of"))
-    Output
-      <error/stbl-error-cant_stabilize_any_of>
+      stabilize_any_of(x, stabilize_lgl, stabilize_int)
+    Condition <stbl-error-cant_stabilize_any_of>
       Error:
       ! `x` must match at least one of the provided stabilizers.
       x `x` <character> must be coercible to <logical> (Locations: 1)
@@ -38,10 +32,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_stabilize_any_of(x, stabilize_lgl,
-        stabilize_int), "stbl", "cant_stabilize_any_of"))
-    Output
-      <error/stbl-error-cant_stabilize_any_of>
+      wrapped_stabilize_any_of(x, stabilize_lgl, stabilize_int)
+    Condition <stbl-error-cant_stabilize_any_of>
       Error in `wrapped_stabilize_any_of()`:
       ! `val` must match at least one of the provided stabilizers.
       x `val` <character> must be coercible to <logical> (Locations: 1)
@@ -50,9 +42,8 @@
 # stabilize_any_of() errors when ... is empty (#215, #285)
 
     Code
-      (expect_pkg_error_classes(stabilize_any_of(1L), "stbl", "empty_specs"))
-    Output
-      <error/stbl-error-empty_specs>
+      stabilize_any_of(1L)
+    Condition <stbl-error-empty_specs>
       Error:
       ! At least one function must be provided via `...`.
       i Supply stabilizer functions, or prototypes for `to_any_of()`.
@@ -60,10 +51,8 @@
 # stabilize_any_of() errors when ... contains named elements (#215, #285)
 
     Code
-      (expect_pkg_error_classes(stabilize_any_of(1L, int = stabilize_int), "stbl",
-      "named_spec"))
-    Output
-      <error/stbl-error-named_spec>
+      stabilize_any_of(1L, int = stabilize_int)
+    Condition <stbl-error-named_spec>
       Error:
       ! All elements passed via `...` must be unnamed.
       i Functions are applied to `x` in sequence, not by name.

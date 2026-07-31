@@ -149,6 +149,7 @@ expect_pkg_message_snapshot <- function(
     expect_fn_name = "expect_pkg_message_classes",
     expect_fn = expect_pkg_message_classes,
     check_installed_msg = "to snapshot-test package messages",
+    error = FALSE,
     transform = transform,
     variant = variant,
     env = env

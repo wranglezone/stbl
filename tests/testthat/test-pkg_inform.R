@@ -91,7 +91,7 @@ test_that("expect_pkg_message_classes() tests expressions for classes (#213)", {
   )
 })
 
-test_that("expect_pkg_message_snapshot() snapshots message class and message (#213)", {
+test_that("expect_pkg_message_snapshot() snapshots message class and message (#213, #301)", {
   expect_pkg_message_snapshot(
     pkg_inform("stbl", "A snapshot message.", "snapshot_subclass"),
     "stbl",
@@ -99,7 +99,7 @@ test_that("expect_pkg_message_snapshot() snapshots message class and message (#2
   )
 })
 
-test_that("expect_pkg_message_snapshot() works with multiple class components (#213)", {
+test_that("expect_pkg_message_snapshot() works with multiple class components (#213, #301)", {
   expect_pkg_message_snapshot(
     pkg_inform("stbl", "A nested message.", c("outer", "inner")),
     "stbl",
@@ -108,7 +108,7 @@ test_that("expect_pkg_message_snapshot() works with multiple class components (#
   )
 })
 
-test_that("expect_pkg_message_snapshot() allows object definition inside expression (#234)", {
+test_that("expect_pkg_message_snapshot() allows object definition inside expression (#234, #301)", {
   informs_and_returns <- function() {
     pkg_inform("stbl", "A message with a return value.", "return_subclass")
     "the return value"
@@ -123,7 +123,7 @@ test_that("expect_pkg_message_snapshot() allows object definition inside express
   expect_equal(result, "the return value")
 })
 
-test_that("expect_pkg_message_snapshot() works from an env without stbl attached (#213)", {
+test_that("expect_pkg_message_snapshot() works from an env without stbl attached (#213, #301)", {
   foreign_env <- new.env(parent = baseenv())
   foreign_env$pkg_inform <- pkg_inform
   foreign_env$expect_pkg_message_snapshot <- expect_pkg_message_snapshot

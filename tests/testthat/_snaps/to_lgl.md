@@ -1,29 +1,24 @@
 # to_lgl() respects allow_null (#21)
 
     Code
-      (expect_pkg_error_classes(to_lgl(given, allow_null = FALSE), "stbl", "bad_null")
-      )
-    Output
-      <error/stbl-error-bad_null>
+      to_lgl(given, allow_null = FALSE)
+    Condition <stbl-error-bad_null>
       Error:
       ! `given` must not be <NULL>.
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl(given, allow_null = FALSE), "stbl",
-      "bad_null"))
-    Output
-      <error/stbl-error-bad_null>
+      wrapped_to_lgl(given, allow_null = FALSE)
+    Condition <stbl-error-bad_null>
       Error in `wrapped_to_lgl()`:
       ! `val` must not be <NULL>.
 
 # to_lgl() errors for bad characters (#21)
 
     Code
-      (expect_pkg_error_classes(to_lgl(letters), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      to_lgl(letters)
+    Condition <stbl-error-incompatible_type>
       Error:
       ! `letters` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -32,9 +27,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl(letters), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      wrapped_to_lgl(letters)
+    Condition <stbl-error-incompatible_type>
       Error in `wrapped_to_lgl()`:
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -43,9 +37,8 @@
 # to_lgl errors for bad factors (#21)
 
     Code
-      (expect_pkg_error_classes(to_lgl(given), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      to_lgl(given)
+    Condition <stbl-error-incompatible_type>
       Error:
       ! `given` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -54,9 +47,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl(given), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      wrapped_to_lgl(given)
+    Condition <stbl-error-incompatible_type>
       Error in `wrapped_to_lgl()`:
       ! `val` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -65,9 +57,8 @@
 # to_lgl() works for lists (#21, #273)
 
     Code
-      (expect_pkg_error_classes(to_lgl(list(TRUE, 1:5)), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      to_lgl(list(TRUE, 1:5))
+    Condition <stbl-error-incompatible_type>
       Error:
       ! `list(TRUE, 1:5)` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
@@ -76,9 +67,8 @@
 # to_lgl() errors for other types (#21, #273)
 
     Code
-      (expect_pkg_error_classes(to_lgl(given), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      to_lgl(given)
+    Condition <stbl-error-incompatible_type>
       Error:
       ! `given` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
@@ -87,9 +77,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl(given), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      wrapped_to_lgl(given)
+    Condition <stbl-error-incompatible_type>
       Error in `wrapped_to_lgl()`:
       ! `val` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
@@ -98,27 +87,24 @@
 ---
 
     Code
-      (expect_pkg_error_classes(to_lgl(given), "stbl", "coerce", "logical"))
-    Output
-      <error/stbl-error-coerce-logical>
+      to_lgl(given)
+    Condition <stbl-error-coerce-logical>
       Error:
       ! Can't coerce `given` <function> to <logical>.
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl(given), "stbl", "coerce", "logical"))
-    Output
-      <error/stbl-error-coerce-logical>
+      wrapped_to_lgl(given)
+    Condition <stbl-error-coerce-logical>
       Error in `wrapped_to_lgl()`:
       ! Can't coerce `val` <function> to <logical>.
 
 # to_lgl_scalar() errors for non-scalars (#32)
 
     Code
-      (expect_pkg_error_classes(to_lgl_scalar(given), "stbl", "non_scalar"))
-    Output
-      <error/stbl-error-non_scalar>
+      to_lgl_scalar(given)
+    Condition <stbl-error-non_scalar>
       Error:
       ! `given` must be a single <logical>.
       x `given` has 3 values.
@@ -126,9 +112,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl_scalar(given), "stbl", "non_scalar"))
-    Output
-      <error/stbl-error-non_scalar>
+      wrapped_to_lgl_scalar(given)
+    Condition <stbl-error-non_scalar>
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` must be a single <logical>.
       x `val` has 3 values.
@@ -136,9 +121,8 @@
 # to_lgl_scalar() errors for bad characters (#32)
 
     Code
-      (expect_pkg_error_classes(to_lgl_scalar(given), "stbl", "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      to_lgl_scalar(given)
+    Condition <stbl-error-incompatible_type>
       Error:
       ! `given` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -147,10 +131,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl_scalar(given), "stbl",
-      "incompatible_type"))
-    Output
-      <error/stbl-error-incompatible_type>
+      wrapped_to_lgl_scalar(given)
+    Condition <stbl-error-incompatible_type>
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -159,18 +141,16 @@
 # to_lgl_scalar() respects allow_null (#32, #189)
 
     Code
-      (expect_pkg_error_classes(to_lgl_scalar(given), "stbl", "bad_null"))
-    Output
-      <error/stbl-error-bad_null>
+      to_lgl_scalar(given)
+    Condition <stbl-error-bad_null>
       Error:
       ! `given` must not be <NULL>.
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_lgl_scalar(given), "stbl", "bad_null"))
-    Output
-      <error/stbl-error-bad_null>
+      wrapped_to_lgl_scalar(given)
+    Condition <stbl-error-bad_null>
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` must not be <NULL>.
 

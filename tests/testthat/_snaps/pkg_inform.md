@@ -21,44 +21,31 @@
     Message <wrapped-message-subclass>
       This message comes from a custom environment.
 
-# expect_pkg_message_snapshot() snapshots message class and message (#213)
+# expect_pkg_message_snapshot() snapshots message class and message (#213, #301)
 
     Code
-      (expect_pkg_message_classes(pkg_inform("stbl", "A snapshot message.",
-        "snapshot_subclass"), "stbl", "snapshot_subclass"))
-    Output
-      <message/stbl-message-snapshot_subclass>
-      Message:
+      pkg_inform("stbl", "A snapshot message.", "snapshot_subclass")
+    Message <stbl-message-snapshot_subclass>
       A snapshot message.
 
-# expect_pkg_message_snapshot() works with multiple class components (#213)
+# expect_pkg_message_snapshot() works with multiple class components (#213, #301)
 
     Code
-      (expect_pkg_message_classes(pkg_inform("stbl", "A nested message.", c("outer",
-        "inner")), "stbl", "outer", "inner"))
-    Output
-      <message/stbl-message-outer-inner>
-      Message:
+      pkg_inform("stbl", "A nested message.", c("outer", "inner"))
+    Message <stbl-message-outer-inner>
       A nested message.
 
-# expect_pkg_message_snapshot() allows object definition inside expression (#234)
+# expect_pkg_message_snapshot() allows object definition inside expression (#234, #301)
 
     Code
-      (expect_pkg_message_classes({
-        result <- informs_and_returns()
-      }, "stbl", "return_subclass"))
-    Output
-      <message/stbl-message-return_subclass>
-      Message in `informs_and_returns()`:
+      result <- informs_and_returns()
+    Message <stbl-message-return_subclass>
       A message with a return value.
 
-# expect_pkg_message_snapshot() works from an env without stbl attached (#213)
+# expect_pkg_message_snapshot() works from an env without stbl attached (#213, #301)
 
     Code
-      (expect_pkg_message_classes(pkg_inform("otherpkg", "Foreign env message.",
-        "foreign_subclass"), "otherpkg", "foreign_subclass"))
-    Output
-      <message/otherpkg-message-foreign_subclass>
-      Message:
+      pkg_inform("otherpkg", "Foreign env message.", "foreign_subclass")
+    Message <otherpkg-message-foreign_subclass>
       Foreign env message.
 
