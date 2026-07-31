@@ -19,8 +19,10 @@
 # pkg_abort() passes dots to cli_abort() (#136)
 
     Code
-      wrapped_abort("A message.", "a_subclass", .internal = TRUE)
-    Condition
+      (expect_pkg_error_classes(wrapped_abort("A message.", "a_subclass", .internal = TRUE),
+      "wrapped", "a_subclass"))
+    Output
+      <error/wrapped-error-a_subclass>
       Error in `wrapped_abort()`:
       ! A message.
       i This is an internal error.

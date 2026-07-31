@@ -1,8 +1,10 @@
 # .stbl_abort() throws the expected error (#95)
 
     Code
-      .stbl_abort("A message.", "a_subclass")
-    Condition
+      (expect_pkg_error_classes(.stbl_abort("A message.", "a_subclass"), "stbl",
+      "a_subclass"))
+    Output
+      <error/stbl-error-a_subclass>
       Error:
       ! A message.
 
@@ -24,8 +26,10 @@
 # .stop_cant_coerce() throws the expected error (#95)
 
     Code
-      .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env())
-    Condition
+      (expect_pkg_error_classes(.stop_cant_coerce("character", "integer", "my_arg",
+        rlang::current_env()), "stbl", "coerce", "integer"))
+    Output
+      <error/stbl-error-coerce-integer>
       Error:
       ! Can't coerce `my_arg` <character> to <integer>.
 
@@ -42,16 +46,20 @@
 # .stop_must() throws the expected error (#95)
 
     Code
-      .stop_must("must be a foo.", "my_arg", rlang::current_env())
-    Condition
+      (expect_pkg_error_classes(.stop_must("must be a foo.", "my_arg", rlang::current_env()),
+      "stbl", "must"))
+    Output
+      <error/stbl-error-must>
       Error:
       ! `my_arg` must be a foo.
 
 # .stop_must() handles subclasses (#95)
 
     Code
-      .stop_must("must be a foo.", "my_arg", rlang::current_env(), subclass = "my_custom_class")
-    Condition
+      (expect_pkg_error_classes(.stop_must("must be a foo.", "my_arg", rlang::current_env(),
+      subclass = "my_custom_class"), "stbl", "my_custom_class"))
+    Output
+      <error/stbl-error-my_custom_class>
       Error:
       ! `my_arg` must be a foo.
 
@@ -68,17 +76,21 @@
 # .stop_null() throws the expected error (#95)
 
     Code
-      .stop_null("my_arg", rlang::current_env())
-    Condition
+      (expect_pkg_error_classes(.stop_null("my_arg", rlang::current_env()), "stbl",
+      "bad_null"))
+    Output
+      <error/stbl-error-bad_null>
       Error:
       ! `my_arg` must not be <NULL>.
 
 # .stop_incompatible() throws the expected error (#95)
 
     Code
-      .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
-      "some reason", "my_arg", rlang::current_env())
-    Condition
+      (expect_pkg_error_classes(.stop_incompatible("character", integer(), c(FALSE,
+        TRUE, FALSE, TRUE), "some reason", "my_arg", rlang::current_env()), "stbl",
+      "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.
@@ -87,9 +99,11 @@
 # .stop_incompatible() passes dots (#95)
 
     Code
-      .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
-      "some reason", "my_arg", rlang::current_env(), .internal = TRUE)
-    Condition
+      (expect_pkg_error_classes(.stop_incompatible("character", integer(), c(FALSE,
+        TRUE, FALSE, TRUE), "some reason", "my_arg", rlang::current_env(), .internal = TRUE),
+      "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.

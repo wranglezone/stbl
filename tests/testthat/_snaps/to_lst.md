@@ -1,16 +1,20 @@
 # to_lst() respects allow_null (#157)
 
     Code
-      to_lst(given, allow_null = FALSE)
-    Condition
+      (expect_pkg_error_classes(to_lst(given, allow_null = FALSE), "stbl", "bad_null")
+      )
+    Output
+      <error/stbl-error-bad_null>
       Error:
       ! `given` must not be <NULL>.
 
 ---
 
     Code
-      wrapped_to_lst(given, allow_null = FALSE)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_lst(given, allow_null = FALSE), "stbl",
+      "bad_null"))
+    Output
+      <error/stbl-error-bad_null>
       Error in `wrapped_to_lst()`:
       ! `val` must not be <NULL>.
 
@@ -37,32 +41,38 @@
 # to_lst() errors by default for functions (#157)
 
     Code
-      to_lst(given)
-    Condition
+      (expect_pkg_error_classes(to_lst(given), "stbl", "bad_function"))
+    Output
+      <error/stbl-error-bad_function>
       Error:
       ! `given` must not be a <function>.
 
 ---
 
     Code
-      wrapped_to_lst(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_lst(given), "stbl", "bad_function"))
+    Output
+      <error/stbl-error-bad_function>
       Error in `wrapped_to_lst()`:
       ! `val` must not be a <function>.
 
 # to_lst() errors informatively for primitives (#157)
 
     Code
-      to_lst(given, coerce_function = TRUE)
-    Condition
+      (expect_pkg_error_classes(to_lst(given, coerce_function = TRUE), "stbl",
+      "coerce", "list"))
+    Output
+      <error/stbl-error-coerce-list>
       Error:
       ! Can't coerce `given` <primitive function> to <list>.
 
 ---
 
     Code
-      wrapped_to_lst(given, coerce_function = TRUE)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_lst(given, coerce_function = TRUE), "stbl",
+      "coerce", "list"))
+    Output
+      <error/stbl-error-coerce-list>
       Error in `wrapped_to_lst()`:
       ! Can't coerce `val` <primitive function> to <list>.
 

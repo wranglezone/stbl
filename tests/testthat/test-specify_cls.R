@@ -38,18 +38,12 @@ test_that("specify_cls builds the expected function snapshot with at least one a
 
 test_that("The function built via specify_cls errors informatively for duplicated args (#150, #153, #161)", {
   no_null <- specify_cls("chr", list(allow_null = FALSE))
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     {
       no_null(NULL, allow_null = FALSE)
     },
     "stbl",
     "duplicate_args"
-  )
-  expect_snapshot(
-    {
-      no_null(NULL, allow_null = FALSE)
-    },
-    error = TRUE
   )
 })
 

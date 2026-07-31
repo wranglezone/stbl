@@ -3,18 +3,15 @@ test_that("stabilize_fct() works (#62)", {
 })
 
 test_that("stabilize_fct() throws errors for bad levels (#62, #67)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
     "stbl",
     "fct_levels"
   )
-  expect_snapshot(
-    stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    error = TRUE
+    "stbl",
+    "fct_levels"
   )
 })
 
@@ -25,27 +22,21 @@ test_that("stabilize_fct_scalar() works (#62, #189)", {
 
 test_that("stabilize_fct_scalar() respects allow_null (#62, #189)", {
   given <- NULL
-  expect_pkg_error_classes(stabilize_fct_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_fct_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_fct_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_fct_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("stabilize_fct_scalar() errors for non-scalars (#62)", {
   given <- letters
-  expect_pkg_error_classes(stabilize_fct_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_fct_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_fct_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_fct_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
