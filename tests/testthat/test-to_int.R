@@ -214,12 +214,13 @@ test_that("to_int() errors informatively for bad factors (#4)", {
   )
 })
 
-test_that("to_int() works for lists (#2)", {
+test_that("to_int() works for lists (#2, #273)", {
   expect_identical(to_int(list(1L, 2.0, "3")), c(1L, 2L, 3L))
   expect_identical(to_int(list(list(1L), 2L)), c(1L, 2L))
-  expect_error(
+  expect_pkg_error_snapshot(
     to_int(list(1L, 1:5)),
-    class = .compile_dash("stbl", "error", "coerce", "integer")
+    "stbl",
+    "incompatible_type"
   )
 })
 

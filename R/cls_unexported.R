@@ -228,17 +228,16 @@
 #'
 #' @param valid `(logical)` The `valid` vector returned by a `stbl_lst_to_*`
 #'   C routine.
-#' @inheritParams .shared-params
+#' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_lst_failures <- function(valid, to_class, x_class, x_arg, call) {
-  if (all(valid)) {
-    return(invisible(NULL))
-  }
-  .stop_cant_coerce(
-    from_class = x_class,
-    to_class = to_class,
-    x_arg = x_arg,
-    call = call
+.check_lst_failures <- function(valid, to, x_class, x_arg, call) {
+  .check_cast_failures(
+    !valid,
+    x_class,
+    to,
+    "incompatible element types",
+    x_arg,
+    call
   )
 }

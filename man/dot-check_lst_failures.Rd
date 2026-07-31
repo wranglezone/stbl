@@ -4,13 +4,13 @@
 \alias{.check_lst_failures}
 \title{Check list coercion failures and error if any element could not be converted}
 \usage{
-.check_lst_failures(valid, to_class, x_class, x_arg, call)
+.check_lst_failures(valid, to, x_class, x_arg, call)
 }
 \arguments{
 \item{valid}{\code{(logical)} The \code{valid} vector returned by a \verb{stbl_lst_to_*}
 C routine.}
 
-\item{to_class}{\verb{(length-1 character)} The name of the class to coerce to.}
+\item{to}{The target object for the coercion.}
 
 \item{x_class}{\verb{(length-1 character)} The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class

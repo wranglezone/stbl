@@ -136,12 +136,13 @@ test_that("to_dbl() errors informatively for bad factors (#23)", {
   )
 })
 
-test_that("to_dbl() works for lists (#128)", {
+test_that("to_dbl() works for lists (#128, #273)", {
   expect_identical(to_dbl(list(1.1, 2L, "3.3")), c(1.1, 2.0, 3.3))
   expect_identical(to_dbl(list(list(1.1), 2L)), c(1.1, 2.0))
-  expect_error(
+  expect_pkg_error_snapshot(
     to_dbl(list(1.1, 1:5)),
-    class = .compile_dash("stbl", "error", "coerce", "double")
+    "stbl",
+    "incompatible_type"
   )
 })
 

@@ -36,7 +36,18 @@
       Error in `wrapped_to_fct()`:
       ! `val` must not be <NULL>.
 
-# to_fct() errors for things that can't be coerced (#62)
+# to_fct() works for lists (#64, #273)
+
+    Code
+      (expect_pkg_error_classes(to_fct(list("a", 1:5)), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
+      Error:
+      ! `list("a", 1:5)` <list> must be coercible to <factor>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
+
+# to_fct() errors for things that can't be coerced (#62, #273)
 
     Code
       to_fct(given)
@@ -71,18 +82,24 @@
 ---
 
     Code
-      to_fct(given)
-    Condition
+      (expect_pkg_error_classes(to_fct(given), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <factor>.
+      ! `given` <list> must be coercible to <factor>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1 and 2
 
 ---
 
     Code
-      wrapped_to_fct(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(given), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_fct()`:
-      ! Can't coerce `val` <list> to <factor>.
+      ! `val` <list> must be coercible to <factor>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1 and 2
 
 # to_fct_scalar() provides informative error messages (#62)
 

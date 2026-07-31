@@ -58,7 +58,7 @@ test_that("to_fct() respects allow_null (#62)", {
   )
 })
 
-test_that("to_fct() works for lists (#64)", {
+test_that("to_fct() works for lists (#64, #273)", {
   expect_identical(
     to_fct(list("a", "b")),
     factor(c("a", "b"))
@@ -67,13 +67,14 @@ test_that("to_fct() works for lists (#64)", {
     to_fct(list(list("a"), "b")),
     factor(c("a", "b"))
   )
-  expect_error(
+  expect_pkg_error_snapshot(
     to_fct(list("a", 1:5)),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
+    "stbl",
+    "incompatible_type"
   )
 })
 
-test_that("to_fct() errors for things that can't be coerced (#62)", {
+test_that("to_fct() errors for things that can't be coerced (#62, #273)", {
   given <- mean
   expect_error(
     to_fct(given),
@@ -91,12 +92,16 @@ test_that("to_fct() errors for things that can't be coerced (#62)", {
   expect_snapshot(wrapped_to_fct(given), error = TRUE)
 
   given <- list(a = 1, b = 1:5)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_fct(given),
-    class = .compile_dash("stbl", "error", "coerce", "factor")
+    "stbl",
+    "incompatible_type"
   )
-  expect_snapshot(to_fct(given), error = TRUE)
-  expect_snapshot(wrapped_to_fct(given), error = TRUE)
+  expect_pkg_error_snapshot(
+    wrapped_to_fct(given),
+    "stbl",
+    "incompatible_type"
+  )
 })
 
 test_that("to_fct() treats numbers as text (#62)", {

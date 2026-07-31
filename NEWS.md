@@ -1,5 +1,9 @@
 # stbl (development version)
 
+## Bug fixes
+
+* `to_chr()`, `to_dbl()`, `to_fct()`, `to_int()`, and `to_lgl()` now throw an "incompatible type" error (with failing element locations) instead of a generic "can't coerce" error when a list contains elements that can't be converted (#273).
+
 ## New functions
 
 * New `stabilize_one_of()` (and `stabilise_one_of()`) validates `x` by trying each unnamed stabilizer function in `...` in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New `to_one_of()` works analogously, accepting type prototypes (e.g. `integer()`, `character()`) in `...` and dispatching to [to()] (#215).

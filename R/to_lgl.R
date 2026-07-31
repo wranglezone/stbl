@@ -88,7 +88,7 @@ to_lgl.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_lgl, x)
-  .check_lst_failures(res[["valid"]], "logical", x_class, x_arg, call)
+  .check_lst_failures(res[["valid"]], logical(), x_class, x_arg, call)
   res[["result"]]
 }
 

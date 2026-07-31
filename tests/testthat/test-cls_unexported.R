@@ -237,10 +237,10 @@ test_that(".to_cls_from_fct() works (#23)", {
   )
 })
 
-test_that(".check_lst_failures() returns NULL when all elements are valid (#noissue)", {
+test_that(".check_lst_failures() returns NULL when all elements are valid (#273)", {
   result <- .check_lst_failures(
     c(TRUE, TRUE, TRUE),
-    to_class = "character",
+    to = character(),
     x_class = "list",
     x_arg = "x",
     call = rlang::current_env()
@@ -248,16 +248,16 @@ test_that(".check_lst_failures() returns NULL when all elements are valid (#nois
   expect_null(result)
 })
 
-test_that(".check_lst_failures() errors when any element is invalid (#noissue)", {
+test_that(".check_lst_failures() errors when any element is invalid (#273)", {
   expect_error(
     .check_lst_failures(
       c(TRUE, FALSE),
-      to_class = "character",
+      to = character(),
       x_class = "list",
       x_arg = "x",
       call = rlang::current_env()
     ),
-    class = .compile_dash("stbl", "error", "coerce", "character")
+    class = .compile_dash("stbl", "error", "incompatible_type")
   )
 })
 

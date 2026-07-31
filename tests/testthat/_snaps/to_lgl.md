@@ -54,21 +54,38 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
 
-# to_lgl() errors for other types (#21)
+# to_lgl() works for lists (#21, #273)
 
     Code
-      to_lgl(given)
-    Condition
+      (expect_pkg_error_classes(to_lgl(list(TRUE, 1:5)), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <logical>.
+      ! `list(TRUE, 1:5)` <list> must be coercible to <logical>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
+
+# to_lgl() errors for other types (#21, #273)
+
+    Code
+      (expect_pkg_error_classes(to_lgl(given), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
+      Error:
+      ! `given` <list> must be coercible to <logical>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 ---
 
     Code
-      wrapped_to_lgl(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_lgl(given), "stbl", "incompatible_type"))
+    Output
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_lgl()`:
-      ! Can't coerce `val` <list> to <logical>.
+      ! `val` <list> must be coercible to <logical>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 ---
 

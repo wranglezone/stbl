@@ -28,41 +28,49 @@
       ! Can't coerce `function(x) x` <function> to <character>.
       i Anonymous functions can't be converted to a string name.
 
-# to_chr() fails gracefully for weird cases (#22)
+# to_chr() fails gracefully for weird cases (#22, #273)
 
     Code
-      (expect_pkg_error_classes(to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <character>.
+      ! `given` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <list> to <character>.
+      ! `val` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1
 
 ---
 
     Code
-      (expect_pkg_error_classes(to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <character>.
+      ! `given` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <list> to <character>.
+      ! `val` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 ---
 
@@ -85,20 +93,24 @@
 ---
 
     Code
-      (expect_pkg_error_classes(to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <character>.
+      ! `given` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(wrapped_to_chr(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <list> to <character>.
+      ! `val` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 2
 
 # to_chr_scalar() errors for non-scalars (#22)
 
@@ -120,24 +132,28 @@
       ! `val` must be a single <character>.
       x `val` has 26 values.
 
-# to_chr_scalar() errors for uncoerceable types (#22)
+# to_chr_scalar() errors for uncoerceable types (#22, #273)
 
     Code
-      (expect_pkg_error_classes(to_chr_scalar(given), "stbl", "coerce", "character"))
+      (expect_pkg_error_classes(to_chr_scalar(given), "stbl", "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error:
-      ! Can't coerce `given` <list> to <character>.
+      ! `given` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_to_chr_scalar(given), "stbl", "coerce",
-      "character"))
+      (expect_pkg_error_classes(wrapped_to_chr_scalar(given), "stbl",
+      "incompatible_type"))
     Output
-      <error/stbl-error-coerce-character>
+      <error/stbl-error-incompatible_type>
       Error in `wrapped_to_chr_scalar()`:
-      ! Can't coerce `val` <list> to <character>.
+      ! `val` <list> must be coercible to <character>
+      x Can't convert some values due to incompatible element types.
+      * Locations: 1
 
 # to_chr_scalar() respects allow_null (#22, #189)
 

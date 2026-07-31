@@ -176,31 +176,30 @@ test_that("to_lgl errors for bad factors (#21)", {
   )
 })
 
-test_that("to_lgl() works for lists (#21)", {
+test_that("to_lgl() works for lists (#21, #273)", {
   expect_identical(
     to_lgl(list(TRUE, FALSE, 1, 0, "T", "F")),
     as.logical(c(1, 0, 1, 0, 1, 0))
   )
   expect_identical(to_lgl(list(list(TRUE), 0L)), c(TRUE, FALSE))
-  expect_error(
+  expect_pkg_error_snapshot(
     to_lgl(list(TRUE, 1:5)),
-    class = .compile_dash("stbl", "error", "coerce", "logical")
+    "stbl",
+    "incompatible_type"
   )
 })
 
-test_that("to_lgl() errors for other types (#21)", {
+test_that("to_lgl() errors for other types (#21, #273)", {
   given <- list(1, 1:10)
-  expect_error(
+  expect_pkg_error_snapshot(
     to_lgl(given),
-    class = .compile_dash("stbl", "error", "coerce", "logical")
+    "stbl",
+    "incompatible_type"
   )
-  expect_snapshot(
-    to_lgl(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_lgl(given),
-    error = TRUE
+    "stbl",
+    "incompatible_type"
   )
 
   given <- mean
