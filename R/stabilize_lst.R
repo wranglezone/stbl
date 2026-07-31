@@ -38,8 +38,8 @@
 #'   age = specify_int_scalar()
 #' )
 #'
-#' # Allow any non-NULL element with stabilize_present
-#' stabilize_lst(list(data = mtcars), data = stabilize_present)
+#' # Allow any non-NULL element with assert_present
+#' stabilize_lst(list(data = mtcars), data = assert_present)
 #'
 #' # Allow extra named elements via .named
 #' stabilize_lst(

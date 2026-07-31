@@ -20,7 +20,7 @@ test_that("specify_df() errors when required column is missing (#142)", {
 })
 
 test_that("specify_df() passes through .min_rows, .max_rows (#142)", {
-  validator <- specify_df(.min_rows = 2, .extra_cols = stabilize_present)
+  validator <- specify_df(.min_rows = 2, .extra_cols = assert_present)
   expect_pkg_error_snapshot(
     validator(data.frame(a = 1L)),
     "stbl",
@@ -31,7 +31,7 @@ test_that("specify_df() passes through .min_rows, .max_rows (#142)", {
 test_that("specify_df() passes through .col_names (#142)", {
   validator <- specify_df(
     .col_names = c("a", "b"),
-    .extra_cols = stabilize_present
+    .extra_cols = assert_present
   )
   expect_pkg_error_snapshot(
     validator(data.frame(a = 1L)),
@@ -41,7 +41,7 @@ test_that("specify_df() passes through .col_names (#142)", {
 })
 
 test_that("specify_df() allows additional specs via ... (#142)", {
-  base_validator <- specify_df(.extra_cols = stabilize_present)
+  base_validator <- specify_df(.extra_cols = assert_present)
   given <- data.frame(a = 1L, b = "hello")
   result <- base_validator(given, a = specify_int_scalar())
   expect_identical(result, given)

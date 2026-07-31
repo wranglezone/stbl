@@ -86,7 +86,7 @@
 # stabilize_df() enforces .min_rows (snapshot) (#142)
 
     Code
-      (expect_pkg_error_classes(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present),
+      (expect_pkg_error_classes(stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = assert_present),
       "stbl", "too_few_rows"))
     Output
       <error/stbl-error-too_few_rows>
@@ -97,7 +97,7 @@
 # stabilize_df() enforces .max_rows (snapshot) (#142)
 
     Code
-      (expect_pkg_error_classes(stabilize_df(mtcars, .max_rows = 5, .extra_cols = stabilize_present),
+      (expect_pkg_error_classes(stabilize_df(mtcars, .max_rows = 5, .extra_cols = assert_present),
       "stbl", "too_many_rows"))
     Output
       <error/stbl-error-too_many_rows>
@@ -109,7 +109,7 @@
 
     Code
       (expect_pkg_error_classes(stabilize_df(data.frame(a = 1L), .col_names = c("a",
-        "b"), .extra_cols = stabilize_present), "stbl", "missing_cols"))
+        "b"), .extra_cols = assert_present), "stbl", "missing_cols"))
     Output
       <error/stbl-error-missing_cols>
       Error:

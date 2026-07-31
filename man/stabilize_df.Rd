@@ -122,19 +122,19 @@ stabilize_df(
   data.frame(name = "Alice", age = 30L, score = 99.5),
   name = specify_chr_scalar(),
   age = specify_int_scalar(),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 
 # Check required column names without validating contents
 stabilize_df(
   mtcars,
   .col_names = c("mpg", "cyl"),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 
 # Enforce row count constraints
 try(
-  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = assert_present)
 )
 
 # NULL is allowed by default
@@ -158,6 +158,7 @@ Other data frame functions:
 \code{\link[=to_df]{to_df()}}
 
 Other stabilization functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
@@ -165,8 +166,7 @@ Other stabilization functions:
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
-\code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}}
+\code{\link[=stabilize_lst]{stabilize_lst()}}
 }
 \concept{data frame functions}
 \concept{stabilization functions}

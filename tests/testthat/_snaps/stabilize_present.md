@@ -1,9 +1,10 @@
-# stabilize_present() errors for NULL (#110)
+# stabilize_present() is deprecated in favor of assert_present() (#299)
 
     Code
-      (expect_pkg_error_classes(stabilize_present(NULL), "stbl", "bad_null"))
+      (expect_pkg_error_classes(stabilize_present("hello"), "stbl", "deprecated"))
     Output
-      <error/stbl-error-bad_null>
+      <error/stbl-error-deprecated>
       Error:
-      ! `NULL` must not be <NULL>.
+      ! `stabilize_present()` was renamed to `assert_present()`.
+      i Please call `assert_present()` instead.
 
