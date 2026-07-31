@@ -17,13 +17,14 @@ test_that(".to_cls_scalar() works", {
     1L
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .to_cls_scalar(
       c("1", "2"),
       is_rlang_cls_scalar = rlang::is_scalar_integer,
       to_cls_fn = as.integer
     ),
-    class = .compile_dash("stbl", "error", "non_scalar")
+    "stbl",
+    "non_scalar"
   )
 })
 
@@ -44,9 +45,10 @@ test_that(".stabilize_cls() calls to_cls_fn with to_cls_args", {
     1:5
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls(1:5, to_cls_fn = to_fn),
-    class = .compile_dash("stbl", "error", "fail")
+    "stbl",
+    "fail"
   )
 })
 
@@ -66,23 +68,25 @@ test_that(".stabilize_cls() calls check_cls_value_fn", {
     1:3
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls(
       1:5,
       to_cls_fn = as.integer,
       check_cls_value_fn = check_fn,
       check_cls_value_fn_args = list(my_arg = "success")
     ),
-    class = .compile_dash("stbl", "error", "custom")
+    "stbl",
+    "custom"
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls(
       1:3,
       to_cls_fn = as.integer,
       check_cls_value_fn = check_fn
     ),
-    class = .compile_dash("stbl", "error", "fail")
+    "stbl",
+    "fail"
   )
 })
 
@@ -92,14 +96,16 @@ test_that(".stabilize_cls() calls stabilize_arg", {
     1:5
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls(1:5, to_cls_fn = as.integer, min_size = 6),
-    class = .compile_dash("stbl", "error", "size_too_small")
+    "stbl",
+    "size_too_small"
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls(1:5, to_cls_fn = as.integer, max_size = 4),
-    class = .compile_dash("stbl", "error", "size_too_large")
+    "stbl",
+    "size_too_large"
   )
 })
 
@@ -123,9 +129,10 @@ test_that(".stabilize_cls_scalar() calls to_cls_scalar_fn with args", {
     1L
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls_scalar("1", to_cls_scalar_fn = to_fn_scalar),
-    class = .compile_dash("stbl", "error", "fail")
+    "stbl",
+    "fail"
   )
 })
 
@@ -151,35 +158,38 @@ test_that(".stabilize_cls_scalar() calls check_cls_value_fn", {
     1L
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls_scalar(
       "5",
       to_cls_scalar_fn = to_fn_scalar,
       check_cls_value_fn = check_fn,
       check_cls_value_fn_args = list(my_arg = "success")
     ),
-    class = .compile_dash("stbl", "error", "custom")
+    "stbl",
+    "custom"
   )
 
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls_scalar(
       "1",
       to_cls_scalar_fn = to_fn_scalar,
       check_cls_value_fn = check_fn
     ),
-    class = .compile_dash("stbl", "error", "fail")
+    "stbl",
+    "fail"
   )
 })
 
 test_that(".stabilize_cls_scalar() checks for NA and empty dots", {
   to_fn_scalar <- function(x, ...) as.integer(x)
-  expect_error(
+  expect_pkg_error_classes(
     .stabilize_cls_scalar(
       NA_integer_,
       to_cls_scalar_fn = to_fn_scalar,
       allow_na = FALSE
     ),
-    class = .compile_dash("stbl", "error", "bad_na")
+    "stbl",
+    "bad_na"
   )
 
   expect_error(
@@ -225,7 +235,7 @@ test_that(".to_cls_from_fct() works (#23)", {
   )
 
   # coerce_factor = FALSE
-  expect_error(
+  expect_pkg_error_classes(
     .to_cls_from_fct(
       x = factor(1:3),
       to_cls_fn = to_fn,
@@ -233,7 +243,9 @@ test_that(".to_cls_from_fct() works (#23)", {
       to_class = "integer",
       coerce_factor = FALSE
     ),
-    class = .compile_dash("stbl", "error", "coerce", "integer")
+    "stbl",
+    "coerce",
+    "integer"
   )
 })
 
@@ -249,7 +261,7 @@ test_that(".check_lst_failures() returns NULL when all elements are valid (#273)
 })
 
 test_that(".check_lst_failures() errors when any element is invalid (#273)", {
-  expect_error(
+  expect_pkg_error_classes(
     .check_lst_failures(
       c(TRUE, FALSE),
       to = character(),
@@ -257,7 +269,8 @@ test_that(".check_lst_failures() errors when any element is invalid (#273)", {
       x_arg = "x",
       call = rlang::current_env()
     ),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })
 
@@ -273,12 +286,13 @@ test_that(".to_num_from_complex() works (#23)", {
   )
 
   # Failure path
-  expect_error(
+  expect_pkg_error_classes(
     .to_num_from_complex(
       x = c(1 + 1i, 2),
       cast_fn = as.integer,
       to_type_obj = integer()
     ),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })

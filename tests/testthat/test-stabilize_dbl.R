@@ -4,9 +4,10 @@ test_that("stabilize_dbl() checks min_value (#23, #176)", {
     stabilize_dbl(given, min_value = 1.1, max_value = 10.1),
     given
   )
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_dbl(given, min_value = 11.1),
-    class = .compile_dash("stbl", "error", "outside_range")
+    "stbl",
+    "outside_range"
   )
   expect_snapshot(
     stabilize_dbl(given, min_value = 11.1),
@@ -24,9 +25,10 @@ test_that("stabilize_dbl() checks min_value (#23, #176)", {
 
 test_that("stabilize_dbl() checks max_value (#23, #176)", {
   given <- 1.1:10.1
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_dbl(given, max_value = 4.1),
-    class = .compile_dash("stbl", "error", "outside_range")
+    "stbl",
+    "outside_range"
   )
   expect_snapshot(
     stabilize_dbl(given, max_value = 4.1),
@@ -46,10 +48,7 @@ test_that("stabilize_dbl_scalar() allows length-1 dbls through (#23, #189)", {
 
 test_that("stabilize_dbl_scalar() respects allow_null (#23, #189)", {
   given <- NULL
-  expect_error(
-    stabilize_dbl_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(stabilize_dbl_scalar(given), "stbl", "bad_null")
   expect_snapshot(
     stabilize_dbl_scalar(given),
     error = TRUE
@@ -62,10 +61,7 @@ test_that("stabilize_dbl_scalar() respects allow_null (#23, #189)", {
 
 test_that("stabilize_dbl_scalar() errors on non-scalars (#23)", {
   given <- 1.1:10.1
-  expect_error(
-    stabilize_dbl_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
-  )
+  expect_pkg_error_classes(stabilize_dbl_scalar(given), "stbl", "non_scalar")
   expect_snapshot(
     stabilize_dbl_scalar(given),
     error = TRUE

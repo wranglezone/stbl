@@ -13,9 +13,10 @@ test_that("to_lst() works for NULL (#157)", {
 
 test_that("to_lst() respects allow_null (#157)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_classes(
     to_lst(given, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
   expect_snapshot(
     to_lst(given, allow_null = FALSE),
@@ -58,10 +59,7 @@ test_that("to_lst() works for character vectors (#157)", {
 
 test_that("to_lst() errors by default for functions (#157)", {
   given <- function(x) x + 1
-  expect_error(
-    to_lst(given),
-    class = .compile_dash("stbl", "error", "bad_function")
-  )
+  expect_pkg_error_classes(to_lst(given), "stbl", "bad_function")
   expect_snapshot(
     to_lst(given),
     error = TRUE
@@ -83,9 +81,11 @@ test_that("to_lst() works for functions with coerce_function = TRUE (#157)", {
 
 test_that("to_lst() errors informatively for primitives (#157)", {
   given <- is.na
-  expect_error(
+  expect_pkg_error_classes(
     to_lst(given, coerce_function = TRUE),
-    class = .compile_dash("stbl", "error", "coerce", "list")
+    "stbl",
+    "coerce",
+    "list"
   )
   expect_snapshot(
     to_lst(given, coerce_function = TRUE),

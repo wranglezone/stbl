@@ -15,9 +15,10 @@ test_that("to_dbl() works for NULL (#23)", {
 
 test_that("to_dbl() respects allow_null (#23)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_classes(
     to_dbl(given, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
   expect_snapshot(
     to_dbl(given, allow_null = FALSE),
@@ -44,9 +45,11 @@ test_that("to_dbl() works for chrs (#23)", {
 test_that("to_dbl() respects coerce_character (#23)", {
   expected <- c(1.1, 2.2)
   given <- as.character(expected)
-  expect_error(
+  expect_pkg_error_classes(
     to_dbl(given, coerce_character = FALSE),
-    class = .compile_dash("stbl", "error", "coerce", "double")
+    "stbl",
+    "coerce",
+    "double"
   )
   expect_snapshot(
     to_dbl(given, coerce_character = FALSE),
@@ -60,10 +63,7 @@ test_that("to_dbl() respects coerce_character (#23)", {
 
 test_that("to_dbl() errors informatively for bad chrs (#23)", {
   given <- c("1.1", "a")
-  expect_error(
-    to_dbl(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_dbl(given),
     error = TRUE
@@ -83,10 +83,7 @@ test_that("to_dbl() works for complexes (#23)", {
 test_that("to_dbl() errors informatively for bad complexes (#23)", {
   given <- as.complex(c(1.1, 2.2))
   given[[1]] <- 1.1 + 1i
-  expect_error(
-    to_dbl(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_dbl(given),
     error = TRUE
@@ -106,9 +103,11 @@ test_that("to_dbl() works for factors (#23)", {
 test_that("to_dbl() respects coerce_factor (#23)", {
   expected <- c(1.1, 3.3)
   given <- factor(expected)
-  expect_error(
+  expect_pkg_error_classes(
     to_dbl(given, coerce_factor = FALSE),
-    class = .compile_dash("stbl", "error", "coerce", "double")
+    "stbl",
+    "coerce",
+    "double"
   )
   expect_snapshot(
     to_dbl(given, coerce_factor = FALSE),
@@ -122,10 +121,7 @@ test_that("to_dbl() respects coerce_factor (#23)", {
 
 test_that("to_dbl() errors informatively for bad factors (#23)", {
   given <- factor(letters)
-  expect_error(
-    to_dbl(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_dbl(given),
     error = TRUE
@@ -159,10 +155,7 @@ test_that("to_dbl_scalar() allows length-1 dbls through (#23)", {
 
 test_that("to_dbl_scalar() provides informative error messages (#23)", {
   given <- c(1.1, 2.2)
-  expect_error(
-    to_dbl_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
-  )
+  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "non_scalar")
   expect_snapshot(
     to_dbl_scalar(given),
     error = TRUE
@@ -175,10 +168,7 @@ test_that("to_dbl_scalar() provides informative error messages (#23)", {
 
 test_that("to_dbl_scalar() respects allow_null (#23, #189)", {
   given <- NULL
-  expect_error(
-    to_dbl_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "bad_null")
   expect_snapshot(
     to_dbl_scalar(given),
     error = TRUE
@@ -191,10 +181,7 @@ test_that("to_dbl_scalar() respects allow_null (#23, #189)", {
 
 test_that("to_dbl_scalar respects allow_zero_length (#23, #43, #45, #189)", {
   given <- double()
-  expect_error(
-    to_dbl_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_empty")
-  )
+  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "bad_empty")
   expect_snapshot(
     to_dbl_scalar(given),
     error = TRUE

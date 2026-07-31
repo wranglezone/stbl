@@ -17,9 +17,10 @@ test_that("stabilize_lgl() checks NAs (#28)", {
     stabilize_lgl(given),
     c(TRUE, NA, TRUE, FALSE)
   )
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lgl(given, allow_na = FALSE),
-    class = .compile_dash("stbl", "error", "bad_na")
+    "stbl",
+    "bad_na"
   )
   expect_snapshot(
     stabilize_lgl(given, allow_na = FALSE),
@@ -33,9 +34,10 @@ test_that("stabilize_lgl() checks NAs (#28)", {
 
 test_that("stabilize_lgl() checks min_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lgl(given, min_size = 5),
-    class = .compile_dash("stbl", "error", "size_too_small")
+    "stbl",
+    "size_too_small"
   )
   expect_snapshot(
     stabilize_lgl(given, min_size = 5),
@@ -49,9 +51,10 @@ test_that("stabilize_lgl() checks min_size (#28)", {
 
 test_that("stabilize_lgl() checks max_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lgl(given, max_size = 3),
-    class = .compile_dash("stbl", "error", "size_too_large")
+    "stbl",
+    "size_too_large"
   )
   expect_snapshot(
     stabilize_lgl(given, max_size = 3),
@@ -70,10 +73,7 @@ test_that("stabilize_lgl_scalar() allows length-1 lgls through (#28, #189)", {
 
 test_that("stabilize_lgl_scalar() respects allow_null (#28, #189)", {
   given <- NULL
-  expect_error(
-    stabilize_lgl_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(stabilize_lgl_scalar(given), "stbl", "bad_null")
   expect_snapshot(
     stabilize_lgl_scalar(given),
     error = TRUE
@@ -86,10 +86,7 @@ test_that("stabilize_lgl_scalar() respects allow_null (#28, #189)", {
 
 test_that("stabilize_lgl_scalar() errors on non-scalars (#28)", {
   given <- c(TRUE, FALSE, TRUE)
-  expect_error(
-    stabilize_lgl_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
-  )
+  expect_pkg_error_classes(stabilize_lgl_scalar(given), "stbl", "non_scalar")
   expect_snapshot(
     stabilize_lgl_scalar(given),
     error = TRUE

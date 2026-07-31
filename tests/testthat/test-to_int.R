@@ -10,9 +10,10 @@ test_that("to_int() works for NULL (#2)", {
 
 test_that("to_int() respects allow_null (#2)", {
   given <- NULL
-  expect_error(
+  expect_pkg_error_classes(
     to_int(given, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
+    "stbl",
+    "bad_null"
   )
   expect_snapshot(
     to_int(given, allow_null = FALSE),
@@ -39,10 +40,7 @@ test_that("to_int() works for dbls (#2)", {
 test_that("to_int() errors for dbls that would lose precision (#2, #217)", {
   given <- as.double(1:10)
   given[[4]] <- 1.1
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -53,10 +51,7 @@ test_that("to_int() errors for dbls that would lose precision (#2, #217)", {
   )
 
   given[[4]] <- Inf
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -76,9 +71,11 @@ test_that("to_int() works for chrs (#2)", {
 test_that("to_int() respects coerce_character (#14)", {
   expected <- 1:10
   given <- as.character(expected)
-  expect_error(
+  expect_pkg_error_classes(
     to_int(given, coerce_character = FALSE),
-    class = .compile_dash("stbl", "error", "coerce", "integer")
+    "stbl",
+    "coerce",
+    "integer"
   )
   expect_snapshot(
     to_int(given, coerce_character = FALSE),
@@ -93,10 +90,7 @@ test_that("to_int() respects coerce_character (#14)", {
 test_that("to_int() errors informatively for bad chrs (#2)", {
   given <- as.character(1:10)
   given[[4]] <- "1.1"
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -107,10 +101,7 @@ test_that("to_int() errors informatively for bad chrs (#2)", {
   )
 
   given[[4]] <- "a"
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -130,10 +121,7 @@ test_that("to_int() works for complexes (#2)", {
 test_that("to_int() errors informatively for bad complexes (#2)", {
   given <- as.complex(1:10)
   given[[4]] <- 1 + 1i
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -147,10 +135,7 @@ test_that("to_int() errors informatively for bad complexes (#2)", {
 test_that("to_int() errors for complexes that would lose precision (#noissue)", {
   given <- as.complex(1:10)
   given[[4]] <- 1.5 + 0i
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -161,10 +146,7 @@ test_that("to_int() errors for complexes that would lose precision (#noissue)", 
   )
 
   given[[4]] <- Inf + 0i
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -184,9 +166,11 @@ test_that("to_int() works for factors (#4)", {
 test_that("to_int() respects coerce_factor (#14)", {
   expected <- c(1L, 3L, 5L, 7L)
   given <- factor(expected)
-  expect_error(
+  expect_pkg_error_classes(
     to_int(given, coerce_factor = FALSE),
-    class = .compile_dash("stbl", "error", "coerce", "integer")
+    "stbl",
+    "coerce",
+    "integer"
   )
   expect_snapshot(
     to_int(given, coerce_factor = FALSE),
@@ -200,10 +184,7 @@ test_that("to_int() respects coerce_factor (#14)", {
 
 test_that("to_int() errors informatively for bad factors (#4)", {
   given <- factor(letters)
-  expect_error(
-    to_int(given),
-    class = .compile_dash("stbl", "error", "incompatible_type")
-  )
+  expect_pkg_error_classes(to_int(given), "stbl", "incompatible_type")
   expect_snapshot(
     to_int(given),
     error = TRUE
@@ -238,10 +219,7 @@ test_that("to_int_scalar() allows length-1 ints through (#12)", {
 
 test_that("to_int_scalar() provides informative error messages (#12)", {
   given <- 1:10
-  expect_error(
-    to_int_scalar(given),
-    class = .compile_dash("stbl", "error", "non_scalar")
-  )
+  expect_pkg_error_classes(to_int_scalar(given), "stbl", "non_scalar")
   expect_snapshot(
     to_int_scalar(given),
     error = TRUE
@@ -254,10 +232,7 @@ test_that("to_int_scalar() provides informative error messages (#12)", {
 
 test_that("to_int_scalar() respects allow_null (#12, #189)", {
   given <- NULL
-  expect_error(
-    to_int_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(to_int_scalar(given), "stbl", "bad_null")
   expect_snapshot(
     to_int_scalar(given),
     error = TRUE
@@ -270,10 +245,7 @@ test_that("to_int_scalar() respects allow_null (#12, #189)", {
 
 test_that("to_int_scalar respects allow_zero_length (#12, #43, #45, #189)", {
   given <- integer()
-  expect_error(
-    to_int_scalar(given),
-    class = .compile_dash("stbl", "error", "bad_empty")
-  )
+  expect_pkg_error_classes(to_int_scalar(given), "stbl", "bad_empty")
   expect_snapshot(
     to_int_scalar(given),
     error = TRUE

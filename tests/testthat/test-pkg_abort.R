@@ -64,9 +64,10 @@ test_that("pkg_abort() passes dots to cli_abort() (#136)", {
   wrapped_abort <- function(message, subclass, ...) {
     pkg_abort("wrapped", message, subclass, ...)
   }
-  expect_error(
+  expect_pkg_error_classes(
     wrapped_abort("A message.", "a_subclass", .internal = TRUE),
-    class = "wrapped-error-a_subclass"
+    "wrapped",
+    "a_subclass"
   )
   expect_snapshot(
     wrapped_abort("A message.", "a_subclass", .internal = TRUE),

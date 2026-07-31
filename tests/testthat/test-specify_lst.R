@@ -9,9 +9,10 @@ test_that("specify_lst() creates a working specifier (#110)", {
 
 test_that("specify_lst() respects pre-configured element specs (#110)", {
   spec <- specify_lst(count = specify_int_scalar())
-  expect_error(
+  expect_pkg_error_classes(
     spec(list(count = "not-int")),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })
 
@@ -32,18 +33,12 @@ test_that("specify_lst() passes through additional element specs from ... (#110)
 
 test_that("specify_lst() respects .min_size (#110)", {
   spec <- specify_lst(.min_size = 2)
-  expect_error(
-    spec(list(a = 1L)),
-    class = .compile_dash("stbl", "error", "size_too_small")
-  )
+  expect_pkg_error_classes(spec(list(a = 1L)), "stbl", "size_too_small")
 })
 
 test_that("specify_lst() respects .allow_null (#110)", {
   spec <- specify_lst(.allow_null = FALSE)
-  expect_error(
-    spec(NULL),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(spec(NULL), "stbl", "bad_null")
 })
 
 test_that("specify_list() exists (#110)", {
@@ -63,8 +58,9 @@ test_that("specify_lst() accepts elements named 'x_arg', 'call', 'x_class' (#204
 test_that("stabilize_lst() with nested specify_lst() propagates errors correctly (#204)", {
   inner_spec <- specify_lst(a = specify_int_scalar())
   given_bad <- list(outer = list(a = "not-int"))
-  expect_error(
+  expect_pkg_error_classes(
     stabilize_lst(given_bad, outer = inner_spec),
-    class = .compile_dash("stbl", "error", "incompatible_type")
+    "stbl",
+    "incompatible_type"
   )
 })

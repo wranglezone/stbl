@@ -7,10 +7,7 @@ test_that("to_df() returns NULL for NULL input by default (#201)", {
 })
 
 test_that("to_df() respects allow_null (#201)", {
-  expect_error(
-    to_df(NULL, allow_null = FALSE),
-    class = .compile_dash("stbl", "error", "bad_null")
-  )
+  expect_pkg_error_classes(to_df(NULL, allow_null = FALSE), "stbl", "bad_null")
   expect_snapshot(
     to_df(NULL, allow_null = FALSE),
     error = TRUE
@@ -58,10 +55,7 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)
 })
 
 test_that("to_df() errors for a list with incompatible column lengths (#201)", {
-  expect_error(
-    to_df(list(a = 1:3, b = 1:2)),
-    class = .compile_dash("stbl", "error", "jagged")
-  )
+  expect_pkg_error_classes(to_df(list(a = 1:3, b = 1:2)), "stbl", "jagged")
   expect_snapshot(
     to_df(list(a = 1:3, b = 1:2)),
     error = TRUE
@@ -73,10 +67,7 @@ test_that("to_df() errors for a list with incompatible column lengths (#201)", {
 })
 
 test_that("to_df() errors for an unnamed list (#203)", {
-  expect_error(
-    to_df(list(1, 2)),
-    class = .compile_dash("stbl", "error", "bad_named")
-  )
+  expect_pkg_error_classes(to_df(list(1, 2)), "stbl", "bad_named")
   expect_snapshot(
     to_df(list(1, 2)),
     error = TRUE
@@ -84,9 +75,11 @@ test_that("to_df() errors for an unnamed list (#203)", {
 })
 
 test_that("to_df() errors for non-coercible types (#201)", {
-  expect_error(
+  expect_pkg_error_classes(
     to_df("not a data frame"),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+    "stbl",
+    "coerce",
+    "data.frame"
   )
   expect_snapshot(
     to_df("not a data frame"),
@@ -117,20 +110,21 @@ test_that("to_df() coerces named vector types to a data frame (#203)", {
 })
 
 test_that("to_df() errors for inline vector expressions (#203)", {
-  expect_error(
+  expect_pkg_error_classes(
     to_df(c("a", "b", "c")),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+    "stbl",
+    "coerce",
+    "data.frame"
   )
-  expect_error(
-    to_df(c(1.5, 2.5)),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
-  )
+  expect_pkg_error_classes(to_df(c(1.5, 2.5)), "stbl", "coerce", "data.frame")
 })
 
 test_that("to_df.default() errors for non-coercible types (#201)", {
-  expect_error(
+  expect_pkg_error_classes(
     to_df(as.Date("2024-01-01")),
-    class = .compile_dash("stbl", "error", "coerce", "data.frame")
+    "stbl",
+    "coerce",
+    "data.frame"
   )
   expect_snapshot(
     to_df(as.Date("2024-01-01")),
