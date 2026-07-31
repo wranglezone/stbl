@@ -24,7 +24,8 @@
       additional_msg = c("*" = "NA locations: {locations}"),
       call = call,
       subclass = "bad_na",
-      message_env = rlang::current_env()
+      message_env = rlang::current_env(),
+      locations = locations
     )
   }
   return(invisible(NULL))
@@ -232,6 +233,7 @@
   }
   max_len <- max(non_one)
   short_mask <- lens < max_len & lens > 1L
+  locations <- unname(which(short_mask))
   short_nms <- names(x)[short_mask]
   short_lens <- lens[short_mask]
   short_pairs <- paste(paste0(short_nms, " = ", short_lens), collapse = ", ")
@@ -246,6 +248,7 @@
     ),
     subclass = "jagged",
     call = call,
-    message_env = rlang::current_env()
+    message_env = rlang::current_env(),
+    locations = locations
   )
 }

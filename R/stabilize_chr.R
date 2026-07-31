@@ -184,7 +184,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
 
   rules <- if (is.list(regex)) regex else list(regex)
 
-  error_msgs <- lapply(
+  rule_failures <- lapply(
     X = rules,
     FUN = .apply_regex_rule,
     x = x,
@@ -192,14 +192,18 @@ stabilise_character_scalar <- stabilize_chr_scalar
     call = call
   )
 
-  error_msgs <- unlist(error_msgs)
+  error_msgs <- unlist(lapply(rule_failures, `[[`, "message"))
 
   if (length(error_msgs)) {
+    locations <- sort(unique(unlist(
+      lapply(rule_failures, `[[`, "locations")
+    )))
     .stbl_abort(
       message = error_msgs,
       subclass = "must",
       call = call,
-      message_env = rlang::current_env()
+      message_env = rlang::current_env(),
+      locations = locations
     )
   }
 
@@ -211,8 +215,8 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #' @param rule `(length-1 character)` A regex rule (possibly with a `name` and
 #'   `negate` attribute).
 #' @inheritParams .shared-params
-#' @returns A character vector of error messages if the rule fails, otherwise
-#'   `NULL`.
+#' @returns A list with a `message` character vector and integer `locations` of
+#'   the failing elements if the rule fails, otherwise `NULL`.
 #' @keywords internal
 .apply_regex_rule <- function(rule, x, x_arg, call) {
   rule <- to_chr_scalar(rule, call = call)
@@ -229,7 +233,10 @@ stabilise_character_scalar <- stabilize_chr_scalar
   )
   additional_msg <- .describe_failure_chr(x, success, negate)
 
-  c(main_msg, additional_msg)
+  list(
+    message = c(main_msg, additional_msg),
+    locations = which(!success)
+  )
 }
 
 #' Detect a regex pattern in a character vector

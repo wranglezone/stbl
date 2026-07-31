@@ -5,6 +5,10 @@
 * `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce snapshots that mirror `testthat::expect_snapshot()`, showing the bare expression under `Code` and the condition class alongside its message. Existing snapshots must be re-accepted (#301).
 * `stabilize_present()` is now named `assert_present()`, since it doesn't stabilize (coerce) its input; it only asserts that the input is not `NULL`. Calling `stabilize_present()` now throws a "deprecated"-classed error directing you to `assert_present()` (#299).
 
+## New features
+
+* Errors raised for element-wise failures now carry an integer `locations` element on the condition object, giving the positions in the input that failed the check. Handlers can read these positions directly via `cnd$locations` instead of parsing the error message (#274).
+
 ## Bug fixes
 
 * `to_chr()`, `to_dbl()`, `to_fct()`, `to_int()`, and `to_lgl()` now throw an "incompatible type" error (with failing element locations) instead of a generic "can't coerce" error when a list contains elements that can't be converted (#273).

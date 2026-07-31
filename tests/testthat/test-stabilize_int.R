@@ -79,3 +79,8 @@ test_that("stabilize_integer_scalar() exists (#164)", {
 test_that("stabilise_integer_scalar() exists (#167)", {
   expect_no_error(stabilise_integer_scalar(TRUE))
 })
+
+test_that("stabilize_int() attaches value failure locations (#274)", {
+  cnd <- rlang::catch_cnd(stabilize_int(c(1L, 5L, 2L, 8L), min_value = 3))
+  expect_identical(cnd$locations, c(1L, 3L))
+})

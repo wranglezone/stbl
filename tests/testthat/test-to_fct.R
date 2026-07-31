@@ -155,3 +155,8 @@ test_that("to_fct() sorts integer levels numerically not lexicographically (#241
   result <- to_fct(given)
   expect_identical(levels(result), c("1", "2", "10"))
 })
+
+test_that("to_fct() attaches bad-level locations (#274)", {
+  cnd <- rlang::catch_cnd(to_fct(c("a", "b", "c", "d"), levels = c("a", "b")))
+  expect_identical(cnd$locations, c(3L, 4L))
+})

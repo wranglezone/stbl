@@ -223,3 +223,10 @@ test_that("stabilize_character_scalar() exists (#164)", {
 test_that("stabilise_character_scalar() exists (#167)", {
   expect_no_error(stabilise_character_scalar(TRUE))
 })
+
+test_that("stabilize_chr() attaches regex failure locations (#274)", {
+  cnd <- rlang::catch_cnd(
+    stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide")
+  )
+  expect_identical(cnd$locations, c(2L, 3L))
+})

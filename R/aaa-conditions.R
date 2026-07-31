@@ -216,6 +216,7 @@ rlang::caller_env
     subclass = "incompatible_type",
     message_env = rlang::current_env(),
     parent = parent,
+    locations = locations,
     ...
   )
 }

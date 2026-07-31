@@ -21,8 +21,8 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-A character vector of error messages if the rule fails, otherwise
-\code{NULL}.
+A list with a \code{message} character vector and integer \code{locations} of
+the failing elements if the rule fails, otherwise \code{NULL}.
 }
 \description{
 Apply a single regex rule to a character vector
