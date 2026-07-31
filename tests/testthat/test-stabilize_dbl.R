@@ -4,39 +4,33 @@ test_that("stabilize_dbl() checks min_value (#23, #176)", {
     stabilize_dbl(given, min_value = 1.1, max_value = 10.1),
     given
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_dbl(given, min_value = 11.1),
     "stbl",
     "outside_range"
-  )
-  expect_snapshot(
-    stabilize_dbl(given, min_value = 11.1),
-    error = TRUE
   )
   expect_snapshot(
     stabilize_dbl(given[[1]], min_value = 11.1),
     error = TRUE
   )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_dbl(given, min_value = 11.1),
-    error = TRUE
+    "stbl",
+    "outside_range"
   )
 })
 
 test_that("stabilize_dbl() checks max_value (#23, #176)", {
   given <- 1.1:10.1
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_dbl(given, max_value = 4.1),
     "stbl",
     "outside_range"
   )
-  expect_snapshot(
-    stabilize_dbl(given, max_value = 4.1),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_dbl(given, max_value = 4.1),
-    error = TRUE
+    "stbl",
+    "outside_range"
   )
 })
 
@@ -48,27 +42,21 @@ test_that("stabilize_dbl_scalar() allows length-1 dbls through (#23, #189)", {
 
 test_that("stabilize_dbl_scalar() respects allow_null (#23, #189)", {
   given <- NULL
-  expect_pkg_error_classes(stabilize_dbl_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_dbl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_dbl_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_dbl_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("stabilize_dbl_scalar() errors on non-scalars (#23)", {
   given <- 1.1:10.1
-  expect_pkg_error_classes(stabilize_dbl_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_dbl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_dbl_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_dbl_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 

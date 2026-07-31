@@ -1,8 +1,10 @@
 # to_fct() throws errors for bad levels (#62, #67, #177)
 
     Code
-      to_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
-    Condition
+      (expect_pkg_error_classes(to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
+      "stbl", "fct_levels"))
+    Output
+      <error/stbl-error-fct_levels>
       Error:
       ! Each value of `letters[1:5]` must be in the expected levels.
       i Allowed levels: "a" and "c".
@@ -12,8 +14,10 @@
 ---
 
     Code
-      wrapped_to_fct(letters[1:5], levels = c("a", "c"), to_na = "b")
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(letters[1:5], levels = c("a", "c"),
+      to_na = "b"), "stbl", "fct_levels"))
+    Output
+      <error/stbl-error-fct_levels>
       Error in `wrapped_to_fct()`:
       ! Each value of `val` must be in the expected levels.
       i Allowed levels: "a" and "c".
@@ -23,16 +27,20 @@
 # to_fct() respects allow_null (#62)
 
     Code
-      to_fct(given, allow_null = FALSE)
-    Condition
+      (expect_pkg_error_classes(to_fct(given, allow_null = FALSE), "stbl", "bad_null")
+      )
+    Output
+      <error/stbl-error-bad_null>
       Error:
       ! `given` must not be <NULL>.
 
 ---
 
     Code
-      wrapped_to_fct(given, allow_null = FALSE)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(given, allow_null = FALSE), "stbl",
+      "bad_null"))
+    Output
+      <error/stbl-error-bad_null>
       Error in `wrapped_to_fct()`:
       ! `val` must not be <NULL>.
 
@@ -50,32 +58,36 @@
 # to_fct() errors for things that can't be coerced (#62, #273)
 
     Code
-      to_fct(given)
-    Condition
+      (expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor"))
+    Output
+      <error/stbl-error-coerce-factor>
       Error:
       ! Can't coerce `given` <function> to <factor>.
 
 ---
 
     Code
-      wrapped_to_fct(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(given), "stbl", "coerce", "factor"))
+    Output
+      <error/stbl-error-coerce-factor>
       Error in `wrapped_to_fct()`:
       ! Can't coerce `val` <function> to <factor>.
 
 ---
 
     Code
-      to_fct(given)
-    Condition
+      (expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor"))
+    Output
+      <error/stbl-error-coerce-factor>
       Error:
       ! Can't coerce `given` <data.frame> to <factor>.
 
 ---
 
     Code
-      wrapped_to_fct(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(given), "stbl", "coerce", "factor"))
+    Output
+      <error/stbl-error-coerce-factor>
       Error in `wrapped_to_fct()`:
       ! Can't coerce `val` <data.frame> to <factor>.
 
@@ -104,8 +116,9 @@
 # to_fct_scalar() provides informative error messages (#62)
 
     Code
-      to_fct_scalar(given)
-    Condition
+      (expect_pkg_error_classes(to_fct_scalar(given), "stbl", "non_scalar"))
+    Output
+      <error/stbl-error-non_scalar>
       Error:
       ! `given` must be a single <factor>.
       x `given` has 26 values.
@@ -113,8 +126,9 @@
 ---
 
     Code
-      wrapped_to_fct_scalar(given)
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct_scalar(given), "stbl", "non_scalar"))
+    Output
+      <error/stbl-error-non_scalar>
       Error in `wrapped_to_fct_scalar()`:
       ! `val` must be a single <factor>.
       x `val` has 26 values.
@@ -122,8 +136,9 @@
 # to_fct_scalar respects allow_zero_length (#62, #43, #45, #189)
 
     Code
-      to_fct_scalar(given)
-    Condition
+      (expect_pkg_error_classes(to_fct_scalar(given), "stbl", "bad_empty"))
+    Output
+      <error/stbl-error-bad_empty>
       Error:
       ! `given` must be a single <factor (non-empty)>.
       x `given` has no values.
@@ -131,8 +146,10 @@
 # to_fct() errors for ints with unexpected levels (#241)
 
     Code
-      to_fct(given, levels = c("1", "2"))
-    Condition
+      (expect_pkg_error_classes(to_fct(given, levels = c("1", "2")), "stbl",
+      "fct_levels"))
+    Output
+      <error/stbl-error-fct_levels>
       Error:
       ! Each value of `<chr>` must be in the expected levels.
       i Allowed levels: "1" and "2".
@@ -141,8 +158,10 @@
 ---
 
     Code
-      wrapped_to_fct(given, levels = c("1", "2"))
-    Condition
+      (expect_pkg_error_classes(wrapped_to_fct(given, levels = c("1", "2")), "stbl",
+      "fct_levels"))
+    Output
+      <error/stbl-error-fct_levels>
       Error in `wrapped_to_fct()`:
       ! Each value of `<chr>` must be in the expected levels.
       i Allowed levels: "1" and "2".

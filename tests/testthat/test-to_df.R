@@ -7,14 +7,15 @@ test_that("to_df() returns NULL for NULL input by default (#201)", {
 })
 
 test_that("to_df() respects allow_null (#201)", {
-  expect_pkg_error_classes(to_df(NULL, allow_null = FALSE), "stbl", "bad_null")
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     to_df(NULL, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_df(NULL, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -55,35 +56,24 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)
 })
 
 test_that("to_df() errors for a list with incompatible column lengths (#201)", {
-  expect_pkg_error_classes(to_df(list(a = 1:3, b = 1:2)), "stbl", "jagged")
-  expect_snapshot(
-    to_df(list(a = 1:3, b = 1:2)),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(to_df(list(a = 1:3, b = 1:2)), "stbl", "jagged")
+  expect_pkg_error_snapshot(
     wrapped_to_df(list(a = 1:3, b = 1:2)),
-    error = TRUE
+    "stbl",
+    "jagged"
   )
 })
 
 test_that("to_df() errors for an unnamed list (#203)", {
-  expect_pkg_error_classes(to_df(list(1, 2)), "stbl", "bad_named")
-  expect_snapshot(
-    to_df(list(1, 2)),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_df(list(1, 2)), "stbl", "bad_named")
 })
 
 test_that("to_df() errors for non-coercible types (#201)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_df("not a data frame"),
     "stbl",
     "coerce",
     "data.frame"
-  )
-  expect_snapshot(
-    to_df("not a data frame"),
-    error = TRUE
   )
 })
 
@@ -120,15 +110,11 @@ test_that("to_df() errors for inline vector expressions (#203)", {
 })
 
 test_that("to_df.default() errors for non-coercible types (#201)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_df(as.Date("2024-01-01")),
     "stbl",
     "coerce",
     "data.frame"
-  )
-  expect_snapshot(
-    to_df(as.Date("2024-01-01")),
-    error = TRUE
   )
 })
 

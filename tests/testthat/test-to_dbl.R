@@ -15,18 +15,15 @@ test_that("to_dbl() works for NULL (#23)", {
 
 test_that("to_dbl() respects allow_null (#23)", {
   given <- NULL
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_dbl(given, allow_null = FALSE),
     "stbl",
     "bad_null"
   )
-  expect_snapshot(
-    to_dbl(given, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_dbl(given, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -45,33 +42,24 @@ test_that("to_dbl() works for chrs (#23)", {
 test_that("to_dbl() respects coerce_character (#23)", {
   expected <- c(1.1, 2.2)
   given <- as.character(expected)
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_dbl(given, coerce_character = FALSE),
     "stbl",
     "coerce",
     "double"
   )
-  expect_snapshot(
-    to_dbl(given, coerce_character = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_dbl(given, coerce_character = FALSE),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "double"
   )
 })
 
 test_that("to_dbl() errors informatively for bad chrs (#23)", {
   given <- c("1.1", "a")
-  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
-  expect_snapshot(
-    to_dbl(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_dbl(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_type")
+  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_type")
 })
 
 test_that("to_dbl() works for complexes (#23)", {
@@ -83,15 +71,8 @@ test_that("to_dbl() works for complexes (#23)", {
 test_that("to_dbl() errors informatively for bad complexes (#23)", {
   given <- as.complex(c(1.1, 2.2))
   given[[1]] <- 1.1 + 1i
-  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
-  expect_snapshot(
-    to_dbl(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_dbl(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_type")
+  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_type")
 })
 
 test_that("to_dbl() works for factors (#23)", {
@@ -103,33 +84,24 @@ test_that("to_dbl() works for factors (#23)", {
 test_that("to_dbl() respects coerce_factor (#23)", {
   expected <- c(1.1, 3.3)
   given <- factor(expected)
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_dbl(given, coerce_factor = FALSE),
     "stbl",
     "coerce",
     "double"
   )
-  expect_snapshot(
-    to_dbl(given, coerce_factor = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_dbl(given, coerce_factor = FALSE),
-    error = TRUE
+    "stbl",
+    "coerce",
+    "double"
   )
 })
 
 test_that("to_dbl() errors informatively for bad factors (#23)", {
   given <- factor(letters)
-  expect_pkg_error_classes(to_dbl(given), "stbl", "incompatible_type")
-  expect_snapshot(
-    to_dbl(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_dbl(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_type")
+  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_type")
 })
 
 test_that("to_dbl() works for lists (#128, #273)", {
@@ -155,37 +127,19 @@ test_that("to_dbl_scalar() allows length-1 dbls through (#23)", {
 
 test_that("to_dbl_scalar() provides informative error messages (#23)", {
   given <- c(1.1, 2.2)
-  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    to_dbl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_dbl_scalar(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(wrapped_to_dbl_scalar(given), "stbl", "non_scalar")
 })
 
 test_that("to_dbl_scalar() respects allow_null (#23, #189)", {
   given <- NULL
-  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    to_dbl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
-    wrapped_to_dbl_scalar(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(wrapped_to_dbl_scalar(given), "stbl", "bad_null")
 })
 
 test_that("to_dbl_scalar respects allow_zero_length (#23, #43, #45, #189)", {
   given <- double()
-  expect_pkg_error_classes(to_dbl_scalar(given), "stbl", "bad_empty")
-  expect_snapshot(
-    to_dbl_scalar(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_dbl_scalar(given), "stbl", "bad_empty")
 })
 
 test_that("to_double() exists (#164)", {

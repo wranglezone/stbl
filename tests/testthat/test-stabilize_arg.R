@@ -22,18 +22,15 @@ test_that("stabilize_arg() complains about weird args (#11, #58, #99)", {
 
 test_that("stabilize_arg() rejects NULLs when asked (#11, #58, #99)", {
   given <- NULL
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg(given, allow_null = FALSE),
     "stbl",
     "bad_null"
   )
-  expect_snapshot(
-    stabilize_arg(given, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg(given, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -42,18 +39,15 @@ test_that("stabilize_arg() checks NAs (#11, #58, #99)", {
   expect_identical(stabilize_arg(given, allow_na = FALSE), given)
 
   given[c(4, 7)] <- NA
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg(given, allow_na = FALSE),
     "stbl",
     "bad_na"
   )
-  expect_snapshot(
-    stabilize_arg(given, allow_na = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg(given, allow_na = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_na"
   )
 })
 
@@ -61,18 +55,15 @@ test_that("stabilize_arg() checks size args (#11, #58, #99)", {
   given <- TRUE
   expect_true(stabilize_arg(given, min_size = 1, max_size = 1))
 
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg(given, min_size = 2, max_size = 1),
     "stbl",
     "size_x_vs_y"
   )
-  expect_snapshot(
-    stabilize_arg(given, min_size = 2, max_size = 1),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg(given, min_size = 2, max_size = 1),
-    error = TRUE
+    "stbl",
+    "size_x_vs_y"
   )
 })
 
@@ -83,35 +74,29 @@ test_that("stabilize_arg() checks min_size (#11, #58, #99)", {
     given
   )
 
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg(given, min_size = 11),
     "stbl",
     "size_too_small"
   )
-  expect_snapshot(
-    stabilize_arg(given, min_size = 11),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg(given, min_size = 11),
-    error = TRUE
+    "stbl",
+    "size_too_small"
   )
 })
 
 test_that("stabilize_arg() checks max_size (#11, #58)", {
   given <- 1:3
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg(given, max_size = 2),
     "stbl",
     "size_too_large"
   )
-  expect_snapshot(
-    stabilize_arg(given, max_size = 2),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg(given, max_size = 2),
-    error = TRUE
+    "stbl",
+    "size_too_large"
   )
 })
 
@@ -123,43 +108,33 @@ test_that("stabilize_arg_scalar() allows length-1 args through (#12)", {
 
 test_that("stabilize_arg_scalar() errors for non-scalars (#12, #58)", {
   given <- 1:10
-  expect_pkg_error_classes(stabilize_arg_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_arg_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_arg_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
 test_that("stabilize_arg_scalar() respects allow_null (#12, #58)", {
   given <- NULL
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg_scalar(given, allow_null = FALSE),
     "stbl",
     "non_scalar"
   )
-  expect_snapshot(
-    stabilize_arg_scalar(given, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_arg_scalar(given, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
 test_that("stabilize_arg_scalar() errors on weird internal arg values (#12, #58)", {
   given <- NULL
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE)),
     "stbl",
     "non_scalar"
-  )
-  expect_snapshot(
-    stabilize_arg_scalar(given, allow_null = c(TRUE, FALSE)),
-    error = TRUE
   )
 })

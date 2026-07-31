@@ -4,35 +4,29 @@ test_that("stabilize_int() checks min_value (#2, #6, #176)", {
     stabilize_int(given, min_value = 1, max_value = 10),
     given
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_int(given, min_value = 11),
     "stbl",
     "outside_range"
   )
-  expect_snapshot(
-    stabilize_int(given, min_value = 11),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_int(given, min_value = 11),
-    error = TRUE
+    "stbl",
+    "outside_range"
   )
 })
 
 test_that("stabilize_int() checks max_value (#5, #176)", {
   given <- 1:10
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_int(given, max_value = 4),
     "stbl",
     "outside_range"
   )
-  expect_snapshot(
-    stabilize_int(given, max_value = 4),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_int(given, max_value = 4),
-    error = TRUE
+    "stbl",
+    "outside_range"
   )
 })
 
@@ -44,27 +38,21 @@ test_that("stabilize_int_scalar() allows length-1 ints through (#12, #189)", {
 
 test_that("stabilize_int_scalar() respects allow_null (#12, #189)", {
   given <- NULL
-  expect_pkg_error_classes(stabilize_int_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_int_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_int_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_int_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("stabilize_int_scalar() errors on non-scalars (#12)", {
   given <- 1:10
-  expect_pkg_error_classes(stabilize_int_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_int_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_int_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_int_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 

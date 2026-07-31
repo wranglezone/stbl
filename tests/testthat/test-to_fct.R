@@ -13,18 +13,15 @@ test_that("to_fct() deals with levels of fcts (#62)", {
 })
 
 test_that("to_fct() throws errors for bad levels (#62, #67, #177)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
     "stbl",
     "fct_levels"
   )
-  expect_snapshot(
-    to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),
-    error = TRUE
+    "stbl",
+    "fct_levels"
   )
 })
 
@@ -45,18 +42,15 @@ test_that("to_fct() works for NULL (#62)", {
 
 test_that("to_fct() respects allow_null (#62)", {
   given <- NULL
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_fct(given, allow_null = FALSE),
     "stbl",
     "bad_null"
   )
-  expect_snapshot(
-    to_fct(given, allow_null = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fct(given, allow_null = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -78,14 +72,12 @@ test_that("to_fct() works for lists (#64, #273)", {
 
 test_that("to_fct() errors for things that can't be coerced (#62, #273)", {
   given <- mean
-  expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor")
-  expect_snapshot(to_fct(given), error = TRUE)
-  expect_snapshot(wrapped_to_fct(given), error = TRUE)
+  expect_pkg_error_snapshot(to_fct(given), "stbl", "coerce", "factor")
+  expect_pkg_error_snapshot(wrapped_to_fct(given), "stbl", "coerce", "factor")
 
   given <- mtcars
-  expect_pkg_error_classes(to_fct(given), "stbl", "coerce", "factor")
-  expect_snapshot(to_fct(given), error = TRUE)
-  expect_snapshot(wrapped_to_fct(given), error = TRUE)
+  expect_pkg_error_snapshot(to_fct(given), "stbl", "coerce", "factor")
+  expect_pkg_error_snapshot(wrapped_to_fct(given), "stbl", "coerce", "factor")
 
   given <- list(a = 1, b = 1:5)
   expect_pkg_error_snapshot(
@@ -112,18 +104,13 @@ test_that("to_fct_scalar() allows length-1 fcts through (#62)", {
 
 test_that("to_fct_scalar() provides informative error messages (#62)", {
   given <- letters
-  expect_pkg_error_classes(to_fct_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(to_fct_scalar(given), error = TRUE)
-  expect_snapshot(wrapped_to_fct_scalar(given), error = TRUE)
+  expect_pkg_error_snapshot(to_fct_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(wrapped_to_fct_scalar(given), "stbl", "non_scalar")
 })
 
 test_that("to_fct_scalar respects allow_zero_length (#62, #43, #45, #189)", {
   given <- factor()
-  expect_pkg_error_classes(to_fct_scalar(given), "stbl", "bad_empty")
-  expect_snapshot(
-    to_fct_scalar(given),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(to_fct_scalar(given), "stbl", "bad_empty")
 })
 
 test_that("to_factor() exists (#164)", {
@@ -146,18 +133,15 @@ test_that("to_fct() works for ints via C (#241)", {
 
 test_that("to_fct() errors for ints with unexpected levels (#241)", {
   given <- c(1L, 2L, 3L)
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     to_fct(given, levels = c("1", "2")),
     "stbl",
     "fct_levels"
   )
-  expect_snapshot(
-    to_fct(given, levels = c("1", "2")),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_to_fct(given, levels = c("1", "2")),
-    error = TRUE
+    "stbl",
+    "fct_levels"
   )
 })
 

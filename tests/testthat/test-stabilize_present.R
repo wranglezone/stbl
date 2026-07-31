@@ -6,11 +6,7 @@ test_that("stabilize_present() returns any non-NULL value unchanged (#110)", {
 })
 
 test_that("stabilize_present() errors for NULL (#110)", {
-  expect_pkg_error_classes(stabilize_present(NULL), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_present(NULL),
-    error = TRUE
-  )
+  expect_pkg_error_snapshot(stabilize_present(NULL), "stbl", "bad_null")
 })
 
 test_that("stabilize_present() works as an element spec in stabilize_lst() (#110)", {

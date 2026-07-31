@@ -17,52 +17,43 @@ test_that("stabilize_lgl() checks NAs (#28)", {
     stabilize_lgl(given),
     c(TRUE, NA, TRUE, FALSE)
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_lgl(given, allow_na = FALSE),
     "stbl",
     "bad_na"
   )
-  expect_snapshot(
-    stabilize_lgl(given, allow_na = FALSE),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_lgl(given, allow_na = FALSE),
-    error = TRUE
+    "stbl",
+    "bad_na"
   )
 })
 
 test_that("stabilize_lgl() checks min_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_lgl(given, min_size = 5),
     "stbl",
     "size_too_small"
   )
-  expect_snapshot(
-    stabilize_lgl(given, min_size = 5),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_lgl(given, min_size = 5),
-    error = TRUE
+    "stbl",
+    "size_too_small"
   )
 })
 
 test_that("stabilize_lgl() checks max_size (#28)", {
   given <- c("TRUE", NA, "true", "fALSE")
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_lgl(given, max_size = 3),
     "stbl",
     "size_too_large"
   )
-  expect_snapshot(
-    stabilize_lgl(given, max_size = 3),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_lgl(given, max_size = 3),
-    error = TRUE
+    "stbl",
+    "size_too_large"
   )
 })
 
@@ -73,27 +64,21 @@ test_that("stabilize_lgl_scalar() allows length-1 lgls through (#28, #189)", {
 
 test_that("stabilize_lgl_scalar() respects allow_null (#28, #189)", {
   given <- NULL
-  expect_pkg_error_classes(stabilize_lgl_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_lgl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_lgl_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_lgl_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("stabilize_lgl_scalar() errors on non-scalars (#28)", {
   given <- c(TRUE, FALSE, TRUE)
-  expect_pkg_error_classes(stabilize_lgl_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_lgl_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_lgl_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_lgl_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 

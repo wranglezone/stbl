@@ -15,18 +15,15 @@ test_that("stabilize_chr() works on happy path (#22, #27, #52)", {
 test_that("stabilize_chr() errors for bad regex matches (#27, #52)", {
   given <- c("123456789", "12345-6789")
   pattern <- r"(^\d{5}(?:[-\s]\d{4})?$)"
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(given, regex = pattern),
     "stbl",
     "must"
   )
-  expect_snapshot(
-    stabilize_chr(given, regex = pattern),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     wrapped_stabilize_chr(given, regex = pattern),
-    error = TRUE
+    "stbl",
+    "must"
   )
 })
 
@@ -39,52 +36,34 @@ test_that("stabilize_chr() works with complex url regex (#52)", {
       regex = url_regex
     )
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(
       c("example.com", "not a url"),
       regex = url_regex
     ),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(
-      c("example.com", "not a url"),
-      regex = url_regex
-    ),
-    error = TRUE
   )
 })
 
 test_that("stabilize_chr() allows for customized error messages (#52)", {
   skip_if_not_installed("stringi")
   url_regex <- r"(^(?:(?:(?:https?|ftp):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$)"
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(
       c("not a url", "example.com"),
       regex = c("must be a url." = url_regex)
     ),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(
-      c("not a url", "example.com"),
-      regex = c("must be a url." = url_regex)
-    ),
-    error = TRUE
   )
 })
 
 test_that("stabilize_chr() works with regex that contains braces (#52)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(c("b", "aa"), regex = "a{1,3}"),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(c("b", "aa"), regex = "a{1,3}"),
-    error = TRUE
   )
 })
 
@@ -98,10 +77,10 @@ test_that("stabilize_chr() accepts negated regex args (#85)", {
   )
 
   given <- c("a", "b", "c")
-  expect_pkg_error_classes(stabilize_chr(given, regex = regex), "stbl", "must")
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     stabilize_chr(given, regex = regex),
-    error = TRUE
+    "stbl",
+    "must"
   )
 })
 
@@ -116,10 +95,10 @@ test_that("stabilize_chr() accepts multiple regex rules (#86, #85)", {
     given
   )
   given <- c("apple", "banana", "boat", "plum")
-  expect_pkg_error_classes(stabilize_chr(given, regex = rules), "stbl", "must")
-  expect_snapshot(
+  expect_pkg_error_snapshot(
     stabilize_chr(given, regex = rules),
-    error = TRUE
+    "stbl",
+    "must"
   )
 })
 
@@ -129,14 +108,10 @@ test_that("stabilize_chr() works with stringr::fixed() (#87)", {
     stabilize_chr("a.b", regex = stringr::fixed("a.b")),
     "a.b"
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(c("a.b", "acb"), regex = stringr::fixed("a.b")),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(c("a.b", "acb"), regex = stringr::fixed("a.b")),
-    error = TRUE
   )
 })
 
@@ -146,14 +121,10 @@ test_that("stabilize_chr() works with stringr::coll() (#87)", {
     stabilize_chr("A", regex = stringr::coll("a", ignore_case = TRUE)),
     "A"
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(c("a", "A"), regex = stringr::coll("a")),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(c("a", "A"), regex = stringr::coll("a")),
-    error = TRUE
   )
 })
 
@@ -163,14 +134,10 @@ test_that("stabilize_chr() works with stringr::regex() (#87)", {
     stabilize_chr("A", regex = stringr::regex("a", ignore_case = TRUE)),
     "A"
   )
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr(c("A", "B"), regex = stringr::regex("a", ignore_case = TRUE)),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr(c("A", "B"), regex = stringr::regex("a", ignore_case = TRUE)),
-    error = TRUE
   )
 })
 
@@ -202,39 +169,29 @@ test_that("stabilize_chr_scalar() allows length-1 chrs through (#22, #189)", {
 
 test_that("stabilize_chr_scalar() respects allow_null (#22, #189)", {
   given <- NULL
-  expect_pkg_error_classes(stabilize_chr_scalar(given), "stbl", "bad_null")
-  expect_snapshot(
-    stabilize_chr_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_chr_scalar(given), "stbl", "bad_null")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "bad_null"
   )
 })
 
 test_that("stabilize_chr_scalar() errors for non-scalars (#22)", {
   given <- letters
-  expect_pkg_error_classes(stabilize_chr_scalar(given), "stbl", "non_scalar")
-  expect_snapshot(
-    stabilize_chr_scalar(given),
-    error = TRUE
-  )
-  expect_snapshot(
+  expect_pkg_error_snapshot(stabilize_chr_scalar(given), "stbl", "non_scalar")
+  expect_pkg_error_snapshot(
     wrapped_stabilize_chr_scalar(given),
-    error = TRUE
+    "stbl",
+    "non_scalar"
   )
 })
 
 test_that("stabilize_chr_scalar() works with regex that contains braces (#52)", {
-  expect_pkg_error_classes(
+  expect_pkg_error_snapshot(
     stabilize_chr_scalar("b", regex = "a{1,3}"),
     "stbl",
     "must"
-  )
-  expect_snapshot(
-    stabilize_chr_scalar("b", regex = "a{1,3}"),
-    error = TRUE
   )
 })
 
