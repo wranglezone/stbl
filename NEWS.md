@@ -2,7 +2,7 @@
 
 ## Breaking changes
 
-* `stabilize_present()` was renamed to `assert_present()`, because it doesn't stabilize (coerce) its input; it only asserts that the input is not `NULL`. Calling `stabilize_present()` now throws a "deprecated"-classed error directing you to `assert_present()` (#299).
+* `stabilize_present()` is now named `assert_present()`, since it doesn't stabilize (coerce) its input; it only asserts that the input is not `NULL`. Calling `stabilize_present()` now throws a "deprecated"-classed error directing you to `assert_present()` (#299).
 
 ## Bug fixes
 

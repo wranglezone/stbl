@@ -56,9 +56,6 @@ reference:
 - contents:
   - object_type
   - stabilize_arg
-- title: deprecated
-- contents:
-  - stabilize_present
 - title: conditions
 - contents:
   - pkg_abort
