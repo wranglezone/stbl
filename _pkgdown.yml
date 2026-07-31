@@ -51,7 +51,7 @@ reference:
   - stabilize_present
 - title: any type
 - contents:
-  - stabilize_one_of
+  - stabilize_any_of
 - title: generic args
 - contents:
   - object_type
