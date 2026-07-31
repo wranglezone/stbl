@@ -200,36 +200,17 @@ expect_pkg_error_snapshot <- function(
   env = caller_env()
 ) {
   # nocov start
-  rlang::check_installed("testthat", "to snapshot-test package errors")
-  obj_expr <- .strip_covr_from_expr(rlang::enexpr(object))
-  error_class_components <- rlang::list2(...)
-  # Inject expect_pkg_error_classes into env if not already findable, so this
-  # works even when the caller's package doesn't attach stbl. Evaluating
-  # directly in env (rather than a child) ensures assignments inside object are
-  # visible to the caller after this function returns.
-  if (!exists("expect_pkg_error_classes", envir = env, inherits = TRUE)) {
-    env$expect_pkg_error_classes <- expect_pkg_error_classes
-    on.exit(rm("expect_pkg_error_classes", envir = env), add = TRUE)
-  }
-  # Build the call to expect_snapshot() at runtime with rlang::call2() so it
-  # carries no source-reference attributes. covr attaches counter calls to
-  # source references; a runtime-built expression has none, so the snapshot
-  # Code section stays stable across normal and coverage runs.
-  snap_call <- rlang::call2(
-    "expect_snapshot",
-    rlang::call2(
-      "(",
-      rlang::call2(
-        "expect_pkg_error_classes",
-        obj_expr,
-        package,
-        !!!error_class_components
-      )
-    ),
+  .expect_pkg_condition_snapshot(
+    obj_expr = .strip_covr_from_expr(rlang::enexpr(object)),
+    package = package,
+    class_components = rlang::list2(...),
+    expect_fn_name = "expect_pkg_error_classes",
+    expect_fn = expect_pkg_error_classes,
+    check_installed_msg = "to snapshot-test package errors",
+    error = TRUE,
     transform = transform,
     variant = variant,
-    .ns = "testthat"
+    env = env
   )
-  eval(snap_call, envir = env)
   # nocov end
 }

@@ -2,6 +2,7 @@
 
 ## Breaking changes
 
+* `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce snapshots that mirror `testthat::expect_snapshot()`, showing the bare expression under `Code` and the condition class alongside its message. Existing snapshots must be re-accepted (#301).
 * `stabilize_present()` is now named `assert_present()`, since it doesn't stabilize (coerce) its input; it only asserts that the input is not `NULL`. Calling `stabilize_present()` now throws a "deprecated"-classed error directing you to `assert_present()` (#299).
 
 ## Bug fixes

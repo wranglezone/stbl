@@ -179,7 +179,7 @@ test_that(".strip_covr_from_expr() removes covr counter wrappers (#253)", {
   )
 })
 
-test_that("expect_pkg_error_snapshot() snapshots error class and message (#188)", {
+test_that("expect_pkg_error_snapshot() snapshots error class and message (#188, #301)", {
   expect_pkg_error_snapshot(
     pkg_abort("stbl", "A snapshot error.", "snapshot_subclass"),
     "stbl",
@@ -187,7 +187,7 @@ test_that("expect_pkg_error_snapshot() snapshots error class and message (#188)"
   )
 })
 
-test_that("expect_pkg_error_snapshot() works with multiple class components (#188)", {
+test_that("expect_pkg_error_snapshot() works with multiple class components (#188, #301)", {
   expect_pkg_error_snapshot(
     pkg_abort("stbl", "A nested error.", c("outer", "inner")),
     "stbl",
@@ -196,7 +196,7 @@ test_that("expect_pkg_error_snapshot() works with multiple class components (#18
   )
 })
 
-test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#188)", {
+test_that("expect_pkg_error_snapshot() works from an env without stbl attached (#188, #301)", {
   # Simulate calling from another package where expect_pkg_error_classes
   # isn't directly available in the caller's environment.
   foreign_env <- new.env(parent = baseenv())

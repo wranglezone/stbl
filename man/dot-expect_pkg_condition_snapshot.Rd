@@ -11,6 +11,7 @@
   expect_fn_name,
   expect_fn,
   check_installed_msg,
+  error,
   transform,
   variant,
   env
@@ -31,6 +32,10 @@ to look up or inject into \code{env}.}
 
 \item{check_installed_msg}{(\code{character(1)}) The \code{"to ..."} string passed to
 \code{\link[rlang:check_installed]{rlang::check_installed()}}.}
+
+\item{error}{(\code{logical(1)}) Passed to \code{\link[testthat:expect_snapshot]{testthat::expect_snapshot()}}. Set to
+\code{TRUE} when snapshotting an error, so the error is captured rather than
+propagated.}
 
 \item{transform}{(\code{function} or \code{NULL}) Optional function to scrub volatile
 output (e.g. temp paths) before snapshot comparison. Passed through to

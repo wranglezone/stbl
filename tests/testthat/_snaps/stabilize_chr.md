@@ -1,10 +1,8 @@
 # stabilize_chr() errors for bad regex matches (#27, #52)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(given, regex = pattern), "stbl", "must")
-      )
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(given, regex = pattern)
+    Condition <stbl-error-must>
       Error:
       ! `given` must match the regex pattern "^\\d{5}(?:[-\\s]\\d{4})?$"
       x Some values fail the check.
@@ -14,10 +12,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_stabilize_chr(given, regex = pattern), "stbl",
-      "must"))
-    Output
-      <error/stbl-error-must>
+      wrapped_stabilize_chr(given, regex = pattern)
+    Condition <stbl-error-must>
       Error in `wrapped_stabilize_chr()`:
       ! `val` must match the regex pattern "^\\d{5}(?:[-\\s]\\d{4})?$"
       x Some values fail the check.
@@ -34,10 +30,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("example.com", "not a url"), regex = url_regex),
-      "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("example.com", "not a url"), regex = url_regex)
+    Condition <stbl-error-must>
       Error:
       ! `c("example.com", "not a url")` must match the regex pattern "^(?:(?:(?:https?|ftp):)?\\/\\/)?(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z0-9\\u00a1-\\uffff][a-z0-9\\u00a1-\\uffff_-]{0,62})?[a-z0-9\\u00a1-\\uffff]\\.)+(?:[a-z\\u00a1-\\uffff]{2,}\\.?))(?::\\d{2,5})?(?:[/?#]\\S*)?$"
       x Some values fail the check.
@@ -47,10 +41,8 @@
 # stabilize_chr() allows for customized error messages (#52)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("not a url", "example.com"), regex = c(
-        `must be a url.` = url_regex)), "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("not a url", "example.com"), regex = c(`must be a url.` = url_regex))
+    Condition <stbl-error-must>
       Error:
       ! `c("not a url", "example.com")` must be a url.
       x Some values fail the check.
@@ -60,10 +52,8 @@
 # stabilize_chr() works with regex that contains braces (#52)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("b", "aa"), regex = "a{1,3}"), "stbl",
-      "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("b", "aa"), regex = "a{1,3}")
+    Condition <stbl-error-must>
       Error:
       ! `c("b", "aa")` must match the regex pattern "a{1,3}"
       x Some values fail the check.
@@ -73,9 +63,8 @@
 # stabilize_chr() accepts negated regex args (#85)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(given, regex = regex), "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(given, regex = regex)
+    Condition <stbl-error-must>
       Error:
       ! `given` must not match the regex pattern "c"
       x Some values fail the check.
@@ -85,9 +74,8 @@
 # stabilize_chr() accepts multiple regex rules (#86, #85)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(given, regex = rules), "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(given, regex = rules)
+    Condition <stbl-error-must>
       Error:
       ! `given` must match the regex pattern "a"
       x Some values fail the check.
@@ -101,10 +89,8 @@
 # stabilize_chr() works with stringr::fixed() (#87)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("a.b", "acb"), regex = stringr::fixed(
-        "a.b")), "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("a.b", "acb"), regex = stringr::fixed("a.b"))
+    Condition <stbl-error-must>
       Error:
       ! `c("a.b", "acb")` must match the regex pattern "a.b"
       x Some values fail the check.
@@ -114,10 +100,8 @@
 # stabilize_chr() works with stringr::coll() (#87)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("a", "A"), regex = stringr::coll("a")),
-      "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("a", "A"), regex = stringr::coll("a"))
+    Condition <stbl-error-must>
       Error:
       ! `c("a", "A")` must match the regex pattern "a"
       x Some values fail the check.
@@ -127,10 +111,8 @@
 # stabilize_chr() works with stringr::regex() (#87)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr(c("A", "B"), regex = stringr::regex("a",
-        ignore_case = TRUE)), "stbl", "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr(c("A", "B"), regex = stringr::regex("a", ignore_case = TRUE))
+    Condition <stbl-error-must>
       Error:
       ! `c("A", "B")` must match the regex pattern "a"
       x Some values fail the check.
@@ -140,28 +122,24 @@
 # stabilize_chr_scalar() respects allow_null (#22, #189)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr_scalar(given), "stbl", "bad_null"))
-    Output
-      <error/stbl-error-bad_null>
+      stabilize_chr_scalar(given)
+    Condition <stbl-error-bad_null>
       Error:
       ! `given` must not be <NULL>.
 
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_stabilize_chr_scalar(given), "stbl",
-      "bad_null"))
-    Output
-      <error/stbl-error-bad_null>
+      wrapped_stabilize_chr_scalar(given)
+    Condition <stbl-error-bad_null>
       Error in `wrapped_stabilize_chr_scalar()`:
       ! `val` must not be <NULL>.
 
 # stabilize_chr_scalar() errors for non-scalars (#22)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr_scalar(given), "stbl", "non_scalar"))
-    Output
-      <error/stbl-error-non_scalar>
+      stabilize_chr_scalar(given)
+    Condition <stbl-error-non_scalar>
       Error:
       ! `given` must be a single <character>.
       x `given` has 26 values.
@@ -169,10 +147,8 @@
 ---
 
     Code
-      (expect_pkg_error_classes(wrapped_stabilize_chr_scalar(given), "stbl",
-      "non_scalar"))
-    Output
-      <error/stbl-error-non_scalar>
+      wrapped_stabilize_chr_scalar(given)
+    Condition <stbl-error-non_scalar>
       Error in `wrapped_stabilize_chr_scalar()`:
       ! `val` must be a single <character>.
       x `val` has 26 values.
@@ -180,10 +156,8 @@
 # stabilize_chr_scalar() works with regex that contains braces (#52)
 
     Code
-      (expect_pkg_error_classes(stabilize_chr_scalar("b", regex = "a{1,3}"), "stbl",
-      "must"))
-    Output
-      <error/stbl-error-must>
+      stabilize_chr_scalar("b", regex = "a{1,3}")
+    Condition <stbl-error-must>
       Error:
       ! `"b"` must match the regex pattern "a{1,3}"
       x "b" fails the check.
