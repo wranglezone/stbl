@@ -67,9 +67,9 @@ throw an error, rather than returning \code{list(NULL)}.
 }
 \seealso{
 Other list functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=specify_lst]{specify_lst()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}},
 \code{\link[=to]{to()}}
 }
 \concept{list functions}

@@ -230,6 +230,7 @@ Other logical functions:
 \code{\link[=to]{to()}}
 
 Other stabilization functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
@@ -237,8 +238,7 @@ Other stabilization functions:
 \code{\link[=stabilize_df]{stabilize_df()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
-\code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}}
+\code{\link[=stabilize_lst]{stabilize_lst()}}
 }
 \concept{logical functions}
 \concept{stabilization functions}

@@ -1,5 +1,9 @@
 # stbl (development version)
 
+## Breaking changes
+
+* `stabilize_present()` was renamed to `assert_present()`, because it doesn't stabilize (coerce) its input; it only asserts that the input is not `NULL`. Calling `stabilize_present()` now throws a "deprecated"-classed error directing you to `assert_present()` (#299).
+
 ## Bug fixes
 
 * `to_chr()`, `to_dbl()`, `to_fct()`, `to_int()`, and `to_lgl()` now throw an "incompatible type" error (with failing element locations) instead of a generic "can't coerce" error when a list contains elements that can't be converted (#273).

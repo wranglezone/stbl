@@ -48,7 +48,7 @@ reference:
 - title: lists
 - contents:
   - matches("lst")
-  - stabilize_present
+  - assert_present
 - title: any type
 - contents:
   - stabilize_any_of
@@ -56,6 +56,9 @@ reference:
 - contents:
   - object_type
   - stabilize_arg
+- title: deprecated
+- contents:
+  - stabilize_present
 - title: conditions
 - contents:
   - pkg_abort

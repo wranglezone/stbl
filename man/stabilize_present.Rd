@@ -2,14 +2,9 @@
 % Please edit documentation in R/stabilize_present.R
 \name{stabilize_present}
 \alias{stabilize_present}
-\title{Require a value to be non-NULL}
+\title{Deprecated: use \code{assert_present()} instead}
 \usage{
-stabilize_present(
-  x,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
+stabilize_present(x, x_arg = caller_arg(x), call = caller_env())
 }
 \arguments{
 \item{x}{The argument to stabilize.}
@@ -21,46 +16,14 @@ in unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
-
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
 }
 \value{
-The value, unchanged.
+This function does not return a value; it always throws an error.
 }
 \description{
-\code{stabilize_present()} validates that a value is not \code{NULL}. Any non-\code{NULL}
-value passes through unchanged. This is useful as an element specification
-in \code{\link[=stabilize_lst]{stabilize_lst()}} when you need to require a named element without
-imposing any type constraints on its value.
+\code{stabilize_present()} was renamed to \code{\link[=assert_present]{assert_present()}} because it doesn't
+stabilize (coerce) \code{x} in any way; it only asserts that \code{x} is not \code{NULL}.
+Calling \code{stabilize_present()} now throws an error directing you to
+\code{\link[=assert_present]{assert_present()}} instead.
 }
-\examples{
-stabilize_present("any value")
-stabilize_present(list(1, 2, 3))
-try(stabilize_present(NULL))
-
-# Use as a named element spec in stabilize_lst()
-stabilize_lst(list(data = mtcars), data = stabilize_present)
-}
-\seealso{
-Other list functions:
-\code{\link[=specify_lst]{specify_lst()}},
-\code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=to]{to()}},
-\code{\link[=to_lst]{to_lst()}}
-
-Other stabilization functions:
-\code{\link[=stabilize_any_of]{stabilize_any_of()}},
-\code{\link[=stabilize_arg]{stabilize_arg()}},
-\code{\link[=stabilize_chr]{stabilize_chr()}},
-\code{\link[=stabilize_dbl]{stabilize_dbl()}},
-\code{\link[=stabilize_df]{stabilize_df()}},
-\code{\link[=stabilize_fct]{stabilize_fct()}},
-\code{\link[=stabilize_int]{stabilize_int()}},
-\code{\link[=stabilize_lgl]{stabilize_lgl()}},
-\code{\link[=stabilize_lst]{stabilize_lst()}}
-}
-\concept{list functions}
-\concept{stabilization functions}
+\keyword{internal}

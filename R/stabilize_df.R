@@ -43,19 +43,19 @@
 #'   data.frame(name = "Alice", age = 30L, score = 99.5),
 #'   name = specify_chr_scalar(),
 #'   age = specify_int_scalar(),
-#'   .extra_cols = stabilize_present
+#'   .extra_cols = assert_present
 #' )
 #'
 #' # Check required column names without validating contents
 #' stabilize_df(
 #'   mtcars,
 #'   .col_names = c("mpg", "cyl"),
-#'   .extra_cols = stabilize_present
+#'   .extra_cols = assert_present
 #' )
 #'
 #' # Enforce row count constraints
 #' try(
-#'   stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+#'   stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = assert_present)
 #' )
 #'
 #' # NULL is allowed by default

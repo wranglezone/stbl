@@ -76,8 +76,8 @@ try(
 }
 \seealso{
 Other list functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}},
 \code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 

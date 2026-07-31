@@ -126,8 +126,8 @@ stabilize_lst(
   age = specify_int_scalar()
 )
 
-# Allow any non-NULL element with stabilize_present
-stabilize_lst(list(data = mtcars), data = stabilize_present)
+# Allow any non-NULL element with assert_present
+stabilize_lst(list(data = mtcars), data = assert_present)
 
 # Allow extra named elements via .named
 stabilize_lst(
@@ -155,12 +155,13 @@ stabilize_lst(
 }
 \seealso{
 Other list functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=specify_lst]{specify_lst()}},
-\code{\link[=stabilize_present]{stabilize_present()}},
 \code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
 Other stabilization functions:
+\code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
@@ -168,8 +169,7 @@ Other stabilization functions:
 \code{\link[=stabilize_df]{stabilize_df()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
-\code{\link[=stabilize_lgl]{stabilize_lgl()}},
-\code{\link[=stabilize_present]{stabilize_present()}}
+\code{\link[=stabilize_lgl]{stabilize_lgl()}}
 }
 \concept{list functions}
 \concept{stabilization functions}

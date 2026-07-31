@@ -92,7 +92,7 @@ test_that("stabilize_df() allows extra columns with .extra_cols (#142)", {
   result <- stabilize_df(
     given,
     a = specify_int_scalar(),
-    .extra_cols = stabilize_present
+    .extra_cols = assert_present
   )
   expect_identical(result, given)
 })
@@ -114,7 +114,7 @@ test_that("stabilize_df() enforces .min_rows (#142)", {
     stabilize_df(
       mtcars[0, ],
       .min_rows = 1,
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "too_few_rows"
@@ -126,7 +126,7 @@ test_that("stabilize_df() enforces .min_rows (snapshot) (#142)", {
     stabilize_df(
       mtcars[0, ],
       .min_rows = 1,
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "too_few_rows"
@@ -138,7 +138,7 @@ test_that("stabilize_df() enforces .max_rows (#142)", {
     stabilize_df(
       mtcars,
       .max_rows = 5,
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "too_many_rows"
@@ -150,7 +150,7 @@ test_that("stabilize_df() enforces .max_rows (snapshot) (#142)", {
     stabilize_df(
       mtcars,
       .max_rows = 5,
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "too_many_rows"
@@ -163,7 +163,7 @@ test_that("stabilize_df() passes with valid row counts (#142)", {
       mtcars,
       .min_rows = 32,
       .max_rows = 32,
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     )
   )
 })
@@ -173,14 +173,14 @@ test_that("stabilize_df() enforces .col_names (#142)", {
     stabilize_df(
       data.frame(a = 1L, b = 2L),
       .col_names = c("a", "b"),
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     )
   )
   expect_pkg_error_classes(
     stabilize_df(
       data.frame(a = 1L),
       .col_names = c("a", "b"),
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "missing_cols"
@@ -192,7 +192,7 @@ test_that("stabilize_df() enforces .col_names (snapshot) (#142)", {
     stabilize_df(
       data.frame(a = 1L),
       .col_names = c("a", "b"),
-      .extra_cols = stabilize_present
+      .extra_cols = assert_present
     ),
     "stbl",
     "missing_cols"
@@ -205,7 +205,7 @@ test_that("stabilize_df() allows .col_names alongside ... specs (#142)", {
     given,
     a = specify_int_scalar(),
     .col_names = c("b", "c"),
-    .extra_cols = stabilize_present
+    .extra_cols = assert_present
   )
   expect_identical(result, given)
 })
@@ -224,7 +224,7 @@ test_that("stabilize_df() preserves data frame class after column coercion (#142
 
 test_that("stabilize_df() works with no column specs and .extra_cols (#142)", {
   given <- data.frame(a = 1L, b = "hello")
-  result <- stabilize_df(given, .extra_cols = stabilize_present)
+  result <- stabilize_df(given, .extra_cols = assert_present)
   expect_identical(result, given)
 })
 
