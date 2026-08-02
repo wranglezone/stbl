@@ -139,7 +139,26 @@ stabilise_integer_scalar(
 
 ## Value
 
-The input as a length-1 integer vector.
+The input as a length-1 integer vector, or an error condition with
+classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+
+- `<stbl-error-incompatible_type>` when some values cannot be safely
+  converted to integer.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_empty>` for empty vectors when
+  `allow_zero_length = FALSE`.
+
+- `<stbl-error-non_scalar>` for non-scalar vectors.
+
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-outside_range>` when values fall outside `min_value` or
+  `max_value`.
 
 ## See also
 
