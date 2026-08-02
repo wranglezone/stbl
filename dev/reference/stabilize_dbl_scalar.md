@@ -145,8 +145,8 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
 
-- `<stbl-error-incompatible_type>` when some values cannot be safely
-  converted to double.
+- `<stbl-error-incompatible_values-double>` when some values cannot be
+  safely converted to double.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 

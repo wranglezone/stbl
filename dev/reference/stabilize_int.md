@@ -155,8 +155,8 @@ The input as an integer vector, or an error condition with classes
 
 - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
 
-- `<stbl-error-incompatible_type>` when some values cannot be safely
-  converted to integer.
+- `<stbl-error-incompatible_values-integer>` when some values cannot be
+  safely converted to integer.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
