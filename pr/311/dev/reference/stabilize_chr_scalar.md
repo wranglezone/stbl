@@ -133,7 +133,7 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 
-- `<stbl-error-must>` when `regex` checks fail.
+- `<stbl-error-regex_mismatch>` when `regex` checks fail.
 
 ## See also
 

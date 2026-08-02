@@ -144,7 +144,7 @@ The input as a character vector, or an error condition with classes
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
 
-- `<stbl-error-must>` when `regex` checks fail.
+- `<stbl-error-regex_mismatch>` when `regex` checks fail.
 
 ## See also
 
