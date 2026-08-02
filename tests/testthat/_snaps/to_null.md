@@ -14,7 +14,7 @@
       Error in `wrapped_to_null()`:
       ! `val` must not be <NULL>.
 
-# .to_null() errors for bad allow_null (#129)
+# .to_null() errors for bad allow_null (#129, wranglezone/stbl#310)
 
     Code
       .to_null(NULL, allow_null = NULL)
@@ -26,7 +26,7 @@
 
     Code
       .to_null(NULL, allow_null = "fish")
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `allow_null` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -36,7 +36,7 @@
 
     Code
       wrapped_to_null(NULL, allow_null = "fish")
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_null()`:
       ! `allow_null` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.

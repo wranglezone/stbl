@@ -19,7 +19,7 @@
       x `val` must not be <NULL>.
       x `val` must not be <NULL>.
 
-# stabilize_any_of() includes Locations from incompatible_type errors (#215, #285)
+# stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, wranglezone/stbl#310)
 
     Code
       stabilize_any_of(x, stabilize_lgl, stabilize_int)

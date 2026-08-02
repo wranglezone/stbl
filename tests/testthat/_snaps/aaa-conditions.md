@@ -73,23 +73,23 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_incompatible() throws the expected error (#95)
+# .stop_incompatible() throws the expected error (#95, wranglezone/stbl#310)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
       "some reason", "my_arg", rlang::current_env())
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
 
-# .stop_incompatible() passes dots (#95)
+# .stop_incompatible() passes dots (#95, wranglezone/stbl#310)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
       "some reason", "my_arg", rlang::current_env(), .internal = TRUE)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.

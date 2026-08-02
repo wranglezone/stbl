@@ -107,12 +107,12 @@ test_that("to_lgl works for characters (#21)", {
   expect_identical(to_lgl(c("1.1", "0.1", "-1.1")), c(TRUE, TRUE, TRUE))
 })
 
-test_that("to_lgl() errors for bad characters (#21)", {
-  expect_pkg_error_snapshot(to_lgl(letters), "stbl", "incompatible_type")
+test_that("to_lgl() errors for bad characters (#21, wranglezone/stbl#310)", {
+  expect_pkg_error_snapshot(to_lgl(letters), "stbl", "incompatible_values", "logical")
   expect_pkg_error_snapshot(
     wrapped_to_lgl(letters),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "logical"
   )
 })
 
@@ -152,13 +152,13 @@ test_that("to_lgl works for factors (#21)", {
   )
 })
 
-test_that("to_lgl errors for bad factors (#21)", {
+test_that("to_lgl errors for bad factors (#21, wranglezone/stbl#310)", {
   given <- factor(letters)
-  expect_pkg_error_snapshot(to_lgl(given), "stbl", "incompatible_type")
-  expect_pkg_error_snapshot(wrapped_to_lgl(given), "stbl", "incompatible_type")
+  expect_pkg_error_snapshot(to_lgl(given), "stbl", "incompatible_values", "logical")
+  expect_pkg_error_snapshot(wrapped_to_lgl(given), "stbl", "incompatible_values", "logical")
 })
 
-test_that("to_lgl() works for lists (#21, #273)", {
+test_that("to_lgl() works for lists (#21, #273, wranglezone/stbl#310)", {
   expect_identical(
     to_lgl(list(TRUE, FALSE, 1, 0, "T", "F")),
     as.logical(c(1, 0, 1, 0, 1, 0))
@@ -167,21 +167,21 @@ test_that("to_lgl() works for lists (#21, #273)", {
   expect_pkg_error_snapshot(
     to_lgl(list(TRUE, 1:5)),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "logical"
   )
 })
 
-test_that("to_lgl() errors for other types (#21, #273)", {
+test_that("to_lgl() errors for other types (#21, #273, wranglezone/stbl#310)", {
   given <- list(1, 1:10)
   expect_pkg_error_snapshot(
     to_lgl(given),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "logical"
   )
   expect_pkg_error_snapshot(
     wrapped_to_lgl(given),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "logical"
   )
 
   given <- mean
@@ -203,13 +203,13 @@ test_that("to_lgl_scalar() errors for non-scalars (#32)", {
   expect_pkg_error_snapshot(wrapped_to_lgl_scalar(given), "stbl", "non_scalar")
 })
 
-test_that("to_lgl_scalar() errors for bad characters (#32)", {
+test_that("to_lgl_scalar() errors for bad characters (#32, wranglezone/stbl#310)", {
   given <- "a"
-  expect_pkg_error_snapshot(to_lgl_scalar(given), "stbl", "incompatible_type")
+  expect_pkg_error_snapshot(to_lgl_scalar(given), "stbl", "incompatible_values", "logical")
   expect_pkg_error_snapshot(
     wrapped_to_lgl_scalar(given),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "logical"
   )
 })
 

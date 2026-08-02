@@ -102,7 +102,7 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-must>} when \code{regex} checks fail.
+\item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 }
 }
 \description{

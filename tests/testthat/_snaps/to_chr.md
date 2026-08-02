@@ -23,11 +23,11 @@
       ! Can't coerce `function(x) x` <function> to <character>.
       i Anonymous functions can't be converted to a string name.
 
-# to_chr() fails gracefully for weird cases (#22, #273)
+# to_chr() fails gracefully for weird cases (#22, #273, wranglezone/stbl#310)
 
     Code
       to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error:
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -37,7 +37,7 @@
 
     Code
       wrapped_to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -47,7 +47,7 @@
 
     Code
       to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error:
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -57,7 +57,7 @@
 
     Code
       wrapped_to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -83,7 +83,7 @@
 
     Code
       to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error:
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -93,7 +93,7 @@
 
     Code
       wrapped_to_chr(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -117,11 +117,11 @@
       ! `val` must be a single <character>.
       x `val` has 26 values.
 
-# to_chr_scalar() errors for uncoerceable types (#22, #273)
+# to_chr_scalar() errors for uncoerceable types (#22, #273, wranglezone/stbl#310)
 
     Code
       to_chr_scalar(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error:
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
@@ -131,7 +131,7 @@
 
     Code
       wrapped_to_chr_scalar(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr_scalar()`:
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.

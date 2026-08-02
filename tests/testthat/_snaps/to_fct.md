@@ -36,17 +36,17 @@
       Error in `wrapped_to_fct()`:
       ! `val` must not be <NULL>.
 
-# to_fct() works for lists (#64, #273)
+# to_fct() works for lists (#64, #273, wranglezone/stbl#310)
 
     Code
       to_fct(list("a", 1:5))
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-factor>
       Error:
       ! `list("a", 1:5)` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
 
-# to_fct() errors for things that can't be coerced (#62, #273)
+# to_fct() errors for things that can't be coerced (#62, #273, wranglezone/stbl#310)
 
     Code
       to_fct(given)
@@ -82,7 +82,7 @@
 
     Code
       to_fct(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-factor>
       Error:
       ! `given` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.
@@ -92,7 +92,7 @@
 
     Code
       wrapped_to_fct(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-factor>
       Error in `wrapped_to_fct()`:
       ! `val` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.

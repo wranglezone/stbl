@@ -14,7 +14,7 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
-#'   - `<stbl-error-must>` when `regex` checks fail.
+#'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -92,7 +92,7 @@ stabilise_character <- stabilize_chr
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-must>` when `regex` checks fail.
+#'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -179,7 +179,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
     )))
     .stbl_abort(
       message = error_msgs,
-      subclass = "must",
+      subclass = "regex_mismatch",
       call = call,
       message_env = rlang::current_env(),
       locations = locations

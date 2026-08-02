@@ -67,7 +67,7 @@
     Code
       .check_cast_failures(failures = failures, x_class = "character", to = logical(),
       due_to = "incompatible values", x_arg = "test_arg", call = rlang::current_env())
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `test_arg` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.

@@ -108,7 +108,7 @@ test_that(".stop_null() passes dots (#95)", {
   # about the messaging.
 })
 
-test_that(".stop_incompatible() throws the expected error (#95)", {
+test_that(".stop_incompatible() throws the expected error (#95, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       "character",
@@ -119,11 +119,11 @@ test_that(".stop_incompatible() throws the expected error (#95)", {
       rlang::current_env()
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "integer"
   )
 })
 
-test_that(".stop_incompatible() passes dots (#95)", {
+test_that(".stop_incompatible() passes dots (#95, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       "character",
@@ -135,6 +135,6 @@ test_that(".stop_incompatible() passes dots (#95)", {
       .internal = TRUE
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "integer"
   )
 })

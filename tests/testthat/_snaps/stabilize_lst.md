@@ -30,11 +30,11 @@
       Error in `wrapped_stabilize_lst()`:
       ! `val` must contain element "name".
 
-# stabilize_lst() errors informatively when element fails validation (#110)
+# stabilize_lst() errors informatively when element fails validation (#110, wranglezone/stbl#310)
 
     Code
       stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar())
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `list(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.

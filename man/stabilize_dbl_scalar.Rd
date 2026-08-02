@@ -112,7 +112,7 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-coerce-double>} when \code{x} cannot be coerced to double.
-\item \verb{<stbl-error-incompatible_type>} when some values cannot be safely
+\item \verb{<stbl-error-incompatible_values-double>} when some values cannot be safely
 converted to double.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when

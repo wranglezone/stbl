@@ -10,7 +10,7 @@
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
-#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
+#'   - `<stbl-error-incompatible_values-double>` when some values cannot be safely
 #'   converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
@@ -99,7 +99,7 @@ stabilise_double <- stabilize_dbl
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
-#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
+#'   - `<stbl-error-incompatible_values-double>` when some values cannot be safely
 #'   converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when

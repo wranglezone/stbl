@@ -108,7 +108,7 @@ The input as a character vector, or an error condition with classes
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
-\item \verb{<stbl-error-must>} when \code{regex} checks fail.
+\item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 }
 }
 \description{

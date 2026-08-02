@@ -260,7 +260,7 @@ test_that(".check_lst_failures() returns NULL when all elements are valid (#273)
   expect_null(result)
 })
 
-test_that(".check_lst_failures() errors when any element is invalid (#273)", {
+test_that(".check_lst_failures() errors when any element is invalid (#273, wranglezone/stbl#310)", {
   expect_pkg_error_classes(
     .check_lst_failures(
       c(TRUE, FALSE),
@@ -270,11 +270,11 @@ test_that(".check_lst_failures() errors when any element is invalid (#273)", {
       call = rlang::current_env()
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "character"
   )
 })
 
-test_that(".to_num_from_complex() works (#23)", {
+test_that(".to_num_from_complex() works (#23, wranglezone/stbl#310)", {
   # Happy path
   expect_equal(
     .to_num_from_complex(
@@ -293,6 +293,6 @@ test_that(".to_num_from_complex() works (#23)", {
       to_type_obj = integer()
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values", "integer"
   )
 })
