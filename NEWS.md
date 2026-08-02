@@ -15,6 +15,8 @@
 
 ## New functions
 
+* New `ignore_stbl_error()` silently catches a `{stbl}` error with the specified `subclass` and returns `NULL`, allowing callers to suppress expected validation failures (#178).
+* New `replace_stbl_error()` catches a `{stbl}` error with the specified `subclass` and replaces its message with a custom one. An optional `additional_class` argument prepends extra classes to the error class list (#178).
 * New `stabilize_any_of()` (and `stabilise_any_of()`) validates `x` by trying each unnamed stabilizer function in `...` in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New `to_any_of()` works analogously, accepting type prototypes (e.g. `integer()`, `character()`) in `...` and dispatching to [to()] (#215, #285).
 
 # stbl 0.4.0

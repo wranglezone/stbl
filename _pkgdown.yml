@@ -61,6 +61,8 @@ reference:
   - pkg_abort
   - expect_pkg_error_classes
   - expect_pkg_error_snapshot
+  - replace_stbl_error
+  - ignore_stbl_error
   - pkg_warn
   - expect_pkg_warning_classes
   - expect_pkg_warning_snapshot
