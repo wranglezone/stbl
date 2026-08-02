@@ -112,9 +112,9 @@ The input as a character vector, or an error condition with classes
 }
 }
 \description{
-Compared to \code{\link[=to_chr]{to_chr()}}, \code{stabilize_chr()} checks more details, but is
-slower. \code{stabilise_chr()}, \code{stabilize_character()}, and
-\code{stabilise_character()} are synonyms of \code{stabilize_chr()}.
+Compared to \code{\link[=to_chr]{to_chr()}}, \code{stabilize_chr()} checks more details, but is slower.
+\code{stabilise_chr()}, \code{stabilize_character()}, and \code{stabilise_character()} are
+synonyms of \code{stabilize_chr()}.
 }
 \examples{
 stabilize_chr(letters)

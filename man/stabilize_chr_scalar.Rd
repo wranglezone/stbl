@@ -107,10 +107,10 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 }
 \description{
 Checks whether a vector can be coerced to a length-1 character vector.
-\code{stabilize_chr_scalar()} is optimized to check for length-1 character
-vectors (compared to \code{\link[=stabilize_chr]{stabilize_chr()}} with \code{max_size = 1}).
-\code{stabilise_chr_scalar}, \code{stabilize_character_scalar()}, and
-\code{stabilise_character_scalar} are synonyms of \code{stabilize_chr_scalar()}.
+\code{stabilize_chr_scalar()} is optimized to check for length-1 character vectors
+(compared to \code{\link[=stabilize_chr]{stabilize_chr()}} with \code{max_size = 1}). \code{stabilise_chr_scalar},
+\code{stabilize_character_scalar()}, and \code{stabilise_character_scalar} are synonyms
+of \code{stabilize_chr_scalar()}.
 }
 \examples{
 stabilize_chr_scalar(TRUE)

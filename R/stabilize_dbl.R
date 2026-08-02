@@ -1,8 +1,8 @@
 #' Coerce to double with additional checks
 #'
-#' Compared to [to_dbl()], `stabilize_dbl()` checks more details, but is
-#' slower. `stabilise_dbl()`, `stabilize_double()`, and `stabilise_double()`
-#' are synonyms of `stabilize_dbl()`.
+#' Compared to [to_dbl()], `stabilize_dbl()` checks more details, but is slower.
+#' `stabilise_dbl()`, `stabilize_double()`, and `stabilise_double()` are
+#' synonyms of `stabilize_dbl()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -10,8 +10,8 @@
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
-#'   - `<stbl-error-incompatible_values-double>` when some values cannot be safely
-#'   converted to double.
+#'   - `<stbl-error-incompatible_values-double>` when some values cannot be
+#'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
@@ -99,8 +99,8 @@ stabilise_double <- stabilize_dbl
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
-#'   - `<stbl-error-incompatible_values-double>` when some values cannot be safely
-#'   converted to double.
+#'   - `<stbl-error-incompatible_values-double>` when some values cannot be
+#'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.

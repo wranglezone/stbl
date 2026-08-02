@@ -119,8 +119,8 @@ The input as an integer vector, or an error condition with classes
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-coerce-integer>} when \code{x} cannot be coerced to integer.
-\item \verb{<stbl-error-incompatible_values-integer>} when some values cannot be safely
-converted to integer.
+\item \verb{<stbl-error-incompatible_values-integer>} when some values cannot be
+safely converted to integer.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
@@ -130,9 +130,9 @@ converted to integer.
 }
 }
 \description{
-Compared to \code{\link[=to_int]{to_int()}}, \code{stabilize_int()} checks more details, but is
-slower. \code{stabilise_int()}, \code{stabilize_integer()}, and \code{stabilise_integer()}
-are synonyms of \code{stabilize_int()}.
+Compared to \code{\link[=to_int]{to_int()}}, \code{stabilize_int()} checks more details, but is slower.
+\code{stabilise_int()}, \code{stabilize_integer()}, and \code{stabilise_integer()} are
+synonyms of \code{stabilize_int()}.
 }
 \examples{
 stabilize_int(1:10)
