@@ -119,8 +119,8 @@ The input as a double vector, or an error condition with classes
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-coerce-double>} when \code{x} cannot be coerced to double.
-\item \verb{<stbl-error-incompatible_type>} when some values cannot be safely
-converted to double.
+\item \verb{<stbl-error-incompatible_values-double>} when some values cannot be
+safely converted to double.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
@@ -130,9 +130,9 @@ converted to double.
 }
 }
 \description{
-Compared to \code{\link[=to_dbl]{to_dbl()}}, \code{stabilize_dbl()} checks more details, but is
-slower. \code{stabilise_dbl()}, \code{stabilize_double()}, and \code{stabilise_double()}
-are synonyms of \code{stabilize_dbl()}.
+Compared to \code{\link[=to_dbl]{to_dbl()}}, \code{stabilize_dbl()} checks more details, but is slower.
+\code{stabilise_dbl()}, \code{stabilize_double()}, and \code{stabilise_double()} are
+synonyms of \code{stabilize_dbl()}.
 }
 \examples{
 stabilize_dbl(1:10)

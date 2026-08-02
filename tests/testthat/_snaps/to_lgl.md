@@ -14,11 +14,11 @@
       Error in `wrapped_to_lgl()`:
       ! `val` must not be <NULL>.
 
-# to_lgl() errors for bad characters (#21)
+# to_lgl() errors for bad characters (#21, #310)
 
     Code
       to_lgl(letters)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `letters` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -28,17 +28,17 @@
 
     Code
       wrapped_to_lgl(letters)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl()`:
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
 
-# to_lgl errors for bad factors (#21)
+# to_lgl errors for bad factors (#21, #310)
 
     Code
       to_lgl(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `given` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -48,27 +48,27 @@
 
     Code
       wrapped_to_lgl(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl()`:
       ! `val` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
 
-# to_lgl() works for lists (#21, #273)
+# to_lgl() works for lists (#21, #273, #310)
 
     Code
       to_lgl(list(TRUE, 1:5))
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `list(TRUE, 1:5)` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
 
-# to_lgl() errors for other types (#21, #273)
+# to_lgl() errors for other types (#21, #273, #310)
 
     Code
       to_lgl(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `given` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
@@ -78,7 +78,7 @@
 
     Code
       wrapped_to_lgl(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl()`:
       ! `val` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
@@ -118,11 +118,11 @@
       ! `val` must be a single <logical>.
       x `val` has 3 values.
 
-# to_lgl_scalar() errors for bad characters (#32)
+# to_lgl_scalar() errors for bad characters (#32, #310)
 
     Code
       to_lgl_scalar(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `given` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
@@ -132,7 +132,7 @@
 
     Code
       wrapped_to_lgl_scalar(given)
-    Condition <stbl-error-incompatible_type>
+    Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.

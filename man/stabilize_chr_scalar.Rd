@@ -102,15 +102,15 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-must>} when \code{regex} checks fail.
+\item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 }
 }
 \description{
 Checks whether a vector can be coerced to a length-1 character vector.
-\code{stabilize_chr_scalar()} is optimized to check for length-1 character
-vectors (compared to \code{\link[=stabilize_chr]{stabilize_chr()}} with \code{max_size = 1}).
-\code{stabilise_chr_scalar}, \code{stabilize_character_scalar()}, and
-\code{stabilise_character_scalar} are synonyms of \code{stabilize_chr_scalar()}.
+\code{stabilize_chr_scalar()} is optimized to check for length-1 character vectors
+(compared to \code{\link[=stabilize_chr]{stabilize_chr()}} with \code{max_size = 1}). \code{stabilise_chr_scalar},
+\code{stabilize_character_scalar()}, and \code{stabilise_character_scalar} are synonyms
+of \code{stabilize_chr_scalar()}.
 }
 \examples{
 stabilize_chr_scalar(TRUE)

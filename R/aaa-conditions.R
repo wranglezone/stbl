@@ -213,7 +213,7 @@ rlang::caller_env
       "*" = "Locations: {locations}"
     ),
     call = call,
-    subclass = "incompatible_type",
+    subclass = c("incompatible_values", to_class),
     message_env = rlang::current_env(),
     parent = parent,
     locations = locations,

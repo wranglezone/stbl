@@ -68,14 +68,15 @@ test_that("stabilize_df() errors when required column is missing (#142)", {
   )
 })
 
-test_that("stabilize_df() errors informatively when column fails validation (#142)", {
+test_that("stabilize_df() errors informatively when column fails validation (#142, #310)", {
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(count = "not-an-int"),
       count = specify_int_scalar()
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -97,7 +98,7 @@ test_that("stabilize_df() allows extra columns with .extra_cols (#142)", {
   expect_identical(result, given)
 })
 
-test_that("stabilize_df() validates extra columns with .extra_cols (#142)", {
+test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310)", {
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L, b = "not-int"),
@@ -105,7 +106,8 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142)", {
       .extra_cols = specify_int_scalar()
     ),
     "stbl",
-    "incompatible_type"
+    "incompatible_values",
+    "integer"
   )
 })
 

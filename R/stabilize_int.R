@@ -1,8 +1,8 @@
 #' Coerce to integer with additional checks
 #'
-#' Compared to [to_int()], `stabilize_int()` checks more details, but is
-#' slower. `stabilise_int()`, `stabilize_integer()`, and `stabilise_integer()`
-#' are synonyms of `stabilize_int()`.
+#' Compared to [to_int()], `stabilize_int()` checks more details, but is slower.
+#' `stabilise_int()`, `stabilize_integer()`, and `stabilise_integer()` are
+#' synonyms of `stabilize_int()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -10,8 +10,8 @@
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
-#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
-#'   converted to integer.
+#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
+#'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
@@ -99,8 +99,8 @@ stabilise_integer <- stabilize_int
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
-#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
-#'   converted to integer.
+#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
+#'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.

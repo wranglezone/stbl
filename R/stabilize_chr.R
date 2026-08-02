@@ -1,8 +1,8 @@
 #' Coerce to character with additional checks
 #'
-#' Compared to [to_chr()], `stabilize_chr()` checks more details, but is
-#' slower. `stabilise_chr()`, `stabilize_character()`, and
-#' `stabilise_character()` are synonyms of `stabilize_chr()`.
+#' Compared to [to_chr()], `stabilize_chr()` checks more details, but is slower.
+#' `stabilise_chr()`, `stabilize_character()`, and `stabilise_character()` are
+#' synonyms of `stabilize_chr()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -14,7 +14,7 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
-#'   - `<stbl-error-must>` when `regex` checks fail.
+#'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -76,10 +76,10 @@ stabilise_character <- stabilize_chr
 #' Coerce to length-1 character with additional checks
 #'
 #' Checks whether a vector can be coerced to a length-1 character vector.
-#' `stabilize_chr_scalar()` is optimized to check for length-1 character
-#' vectors (compared to [stabilize_chr()] with `max_size = 1`).
-#' `stabilise_chr_scalar`, `stabilize_character_scalar()`, and
-#' `stabilise_character_scalar` are synonyms of `stabilize_chr_scalar()`.
+#' `stabilize_chr_scalar()` is optimized to check for length-1 character vectors
+#' (compared to [stabilize_chr()] with `max_size = 1`). `stabilise_chr_scalar`,
+#' `stabilize_character_scalar()`, and `stabilise_character_scalar` are synonyms
+#' of `stabilize_chr_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -92,7 +92,7 @@ stabilise_character <- stabilize_chr
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-must>` when `regex` checks fail.
+#'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -179,7 +179,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
     )))
     .stbl_abort(
       message = error_msgs,
-      subclass = "must",
+      subclass = "regex_mismatch",
       call = call,
       message_env = rlang::current_env(),
       locations = locations
