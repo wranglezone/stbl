@@ -30,7 +30,7 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <character> to <double>.
 
-# to_dbl() errors informatively for bad chrs (#23, wranglezone/stbl#310)
+# to_dbl() errors informatively for bad chrs (#23, #310)
 
     Code
       to_dbl(given)
@@ -50,7 +50,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 2
 
-# to_dbl() errors informatively for bad complexes (#23, wranglezone/stbl#310)
+# to_dbl() errors informatively for bad complexes (#23, #310)
 
     Code
       to_dbl(given)
@@ -86,7 +86,7 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <factor> to <double>.
 
-# to_dbl() errors informatively for bad factors (#23, wranglezone/stbl#310)
+# to_dbl() errors informatively for bad factors (#23, #310)
 
     Code
       to_dbl(given)
@@ -106,7 +106,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
 
-# to_dbl() works for lists (#128, #273, wranglezone/stbl#310)
+# to_dbl() works for lists (#128, #273, #310)
 
     Code
       to_dbl(list(1.1, 1:5))

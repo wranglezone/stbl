@@ -7,7 +7,7 @@ test_that("specify_lst() creates a working specifier (#110)", {
   expect_s3_class(spec, "stbl_specified_fn")
 })
 
-test_that("specify_lst() respects pre-configured element specs (#110, wranglezone/stbl#310)", {
+test_that("specify_lst() respects pre-configured element specs (#110, #310)", {
   spec <- specify_lst(count = specify_int_scalar())
   expect_pkg_error_classes(
     spec(list(count = "not-int")),
@@ -56,7 +56,7 @@ test_that("specify_lst() accepts elements named 'x_arg', 'call', 'x_class' (#204
   expect_identical(spec(given), given)
 })
 
-test_that("stabilize_lst() with nested specify_lst() propagates errors correctly (#204, wranglezone/stbl#310)", {
+test_that("stabilize_lst() with nested specify_lst() propagates errors correctly (#204, #310)", {
   inner_spec <- specify_lst(a = specify_int_scalar())
   given_bad <- list(outer = list(a = "not-int"))
   expect_pkg_error_classes(

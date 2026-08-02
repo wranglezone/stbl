@@ -48,7 +48,7 @@ test_that("stabilize_lst() errors when required named element is missing (#110)"
   )
 })
 
-test_that("stabilize_lst() errors informatively when element fails validation (#110, wranglezone/stbl#310)", {
+test_that("stabilize_lst() errors informatively when element fails validation (#110, #310)", {
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(count = "not-an-int"),
@@ -73,7 +73,7 @@ test_that("stabilize_lst() errors on extra named elements by default (#110)", {
   )
 })
 
-test_that("stabilize_lst() validates extra named elements with .named (#110, wranglezone/stbl#310)", {
+test_that("stabilize_lst() validates extra named elements with .named (#110, #310)", {
   given <- list(a = 1L, b = 2L)
   expect_identical(
     stabilize_lst(given, .named = specify_int_scalar()),
@@ -96,7 +96,7 @@ test_that("stabilize_lst() errors on unnamed elements by default (#110)", {
   )
 })
 
-test_that("stabilize_lst() validates unnamed elements with .unnamed (#110, wranglezone/stbl#310)", {
+test_that("stabilize_lst() validates unnamed elements with .unnamed (#110, #310)", {
   given <- list(1L, 2L, 3L)
   expect_identical(
     stabilize_lst(given, .unnamed = specify_int_scalar()),

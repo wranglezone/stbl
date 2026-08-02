@@ -260,7 +260,7 @@ test_that(".check_lst_failures() returns NULL when all elements are valid (#273)
   expect_null(result)
 })
 
-test_that(".check_lst_failures() errors when any element is invalid (#273, wranglezone/stbl#310)", {
+test_that(".check_lst_failures() errors when any element is invalid (#273, #310)", {
   expect_pkg_error_classes(
     .check_lst_failures(
       c(TRUE, FALSE),
@@ -275,7 +275,7 @@ test_that(".check_lst_failures() errors when any element is invalid (#273, wrang
   )
 })
 
-test_that(".to_num_from_complex() works (#23, wranglezone/stbl#310)", {
+test_that(".to_num_from_complex() works (#23, #310)", {
   # Happy path
   expect_equal(
     .to_num_from_complex(

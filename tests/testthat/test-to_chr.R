@@ -122,7 +122,7 @@ test_that("to_chr() errors for anonymous functions (#251)", {
   expect_identical(wrapped_to_chr(function(x) x), "val")
 })
 
-test_that("to_chr() fails gracefully for weird cases (#22, #273, wranglezone/stbl#310)", {
+test_that("to_chr() fails gracefully for weird cases (#22, #273, #310)", {
   given <- list(mean)
   expect_pkg_error_snapshot(
     to_chr(given),
@@ -202,7 +202,7 @@ test_that("to_chr_scalar() errors for non-scalars (#22)", {
   )
 })
 
-test_that("to_chr_scalar() errors for uncoerceable types (#22, #273, wranglezone/stbl#310)", {
+test_that("to_chr_scalar() errors for uncoerceable types (#22, #273, #310)", {
   given <- list(a = 1:10)
   expect_pkg_error_snapshot(
     to_chr_scalar(given),

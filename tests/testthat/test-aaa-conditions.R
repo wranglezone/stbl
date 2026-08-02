@@ -108,7 +108,7 @@ test_that(".stop_null() passes dots (#95)", {
   # about the messaging.
 })
 
-test_that(".stop_incompatible() throws the expected error (#95, wranglezone/stbl#310)", {
+test_that(".stop_incompatible() throws the expected error (#95, #310)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       "character",
@@ -124,7 +124,7 @@ test_that(".stop_incompatible() throws the expected error (#95, wranglezone/stbl
   )
 })
 
-test_that(".stop_incompatible() passes dots (#95, wranglezone/stbl#310)", {
+test_that(".stop_incompatible() passes dots (#95, #310)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       "character",

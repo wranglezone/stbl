@@ -14,7 +14,7 @@
       Error in `wrapped_to_null()`:
       ! `val` must not be <NULL>.
 
-# .to_null() errors for bad allow_null (#129, wranglezone/stbl#310)
+# .to_null() errors for bad allow_null (#129, #310)
 
     Code
       .to_null(NULL, allow_null = NULL)

@@ -23,7 +23,7 @@
       ! Can't coerce `function(x) x` <function> to <character>.
       i Anonymous functions can't be converted to a string name.
 
-# to_chr() fails gracefully for weird cases (#22, #273, wranglezone/stbl#310)
+# to_chr() fails gracefully for weird cases (#22, #273, #310)
 
     Code
       to_chr(given)
@@ -117,7 +117,7 @@
       ! `val` must be a single <character>.
       x `val` has 26 values.
 
-# to_chr_scalar() errors for uncoerceable types (#22, #273, wranglezone/stbl#310)
+# to_chr_scalar() errors for uncoerceable types (#22, #273, #310)
 
     Code
       to_chr_scalar(given)

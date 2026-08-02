@@ -14,7 +14,7 @@
       Error in `wrapped_to_int()`:
       ! `val` must not be <NULL>.
 
-# to_int() errors for dbls that would lose precision (#2, #217, wranglezone/stbl#310)
+# to_int() errors for dbls that would lose precision (#2, #217, #310)
 
     Code
       to_int(given)
@@ -70,7 +70,7 @@
       Error in `wrapped_to_int()`:
       ! Can't coerce `val` <character> to <integer>.
 
-# to_int() errors informatively for bad chrs (#2, wranglezone/stbl#310)
+# to_int() errors informatively for bad chrs (#2, #310)
 
     Code
       to_int(given)
@@ -110,7 +110,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 4
 
-# to_int() errors informatively for bad complexes (#2, wranglezone/stbl#310)
+# to_int() errors informatively for bad complexes (#2, #310)
 
     Code
       to_int(given)
@@ -130,7 +130,7 @@
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
 
-# to_int() errors for complexes that would lose precision (#noissue, wranglezone/stbl#310)
+# to_int() errors for complexes that would lose precision (#noissue, #310)
 
     Code
       to_int(given)
@@ -186,7 +186,7 @@
       Error in `wrapped_to_int()`:
       ! Can't coerce `val` <factor> to <integer>.
 
-# to_int() errors informatively for bad factors (#4, wranglezone/stbl#310)
+# to_int() errors informatively for bad factors (#4, #310)
 
     Code
       to_int(given)
@@ -206,7 +206,7 @@
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
 
-# to_int() works for lists (#2, #273, wranglezone/stbl#310)
+# to_int() works for lists (#2, #273, #310)
 
     Code
       to_int(list(1L, 1:5))

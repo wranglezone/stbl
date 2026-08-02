@@ -73,7 +73,7 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_incompatible() throws the expected error (#95, wranglezone/stbl#310)
+# .stop_incompatible() throws the expected error (#95, #310)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
@@ -84,7 +84,7 @@
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
 
-# .stop_incompatible() passes dots (#95, wranglezone/stbl#310)
+# .stop_incompatible() passes dots (#95, #310)
 
     Code
       .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),

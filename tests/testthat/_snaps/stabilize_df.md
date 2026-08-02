@@ -38,7 +38,7 @@
       Error:
       ! `data.frame(foo = "a")` must contain element "name".
 
-# stabilize_df() errors informatively when column fails validation (#142, wranglezone/stbl#310)
+# stabilize_df() errors informatively when column fails validation (#142, #310)
 
     Code
       stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar())
@@ -57,7 +57,7 @@
       ! `data.frame(a = 1L, b = 2L)` must not contain extra named elements.
       x Extra element: "b"
 
-# stabilize_df() validates extra columns with .extra_cols (#142, wranglezone/stbl#310)
+# stabilize_df() validates extra columns with .extra_cols (#142, #310)
 
     Code
       stabilize_df(data.frame(a = 1L, b = "not-int"), a = specify_int_scalar(),
