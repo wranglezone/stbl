@@ -62,7 +62,10 @@ for the entire vector.
 Other factor functions:
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),

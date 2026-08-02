@@ -69,7 +69,10 @@ for the entire vector.
 Other double functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),

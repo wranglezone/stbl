@@ -49,7 +49,10 @@ for the entire vector.
 Other logical functions:
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),

@@ -4,7 +4,7 @@
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
 with the provided arguments. `specify_lgl_scalar()` creates a function
 that will call
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
 with the provided arguments. `specify_logical()` is a synonym of
 `specify_lgl()`, and `specify_logical_scalar()` is a synonym of
 `specify_lgl_scalar()`.
@@ -70,12 +70,12 @@ specify_logical_scalar(
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
 or
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
 or
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md).
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -84,7 +84,10 @@ provide additional context or functionality.
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

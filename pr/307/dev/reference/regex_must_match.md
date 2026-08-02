@@ -7,7 +7,7 @@ the message will be "must match the regex pattern {regex}". If the input
 match...". This message can be used with
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
 and
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md).
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md).
 
 ## Usage
 

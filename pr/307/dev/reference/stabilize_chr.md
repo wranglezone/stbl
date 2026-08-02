@@ -1,19 +1,10 @@
-# Ensure a character argument meets expectations
+# Coerce to character with additional checks
 
-`to_chr()` checks whether an argument can be coerced to character
-without losing information, returning it silently if so. Otherwise an
-informative error message is signaled. `to_character` is a synonym of
-`to_chr()`.
-
-`stabilize_chr()` can check more details about the argument, but is
-slower than `to_chr()`. `stabilise_chr()`, `stabilize_character()`, and
-`stabilise_character()` are synonyms of `stabilize_chr()`.
-
-`stabilize_chr_scalar()` and `to_chr_scalar()` are optimized to check
-for length-1 character vectors. `stabilise_chr_scalar`,
-`stabilize_character_scalar()`, and `stabilise_character_scalar` are
-synonyms of `stabilize_chr_scalar()`, and `to_character_scalar()` is a
-synonym of `to_chr_scalar()`.
+Compared to
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+`stabilize_chr()` checks more details, but is slower. `stabilise_chr()`,
+`stabilize_character()`, and `stabilise_character()` are synonyms of
+`stabilize_chr()`.
 
 ## Usage
 
@@ -65,90 +56,6 @@ stabilise_character(
   min_size = NULL,
   max_size = NULL,
   regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_chr(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_character(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -218,94 +125,49 @@ to_character_scalar(
   the object before checking its coercion, but want the error message to
   match the original class.
 
-- allow_zero_length:
-
-  `(length-1 logical)` Are zero-length vectors acceptable?
-
 ## Value
 
-The argument as a character vector.
-
-## Details
-
-These functions have two important differences from
-[`base::as.character()`](https://rdrr.io/r/base/character.html):
-
-- `list`s and `data.frame`s are *not* coerced to character. In base R,
-  such objects are coerced to character representations of their
-  elements. For example, `as.character(list(1:3))` returns "1:10". In
-  the unlikely event that this is the expected behavior, use
-  [`as.character()`](https://rdrr.io/r/base/character.html) instead.
-
-- `NULL` values can be rejected as part of the call to this function
-  (with `allow_null = FALSE`).
-
-Named functions are converted to their string name. If the function
-comes from a package namespace, the result is a `"pkg::fn"` string. For
-example, `to_chr(mean)` returns `"base::mean"`. Anonymous functions
-produce an error.
-
-To preserve the original call-site symbol when `to_chr()` is called
-inside a wrapper function, use the embrace operator `{{ }}`. For
-example:
-
-    my_wrapper <- function(fn) {
-      to_chr({{ fn }})
-    }
-    my_wrapper(mean)  # Returns "base::mean"
+The input as a character vector.
 
 ## See also
 
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
 
 Other stabilization functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 ## Examples
 
 ``` r
-to_chr("a")
-#> [1] "a"
-to_chr(letters)
-#>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-#> [20] "t" "u" "v" "w" "x" "y" "z"
-to_chr(1:10)
-#>  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
-to_chr(1 + 0i)
-#> [1] "1+0i"
-to_chr(NULL)
-#> NULL
-try(to_chr(NULL, allow_null = FALSE))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-
-# Named functions are converted to their string name.
-to_chr(mean)
-#> [1] "base::mean"
-to_chr(base::mean)
-#> [1] "base::mean"
-try(to_chr(function(x) x))
-#> Error in eval(expr, envir) : 
-#>   Can't coerce `function(x) x` <function> to <character>.
-#> ℹ Anonymous functions can't be converted to a string name.
-
-to_chr_scalar("a")
-#> [1] "a"
-try(to_chr_scalar(letters))
-#> Error in eval(expr, envir) : 
-#>   `letters` must be a single <character>.
-#> ✖ `letters` has 26 values.
-
 stabilize_chr(letters)
 #>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 #> [20] "t" "u" "v" "w" "x" "y" "z"
@@ -331,17 +193,4 @@ try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 #> ✖ Some values fail the check.
 #> ✖ Locations: 2 and 3
 #> ✖ Values: find and find
-
-stabilize_chr_scalar(TRUE)
-#> [1] "TRUE"
-stabilize_chr_scalar("TRUE")
-#> [1] "TRUE"
-try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
-#> Error in eval(expr, envir) : 
-#>   `c(TRUE, FALSE, TRUE)` must be a single <character>.
-#> ✖ `c(TRUE, FALSE, TRUE)` has 3 values.
-try(stabilize_chr_scalar(NULL))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-stabilize_chr_scalar(NULL, allow_null = TRUE)
-#> NULL
 ```
