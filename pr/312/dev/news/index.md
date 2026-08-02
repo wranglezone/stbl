@@ -46,6 +46,18 @@
 ### New functions
 
 - New
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
+  silently catches a [stbl](https://stbl.wrangle.zone/) error with the
+  specified `subclass` and returns `NULL`, allowing callers to suppress
+  expected validation failures
+  ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+- New
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  catches a [stbl](https://stbl.wrangle.zone/) error with the specified
+  `subclass` and replaces its message with a custom one. An optional
+  `additional_class` argument prepends extra classes to the error class
+  list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+- New
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   (and
   [`stabilise_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md))

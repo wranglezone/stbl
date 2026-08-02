@@ -224,6 +224,10 @@
   : Test package error classes
 - [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
   : Snapshot-test a package error
+- [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  : Replace a stbl error with a custom message
+- [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
+  : Ignore a stbl error and return NULL
 - [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md) :
   Signal a warning with standards applied
 - [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
