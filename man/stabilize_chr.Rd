@@ -99,7 +99,17 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-The input as a character vector.
+The input as a character vector, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be coerced to character.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-must>} when \code{regex} checks fail.
+}
 }
 \description{
 Compared to \code{\link[=to_chr]{to_chr()}}, \code{stabilize_chr()} checks more details, but is

@@ -25,7 +25,22 @@
 #'   named element of `.x` shares a name with another.
 #' @inheritParams .shared-params
 #'
-#' @returns The validated list.
+#' @returns The validated list, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+#'   - `<stbl-error-coerce-list>` when `.x` cannot be coerced to a list.
+#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
+#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
+#'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
+#'   unnamed.
+#'   - `<stbl-error-missing_element>` when a required named element is absent.
+#'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
+#'   `.unnamed` is `NULL`.
+#'   - `<stbl-error-bad_named>` when extra named elements are present but `.named`
+#'   is `NULL`.
+#'   - `<stbl-error-duplicate_names>` when duplicate names are present and
+#'   `.allow_duplicate_names = FALSE`.
 #' @family list functions
 #' @family stabilization functions
 #' @export

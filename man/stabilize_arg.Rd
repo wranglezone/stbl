@@ -60,7 +60,19 @@ match the original class.}
 acceptable?}
 }
 \value{
-\code{x}, unless one of the checks fails.
+\code{x}, or an error condition with classes \verb{<stbl-error>},
+\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
+specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when
+\code{allow_zero_length = FALSE} in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors in
+\code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+}
 }
 \description{
 \code{stabilize_arg()} is used by other functions such as \code{\link[=stabilize_int]{stabilize_int()}}. Use

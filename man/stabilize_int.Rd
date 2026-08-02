@@ -114,7 +114,20 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-The input as an integer vector.
+The input as an integer vector, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-coerce-integer>} when \code{x} cannot be coerced to integer.
+\item \verb{<stbl-error-incompatible_type>} when some values cannot be safely
+converted to integer.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
+\code{max_value}.
+}
 }
 \description{
 Compared to \code{\link[=to_int]{to_int()}}, \code{stabilize_int()} checks more details, but is

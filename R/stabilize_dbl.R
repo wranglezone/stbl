@@ -6,7 +6,18 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a double vector.
+#' @returns The input as a double vector, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
+#'   converted to double.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
+#'   `max_value`.
 #' @family double functions
 #' @family stabilization functions
 #' @export
@@ -84,7 +95,19 @@ stabilise_double <- stabilize_dbl
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a length-1 double vector.
+#' @returns The input as a length-1 double vector, or an error condition with
+#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-incompatible_type>` when some values cannot be safely
+#'   converted to double.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
+#'   `max_value`.
 #' @family double functions
 #' @family stabilization functions
 #' @export

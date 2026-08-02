@@ -99,7 +99,27 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-The validated data frame.
+The validated data frame, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
+\item \verb{<stbl-error-coerce-data.frame>} when \code{.x} cannot be coerced to a data
+frame.
+\item \verb{<stbl-error-jagged>} when list input has incompatible element lengths for
+conversion to a data frame.
+\item \verb{<stbl-error-too_few_rows>} when the data frame has fewer than
+\code{.min_rows} rows.
+\item \verb{<stbl-error-too_many_rows>} when the data frame has more than
+\code{.max_rows} rows.
+\item \verb{<stbl-error-missing_cols>} when required names in \code{.col_names} are
+absent.
+\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
+unnamed.
+\item \verb{<stbl-error-missing_element>}, \verb{<stbl-error-bad_named>},
+\verb{<stbl-error-bad_unnamed>}, or \verb{<stbl-error-duplicate_names>} when list-like
+column checks delegated to \code{\link[=stabilize_lst]{stabilize_lst()}} fail.
+}
 }
 \description{
 \code{stabilize_df()} validates the structure and contents of a data frame. It can

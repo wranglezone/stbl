@@ -25,7 +25,25 @@
 #'   `.x`. If `NULL` (default), the row count is not checked.
 #' @inheritParams .shared-params
 #'
-#' @returns The validated data frame.
+#' @returns The validated data frame, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+#'   - `<stbl-error-coerce-data.frame>` when `.x` cannot be coerced to a data
+#'   frame.
+#'   - `<stbl-error-jagged>` when list input has incompatible element lengths for
+#'   conversion to a data frame.
+#'   - `<stbl-error-too_few_rows>` when the data frame has fewer than
+#'   `.min_rows` rows.
+#'   - `<stbl-error-too_many_rows>` when the data frame has more than
+#'   `.max_rows` rows.
+#'   - `<stbl-error-missing_cols>` when required names in `.col_names` are
+#'   absent.
+#'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
+#'   unnamed.
+#'   - `<stbl-error-missing_element>`, `<stbl-error-bad_named>`,
+#'   `<stbl-error-bad_unnamed>`, or `<stbl-error-duplicate_names>` when list-like
+#'   column checks delegated to [stabilize_lst()] fail.
 #' @family data frame functions
 #' @family stabilization functions
 #' @export

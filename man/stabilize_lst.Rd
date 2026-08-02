@@ -109,7 +109,24 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-The validated list.
+The validated list, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
+\item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be coerced to a list.
+\item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
+\item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
+\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
+unnamed.
+\item \verb{<stbl-error-missing_element>} when a required named element is absent.
+\item \verb{<stbl-error-bad_unnamed>} when unnamed elements are present but
+\code{.unnamed} is \code{NULL}.
+\item \verb{<stbl-error-bad_named>} when extra named elements are present but \code{.named}
+is \code{NULL}.
+\item \verb{<stbl-error-duplicate_names>} when duplicate names are present and
+\code{.allow_duplicate_names = FALSE}.
+}
 }
 \description{
 \code{stabilize_lst()} validates the structure and contents of a list. It can

@@ -18,7 +18,9 @@ in unexported functions.}
 source of error messages.}
 }
 \value{
-This function does not return a value; it always throws an error.
+This function does not return a value; it always throws an error
+condition with classes \verb{<stbl-error-deprecated>}, \verb{<stbl-error>},
+\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, and \verb{<condition>}.
 }
 \description{
 \code{stabilize_present()} was renamed to \code{\link[=assert_present]{assert_present()}} because it doesn't
