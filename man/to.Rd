@@ -156,27 +156,42 @@ to("mean", mean)
 Other character functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
 \code{\link[=specify_chr]{specify_chr()}},
-\code{\link[=stabilize_chr]{stabilize_chr()}}
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
+\code{\link[=to_chr]{to_chr()}},
+\code{\link[=to_chr_scalar]{to_chr_scalar()}}
 
 Other double functions:
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},
 \code{\link[=specify_dbl]{specify_dbl()}},
-\code{\link[=stabilize_dbl]{stabilize_dbl()}}
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}},
+\code{\link[=to_dbl]{to_dbl()}},
+\code{\link[=to_dbl_scalar]{to_dbl_scalar()}}
 
 Other integer functions:
 \code{\link[=are_int_ish]{are_int_ish()}},
 \code{\link[=specify_int]{specify_int()}},
-\code{\link[=stabilize_int]{stabilize_int()}}
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
+\code{\link[=to_int]{to_int()}},
+\code{\link[=to_int_scalar]{to_int_scalar()}}
 
 Other logical functions:
 \code{\link[=are_lgl_ish]{are_lgl_ish()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
-\code{\link[=stabilize_lgl]{stabilize_lgl()}}
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=to_lgl]{to_lgl()}},
+\code{\link[=to_lgl_scalar]{to_lgl_scalar()}}
 
 Other factor functions:
 \code{\link[=are_fct_ish]{are_fct_ish()}},
 \code{\link[=specify_fct]{specify_fct()}},
-\code{\link[=stabilize_fct]{stabilize_fct()}}
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
+\code{\link[=to_fct]{to_fct()}},
+\code{\link[=to_fct_scalar]{to_fct_scalar()}}
 
 Other function functions:
 \code{\link[=are_fn_ish]{are_fn_ish()}},

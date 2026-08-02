@@ -101,7 +101,10 @@ try(stabilize_3_to_5(c(1:6)))
 Other integer functions:
 \code{\link[=are_int_ish]{are_int_ish()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_int]{to_int()}},
+\code{\link[=to_int_scalar]{to_int_scalar()}}
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},

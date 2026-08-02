@@ -1,38 +1,17 @@
-#' Ensure a double argument meets expectations
+#' Coerce to double with additional checks
 #'
-#' @description `to_dbl()` checks whether an argument can be coerced to double
-#'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_double` is a synonym of
-#'   `to_dbl()`.
-#'
-#'   `stabilize_dbl()` can check more details about the argument, but is slower
-#'   than `to_dbl()`. `stabilise_dbl()`, `stabilize_double()`, and
-#'   `stabilise_double()` are synonyms of `stabilize_dbl()`.
-#'
-#'   `stabilize_dbl_scalar()` and `to_dbl_scalar()` are optimized to check for
-#'   length-1 double vectors. `stabilise_dbl_scalar`,
-#'   `stabilize_double_scalar()`, and `stabilise_double_scalar` are synonyms of
-#'   `stabilize_dbl_scalar()`, and `to_double_scalar()` is a synonym of
-#'   `to_dbl_scalar()`.
+#' Compared to [to_dbl()], `stabilize_dbl()` checks more details, but is
+#' slower. `stabilise_dbl()`, `stabilize_double()`, and `stabilise_double()`
+#' are synonyms of `stabilize_dbl()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a double vector.
+#' @returns The input as a double vector.
 #' @family double functions
 #' @family stabilization functions
 #' @export
 #'
 #' @examples
-#' to_dbl(1:10)
-#' to_dbl("1.1")
-#' to_dbl(1 + 0i)
-#' to_dbl(NULL)
-#' try(to_dbl("a"))
-#' try(to_dbl("1.1", coerce_character = FALSE))
-#'
-#' to_dbl_scalar("1.1")
-#' try(to_dbl_scalar(1:10))
-#'
 #' stabilize_dbl(1:10)
 #' stabilize_dbl("1.1")
 #' stabilize_dbl(1 + 0i)
@@ -45,12 +24,6 @@
 #' try(stabilize_dbl(factor("1.1"), coerce_factor = FALSE))
 #' try(stabilize_dbl(1:10, min_value = 3.5))
 #' try(stabilize_dbl(1:10, max_value = 7.5))
-#'
-#' stabilize_dbl_scalar(1.0)
-#' stabilize_dbl_scalar("1.1")
-#' try(stabilize_dbl_scalar(1:10))
-#' try(stabilize_dbl_scalar(NULL))
-#' stabilize_dbl_scalar(NULL, allow_null = TRUE)
 stabilize_dbl <- function(
   x,
   ...,
@@ -101,8 +74,27 @@ stabilise_dbl <- stabilize_dbl
 #' @rdname stabilize_dbl
 stabilise_double <- stabilize_dbl
 
+#' Coerce to length-1 double with additional checks
+#'
+#' Checks whether a vector can be coerced to a length-1 double vector.
+#' `stabilize_dbl_scalar()` is optimized to check for length-1 double vectors
+#' (compared to [stabilize_dbl()] with `max_size = 1`). `stabilise_dbl_scalar`,
+#' `stabilize_double_scalar()`, and `stabilise_double_scalar` are synonyms of
+#' `stabilize_dbl_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 double vector.
+#' @family double functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_dbl
+#'
+#' @examples
+#' stabilize_dbl_scalar(1.0)
+#' stabilize_dbl_scalar("1.1")
+#' try(stabilize_dbl_scalar(1:10))
+#' try(stabilize_dbl_scalar(NULL))
+#' stabilize_dbl_scalar(NULL, allow_null = TRUE)
 stabilize_dbl_scalar <- function(
   x,
   ...,
@@ -140,15 +132,15 @@ stabilize_dbl_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname stabilize_dbl_scalar
 stabilize_double_scalar <- stabilize_dbl_scalar
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname stabilize_dbl_scalar
 stabilise_dbl_scalar <- stabilize_dbl_scalar
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname stabilize_dbl_scalar
 stabilise_double_scalar <- stabilize_dbl_scalar
 
 #' Check double values against min and max values

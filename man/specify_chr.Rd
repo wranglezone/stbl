@@ -86,7 +86,10 @@ try(stabilize_email("not-an-email-address"))
 Other character functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_chr]{to_chr()}},
+\code{\link[=to_chr_scalar]{to_chr_scalar()}}
 
 Other specification functions:
 \code{\link[=specify_dbl]{specify_dbl()}},

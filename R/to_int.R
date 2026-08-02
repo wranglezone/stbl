@@ -1,5 +1,24 @@
+#' Coerce to integer
+#'
+#' Checks whether a vector can be coerced to integer without losing information,
+#' returning it silently if so. Otherwise an informative error message is
+#' signaled. `to_integer` is a synonym of `to_int()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as an integer vector.
+#' @family integer functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_int
+#'
+#' @examples
+#' to_int(1:10)
+#' to_int("1")
+#' to_int(1 + 0i)
+#' to_int(NULL)
+#' try(to_int(c(1, 2, 3.1, 4, 5.2)))
+#' try(to_int("1", coerce_character = FALSE))
+#' try(to_int(c("1", "2", "3.1", "4", "5.2")))
 to_int <- function(
   x,
   ...,
@@ -11,7 +30,7 @@ to_int <- function(
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname to_int
 to_integer <- to_int
 
 #' @export
@@ -20,7 +39,7 @@ to_int.integer <- function(x, ...) {
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname to_int
 to_int.NULL <- function(
   x,
   ...,
@@ -63,7 +82,7 @@ to_int.logical <- function(x, ...) {
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname to_int
 to_int.character <- function(
   x,
   ...,
@@ -90,7 +109,7 @@ to_int.character <- function(
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname to_int
 to_int.factor <- function(
   x,
   ...,
@@ -131,8 +150,23 @@ to_int.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   vec_cast(x, integer(), x_arg = x_arg, call = call)
 }
 
+#' Coerce to length-1 integer
+#'
+#' Checks whether a vector can be coerced to a length-1 integer vector.
+#' `to_int_scalar()` is optimized to check for length-1 integer vectors
+#' (compared to [stabilize_int()] with `max_size = 1`). `to_integer_scalar()`
+#' is a synonym of `to_int_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 integer vector.
+#' @family integer functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_int
+#'
+#' @examples
+#' to_int_scalar("1")
+#' try(to_int_scalar(1:10))
 to_int_scalar <- function(
   x,
   ...,
@@ -156,7 +190,7 @@ to_int_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname to_int_scalar
 to_integer_scalar <- to_int_scalar
 
 #' Check for character to integer coercion failures

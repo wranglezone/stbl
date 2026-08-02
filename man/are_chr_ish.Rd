@@ -57,7 +57,10 @@ is_chr_ish(list("a", 1, list(1, 2)))
 Other character functions:
 \code{\link[=specify_chr]{specify_chr()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_chr]{to_chr()}},
+\code{\link[=to_chr_scalar]{to_chr_scalar()}}
 
 Other check functions:
 \code{\link[=are_dbl_ish]{are_dbl_ish()}},

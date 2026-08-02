@@ -1,39 +1,17 @@
-#' Ensure an integer argument meets expectations
+#' Coerce to integer with additional checks
 #'
-#' @description `to_int()` checks whether an argument can be coerced to integer
-#'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_integer` is a synonym of
-#'   `to_int()`.
-#'
-#'   `stabilize_int()` can check more details about the argument, but is slower
-#'   than `to_int()`. `stabilise_int()`, `stabilize_integer()`, and
-#'   `stabilise_integer()` are synonyms of `stabilize_int()`.
-#'
-#'   `stabilize_int_scalar()` and `to_int_scalar()` are optimized to check for
-#'   length-1 integer vectors. `stabilise_int_scalar`,
-#'   `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms
-#'   of `stabilize_int_scalar()`, and `to_integer_scalar()` is a synonym of
-#'   `to_int_scalar()`.
+#' Compared to [to_int()], `stabilize_int()` checks more details, but is
+#' slower. `stabilise_int()`, `stabilize_integer()`, and `stabilise_integer()`
+#' are synonyms of `stabilize_int()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as an integer vector.
+#' @returns The input as an integer vector.
 #' @family integer functions
 #' @family stabilization functions
 #' @export
 #'
 #' @examples
-#' to_int(1:10)
-#' to_int("1")
-#' to_int(1 + 0i)
-#' to_int(NULL)
-#' try(to_int(c(1, 2, 3.1, 4, 5.2)))
-#' try(to_int("1", coerce_character = FALSE))
-#' try(to_int(c("1", "2", "3.1", "4", "5.2")))
-#'
-#' to_int_scalar("1")
-#' try(to_int_scalar(1:10))
-#'
 #' stabilize_int(1:10)
 #' stabilize_int("1")
 #' stabilize_int(1 + 0i)
@@ -46,12 +24,6 @@
 #' try(stabilize_int(factor("1"), coerce_factor = FALSE))
 #' try(stabilize_int(1:10, min_value = 3))
 #' try(stabilize_int(1:10, max_value = 7))
-#'
-#' stabilize_int_scalar(1L)
-#' stabilize_int_scalar("1")
-#' try(stabilize_int_scalar(1:10))
-#' try(stabilize_int_scalar(NULL))
-#' stabilize_int_scalar(NULL, allow_null = TRUE)
 stabilize_int <- function(
   x,
   ...,
@@ -102,8 +74,27 @@ stabilise_int <- stabilize_int
 #' @rdname stabilize_int
 stabilise_integer <- stabilize_int
 
+#' Coerce to length-1 integer with additional checks
+#'
+#' Checks whether a vector can be coerced to a length-1 integer vector.
+#' `stabilize_int_scalar()` is optimized to check for length-1 integer vectors
+#' (compared to [stabilize_int()] with `max_size = 1`). `stabilise_int_scalar`,
+#' `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms of
+#' `stabilize_int_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 integer vector.
+#' @family integer functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_int
+#'
+#' @examples
+#' stabilize_int_scalar(1L)
+#' stabilize_int_scalar("1")
+#' try(stabilize_int_scalar(1:10))
+#' try(stabilize_int_scalar(NULL))
+#' stabilize_int_scalar(NULL, allow_null = TRUE)
 stabilize_int_scalar <- function(
   x,
   ...,
@@ -141,13 +132,13 @@ stabilize_int_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname stabilize_int_scalar
 stabilize_integer_scalar <- stabilize_int_scalar
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname stabilize_int_scalar
 stabilise_int_scalar <- stabilize_int_scalar
 
 #' @export
-#' @rdname stabilize_int
+#' @rdname stabilize_int_scalar
 stabilise_integer_scalar <- stabilize_int_scalar

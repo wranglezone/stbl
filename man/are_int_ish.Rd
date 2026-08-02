@@ -77,7 +77,10 @@ is_int_ish(factor(c("1", "a")))
 Other integer functions:
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_int]{to_int()}},
+\code{\link[=to_int_scalar]{to_int_scalar()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

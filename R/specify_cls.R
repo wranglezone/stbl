@@ -295,6 +295,7 @@ specify_double_scalar <- specify_dbl_scalar
 #' `specify_fct_scalar()`.
 #'
 #' @inheritParams stabilize_fct
+#' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_fct()] or [stabilize_fct_scalar()] with the provided arguments.
 #'   The generated function will also accept `...` for additional arguments to
