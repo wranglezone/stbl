@@ -68,7 +68,7 @@ test_that("specify_cls builds the expected scalar function snapshot (#150)", {
 
 # Class versions ----
 
-test_that("specify_chr can build a regex checker (#147)", {
+test_that("specify_chr can build a regex checker (#147, #310)", {
   checker <- specify_chr(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
   given <- "12345-6789"
   expect_identical(
@@ -82,7 +82,7 @@ test_that("specify_chr can build a regex checker (#147)", {
   )
 })
 
-test_that("specify_chr_scalar can build a regex checker (#147)", {
+test_that("specify_chr_scalar can build a regex checker (#147, #310)", {
   checker <- specify_chr_scalar(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
   given <- "12345-6789"
   expect_identical(
