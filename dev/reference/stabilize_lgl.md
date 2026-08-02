@@ -109,7 +109,21 @@ stabilise_logical(
 
 ## Value
 
-The input as a logical vector.
+The input as a logical vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
+
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
 
 ## See also
 

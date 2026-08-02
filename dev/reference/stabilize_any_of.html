@@ -128,8 +128,12 @@ match the original class.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>x</code> coerced or validated by the first successful function or
-prototype in <code>...</code>.</p>
-    </div>
+prototype in <code>...</code>, or an error condition with classes <code>&lt;stbl-error&gt;</code>,
+<code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a
+specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-empty_specs&gt;</code> when no functions are supplied in <code>...</code>.</p></li>
+<li><p><code>&lt;stbl-error-named_spec&gt;</code> when any element of <code>...</code> is named.</p></li>
+<li><p><code>&lt;stbl-error-cant_stabilize_any_of&gt;</code> when all provided functions fail.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other stabilization functions:

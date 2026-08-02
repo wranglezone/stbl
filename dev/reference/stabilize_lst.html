@@ -184,8 +184,22 @@ match the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The validated list.</p>
-    </div>
+    <p>The validated list, or an error condition with classes
+<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be coerced to a list.</p></li>
+<li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
+unnamed.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent.</p></li>
+<li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when unnamed elements are present but
+<code>.unnamed</code> is <code>NULL</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but <code>.named</code>
+is <code>NULL</code>.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and
+<code>.allow_duplicate_names = FALSE</code>.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other list functions:

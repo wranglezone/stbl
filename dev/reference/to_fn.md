@@ -113,24 +113,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55f97253c2a0>
+#> <bytecode: 0x56538bec22a0>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x55f979323960>
+#> <environment: 0x5653928a81d8>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55f97253c2a0>
+#> <bytecode: 0x56538bec22a0>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x55f971ef79f8>
+#> <bytecode: 0x56538b87d9f8>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL

@@ -175,8 +175,25 @@ match the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The validated data frame.</p>
-    </div>
+    <p>The validated data frame, or an error condition with classes
+<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be coerced to a data
+frame.</p></li>
+<li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths for
+conversion to a data frame.</p></li>
+<li><p><code>&lt;stbl-error-too_few_rows&gt;</code> when the data frame has fewer than
+<code>.min_rows</code> rows.</p></li>
+<li><p><code>&lt;stbl-error-too_many_rows&gt;</code> when the data frame has more than
+<code>.max_rows</code> rows.</p></li>
+<li><p><code>&lt;stbl-error-missing_cols&gt;</code> when required names in <code>.col_names</code> are
+absent.</p></li>
+<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
+unnamed.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code>, <code>&lt;stbl-error-bad_named&gt;</code>,
+<code>&lt;stbl-error-bad_unnamed&gt;</code>, or <code>&lt;stbl-error-duplicate_names&gt;</code> when list-like
+column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a></code> fail.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other data frame functions:

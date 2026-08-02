@@ -34,4 +34,6 @@ stabilize_present(x, x_arg = caller_arg(x), call = caller_env())
 
 ## Value
 
-This function does not return a value; it always throws an error.
+This function does not return a value; it always throws an error
+condition with classes `<stbl-error-deprecated>`, `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, and `<condition>`.

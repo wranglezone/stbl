@@ -84,7 +84,15 @@ to_any_of(
 ## Value
 
 `x` coerced or validated by the first successful function or prototype
-in `...`.
+in `...`, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-empty_specs>` when no functions are supplied in `...`.
+
+- `<stbl-error-named_spec>` when any element of `...` is named.
+
+- `<stbl-error-cant_stabilize_any_of>` when all provided functions fail.
 
 ## See also
 

@@ -126,7 +126,23 @@ stabilise_factor(
 
 ## Value
 
-The input as a factor.
+The input as a factor, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
+
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
+
+- `<stbl-error-fct_levels>` when values are not present in `levels`.
 
 ## See also
 
