@@ -33,12 +33,14 @@ test_that(".to_null() errors for bad allow_null (#129, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     .to_null(NULL, allow_null = "fish"),
     "stbl",
-    "incompatible_values", "logical"
+    "incompatible_values",
+    "logical"
   )
   expect_pkg_error_snapshot(
     wrapped_to_null(NULL, allow_null = "fish"),
     "stbl",
-    "incompatible_values", "logical"
+    "incompatible_values",
+    "logical"
   )
 })
 

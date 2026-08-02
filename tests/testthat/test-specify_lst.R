@@ -12,7 +12,8 @@ test_that("specify_lst() respects pre-configured element specs (#110, wranglezon
   expect_pkg_error_classes(
     spec(list(count = "not-int")),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -61,6 +62,7 @@ test_that("stabilize_lst() with nested specify_lst() propagates errors correctly
   expect_pkg_error_classes(
     stabilize_lst(given_bad, outer = inner_spec),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })

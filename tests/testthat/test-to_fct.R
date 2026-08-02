@@ -66,7 +66,8 @@ test_that("to_fct() works for lists (#64, #273, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     to_fct(list("a", 1:5)),
     "stbl",
-    "incompatible_values", "factor"
+    "incompatible_values",
+    "factor"
   )
 })
 
@@ -83,12 +84,14 @@ test_that("to_fct() errors for things that can't be coerced (#62, #273, wranglez
   expect_pkg_error_snapshot(
     to_fct(given),
     "stbl",
-    "incompatible_values", "factor"
+    "incompatible_values",
+    "factor"
   )
   expect_pkg_error_snapshot(
     wrapped_to_fct(given),
     "stbl",
-    "incompatible_values", "factor"
+    "incompatible_values",
+    "factor"
   )
 })
 

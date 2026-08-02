@@ -37,12 +37,32 @@ test_that("to_int() works for dbls (#2)", {
 test_that("to_int() errors for dbls that would lose precision (#2, #217, wranglezone/stbl#310)", {
   given <- as.double(1:10)
   given[[4]] <- 1.1
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 
   given[[4]] <- Inf
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to_int() works for chrs (#2)", {
@@ -71,12 +91,32 @@ test_that("to_int() respects coerce_character (#14)", {
 test_that("to_int() errors informatively for bad chrs (#2, wranglezone/stbl#310)", {
   given <- as.character(1:10)
   given[[4]] <- "1.1"
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 
   given[[4]] <- "a"
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to_int() works for complexes (#2)", {
@@ -88,19 +128,49 @@ test_that("to_int() works for complexes (#2)", {
 test_that("to_int() errors informatively for bad complexes (#2, wranglezone/stbl#310)", {
   given <- as.complex(1:10)
   given[[4]] <- 1 + 1i
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to_int() errors for complexes that would lose precision (#noissue, wranglezone/stbl#310)", {
   given <- as.complex(1:10)
   given[[4]] <- 1.5 + 0i
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 
   given[[4]] <- Inf + 0i
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to_int() works for factors (#4)", {
@@ -128,8 +198,18 @@ test_that("to_int() respects coerce_factor (#14)", {
 
 test_that("to_int() errors informatively for bad factors (#4, wranglezone/stbl#310)", {
   given <- factor(letters)
-  expect_pkg_error_snapshot(to_int(given), "stbl", "incompatible_values", "integer")
-  expect_pkg_error_snapshot(wrapped_to_int(given), "stbl", "incompatible_values", "integer")
+  expect_pkg_error_snapshot(
+    to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_int(given),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to_int() works for lists (#2, #273, wranglezone/stbl#310)", {
@@ -138,7 +218,8 @@ test_that("to_int() works for lists (#2, #273, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     to_int(list(1L, 1:5)),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 

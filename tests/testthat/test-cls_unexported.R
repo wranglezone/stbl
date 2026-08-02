@@ -270,7 +270,8 @@ test_that(".check_lst_failures() errors when any element is invalid (#273, wrang
       call = rlang::current_env()
     ),
     "stbl",
-    "incompatible_values", "character"
+    "incompatible_values",
+    "character"
   )
 })
 
@@ -293,6 +294,7 @@ test_that(".to_num_from_complex() works (#23, wranglezone/stbl#310)", {
       to_type_obj = integer()
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })

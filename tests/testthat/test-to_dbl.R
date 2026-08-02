@@ -58,8 +58,18 @@ test_that("to_dbl() respects coerce_character (#23)", {
 
 test_that("to_dbl() errors informatively for bad chrs (#23, wranglezone/stbl#310)", {
   given <- c("1.1", "a")
-  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_values", "double")
-  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_values", "double")
+  expect_pkg_error_snapshot(
+    to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 test_that("to_dbl() works for complexes (#23)", {
@@ -71,8 +81,18 @@ test_that("to_dbl() works for complexes (#23)", {
 test_that("to_dbl() errors informatively for bad complexes (#23, wranglezone/stbl#310)", {
   given <- as.complex(c(1.1, 2.2))
   given[[1]] <- 1.1 + 1i
-  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_values", "double")
-  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_values", "double")
+  expect_pkg_error_snapshot(
+    to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 test_that("to_dbl() works for factors (#23)", {
@@ -100,8 +120,18 @@ test_that("to_dbl() respects coerce_factor (#23)", {
 
 test_that("to_dbl() errors informatively for bad factors (#23, wranglezone/stbl#310)", {
   given <- factor(letters)
-  expect_pkg_error_snapshot(to_dbl(given), "stbl", "incompatible_values", "double")
-  expect_pkg_error_snapshot(wrapped_to_dbl(given), "stbl", "incompatible_values", "double")
+  expect_pkg_error_snapshot(
+    to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_dbl(given),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 test_that("to_dbl() works for lists (#128, #273, wranglezone/stbl#310)", {
@@ -110,7 +140,8 @@ test_that("to_dbl() works for lists (#128, #273, wranglezone/stbl#310)", {
   expect_pkg_error_snapshot(
     to_dbl(list(1.1, 1:5)),
     "stbl",
-    "incompatible_values", "double"
+    "incompatible_values",
+    "double"
   )
 })
 

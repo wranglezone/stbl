@@ -119,7 +119,8 @@ test_that(".stop_incompatible() throws the expected error (#95, wranglezone/stbl
       rlang::current_env()
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -135,6 +136,7 @@ test_that(".stop_incompatible() passes dots (#95, wranglezone/stbl#310)", {
       .internal = TRUE
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })

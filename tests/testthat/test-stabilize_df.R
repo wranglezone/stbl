@@ -75,7 +75,8 @@ test_that("stabilize_df() errors informatively when column fails validation (#14
       count = specify_int_scalar()
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -105,7 +106,8 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142, wrangl
       .extra_cols = specify_int_scalar()
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 

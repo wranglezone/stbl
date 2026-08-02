@@ -87,7 +87,8 @@ test_that(".check_cast_failures() works", {
       call = rlang::current_env()
     ),
     "stbl",
-    "incompatible_values", "logical"
+    "incompatible_values",
+    "logical"
   )
 })
 

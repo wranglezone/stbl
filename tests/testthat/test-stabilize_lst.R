@@ -55,7 +55,8 @@ test_that("stabilize_lst() errors informatively when element fails validation (#
       count = specify_int_scalar()
     ),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -81,7 +82,8 @@ test_that("stabilize_lst() validates extra named elements with .named (#110, wra
   expect_pkg_error_classes(
     stabilize_lst(list(a = 1L, b = "not-int"), .named = specify_int_scalar()),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -103,7 +105,8 @@ test_that("stabilize_lst() validates unnamed elements with .unnamed (#110, wrang
   expect_pkg_error_classes(
     stabilize_lst(list(1L, "not-int"), .unnamed = specify_int_scalar()),
     "stbl",
-    "incompatible_values", "integer"
+    "incompatible_values",
+    "integer"
   )
 })
 

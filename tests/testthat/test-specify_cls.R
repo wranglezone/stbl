@@ -78,7 +78,7 @@ test_that("specify_chr can build a regex checker (#147)", {
   expect_pkg_error_classes(
     checker("invalid"),
     "stbl",
-    "must"
+    "regex_mismatch"
   )
 })
 
@@ -92,7 +92,7 @@ test_that("specify_chr_scalar can build a regex checker (#147)", {
   expect_pkg_error_classes(
     checker("invalid"),
     "stbl",
-    "must"
+    "regex_mismatch"
   )
 })
 
