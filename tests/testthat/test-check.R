@@ -62,7 +62,7 @@ test_that(".check_x_no_more_than_y() works (#95)", {
   )
 })
 
-test_that(".check_cast_failures() works", {
+test_that(".check_cast_failures() works (#310)", {
   # Happy path
   expect_null(
     .check_cast_failures(

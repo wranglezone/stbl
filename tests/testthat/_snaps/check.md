@@ -62,7 +62,7 @@
       * `2` = 2
       * `1` = 1
 
-# .check_cast_failures() works
+# .check_cast_failures() works (#310)
 
     Code
       .check_cast_failures(failures = failures, x_class = "character", to = logical(),
