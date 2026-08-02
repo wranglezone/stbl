@@ -77,7 +77,17 @@ from the object before checking its coercion, but want the error message to
 match the original class.}
 }
 \value{
-The input as a length-1 logical vector.
+The input as a length-1 logical vector, or an error condition with
+classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-coerce-logical>} when \code{x} cannot be coerced to logical.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when
+\code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
+\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+}
 }
 \description{
 Checks whether a vector can be coerced to a length-1 logical vector.

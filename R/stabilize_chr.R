@@ -6,7 +6,15 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a character vector.
+#' @returns The input as a character vector, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-character>` when `x` cannot be coerced to character.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-must>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -75,7 +83,16 @@ stabilise_character <- stabilize_chr
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a length-1 character vector.
+#' @returns The input as a length-1 character vector, or an error condition with
+#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-character>` when `x` cannot be coerced to character.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-must>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
 #' @export

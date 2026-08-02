@@ -6,7 +6,9 @@
 #' [assert_present()] instead.
 #'
 #' @inheritParams .shared-params
-#' @returns This function does not return a value; it always throws an error.
+#' @returns This function does not return a value; it always throws an error
+#'   condition with classes `<stbl-error-deprecated>`, `<stbl-error>`,
+#'   `<stbl-condition>`, `<rlang_error>`, `<error>`, and `<condition>`.
 #' @keywords internal
 #' @export
 stabilize_present <- function(x, x_arg = caller_arg(x), call = caller_env()) {

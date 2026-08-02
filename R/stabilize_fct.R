@@ -8,7 +8,15 @@
 #' @param levels `(character)` Expected levels. If `NULL` (default), the levels
 #'   will be computed by [base::factor()].
 #'
-#' @returns The input as a factor.
+#' @returns The input as a factor, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
 #' @family factor functions
 #' @family stabilization functions
 #' @export
@@ -71,7 +79,16 @@ stabilise_factor <- stabilize_fct
 #' @param levels `(character)` Expected levels. If `NULL` (default), the levels
 #'   will be computed by [base::factor()].
 #'
-#' @returns The input as a length-1 factor.
+#' @returns The input as a length-1 factor, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
 #' @family factor functions
 #' @family stabilization functions
 #' @export

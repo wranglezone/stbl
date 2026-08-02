@@ -55,7 +55,14 @@ match the original class.}
 }
 \value{
 \code{x} coerced or validated by the first successful function or
-prototype in \code{...}.
+prototype in \code{...}, or an error condition with classes \verb{<stbl-error>},
+\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
+specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
+\item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
+\item \verb{<stbl-error-cant_stabilize_any_of>} when all provided functions fail.
+}
 }
 \description{
 \code{stabilize_any_of()} attempts to validate and coerce \code{x} using
