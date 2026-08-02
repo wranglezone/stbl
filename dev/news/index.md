@@ -23,6 +23,14 @@
   [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   ([\#299](https://github.com/wranglezone/stbl/issues/299)).
 
+### New features
+
+- Errors raised for element-wise failures now carry an integer
+  `locations` element on the condition object, giving the positions in
+  the input that failed the check. Handlers can read these positions via
+  `cnd$locations`
+  ([\#274](https://github.com/wranglezone/stbl/issues/274)).
+
 ### Bug fixes
 
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),

@@ -33,5 +33,5 @@ Apply a single regex rule to a character vector
 
 ## Value
 
-A character vector of error messages if the rule fails, otherwise
-`NULL`.
+A list with a `message` character vector and integer `locations` of the
+failing elements if the rule fails, otherwise `NULL`.
