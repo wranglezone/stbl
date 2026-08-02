@@ -53,7 +53,7 @@ to_any_of(
   such as `stabilize_*` functions
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), `to_*` functions
-  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), or functions produced by `specify_*()` calls
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   etc.). For `to_any_of()`: prototype objects (e.g.
@@ -92,12 +92,27 @@ Other stabilization functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 ## Examples
 

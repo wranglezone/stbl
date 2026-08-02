@@ -4,7 +4,7 @@
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
 with the provided arguments. `specify_fct_scalar()` creates a function
 that will call
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
 with the provided arguments. `specify_factor()` is a synonym of
 `specify_fct()`, and `specify_factor_scalar()` is a synonym of
 `specify_fct_scalar()`.
@@ -87,12 +87,12 @@ specify_factor_scalar(
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
 or
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
 or
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md).
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -101,7 +101,10 @@ provide additional context or functionality.
 Other factor functions:
 [`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

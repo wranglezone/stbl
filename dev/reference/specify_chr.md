@@ -4,7 +4,7 @@
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
 with the provided arguments. `specify_chr_scalar()` creates a function
 that will call
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
 with the provided arguments. `specify_character()` is a synonym of
 `specify_chr()`, and `specify_character_scalar()` is a synonym of
 `specify_chr_scalar()`.
@@ -88,12 +88,12 @@ specify_character_scalar(
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
 or
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
 or
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md).
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -102,7 +102,10 @@ provide additional context or functionality.
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
 
 Other specification functions:
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),

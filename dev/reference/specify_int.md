@@ -4,7 +4,7 @@
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
 with the provided arguments. `specify_int_scalar()` creates a function
 that will call
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
 with the provided arguments. `specify_integer()` is a synonym of
 `specify_int()`, and `specify_integer_scalar()` is a synonym of
 `specify_int_scalar()`.
@@ -110,12 +110,12 @@ specify_integer_scalar(
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
 or
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
 or
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md).
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -124,7 +124,10 @@ provide additional context or functionality.
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

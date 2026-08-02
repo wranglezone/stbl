@@ -44,9 +44,9 @@ register_user <- function(username,
 Let’s start adding checks. The first check will be for the `interests`
 argument. We expect this to be a character vector, but we’re not picky
 about the content.
-[`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-will convert inputs that are character-like (like factors or a simple
-list of strings) into a proper character vector.
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) will
+convert inputs that are character-like (like factors or a simple list of
+strings) into a proper character vector.
 
 ``` r
 
@@ -134,11 +134,11 @@ register_user(
 Next, we’ll add checks for `age` and `is_premium_member`. These
 arguments must each contain a single value. We’ll use the `_scalar`
 variants:
-[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
 and
-[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md).
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md).
 These functions are liberal in what they accept. For example,
-[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 understands that `1`, `"T"`, and `"True"` all mean `TRUE`.
 
 ``` r
@@ -224,7 +224,7 @@ register_user(
 Finally, let’s add more complex validation for `username` and
 `email_address`. For these, simple type coercion isn’t enough; we need
 to check their content and structure using
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md).
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md).
 This function first coerces the input to character, then applies a list
 of validation rules supplied via the `regex` argument (see the
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
@@ -335,14 +335,14 @@ register_user(
 Our `register_user()` function is now robust against a variety of bad
 inputs. We’ve built up layers of protection:
 
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md)
   ensures `interests` is a character vector.
-- [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+- [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   and
-  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
   ensure `age` and `is_premium_member` are single values of the correct
   type.
-- [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+- [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   with regex rules ensures `username` and `email_address` meet specific
   content requirements.
 

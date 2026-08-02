@@ -1,19 +1,10 @@
-# Ensure an integer argument meets expectations
+# Coerce to integer with additional checks
 
-`to_int()` checks whether an argument can be coerced to integer without
-losing information, returning it silently if so. Otherwise an
-informative error message is signaled. `to_integer` is a synonym of
-`to_int()`.
-
-`stabilize_int()` can check more details about the argument, but is
-slower than `to_int()`. `stabilise_int()`, `stabilize_integer()`, and
-`stabilise_integer()` are synonyms of `stabilize_int()`.
-
-`stabilize_int_scalar()` and `to_int_scalar()` are optimized to check
-for length-1 integer vectors. `stabilise_int_scalar`,
-`stabilize_integer_scalar()`, and `stabilise_integer_scalar` are
-synonyms of `stabilize_int_scalar()`, and `to_integer_scalar()` is a
-synonym of `to_int_scalar()`.
+Compared to
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+`stabilize_int()` checks more details, but is slower. `stabilise_int()`,
+`stabilize_integer()`, and `stabilise_integer()` are synonyms of
+`stabilize_int()`.
 
 ## Usage
 
@@ -77,125 +68,6 @@ stabilise_integer(
   max_size = NULL,
   min_value = NULL,
   max_value = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_int_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  coerce_character = TRUE,
-  coerce_factor = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_integer_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  coerce_character = TRUE,
-  coerce_factor = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_int_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  coerce_character = TRUE,
-  coerce_factor = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_integer_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  coerce_character = TRUE,
-  coerce_factor = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_int(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_integer(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class '`NULL`'
-to_int(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
-
-# S3 method for class 'character'
-to_int(
-  x,
-  ...,
-  coerce_character = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class 'factor'
-to_int(
-  x,
-  ...,
-  coerce_factor = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_int_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_integer_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -275,65 +147,49 @@ to_integer_scalar(
   the object before checking its coercion, but want the error message to
   match the original class.
 
-- allow_zero_length:
-
-  `(length-1 logical)` Are zero-length vectors acceptable?
-
 ## Value
 
-The argument as an integer vector.
+The input as an integer vector.
 
 ## See also
 
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
 
 Other stabilization functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 ## Examples
 
 ``` r
-to_int(1:10)
-#>  [1]  1  2  3  4  5  6  7  8  9 10
-to_int("1")
-#> [1] 1
-to_int(1 + 0i)
-#> [1] 1
-to_int(NULL)
-#> NULL
-try(to_int(c(1, 2, 3.1, 4, 5.2)))
-#> Error in eval(expr, envir) : 
-#>   `c(1, 2, 3.1, 4, 5.2)` <double> must be coercible to <integer>
-#> ✖ Can't convert some values due to loss of precision.
-#> • Locations: 3 and 5
-try(to_int("1", coerce_character = FALSE))
-#> Error in eval(expr, envir) : 
-#>   Can't coerce `"1"` <character> to <integer>.
-try(to_int(c("1", "2", "3.1", "4", "5.2")))
-#> Error in eval(expr, envir) : 
-#>   `c("1", "2", "3.1", "4", "5.2")` <character> must be coercible to
-#> <integer>
-#> ✖ Can't convert some values due to loss of precision.
-#> • Locations: 3 and 5
-
-to_int_scalar("1")
-#> [1] 1
-try(to_int_scalar(1:10))
-#> Error in eval(expr, envir) : 
-#>   `1:10` must be a single <integer>.
-#> ✖ `1:10` has 10 values.
-
 stabilize_int(1:10)
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 stabilize_int("1")
@@ -375,17 +231,4 @@ try(stabilize_int(1:10, max_value = 7))
 #> ℹ Some values are too high.
 #> ✖ Locations: 8, 9, and 10
 #> ✖ Values: 8, 9, and 10
-
-stabilize_int_scalar(1L)
-#> [1] 1
-stabilize_int_scalar("1")
-#> [1] 1
-try(stabilize_int_scalar(1:10))
-#> Error in eval(expr, envir) : 
-#>   `1:10` must be a single <integer>.
-#> ✖ `1:10` has 10 values.
-try(stabilize_int_scalar(NULL))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-stabilize_int_scalar(NULL, allow_null = TRUE)
-#> NULL
 ```

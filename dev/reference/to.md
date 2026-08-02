@@ -165,27 +165,42 @@ to(
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
 
 Other double functions:
 [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md)
 
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
+[`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
 
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
+[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
 
 Other factor functions:
 [`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
+[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
 
 Other function functions:
 [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
@@ -219,6 +234,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x564048a39650>
+#> <bytecode: 0x55f97253c2a0>
 #> <environment: namespace:base>
 ```

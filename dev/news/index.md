@@ -33,15 +33,14 @@
 
 ### Bug fixes
 
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-  [`to_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  and
-  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
-  now throw an “incompatible type” error (with failing element
-  locations) instead of a generic “can’t coerce” error when a list
-  contains elements that can’t be converted
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md), and
+  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) now
+  throw an “incompatible type” error (with failing element locations)
+  instead of a generic “can’t coerce” error when a list contains
+  elements that can’t be converted
   ([\#273](https://github.com/wranglezone/stbl/issues/273)).
 
 ### New functions
@@ -73,15 +72,15 @@ CRAN release: 2026-07-28
   error if extra arguments are passed in `...`. Previously, these extra
   arguments were silently discarded
   ([\#200](https://github.com/wranglezone/stbl/issues/200)).
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  now converts named functions to a string representing their name
-  instead of erroring. Package functions are returned as `"pkg::fn"`
-  (e.g., `to_chr(mean)` returns `"base::mean"`). Anonymous functions
-  still produce an informative error. This behavior extends to
-  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  converts named functions to a string representing their name instead
+  of erroring. Package functions are returned as `"pkg::fn"` (e.g.,
+  `to_chr(mean)` returns `"base::mean"`). Anonymous functions still
+  produce an informative error. This behavior extends to
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
   [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   and
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   ([\#251](https://github.com/wranglezone/stbl/issues/251)).
 
 ### New functions
@@ -179,16 +178,16 @@ CRAN release: 2026-04-04
 
 ### Breaking changes
 
-- [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-  [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+- [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+  [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+  [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
+  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
   [`specify_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
@@ -214,9 +213,9 @@ CRAN release: 2026-04-04
 
 - New long-form and British-spelling synonym functions for all class
   functions. For example,
-  [`to_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
+  [`to_character()`](https://stbl.wrangle.zone/dev/reference/to_chr.md)
   is a synonym for
-  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   for
   [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
@@ -319,11 +318,11 @@ CRAN release: 2025-09-16
   ([\#23](https://github.com/wranglezone/stbl/issues/23),
   [\#93](https://github.com/wranglezone/stbl/issues/93)).
 - New functions for working with doubles are available:
-  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
   [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   and
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   ([\#23](https://github.com/wranglezone/stbl/issues/23)).
 - [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
   now accepts patterns from
@@ -350,13 +349,13 @@ CRAN release: 2025-09-16
 - `to_*()` functions now consistently flatten list-like inputs when no
   information would be lost in the process
   ([\#128](https://github.com/wranglezone/stbl/issues/128)).
-- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
-  now lists the allowed values in its error message when a value is not
-  in the expected set, making it easier to debug
+- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md) now
+  lists the allowed values in its error message when a value is not in
+  the expected set, making it easier to debug
   ([\#67](https://github.com/wranglezone/stbl/issues/67)).
-- [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
-  now coerces character representations of numbers (e.g., “0” and “1”)
-  to `FALSE` and `TRUE` respectively
+- [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) now
+  coerces character representations of numbers (e.g., “0” and “1”) to
+  `FALSE` and `TRUE` respectively
   ([\#30](https://github.com/wranglezone/stbl/issues/30)).
 
 ### Documentation

@@ -108,7 +108,7 @@ or send corrupt data to our external service.</p>
 </h2>
 <p>Let’s start adding checks. The first check will be for the
 <code>interests</code> argument. We expect this to be a character
-vector, but we’re not picky about the content. <code><a href="../reference/stabilize_chr.html">to_chr()</a></code>
+vector, but we’re not picky about the content. <code><a href="../reference/to_chr.html">to_chr()</a></code>
 will convert inputs that are character-like (like factors or a simple
 list of strings) into a proper character vector.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -117,7 +117,7 @@ list of strings) into a proper character vector.</p>
 <span>                          <span class="va">age</span>,</span>
 <span>                          <span class="va">is_premium_member</span>,</span>
 <span>                          <span class="va">interests</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
+<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    username <span class="op">=</span> <span class="va">username</span>,</span>
@@ -184,9 +184,9 @@ character vector, it fails with a helpful error message:</p>
 <p>Next, we’ll add checks for <code>age</code> and
 <code>is_premium_member</code>. These arguments must each contain a
 single value. We’ll use the <code>_scalar</code> variants:
-<code><a href="../reference/stabilize_int.html">to_int_scalar()</a></code> and <code><a href="../reference/stabilize_lgl.html">to_lgl_scalar()</a></code>. These
+<code><a href="../reference/to_int_scalar.html">to_int_scalar()</a></code> and <code><a href="../reference/to_lgl_scalar.html">to_lgl_scalar()</a></code>. These
 functions are liberal in what they accept. For example,
-<code><a href="../reference/stabilize_lgl.html">to_lgl_scalar()</a></code> understands that <code>1</code>,
+<code><a href="../reference/to_lgl_scalar.html">to_lgl_scalar()</a></code> understands that <code>1</code>,
 <code>"T"</code>, and <code>"True"</code> all mean
 <code>TRUE</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -195,9 +195,9 @@ functions are liberal in what they accept. For example,
 <span>                          <span class="va">age</span>,</span>
 <span>                          <span class="va">is_premium_member</span>,</span>
 <span>                          <span class="va">interests</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
-<span>  <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_int.html">to_int_scalar</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
-<span>  <span class="va">is_premium_member</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_lgl.html">to_lgl_scalar</a></span><span class="op">(</span><span class="va">is_premium_member</span><span class="op">)</span></span>
+<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
+<span>  <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_int_scalar.html">to_int_scalar</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
+<span>  <span class="va">is_premium_member</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_lgl_scalar.html">to_lgl_scalar</a></span><span class="op">(</span><span class="va">is_premium_member</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    username <span class="op">=</span> <span class="va">username</span>,</span>
@@ -259,7 +259,7 @@ converted to an integer:</p>
 <p>Finally, let’s add more complex validation for <code>username</code>
 and <code>email_address</code>. For these, simple type coercion isn’t
 enough; we need to check their content and structure using
-<code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code>. This function first coerces the
+<code><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar()</a></code>. This function first coerces the
 input to character, then applies a list of validation rules supplied via
 the <code>regex</code> argument (see the <code><a href="../reference/stabilize_chr.html">stabilize_chr()</a></code>
 documentation for details). If speed matters, you should prefer the
@@ -273,15 +273,15 @@ faster <code>to_*()</code> functions and only “upgrade” to
 <span>                          <span class="va">is_premium_member</span>,</span>
 <span>                          <span class="va">interests</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Simple checks.</span></span>
-<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
-<span>  <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_int.html">to_int_scalar</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
-<span>  <span class="va">is_premium_member</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_lgl.html">to_lgl_scalar</a></span><span class="op">(</span><span class="va">is_premium_member</span><span class="op">)</span></span>
+<span>  <span class="va">interests</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_chr.html">to_chr</a></span><span class="op">(</span><span class="va">interests</span><span class="op">)</span></span>
+<span>  <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_int_scalar.html">to_int_scalar</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
+<span>  <span class="va">is_premium_member</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_lgl_scalar.html">to_lgl_scalar</a></span><span class="op">(</span><span class="va">is_premium_member</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Make sure the username is a length-1 character vector without any spaces,</span></span>
 <span>  <span class="co"># tabs, or newlines. "\\s" means "any space character".</span></span>
 <span>  <span class="va">space_regex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"must not contain spaces"</span> <span class="op">=</span> <span class="st">"\\s"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">space_regex</span>, <span class="st">"negate"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
-<span>  <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
+<span>  <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
 <span>    <span class="va">username</span>,</span>
 <span>    regex <span class="op">=</span> <span class="va">space_regex</span></span>
 <span>  <span class="op">)</span></span>
@@ -292,7 +292,7 @@ faster <code>to_*()</code> functions and only “upgrade” to
 <span>  <span class="co"># "\\." (a literal period), "[...]{2,}" (two or more of any character in the</span></span>
 <span>  <span class="co"># brackets), "$" (end of string).</span></span>
 <span>  <span class="va">email_regex</span> <span class="op">&lt;-</span> <span class="st">"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"</span></span>
-<span>  <span class="va">email_address</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
+<span>  <span class="va">email_address</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar</a></span><span class="op">(</span></span>
 <span>    <span class="va">email_address</span>,</span>
 <span>    regex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"must be a valid email address"</span> <span class="op">=</span> <span class="va">email_regex</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
@@ -355,14 +355,14 @@ with an informative error message:</p>
 variety of bad inputs. We’ve built up layers of protection:</p>
 <ul>
 <li>
-<code><a href="../reference/stabilize_chr.html">to_chr()</a></code> ensures <code>interests</code> is a character
+<code><a href="../reference/to_chr.html">to_chr()</a></code> ensures <code>interests</code> is a character
 vector.</li>
 <li>
-<code><a href="../reference/stabilize_int.html">to_int_scalar()</a></code> and <code><a href="../reference/stabilize_lgl.html">to_lgl_scalar()</a></code> ensure
+<code><a href="../reference/to_int_scalar.html">to_int_scalar()</a></code> and <code><a href="../reference/to_lgl_scalar.html">to_lgl_scalar()</a></code> ensure
 <code>age</code> and <code>is_premium_member</code> are single values of
 the correct type.</li>
 <li>
-<code><a href="../reference/stabilize_chr.html">stabilize_chr_scalar()</a></code> with regex rules ensures
+<code><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar()</a></code> with regex rules ensures
 <code>username</code> and <code>email_address</code> meet specific
 content requirements.</li>
 </ul>
