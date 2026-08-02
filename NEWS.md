@@ -7,7 +7,7 @@
 
 ## New features
 
-* Errors raised for element-wise failures now carry an integer `locations` element on the condition object, giving the positions in the input that failed the check. Handlers can read these positions directly via `cnd$locations` instead of parsing the error message (#274).
+* Errors raised for element-wise failures now carry an integer `locations` element on the condition object, giving the positions in the input that failed the check. Handlers can read these positions via `cnd$locations` (#274).
 
 ## Bug fixes
 
