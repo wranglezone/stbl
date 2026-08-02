@@ -1,39 +1,17 @@
-#' Ensure a logical argument meets expectations
+#' Coerce to logical with additional checks
 #'
-#' @description `to_lgl()` checks whether an argument can be coerced to logical
-#'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_logical` is a synonym of
-#'   `to_lgl()`.
-#'
-#'   `stabilize_lgl()` can check more details about the argument, but is slower
-#'   than `to_lgl()`. `stabilise_lgl()`, `stabilize_logical()`, and
-#'   `stabilise_logical()` are synonyms of `stabilize_lgl()`.
-#'
-#'   `stabilize_lgl_scalar()` and `to_lgl_scalar()` are optimized to check for
-#'   length-1 logical vectors. `stabilise_lgl_scalar()`,
-#'   `stabilize_logical_scalar()`, and `stabilise_logical_scalar()` are synonyms
-#'   of `stabilize_lgl_scalar()`, and `to_logical_scalar()` is a synonym of
-#'   `to_lgl_scalar()`.
+#' Compared to [to_lgl()], `stabilize_lgl()` checks more details, but is
+#' slower. `stabilise_lgl()`, `stabilize_logical()`, and `stabilise_logical()`
+#' are synonyms of `stabilize_lgl()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a logical vector.
+#' @returns The input as a logical vector.
 #' @family logical functions
 #' @family stabilization functions
 #' @export
 #'
 #' @examples
-#' to_lgl(TRUE)
-#' to_lgl("TRUE")
-#' to_lgl(1:10)
-#' to_lgl(NULL)
-#' try(to_lgl(NULL, allow_null = FALSE))
-#' try(to_lgl(letters))
-#' try(to_lgl(list(TRUE)))
-#'
-#' to_lgl_scalar("TRUE")
-#' try(to_lgl_scalar(c(TRUE, FALSE)))
-#'
 #' stabilize_lgl(c(TRUE, FALSE, TRUE))
 #' stabilize_lgl("true")
 #' stabilize_lgl(NULL)
@@ -42,12 +20,6 @@
 #' try(stabilize_lgl(letters))
 #' try(stabilize_lgl(c(TRUE, FALSE, TRUE), min_size = 5))
 #' try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
-#'
-#' stabilize_lgl_scalar(TRUE)
-#' stabilize_lgl_scalar("TRUE")
-#' try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
-#' try(stabilize_lgl_scalar(NULL))
-#' stabilize_lgl_scalar(NULL, allow_null = TRUE)
 stabilize_lgl <- function(
   x,
   ...,
@@ -85,8 +57,27 @@ stabilise_lgl <- stabilize_lgl
 #' @rdname stabilize_lgl
 stabilise_logical <- stabilize_lgl
 
+#' Coerce to length-1 logical with additional checks
+#'
+#' Checks whether a vector can be coerced to a length-1 logical vector.
+#' `stabilize_lgl_scalar()` is optimized to check for length-1 logical vectors
+#' (compared to [stabilize_lgl()] with `max_size = 1`). `stabilise_lgl_scalar`,
+#' `stabilize_logical_scalar()`, and `stabilise_logical_scalar` are synonyms of
+#' `stabilize_lgl_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 logical vector.
+#' @family logical functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_lgl
+#'
+#' @examples
+#' stabilize_lgl_scalar(TRUE)
+#' stabilize_lgl_scalar("TRUE")
+#' try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
+#' try(stabilize_lgl_scalar(NULL))
+#' stabilize_lgl_scalar(NULL, allow_null = TRUE)
 stabilize_lgl_scalar <- function(
   x,
   ...,
@@ -111,13 +102,13 @@ stabilize_lgl_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_lgl
+#' @rdname stabilize_lgl_scalar
 stabilize_logical_scalar <- stabilize_lgl_scalar
 
 #' @export
-#' @rdname stabilize_lgl
+#' @rdname stabilize_lgl_scalar
 stabilise_lgl_scalar <- stabilize_lgl_scalar
 
 #' @export
-#' @rdname stabilize_lgl
+#' @rdname stabilize_lgl_scalar
 stabilise_logical_scalar <- stabilize_lgl_scalar

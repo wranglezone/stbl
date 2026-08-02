@@ -63,7 +63,10 @@ is_lgl_ish(list(TRUE, 0, "F", "a"))
 Other logical functions:
 \code{\link[=specify_lgl]{specify_lgl()}},
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_lgl]{to_lgl()}},
+\code{\link[=to_lgl_scalar]{to_lgl_scalar()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

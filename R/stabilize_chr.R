@@ -1,67 +1,17 @@
-#' Ensure a character argument meets expectations
+#' Coerce to character with additional checks
 #'
-#' @description `to_chr()` checks whether an argument can be coerced to
-#'   character without losing information, returning it silently if so.
-#'   Otherwise an informative error message is signaled. `to_character` is a
-#'   synonym of `to_chr()`.
-#'
-#'   `stabilize_chr()` can check more details about the argument, but is slower
-#'   than `to_chr()`. `stabilise_chr()`, `stabilize_character()`, and
-#'   `stabilise_character()` are synonyms of `stabilize_chr()`.
-#'
-#'   `stabilize_chr_scalar()` and `to_chr_scalar()` are optimized to check for
-#'   length-1 character vectors. `stabilise_chr_scalar`,
-#'   `stabilize_character_scalar()`, and `stabilise_character_scalar` are
-#'   synonyms of `stabilize_chr_scalar()`, and `to_character_scalar()` is a
-#'   synonym of `to_chr_scalar()`.
-#'
-#' @details These functions have two important differences from
-#'   [base::as.character()]:
-#'
-#' - `list`s and `data.frame`s are *not* coerced to character. In base R, such
-#'   objects are coerced to character representations of their elements. For
-#'   example, `as.character(list(1:3))` returns "1:10". In the unlikely event
-#'   that this is the expected behavior, use `as.character()` instead.
-#' - `NULL` values can be rejected as part of the call to this function (with
-#'   `allow_null = FALSE`).
-#'
-#' Named functions are converted to their string name. If the function comes
-#' from a package namespace, the result is a `"pkg::fn"` string. For example,
-#' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
-#'
-#' To preserve the original call-site symbol when `to_chr()` is called inside
-#' a wrapper function, use the embrace operator `{{ }}`. For example:
-#'
-#' ```r
-#' my_wrapper <- function(fn) {
-#'   to_chr({{ fn }})
-#' }
-#' my_wrapper(mean)  # Returns "base::mean"
-#' ```
+#' Compared to [to_chr()], `stabilize_chr()` checks more details, but is
+#' slower. `stabilise_chr()`, `stabilize_character()`, and
+#' `stabilise_character()` are synonyms of `stabilize_chr()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a character vector.
+#' @returns The input as a character vector.
 #' @family character functions
 #' @family stabilization functions
 #' @export
 #'
 #' @examples
-#' to_chr("a")
-#' to_chr(letters)
-#' to_chr(1:10)
-#' to_chr(1 + 0i)
-#' to_chr(NULL)
-#' try(to_chr(NULL, allow_null = FALSE))
-#'
-#' # Named functions are converted to their string name.
-#' to_chr(mean)
-#' to_chr(base::mean)
-#' try(to_chr(function(x) x))
-#'
-#' to_chr_scalar("a")
-#' try(to_chr_scalar(letters))
-#'
 #' stabilize_chr(letters)
 #' stabilize_chr(1:10)
 #' stabilize_chr(NULL)
@@ -70,12 +20,6 @@
 #' try(stabilize_chr(letters, min_size = 50))
 #' try(stabilize_chr(letters, max_size = 20))
 #' try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
-#'
-#' stabilize_chr_scalar(TRUE)
-#' stabilize_chr_scalar("TRUE")
-#' try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
-#' try(stabilize_chr_scalar(NULL))
-#' stabilize_chr_scalar(NULL, allow_null = TRUE)
 stabilize_chr <- function(
   x,
   ...,
@@ -121,8 +65,26 @@ stabilise_chr <- stabilize_chr
 #' @rdname stabilize_chr
 stabilise_character <- stabilize_chr
 
+#' Coerce to length-1 character with additional checks
+#'
+#' Checks whether a vector can be coerced to a length-1 character vector.
+#' `stabilize_chr_scalar()` is optimized to check for length-1 character
+#' vectors (compared to [stabilize_chr()] with `max_size = 1`).
+#' `stabilise_chr_scalar`, `stabilize_character_scalar()`, and
+#' `stabilise_character_scalar` are synonyms of `stabilize_chr_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 character vector.
+#' @family character functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_chr
+#'
+#' @examples
+#' stabilize_chr_scalar(TRUE)
+#' try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
+#' try(stabilize_chr_scalar(NULL))
+#' stabilize_chr_scalar(NULL, allow_null = TRUE)
 stabilize_chr_scalar <- function(
   x,
   ...,
@@ -156,15 +118,15 @@ stabilize_chr_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_chr
+#' @rdname stabilize_chr_scalar
 stabilize_character_scalar <- stabilize_chr_scalar
 
 #' @export
-#' @rdname stabilize_chr
+#' @rdname stabilize_chr_scalar
 stabilise_chr_scalar <- stabilize_chr_scalar
 
 #' @export
-#' @rdname stabilize_chr
+#' @rdname stabilize_chr_scalar
 stabilise_character_scalar <- stabilize_chr_scalar
 
 #' Check character values against one or more regex patterns

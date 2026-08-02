@@ -1,5 +1,23 @@
+#' Coerce to double
+#'
+#' Checks whether a vector can be coerced to double without losing information,
+#' returning it silently if so. Otherwise an informative error message is
+#' signaled. `to_double` is a synonym of `to_dbl()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a double vector.
+#' @family double functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_dbl
+#'
+#' @examples
+#' to_dbl(1:10)
+#' to_dbl("1.1")
+#' to_dbl(1 + 0i)
+#' to_dbl(NULL)
+#' try(to_dbl("a"))
+#' try(to_dbl("1.1", coerce_character = FALSE))
 to_dbl <- function(
   x,
   ...,
@@ -11,7 +29,7 @@ to_dbl <- function(
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname to_dbl
 to_double <- to_dbl
 
 #' @export
@@ -20,7 +38,7 @@ to_dbl.double <- function(x, ...) {
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname to_dbl
 to_dbl.NULL <- function(
   x,
   ...,
@@ -55,7 +73,7 @@ to_dbl.logical <- function(x, ...) {
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname to_dbl
 to_dbl.character <- function(
   x,
   ...,
@@ -89,7 +107,7 @@ to_dbl.character <- function(
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname to_dbl
 to_dbl.factor <- function(
   x,
   ...,
@@ -144,8 +162,23 @@ to_dbl.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   vec_cast(x, double(), x_arg = x_arg, call = call)
 }
 
+#' Coerce to length-1 double
+#'
+#' Checks whether a vector can be coerced to a length-1 double vector.
+#' `to_dbl_scalar()` is optimized to check for length-1 double vectors
+#' (compared to [stabilize_dbl()] with `max_size = 1`). `to_double_scalar()`
+#' is a synonym of `to_dbl_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 double vector.
+#' @family double functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_dbl
+#'
+#' @examples
+#' to_dbl_scalar("1.1")
+#' try(to_dbl_scalar(1:10))
 to_dbl_scalar <- function(
   x,
   ...,
@@ -169,5 +202,5 @@ to_dbl_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_dbl
+#' @rdname to_dbl_scalar
 to_double_scalar <- to_dbl_scalar

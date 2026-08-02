@@ -77,7 +77,10 @@ is_dbl_ish(c(1 + 1i, 1 + 0i, NA))
 Other double functions:
 \code{\link[=specify_dbl]{specify_dbl()}},
 \code{\link[=stabilize_dbl]{stabilize_dbl()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_dbl]{to_dbl()}},
+\code{\link[=to_dbl_scalar]{to_dbl_scalar()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

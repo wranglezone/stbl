@@ -1,5 +1,31 @@
+#' Coerce to factor
+#'
+#' Checks whether a vector can be coerced to a factor without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_factor` is a synonym of `to_fct()`.
+#'
+#' @details This function has important differences from [base::as.factor()]
+#'   and [base::factor()]:
+#'
+#' - Values are never silently coerced to `NA` unless they are explicitly
+#'   supplied in the `to_na` argument.
+#' - `NULL` values can be rejected as part of the call to this function (with
+#'   `allow_null = FALSE`).
+#'
+#' @inheritParams .shared-params
+#' @param levels `(character)` Expected levels. If `NULL` (default), the levels
+#'   will be computed by [base::factor()].
+#'
+#' @returns The input as a factor.
+#' @family factor functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_fct
+#'
+#' @examples
+#' to_fct("a")
+#' to_fct(1:10)
+#' to_fct(NULL)
+#' try(to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"))
 to_fct <- function(
   x,
   ...,
@@ -13,7 +39,7 @@ to_fct <- function(
 }
 
 #' @export
-#' @rdname stabilize_fct
+#' @rdname to_fct
 to_factor <- to_fct
 
 #' @export
@@ -67,7 +93,7 @@ to_fct.integer <- function(
   return(.coerce_fct_levels(x, levels, to_na, x_arg, call))
 }
 #' @export
-#' @rdname stabilize_fct
+#' @rdname to_fct
 to_fct.NULL <- function(
   x,
   ...,
@@ -206,8 +232,25 @@ to_fct.default <- function(
   )
 }
 
+#' Coerce to length-1 factor
+#'
+#' Checks whether a vector can be coerced to a length-1 factor.
+#' `to_fct_scalar()` is optimized to check for length-1 factors (compared to
+#' [stabilize_fct()] with `max_size = 1`). `to_factor_scalar()` is a synonym
+#' of `to_fct_scalar()`.
+#'
+#' @inheritParams .shared-params
+#' @param levels `(character)` Expected levels. If `NULL` (default), the levels
+#'   will be computed by [base::factor()].
+#'
+#' @returns The input as a length-1 factor.
+#' @family factor functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_fct
+#'
+#' @examples
+#' to_fct_scalar("a")
+#' try(to_fct_scalar(letters))
 to_fct_scalar <- function(
   x,
   ...,
@@ -233,7 +276,7 @@ to_fct_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_fct
+#' @rdname to_fct_scalar
 to_factor_scalar <- to_fct_scalar
 
 #' Force slow path in `.to_cls_scalar()`

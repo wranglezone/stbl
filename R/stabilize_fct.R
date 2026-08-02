@@ -1,54 +1,24 @@
-#' Ensure a factor argument meets expectations
+#' Coerce to factor with additional checks
 #'
-#' @description `to_fct()` checks whether an argument can be coerced to a factor
-#'   without losing information, returning it silently if so. Otherwise an
-#'   informative error message is signaled. `to_factor` is a synonym of
-#'   `to_fct()`.
-#'
-#'   `stabilize_fct()` can check more details about the argument, but is slower
-#'   than `to_fct()`. `stabilise_fct()`, `stabilize_factor()`, and
-#'   `stabilise_factor()` are synonyms of `stabilize_fct()`.
-#'
-#'   `stabilize_fct_scalar()` and `to_fct_scalar()` are optimized to check for
-#'   length-1 factors. `stabilise_fct_scalar`, `stabilize_factor_scalar()`, and
-#'   `stabilise_factor_scalar` are synonyms of `stabilize_fct_scalar()`, and
-#'   `to_factor_scalar()` is a synonym of `to_fct_scalar()`.
-#'
-#' @details These functions have important differences from [base::as.factor()]
-#'   and [base::factor()]:
-#'
-#' - Values are never silently coerced to `NA` unless they are explicitly
-#'   supplied in the `to_na` argument.
-#' - `NULL` values can be rejected as part of the call to this function (with
-#'   `allow_null = FALSE`).
+#' Compared to [to_fct()], `stabilize_fct()` checks more details, but is
+#' slower. `stabilise_fct()`, `stabilize_factor()`, and `stabilise_factor()`
+#' are synonyms of `stabilize_fct()`.
 #'
 #' @inheritParams .shared-params
 #' @param levels `(character)` Expected levels. If `NULL` (default), the levels
 #'   will be computed by [base::factor()].
 #'
-#' @returns The argument as a factor.
+#' @returns The input as a factor.
 #' @family factor functions
 #' @family stabilization functions
 #' @export
 #'
 #' @examples
-#' to_fct("a")
-#' to_fct(1:10)
-#' to_fct(NULL)
-#' try(to_fct(letters[1:5], levels = c("a", "c"), to_na = "b"))
-#'
-#' to_fct_scalar("a")
-#' try(to_fct_scalar(letters))
-#'
 #' stabilize_fct(letters)
 #' try(stabilize_fct(NULL, allow_null = FALSE))
 #' try(stabilize_fct(c("a", NA), allow_na = FALSE))
 #' try(stabilize_fct(c("a", "b", "c"), min_size = 5))
 #' try(stabilize_fct(c("a", "b", "c"), max_size = 2))
-#'
-#' stabilize_fct_scalar("a")
-#' try(stabilize_fct_scalar(letters))
-#' try(stabilize_fct_scalar("c", levels = c("a", "b")))
 stabilize_fct <- function(
   x,
   ...,
@@ -89,8 +59,27 @@ stabilise_fct <- stabilize_fct
 #' @rdname stabilize_fct
 stabilise_factor <- stabilize_fct
 
+#' Coerce to length-1 factor with additional checks
+#'
+#' Checks whether a vector can be coerced to a length-1 factor.
+#' `stabilize_fct_scalar()` is optimized to check for length-1 factors
+#' (compared to [stabilize_fct()] with `max_size = 1`). `stabilise_fct_scalar`,
+#' `stabilize_factor_scalar()`, and `stabilise_factor_scalar` are synonyms of
+#' `stabilize_fct_scalar()`.
+#'
+#' @inheritParams .shared-params
+#' @param levels `(character)` Expected levels. If `NULL` (default), the levels
+#'   will be computed by [base::factor()].
+#'
+#' @returns The input as a length-1 factor.
+#' @family factor functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_fct
+#'
+#' @examples
+#' stabilize_fct_scalar("a")
+#' try(stabilize_fct_scalar(letters))
+#' try(stabilize_fct_scalar("c", levels = c("a", "b")))
 stabilize_fct_scalar <- function(
   x,
   ...,
@@ -118,13 +107,13 @@ stabilize_fct_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_fct
+#' @rdname stabilize_fct_scalar
 stabilize_factor_scalar <- stabilize_fct_scalar
 
 #' @export
-#' @rdname stabilize_fct
+#' @rdname stabilize_fct_scalar
 stabilise_fct_scalar <- stabilize_fct_scalar
 
 #' @export
-#' @rdname stabilize_fct
+#' @rdname stabilize_fct_scalar
 stabilise_factor_scalar <- stabilize_fct_scalar

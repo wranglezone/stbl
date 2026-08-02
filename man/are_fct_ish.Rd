@@ -74,7 +74,10 @@ is_fct_ish(factor(c("a", "b", "c")), levels = c("a", "b"))
 Other factor functions:
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
-\code{\link[=to]{to()}}
+\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
+\code{\link[=to]{to()}},
+\code{\link[=to_fct]{to_fct()}},
+\code{\link[=to_fct_scalar]{to_fct_scalar()}}
 
 Other check functions:
 \code{\link[=are_chr_ish]{are_chr_ish()}},

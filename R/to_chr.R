@@ -1,5 +1,52 @@
+#' Coerce to character
+#'
+#' Checks whether a vector can be coerced to character without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_character` is a synonym of `to_chr()`.
+#'
+#' @details This function has two important differences from
+#'   [base::as.character()]:
+#'
+#' - `list`s and `data.frame`s are *not* coerced to character. In base R, such
+#'   objects are coerced to character representations of their elements. For
+#'   example, `as.character(list(1:3))` returns "1:3". In the unlikely event
+#'   that this is the expected behavior, use `as.character()` instead.
+#' - `NULL` values can be rejected as part of the call to this function (with
+#'   `allow_null = FALSE`).
+#'
+#' Named functions are converted to their string name. If the function comes
+#' from a package namespace, the result is a `"pkg::fn"` string. For example,
+#' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
+#'
+#' To preserve the original call-site symbol when `to_chr()` is called inside
+#' a wrapper function, use the embrace operator `{{ }}`. For example:
+#'
+#' ```r
+#' my_wrapper <- function(fn) {
+#'   to_chr({{ fn }})
+#' }
+#' my_wrapper(mean)  # Returns "base::mean"
+#' ```
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a character vector.
+#' @family character functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_chr
+#'
+#' @examples
+#' to_chr("a")
+#' to_chr(letters)
+#' to_chr(1:10)
+#' to_chr(1 + 0i)
+#' to_chr(NULL)
+#' try(to_chr(NULL, allow_null = FALSE))
+#'
+#' # Named functions are converted to their string name.
+#' to_chr(mean)
+#' to_chr(base::mean)
+#' try(to_chr(function(x) x))
 to_chr <- function(
   x,
   ...,
@@ -16,7 +63,7 @@ to_chr <- function(
 }
 
 #' @export
-#' @rdname stabilize_chr
+#' @rdname to_chr
 to_character <- to_chr
 
 #' Internal S3 implementation of to_chr
@@ -214,8 +261,23 @@ to_character <- to_chr
   )
 }
 
+#' Coerce to length-1 character
+#'
+#' Checks whether a vector can be coerced to a length-1 character vector.
+#' `to_chr_scalar()` is optimized to check for length-1 character vectors
+#' (compared to [stabilize_chr()] with `max_size = 1`). `to_character_scalar()`
+#' is a synonym of `to_chr_scalar()`.
+#'
+#' @inheritParams .shared-params
+#'
+#' @returns The input as a length-1 character vector.
+#' @family character functions
+#' @family stabilization functions
 #' @export
-#' @rdname stabilize_chr
+#'
+#' @examples
+#' to_chr_scalar("a")
+#' try(to_chr_scalar(letters))
 to_chr_scalar <- function(
   x,
   ...,
@@ -244,5 +306,5 @@ to_chr_scalar <- function(
 }
 
 #' @export
-#' @rdname stabilize_chr
+#' @rdname to_chr_scalar
 to_character_scalar <- to_chr_scalar
