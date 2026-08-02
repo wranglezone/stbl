@@ -83,3 +83,8 @@ test_that("stabilize_double_scalar() exists (#164)", {
 test_that("stabilise_double_scalar() exists (#167)", {
   expect_no_error(stabilise_double_scalar(TRUE))
 })
+
+test_that("stabilize_dbl() attaches value failure locations (#274)", {
+  cnd <- rlang::catch_cnd(stabilize_dbl(c(1, 5, 2, 8), max_value = 4))
+  expect_identical(cnd$locations, c(2L, 4L))
+})

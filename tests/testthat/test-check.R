@@ -9,6 +9,11 @@ test_that(".check_na() works (#95)", {
   )
 })
 
+test_that(".check_na() attaches failing locations (#274)", {
+  cnd <- rlang::catch_cnd(.check_na(c(1, NA, 3, NA), allow_na = FALSE))
+  expect_identical(cnd$locations, c(2L, 4L))
+})
+
 test_that(".check_size() works (#95)", {
   expect_null(.check_size(1:5, NULL, NULL))
   expect_null(.check_size(1:5, 1, 10))
@@ -86,6 +91,20 @@ test_that(".check_cast_failures() works", {
   )
 })
 
+test_that(".check_cast_failures() attaches failing locations (#274)", {
+  cnd <- rlang::catch_cnd(
+    .check_cast_failures(
+      failures = c(FALSE, TRUE, FALSE, TRUE),
+      x_class = "character",
+      to = logical(),
+      due_to = "incompatible values",
+      x_arg = "test_arg",
+      call = rlang::current_env()
+    )
+  )
+  expect_identical(cnd$locations, c(2L, 4L))
+})
+
 test_that(".check_all_named() works (#203)", {
   expect_null(.check_all_named(list(a = 1, b = 2)))
   expect_pkg_error_snapshot(.check_all_named(list(1, 2)), "stbl", "bad_named")
@@ -100,4 +119,18 @@ test_that(".check_not_jagged() works (#203)", {
     "stbl",
     "jagged"
   )
+})
+
+test_that(".check_not_jagged() attaches failing locations (#274)", {
+  cnd <- rlang::catch_cnd(
+    .check_not_jagged(list(a = 1:3, b = 1:3, c = 1:2))
+  )
+  expect_identical(cnd$locations, 3L)
+})
+
+test_that("object-level checks do not attach locations (#274)", {
+  expect_null(rlang::catch_cnd(.check_size(1:5, 6, 10))$locations)
+  expect_null(rlang::catch_cnd(.check_scalar(1:2))$locations)
+  expect_null(rlang::catch_cnd(.check_all_named(list(1, 2)))$locations)
+  expect_null(rlang::catch_cnd(.check_x_no_more_than_y(2, 1))$locations)
 })

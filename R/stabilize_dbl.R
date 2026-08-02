@@ -189,11 +189,13 @@ stabilise_double_scalar <- stabilize_dbl_scalar
     target_value = max_value,
     x_arg = x_arg
   )
+  locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
   .stbl_abort(
     c(min_msg, max_msg),
     subclass = "outside_range",
     call = call,
-    message_env = rlang::current_env()
+    message_env = rlang::current_env(),
+    locations = locations
   )
 }
 

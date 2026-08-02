@@ -181,6 +181,7 @@ to_fct.default <- function(
 #' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_bad_levels <- function(x, bad_casts, levels, to_na, x_arg, call) {
+  locations <- which(bad_casts)
   bad_values <- unique(x[bad_casts])
   msg <- c(
     "Each value of {.arg {x_arg}} must be in the expected levels.",
@@ -200,7 +201,8 @@ to_fct.default <- function(
     message = msg,
     subclass = "fct_levels",
     call = call,
-    message_env = rlang::current_env()
+    message_env = rlang::current_env(),
+    locations = locations
   )
 }
 
