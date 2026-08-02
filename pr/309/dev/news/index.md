@@ -30,10 +30,6 @@
   the input that failed the check. Handlers can read these positions via
   `cnd$locations`
   ([\#274](https://github.com/wranglezone/stbl/issues/274)).
-- `stabilize_*()` and related helpers now document the error class
-  hierarchy and function-specific failure subclasses in their `@returns`
-  sections, making condition testing and handling easier
-  ([\#308](https://github.com/wranglezone/stbl/issues/308)).
 
 ### Bug fixes
 

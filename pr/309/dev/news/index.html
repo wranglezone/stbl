@@ -48,8 +48,6 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>Errors raised for element-wise failures now carry an integer <code>locations</code> element on the condition object, giving the positions in the input that failed the check. Handlers can read these positions via <code>cnd$locations</code> (<a href="https://github.com/wranglezone/stbl/issues/274" class="external-link">#274</a>).</li>
-<li>
-<code>stabilize_*()</code> and related helpers now document the error class hierarchy and function-specific failure subclasses in their <code>@returns</code> sections, making condition testing and handling easier (<a href="https://github.com/wranglezone/stbl/issues/308" class="external-link">#308</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
