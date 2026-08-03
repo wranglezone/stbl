@@ -17,6 +17,8 @@ specify_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -24,6 +26,8 @@ specify_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -32,6 +36,8 @@ specify_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -39,6 +45,8 @@ specify_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 ```
@@ -64,6 +72,16 @@ specify_character_scalar(
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - regex:
 

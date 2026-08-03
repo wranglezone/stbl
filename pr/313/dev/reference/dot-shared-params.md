@@ -19,6 +19,11 @@ to make them easier to import and to find.
 
   `(length-1 logical)` Are NA values ok?
 
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
+
 - allow_null:
 
   `(length-1 logical)` Is NULL an acceptable value?
@@ -115,6 +120,11 @@ to make them easier to import and to find.
 
   `(length-1 numeric)` Maximum number of distinct non-`NA` values
   allowed across the whole vector after applying `to_na`.
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - max_value:
 

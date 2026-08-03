@@ -63,6 +63,12 @@ error class list. Useful for the <code>class</code> argument of
 <dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
 
 
+<dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Maximum number of characters allowed in
+each element. <code>NULL</code> (default) skips the check. <code>NA</code> elements are not
+checked.</p></dd>
+
+
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
@@ -158,6 +164,12 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <dt id="arg-max-levels">max_levels<a class="anchor" aria-label="anchor" href="#arg-max-levels"></a></dt>
 <dd><p><code>(length-1 numeric)</code> Maximum number of distinct non-<code>NA</code>
 values allowed across the whole vector after applying <code>to_na</code>.</p></dd>
+
+
+<dt id="arg-min-characters">min_characters<a class="anchor" aria-label="anchor" href="#arg-min-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Minimum number of characters allowed in
+each element. <code>NULL</code> (default) skips the check. <code>NA</code> elements are not
+checked.</p></dd>
 
 
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>

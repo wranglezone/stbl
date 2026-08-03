@@ -17,6 +17,8 @@ stabilize_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -29,6 +31,8 @@ stabilize_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -41,6 +45,8 @@ stabilise_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -53,6 +59,8 @@ stabilise_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -81,6 +89,16 @@ stabilise_character_scalar(
 - allow_na:
 
   `(length-1 logical)` Are NA values ok?
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - regex:
 
@@ -132,6 +150,12 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 - `<stbl-error-non_scalar>` for non-scalar vectors.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-n_characters-too_few>` when the element has fewer
+  characters than `min_characters`.
+
+- `<stbl-error-n_characters-too_many>` when the element has more
+  characters than `max_characters`.
 
 - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 

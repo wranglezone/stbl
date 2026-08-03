@@ -1,11 +1,18 @@
-# Check character values against one or more regex patterns
+# Check character values against character count and regex patterns
 
-Check character values against one or more regex patterns
+Check character values against character count and regex patterns
 
 ## Usage
 
 ``` r
-.check_value_chr(x, regex, x_arg = caller_arg(x), call = caller_env())
+.check_value_chr(
+  x,
+  regex,
+  min_characters = NULL,
+  max_characters = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+)
 ```
 
 ## Arguments
@@ -27,6 +34,16 @@ Check character values against one or more regex patterns
   displayed. To check that a pattern is *not* matched, attach a `negate`
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - x_arg:
 

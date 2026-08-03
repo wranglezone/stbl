@@ -55,6 +55,15 @@
   dispatching to \[to()\]
   ([\#215](https://github.com/wranglezone/stbl/issues/215),
   [\#285](https://github.com/wranglezone/stbl/issues/285)).
+- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  and
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  gain new `min_characters` and `max_characters` arguments to constrain
+  the number of characters in each element of a character vector,
+  analogous to JSON Schema `minLength` / `maxLength`
+  ([\#275](https://github.com/wranglezone/stbl/issues/275)).
 
 ### Bug fixes
 

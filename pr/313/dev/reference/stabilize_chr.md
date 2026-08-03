@@ -16,6 +16,8 @@ stabilize_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -29,6 +31,8 @@ stabilize_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -42,6 +46,8 @@ stabilise_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -55,6 +61,8 @@ stabilise_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -91,6 +99,16 @@ stabilise_character(
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - regex:
 
@@ -143,6 +161,12 @@ The input as a character vector, or an error condition with classes
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
+
+- `<stbl-error-n_characters-too_few>` when elements have fewer
+  characters than `min_characters`.
+
+- `<stbl-error-n_characters-too_many>` when elements have more
+  characters than `max_characters`.
 
 - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 
@@ -204,6 +228,18 @@ try(stabilize_chr(letters, min_size = 50))
 try(stabilize_chr(letters, max_size = 20))
 #> Error in eval(expr, envir) : `letters` must have size <= 20.
 #> ✖ 26 is too big.
+try(stabilize_chr(c("hi", "hey"), min_characters = 3))
+#> Error in eval(expr, envir) : 
+#>   Each element of `c("hi", "hey")` must have >= 3 characters.
+#> ℹ Some elements have too few characters.
+#> ✖ Location: 1
+#> ✖ Value: hi
+try(stabilize_chr(c("hi", "hey"), max_characters = 2))
+#> Error in eval(expr, envir) : 
+#>   Each element of `c("hi", "hey")` must have <= 2 characters.
+#> ℹ Some elements have too many characters.
+#> ✖ Location: 2
+#> ✖ Value: hey
 try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 #> Error in eval(expr, envir) : 
 #>   `c("hide", "find", "find", "hide")` must match the regex pattern "hide"

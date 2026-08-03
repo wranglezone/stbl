@@ -56,6 +56,8 @@ synonyms of <code>stabilize_chr()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -69,6 +71,8 @@ synonyms of <code>stabilize_chr()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -82,6 +86,8 @@ synonyms of <code>stabilize_chr()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -95,6 +101,8 @@ synonyms of <code>stabilize_chr()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -130,6 +138,18 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg-min-characters">min_characters<a class="anchor" aria-label="anchor" href="#arg-min-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Minimum number of characters allowed in
+each element. <code>NULL</code> (default) skips the check. <code>NA</code> elements are not
+checked.</p></dd>
+
+
+<dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Maximum number of characters allowed in
+each element. <code>NULL</code> (default) skips the check. <code>NA</code> elements are not
+checked.</p></dd>
 
 
 <dt id="arg-regex">regex<a class="anchor" aria-label="anchor" href="#arg-regex"></a></dt>
@@ -173,6 +193,10 @@ match the original class.</p></dd>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-n_characters-too_few&gt;</code> when elements have fewer characters
+than <code>min_characters</code>.</p></li>
+<li><p><code>&lt;stbl-error-n_characters-too_many&gt;</code> when elements have more characters
+than <code>max_characters</code>.</p></li>
 <li><p><code>&lt;stbl-error-regex_mismatch&gt;</code> when <code>regex</code> checks fail.</p></li>
 </ul></div>
     <div class="section level2">
@@ -232,6 +256,18 @@ match the original class.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_chr</span><span class="op">(</span><span class="va">letters</span>, max_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `letters` must have size &lt;= 20.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> 26 is too big.</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_chr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hi"</span>, <span class="st">"hey"</span><span class="op">)</span>, min_characters <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Each element of `c("hi", "hey")` must have &gt;= 3 characters.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Some elements have too few characters.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Location: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Value: hi</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_chr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hi"</span>, <span class="st">"hey"</span><span class="op">)</span>, max_characters <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Each element of `c("hi", "hey")` must have &lt;= 2 characters.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Some elements have too many characters.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Location: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Value: hey</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_chr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hide"</span>, <span class="st">"find"</span>, <span class="st">"find"</span>, <span class="st">"hide"</span><span class="op">)</span>, regex <span class="op">=</span> <span class="st">"hide"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `c("hide", "find", "find", "hide")` must match the regex pattern <span style="color: #0000BB;">"hide"</span></span>
