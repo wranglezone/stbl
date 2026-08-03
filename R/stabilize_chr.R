@@ -220,29 +220,17 @@ stabilise_character_scalar <- stabilize_chr_scalar
     call = call
   )
 
-  if (!is.null(min_characters) && !is.null(max_characters)) {
-    if (min_characters > max_characters) {
-      .stbl_abort(
-        message = format_inline(
-          "`min_characters` ({min_characters}) must be \\
-          <= `max_characters` ({max_characters})."
-        ),
-        subclass = "invalid_argument",
-        call = call,
-        message_env = rlang::current_env()
-      )
-    }
-  }
+  .check_x_no_more_than_y(min_characters, max_characters, call = call)
 
   if (is.null(min_characters) && is.null(max_characters)) {
     return(invisible(NULL))
   }
 
   n <- nchar(x)
-  min_failure_locations <- if (!is.null(min_characters)) {
+  min_failure_locations <- if (length(min_characters)) {
     which(!is.na(x) & n < min_characters)
   }
-  max_failure_locations <- if (!is.null(max_characters)) {
+  max_failure_locations <- if (length(max_characters)) {
     which(!is.na(x) & n > max_characters)
   }
   has_min_failures <- length(min_failure_locations) > 0L
@@ -267,12 +255,12 @@ stabilise_character_scalar <- stabilize_chr_scalar
       )
     }
     locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
-    subclass <- if (has_min_failures && has_max_failures) {
-      "n_characters"
+    if (has_min_failures && has_max_failures) {
+      subclass <- "n_characters"
     } else if (has_min_failures) {
-      c("n_characters", "too_few")
+      subclass <- c("n_characters", "too_few")
     } else {
-      c("n_characters", "too_many")
+      subclass <- c("n_characters", "too_many")
     }
     .stbl_abort(
       c(min_msg, max_msg),

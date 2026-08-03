@@ -314,7 +314,7 @@ test_that("stabilize_chr() errors when min_characters > max_characters (#275)", 
   expect_pkg_error_snapshot(
     stabilize_chr("hello", min_characters = 5, max_characters = 3),
     "stbl",
-    "invalid_argument"
+    "size_x_vs_y"
   )
 })
 

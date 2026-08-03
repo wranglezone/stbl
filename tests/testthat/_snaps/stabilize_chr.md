@@ -243,9 +243,11 @@
 
     Code
       stabilize_chr("hello", min_characters = 5, max_characters = 3)
-    Condition <stbl-error-invalid_argument>
+    Condition <stbl-error-size_x_vs_y>
       Error:
-      ! `min_characters` (5) must be <= `max_characters` (3).
+      ! `min_characters` can't be larger than `max_characters`.
+      * `min_characters` = 5
+      * `max_characters` = 3
 
 # stabilize_chr_scalar() errors for wrong character count (#275)
 
