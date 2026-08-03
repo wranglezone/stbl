@@ -28,12 +28,10 @@ attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
-each element. \code{NULL} (default) skips the check. \code{NA} elements are not
-checked.}
+each element.}
 
 \item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
-each element. \code{NULL} (default) skips the check. \code{NA} elements are not
-checked.}
+each element.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or

@@ -76,12 +76,10 @@ acceptable?}
 \item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
-each element. \code{NULL} (default) skips the check. \code{NA} elements are not
-checked.}
+each element.}
 
 \item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
-each element. \code{NULL} (default) skips the check. \code{NA} elements are not
-checked.}
+each element.}
 
 \item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
 regular expressions to test against the values of \code{x}. This can be a
