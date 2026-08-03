@@ -9,6 +9,7 @@ specify_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL
@@ -18,6 +19,7 @@ specify_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL
@@ -40,6 +42,9 @@ function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function prod
 function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
 unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
 cause an error.}
+
+\item{.unique}{\verb{(length-1 logical)} Should all elements in \code{.x} be distinct?
+If \code{TRUE}, duplicated elements are rejected.}
 
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 

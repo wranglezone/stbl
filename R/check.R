@@ -82,6 +82,49 @@
   )
 }
 
+#' Check that all elements are unique
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_unique <- function(
+  x,
+  unique = FALSE,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  unique <- to_lgl_scalar(unique, call = call)
+  if (!unique || !length(x)) {
+    return(invisible(NULL))
+  }
+
+  locations <- which(duplicated(x))
+  if (!length(locations)) {
+    return(invisible(NULL))
+  }
+
+  additional_msg <- c(
+    x = format_inline("Duplicate location{?s}: {locations}")
+  )
+  if (is.atomic(x)) {
+    duplicate_values <- x[locations]
+    additional_msg <- c(
+      additional_msg,
+      x = format_inline("Duplicate value{?s}: {duplicate_values}")
+    )
+  }
+  .stop_must(
+    "must contain unique elements.",
+    x_arg = x_arg,
+    additional_msg = additional_msg,
+    call = call,
+    subclass = "duplicate_elements",
+    message_env = rlang::current_env(),
+    locations = locations
+  )
+}
+
 #' Check if an object is a scalar
 #'
 #' @inheritParams .shared-params-check

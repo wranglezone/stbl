@@ -84,3 +84,20 @@ test_that("stabilize_int() attaches value failure locations (#274)", {
   cnd <- rlang::catch_cnd(stabilize_int(c(1L, 5L, 2L, 8L), min_value = 3))
   expect_identical(cnd$locations, c(1L, 3L))
 })
+
+test_that("stabilize_int() enforces unique elements (#280)", {
+  expect_identical(stabilize_int(c(1L, 2L), unique = TRUE), c(1L, 2L))
+  expect_pkg_error_classes(
+    stabilize_int(c(1L, 2L, 1L), unique = TRUE),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("stabilize_int() reports duplicate locations, including NA duplicates (#280)", {
+  cnd <- rlang::catch_cnd(stabilize_int(
+    c(1L, NA_integer_, NA_integer_),
+    unique = TRUE
+  ))
+  expect_identical(cnd$locations, 3L)
+})

@@ -143,6 +143,37 @@ test_that("stabilize_lst() enforces .max_size (#110)", {
   )
 })
 
+test_that("stabilize_lst() enforces .unique (#280)", {
+  expect_identical(
+    stabilize_lst(
+      list(1L, 2L),
+      .unnamed = specify_int_scalar(),
+      .unique = TRUE
+    ),
+    list(1L, 2L)
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(1L, 2L, 1L),
+      .unnamed = specify_int_scalar(),
+      .unique = TRUE
+    ),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("stabilize_lst() reports duplicate locations for .unique failures (#280)", {
+  cnd <- rlang::catch_cnd(
+    stabilize_lst(
+      list("a", "b", "a"),
+      .unnamed = specify_chr_scalar(),
+      .unique = TRUE
+    )
+  )
+  expect_identical(cnd$locations, 3L)
+})
+
 test_that("stabilize_lst() validates nested lists (#110)", {
   spec_aes <- specify_lst(x = specify_chr_scalar(), y = specify_chr_scalar())
   given <- list(aes = list(x = "mpg", y = "hp"))

@@ -88,3 +88,20 @@ test_that("stabilize_dbl() attaches value failure locations (#274)", {
   cnd <- rlang::catch_cnd(stabilize_dbl(c(1, 5, 2, 8), max_value = 4))
   expect_identical(cnd$locations, c(2L, 4L))
 })
+
+test_that("stabilize_dbl() enforces unique elements (#280)", {
+  expect_identical(stabilize_dbl(c(1, 2), unique = TRUE), c(1, 2))
+  expect_pkg_error_classes(
+    stabilize_dbl(c(1, 2, 1), unique = TRUE),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("stabilize_dbl() reports duplicate locations, including NA duplicates (#280)", {
+  cnd <- rlang::catch_cnd(stabilize_dbl(
+    c(1, NA_real_, NA_real_),
+    unique = TRUE
+  ))
+  expect_identical(cnd$locations, 3L)
+})

@@ -14,6 +14,8 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
+#'   present.
 #'   - `<stbl-error-n_characters-too_few>` when elements have fewer characters
 #'   than `min_characters`.
 #'   - `<stbl-error-n_characters-too_many>` when elements have more characters
@@ -41,6 +43,7 @@ stabilize_chr <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -66,6 +69,7 @@ stabilize_chr <- function(
     allow_na = allow_na,
     min_size = min_size,
     max_size = max_size,
+    unique = unique,
     x_arg = x_arg,
     call = call,
     x_class = x_class,

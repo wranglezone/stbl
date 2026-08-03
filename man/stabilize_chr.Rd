@@ -14,6 +14,7 @@ stabilize_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -29,6 +30,7 @@ stabilize_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -44,6 +46,7 @@ stabilise_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -59,6 +62,7 @@ stabilise_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -81,6 +85,8 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
 each element.}
@@ -122,6 +128,8 @@ The input as a character vector, or an error condition with classes
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
+present.
 \item \verb{<stbl-error-n_characters-too_few>} when elements have fewer characters
 than \code{min_characters}.
 \item \verb{<stbl-error-n_characters-too_many>} when elements have more characters
