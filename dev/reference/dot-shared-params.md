@@ -94,6 +94,30 @@ to make them easier to import and to find.
   (`environment`) The execution environment to use to evaluate variables
   in error messages.
 
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+
+- max_levels:
+
+  `(length-1 numeric)` Maximum number of distinct non-`NA` values
+  allowed across the whole vector after applying `to_na`.
+
+- max_size:
+
+  `(length-1 integer)` The maximum size of the object. Object size will
+  be tested using
+  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- max_value:
+
+  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
+  (default) values are not checked.
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+
 - min_size:
 
   `(length-1 integer)` The minimum size of the object. Object size will
@@ -103,22 +127,6 @@ to make them easier to import and to find.
 - min_value:
 
   `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
-
-- max_size:
-
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- max_levels:
-
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
-
-- max_value:
-
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
   (default) values are not checked.
 
 - package:

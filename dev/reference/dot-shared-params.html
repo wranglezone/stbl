@@ -140,19 +140,9 @@ rlang, used for a fast path if <code>x</code> is already the right type.</p></dd
 evaluate variables in error messages.</p></dd>
 
 
-<dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
-
-
-<dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
-<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
-
-
-<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+<dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Maximum number of characters allowed in
+each element.</p></dd>
 
 
 <dt id="arg-max-levels">max_levels<a class="anchor" aria-label="anchor" href="#arg-max-levels"></a></dt>
@@ -160,8 +150,28 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 values allowed across the whole vector after applying <code>to_na</code>.</p></dd>
 
 
+<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
+<dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
+size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
 <dd><p><code>(length-1 numeric)</code> The highest allowed value for <code>x</code>. If
+<code>NULL</code> (default) values are not checked.</p></dd>
+
+
+<dt id="arg-min-characters">min_characters<a class="anchor" aria-label="anchor" href="#arg-min-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Minimum number of characters allowed in
+each element.</p></dd>
+
+
+<dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
+<dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
+size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
+<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
 <code>NULL</code> (default) values are not checked.</p></dd>
 
 
