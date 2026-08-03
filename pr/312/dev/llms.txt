@@ -354,7 +354,7 @@ contributing to this project, you agree to abide by its terms.
 - [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
   : Replace a stbl error with a custom message
 - [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
-  : Ignore a stbl error and return NULL
+  : Ignore a stbl error class
 - [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md) :
   Signal a warning with standards applied
 - [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
