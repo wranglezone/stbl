@@ -2,36 +2,28 @@
 % Please edit documentation in R/ignore_stbl_error.R
 \name{ignore_stbl_error}
 \alias{ignore_stbl_error}
-\title{Ignore a stbl error and return NULL}
+\title{Ignore a stbl error class}
 \usage{
 ignore_stbl_error(expr, subclass)
 }
 \arguments{
 \item{expr}{An expression to evaluate.}
 
-\item{subclass}{(\code{character}) The subclass(es) of the \code{{stbl}} error to
+\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to
 ignore. Combined with \code{"stbl-error-"} to form the class name to intercept.
 For example, \code{c("coerce", "character")} silences errors of class
-\code{stbl-error-coerce-character}, while \code{c("coerce")} silences any
-\code{stbl-error-coerce} error.}
+\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), while \code{c("coerce")}
+silences any \code{stbl-error-coerce} error.}
 }
 \value{
 The result of \code{expr} if no matching error is thrown, or \code{NULL}
-if a matching \code{{stbl}} error is caught.
+if a matching \code{stbl} error is caught.
 }
 \description{
-Catches a \code{{stbl}} error with the specified \code{subclass} and silently returns
-\code{NULL}. Other errors (including other \code{{stbl}} errors) are not caught and
-will propagate normally.
-}
-\details{
-The \code{subclass} argument mirrors the subclass hierarchy used when the error
-was originally thrown. For example, an error with class
-\code{stbl-error-coerce-character} is caught with
-\code{subclass = c("coerce", "character")}. Any \code{coerce} error (regardless of
-the target type) is caught with \code{subclass = c("coerce")}. Similarly,
-\code{stbl-error-incompatible_values-integer} is caught with
-\code{subclass = c("incompatible_values", "integer")}.
+Silences a \code{stbl} error with the specified \code{subclass}. Other errors
+(including other \code{stbl} errors) are not caught and propagate normally. See
+the documentation of each \verb{stabilize_*()} or \verb{to_*()} function for the types
+of errors it throws.
 }
 \examples{
 ignore_stbl_error(to_chr(data.frame()), subclass = c("coerce", "character"))

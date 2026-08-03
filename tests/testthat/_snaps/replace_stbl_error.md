@@ -2,7 +2,7 @@
 
     Code
       result_fn(data.frame())
-    Condition
+    Condition <stbl-error-coerce-character>
       Error in `result_fn()`:
       ! Custom message.
 

@@ -6,7 +6,11 @@ test_that("replace_stbl_error() replaces the message of a matching stbl error (#
       message = "Custom message."
     )
   }
-  expect_snapshot(result_fn(data.frame()), error = TRUE)
+  expect_pkg_error_snapshot(
+    result_fn(data.frame()),
+    "stbl",
+    c("coerce", "character")
+  )
 })
 
 test_that("replace_stbl_error() preserves the original call (#178)", {
@@ -32,10 +36,12 @@ test_that("replace_stbl_error() preserves the original class hierarchy (#178)", 
       message = "Custom message."
     )
   }
-  err <- rlang::catch_cnd(my_fn(data.frame()), "error")
-  expect_in("stbl-error-coerce-character", class(err))
-  expect_in("stbl-error-coerce", class(err))
-  expect_in("stbl-error", class(err))
+  expect_pkg_error_classes(
+    my_fn(data.frame()),
+    "stbl",
+    "coerce",
+    "character"
+  )
 })
 
 test_that("replace_stbl_error() prepends additional_class when provided (#178)", {
@@ -49,7 +55,10 @@ test_that("replace_stbl_error() prepends additional_class when provided (#178)",
   }
   err <- rlang::catch_cnd(my_fn(data.frame()), "error")
   expect_equal(class(err)[[1L]], "mypkg-error-bad_chr")
-  expect_in("stbl-error-coerce-character", class(err))
+  expect_contains(
+    class(err),
+    .compile_pkg_error_classes("stbl", "coerce", "character")
+  )
 })
 
 test_that("replace_stbl_error() returns value when no error is thrown (#178)", {
@@ -62,13 +71,14 @@ test_that("replace_stbl_error() returns value when no error is thrown (#178)", {
 })
 
 test_that("replace_stbl_error() does not catch non-matching stbl errors (#178)", {
-  expect_error(
+  expect_pkg_error_classes(
     replace_stbl_error(
       stabilize_chr(NULL, allow_null = FALSE),
       subclass = c("coerce", "character"),
       message = "Custom message."
     ),
-    class = "stbl-error-bad_null"
+    "stbl",
+    "bad_null"
   )
 })
 
@@ -81,7 +91,7 @@ test_that("replace_stbl_error() catches broad subclass (#178)", {
     )
   }
   err <- rlang::catch_cnd(my_fn(data.frame()), "error")
-  expect_match(conditionMessage(err), "Custom coerce message.")
+  expect_equal(conditionMessage(err), "Custom coerce message.")
 })
 
 test_that("replace_stbl_error() formats message with cli markup (#178)", {

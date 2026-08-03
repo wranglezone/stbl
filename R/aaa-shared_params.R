@@ -4,6 +4,9 @@
 #' make them easier to import and to find.
 #'
 #' @param ... Arguments passed to methods.
+#' @param additional_class (`character`) Additional classes to prepend to the
+#'   error class list. Useful for the `class` argument of
+#'   [testthat::expect_error()].
 #' @param allow_na `(length-1 logical)` Are NA values ok?
 #' @param allow_null `(length-1 logical)` Is NULL an acceptable value?
 #' @param allow_zero_length `(length-1 logical)` Are zero-length vectors
