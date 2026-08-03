@@ -300,7 +300,11 @@ test_that("stabilize_chr() errors for single element with wrong character count 
 
 test_that("stabilize_chr() errors when both min and max fail (#275)", {
   expect_pkg_error_snapshot(
-    stabilize_chr(c("a", "hello_world"), min_characters = 2, max_characters = 5),
+    stabilize_chr(
+      c("a", "hello_world"),
+      min_characters = 2,
+      max_characters = 5
+    ),
     "stbl",
     "n_characters"
   )
