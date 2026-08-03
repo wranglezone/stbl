@@ -30,6 +30,31 @@
   the input that failed the check. Handlers can read these positions via
   `cnd$locations`
   ([\#274](https://github.com/wranglezone/stbl/issues/274)).
+- New function
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
+  silently catches a [stbl](https://stbl.wrangle.zone/) error with the
+  specified `subclass` and returns `NULL`, allowing callers to suppress
+  expected validation failures
+  ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+- New function
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  catches a [stbl](https://stbl.wrangle.zone/) error with the specified
+  `subclass` and replaces its message with a custom one. An optional
+  `additional_class` argument prepends extra classes to the error class
+  list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+- New function
+  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
+  validates `x` by trying each unnamed stabilizer function in `...` in
+  order, returning the first successful result. If all functions fail,
+  an informative error combining the individual failure messages is
+  thrown. New function
+  [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
+  works analogously, accepting type prototypes
+  (e.g. [`integer()`](https://rdrr.io/r/base/integer.html),
+  [`character()`](https://rdrr.io/r/base/character.html)) in `...` and
+  dispatching to \[to()\]
+  ([\#215](https://github.com/wranglezone/stbl/issues/215),
+  [\#285](https://github.com/wranglezone/stbl/issues/285)).
 
 ### Bug fixes
 
@@ -42,36 +67,6 @@
   instead of a generic “can’t coerce” error when a list contains
   elements that can’t be converted
   ([\#273](https://github.com/wranglezone/stbl/issues/273)).
-
-### New functions
-
-- New
-  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
-  silently catches a [stbl](https://stbl.wrangle.zone/) error with the
-  specified `subclass` and returns `NULL`, allowing callers to suppress
-  expected validation failures
-  ([\#178](https://github.com/wranglezone/stbl/issues/178)).
-- New
-  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
-  catches a [stbl](https://stbl.wrangle.zone/) error with the specified
-  `subclass` and replaces its message with a custom one. An optional
-  `additional_class` argument prepends extra classes to the error class
-  list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
-- New
-  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  (and
-  [`stabilise_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md))
-  validates `x` by trying each unnamed stabilizer function in `...` in
-  order, returning the first successful result. If all functions fail,
-  an informative error combining the individual failure messages is
-  thrown. New
-  [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  works analogously, accepting type prototypes
-  (e.g. [`integer()`](https://rdrr.io/r/base/integer.html),
-  [`character()`](https://rdrr.io/r/base/character.html)) in `...` and
-  dispatching to \[to()\]
-  ([\#215](https://github.com/wranglezone/stbl/issues/215),
-  [\#285](https://github.com/wranglezone/stbl/issues/285)).
 
 ## stbl 0.4.0
 
