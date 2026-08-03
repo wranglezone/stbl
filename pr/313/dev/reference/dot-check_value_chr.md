@@ -38,12 +38,10 @@ Check character values against character count and regex patterns
 - min_characters:
 
   (`integer(1)`) Minimum number of characters allowed in each element.
-  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - max_characters:
 
   (`integer(1)`) Maximum number of characters allowed in each element.
-  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - x_arg:
 

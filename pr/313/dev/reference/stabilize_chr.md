@@ -103,12 +103,10 @@ stabilise_character(
 - min_characters:
 
   (`integer(1)`) Minimum number of characters allowed in each element.
-  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - max_characters:
 
   (`integer(1)`) Maximum number of characters allowed in each element.
-  `NULL` (default) skips the check. `NA` elements are not checked.
 
 - regex:
 
