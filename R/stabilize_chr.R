@@ -181,6 +181,34 @@ stabilise_character_scalar <- stabilize_chr_scalar
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  .check_value_n_characters(
+    x,
+    min_characters = min_characters,
+    max_characters = max_characters,
+    x_arg = x_arg,
+    call = call
+  )
+  .check_value_regex(
+    x,
+    regex = regex,
+    x_arg = x_arg,
+    call = call
+  )
+  invisible(NULL)
+}
+
+#' Check character values against character count constraints
+#'
+#' @inheritParams .shared-params
+#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @keywords internal
+.check_value_n_characters <- function(
+  x,
+  min_characters = NULL,
+  max_characters = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
   min_characters <- to_int_scalar(
     min_characters,
     allow_null = TRUE,
@@ -206,53 +234,69 @@ stabilise_character_scalar <- stabilize_chr_scalar
     }
   }
 
-  if (!is.null(min_characters) || !is.null(max_characters)) {
-    n <- nchar(x)
-    min_failure_locations <- if (!is.null(min_characters)) {
-      which(!is.na(x) & n < min_characters)
-    }
-    max_failure_locations <- if (!is.null(max_characters)) {
-      which(!is.na(x) & n > max_characters)
-    }
-    has_min_failures <- length(min_failure_locations) > 0L
-    has_max_failures <- length(max_failure_locations) > 0L
-    if (has_min_failures || has_max_failures) {
-      min_msg <- if (has_min_failures) {
-        .describe_failure_n_characters(
-          x,
-          min_failure_locations,
-          min_characters,
-          "few",
-          x_arg
-        )
-      }
-      max_msg <- if (has_max_failures) {
-        .describe_failure_n_characters(
-          x,
-          max_failure_locations,
-          max_characters,
-          "many",
-          x_arg
-        )
-      }
-      locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
-      subclass <- if (has_min_failures && has_max_failures) {
-        "n_characters"
-      } else if (has_min_failures) {
-        c("n_characters", "too_few")
-      } else {
-        c("n_characters", "too_many")
-      }
-      .stbl_abort(
-        c(min_msg, max_msg),
-        subclass = subclass,
-        call = call,
-        message_env = rlang::current_env(),
-        locations = locations
-      )
-    }
+  if (is.null(min_characters) && is.null(max_characters)) {
+    return(invisible(NULL))
   }
 
+  n <- nchar(x)
+  min_failure_locations <- if (!is.null(min_characters)) {
+    which(!is.na(x) & n < min_characters)
+  }
+  max_failure_locations <- if (!is.null(max_characters)) {
+    which(!is.na(x) & n > max_characters)
+  }
+  has_min_failures <- length(min_failure_locations) > 0L
+  has_max_failures <- length(max_failure_locations) > 0L
+  if (has_min_failures || has_max_failures) {
+    min_msg <- if (has_min_failures) {
+      .describe_failure_n_characters(
+        x,
+        min_failure_locations,
+        min_characters,
+        "few",
+        x_arg
+      )
+    }
+    max_msg <- if (has_max_failures) {
+      .describe_failure_n_characters(
+        x,
+        max_failure_locations,
+        max_characters,
+        "many",
+        x_arg
+      )
+    }
+    locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
+    subclass <- if (has_min_failures && has_max_failures) {
+      "n_characters"
+    } else if (has_min_failures) {
+      c("n_characters", "too_few")
+    } else {
+      c("n_characters", "too_many")
+    }
+    .stbl_abort(
+      c(min_msg, max_msg),
+      subclass = subclass,
+      call = call,
+      message_env = rlang::current_env(),
+      locations = locations
+    )
+  }
+
+  invisible(NULL)
+}
+
+#' Check character values against regex patterns
+#'
+#' @inheritParams .shared-params
+#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @keywords internal
+.check_value_regex <- function(
+  x,
+  regex,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
   if (is.null(regex)) {
     return(invisible(NULL))
   }
