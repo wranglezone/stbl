@@ -6,6 +6,10 @@
 \arguments{
 \item{...}{Arguments passed to methods.}
 
+\item{additional_class}{(\code{character}) Additional classes to prepend to the
+error class list. Useful for the \code{class} argument of
+\code{\link[testthat:expect_error]{testthat::expect_error()}}.}
+
 \item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
 
 \item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}

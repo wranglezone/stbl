@@ -58,6 +58,8 @@ reference:
   - stabilize_arg
 - title: conditions
 - contents:
+  - ignore_stbl_error
+  - replace_stbl_error
   - pkg_abort
   - expect_pkg_error_classes
   - expect_pkg_error_snapshot
