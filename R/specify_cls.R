@@ -172,6 +172,8 @@ specify_chr <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 ) {
   # Only pass arguments that aren't missing.
@@ -190,6 +192,8 @@ specify_chr_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 ) {
   # Only pass arguments that aren't missing.

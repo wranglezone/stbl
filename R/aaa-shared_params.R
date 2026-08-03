@@ -37,15 +37,19 @@
 #' @param levels `(character)` The desired factor levels.
 #' @param message_env (`environment`) The execution environment to use to
 #'   evaluate variables in error messages.
+#' @param max_characters (`integer(1)`) Maximum number of characters allowed in
+#'   each element.
+#' @param max_levels `(length-1 numeric)` Maximum number of distinct non-`NA`
+#'   values allowed across the whole vector after applying `to_na`.
+#' @param max_size `(length-1 integer)` The maximum size of the object. Object
+#'   size will be tested using [vctrs::vec_size()].
+#' @param max_value `(length-1 numeric)` The highest allowed value for `x`. If
+#'   `NULL` (default) values are not checked.
+#' @param min_characters (`integer(1)`) Minimum number of characters allowed in
+#'   each element.
 #' @param min_size `(length-1 integer)` The minimum size of the object. Object
 #'   size will be tested using [vctrs::vec_size()].
 #' @param min_value `(length-1 numeric)` The lowest allowed value for `x`. If
-#'   `NULL` (default) values are not checked.
-#' @param max_size `(length-1 integer)` The maximum size of the object. Object
-#'   size will be tested using [vctrs::vec_size()].
-#' @param max_levels `(length-1 numeric)` Maximum number of distinct non-`NA`
-#'   values allowed across the whole vector after applying `to_na`.
-#' @param max_value `(length-1 numeric)` The highest allowed value for `x`. If
 #'   `NULL` (default) values are not checked.
 #' @param package `(length-1 character)` The name of the package to use in
 #'   classes.

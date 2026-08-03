@@ -12,6 +12,8 @@ specify_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -19,6 +21,8 @@ specify_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -27,6 +31,8 @@ specify_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 
@@ -34,6 +40,8 @@ specify_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL
 )
 }
@@ -47,6 +55,12 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
+each element.}
+
+\item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
+each element.}
 
 \item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
 regular expressions to test against the values of \code{x}. This can be a

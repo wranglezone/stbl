@@ -162,3 +162,108 @@
       ! `"b"` must match the regex pattern "a{1,3}"
       x "b" fails the check.
 
+# stabilize_chr() errors when elements have too few characters (#275)
+
+    Code
+      stabilize_chr(c("hi", "hello"), min_characters = 3)
+    Condition <stbl-error-n_characters-too_few>
+      Error:
+      ! Each element of `c("hi", "hello")` must have >= 3 characters.
+      i Some elements have too few characters.
+      x Location: 1
+      x Value: hi
+
+---
+
+    Code
+      wrapped_stabilize_chr(c("hi", "hello"), min_characters = 3)
+    Condition <stbl-error-n_characters-too_few>
+      Error in `wrapped_stabilize_chr()`:
+      ! Each element of `val` must have >= 3 characters.
+      i Some elements have too few characters.
+      x Location: 1
+      x Value: hi
+
+# stabilize_chr() errors when elements have too many characters (#275)
+
+    Code
+      stabilize_chr(c("hi", "hello"), max_characters = 3)
+    Condition <stbl-error-n_characters-too_many>
+      Error:
+      ! Each element of `c("hi", "hello")` must have <= 3 characters.
+      i Some elements have too many characters.
+      x Location: 2
+      x Value: hello
+
+---
+
+    Code
+      wrapped_stabilize_chr(c("hi", "hello"), max_characters = 3)
+    Condition <stbl-error-n_characters-too_many>
+      Error in `wrapped_stabilize_chr()`:
+      ! Each element of `val` must have <= 3 characters.
+      i Some elements have too many characters.
+      x Location: 2
+      x Value: hello
+
+# stabilize_chr() errors for single element with wrong character count (#275)
+
+    Code
+      stabilize_chr("hi", min_characters = 5)
+    Condition <stbl-error-n_characters-too_few>
+      Error:
+      ! Each element of `"hi"` must have >= 5 characters.
+      x "hi" has 2 characters.
+
+---
+
+    Code
+      stabilize_chr("hello", max_characters = 3)
+    Condition <stbl-error-n_characters-too_many>
+      Error:
+      ! Each element of `"hello"` must have <= 3 characters.
+      x "hello" has 5 characters.
+
+# stabilize_chr() errors when both min and max fail (#275)
+
+    Code
+      stabilize_chr(c("a", "hello_world"), min_characters = 2, max_characters = 5)
+    Condition <stbl-error-n_characters>
+      Error:
+      ! Each element of `c("a", "hello_world")` must have >= 2 characters.
+      i Some elements have too few characters.
+      x Location: 1
+      x Value: a
+      Each element of `c("a", "hello_world")` must have <= 5 characters.
+      i Some elements have too many characters.
+      x Location: 2
+      x Value: hello_world
+
+# stabilize_chr() errors when min_characters > max_characters (#275)
+
+    Code
+      stabilize_chr("hello", min_characters = 5, max_characters = 3)
+    Condition <stbl-error-size_x_vs_y>
+      Error:
+      ! `min_characters` can't be larger than `max_characters`.
+      * `min_characters` = 5
+      * `max_characters` = 3
+
+# stabilize_chr_scalar() errors for wrong character count (#275)
+
+    Code
+      stabilize_chr_scalar("hi", min_characters = 5)
+    Condition <stbl-error-n_characters-too_few>
+      Error:
+      ! Each element of `"hi"` must have >= 5 characters.
+      x "hi" has 2 characters.
+
+---
+
+    Code
+      stabilize_chr_scalar("hello", max_characters = 3)
+    Condition <stbl-error-n_characters-too_many>
+      Error:
+      ! Each element of `"hello"` must have <= 3 characters.
+      x "hello" has 5 characters.
+

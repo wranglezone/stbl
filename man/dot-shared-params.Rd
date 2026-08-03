@@ -57,19 +57,25 @@ rlang, used for a fast path if \code{x} is already the right type.}
 \item{message_env}{(\code{environment}) The execution environment to use to
 evaluate variables in error messages.}
 
-\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-
-\item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
-\code{NULL} (default) values are not checked.}
-
-\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
+each element.}
 
 \item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
 values allowed across the whole vector after applying \code{to_na}.}
 
+\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
+\code{NULL} (default) values are not checked.}
+
+\item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
+each element.}
+
+\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
 \item{package}{\verb{(length-1 character)} The name of the package to use in
