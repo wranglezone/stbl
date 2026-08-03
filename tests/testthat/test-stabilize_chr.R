@@ -230,3 +230,113 @@ test_that("stabilize_chr() attaches regex failure locations (#274)", {
   )
   expect_identical(cnd$locations, c(2L, 3L))
 })
+
+test_that("stabilize_chr() passes when all elements meet min_characters (#275)", {
+  expect_identical(
+    stabilize_chr(c("hello", "world"), min_characters = 5),
+    c("hello", "world")
+  )
+  expect_identical(
+    stabilize_chr(c("hello", NA), min_characters = 5, allow_na = TRUE),
+    c("hello", NA)
+  )
+})
+
+test_that("stabilize_chr() passes when all elements meet max_characters (#275)", {
+  expect_identical(
+    stabilize_chr(c("hi", "hey"), max_characters = 3),
+    c("hi", "hey")
+  )
+  expect_identical(
+    stabilize_chr(c("hi", NA), max_characters = 3, allow_na = TRUE),
+    c("hi", NA)
+  )
+})
+
+test_that("stabilize_chr() errors when elements have too few characters (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr(c("hi", "hello"), min_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_few"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_chr(c("hi", "hello"), min_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_few"
+  )
+})
+
+test_that("stabilize_chr() errors when elements have too many characters (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr(c("hi", "hello"), max_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_many"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_chr(c("hi", "hello"), max_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_many"
+  )
+})
+
+test_that("stabilize_chr() errors for single element with wrong character count (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr("hi", min_characters = 5),
+    "stbl",
+    "n_characters",
+    "too_few"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr("hello", max_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_many"
+  )
+})
+
+test_that("stabilize_chr() errors when both min and max fail (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr(c("a", "hello_world"), min_characters = 2, max_characters = 5),
+    "stbl",
+    "n_characters"
+  )
+})
+
+test_that("stabilize_chr() errors when min_characters > max_characters (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr("hello", min_characters = 5, max_characters = 3),
+    "stbl",
+    "invalid_argument"
+  )
+})
+
+test_that("stabilize_chr() attaches locations for min/max_characters failures (#275)", {
+  cnd <- rlang::catch_cnd(
+    stabilize_chr(c("hi", "hello"), min_characters = 3)
+  )
+  expect_identical(cnd$locations, 1L)
+
+  cnd <- rlang::catch_cnd(
+    stabilize_chr(c("hi", "hello"), max_characters = 3)
+  )
+  expect_identical(cnd$locations, 2L)
+})
+
+test_that("stabilize_chr_scalar() errors for wrong character count (#275)", {
+  expect_pkg_error_snapshot(
+    stabilize_chr_scalar("hi", min_characters = 5),
+    "stbl",
+    "n_characters",
+    "too_few"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr_scalar("hello", max_characters = 3),
+    "stbl",
+    "n_characters",
+    "too_many"
+  )
+})

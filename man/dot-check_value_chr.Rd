@@ -2,9 +2,16 @@
 % Please edit documentation in R/stabilize_chr.R
 \name{.check_value_chr}
 \alias{.check_value_chr}
-\title{Check character values against one or more regex patterns}
+\title{Check character values against character count and regex patterns}
 \usage{
-.check_value_chr(x, regex, x_arg = caller_arg(x), call = caller_env())
+.check_value_chr(
+  x,
+  regex,
+  min_characters = NULL,
+  max_characters = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+)
 }
 \arguments{
 \item{x}{The argument to stabilize.}
@@ -20,6 +27,14 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
+\item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
+
+\item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
+
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
@@ -32,6 +47,6 @@ source of error messages.}
 \code{NULL}, invisibly, if \code{x} passes all checks.
 }
 \description{
-Check character values against one or more regex patterns
+Check character values against character count and regex patterns
 }
 \keyword{internal}

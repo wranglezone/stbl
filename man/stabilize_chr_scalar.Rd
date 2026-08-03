@@ -13,6 +13,8 @@ stabilize_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -25,6 +27,8 @@ stabilize_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -37,6 +41,8 @@ stabilise_chr_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -49,6 +55,8 @@ stabilise_character_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -66,6 +74,14 @@ stabilise_character_scalar(
 acceptable?}
 
 \item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+
+\item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
+
+\item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
 
 \item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
 regular expressions to test against the values of \code{x}. This can be a
@@ -102,6 +118,10 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-n_characters-too_few>} when the element has fewer characters
+than \code{min_characters}.
+\item \verb{<stbl-error-n_characters-too_many>} when the element has more characters
+than \code{max_characters}.
 \item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 }
 }

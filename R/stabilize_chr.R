@@ -14,6 +14,10 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-n_characters-too_few>` when elements have fewer characters
+#'   than `min_characters`.
+#'   - `<stbl-error-n_characters-too_many>` when elements have more characters
+#'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
@@ -27,6 +31,8 @@
 #' try(stabilize_chr(c("a", NA), allow_na = FALSE))
 #' try(stabilize_chr(letters, min_size = 50))
 #' try(stabilize_chr(letters, max_size = 20))
+#' try(stabilize_chr(c("hi", "hey"), min_characters = 3))
+#' try(stabilize_chr(c("hi", "hey"), max_characters = 2))
 #' try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 stabilize_chr <- function(
   x,
@@ -35,6 +41,8 @@ stabilize_chr <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -49,7 +57,11 @@ stabilize_chr <- function(
     x,
     to_cls_fn = to_chr,
     check_cls_value_fn = .check_value_chr,
-    check_cls_value_fn_args = list(regex = regex),
+    check_cls_value_fn_args = list(
+      regex = regex,
+      min_characters = min_characters,
+      max_characters = max_characters
+    ),
     allow_null = allow_null,
     allow_na = allow_na,
     min_size = min_size,
@@ -92,6 +104,10 @@ stabilise_character <- stabilize_chr
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-n_characters-too_few>` when the element has fewer characters
+#'   than `min_characters`.
+#'   - `<stbl-error-n_characters-too_many>` when the element has more characters
+#'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #' @family character functions
 #' @family stabilization functions
@@ -108,6 +124,8 @@ stabilize_chr_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -123,7 +141,11 @@ stabilize_chr_scalar <- function(
     x,
     to_cls_scalar_fn = to_chr_scalar,
     check_cls_value_fn = .check_value_chr,
-    check_cls_value_fn_args = list(regex = regex),
+    check_cls_value_fn_args = list(
+      regex = regex,
+      min_characters = min_characters,
+      max_characters = max_characters
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,
@@ -146,7 +168,7 @@ stabilise_chr_scalar <- stabilize_chr_scalar
 #' @rdname stabilize_chr_scalar
 stabilise_character_scalar <- stabilize_chr_scalar
 
-#' Check character values against one or more regex patterns
+#' Check character values against character count and regex patterns
 #'
 #' @inheritParams .shared-params
 #' @returns `NULL`, invisibly, if `x` passes all checks.
@@ -154,9 +176,83 @@ stabilise_character_scalar <- stabilize_chr_scalar
 .check_value_chr <- function(
   x,
   regex,
+  min_characters = NULL,
+  max_characters = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  min_characters <- to_int_scalar(
+    min_characters,
+    allow_null = TRUE,
+    call = call
+  )
+  max_characters <- to_int_scalar(
+    max_characters,
+    allow_null = TRUE,
+    call = call
+  )
+
+  if (!is.null(min_characters) && !is.null(max_characters)) {
+    if (min_characters > max_characters) {
+      .stbl_abort(
+        message = format_inline(
+          "`min_characters` ({min_characters}) must be \\
+          <= `max_characters` ({max_characters})."
+        ),
+        subclass = "invalid_argument",
+        call = call,
+        message_env = rlang::current_env()
+      )
+    }
+  }
+
+  if (!is.null(min_characters) || !is.null(max_characters)) {
+    n <- nchar(x)
+    min_failure_locations <- if (!is.null(min_characters)) {
+      which(!is.na(x) & n < min_characters)
+    }
+    max_failure_locations <- if (!is.null(max_characters)) {
+      which(!is.na(x) & n > max_characters)
+    }
+    has_min_failures <- length(min_failure_locations) > 0L
+    has_max_failures <- length(max_failure_locations) > 0L
+    if (has_min_failures || has_max_failures) {
+      min_msg <- if (has_min_failures) {
+        .describe_failure_n_characters(
+          x,
+          min_failure_locations,
+          min_characters,
+          "few",
+          x_arg
+        )
+      }
+      max_msg <- if (has_max_failures) {
+        .describe_failure_n_characters(
+          x,
+          max_failure_locations,
+          max_characters,
+          "many",
+          x_arg
+        )
+      }
+      locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
+      subclass <- if (has_min_failures && has_max_failures) {
+        "n_characters"
+      } else if (has_min_failures) {
+        c("n_characters", "too_few")
+      } else {
+        c("n_characters", "too_many")
+      }
+      .stbl_abort(
+        c(min_msg, max_msg),
+        subclass = subclass,
+        call = call,
+        message_env = rlang::current_env(),
+        locations = locations
+      )
+    }
+  }
+
   if (is.null(regex)) {
     return(invisible(NULL))
   }
@@ -187,6 +283,47 @@ stabilise_character_scalar <- stabilize_chr_scalar
   }
 
   invisible(NULL)
+}
+
+#' Describe a character count validation failure
+#'
+#' @param x `(character)` The vector being checked.
+#' @param failure_locations `(integer)` Indices where the check failed.
+#' @param target `(integer(1))` The character count limit.
+#' @param direction `(character(1))` One of `"few"` or `"many"`.
+#' @inheritParams .shared-params
+#' @returns A named character vector for [.stbl_abort()].
+#' @keywords internal
+.describe_failure_n_characters <- function(
+  x,
+  failure_locations,
+  target,
+  direction,
+  x_arg
+) {
+  direction_sign <- if (direction == "few") ">=" else "<="
+  msg_main <- format_inline(
+    "Each element of {.arg {x_arg}} must have {direction_sign} {target} \\
+    character{?s}."
+  )
+  if (length(x) == 1L) {
+    return(c(
+      msg_main,
+      "x" = format_inline(
+        "{.val {x}} has {nchar(x)} character{?s}."
+      )
+    ))
+  }
+  n_failures <- length(failure_locations)
+  failure_values <- x[failure_locations]
+  c(
+    msg_main,
+    "i" = format_inline("Some elements have too {direction} characters."),
+    "x" = format_inline(
+      "{qty(n_failures)}Location{?s}: {failure_locations}"
+    ),
+    "x" = format_inline("{qty(n_failures)}Value{?s}: {failure_values}")
+  )
 }
 
 #' Apply a single regex rule to a character vector

@@ -12,6 +12,10 @@ error class list. Useful for the \code{class} argument of
 
 \item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
 
+\item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
+
 \item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
 \item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
@@ -68,6 +72,10 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
 values allowed across the whole vector after applying \code{to_na}.}
+
+\item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
+each element. \code{NULL} (default) skips the check. \code{NA} elements are not
+checked.}
 
 \item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}

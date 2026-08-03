@@ -11,6 +11,7 @@
 * New function `ignore_stbl_error()` silently catches a `{stbl}` error with the specified `subclass` and returns `NULL`, allowing callers to suppress expected validation failures (#178).
 * New function `replace_stbl_error()` catches a `{stbl}` error with the specified `subclass` and replaces its message with a custom one. An optional `additional_class` argument prepends extra classes to the error class list (#178).
 * New function `stabilize_any_of()` validates `x` by trying each unnamed stabilizer function in `...` in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New function `to_any_of()` works analogously, accepting type prototypes (e.g. `integer()`, `character()`) in `...` and dispatching to [to()] (#215, #285).
+* `stabilize_chr()`, `stabilize_chr_scalar()`, `specify_chr()`, and `specify_chr_scalar()` gain new `min_characters` and `max_characters` arguments to constrain the number of characters in each element of a character vector, analogous to JSON Schema `minLength` / `maxLength` (#275).
 
 ## Bug fixes
 
