@@ -61,8 +61,7 @@
   and
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   gain new `min_characters` and `max_characters` arguments to constrain
-  the number of characters in each element of a character vector,
-  analogous to JSON Schema `minLength` / `maxLength`
+  the number of characters in each element of a character vector
   ([\#275](https://github.com/wranglezone/stbl/issues/275)).
 
 ### Bug fixes
