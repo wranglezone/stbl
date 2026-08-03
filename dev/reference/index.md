@@ -218,6 +218,10 @@
 
 ## conditions
 
+- [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
+  : Ignore a stbl error class
+- [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  : Replace a stbl error with a custom message
 - [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
   : Signal an error with standards applied
 - [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)

@@ -9,6 +9,12 @@ to make them easier to import and to find.
 
   Arguments passed to methods.
 
+- additional_class:
+
+  (`character`) Additional classes to prepend to the error class list.
+  Useful for the `class` argument of
+  [`testthat::expect_error()`](https://testthat.r-lib.org/reference/expect_error.html).
+
 - allow_na:
 
   `(length-1 logical)` Are NA values ok?
