@@ -154,10 +154,8 @@ CRAN release: 2026-07-28
   and
   [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   now produce stable snapshots when run under
-  `devtools::test_coverage_active_file()`.
-  [`specify_cls()`](https://stbl.wrangle.zone/dev/reference/specify_cls.md)
-  and related `specify_*()` functions now also produce stable
-  function-body snapshots under coverage
+  `devtools::test_coverage_active_file()`. `specify_*()` functions now
+  also produce stable function-body snapshots under coverage
   ([\#253](https://github.com/wranglezone/stbl/issues/253)).
 - [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
   and

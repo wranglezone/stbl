@@ -28,7 +28,7 @@ Construct a specified stabilizer function
 - factory_args:
 
   Arguments passed to
-  [`specify_cls()`](https://stbl.wrangle.zone/dev/reference/specify_cls.md)
+  [`.specify_cls()`](https://stbl.wrangle.zone/dev/reference/dot-specify_cls.md)
   as `...`.
 
 - ...:

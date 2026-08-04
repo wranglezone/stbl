@@ -5,7 +5,7 @@ Create a specified stabilizer function
 ## Usage
 
 ``` r
-specify_cls(
+.specify_cls(
   stabilizer,
   factory_args = list(),
   scalar = FALSE,

@@ -84,6 +84,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-return-conditions.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-specify_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.html</loc></url>
@@ -127,7 +128,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/replace_stbl_error.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/specify_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_dbl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_df.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_fct.html</loc></url>
