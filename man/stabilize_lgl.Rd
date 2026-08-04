@@ -14,6 +14,7 @@ stabilize_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -26,6 +27,7 @@ stabilize_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -38,6 +40,7 @@ stabilise_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -50,6 +53,7 @@ stabilise_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -69,6 +73,10 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -93,6 +101,7 @@ The input as a logical vector, or an error condition with classes
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 }
 }
 \description{
@@ -109,6 +118,7 @@ try(stabilize_lgl(c(TRUE, NA), allow_na = FALSE))
 try(stabilize_lgl(letters))
 try(stabilize_lgl(c(TRUE, FALSE, TRUE), min_size = 5))
 try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
+try(stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE))
 }
 \seealso{
 Other logical functions:

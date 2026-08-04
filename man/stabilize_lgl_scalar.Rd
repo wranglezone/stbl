@@ -13,6 +13,7 @@ stabilize_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -24,6 +25,7 @@ stabilize_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -35,6 +37,7 @@ stabilise_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -46,6 +49,7 @@ stabilise_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -62,6 +66,10 @@ stabilise_logical_scalar(
 acceptable?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
+
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -87,6 +95,8 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-allowed_values>} when the value is not in
+\code{allowed_values}.
 }
 }
 \description{

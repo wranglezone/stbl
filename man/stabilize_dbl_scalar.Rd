@@ -17,6 +17,7 @@ stabilize_dbl_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -32,6 +33,7 @@ stabilize_double_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -47,6 +49,7 @@ stabilise_dbl_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -62,6 +65,7 @@ stabilise_double_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -93,6 +97,10 @@ the integer index of the factor.}
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
+
 \item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
@@ -121,6 +129,8 @@ safely converted to double.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
+\item \verb{<stbl-error-allowed_values>} when the value is not in
+\code{allowed_values}.
 }
 }
 \description{

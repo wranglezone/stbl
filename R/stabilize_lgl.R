@@ -14,6 +14,7 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #' @family logical functions
 #' @family stabilization functions
 #' @export
@@ -27,6 +28,7 @@
 #' try(stabilize_lgl(letters))
 #' try(stabilize_lgl(c(TRUE, FALSE, TRUE), min_size = 5))
 #' try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
+#' try(stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE))
 stabilize_lgl <- function(
   x,
   ...,
@@ -34,6 +36,7 @@ stabilize_lgl <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -41,6 +44,10 @@ stabilize_lgl <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_lgl,
+    check_cls_value_fn = .check_value_lgl,
+    check_cls_value_fn_args = list(
+      allowed_values = allowed_values
+    ),
     allow_null = allow_null,
     allow_na = allow_na,
     min_size = min_size,
@@ -83,6 +90,8 @@ stabilise_logical <- stabilize_lgl
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-allowed_values>` when the value is not in
+#'   `allowed_values`.
 #' @family logical functions
 #' @family stabilization functions
 #' @export
@@ -99,6 +108,7 @@ stabilize_lgl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -106,6 +116,10 @@ stabilize_lgl_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_lgl_scalar,
+    check_cls_value_fn = .check_value_lgl,
+    check_cls_value_fn_args = list(
+      allowed_values = allowed_values
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,
@@ -127,3 +141,24 @@ stabilise_lgl_scalar <- stabilize_lgl_scalar
 #' @export
 #' @rdname stabilize_lgl_scalar
 stabilise_logical_scalar <- stabilize_lgl_scalar
+
+#' Check logical values against allowed values
+#'
+#' @inheritParams .shared-params
+#' @returns `NULL`, invisibly, if `x` passes all checks.
+#' @keywords internal
+.check_value_lgl <- function(
+  x,
+  allowed_values = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  allowed_values <- to_lgl(allowed_values, allow_null = TRUE, call = call)
+  .check_allowed_values(
+    x,
+    allowed_values = allowed_values,
+    x_arg = x_arg,
+    call = call
+  )
+  invisible(NULL)
+}

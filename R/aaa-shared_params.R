@@ -8,6 +8,9 @@
 #'   error class list. Useful for the `class` argument of
 #'   [testthat::expect_error()].
 #' @param allow_na (`logical(1)`) Are NA values ok?
+#' @param allowed_values A vector of permitted values (coerced to the target
+#'   type). `NULL` (default) skips the check. `NA` values in `x` are permitted
+#'   independently of `allowed_values`, subject to `allow_na`.
 #' @param allow_null (`logical(1)`) Is NULL an acceptable value?
 #' @param allow_zero_length (`logical(1)`) Are zero-length vectors
 #'   acceptable?
@@ -34,7 +37,9 @@
 #'   failed.
 #' @param is_rlang_cls_scalar `(function)` An `is_scalar_*()` function from
 #'   rlang, used for a fast path if `x` is already the right type.
-#' @param levels `(character)` The desired factor levels.
+#' @param levels `(character)` The desired factor levels. For factors, a
+#'   vector's `levels` play the same role that `allowed_values` plays for
+#'   other types: they restrict `x` to a fixed set of permitted values.
 #' @param max_characters (`integer(1)`) Maximum number of characters allowed in
 #'   each element.
 #' @param max_levels (`numeric(1)`) Maximum number of distinct non-`NA`

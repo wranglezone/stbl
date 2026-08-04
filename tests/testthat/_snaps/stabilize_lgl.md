@@ -86,3 +86,36 @@
       ! `val` must be a single <logical>.
       x `val` has 3 values.
 
+# stabilize_lgl() checks allowed_values (#282)
+
+    Code
+      stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE)
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `c(TRUE, FALSE)` must be one of the allowed values.
+      i Allowed value: "TRUE".
+      x Unexpected location: 2
+      x Unexpected value: "FALSE".
+
+---
+
+    Code
+      wrapped_stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE)
+    Condition <stbl-error-allowed_values>
+      Error in `wrapped_stabilize_lgl()`:
+      ! `val` must be one of the allowed values.
+      i Allowed value: "TRUE".
+      x Unexpected location: 2
+      x Unexpected value: "FALSE".
+
+# stabilize_lgl_scalar() checks allowed_values (#282)
+
+    Code
+      stabilize_lgl_scalar(FALSE, allowed_values = TRUE)
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `FALSE` must be one of the allowed values.
+      i Allowed value: "TRUE".
+      x Unexpected location: 1
+      x Unexpected value: "FALSE".
+

@@ -242,6 +242,48 @@
   }
 }
 
+#' Check that all elements are members of an allowed set of values
+#'
+#' @param allowed_values A vector of permitted values, already coerced to the
+#'   same type as `x`. `NULL` or zero-length skips the check.
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_allowed_values <- function(
+  x,
+  allowed_values,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (is.null(allowed_values) || !length(allowed_values)) {
+    return(invisible(NULL))
+  }
+
+  failures <- !is.na(x) & !(x %in% allowed_values)
+  if (!any(failures)) {
+    return(invisible(NULL))
+  }
+
+  locations <- which(failures)
+  location_chrs <- as.character(locations)
+  bad_value_chrs <- as.character(unique(x[failures]))
+  allowed_value_chrs <- as.character(allowed_values)
+  .stop_must(
+    "must be one of the allowed values.",
+    x_arg = x_arg,
+    additional_msg = c(
+      "i" = "Allowed value{?s}: {.val {allowed_value_chrs}}.",
+      "x" = "Unexpected location{?s}: {location_chrs}",
+      "x" = "Unexpected value{?s}: {.val {bad_value_chrs}}."
+    ),
+    call = call,
+    subclass = "allowed_values",
+    message_env = rlang::current_env(),
+    locations = locations
+  )
+}
+
 #' Check that all list elements are named
 #'
 #' @inheritParams .shared-params

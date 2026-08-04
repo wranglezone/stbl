@@ -175,7 +175,8 @@ specify_chr <- function(
   unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -195,7 +196,8 @@ specify_chr_scalar <- function(
   allow_na = TRUE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -249,7 +251,8 @@ specify_dbl <- function(
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -270,7 +273,8 @@ specify_dbl_scalar <- function(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -395,7 +399,8 @@ specify_int <- function(
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -416,7 +421,8 @@ specify_int_scalar <- function(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -464,7 +470,8 @@ specify_lgl <- function(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()
@@ -481,7 +488,8 @@ specify_lgl <- function(
 specify_lgl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 ) {
   # Only pass arguments that aren't missing.
   factory_args <- list()

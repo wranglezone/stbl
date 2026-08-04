@@ -331,3 +331,27 @@ test_that("specify_logical() exists (#164)", {
 test_that("stabilize_logical_scalar() exists (#164)", {
   expect_no_error(specify_logical_scalar())
 })
+
+test_that("specify_chr can enforce allowed_values (#282)", {
+  checker <- specify_chr(allowed_values = c("a", "b"))
+  expect_identical(checker("a"), "a")
+  expect_pkg_error_classes(checker("z"), "stbl", "allowed_values")
+})
+
+test_that("specify_int can enforce allowed_values (#282)", {
+  checker <- specify_int(allowed_values = c(1L, 2L))
+  expect_identical(checker(1L), 1L)
+  expect_pkg_error_classes(checker(5L), "stbl", "allowed_values")
+})
+
+test_that("specify_dbl can enforce allowed_values (#282)", {
+  checker <- specify_dbl(allowed_values = c(1.1, 2.2))
+  expect_identical(checker(1.1), 1.1)
+  expect_pkg_error_classes(checker(3.3), "stbl", "allowed_values")
+})
+
+test_that("specify_lgl can enforce allowed_values (#282)", {
+  checker <- specify_lgl(allowed_values = TRUE)
+  expect_identical(checker(TRUE), TRUE)
+  expect_pkg_error_classes(checker(FALSE), "stbl", "allowed_values")
+})

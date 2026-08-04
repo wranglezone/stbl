@@ -25,6 +25,17 @@
       ! `1:5` must have size <= 4.
       x 5 is too big.
 
+# .check_allowed_values() works (#282)
+
+    Code
+      .check_allowed_values(c("a", "b", "z"), c("a", "b", "c"))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `c("a", "b", "z")` must be one of the allowed values.
+      i Allowed values: "a", "b", and "c".
+      x Unexpected location: 3
+      x Unexpected value: "z".
+
 # .check_scalar() works (#95)
 
     Code

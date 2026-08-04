@@ -358,3 +358,39 @@ test_that("stabilize_chr_scalar() errors for wrong character count (#275)", {
     "too_many"
   )
 })
+
+test_that("stabilize_chr() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_chr(c("a", "b"), allowed_values = c("a", "b", "c")),
+    c("a", "b")
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")),
+    "stbl",
+    "allowed_values"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that("stabilize_chr() permits NA independently of allowed_values (#282)", {
+  expect_identical(
+    stabilize_chr(c("a", NA), allowed_values = "a"),
+    c("a", NA)
+  )
+})
+
+test_that("stabilize_chr_scalar() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_chr_scalar("a", allowed_values = c("a", "b")),
+    "a"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr_scalar("z", allowed_values = c("a", "b")),
+    "stbl",
+    "allowed_values"
+  )
+})

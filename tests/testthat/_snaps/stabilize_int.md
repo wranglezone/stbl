@@ -76,3 +76,36 @@
       ! `val` must be a single <integer>.
       x `val` has 10 values.
 
+# stabilize_int() checks allowed_values (#282)
+
+    Code
+      stabilize_int(1:5, allowed_values = c(1L, 2L, 3L))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `1:5` must be one of the allowed values.
+      i Allowed values: "1", "2", and "3".
+      x Unexpected locations: 4 and 5
+      x Unexpected values: "4" and "5".
+
+---
+
+    Code
+      wrapped_stabilize_int(1:5, allowed_values = c(1L, 2L, 3L))
+    Condition <stbl-error-allowed_values>
+      Error in `wrapped_stabilize_int()`:
+      ! `val` must be one of the allowed values.
+      i Allowed values: "1", "2", and "3".
+      x Unexpected locations: 4 and 5
+      x Unexpected values: "4" and "5".
+
+# stabilize_int_scalar() checks allowed_values (#282)
+
+    Code
+      stabilize_int_scalar(5L, allowed_values = c(1L, 2L))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `5L` must be one of the allowed values.
+      i Allowed values: "1" and "2".
+      x Unexpected location: 1
+      x Unexpected value: "5".
+

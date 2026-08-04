@@ -105,3 +105,32 @@ test_that("stabilize_dbl() reports duplicate locations, including NA duplicates 
   ))
   expect_identical(cnd$locations, c(2L, 4L))
 })
+
+test_that("stabilize_dbl() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_dbl(c(1.1, 2.2), allowed_values = c(1.1, 2.2, 3.3)),
+    c(1.1, 2.2)
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)),
+    "stbl",
+    "allowed_values"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that("stabilize_dbl_scalar() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_dbl_scalar(1.1, allowed_values = c(1.1, 2.2)),
+    1.1
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl_scalar(3.3, allowed_values = c(1.1, 2.2)),
+    "stbl",
+    "allowed_values"
+  )
+})
