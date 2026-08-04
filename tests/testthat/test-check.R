@@ -51,7 +51,7 @@ test_that(".check_allowed_values() permits NA independently of allowed_values (#
   expect_null(.check_allowed_values(c("a", NA), c("a")))
 })
 
-test_that(".check_allowed_values() attaches failing locations (#274, #282)", {
+test_that(".check_allowed_values() attaches failing locations (#282)", {
   cnd <- rlang::catch_cnd(
     .check_allowed_values(c("a", "b", "z", "y"), c("a", "b"))
   )
