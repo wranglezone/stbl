@@ -16,23 +16,23 @@ format:
 
 # Make it obvious what the function does
 
-:: notes
-- Show a `my_function <- function(x, y) {}` example.
-- Have something real in mind. Maybe F to C conversion? No, something with at least 2 inputs.
+::: notes
+- Show a `my_function <- function(x, y, z) {}` example.
+- Have something real in mind. Best option so far: `order_df <- function(items, prices, tax_rate) {}`.
 - Rename to make it obvious what's expected.
 - Defaults can also help make things obvious.
-::
+:::
 
 # Forgive "close enough" input
 
-:: notes
+::: notes
 - Show `stbl::to_int()` vs `as.integer()` (NAs introduced) vs over-strict `vctrs::vec_cast("1", integer())`
 - Use this to lead to error section.
-::
+:::
 
 # Tell users how to fix mistakes
 
-:: notes
+::: notes
 - Show error messages before stbl. `x + y` throws fun, hard to understand errors.
 - Show stbl-style errors.
-::
+:::
