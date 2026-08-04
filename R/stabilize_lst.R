@@ -23,6 +23,8 @@
 #' @param .allow_duplicate_names `(length-1 logical)` Should `.x` be allowed to
 #'   have duplicate names? If `FALSE` (default), an error is thrown when any
 #'   named element of `.x` shares a name with another.
+#' @param .unique `(length-1 logical)` Should all elements in `.x` be distinct?
+#'   If `TRUE`, duplicated elements are rejected.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list, or an error condition with classes
@@ -32,6 +34,8 @@
 #'   - `<stbl-error-coerce-list>` when `.x` cannot be coerced to a list.
 #'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
 #'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
+#'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
+#'   elements are present.
 #'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
 #'   unnamed.
 #'   - `<stbl-error-missing_element>` when a required named element is absent.
@@ -85,6 +89,7 @@ stabilize_lst <- function(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -125,6 +130,14 @@ stabilize_lst <- function(
     .unnamed = .unnamed,
     .x_arg = .x_arg,
     .call = .call
+  )
+  # Run after validation so coerced values (e.g. "1" and 1L both becoming
+  # 1L) are compared, not the original inputs.
+  .check_unique(
+    .x,
+    unique = .unique,
+    x_arg = .x_arg,
+    call = .call
   )
 
   return(.x)

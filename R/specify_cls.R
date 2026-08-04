@@ -172,6 +172,7 @@ specify_chr <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL
@@ -246,6 +247,7 @@ specify_dbl <- function(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 ) {
@@ -391,6 +393,7 @@ specify_int <- function(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 ) {

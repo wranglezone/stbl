@@ -231,6 +231,20 @@ test_that("stabilize_chr() attaches regex failure locations (#274)", {
   expect_identical(cnd$locations, c(2L, 3L))
 })
 
+test_that("stabilize_chr() enforces unique elements (#280)", {
+  expect_identical(stabilize_chr(c("a", "b"), unique = TRUE), c("a", "b"))
+  expect_pkg_error_classes(
+    stabilize_chr(c("a", "b", "a"), unique = TRUE),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("stabilize_chr() reports duplicate locations, including NA duplicates (#280)", {
+  cnd <- rlang::catch_cnd(stabilize_chr(c("a", "a", NA, NA), unique = TRUE))
+  expect_identical(cnd$locations, c(2L, 4L))
+})
+
 test_that("stabilize_chr() passes when all elements meet min_characters (#275)", {
   expect_identical(
     stabilize_chr(c("hello", "world"), min_characters = 5),

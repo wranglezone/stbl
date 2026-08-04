@@ -13,6 +13,7 @@ stabilize_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -27,6 +28,7 @@ stabilize_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -41,6 +43,7 @@ stabilise_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -55,6 +58,7 @@ stabilise_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -87,6 +91,9 @@ cause an error.}
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
+\item{.unique}{\verb{(length-1 logical)} Should all elements in \code{.x} be distinct?
+If \code{TRUE}, duplicated elements are rejected.}
+
 \item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
 
 \item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
@@ -117,6 +124,8 @@ The validated list, or an error condition with classes
 \item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be coerced to a list.
 \item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
 \item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate
+elements are present.
 \item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
 unnamed.
 \item \verb{<stbl-error-missing_element>} when a required named element is absent.

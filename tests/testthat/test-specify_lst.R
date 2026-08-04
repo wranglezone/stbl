@@ -42,6 +42,12 @@ test_that("specify_lst() respects .allow_null (#110)", {
   expect_pkg_error_classes(spec(NULL), "stbl", "bad_null")
 })
 
+test_that("specify_lst() enforces .unique when configured (#280)", {
+  spec <- specify_lst(.unnamed = specify_int_scalar(), .unique = TRUE)
+  expect_identical(spec(list(1L, 2L)), list(1L, 2L))
+  expect_pkg_error_classes(spec(list(1L, 2L, 1L)), "stbl", "duplicate_elements")
+})
+
 test_that("specify_list() exists (#110)", {
   expect_no_error(specify_list())
 })
