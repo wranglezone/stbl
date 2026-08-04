@@ -45,6 +45,7 @@ stabilize_arg <- function(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -65,6 +66,7 @@ stabilize_arg <- function(
     x_arg = x_arg,
     call = call
   )
+  .check_unique(x, unique = unique, x_arg = x_arg, call = call)
   return(x)
 }
 

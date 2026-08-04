@@ -76,6 +76,7 @@
 #'   coercion.
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
+#' @param unique `(length-1 logical)` Should all elements in `x` be distinct?
 #' @param x The argument to stabilize.
 #' @param x_arg `(length-1 character)` The name of the argument being stabilized
 #'   to use in error messages. The automatic value will work in most cases, or

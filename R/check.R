@@ -82,6 +82,53 @@
   )
 }
 
+#' Check that all elements are unique
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_unique <- function(
+  x,
+  unique = FALSE,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  unique <- to_lgl_scalar(unique, call = call)
+  if (!unique || !length(x)) {
+    return(invisible(NULL))
+  }
+
+  locations <- which(duplicated(x))
+  if (!length(locations)) {
+    return(invisible(NULL))
+  }
+
+  # Convert to character so cli treats the substitution's *length* (not its
+  # numeric value) as the pluralization quantity; a numeric substitution used
+  # for pluralization must have length 1.
+  location_chrs <- as.character(locations)
+  additional_msg <- c(
+    x = "Duplicate location{?s}: {location_chrs}"
+  )
+  if (is.atomic(x)) {
+    duplicate_value_chrs <- as.character(x[locations])
+    additional_msg <- c(
+      additional_msg,
+      x = "Duplicate value{?s}: {duplicate_value_chrs}"
+    )
+  }
+  .stop_must(
+    "must contain unique elements.",
+    x_arg = x_arg,
+    additional_msg = additional_msg,
+    call = call,
+    subclass = "duplicate_elements",
+    message_env = rlang::current_env(),
+    locations = locations
+  )
+}
+
 #' Check if an object is a scalar
 #'
 #' @inheritParams .shared-params-check

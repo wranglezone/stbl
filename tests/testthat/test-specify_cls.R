@@ -82,6 +82,16 @@ test_that("specify_chr can build a regex checker (#147, #310)", {
   )
 })
 
+test_that("specify_chr can enforce unique elements (#280)", {
+  checker <- specify_chr(unique = TRUE)
+  expect_identical(checker(c("a", "b")), c("a", "b"))
+  expect_pkg_error_classes(
+    checker(c("a", "b", "a")),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
 test_that("specify_chr_scalar can build a regex checker (#147, #310)", {
   checker <- specify_chr_scalar(regex = r"(^\d{5}(?:[-\s]\d{4})?$)")
   given <- "12345-6789"
@@ -121,6 +131,16 @@ test_that("specify_dbl can build a value checker (#148)", {
     checker(19.2),
     "stbl",
     "outside_range"
+  )
+})
+
+test_that("specify_dbl can enforce unique elements (#280)", {
+  checker <- specify_dbl(unique = TRUE)
+  expect_identical(checker(c(1.1, 2.2)), c(1.1, 2.2))
+  expect_pkg_error_classes(
+    checker(c(1.1, 2.2, 1.1)),
+    "stbl",
+    "duplicate_elements"
   )
 })
 
@@ -201,6 +221,12 @@ test_that("specify_int can build a value checker (#149)", {
     "stbl",
     "outside_range"
   )
+})
+
+test_that("specify_int can enforce unique elements (#280)", {
+  checker <- specify_int(unique = TRUE)
+  expect_identical(checker(c(1L, 2L)), c(1L, 2L))
+  expect_pkg_error_classes(checker(c(1L, 2L, 1L)), "stbl", "duplicate_elements")
 })
 
 test_that("specify_int_scalar can build a value checker (#149)", {

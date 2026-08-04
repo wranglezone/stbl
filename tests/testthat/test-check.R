@@ -21,6 +21,21 @@ test_that(".check_size() works (#95)", {
   expect_pkg_error_snapshot(.check_size(1:5, 1, 4), "stbl", "size_too_large")
 })
 
+test_that(".check_unique() works for atomic and list inputs (#280)", {
+  expect_null(.check_unique(c(1, 2), unique = FALSE))
+  expect_null(.check_unique(c(1, 2), unique = TRUE))
+  expect_pkg_error_classes(
+    .check_unique(c(1, 2, 1), unique = TRUE),
+    "stbl",
+    "duplicate_elements"
+  )
+  expect_pkg_error_classes(
+    .check_unique(list(1, 2, 1), unique = TRUE),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
 test_that(".check_scalar() works (#95)", {
   expect_null(.check_scalar(1))
   expect_null(.check_scalar(NULL))

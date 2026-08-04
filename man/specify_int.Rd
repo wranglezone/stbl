@@ -14,6 +14,7 @@ specify_int(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 )
@@ -35,6 +36,7 @@ specify_integer(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 )
@@ -67,6 +69,8 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
 
 \item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}

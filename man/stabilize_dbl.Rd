@@ -16,6 +16,7 @@ stabilize_dbl(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -32,6 +33,7 @@ stabilize_double(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -48,6 +50,7 @@ stabilise_dbl(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -64,6 +67,7 @@ stabilise_double(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -93,6 +97,8 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
 
 \item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
@@ -125,6 +131,8 @@ safely converted to double.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
+present.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
 }

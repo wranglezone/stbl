@@ -16,6 +16,8 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
+#'   present.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
 #' @family integer functions
@@ -44,6 +46,7 @@ stabilize_int <- function(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -66,6 +69,7 @@ stabilize_int <- function(
     allow_na = allow_na,
     min_size = min_size,
     max_size = max_size,
+    unique = unique,
     x_arg = x_arg,
     call = call,
     x_class = x_class,

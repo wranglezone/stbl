@@ -114,6 +114,8 @@ coercion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
+\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
+
 \item{x}{The argument to stabilize.}
 
 \item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
