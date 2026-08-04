@@ -997,17 +997,64 @@ margin-right: 0; }
 </section>
 <section id="make-it-obvious-what-the-function-does" class="title-slide slide level1 center">
 <h1>Make it obvious what the function does</h1>
-<p>:: notes - Show a <code>my_function &lt;- function(x, y) {}</code> example. - Have something real in mind. Maybe F to C conversion? No, something with at least 2 inputs. - Rename to make it obvious what’s expected. - Defaults can also help make things obvious. ::</p>
+<aside class="notes">
+<ul>
+<li>Show a <code>my_function &lt;- function(x, y, z) {}</code> example.</li>
+<li>Have something real in mind. Best option so far: <code>order_df &lt;- function(items, prices, tax_rate) {}</code>.</li>
+<li>Rename to make it obvious what’s expected.</li>
+<li>Defaults can also help make things obvious.</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 
 <section id="forgive-close-enough-input" class="title-slide slide level1 center">
 <h1>Forgive “close enough” input</h1>
-<p>:: notes - Show <code>stbl::to_int()</code> vs <code>as.integer()</code> (NAs introduced) vs over-strict <code>vctrs::vec_cast(&quot;1&quot;, integer())</code> - Use this to lead to error section. ::</p>
+<aside class="notes">
+<ul>
+<li>Show <code>stbl::to_int()</code> vs <code>as.integer()</code> (NAs introduced) vs over-strict <code>vctrs::vec_cast(&quot;1&quot;, integer())</code></li>
+<li>Use this to lead to error section.</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 
 <section id="tell-users-how-to-fix-mistakes" class="title-slide slide level1 center">
 <h1>Tell users how to fix mistakes</h1>
-<p>:: notes - Show error messages before stbl. <code>x + y</code> throws fun, hard to understand errors. - Show stbl-style errors. ::</p>
+<aside class="notes">
+<ul>
+<li>Show error messages before stbl. <code>x + y</code> throws fun, hard to understand errors.</li>
+<li>Show stbl-style errors.</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 
 </section>
     </div>
