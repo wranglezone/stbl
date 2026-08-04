@@ -14,7 +14,7 @@
 #'   function. You can copy/paste the body of the resulting function if you want
 #'   to provide additional context or functionality.
 #' @keywords internal
-specify_cls <- function(
+.specify_cls <- function(
   stabilizer,
   factory_args = list(),
   scalar = FALSE,
@@ -62,7 +62,7 @@ specify_cls <- function(
 
 #' Assemble the function name of the stabilizer
 #'
-#' @inheritParams specify_cls
+#' @inheritParams .specify_cls
 #' @returns The symbol of the stabilizer function to call.
 #' @keywords internal
 .construct_stabilizer_symbol <- function(stabilizer, scalar = FALSE) {
@@ -75,10 +75,10 @@ specify_cls <- function(
 #'
 #' @param check_dupes `(list)` An empty list, or a list containing an expression
 #'   that checks for duplicate arguments.
-#' @param factory_args Arguments passed to [specify_cls()] as `...`.
+#' @param factory_args Arguments passed to [.specify_cls()] as `...`.
 #' @param ... Not used. Included to avoid confusion in R CMD check.
-#' @inheritParams specify_cls
-#' @inherit specify_cls return
+#' @inheritParams .specify_cls
+#' @inherit .specify_cls return
 #' @keywords internal
 .construct_specification_fn <- function(
   check_dupes,
@@ -184,7 +184,7 @@ specify_chr <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("chr", factory_args)
+  .specify_cls("chr", factory_args)
 }
 
 #' @export
@@ -204,7 +204,7 @@ specify_chr_scalar <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("chr", factory_args, scalar = TRUE)
+  .specify_cls("chr", factory_args, scalar = TRUE)
 }
 
 #' @export
@@ -258,7 +258,7 @@ specify_dbl <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("dbl", factory_args)
+  .specify_cls("dbl", factory_args)
 }
 
 #' @export
@@ -279,7 +279,7 @@ specify_dbl_scalar <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("dbl", factory_args, scalar = TRUE)
+  .specify_cls("dbl", factory_args, scalar = TRUE)
 }
 
 #' @export
@@ -331,7 +331,7 @@ specify_fct <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("fct", factory_args)
+  .specify_cls("fct", factory_args)
 }
 
 #' @export
@@ -350,7 +350,7 @@ specify_fct_scalar <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("fct", factory_args, scalar = TRUE)
+  .specify_cls("fct", factory_args, scalar = TRUE)
 }
 
 #' @export
@@ -404,7 +404,7 @@ specify_int <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("int", factory_args)
+  .specify_cls("int", factory_args)
 }
 
 #' @export
@@ -425,7 +425,7 @@ specify_int_scalar <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("int", factory_args, scalar = TRUE)
+  .specify_cls("int", factory_args, scalar = TRUE)
 }
 
 #' @export
@@ -473,7 +473,7 @@ specify_lgl <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("lgl", factory_args)
+  .specify_cls("lgl", factory_args)
 }
 
 #' @export
@@ -490,7 +490,7 @@ specify_lgl_scalar <- function(
       factory_args[[arg]] <- get(arg)
     }
   }
-  specify_cls("lgl", factory_args, scalar = TRUE)
+  .specify_cls("lgl", factory_args, scalar = TRUE)
 }
 
 #' @export

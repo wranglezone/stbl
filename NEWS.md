@@ -33,7 +33,7 @@
 
 ## Bug fixes
 
-* `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce stable snapshots when run under `devtools::test_coverage_active_file()`. `specify_cls()` and related `specify_*()` functions now also produce stable function-body snapshots under coverage (#253).
+* `expect_pkg_error_snapshot()`, `expect_pkg_message_snapshot()`, and `expect_pkg_warning_snapshot()` now produce stable snapshots when run under `devtools::test_coverage_active_file()`. `specify_*()` functions now also produce stable function-body snapshots under coverage (#253).
 * `expect_pkg_message_classes()` and `expect_pkg_warning_classes()` now support assignments inside `object` (e.g. `result <- fn_that_warns()`). `expect_pkg_message_snapshot()` and `expect_pkg_warning_snapshot()` inherit the same fix (#234).
 
 ## Other changes
