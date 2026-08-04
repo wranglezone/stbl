@@ -101,3 +101,32 @@ test_that("stabilize_int() reports duplicate locations, including NA duplicates 
   ))
   expect_identical(cnd$locations, c(2L, 4L))
 })
+
+test_that("stabilize_int() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_int(1:3, allowed_values = c(1L, 2L, 3L)),
+    1:3
+  )
+  expect_pkg_error_snapshot(
+    stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)),
+    "stbl",
+    "allowed_values"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that("stabilize_int_scalar() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_int_scalar(1L, allowed_values = c(1L, 2L)),
+    1L
+  )
+  expect_pkg_error_snapshot(
+    stabilize_int_scalar(5L, allowed_values = c(1L, 2L)),
+    "stbl",
+    "allowed_values"
+  )
+})

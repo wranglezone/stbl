@@ -12,6 +12,7 @@
 * New function `replace_stbl_error()` catches a `{stbl}` error with the specified `subclass` and replaces its message with a custom one. An optional `additional_class` argument prepends extra classes to the error class list (#178).
 * New function `stabilize_any_of()` validates `x` by trying each unnamed stabilizer function in `...` in order, returning the first successful result. If all functions fail, an informative error combining the individual failure messages is thrown. New function `to_any_of()` works analogously, accepting type prototypes (e.g. `integer()`, `character()`) in `...` and dispatching to [to()] (#215, #285).
 * `stabilize_chr()`, `stabilize_chr_scalar()`, `specify_chr()`, and `specify_chr_scalar()` gain new `min_characters` and `max_characters` arguments to constrain the number of characters in each element of a character vector (#275).
+* `stabilize_chr()`, `stabilize_chr_scalar()`, `stabilize_int()`, `stabilize_int_scalar()`, `stabilize_dbl()`, `stabilize_dbl_scalar()`, `stabilize_lgl()`, `stabilize_lgl_scalar()`, and their `specify_*()` factories gain a new `allowed_values` argument, restricting `x` to a fixed set of permitted values, similar to JSON Schema's `enum`/`const` (#282).
 * `stabilize_chr()`, `stabilize_dbl()`, `stabilize_int()`, `stabilize_lst()`, `specify_chr()`, `specify_dbl()`, `specify_int()`, and `specify_lst()` gain new `unique`/`.unique` arguments to enforce distinct elements and raise duplicate-element errors when repeated values are found (#280).
 
 ## Bug fixes

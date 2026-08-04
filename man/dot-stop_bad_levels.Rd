@@ -12,7 +12,9 @@
 \item{bad_casts}{\code{(logical)} A logical vector indicating which elements of
 \code{x} are not in the allowed levels.}
 
-\item{levels}{\code{(character)} The desired factor levels.}
+\item{levels}{\code{(character)} The desired factor levels. For factors, a
+vector's \code{levels} play the same role that \code{allowed_values} plays for
+other types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 

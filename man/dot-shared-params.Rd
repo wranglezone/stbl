@@ -12,6 +12,10 @@ error class list. Useful for the \code{class} argument of
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
@@ -52,7 +56,9 @@ failed.}
 \item{is_rlang_cls_scalar}{\verb{(function)} An \verb{is_scalar_*()} function from
 rlang, used for a fast path if \code{x} is already the right type.}
 
-\item{levels}{\code{(character)} The desired factor levels.}
+\item{levels}{\code{(character)} The desired factor levels. For factors, a
+vector's \code{levels} play the same role that \code{allowed_values} plays for
+other types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
 each element.}

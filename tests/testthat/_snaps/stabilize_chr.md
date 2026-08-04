@@ -267,3 +267,36 @@
       ! Each element of `"hello"` must have <= 3 characters.
       x "hello" has 5 characters.
 
+# stabilize_chr() checks allowed_values (#282)
+
+    Code
+      stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c"))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `c("a", "b", "z")` must be one of the allowed values.
+      i Allowed values: "a", "b", and "c".
+      x Unexpected location: 3
+      x Unexpected value: "z".
+
+---
+
+    Code
+      wrapped_stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c"))
+    Condition <stbl-error-allowed_values>
+      Error in `wrapped_stabilize_chr()`:
+      ! `val` must be one of the allowed values.
+      i Allowed values: "a", "b", and "c".
+      x Unexpected location: 3
+      x Unexpected value: "z".
+
+# stabilize_chr_scalar() checks allowed_values (#282)
+
+    Code
+      stabilize_chr_scalar("z", allowed_values = c("a", "b"))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `"z"` must be one of the allowed values.
+      i Allowed values: "a" and "b".
+      x Unexpected location: 1
+      x Unexpected value: "z".
+

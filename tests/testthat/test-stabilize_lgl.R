@@ -105,3 +105,32 @@ test_that("stabilize_logical_scalar() exists (#164)", {
 test_that("stabilise_logical_scalar() exists (#167)", {
   expect_no_error(stabilize_logical_scalar(TRUE))
 })
+
+test_that("stabilize_lgl() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_lgl(c(TRUE, TRUE), allowed_values = TRUE),
+    c(TRUE, TRUE)
+  )
+  expect_pkg_error_snapshot(
+    stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE),
+    "stbl",
+    "allowed_values"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that("stabilize_lgl_scalar() checks allowed_values (#282)", {
+  expect_identical(
+    stabilize_lgl_scalar(TRUE, allowed_values = TRUE),
+    TRUE
+  )
+  expect_pkg_error_snapshot(
+    stabilize_lgl_scalar(FALSE, allowed_values = TRUE),
+    "stbl",
+    "allowed_values"
+  )
+})

@@ -18,6 +18,7 @@ stabilize_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilize_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -50,6 +52,7 @@ stabilise_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +69,7 @@ stabilise_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -105,6 +109,10 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
+
 \item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
@@ -135,6 +143,7 @@ than \code{min_characters}.
 \item \verb{<stbl-error-n_characters-too_many>} when elements have more characters
 than \code{max_characters}.
 \item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
+\item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 }
 }
 \description{
@@ -153,6 +162,7 @@ try(stabilize_chr(letters, max_size = 20))
 try(stabilize_chr(c("hi", "hey"), min_characters = 3))
 try(stabilize_chr(c("hi", "hey"), max_characters = 2))
 try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
+try(stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")))
 }
 \seealso{
 Other character functions:

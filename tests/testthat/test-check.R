@@ -36,6 +36,28 @@ test_that(".check_unique() works for atomic and list inputs (#280)", {
   )
 })
 
+test_that(".check_allowed_values() works (#282)", {
+  expect_null(.check_allowed_values(c("a", "b"), NULL))
+  expect_null(.check_allowed_values(c("a", "b"), character()))
+  expect_null(.check_allowed_values(c("a", "b"), c("a", "b", "c")))
+  expect_pkg_error_snapshot(
+    .check_allowed_values(c("a", "b", "z"), c("a", "b", "c")),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that(".check_allowed_values() permits NA independently of allowed_values (#282)", {
+  expect_null(.check_allowed_values(c("a", NA), c("a")))
+})
+
+test_that(".check_allowed_values() attaches failing locations (#274, #282)", {
+  cnd <- rlang::catch_cnd(
+    .check_allowed_values(c("a", "b", "z", "y"), c("a", "b"))
+  )
+  expect_identical(cnd$locations, c(3L, 4L))
+})
+
 test_that(".check_scalar() works (#95)", {
   expect_null(.check_scalar(1))
   expect_null(.check_scalar(NULL))

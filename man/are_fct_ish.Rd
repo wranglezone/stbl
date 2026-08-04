@@ -23,7 +23,9 @@ is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 
 \item{...}{Arguments passed to methods.}
 
-\item{levels}{\code{(character)} The desired factor levels.}
+\item{levels}{\code{(character)} The desired factor levels. For factors, a
+vector's \code{levels} play the same role that \code{allowed_values} plays for
+other types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 

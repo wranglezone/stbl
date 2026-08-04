@@ -21,6 +21,7 @@
 #'   - `<stbl-error-n_characters-too_many>` when elements have more characters
 #'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -36,6 +37,7 @@
 #' try(stabilize_chr(c("hi", "hey"), min_characters = 3))
 #' try(stabilize_chr(c("hi", "hey"), max_characters = 2))
 #' try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
+#' try(stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")))
 stabilize_chr <- function(
   x,
   ...,
@@ -47,6 +49,7 @@ stabilize_chr <- function(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -63,7 +66,8 @@ stabilize_chr <- function(
     check_cls_value_fn_args = list(
       regex = regex,
       min_characters = min_characters,
-      max_characters = max_characters
+      max_characters = max_characters,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_na = allow_na,
@@ -113,6 +117,8 @@ stabilise_character <- stabilize_chr
 #'   - `<stbl-error-n_characters-too_many>` when the element has more characters
 #'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
+#'   - `<stbl-error-allowed_values>` when the value is not in
+#'   `allowed_values`.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -131,6 +137,7 @@ stabilize_chr_scalar <- function(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -148,7 +155,8 @@ stabilize_chr_scalar <- function(
     check_cls_value_fn_args = list(
       regex = regex,
       min_characters = min_characters,
-      max_characters = max_characters
+      max_characters = max_characters,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
@@ -182,6 +190,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
   regex,
   min_characters = NULL,
   max_characters = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
@@ -195,6 +204,13 @@ stabilise_character_scalar <- stabilize_chr_scalar
   .check_value_regex(
     x,
     regex = regex,
+    x_arg = x_arg,
+    call = call
+  )
+  allowed_values <- to_chr(allowed_values, allow_null = TRUE, call = call)
+  .check_allowed_values(
+    x,
+    allowed_values = allowed_values,
     x_arg = x_arg,
     call = call
   )

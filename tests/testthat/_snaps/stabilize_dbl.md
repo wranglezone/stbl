@@ -85,3 +85,36 @@
       ! `val` must be a single <numeric>.
       x `val` has 10 values.
 
+# stabilize_dbl() checks allowed_values (#282)
+
+    Code
+      stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `c(1.1, 2.2, 3.3)` must be one of the allowed values.
+      i Allowed values: "1.1" and "2.2".
+      x Unexpected location: 3
+      x Unexpected value: "3.3".
+
+---
+
+    Code
+      wrapped_stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2))
+    Condition <stbl-error-allowed_values>
+      Error in `wrapped_stabilize_dbl()`:
+      ! `val` must be one of the allowed values.
+      i Allowed values: "1.1" and "2.2".
+      x Unexpected location: 3
+      x Unexpected value: "3.3".
+
+# stabilize_dbl_scalar() checks allowed_values (#282)
+
+    Code
+      stabilize_dbl_scalar(3.3, allowed_values = c(1.1, 2.2))
+    Condition <stbl-error-allowed_values>
+      Error:
+      ! `3.3` must be one of the allowed values.
+      i Allowed values: "1.1" and "2.2".
+      x Unexpected location: 1
+      x Unexpected value: "3.3".
+

@@ -15,7 +15,8 @@ specify_chr(
   unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_chr_scalar(
@@ -24,7 +25,8 @@ specify_chr_scalar(
   allow_na = TRUE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_character(
@@ -35,7 +37,8 @@ specify_character(
   unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_character_scalar(
@@ -44,7 +47,8 @@ specify_character_scalar(
   allow_na = TRUE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 }
 \arguments{
@@ -76,6 +80,10 @@ character vector where the value is the regex pattern and the name is the
 message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
+
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
 acceptable?}

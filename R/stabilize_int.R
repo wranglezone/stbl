@@ -20,6 +20,7 @@
 #'   present.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -37,6 +38,7 @@
 #' try(stabilize_int(factor("1"), coerce_factor = FALSE))
 #' try(stabilize_int(1:10, min_value = 3))
 #' try(stabilize_int(1:10, max_value = 7))
+#' try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
 stabilize_int <- function(
   x,
   ...,
@@ -49,6 +51,7 @@ stabilize_int <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -63,7 +66,8 @@ stabilize_int <- function(
     check_cls_value_fn = .check_value_dbl,
     check_cls_value_fn_args = list(
       min_value = min_value,
-      max_value = max_value
+      max_value = max_value,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_na = allow_na,
@@ -112,6 +116,8 @@ stabilise_integer <- stabilize_int
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
+#'   - `<stbl-error-allowed_values>` when the value is not in
+#'   `allowed_values`.
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -132,6 +138,7 @@ stabilize_int_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -146,7 +153,8 @@ stabilize_int_scalar <- function(
     check_cls_value_fn = .check_value_dbl,
     check_cls_value_fn_args = list(
       min_value = min_value,
-      max_value = max_value
+      max_value = max_value,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,

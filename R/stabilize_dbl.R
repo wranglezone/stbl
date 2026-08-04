@@ -20,6 +20,7 @@
 #'   present.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #' @family double functions
 #' @family stabilization functions
 #' @export
@@ -37,6 +38,7 @@
 #' try(stabilize_dbl(factor("1.1"), coerce_factor = FALSE))
 #' try(stabilize_dbl(1:10, min_value = 3.5))
 #' try(stabilize_dbl(1:10, max_value = 7.5))
+#' try(stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)))
 stabilize_dbl <- function(
   x,
   ...,
@@ -49,6 +51,7 @@ stabilize_dbl <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -63,7 +66,8 @@ stabilize_dbl <- function(
     check_cls_value_fn = .check_value_dbl,
     check_cls_value_fn_args = list(
       min_value = min_value,
-      max_value = max_value
+      max_value = max_value,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_na = allow_na,
@@ -112,6 +116,8 @@ stabilise_double <- stabilize_dbl
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
+#'   - `<stbl-error-allowed_values>` when the value is not in
+#'   `allowed_values`.
 #' @family double functions
 #' @family stabilization functions
 #' @export
@@ -132,6 +138,7 @@ stabilize_dbl_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -146,7 +153,8 @@ stabilize_dbl_scalar <- function(
     check_cls_value_fn = .check_value_dbl,
     check_cls_value_fn_args = list(
       min_value = min_value,
-      max_value = max_value
+      max_value = max_value,
+      allowed_values = allowed_values
     ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
@@ -179,6 +187,7 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   x,
   min_value,
   max_value,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
@@ -191,6 +200,13 @@ stabilise_double_scalar <- stabilize_dbl_scalar
     .Call(stbl_check_max_dbl, x, max_value)
   }
   if (is.null(min_failure_locations) && is.null(max_failure_locations)) {
+    allowed_values <- to_dbl(allowed_values, allow_null = TRUE, call = call)
+    .check_allowed_values(
+      x,
+      allowed_values = allowed_values,
+      x_arg = x_arg,
+      call = call
+    )
     return(invisible(NULL))
   }
   min_msg <- .describe_failure_dbl_value(

@@ -11,26 +11,30 @@ specify_lgl(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 
 specify_logical(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 }
 \arguments{
@@ -43,6 +47,10 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{allowed_values}{A vector of permitted values (coerced to the target
+type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
+independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
 acceptable?}

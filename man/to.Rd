@@ -135,7 +135,9 @@ stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
 
-\item{levels}{\code{(character)} The desired factor levels.}
+\item{levels}{\code{(character)} The desired factor levels. For factors, a
+vector's \code{levels} play the same role that \code{allowed_values} plays for
+other types: they restrict \code{x} to a fixed set of permitted values.}
 }
 \value{
 \code{x} coerced to the type of \code{.to}.
