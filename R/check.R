@@ -104,14 +104,18 @@
     return(invisible(NULL))
   }
 
+  # Convert to character so cli treats the substitution's *length* (not its
+  # numeric value) as the pluralization quantity; a numeric substitution used
+  # for pluralization must have length 1.
+  location_chrs <- as.character(locations)
   additional_msg <- c(
-    x = format_inline("Duplicate location{?s}: {locations}")
+    x = "Duplicate location{?s}: {location_chrs}"
   )
   if (is.atomic(x)) {
-    duplicate_values <- x[locations]
+    duplicate_value_chrs <- as.character(x[locations])
     additional_msg <- c(
       additional_msg,
-      x = format_inline("Duplicate value{?s}: {duplicate_values}")
+      x = "Duplicate value{?s}: {duplicate_value_chrs}"
     )
   }
   .stop_must(

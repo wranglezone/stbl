@@ -96,8 +96,8 @@ test_that("stabilize_int() enforces unique elements (#280)", {
 
 test_that("stabilize_int() reports duplicate locations, including NA duplicates (#280)", {
   cnd <- rlang::catch_cnd(stabilize_int(
-    c(1L, NA_integer_, NA_integer_),
+    c(1L, 1L, NA_integer_, NA_integer_),
     unique = TRUE
   ))
-  expect_identical(cnd$locations, 3L)
+  expect_identical(cnd$locations, c(2L, 4L))
 })

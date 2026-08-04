@@ -174,6 +174,18 @@ test_that("stabilize_lst() reports duplicate locations for .unique failures (#28
   expect_identical(cnd$locations, 3L)
 })
 
+test_that("stabilize_lst() checks .unique after coercion (#280)", {
+  cnd <- rlang::catch_cnd(
+    stabilize_lst(
+      list("1", 1.0),
+      .unnamed = specify_int_scalar(),
+      .unique = TRUE
+    )
+  )
+  expect_pkg_error_classes(cnd, "stbl", "duplicate_elements")
+  expect_identical(cnd$locations, 2L)
+})
+
 test_that("stabilize_lst() validates nested lists (#110)", {
   spec_aes <- specify_lst(x = specify_chr_scalar(), y = specify_chr_scalar())
   given <- list(aes = list(x = "mpg", y = "hp"))

@@ -241,8 +241,8 @@ test_that("stabilize_chr() enforces unique elements (#280)", {
 })
 
 test_that("stabilize_chr() reports duplicate locations, including NA duplicates (#280)", {
-  cnd <- rlang::catch_cnd(stabilize_chr(c("a", NA, NA), unique = TRUE))
-  expect_identical(cnd$locations, 3L)
+  cnd <- rlang::catch_cnd(stabilize_chr(c("a", "a", NA, NA), unique = TRUE))
+  expect_identical(cnd$locations, c(2L, 4L))
 })
 
 test_that("stabilize_chr() passes when all elements meet min_characters (#275)", {

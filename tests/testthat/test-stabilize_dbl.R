@@ -100,8 +100,8 @@ test_that("stabilize_dbl() enforces unique elements (#280)", {
 
 test_that("stabilize_dbl() reports duplicate locations, including NA duplicates (#280)", {
   cnd <- rlang::catch_cnd(stabilize_dbl(
-    c(1, NA_real_, NA_real_),
+    c(1, 1, NA_real_, NA_real_),
     unique = TRUE
   ))
-  expect_identical(cnd$locations, 3L)
+  expect_identical(cnd$locations, c(2L, 4L))
 })

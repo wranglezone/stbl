@@ -115,12 +115,6 @@ stabilize_lst <- function(
     x_arg = .x_arg,
     call = .call
   )
-  .check_unique(
-    .x,
-    unique = .unique,
-    x_arg = .x_arg,
-    call = .call
-  )
 
   .check_specs_named(..., .call = .call)
   .x <- .validate_named_elements(
@@ -136,6 +130,14 @@ stabilize_lst <- function(
     .unnamed = .unnamed,
     .x_arg = .x_arg,
     .call = .call
+  )
+  # Run after validation so coerced values (e.g. "1" and 1L both becoming
+  # 1L) are compared, not the original inputs.
+  .check_unique(
+    .x,
+    unique = .unique,
+    x_arg = .x_arg,
+    call = .call
   )
 
   return(.x)
