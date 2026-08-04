@@ -185,7 +185,7 @@
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#' @returns `(length-1 logical)` `TRUE` if `x` is `NULL` and `allow_null` is
+#' @returns (`logical(1)`) `TRUE` if `x` is `NULL` and `allow_null` is
 #'   `TRUE`, else `FALSE`.
 #' @keywords internal
 .is_allowed_null <- function(x, allow_null = TRUE, call = caller_env()) {
@@ -196,7 +196,7 @@
 #' Check that one value is not greater than another
 #'
 #' @param y The value to compare against.
-#' @param y_arg `(length-1 character)` The name of the `y` argument.
+#' @param y_arg (`character(1)`) The name of the `y` argument.
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return

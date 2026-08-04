@@ -40,7 +40,7 @@ calls (\code{\link[=specify_chr]{specify_chr()}}, etc.). For \code{to_any_of()}:
 \code{integer()}, \code{character()}) that determine the target types to try, passed
 as the \code{.to} argument of \code{\link[=to]{to()}}.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -48,7 +48,7 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}

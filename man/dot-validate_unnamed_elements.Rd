@@ -15,7 +15,7 @@ function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used
 unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
 cause an error.}
 
-\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

@@ -16,7 +16,7 @@
 \item{check_dupes}{\code{(list)} An empty list, or a list containing an expression
 that checks for duplicate arguments.}
 
-\item{stabilizer}{\verb{(length-1 character)} Name of the stabilizer function to
+\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to
 call.}
 
 \item{factory_args}{Arguments passed to \code{\link[=specify_cls]{specify_cls()}} as \code{...}.}

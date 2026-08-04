@@ -9,9 +9,9 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
+\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

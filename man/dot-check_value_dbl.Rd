@@ -15,13 +15,13 @@
 \arguments{
 \item{x}{The argument to stabilize.}
 
-\item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
+\item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
-\item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
+\item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

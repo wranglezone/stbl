@@ -38,7 +38,7 @@ will be computed by \code{\link[base:factor]{base::factor()}}.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -46,12 +46,12 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
 
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
 The input as a factor.

@@ -9,13 +9,13 @@
 \arguments{
 \item{.x}{\code{(data.frame)} The data frame being validated.}
 
-\item{min_rows}{\verb{(length-1 integer)} Minimum number of rows allowed, or
+\item{min_rows}{(\code{integer(1)}) Minimum number of rows allowed, or
 \code{NULL} to skip this check.}
 
-\item{max_rows}{\verb{(length-1 integer)} Maximum number of rows allowed, or
+\item{max_rows}{(\code{integer(1)}) Maximum number of rows allowed, or
 \code{NULL} to skip this check.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

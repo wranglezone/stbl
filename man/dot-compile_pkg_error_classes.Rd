@@ -7,7 +7,7 @@
 .compile_pkg_error_classes(package, ...)
 }
 \arguments{
-\item{package}{\verb{(length-1 character)} The name of the package to use in
+\item{package}{(\code{character(1)}) The name of the package to use in
 classes.}
 
 \item{...}{\code{(character)} Components of the class name, from least-specific to

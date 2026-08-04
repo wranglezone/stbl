@@ -76,17 +76,17 @@ stabilise_character(
 
 \item{...}{Arguments passed to methods.}
 
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+\item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
+\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
 each element.}
@@ -105,7 +105,7 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -113,7 +113,7 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}

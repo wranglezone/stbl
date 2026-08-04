@@ -1,10 +1,10 @@
 #' Create a specified stabilizer function
 #'
-#' @param stabilizer `(length-1 character)` Name of the stabilizer function to
+#' @param stabilizer (`character(1)`) Name of the stabilizer function to
 #'   call.
 #' @param factory_args `(list)` Arguments to include in the call to the
 #'   stabilizer function.
-#' @param scalar `(length-1 logical)` Whether to call the scalar version of the
+#' @param scalar (`logical(1)`) Whether to call the scalar version of the
 #'   stabilizer.
 #' @param call `(environment)` The environment to use as the parent of the
 #'   generated function. Defaults to the caller's environment.

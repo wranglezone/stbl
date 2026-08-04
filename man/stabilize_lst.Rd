@@ -87,22 +87,22 @@ function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used
 unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
 cause an error.}
 
-\item{.allow_duplicate_names}{\verb{(length-1 logical)} Should \code{.x} be allowed to
+\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
-\item{.unique}{\verb{(length-1 logical)} Should all elements in \code{.x} be distinct?
+\item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct?
 If \code{TRUE}, duplicated elements are rejected.}
 
-\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{.min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -110,7 +110,7 @@ in unexported functions.}
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{.x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{.x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}

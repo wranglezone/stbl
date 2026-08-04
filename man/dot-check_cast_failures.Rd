@@ -10,17 +10,17 @@
 \item{failures}{\code{(logical)} A logical vector where \code{TRUE} indicates a
 coercion failure.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
 
 \item{to}{The target object for the coercion.}
 
-\item{due_to}{\verb{(length-1 character)} A string describing the reason for the
+\item{due_to}{(\code{character(1)}) A string describing the reason for the
 failure.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

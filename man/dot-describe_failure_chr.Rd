@@ -12,7 +12,7 @@
 \item{success}{\code{(logical)} A logical vector indicating which elements of \code{x}
 passed the check.}
 
-\item{negate}{\verb{(length-1 logical)} Was the check a negative one?}
+\item{negate}{(\code{logical(1)}) Was the check a negative one?}
 }
 \value{
 A named character vector to be used as \code{additional_msg} in

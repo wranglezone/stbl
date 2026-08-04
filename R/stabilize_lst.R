@@ -20,10 +20,10 @@
 #'   function ([specify_chr()], etc). This function is used to validate all
 #'   unnamed elements of `.x`. If `NULL` (default), any unnamed elements will
 #'   cause an error.
-#' @param .allow_duplicate_names `(length-1 logical)` Should `.x` be allowed to
+#' @param .allow_duplicate_names (`logical(1)`) Should `.x` be allowed to
 #'   have duplicate names? If `FALSE` (default), an error is thrown when any
 #'   named element of `.x` shares a name with another.
-#' @param .unique `(length-1 logical)` Should all elements in `.x` be distinct?
+#' @param .unique (`logical(1)`) Should all elements in `.x` be distinct?
 #'   If `TRUE`, duplicated elements are rejected.
 #' @inheritParams .shared-params
 #'

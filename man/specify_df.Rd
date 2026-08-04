@@ -39,13 +39,13 @@ columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \co
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
 cause an error. Unlike \code{...}, this does not validate the column contents.}
 
-\item{.min_rows}{\verb{(length-1 integer)} The minimum number of rows allowed in
+\item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in
 \code{.x}. If \code{NULL} (default), the row count is not checked.}
 
-\item{.max_rows}{\verb{(length-1 integer)} The maximum number of rows allowed in
+\item{.max_rows}{(\code{integer(1)}) The maximum number of rows allowed in
 \code{.x}. If \code{NULL} (default), the row count is not checked.}
 
-\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

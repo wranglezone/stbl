@@ -34,17 +34,17 @@ specify_logical_scalar(
 )
 }
 \arguments{
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+\item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
 acceptable?}
 }
 \value{

@@ -325,8 +325,8 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #'
 #' @param x `(character)` The vector being checked.
 #' @param failure_locations `(integer)` Indices where the check failed.
-#' @param target `(integer(1))` The character count limit.
-#' @param direction `(character(1))` One of `"few"` or `"many"`.
+#' @param target (`integer(1)`) The character count limit.
+#' @param direction (`character(1)`) One of `"few"` or `"many"`.
 #' @inheritParams .shared-params
 #' @returns A named character vector for [.stbl_abort()].
 #' @keywords internal
@@ -364,7 +364,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
 
 #' Apply a single regex rule to a character vector
 #'
-#' @param rule `(length-1 character)` A regex rule (possibly with a `name` and
+#' @param rule (`character(1)`) A regex rule (possibly with a `name` and
 #'   `negate` attribute).
 #' @inheritParams .shared-params
 #' @returns A list with a `message` character vector and integer `locations` of
@@ -413,7 +413,7 @@ stabilise_character_scalar <- stabilize_chr_scalar
 #' @inheritParams .shared-params
 #' @param success `(logical)` A logical vector indicating which elements of `x`
 #'   passed the check.
-#' @param negate `(length-1 logical)` Was the check a negative one?
+#' @param negate (`logical(1)`) Was the check a negative one?
 #' @returns A named character vector to be used as `additional_msg` in
 #'   [.stop_must()].
 #' @keywords internal
