@@ -9,13 +9,13 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 }
 \value{
-\verb{(length-1 logical)} \code{TRUE} if \code{x} is \code{NULL} and \code{allow_null} is
+(\code{logical(1)}) \code{TRUE} if \code{x} is \code{NULL} and \code{allow_null} is
 \code{TRUE}, else \code{FALSE}.
 }
 \description{

@@ -12,13 +12,13 @@ specify_cls(
 )
 }
 \arguments{
-\item{stabilizer}{\verb{(length-1 character)} Name of the stabilizer function to
+\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to
 call.}
 
 \item{factory_args}{\code{(list)} Arguments to include in the call to the
 stabilizer function.}
 
-\item{scalar}{\verb{(length-1 logical)} Whether to call the scalar version of the
+\item{scalar}{(\code{logical(1)}) Whether to call the scalar version of the
 stabilizer.}
 
 \item{call}{\code{(environment)} The environment to use as the parent of the

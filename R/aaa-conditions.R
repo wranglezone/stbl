@@ -98,10 +98,10 @@ rlang::caller_env
 
 #' Abort with a standardized "can't coerce" message
 #'
-#' @param from_class `(length-1 character)` The class of the object that failed
+#' @param from_class (`character(1)`) The class of the object that failed
 #'   coercion.
-#' @param to_class `(length-1 character)` The target class for the coercion.
-#' @param additional_msg `(length-1 character)` Optional, additional
+#' @param to_class (`character(1)`) The target class for the coercion.
+#' @param additional_msg (`character(1)`) Optional, additional
 #'   cli-formatted messages.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params

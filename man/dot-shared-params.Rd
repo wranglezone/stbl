@@ -10,11 +10,11 @@
 error class list. Useful for the \code{class} argument of
 \code{\link[testthat:expect_error]{testthat::expect_error()}}.}
 
-\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+\item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
 acceptable?}
 
 \item{are_cls_ish_fn}{The \verb{are_*_ish} function to apply to each element.}
@@ -30,20 +30,20 @@ after coercion.}
 \item{check_cls_value_fn_args}{\code{(list)} A list of additional arguments to
 pass to \code{check_cls_value_fn()}.}
 
-\item{coerce_character}{\verb{(length-1 logical)} Should character vectors such as
+\item{coerce_character}{(\code{logical(1)}) Should character vectors such as
 "1" and "2.0" be considered numeric-ish?}
 
-\item{coerce_factor}{\verb{(length-1 logical)} Should factors with values such as
+\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as
 "1" and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 
-\item{coerce_function}{\verb{(length-1 logical)} Should functions be coerced?}
+\item{coerce_function}{(\code{logical(1)}) Should functions be coerced?}
 
-\item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
 set this parameter.}
 
-\item{due_to}{\verb{(length-1 character)} A string describing the reason for the
+\item{due_to}{(\code{character(1)}) A string describing the reason for the
 failure.}
 
 \item{failures}{\code{(logical)} A logical vector indicating which elements
@@ -54,31 +54,31 @@ rlang, used for a fast path if \code{x} is already the right type.}
 
 \item{levels}{\code{(character)} The desired factor levels.}
 
-\item{message_env}{(\code{environment}) The execution environment to use to
-evaluate variables in error messages.}
-
 \item{max_characters}{(\code{integer(1)}) Maximum number of characters allowed in
 each element.}
 
-\item{max_levels}{\verb{(length-1 numeric)} Maximum number of distinct non-\code{NA}
+\item{max_levels}{(\code{numeric(1)}) Maximum number of distinct non-\code{NA}
 values allowed across the whole vector after applying \code{to_na}.}
 
-\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_value}{\verb{(length-1 numeric)} The highest allowed value for \code{x}. If
+\item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
+
+\item{message_env}{(\code{environment}) The execution environment to use to
+evaluate variables in error messages.}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
 each element.}
 
-\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{min_value}{\verb{(length-1 numeric)} The lowest allowed value for \code{x}. If
+\item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
 
-\item{package}{\verb{(length-1 character)} The name of the package to use in
+\item{package}{(\code{character(1)}) The name of the package to use in
 classes.}
 
 \item{parent}{A parent condition, as you might create during a
@@ -97,7 +97,7 @@ throws an error, try installing the stringi package.}
 
 \item{to}{The target object for the coercion.}
 
-\item{to_class}{\verb{(length-1 character)} The name of the class to coerce to.}
+\item{to_class}{(\code{character(1)}) The name of the class to coerce to.}
 
 \item{to_cls_args}{\code{(list)} A list of additional arguments to pass to
 \code{to_cls_fn()}.}
@@ -114,16 +114,16 @@ coercion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
-\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
+\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
 \item{x}{The argument to stabilize.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
 
-\item{x_class}{\verb{(length-1 character)} The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}

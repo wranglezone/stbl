@@ -15,7 +15,7 @@ pkg_abort(
 )
 }
 \arguments{
-\item{package}{\verb{(length-1 character)} The name of the package to use in
+\item{package}{(\code{character(1)}) The name of the package to use in
 classes.}
 
 \item{message}{(\code{character}) The message for the new error. Messages will be

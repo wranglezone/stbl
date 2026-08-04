@@ -11,11 +11,11 @@
 
 \item{failure_locations}{\code{(integer)} Indices where the check failed.}
 
-\item{target}{\code{(integer(1))} The character count limit.}
+\item{target}{(\code{integer(1)}) The character count limit.}
 
-\item{direction}{\code{(character(1))} One of \code{"few"} or \code{"many"}.}
+\item{direction}{(\code{character(1)}) One of \code{"few"} or \code{"many"}.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

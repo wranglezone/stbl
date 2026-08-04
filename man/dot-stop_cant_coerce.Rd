@@ -16,12 +16,12 @@
 )
 }
 \arguments{
-\item{from_class}{\verb{(length-1 character)} The class of the object that failed
+\item{from_class}{(\code{character(1)}) The class of the object that failed
 coercion.}
 
-\item{to_class}{\verb{(length-1 character)} The target class for the coercion.}
+\item{to_class}{(\code{character(1)}) The target class for the coercion.}
 
-\item{x_arg}{\verb{(length-1 character)} The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -29,7 +29,7 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{additional_msg}{\verb{(length-1 character)} Optional, additional
+\item{additional_msg}{(\code{character(1)}) Optional, additional
 cli-formatted messages.}
 
 \item{message_env}{(\code{environment}) The execution environment to use to

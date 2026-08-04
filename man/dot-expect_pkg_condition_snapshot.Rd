@@ -20,7 +20,7 @@
 \arguments{
 \item{obj_expr}{An unevaluated expression (from \code{\link[rlang:enexpr]{rlang::enexpr()}}).}
 
-\item{package}{\verb{(length-1 character)} The name of the package to use in
+\item{package}{(\code{character(1)}) The name of the package to use in
 classes.}
 
 \item{class_components}{(\code{list}) Passed as \code{...} to \code{expect_fn}.}

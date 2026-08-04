@@ -19,9 +19,9 @@
 #' @param .col_names `(character)` A character vector of column names that must
 #'   be present in `.x`. Any columns listed here that are absent from `.x` will
 #'   cause an error. Unlike `...`, this does not validate the column contents.
-#' @param .min_rows `(length-1 integer)` The minimum number of rows allowed in
+#' @param .min_rows (`integer(1)`) The minimum number of rows allowed in
 #'   `.x`. If `NULL` (default), the row count is not checked.
-#' @param .max_rows `(length-1 integer)` The maximum number of rows allowed in
+#' @param .max_rows (`integer(1)`) The maximum number of rows allowed in
 #'   `.x`. If `NULL` (default), the row count is not checked.
 #' @inheritParams .shared-params
 #'
@@ -154,9 +154,9 @@ stabilise_data_frame <- stabilize_df
 #' Check that a data frame has an acceptable number of rows
 #'
 #' @param .x `(data.frame)` The data frame being validated.
-#' @param min_rows `(length-1 integer)` Minimum number of rows allowed, or
+#' @param min_rows (`integer(1)`) Minimum number of rows allowed, or
 #'   `NULL` to skip this check.
-#' @param max_rows `(length-1 integer)` Maximum number of rows allowed, or
+#' @param max_rows (`integer(1)`) Maximum number of rows allowed, or
 #'   `NULL` to skip this check.
 #' @inheritParams .shared-params
 #' @returns `NULL`, invisibly, if the check passes.

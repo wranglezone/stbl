@@ -23,7 +23,7 @@ is_logical_ish(x, ...)
 
 \item{...}{Arguments passed to methods.}
 
-\item{depth}{\verb{(length-1 integer)} Current recursion depth. Do not manually
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
 set this parameter.}
 }
 \value{

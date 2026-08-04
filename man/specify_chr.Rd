@@ -48,17 +48,17 @@ specify_character_scalar(
 )
 }
 \arguments{
-\item{allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_na}{\verb{(length-1 logical)} Are NA values ok?}
+\item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{unique}{\verb{(length-1 logical)} Should all elements in \code{x} be distinct?}
+\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
 \item{min_characters}{(\code{integer(1)}) Minimum number of characters allowed in
 each element.}
@@ -77,7 +77,7 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{allow_zero_length}{\verb{(length-1 logical)} Are zero-length vectors
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
 acceptable?}
 }
 \value{

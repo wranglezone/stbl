@@ -43,15 +43,15 @@ function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used
 unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
 cause an error.}
 
-\item{.unique}{\verb{(length-1 logical)} Should all elements in \code{.x} be distinct?
+\item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct?
 If \code{TRUE}, duplicated elements are rejected.}
 
-\item{.allow_null}{\verb{(length-1 logical)} Is NULL an acceptable value?}
+\item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{.min_size}{\verb{(length-1 integer)} The minimum size of the object. Object
+\item{.min_size}{(\code{integer(1)}) The minimum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.max_size}{\verb{(length-1 integer)} The maximum size of the object. Object
+\item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 }
 \value{
