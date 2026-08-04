@@ -60,6 +60,7 @@ synonym of <code>specify_chr_scalar()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -79,6 +80,7 @@ synonym of <code>specify_chr_scalar()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  regex <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -114,6 +116,10 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg-unique">unique<a class="anchor" aria-label="anchor" href="#arg-unique"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should all elements in <code>x</code> be distinct?</p></dd>
 
 
 <dt id="arg-min-characters">min_characters<a class="anchor" aria-label="anchor" href="#arg-min-characters"></a></dt>

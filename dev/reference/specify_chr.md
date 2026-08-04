@@ -17,6 +17,7 @@ specify_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL
@@ -36,6 +37,7 @@ specify_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL
@@ -72,6 +74,10 @@ specify_character_scalar(
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
 
 - min_characters:
 

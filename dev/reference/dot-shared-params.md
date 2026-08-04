@@ -188,6 +188,10 @@ to make them easier to import and to find.
   An empty object of the target type (e.g.,
   [`integer()`](https://rdrr.io/r/base/integer.html)).
 
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
+
 - x:
 
   The argument to stabilize.

@@ -16,6 +16,7 @@ Stabilize an object of a specific class
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -68,6 +69,10 @@ Stabilize an object of a specific class
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
 
 - x_arg:
 

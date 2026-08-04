@@ -19,6 +19,7 @@ specify_dbl(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 )
@@ -40,6 +41,7 @@ specify_double(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL
 )
@@ -90,6 +92,10 @@ specify_double_scalar(
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
 
 - min_value:
 

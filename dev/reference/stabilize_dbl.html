@@ -58,6 +58,7 @@ synonyms of <code>stabilize_dbl()</code>.</p>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -74,6 +75,7 @@ synonyms of <code>stabilize_dbl()</code>.</p>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -90,6 +92,7 @@ synonyms of <code>stabilize_dbl()</code>.</p>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -106,6 +109,7 @@ synonyms of <code>stabilize_dbl()</code>.</p>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -156,6 +160,10 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 
+<dt id="arg-unique">unique<a class="anchor" aria-label="anchor" href="#arg-unique"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should all elements in <code>x</code> be distinct?</p></dd>
+
+
 <dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
 <dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
 <code>NULL</code> (default) values are not checked.</p></dd>
@@ -196,6 +204,8 @@ safely converted to double.</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>unique = TRUE</code> and duplicates are
+present.</p></li>
 <li><p><code>&lt;stbl-error-outside_range&gt;</code> when values fall outside <code>min_value</code> or
 <code>max_value</code>.</p></li>
 </ul></div>

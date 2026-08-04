@@ -16,6 +16,7 @@ stabilize_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -31,6 +32,7 @@ stabilize_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -46,6 +48,7 @@ stabilise_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -61,6 +64,7 @@ stabilise_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
@@ -99,6 +103,10 @@ stabilise_character(
   `(length-1 integer)` The maximum size of the object. Object size will
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
 
 - min_characters:
 
@@ -159,6 +167,9 @@ The input as a character vector, or an error condition with classes
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
+
+- `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
+  are present.
 
 - `<stbl-error-n_characters-too_few>` when elements have fewer
   characters than `min_characters`.

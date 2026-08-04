@@ -18,6 +18,7 @@ stabilize_int(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -34,6 +35,7 @@ stabilize_integer(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -50,6 +52,7 @@ stabilise_int(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -66,6 +69,7 @@ stabilise_integer(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   x_arg = caller_arg(x),
@@ -118,6 +122,10 @@ stabilise_integer(
   be tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
+- unique:
+
+  `(length-1 logical)` Should all elements in `x` be distinct?
+
 - min_value:
 
   `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
@@ -167,6 +175,9 @@ The input as an integer vector, or an error condition with classes
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
+
+- `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
+  are present.
 
 - `<stbl-error-outside_range>` when values fall outside `min_value` or
   `max_value`.

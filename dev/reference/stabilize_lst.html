@@ -61,6 +61,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -75,6 +76,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -89,6 +91,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -103,6 +106,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -149,6 +153,11 @@ have duplicate names? If <code>FALSE</code> (default), an error is thrown when a
 named element of <code>.x</code> shares a name with another.</p></dd>
 
 
+<dt id="arg--unique">.unique<a class="anchor" aria-label="anchor" href="#arg--unique"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should all elements in <code>.x</code> be distinct?
+If <code>TRUE</code>, duplicated elements are rejected.</p></dd>
+
+
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
 <dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
 
@@ -190,6 +199,8 @@ match the original class.</p></dd>
 <li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be coerced to a list.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate
+elements are present.</p></li>
 <li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
 unnamed.</p></li>
 <li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent.</p></li>

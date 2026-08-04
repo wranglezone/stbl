@@ -63,6 +63,18 @@
   gain new `min_characters` and `max_characters` arguments to constrain
   the number of characters in each element of a character vector
   ([\#275](https://github.com/wranglezone/stbl/issues/275)).
+- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  gain new `unique`/`.unique` arguments to enforce distinct elements and
+  raise duplicate-element errors when repeated values are found
+  ([\#280](https://github.com/wranglezone/stbl/issues/280)).
 
 ### Bug fixes
 

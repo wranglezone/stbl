@@ -50,6 +50,7 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -59,6 +60,7 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -90,6 +92,11 @@ function (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or
 function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all
 unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unnamed elements will
 cause an error.</p></dd>
+
+
+<dt id="arg--unique">.unique<a class="anchor" aria-label="anchor" href="#arg--unique"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should all elements in <code>.x</code> be distinct?
+If <code>TRUE</code>, duplicated elements are rejected.</p></dd>
 
 
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>

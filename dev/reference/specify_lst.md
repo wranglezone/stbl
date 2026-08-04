@@ -12,6 +12,7 @@ specify_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL
@@ -21,6 +22,7 @@ specify_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL
@@ -56,6 +58,11 @@ specify_list(
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   etc). This function is used to validate all unnamed elements of `.x`.
   If `NULL` (default), any unnamed elements will cause an error.
+
+- .unique:
+
+  `(length-1 logical)` Should all elements in `.x` be distinct? If
+  `TRUE`, duplicated elements are rejected.
 
 - .allow_null:
 

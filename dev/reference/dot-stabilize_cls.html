@@ -54,6 +54,7 @@
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -107,6 +108,10 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
 <dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg-unique">unique<a class="anchor" aria-label="anchor" href="#arg-unique"></a></dt>
+<dd><p><code>(length-1 logical)</code> Should all elements in <code>x</code> be distinct?</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>

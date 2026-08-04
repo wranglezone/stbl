@@ -15,6 +15,7 @@ stabilize_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -29,6 +30,7 @@ stabilize_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -43,6 +45,7 @@ stabilise_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -57,6 +60,7 @@ stabilise_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
@@ -105,6 +109,11 @@ stabilise_list(
   `(length-1 logical)` Should `.x` be allowed to have duplicate names?
   If `FALSE` (default), an error is thrown when any named element of
   `.x` shares a name with another.
+
+- .unique:
+
+  `(length-1 logical)` Should all elements in `.x` be distinct? If
+  `TRUE`, duplicated elements are rejected.
 
 - .allow_null:
 
@@ -156,6 +165,9 @@ specific class by failure mode:
 
 - `<stbl-error-size_too_large>` when the list is longer than
   `.max_size`.
+
+- `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
+  elements are present.
 
 - `<stbl-error-unnamed_spec>` when any element passed through `...` is
   unnamed.
