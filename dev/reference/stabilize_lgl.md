@@ -16,6 +16,7 @@ stabilize_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -28,6 +29,7 @@ stabilize_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -40,6 +42,7 @@ stabilise_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -52,6 +55,7 @@ stabilise_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -87,6 +91,12 @@ stabilise_logical(
   (`integer(1)`) The maximum size of the object. Object size will be
   tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - x_arg:
 
@@ -124,6 +134,8 @@ The input as a logical vector, or an error condition with classes
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
+
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 ## See also
 
@@ -190,4 +202,10 @@ try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
 #> Error in eval(expr, envir) : 
 #>   `c(TRUE, FALSE, TRUE)` must have size <= 2.
 #> ✖ 3 is too big.
+try(stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE))
+#> Error in eval(expr, envir) : 
+#>   `c(TRUE, FALSE)` must be one of the allowed values.
+#> ℹ Allowed value: "TRUE".
+#> ✖ Unexpected location: 2
+#> ✖ Unexpected value: "FALSE".
 ```

@@ -20,6 +20,7 @@ stabilize_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -36,6 +37,7 @@ stabilize_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -52,6 +54,7 @@ stabilise_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -68,6 +71,7 @@ stabilise_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -130,6 +134,12 @@ stabilise_character(
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
   (`character(1)`) The name of the argument being stabilized to use in
@@ -178,6 +188,8 @@ The input as a character vector, or an error condition with classes
   characters than `max_characters`.
 
 - `<stbl-error-regex_mismatch>` when `regex` checks fail.
+
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 ## See also
 
@@ -255,4 +267,10 @@ try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 #> ✖ Some values fail the check.
 #> ✖ Locations: 2 and 3
 #> ✖ Values: find and find
+try(stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")))
+#> Error in eval(expr, envir) : 
+#>   `c("a", "b", "z")` must be one of the allowed values.
+#> ℹ Allowed values: "a", "b", and "c".
+#> ✖ Unexpected location: 3
+#> ✖ Unexpected value: "z".
 ```

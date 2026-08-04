@@ -64,6 +64,17 @@
   the number of characters in each element of a character vector
   ([\#275](https://github.com/wranglezone/stbl/issues/275)).
 - [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+  [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+  and their `specify_*()` factories gain a new `allowed_values`
+  argument, allowing users to restrict `x` to a fixed set of permitted
+  values ([\#282](https://github.com/wranglezone/stbl/issues/282)).
+- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),

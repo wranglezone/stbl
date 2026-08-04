@@ -21,7 +21,8 @@ specify_dbl(
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 )
 
 specify_dbl_scalar(
@@ -31,7 +32,8 @@ specify_dbl_scalar(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 )
 
 specify_double(
@@ -43,7 +45,8 @@ specify_double(
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 )
 
 specify_double_scalar(
@@ -53,7 +56,8 @@ specify_double_scalar(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  allowed_values = NULL
 )
 ```
 
@@ -106,6 +110,12 @@ specify_double_scalar(
 
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - allow_zero_length:
 

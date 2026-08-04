@@ -56,6 +56,7 @@ are synonyms of <code>stabilize_lgl()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -68,6 +69,7 @@ are synonyms of <code>stabilize_lgl()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -80,6 +82,7 @@ are synonyms of <code>stabilize_lgl()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -92,6 +95,7 @@ are synonyms of <code>stabilize_lgl()</code>.</p>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -128,6 +132,12 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -156,6 +166,7 @@ match the original class.</p></dd>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when values are not in <code>allowed_values</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -221,6 +232,12 @@ match the original class.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `c(TRUE, FALSE, TRUE)` must have size &lt;= 2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> 3 is too big.</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_lgl</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, allowed_values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `c(TRUE, FALSE)` must be one of the allowed values.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Allowed value: <span style="color: #0000BB;">"TRUE"</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Unexpected location: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Unexpected value: <span style="color: #0000BB;">"FALSE"</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

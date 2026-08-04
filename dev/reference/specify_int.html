@@ -64,7 +64,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_int_scalar</span><span class="op">(</span></span>
@@ -74,7 +75,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_integer</span><span class="op">(</span></span>
@@ -86,7 +88,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_integer_scalar</span><span class="op">(</span></span>
@@ -96,7 +99,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max_value <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -146,6 +150,12 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
 <dd><p>(<code>numeric(1)</code>) The highest allowed value for <code>x</code>. If
 <code>NULL</code> (default) values are not checked.</p></dd>
+
+
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
 
 <dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>

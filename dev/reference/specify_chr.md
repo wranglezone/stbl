@@ -20,7 +20,8 @@ specify_chr(
   unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_chr_scalar(
@@ -29,7 +30,8 @@ specify_chr_scalar(
   allow_na = TRUE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_character(
@@ -40,7 +42,8 @@ specify_character(
   unique = FALSE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 
 specify_character_scalar(
@@ -49,7 +52,8 @@ specify_character_scalar(
   allow_na = TRUE,
   min_characters = NULL,
   max_characters = NULL,
-  regex = NULL
+  regex = NULL,
+  allowed_values = NULL
 )
 ```
 
@@ -100,6 +104,12 @@ specify_character_scalar(
   displayed. To check that a pattern is *not* matched, attach a `negate`
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - allow_zero_length:
 

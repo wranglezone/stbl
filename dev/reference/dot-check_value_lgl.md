@@ -1,14 +1,13 @@
-# Coerce to factor with specified levels
+# Check logical values against allowed values
 
-Coerce to factor with specified levels
+Check logical values against allowed values
 
 ## Usage
 
 ``` r
-.coerce_fct_levels(
+.check_value_lgl(
   x,
-  levels = NULL,
-  to_na = character(),
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 )
@@ -20,15 +19,11 @@ Coerce to factor with specified levels
 
   The argument to stabilize.
 
-- levels:
+- allowed_values:
 
-  `(character)` The desired factor levels. For factors, a vector's
-  `levels` play the same role that `allowed_values` plays for other
-  types: they restrict `x` to a fixed set of permitted values.
-
-- to_na:
-
-  `(character)` Values to convert to `NA`.
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - x_arg:
 
@@ -44,4 +39,4 @@ Coerce to factor with specified levels
 
 ## Value
 
-`x` as a factor with specified levels and NAs.
+`NULL`, invisibly, if `x` passes all checks.

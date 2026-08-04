@@ -10,6 +10,7 @@ Check character values against character count and regex patterns
   regex,
   min_characters = NULL,
   max_characters = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 )
@@ -42,6 +43,12 @@ Check character values against character count and regex patterns
 - max_characters:
 
   (`integer(1)`) Maximum number of characters allowed in each element.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - x_arg:
 

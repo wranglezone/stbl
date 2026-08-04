@@ -21,6 +21,7 @@ stabilize_dbl(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -38,6 +39,7 @@ stabilize_double(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -55,6 +57,7 @@ stabilise_dbl(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -72,6 +75,7 @@ stabilise_double(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -136,6 +140,12 @@ stabilise_double(
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
   (`character(1)`) The name of the argument being stabilized to use in
@@ -181,6 +191,8 @@ The input as a double vector, or an error condition with classes
 
 - `<stbl-error-outside_range>` when values fall outside `min_value` or
   `max_value`.
+
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 ## See also
 
@@ -262,4 +274,10 @@ try(stabilize_dbl(1:10, max_value = 7.5))
 #> ℹ Some values are too high.
 #> ✖ Locations: 8, 9, and 10
 #> ✖ Values: 8, 9, and 10
+try(stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)))
+#> Error in eval(expr, envir) : 
+#>   `c(1.1, 2.2, 3.3)` must be one of the allowed values.
+#> ℹ Allowed values: "1.1" and "2.2".
+#> ✖ Unexpected location: 3
+#> ✖ Unexpected value: "3.3".
 ```

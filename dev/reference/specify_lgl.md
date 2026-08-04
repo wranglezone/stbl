@@ -16,26 +16,30 @@ specify_lgl(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 
 specify_logical(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 ```
 
@@ -60,6 +64,12 @@ specify_logical_scalar(
   (`integer(1)`) The maximum size of the object. Object size will be
   tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - allow_zero_length:
 

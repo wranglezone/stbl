@@ -20,6 +20,7 @@ stabilize_chr_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilize_character_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -48,6 +50,7 @@ stabilise_chr_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -62,6 +65,7 @@ stabilise_character_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -112,6 +116,12 @@ stabilise_character_scalar(
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
   (`character(1)`) The name of the argument being stabilized to use in
@@ -156,6 +166,9 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
   characters than `max_characters`.
 
 - `<stbl-error-regex_mismatch>` when `regex` checks fail.
+
+- `<stbl-error-allowed_values>` when the value is not in
+  `allowed_values`.
 
 ## See also
 

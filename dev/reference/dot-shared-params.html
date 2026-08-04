@@ -63,6 +63,12 @@ error class list. Useful for the <code>class</code> argument of
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
 
 
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
@@ -132,7 +138,9 @@ rlang, used for a fast path if <code>x</code> is already the right type.</p></dd
 
 
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
-<dd><p><code>(character)</code> The desired factor levels.</p></dd>
+<dd><p><code>(character)</code> The desired factor levels. For factors, a
+vector's <code>levels</code> play the same role that <code>allowed_values</code> plays for
+other types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 
 
 <dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>

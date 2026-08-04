@@ -61,6 +61,7 @@ stabilize_lgl_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -72,6 +73,7 @@ stabilize_lgl_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -83,6 +85,7 @@ stabilize_lgl_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -94,6 +97,7 @@ stabilize_lgl_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -125,6 +129,12 @@ acceptable?</p></dd>
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
 
 
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -154,6 +164,8 @@ classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <c
 <code>allow_zero_length = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-non_scalar&gt;</code> for non-scalar vectors.</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when the value is not in
+<code>allowed_values</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

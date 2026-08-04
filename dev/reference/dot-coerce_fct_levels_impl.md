@@ -22,7 +22,9 @@ Core implementation for applying factor levels
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
 
 - to_na:
 

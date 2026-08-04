@@ -19,6 +19,12 @@ to make them easier to import and to find.
 
   (`logical(1)`) Are NA values ok?
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
@@ -87,7 +93,9 @@ to make them easier to import and to find.
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
 
 - max_characters:
 

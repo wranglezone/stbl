@@ -154,7 +154,9 @@ to(
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
 
 ## Value
 
@@ -234,6 +236,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x561aa1f902a0>
+#> <bytecode: 0x562532bfa2a0>
 #> <environment: namespace:base>
 ```

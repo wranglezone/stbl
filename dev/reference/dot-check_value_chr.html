@@ -48,6 +48,7 @@
 <span>  <span class="va">regex</span>,</span>
 <span>  min_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_characters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -82,6 +83,12 @@ each element.</p></dd>
 <dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>
 <dd><p>(<code>integer(1)</code>) Maximum number of characters allowed in
 each element.</p></dd>
+
+
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>

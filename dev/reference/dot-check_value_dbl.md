@@ -9,6 +9,7 @@ Check double values against min and max values
   x,
   min_value,
   max_value,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 )
@@ -29,6 +30,12 @@ Check double values against min and max values
 
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - x_arg:
 

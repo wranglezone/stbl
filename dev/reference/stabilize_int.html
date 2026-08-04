@@ -61,6 +61,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -78,6 +79,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -95,6 +97,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -112,6 +115,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -174,6 +178,12 @@ size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_s
 <code>NULL</code> (default) values are not checked.</p></dd>
 
 
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
@@ -208,6 +218,7 @@ safely converted to integer.</p></li>
 present.</p></li>
 <li><p><code>&lt;stbl-error-outside_range&gt;</code> when values fall outside <code>min_value</code> or
 <code>max_value</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when values are not in <code>allowed_values</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -288,6 +299,12 @@ present.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Some values are too high.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Locations: 8, 9, and 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Values: 8, 9, and 10</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_int</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, allowed_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `1:5` must be one of the allowed values.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Allowed values: <span style="color: #0000BB;">"1"</span>, <span style="color: #0000BB;">"2"</span>, and <span style="color: #0000BB;">"3"</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Unexpected locations: 4 and 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Unexpected values: <span style="color: #0000BB;">"4"</span> and <span style="color: #0000BB;">"5"</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

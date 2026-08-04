@@ -21,6 +21,7 @@ stabilize_dbl_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -36,6 +37,7 @@ stabilize_double_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,6 +53,7 @@ stabilise_dbl_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +69,7 @@ stabilise_double_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -118,6 +122,12 @@ stabilise_double_scalar(
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
   (`character(1)`) The name of the argument being stabilized to use in
@@ -159,6 +169,9 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-outside_range>` when values fall outside `min_value` or
   `max_value`.
+
+- `<stbl-error-allowed_values>` when the value is not in
+  `allowed_values`.
 
 ## See also
 
