@@ -19,7 +19,7 @@ that checks for duplicate arguments.}
 \item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to
 call.}
 
-\item{factory_args}{Arguments passed to \code{\link[=specify_cls]{specify_cls()}} as \code{...}.}
+\item{factory_args}{Arguments passed to \code{\link[=.specify_cls]{.specify_cls()}} as \code{...}.}
 
 \item{...}{Not used. Included to avoid confusion in R CMD check.}
 
