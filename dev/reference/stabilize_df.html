@@ -141,21 +141,21 @@ cause an error. Unlike <code>...</code>, this does not validate the column conte
 
 
 <dt id="arg--min-rows">.min_rows<a class="anchor" aria-label="anchor" href="#arg--min-rows"></a></dt>
-<dd><p><code>(length-1 integer)</code> The minimum number of rows allowed in
+<dd><p>(<code>integer(1)</code>) The minimum number of rows allowed in
 <code>.x</code>. If <code>NULL</code> (default), the row count is not checked.</p></dd>
 
 
 <dt id="arg--max-rows">.max_rows<a class="anchor" aria-label="anchor" href="#arg--max-rows"></a></dt>
-<dd><p><code>(length-1 integer)</code> The maximum number of rows allowed in
+<dd><p>(<code>integer(1)</code>) The maximum number of rows allowed in
 <code>.x</code>. If <code>NULL</code> (default), the row count is not checked.</p></dd>
 
 
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
-<dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
+<dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
+<dd><p>(<code>character(1)</code>) The name of the argument being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.</p></dd>
@@ -167,7 +167,7 @@ source of error messages.</p></dd>
 
 
 <dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of the argument being
+<dd><p>(<code>character(1)</code>) The class name of the argument being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.</p></dd>

@@ -96,24 +96,24 @@ stabilise_data_frame(
 
 - .min_rows:
 
-  `(length-1 integer)` The minimum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The minimum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .max_rows:
 
-  `(length-1 integer)` The maximum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The maximum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - .x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - .call:
 
@@ -122,9 +122,9 @@ stabilise_data_frame(
 
 - .x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the argument being stabilized to
+  use in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 ## Value

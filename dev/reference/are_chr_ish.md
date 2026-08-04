@@ -35,7 +35,7 @@ are_chr_ish(x, ..., depth = 1)
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 ## Value

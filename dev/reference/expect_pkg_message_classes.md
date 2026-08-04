@@ -19,7 +19,7 @@ expect_pkg_message_classes(object, package, ...)
 
 - package:
 
-  `(length-1 character)` The name of the package to use in classes.
+  (`character(1)`) The name of the package to use in classes.
 
 - ...:
 

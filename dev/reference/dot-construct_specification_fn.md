@@ -23,7 +23,7 @@ Construct a specified stabilizer function
 
 - stabilizer:
 
-  `(length-1 character)` Name of the stabilizer function to call.
+  (`character(1)`) Name of the stabilizer function to call.
 
 - factory_args:
 

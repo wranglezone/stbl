@@ -41,13 +41,13 @@ are_int_ish(x, ..., depth = 1)
 
 - coerce_character:
 
-  `(length-1 logical)` Should character vectors such as "1" and "2.0" be
+  (`logical(1)`) Should character vectors such as "1" and "2.0" be
   considered numeric-ish?
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -55,7 +55,7 @@ are_int_ish(x, ..., depth = 1)
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 ## Value

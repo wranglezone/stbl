@@ -17,7 +17,7 @@ specify_cls(
 
 - stabilizer:
 
-  `(length-1 character)` Name of the stabilizer function to call.
+  (`character(1)`) Name of the stabilizer function to call.
 
 - factory_args:
 
@@ -25,8 +25,7 @@ specify_cls(
 
 - scalar:
 
-  `(length-1 logical)` Whether to call the scalar version of the
-  stabilizer.
+  (`logical(1)`) Whether to call the scalar version of the stabilizer.
 
 - call:
 

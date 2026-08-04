@@ -22,20 +22,20 @@ Check double values against min and max values
 
 - min_value:
 
-  `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - max_value:
 
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 

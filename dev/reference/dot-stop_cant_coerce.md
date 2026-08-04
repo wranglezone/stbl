@@ -21,18 +21,18 @@ Abort with a standardized "can't coerce" message
 
 - from_class:
 
-  `(length-1 character)` The class of the object that failed coercion.
+  (`character(1)`) The class of the object that failed coercion.
 
 - to_class:
 
-  `(length-1 character)` The target class for the coercion.
+  (`character(1)`) The target class for the coercion.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -41,7 +41,7 @@ Abort with a standardized "can't coerce" message
 
 - additional_msg:
 
-  `(length-1 character)` Optional, additional cli-formatted messages.
+  (`character(1)`) Optional, additional cli-formatted messages.
 
 - message_env:
 

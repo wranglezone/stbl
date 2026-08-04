@@ -56,17 +56,17 @@ specify_data_frame(
 
 - .min_rows:
 
-  `(length-1 integer)` The minimum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The minimum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .max_rows:
 
-  `(length-1 integer)` The maximum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The maximum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 ## Value
 

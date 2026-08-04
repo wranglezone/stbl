@@ -43,12 +43,12 @@ are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
 
 - max_levels:
 
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
+  (`numeric(1)`) Maximum number of distinct non-`NA` values allowed
+  across the whole vector after applying `to_na`.
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 ## Value

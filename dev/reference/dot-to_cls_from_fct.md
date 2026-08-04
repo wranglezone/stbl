@@ -33,12 +33,12 @@ Coerce an object from a factor to a specific class
 
 - to_class:
 
-  `(length-1 character)` The name of the class to coerce to.
+  (`character(1)`) The name of the class to coerce to.
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -46,10 +46,10 @@ Coerce an object from a factor to a specific class
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -58,9 +58,9 @@ Coerce an object from a factor to a specific class
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the argument being stabilized to
+  use in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 ## Value

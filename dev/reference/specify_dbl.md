@@ -61,21 +61,21 @@ specify_double_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - coerce_character:
 
-  `(length-1 logical)` Should character vectors such as "1" and "2.0" be
+  (`logical(1)`) Should character vectors such as "1" and "2.0" be
   considered numeric-ish?
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -83,33 +83,33 @@ specify_double_scalar(
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - unique:
 
-  `(length-1 logical)` Should all elements in `x` be distinct?
+  (`logical(1)`) Should all elements in `x` be distinct?
 
 - min_value:
 
-  `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - max_value:
 
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 ## Value
 

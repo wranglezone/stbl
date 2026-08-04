@@ -16,16 +16,16 @@ Check for duplicate names in a list
 
 - .allow_duplicate_names:
 
-  `(length-1 logical)` Should `.x` be allowed to have duplicate names?
-  If `FALSE` (default), an error is thrown when any named element of
-  `.x` shares a name with another.
+  (`logical(1)`) Should `.x` be allowed to have duplicate names? If
+  `FALSE` (default), an error is thrown when any named element of `.x`
+  shares a name with another.
 
 - .x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - .call:
 

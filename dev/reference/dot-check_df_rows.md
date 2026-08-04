@@ -16,20 +16,20 @@ Check that a data frame has an acceptable number of rows
 
 - min_rows:
 
-  `(length-1 integer)` Minimum number of rows allowed, or `NULL` to skip
-  this check.
+  (`integer(1)`) Minimum number of rows allowed, or `NULL` to skip this
+  check.
 
 - max_rows:
 
-  `(length-1 integer)` Maximum number of rows allowed, or `NULL` to skip
-  this check.
+  (`integer(1)`) Maximum number of rows allowed, or `NULL` to skip this
+  check.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 

@@ -61,23 +61,23 @@ specify_list(
 
 - .unique:
 
-  `(length-1 logical)` Should all elements in `.x` be distinct? If
-  `TRUE`, duplicated elements are rejected.
+  (`logical(1)`) Should all elements in `.x` be distinct? If `TRUE`,
+  duplicated elements are rejected.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - .min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 ## Value

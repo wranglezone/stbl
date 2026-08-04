@@ -17,15 +17,15 @@ to make them easier to import and to find.
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 - are_cls_ish_fn:
 
@@ -51,13 +51,13 @@ to make them easier to import and to find.
 
 - coerce_character:
 
-  `(length-1 logical)` Should character vectors such as "1" and "2.0" be
+  (`logical(1)`) Should character vectors such as "1" and "2.0" be
   considered numeric-ish?
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -65,16 +65,16 @@ to make them easier to import and to find.
 
 - coerce_function:
 
-  `(length-1 logical)` Should functions be coerced?
+  (`logical(1)`) Should functions be coerced?
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 - due_to:
 
-  `(length-1 character)` A string describing the reason for the failure.
+  (`character(1)`) A string describing the reason for the failure.
 
 - failures:
 
@@ -89,30 +89,30 @@ to make them easier to import and to find.
 
   `(character)` The desired factor levels.
 
-- message_env:
-
-  (`environment`) The execution environment to use to evaluate variables
-  in error messages.
-
 - max_characters:
 
   (`integer(1)`) Maximum number of characters allowed in each element.
 
 - max_levels:
 
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
+  (`numeric(1)`) Maximum number of distinct non-`NA` values allowed
+  across the whole vector after applying `to_na`.
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_value:
 
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
+  values are not checked.
+
+- message_env:
+
+  (`environment`) The execution environment to use to evaluate variables
+  in error messages.
 
 - min_characters:
 
@@ -120,18 +120,18 @@ to make them easier to import and to find.
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - min_value:
 
-  `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - package:
 
-  `(length-1 character)` The name of the package to use in classes.
+  (`character(1)`) The name of the package to use in classes.
 
 - parent:
 
@@ -160,7 +160,7 @@ to make them easier to import and to find.
 
 - to_class:
 
-  `(length-1 character)` The name of the class to coerce to.
+  (`character(1)`) The name of the class to coerce to.
 
 - to_cls_args:
 
@@ -190,7 +190,7 @@ to make them easier to import and to find.
 
 - unique:
 
-  `(length-1 logical)` Should all elements in `x` be distinct?
+  (`logical(1)`) Should all elements in `x` be distinct?
 
 - x:
 
@@ -198,14 +198,14 @@ to make them easier to import and to find.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the argument being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the argument being stabilized to
+  use in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
