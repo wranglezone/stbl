@@ -22,7 +22,7 @@
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for coercion.}
 
@@ -49,7 +49,7 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -57,7 +57,7 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the object being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}

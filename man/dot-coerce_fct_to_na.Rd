@@ -7,7 +7,7 @@
 .coerce_fct_to_na(x, to_na = character(), call = caller_env())
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 

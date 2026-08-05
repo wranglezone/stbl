@@ -170,7 +170,7 @@ rlang::caller_env
   .glue2("{.arg [x_arg]} [msg]")
 }
 
-#' Abort because an argument must not be NULL
+#' Abort because an object must not be NULL
 #'
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params

@@ -15,7 +15,7 @@ size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
 size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

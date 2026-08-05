@@ -21,7 +21,7 @@ coercion.}
 
 \item{to_class}{(\code{character(1)}) The target class for the coercion.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

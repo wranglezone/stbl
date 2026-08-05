@@ -119,7 +119,7 @@
 .check_max_dbl(x, max_val)
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
 vector's \code{levels} play the same role that \code{allowed_values} plays for

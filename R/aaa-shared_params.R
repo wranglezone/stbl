@@ -82,12 +82,12 @@
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param unique (`logical(1)`) Should all elements in `x` be distinct?
-#' @param x The argument to stabilize.
-#' @param x_arg (`character(1)`) The name of the argument being stabilized
+#' @param x The object to stabilize.
+#' @param x_arg (`character(1)`) The name of the object being stabilized
 #'   to use in error messages. The automatic value will work in most cases, or
 #'   pass it through from higher-level functions to make error messages clearer
 #'   in unexported functions.
-#' @param x_class (`character(1)`) The class name of the argument being
+#' @param x_class (`character(1)`) The class name of the object being
 #'   stabilized to use in error messages. Use this if you remove a special class
 #'   from the object before checking its coercion, but want the error message to
 #'   match the original class.

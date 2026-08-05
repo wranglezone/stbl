@@ -2,12 +2,12 @@
 % Please edit documentation in R/aaa-conditions.R
 \name{.stop_null}
 \alias{.stop_null}
-\title{Abort because an argument must not be NULL}
+\title{Abort because an object must not be NULL}
 \usage{
 .stop_null(x_arg, call, parent = NULL, ...)
 }
 \arguments{
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -25,6 +25,6 @@ source of error messages.}
 \code{NULL} invisibly (called for side effects).
 }
 \description{
-Abort because an argument must not be NULL
+Abort because an object must not be NULL
 }
 \keyword{internal}

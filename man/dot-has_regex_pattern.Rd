@@ -7,7 +7,7 @@
 .has_regex_pattern(x, regex)
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
 regular expressions to test against the values of \code{x}. This can be a

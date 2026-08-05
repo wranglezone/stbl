@@ -1,13 +1,13 @@
-#' Ensure a data frame argument meets expectations
+#' Ensure a data frame meets expectations
 #'
-#' `to_df()` checks whether an argument can be coerced to a data frame,
+#' `to_df()` checks whether an object can be coerced to a data frame,
 #' returning it silently if so. Otherwise an informative error message is
 #' signaled. `to_data_frame()` is a synonym of `to_df()`.
 #'
 #' @param ... Arguments passed to [base::as.data.frame()] or other methods.
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a data frame.
+#' @returns The object as a data frame.
 #' @family data frame functions
 #' @export
 #'

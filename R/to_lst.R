@@ -1,6 +1,6 @@
-#' Ensure a list argument meets expectations
+#' Ensure a list meets expectations
 #'
-#' `to_lst()` checks whether an argument can be coerced to a list without losing
+#' `to_lst()` checks whether an object can be coerced to a list without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_list()` is a synonym of `to_lst()`.
 #'
@@ -17,7 +17,7 @@
 #' @param ... Arguments passed to [base::as.list()] or other methods.
 #' @inheritParams .shared-params
 #'
-#' @returns The argument as a list.
+#' @returns The object as a list.
 #' @family list functions
 #' @export
 to_lst <- function(
@@ -91,7 +91,7 @@ to_lst.function <- function(
   }
 }
 
-#' Abort because an argument must not be a function
+#' Abort because an object must not be a function
 #'
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params

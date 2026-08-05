@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If
 \code{NULL} (default) values are not checked.}
@@ -26,7 +26,7 @@
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}

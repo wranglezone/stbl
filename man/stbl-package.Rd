@@ -4,11 +4,11 @@
 \name{stbl-package}
 \alias{stbl}
 \alias{stbl-package}
-\title{stbl: Stabilize Function Arguments}
+\title{stbl: Stabilize Objects}
 \description{
 \if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 
-A set of consistent, opinionated functions to quickly check function arguments, coerce them to the desired configuration, or deliver informative error messages when that is not possible.
+A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.
 }
 \seealso{
 Useful links:

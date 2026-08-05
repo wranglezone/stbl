@@ -1,10 +1,10 @@
-#' Ensure an argument meets expectations
+#' Ensure an object meets expectations
 #'
 #' @description
 #' `stabilize_arg()` is used by other functions such as [stabilize_int()]. Use
 #' `stabilize_arg()` if the type-specific functions will not work for your use
 #' case, but you would still like to check things like size or whether the
-#' argument is NULL.
+#' object is NULL.
 #'
 #' `stabilize_arg_scalar()` is optimized to check for length-1 vectors.
 #'

@@ -4,7 +4,7 @@
 \alias{to_df}
 \alias{to_data_frame}
 \alias{to_df.NULL}
-\title{Ensure a data frame argument meets expectations}
+\title{Ensure a data frame meets expectations}
 \usage{
 to_df(
   x,
@@ -25,11 +25,11 @@ to_data_frame(
 \method{to_df}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to \code{\link[base:as.data.frame]{base::as.data.frame()}} or other methods.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
 to use in error messages. The automatic value will work in most cases, or
 pass it through from higher-level functions to make error messages clearer
 in unexported functions.}
@@ -37,7 +37,7 @@ in unexported functions.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the argument being
+\item{x_class}{(\code{character(1)}) The class name of the object being
 stabilized to use in error messages. Use this if you remove a special class
 from the object before checking its coercion, but want the error message to
 match the original class.}
@@ -45,10 +45,10 @@ match the original class.}
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
-The argument as a data frame.
+The object as a data frame.
 }
 \description{
-\code{to_df()} checks whether an argument can be coerced to a data frame,
+\code{to_df()} checks whether an object can be coerced to a data frame,
 returning it silently if so. Otherwise an informative error message is
 signaled. \code{to_data_frame()} is a synonym of \code{to_df()}.
 }
