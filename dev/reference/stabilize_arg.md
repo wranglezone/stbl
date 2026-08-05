@@ -1,10 +1,10 @@
-# Ensure an argument meets expectations
+# Ensure an object meets expectations
 
 `stabilize_arg()` is used by other functions such as
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md).
 Use `stabilize_arg()` if the type-specific functions will not work for
 your use case, but you would still like to check things like size or
-whether the argument is NULL.
+whether the object is NULL.
 
 `stabilize_arg_scalar()` is optimized to check for length-1 vectors.
 
@@ -40,7 +40,7 @@ stabilize_arg_scalar(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -72,7 +72,7 @@ stabilize_arg_scalar(
 
 - x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
@@ -84,8 +84,8 @@ stabilize_arg_scalar(
 
 - x_class:
 
-  (`character(1)`) The class name of the argument being stabilized to
-  use in error messages. Use this if you remove a special class from the
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
   object before checking its coercion, but want the error message to
   match the original class.
 

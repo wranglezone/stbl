@@ -86,7 +86,7 @@ Call the C routine to convert a vector to another type
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - levels:
 

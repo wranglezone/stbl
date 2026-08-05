@@ -12,7 +12,7 @@ Detect a regex pattern in a character vector
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - regex:
 

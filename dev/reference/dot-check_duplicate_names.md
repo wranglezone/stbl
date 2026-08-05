@@ -12,7 +12,7 @@ Check for duplicate names in a list
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - .allow_duplicate_names:
 
@@ -22,7 +22,7 @@ Check for duplicate names in a list
 
 - .x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.

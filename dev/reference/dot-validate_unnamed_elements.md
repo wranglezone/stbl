@@ -12,7 +12,7 @@ Validate or reject unnamed elements
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - .unnamed:
 
@@ -25,7 +25,7 @@ Validate or reject unnamed elements
 
 - .x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.

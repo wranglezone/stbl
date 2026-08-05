@@ -12,7 +12,7 @@ Describe a character-based validation failure
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - success:
 

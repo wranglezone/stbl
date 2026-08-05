@@ -1,6 +1,6 @@
-# Abort because an argument must not be a function
+# Abort because an object must not be a function
 
-Abort because an argument must not be a function
+Abort because an object must not be a function
 
 ## Usage
 
@@ -12,7 +12,7 @@ Abort because an argument must not be a function
 
 - x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.

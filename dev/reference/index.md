@@ -164,10 +164,10 @@
   [`stabilise_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   [`stabilize_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   [`stabilise_data_frame()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
-  : Ensure a data frame argument meets expectations
+  : Ensure a data frame meets expectations
 - [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
   [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
-  : Ensure a data frame argument meets expectations
+  : Ensure a data frame meets expectations
 
 ## functions
 
@@ -183,7 +183,7 @@
   value to a target type
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
-  Ensure a list argument meets expectations
+  Ensure a list meets expectations
 
 ## lists
 
@@ -194,10 +194,10 @@
   [`stabilize_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   [`stabilise_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   [`stabilise_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
-  : Ensure a list argument meets expectations
+  : Ensure a list meets expectations
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
-  Ensure a list argument meets expectations
+  Ensure a list meets expectations
 - [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   : Require a value to be non-NULL
 
@@ -214,7 +214,7 @@
   : Identify the class, type, etc of an object
 - [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md)
   [`stabilize_arg_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md)
-  : Ensure an argument meets expectations
+  : Ensure an object meets expectations
 
 ## conditions
 

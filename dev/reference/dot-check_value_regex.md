@@ -12,7 +12,7 @@ Check character values against regex patterns
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - regex:
 
@@ -30,7 +30,7 @@ Check character values against regex patterns
 
 - x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.

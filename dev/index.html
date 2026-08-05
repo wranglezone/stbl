@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Stabilize Function Arguments • stbl</title>
+<title>Stabilize Objects • stbl</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,9 +15,9 @@
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Stabilize Function Arguments">
-<meta name="description" content="A set of consistent, opinionated functions to quickly check function arguments, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
-<meta property="og:description" content="A set of consistent, opinionated functions to quickly check function arguments, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Stabilize Objects">
+<meta name="description" content="A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
+<meta property="og:description" content="A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
 <meta property="og:image" content="https://stbl.wrangle.zone/logo.svg">
 <meta name="robots" content="noindex">
 </head>
@@ -68,7 +68,7 @@
 </div>
 <!-- badges: start -->
 
-<p>R is flexible about classes. Variables are not declared with explicit classes, and arguments of the “wrong” class don’t cause errors until they explicitly fail at some point in the call stack. It would be helpful to keep that flexibility from a user standpoint, but to error informatively and quickly if the inputs will not work for a computation. The purpose of stbl is to allow programmers to specify what they want, and to then see if what the user supplied can work for that purpose.</p>
+<p>R is flexible about classes. Variables are not declared with explicit classes, and objects of the “wrong” class don’t cause errors until they explicitly fail at some point in the call stack. It would be helpful to keep that flexibility from a user standpoint, but to error informatively and quickly if the inputs will not work for a computation. The purpose of stbl is to allow programmers to specify what they want, and to then see if what the user supplied can work for that purpose.</p>
 <p>This approach aligns with <a href="https://en.wikipedia.org/wiki/Robustness_principle" class="external-link">Postel’s Law</a>:</p>
 <blockquote>
 <p>“Be conservative in what you send. Be liberal in what you accept from others.”</p>
@@ -90,12 +90,12 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The primary use-case for stbl is to stabilize function arguments. The goal is to make sure arguments will work the way you expect them to work, and to give meaningful error messages when they won’t.</p>
+<p>The primary use-case for stbl is to stabilize objects, such as function arguments. The goal is to make sure objects will work the way you expect them to work, and to give meaningful error messages when they won’t.</p>
 <p>For example, perhaps you would like to protect against the case where data is not properly translated from character to integer when it’s loaded by a user.</p>
 <div class="section level3">
 <h3 id="without-stbl">Without stbl:<a class="anchor" aria-label="anchor" href="#without-stbl"></a>
 </h3>
-<p>Without the argument-stabilizers provided in stbl, error messages can be cryptic, and errors trigger when you might not want them to.</p>
+<p>Without the stabilizers provided in stbl, error messages can be cryptic, and errors trigger when you might not want them to.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_old_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">my_arg_name</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">my_arg_name</span> <span class="op">+</span> <span class="fl">1</span></span>
@@ -107,7 +107,7 @@
 <div class="section level3">
 <h3 id="with-stbl">With stbl:<a class="anchor" aria-label="anchor" href="#with-stbl"></a>
 </h3>
-<p>stbl helps to ensure that arguments are what you expect them to be.</p>
+<p>stbl helps to ensure that objects are what you expect them to be.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">my_arg_name</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">my_arg_name</span> <span class="op">&lt;-</span> <span class="fu">stbl</span><span class="fu">::</span><span class="fu"><a href="reference/to_int.html">to_int</a></span><span class="op">(</span><span class="va">my_arg_name</span><span class="op">)</span></span>

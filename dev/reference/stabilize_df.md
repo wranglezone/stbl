@@ -1,4 +1,4 @@
-# Ensure a data frame argument meets expectations
+# Ensure a data frame meets expectations
 
 `stabilize_df()` validates the structure and contents of a data frame.
 It can check that specific named columns are present and valid, that
@@ -67,7 +67,7 @@ stabilise_data_frame(
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -110,7 +110,7 @@ stabilise_data_frame(
 
 - .x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
@@ -122,8 +122,8 @@ stabilise_data_frame(
 
 - .x_class:
 
-  (`character(1)`) The class name of the argument being stabilized to
-  use in error messages. Use this if you remove a special class from the
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
   object before checking its coercion, but want the error message to
   match the original class.
 

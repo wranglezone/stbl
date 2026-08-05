@@ -1,6 +1,6 @@
-# Ensure a list argument meets expectations
+# Ensure a list meets expectations
 
-`to_lst()` checks whether an argument can be coerced to a list without
+`to_lst()` checks whether an object can be coerced to a list without
 losing information, returning it silently if so. Otherwise an
 informative error message is signaled. `to_list()` is a synonym of
 `to_lst()`.
@@ -35,7 +35,7 @@ to_lst(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -45,7 +45,7 @@ to_lst(
 
 - x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
@@ -65,7 +65,7 @@ to_lst(
 
 ## Value
 
-The argument as a list.
+The object as a list.
 
 ## Details
 

@@ -51,7 +51,7 @@ to_fn(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -59,7 +59,7 @@ to_fn(
 
 - x_arg:
 
-  (`character(1)`) The name of the argument being stabilized to use in
+  (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
@@ -71,8 +71,8 @@ to_fn(
 
 - x_class:
 
-  (`character(1)`) The class name of the argument being stabilized to
-  use in error messages. Use this if you remove a special class from the
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
   object before checking its coercion, but want the error message to
   match the original class.
 
@@ -113,24 +113,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x562532bfa2a0>
+#> <bytecode: 0x561061ad22a0>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x5625357eeeb8>
+#> <environment: 0x5610658c4a18>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x562532bfa2a0>
+#> <bytecode: 0x561061ad22a0>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x5625325b59f8>
+#> <bytecode: 0x56106148d9f8>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL
