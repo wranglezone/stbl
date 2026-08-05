@@ -69,7 +69,7 @@ to_character <- to_chr
 #' Internal S3 implementation of to_chr
 #'
 #' @inheritParams .shared-params
-#' @returns The argument coerced to character.
+#' @returns The object coerced to character.
 #' @keywords internal
 .to_chr_impl <- function(
   x,

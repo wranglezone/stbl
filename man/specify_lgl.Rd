@@ -42,18 +42,17 @@ specify_logical_scalar(
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

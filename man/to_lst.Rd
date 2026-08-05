@@ -7,7 +7,7 @@
 \alias{to_lst.default}
 \alias{to_lst.NULL}
 \alias{to_lst.function}
-\title{Ensure a list argument meets expectations}
+\title{Ensure a list meets expectations}
 \usage{
 to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
 
@@ -28,14 +28,14 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to \code{\link[base:as.list]{base::as.list()}} or other methods.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
@@ -45,10 +45,10 @@ source of error messages.}
 \item{coerce_function}{(\code{logical(1)}) Should functions be coerced?}
 }
 \value{
-The argument as a list.
+The object as a list.
 }
 \description{
-\code{to_lst()} checks whether an argument can be coerced to a list without losing
+\code{to_lst()} checks whether an object can be coerced to a list without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_list()} is a synonym of \code{to_lst()}.
 }

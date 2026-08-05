@@ -115,29 +115,29 @@ to(
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{.to}{A prototype that determines the target type (e.g., \code{integer()},
 \code{factor(levels = c("a", "b"))}).}
 
 \item{...}{Arguments passed to methods and on to \verb{to_*()} functions.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
-vector's \code{levels} play the same role that \code{allowed_values} plays for
-other types: they restrict \code{x} to a fixed set of permitted values.}
+vector's \code{levels} play the same role that \code{allowed_values} plays for other
+types: they restrict \code{x} to a fixed set of permitted values.}
 }
 \value{
 \code{x} coerced to the type of \code{.to}.

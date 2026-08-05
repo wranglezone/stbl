@@ -1,4 +1,4 @@
-#' Ensure an argument is NULL
+#' Ensure an object is NULL
 #'
 #' @inheritParams .shared-params
 #' @returns `NULL` or an error.

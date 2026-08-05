@@ -12,8 +12,7 @@
 #'   type). `NULL` (default) skips the check. `NA` values in `x` are permitted
 #'   independently of `allowed_values`, subject to `allow_na`.
 #' @param allow_null (`logical(1)`) Is NULL an acceptable value?
-#' @param allow_zero_length (`logical(1)`) Are zero-length vectors
-#'   acceptable?
+#' @param allow_zero_length (`logical(1)`) Are zero-length vectors acceptable?
 #' @param are_cls_ish_fn The `are_*_ish` function to apply to each element.
 #' @param call `(environment)` The execution environment to mention as the
 #'   source of error messages.
@@ -22,15 +21,15 @@
 #'   after coercion.
 #' @param check_cls_value_fn_args `(list)` A list of additional arguments to
 #'   pass to `check_cls_value_fn()`.
-#' @param coerce_character (`logical(1)`) Should character vectors such as
-#'   "1" and "2.0" be considered numeric-ish?
-#' @param coerce_factor (`logical(1)`) Should factors with values such as
-#'   "1" and "2.0" be considered numeric-ish? Note that this package uses the
+#' @param coerce_character (`logical(1)`) Should character vectors such as "1"
+#'   and "2.0" be considered numeric-ish?
+#' @param coerce_factor (`logical(1)`) Should factors with values such as "1"
+#'   and "2.0" be considered numeric-ish? Note that this package uses the
 #'   character value from the factor, while [as.integer()] and [as.double()] use
 #'   the integer index of the factor.
 #' @param coerce_function (`logical(1)`) Should functions be coerced?
-#' @param depth (`integer(1)`) Current recursion depth. Do not manually
-#'   set this parameter.
+#' @param depth (`integer(1)`) Current recursion depth. Do not manually set this
+#'   parameter.
 #' @param due_to (`character(1)`) A string describing the reason for the
 #'   failure.
 #' @param failures `(logical)` A logical vector indicating which elements
@@ -38,26 +37,25 @@
 #' @param is_rlang_cls_scalar `(function)` An `is_scalar_*()` function from
 #'   rlang, used for a fast path if `x` is already the right type.
 #' @param levels `(character)` The desired factor levels. For factors, a
-#'   vector's `levels` play the same role that `allowed_values` plays for
-#'   other types: they restrict `x` to a fixed set of permitted values.
+#'   vector's `levels` play the same role that `allowed_values` plays for other
+#'   types: they restrict `x` to a fixed set of permitted values.
 #' @param max_characters (`integer(1)`) Maximum number of characters allowed in
 #'   each element.
-#' @param max_levels (`numeric(1)`) Maximum number of distinct non-`NA`
-#'   values allowed across the whole vector after applying `to_na`.
-#' @param max_size (`integer(1)`) The maximum size of the object. Object
-#'   size will be tested using [vctrs::vec_size()].
-#' @param max_value (`numeric(1)`) The highest allowed value for `x`. If
-#'   `NULL` (default) values are not checked.
+#' @param max_levels (`numeric(1)`) Maximum number of distinct non-`NA` values
+#'   allowed across the whole vector after applying `to_na`.
+#' @param max_size (`integer(1)`) The maximum size of the object. Object size
+#'   will be tested using [vctrs::vec_size()].
+#' @param max_value (`numeric(1)`) The highest allowed value for `x`. If `NULL`
+#'   (default) values are not checked.
 #' @param message_env (`environment`) The execution environment to use to
 #'   evaluate variables in error messages.
 #' @param min_characters (`integer(1)`) Minimum number of characters allowed in
 #'   each element.
-#' @param min_size (`integer(1)`) The minimum size of the object. Object
-#'   size will be tested using [vctrs::vec_size()].
-#' @param min_value (`numeric(1)`) The lowest allowed value for `x`. If
-#'   `NULL` (default) values are not checked.
-#' @param package (`character(1)`) The name of the package to use in
-#'   classes.
+#' @param min_size (`integer(1)`) The minimum size of the object. Object size
+#'   will be tested using [vctrs::vec_size()].
+#' @param min_value (`numeric(1)`) The lowest allowed value for `x`. If `NULL`
+#'   (default) values are not checked.
+#' @param package (`character(1)`) The name of the package to use in classes.
 #' @param parent A parent condition, as you might create during a
 #'   [rlang::try_fetch()]. See [rlang::abort()] for additional information.
 #' @param regex `(character, list, or stringr_pattern)` One or more optional
@@ -82,15 +80,15 @@
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param unique (`logical(1)`) Should all elements in `x` be distinct?
-#' @param x The argument to stabilize.
-#' @param x_arg (`character(1)`) The name of the argument being stabilized
-#'   to use in error messages. The automatic value will work in most cases, or
-#'   pass it through from higher-level functions to make error messages clearer
-#'   in unexported functions.
-#' @param x_class (`character(1)`) The class name of the argument being
-#'   stabilized to use in error messages. Use this if you remove a special class
-#'   from the object before checking its coercion, but want the error message to
-#'   match the original class.
+#' @param x The object to stabilize.
+#' @param x_arg (`character(1)`) The name of the object being stabilized to use
+#'   in error messages. The automatic value will work in most cases, or pass it
+#'   through from higher-level functions to make error messages clearer in
+#'   unexported functions.
+#' @param x_class (`character(1)`) The class name of the object being stabilized
+#'   to use in error messages. Use this if you remove a special class from the
+#'   object before checking its coercion, but want the error message to match
+#'   the original class.
 #'
 #' @name .shared-params
 #' @keywords internal

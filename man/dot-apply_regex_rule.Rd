@@ -10,12 +10,12 @@
 \item{rule}{(\code{character(1)}) A regex rule (possibly with a \code{name} and
 \code{negate} attribute).}
 
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

@@ -16,8 +16,7 @@ expect_pkg_error_snapshot(
 \arguments{
 \item{object}{An expression that is expected to throw an error.}
 
-\item{package}{(\code{character(1)}) The name of the package to use in
-classes.}
+\item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
 \item{...}{\code{(character)} Components of the class name, from least-specific to
 most.}

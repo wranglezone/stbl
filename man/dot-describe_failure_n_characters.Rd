@@ -15,10 +15,10 @@
 
 \item{direction}{(\code{character(1)}) One of \code{"few"} or \code{"many"}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 }
 \value{
 A named character vector for \code{\link[=.stbl_abort]{.stbl_abort()}}.

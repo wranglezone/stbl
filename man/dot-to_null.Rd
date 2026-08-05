@@ -2,19 +2,19 @@
 % Please edit documentation in R/to_null.R
 \name{.to_null}
 \alias{.to_null}
-\title{Ensure an argument is NULL}
+\title{Ensure an object is NULL}
 \usage{
 .to_null(x, allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
@@ -23,6 +23,6 @@ source of error messages.}
 \code{NULL} or an error.
 }
 \description{
-Ensure an argument is NULL
+Ensure an object is NULL
 }
 \keyword{internal}

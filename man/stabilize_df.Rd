@@ -5,7 +5,7 @@
 \alias{stabilise_df}
 \alias{stabilize_data_frame}
 \alias{stabilise_data_frame}
-\title{Ensure a data frame argument meets expectations}
+\title{Ensure a data frame meets expectations}
 \usage{
 stabilize_df(
   .x,
@@ -60,7 +60,7 @@ stabilise_data_frame(
 )
 }
 \arguments{
-\item{.x}{The argument to stabilize.}
+\item{.x}{The object to stabilize.}
 
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
@@ -85,18 +85,18 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{.x_class}{(\code{character(1)}) The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{.x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 }
 \value{
 The validated data frame, or an error condition with classes

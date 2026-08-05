@@ -72,47 +72,46 @@ stabilise_integer_scalar(
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{coerce_character}{(\code{logical(1)}) Should character vectors such as
-"1" and "2.0" be considered numeric-ish?}
+\item{coerce_character}{(\code{logical(1)}) Should character vectors such as "1"
+and "2.0" be considered numeric-ish?}
 
-\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as
-"1" and "2.0" be considered numeric-ish? Note that this package uses the
+\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as "1"
+and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 
-\item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If
-\code{NULL} (default) values are not checked.}
+\item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If \code{NULL}
+(default) values are not checked.}
 
-\item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If
-\code{NULL} (default) values are not checked.}
+\item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
+(default) values are not checked.}
 
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 }
 \value{
 The input as a length-1 integer vector, or an error condition with

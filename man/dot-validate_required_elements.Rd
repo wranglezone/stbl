@@ -7,7 +7,7 @@
 .validate_required_elements(.x, element_specs, nms, .x_arg, .call)
 }
 \arguments{
-\item{.x}{The argument to stabilize.}
+\item{.x}{The object to stabilize.}
 
 \item{element_specs}{\code{(list)} Named list of stabilizer functions, such as
 \verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by
@@ -17,10 +17,10 @@ element.}
 
 \item{nms}{\code{(character)} Result of \code{rlang::names2(.x)}.}
 
-\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

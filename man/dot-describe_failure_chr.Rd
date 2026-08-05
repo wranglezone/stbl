@@ -7,7 +7,7 @@
 .describe_failure_chr(x, success, negate = FALSE)
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{success}{\code{(logical)} A logical vector indicating which elements of \code{x}
 passed the check.}

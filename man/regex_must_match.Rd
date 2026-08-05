@@ -21,7 +21,7 @@ attribute and with \code{\link[=names]{names()}} equal to the generated "must no
 message.
 }
 \description{
-Attach a standardized error message to a \code{regex} argument. By default, the
+Attach a standardized error message to a \code{regex} pattern. By default, the
 message will be "must match the regex pattern \{regex\}". If the input
 \code{regex} has a \code{negate} attribute set to \code{TRUE} (set automatically by
 \code{regex_must_not_match()}), the message will instead be "must not match...".

@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{.x}{The argument to stabilize.}
+\item{.x}{The object to stabilize.}
 
 \item{nms}{\code{(character)} Result of \code{rlang::names2(.x)}.}
 
@@ -26,10 +26,10 @@ function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function prod
 function (\code{\link[=specify_chr]{specify_chr()}}, etc), or \code{NULL} to disallow extra named
 elements.}
 
-\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

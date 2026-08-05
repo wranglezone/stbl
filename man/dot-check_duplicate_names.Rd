@@ -7,16 +7,16 @@
 .check_duplicate_names(.x, .allow_duplicate_names, .x_arg, .call)
 }
 \arguments{
-\item{.x}{The argument to stabilize.}
+\item{.x}{The object to stabilize.}
 
 \item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
-\item{.x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

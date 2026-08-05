@@ -196,7 +196,8 @@
 #' Check that one value is not greater than another
 #'
 #' @param y The value to compare against.
-#' @param y_arg (`character(1)`) The name of the `y` argument.
+#' @param y_arg (`character(1)`) The name of the `y` value to use in error
+#'   messages.
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return

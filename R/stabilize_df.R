@@ -1,4 +1,4 @@
-#' Ensure a data frame argument meets expectations
+#' Ensure a data frame meets expectations
 #'
 #' `stabilize_df()` validates the structure and contents of a data frame. It can
 #' check that specific named columns are present and valid, that extra columns

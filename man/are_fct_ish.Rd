@@ -24,16 +24,16 @@ is_factor_ish(x, ..., levels = NULL, to_na = character(), max_levels = Inf)
 \item{...}{Arguments passed to methods.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
-vector's \code{levels} play the same role that \code{allowed_values} plays for
-other types: they restrict \code{x} to a fixed set of permitted values.}
+vector's \code{levels} play the same role that \code{allowed_values} plays for other
+types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
-\item{max_levels}{(\code{numeric(1)}) Maximum number of distinct non-\code{NA}
-values allowed across the whole vector after applying \code{to_na}.}
+\item{max_levels}{(\code{numeric(1)}) Maximum number of distinct non-\code{NA} values
+allowed across the whole vector after applying \code{to_na}.}
 
-\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
-set this parameter.}
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually set this
+parameter.}
 }
 \value{
 \code{are_fct_ish()} returns a logical vector with the same length as the

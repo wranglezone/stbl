@@ -15,8 +15,7 @@ pkg_inform(
 )
 }
 \arguments{
-\item{package}{(\code{character(1)}) The name of the package to use in
-classes.}
+\item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
 \item{message}{(\code{character}) The message for the new message condition.
 Messages will be formatted with \code{\link[cli:cli_bullets]{cli::cli_bullets()}}.}

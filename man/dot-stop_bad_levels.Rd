@@ -7,21 +7,21 @@
 .stop_bad_levels(x, bad_casts, levels, to_na, x_arg, call)
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{bad_casts}{\code{(logical)} A logical vector indicating which elements of
 \code{x} are not in the allowed levels.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
-vector's \code{levels} play the same role that \code{allowed_values} plays for
-other types: they restrict \code{x} to a fixed set of permitted values.}
+vector's \code{levels} play the same role that \code{allowed_values} plays for other
+types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

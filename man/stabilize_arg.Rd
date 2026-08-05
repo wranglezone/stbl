@@ -3,7 +3,7 @@
 \name{stabilize_arg}
 \alias{stabilize_arg}
 \alias{stabilize_arg_scalar}
-\title{Ensure an argument meets expectations}
+\title{Ensure an object meets expectations}
 \usage{
 stabilize_arg(
   x,
@@ -30,7 +30,7 @@ stabilize_arg_scalar(
 )
 }
 \arguments{
-\item{x}{The argument to stabilize.}
+\item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
 
@@ -38,29 +38,28 @@ stabilize_arg_scalar(
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
 \value{
 \code{x}, or an error condition with classes \verb{<stbl-error>},
@@ -81,7 +80,7 @@ specific class by failure mode:
 \code{stabilize_arg()} is used by other functions such as \code{\link[=stabilize_int]{stabilize_int()}}. Use
 \code{stabilize_arg()} if the type-specific functions will not work for your use
 case, but you would still like to check things like size or whether the
-argument is NULL.
+object is NULL.
 
 \code{stabilize_arg_scalar()} is optimized to check for length-1 vectors.
 }

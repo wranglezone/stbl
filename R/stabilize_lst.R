@@ -1,4 +1,4 @@
-#' Ensure a list argument meets expectations
+#' Ensure a list meets expectations
 #'
 #' `stabilize_lst()` validates the structure and contents of a list. It can
 #' check that specific named elements are present and valid, that extra named

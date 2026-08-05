@@ -2,15 +2,15 @@
 % Please edit documentation in R/to_lst.R
 \name{.stop_function}
 \alias{.stop_function}
-\title{Abort because an argument must not be a function}
+\title{Abort because an object must not be a function}
 \usage{
 .stop_function(x_arg, call)
 }
 \arguments{
-\item{x_arg}{(\code{character(1)}) The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
@@ -19,6 +19,6 @@ source of error messages.}
 \code{NULL} invisibly (called for side effects).
 }
 \description{
-Abort because an argument must not be a function
+Abort because an object must not be a function
 }
 \keyword{internal}

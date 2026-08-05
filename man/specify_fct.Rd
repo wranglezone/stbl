@@ -46,19 +46,18 @@ specify_factor_scalar(
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{levels}{\code{(character)} Expected levels. If \code{NULL} (default), the levels
 will be computed by \code{\link[base:factor]{base::factor()}}.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

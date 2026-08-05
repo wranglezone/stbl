@@ -1,12 +1,12 @@
 Package: stbl
-Title: Stabilize Function Arguments
+Title: Stabilize Objects
 Version: 0.4.0.9000
 Authors@R:
     person("Jon", "Harmon", , "jonthegeek@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-4781-4346"))
 Description: A set of consistent, opinionated functions to quickly check
-    function arguments, coerce them to the desired configuration, or
-    deliver informative error messages when that is not possible.
+    objects, coerce them to the desired configuration, or deliver
+    informative error messages when that is not possible.
 License: MIT + file LICENSE
 URL: https://stbl.wrangle.zone/, https://github.com/wranglezone/stbl
 BugReports: https://github.com/wranglezone/stbl/issues
@@ -26,11 +26,11 @@ Suggests:
     testthat (>= 3.3.0)
 VignetteBuilder:
     knitr
+Config/Needs/website: quarto
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Config/Needs/website: quarto
 Encoding: UTF-8
 Language: en-US
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
