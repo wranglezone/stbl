@@ -29,16 +29,16 @@ is_integer_ish(x, ...)
 
 \item{...}{Arguments passed to methods.}
 
-\item{coerce_character}{(\code{logical(1)}) Should character vectors such as
-"1" and "2.0" be considered numeric-ish?}
+\item{coerce_character}{(\code{logical(1)}) Should character vectors such as "1"
+and "2.0" be considered numeric-ish?}
 
-\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as
-"1" and "2.0" be considered numeric-ish? Note that this package uses the
+\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as "1"
+and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 
-\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
-set this parameter.}
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually set this
+parameter.}
 }
 \value{
 \code{are_int_ish()} returns a logical vector with the same length as the

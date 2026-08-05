@@ -23,8 +23,8 @@ is_logical_ish(x, ...)
 
 \item{...}{Arguments passed to methods.}
 
-\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
-set this parameter.}
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually set this
+parameter.}
 }
 \value{
 \code{are_lgl_ish()} returns a logical vector with the same length as the

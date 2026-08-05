@@ -48,11 +48,11 @@ If \code{TRUE}, duplicated elements are rejected.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{.min_size}{(\code{integer(1)}) The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

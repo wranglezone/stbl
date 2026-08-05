@@ -31,10 +31,10 @@ elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \c
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
 named element of \code{.x} shares a name with another.}
 
-\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

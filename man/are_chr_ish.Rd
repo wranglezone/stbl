@@ -23,8 +23,8 @@ is_character_ish(x, ...)
 
 \item{...}{Arguments passed to methods.}
 
-\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually
-set this parameter.}
+\item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually set this
+parameter.}
 }
 \value{
 \code{are_chr_ish()} returns a logical vector with the same length as the

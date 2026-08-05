@@ -32,10 +32,10 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 \item{...}{Arguments passed to \code{\link[base:as.list]{base::as.list()}} or other methods.}
 
-\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

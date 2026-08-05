@@ -9,16 +9,16 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object
-size will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

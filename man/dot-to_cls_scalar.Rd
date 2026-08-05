@@ -29,21 +29,20 @@ rlang, used for a fast path if \code{x} is already the right type.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 
-\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the object being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 }
 \value{
 \code{x} as a scalar of the target class.

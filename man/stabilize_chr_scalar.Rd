@@ -74,8 +74,7 @@ stabilise_character_scalar(
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors
-acceptable?}
+\item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
@@ -100,18 +99,18 @@ throws an error, try installing the stringi package.}
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
-\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the object being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 }
 \value{
 The input as a length-1 character vector, or an error condition with

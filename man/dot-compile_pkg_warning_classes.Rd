@@ -7,8 +7,7 @@
 .compile_pkg_warning_classes(package, ...)
 }
 \arguments{
-\item{package}{(\code{character(1)}) The name of the package to use in
-classes.}
+\item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
 \item{...}{\code{(character)} Components of the class name, from least-specific to
 most.}

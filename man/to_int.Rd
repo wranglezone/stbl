@@ -49,26 +49,26 @@ to_integer(
 
 \item{...}{Arguments passed to methods.}
 
-\item{x_arg}{(\code{character(1)}) The name of the object being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.}
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{x_class}{(\code{character(1)}) The class name of the object being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.}
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{coerce_character}{(\code{logical(1)}) Should character vectors such as
-"1" and "2.0" be considered numeric-ish?}
+\item{coerce_character}{(\code{logical(1)}) Should character vectors such as "1"
+and "2.0" be considered numeric-ish?}
 
-\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as
-"1" and "2.0" be considered numeric-ish? Note that this package uses the
+\item{coerce_factor}{(\code{logical(1)}) Should factors with values such as "1"
+and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 }
