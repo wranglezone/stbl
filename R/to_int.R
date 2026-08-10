@@ -147,15 +147,13 @@ to_int.complex <- function(
 
 #' @export
 to_int.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, integer(), x_arg = x_arg, call = call)
+  vctrs::vec_cast(x, integer(), x_arg = x_arg, call = call)
 }
 
 #' Coerce to length-1 integer
 #'
 #' Checks whether a vector can be coerced to a length-1 integer vector.
-#' `to_int_scalar()` is optimized to check for length-1 integer vectors
-#' (compared to [stabilize_int()] with `max_size = 1`). `to_integer_scalar()`
-#' is a synonym of `to_int_scalar()`.
+#' `to_integer_scalar()` is a synonym of `to_int_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'

@@ -217,6 +217,144 @@ specify_character <- specify_chr
 #' @rdname specify_chr
 specify_character_scalar <- specify_chr_scalar
 
+# date ----
+
+#' Create a specified date stabilizer function
+#'
+#' `specify_date()` creates a function that will call [stabilize_date()] with
+#' the provided arguments. `specify_date_scalar()` creates a function that will
+#' call [stabilize_date_scalar()] with the provided arguments.
+#'
+#' @inheritParams .shared-params
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_date()] or [stabilize_date_scalar()] with the provided
+#'   arguments. The generated function will also accept `...` for additional
+#'   arguments to pass to `stabilize_date()` or `stabilize_date_scalar()`. You
+#'   can copy/paste the body of the resulting function if you want to provide
+#'   additional context or functionality.
+#' @family date functions
+#' @family specification functions
+#' @export
+#'
+#' @examples
+#' stabilize_recent <- specify_date(min_value = "2000-01-01")
+#' stabilize_recent("2024-01-01")
+#' try(stabilize_recent("1999-12-31"))
+specify_date <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  unique = FALSE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("date", factory_args)
+}
+
+#' @export
+#' @rdname specify_date
+specify_date_scalar <- function(
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  allow_na = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("date", factory_args, scalar = TRUE)
+}
+
+# dttm ----
+
+#' Create a specified datetime stabilizer function
+#'
+#' `specify_dttm()` creates a function that will call [stabilize_dttm()] with
+#' the provided arguments. `specify_dttm_scalar()` creates a function that will
+#' call [stabilize_dttm_scalar()] with the provided arguments.
+#' `specify_datetime()` is a synonym of `specify_dttm()`, and
+#' `specify_datetime_scalar()` is a synonym of `specify_dttm_scalar()`.
+#'
+#' @inheritParams .shared-params
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_dttm()] or [stabilize_dttm_scalar()] with the provided
+#'   arguments. The generated function will also accept `...` for additional
+#'   arguments to pass to `stabilize_dttm()` or `stabilize_dttm_scalar()`. You
+#'   can copy/paste the body of the resulting function if you want to provide
+#'   additional context or functionality.
+#' @family datetime functions
+#' @family specification functions
+#' @export
+#'
+#' @examples
+#' stabilize_recent <- specify_dttm(min_value = "2000-01-01T00:00:00Z")
+#' stabilize_recent("2024-01-01T00:00:00Z")
+#' try(stabilize_recent("1999-12-31T00:00:00Z"))
+specify_dttm <- function(
+  tz = "UTC",
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  unique = FALSE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("dttm", factory_args)
+}
+
+#' @export
+#' @rdname specify_dttm
+specify_dttm_scalar <- function(
+  tz = "UTC",
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  allow_na = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("datetime", factory_args, scalar = TRUE)
+}
+
+#' @export
+#' @rdname specify_dttm
+specify_datetime <- specify_dttm
+
+#' @export
+#' @rdname specify_dttm
+specify_datetime_scalar <- specify_dttm_scalar
+
 # dbl ----
 
 #' Create a specified double stabilizer function
@@ -224,8 +362,8 @@ specify_character_scalar <- specify_chr_scalar
 #' `specify_dbl()` creates a function that will call [stabilize_dbl()] with the
 #' provided arguments. `specify_dbl_scalar()` creates a function that will call
 #' [stabilize_dbl_scalar()] with the provided arguments. `specify_double()` is a
-#' synonym of `specify_dbl()`, and `specify_double_scalar()` is a
-#' synonym of `specify_dbl_scalar()`.
+#' synonym of `specify_dbl()`, and `specify_double_scalar()` is a synonym of
+#' `specify_dbl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
@@ -293,6 +431,79 @@ specify_double <- specify_dbl
 #' @export
 #' @rdname specify_dbl
 specify_double_scalar <- specify_dbl_scalar
+
+# dur ----
+
+#' Create a specified duration stabilizer function
+#'
+#' `specify_dur()` creates a function that will call [stabilize_dur()] with the
+#' provided arguments. `specify_dur_scalar()` creates a function that will call
+#' [stabilize_dur_scalar()] with the provided arguments. `specify_duration()` is
+#' a synonym of `specify_dur()`, and `specify_duration_scalar()` is a synonym of
+#' `specify_dur_scalar()`.
+#'
+#' @inheritParams .shared-params
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_dur()] or [stabilize_dur_scalar()] with the provided arguments.
+#'   The generated function will also accept `...` for additional arguments to
+#'   pass to `stabilize_dur()` or `stabilize_dur_scalar()`. You can copy/paste
+#'   the body of the resulting function if you want to provide additional
+#'   context or functionality.
+#' @family duration functions
+#' @family specification functions
+#' @export
+#'
+#' @examples
+#' stabilize_short <- specify_dur(max_value = "P1D")
+#' stabilize_short("PT12H")
+#' try(stabilize_short("P2D"))
+specify_dur <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  unique = FALSE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("dur", factory_args)
+}
+
+#' @export
+#' @rdname specify_dur
+specify_dur_scalar <- function(
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  allow_na = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("dur", factory_args, scalar = TRUE)
+}
+
+#' @export
+#' @rdname specify_dur
+specify_duration <- specify_dur
+
+#' @export
+#' @rdname specify_dur
+specify_duration_scalar <- specify_dur_scalar
 
 # fct ----
 
@@ -508,3 +719,66 @@ specify_logical <- specify_lgl
 #' @export
 #' @rdname specify_lgl
 specify_logical_scalar <- specify_lgl_scalar
+
+# time ----
+
+#' Create a specified time-of-day stabilizer function
+#'
+#' `specify_time()` creates a function that will call [stabilize_time()] with
+#' the provided arguments. `specify_time_scalar()` creates a function that will
+#' call [stabilize_time_scalar()] with the provided arguments.
+#'
+#' @inheritParams .shared-params
+#' @returns A function of class `"stbl_specified_fn"` that calls
+#'   [stabilize_time()] or [stabilize_time_scalar()] with the provided
+#'   arguments. The generated function will also accept `...` for additional
+#'   arguments to pass to `stabilize_time()` or `stabilize_time_scalar()`. You
+#'   can copy/paste the body of the resulting function if you want to provide
+#'   additional context or functionality.
+#' @family time functions
+#' @family specification functions
+#' @export
+#'
+#' @examples
+#' stabilize_afternoon <- specify_time(min_value = "12:00:00Z")
+#' stabilize_afternoon("13:00:00Z")
+#' try(stabilize_afternoon("06:00:00Z"))
+specify_time <- function(
+  allow_null = TRUE,
+  allow_na = TRUE,
+  min_size = NULL,
+  max_size = NULL,
+  unique = FALSE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("time", factory_args)
+}
+
+#' @export
+#' @rdname specify_time
+specify_time_scalar <- function(
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  allow_na = TRUE,
+  min_value = NULL,
+  max_value = NULL,
+  allowed_values = NULL
+) {
+  # Only pass arguments that aren't missing.
+  factory_args <- list()
+  for (arg in names(formals())) {
+    if (!rlang::inject(base::missing(!!arg))) {
+      factory_args[[arg]] <- get(arg)
+    }
+  }
+  .specify_cls("time", factory_args, scalar = TRUE)
+}

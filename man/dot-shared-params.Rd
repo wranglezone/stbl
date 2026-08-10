@@ -118,6 +118,9 @@ coercion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
+\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
+
 \item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
 \item{x}{The object to stabilize.}

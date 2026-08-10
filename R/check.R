@@ -52,7 +52,7 @@
   max_size <- to_int_scalar(max_size, allow_null = TRUE, call = call)
   .check_x_no_more_than_y(min_size, max_size, call = call)
 
-  x_size <- vec_size(x)
+  x_size <- vctrs::vec_size(x)
 
   min_ok <- is.null(min_size) || x_size >= min_size
   max_ok <- is.null(max_size) || x_size <= max_size
@@ -99,7 +99,15 @@
     return(invisible(NULL))
   }
 
-  locations <- which(duplicated(x))
+  # base::duplicated() silently mishandles some S4 vector classes (e.g.
+  # lubridate's Period): is.atomic() reports TRUE for them, which sends
+  # duplicated() down a primitive fast path that only looks at the object's
+  # `.Data` slot, ignoring its other slots. vec_duplicate_id() compares full
+  # vctrs identity instead, so this gives the same result as duplicated()
+  # (only later occurrences are flagged) but works for every vector type. In
+  # contrast, vctrs::vec_duplicate_detect() reports all duplicated values, not
+  # just the second and subsequent repetitions.
+  locations <- which(vctrs::vec_duplicate_id(x) != seq_along(x))
   if (!length(locations)) {
     return(invisible(NULL))
   }
@@ -166,9 +174,9 @@
     return(invisible(NULL))
   }
 
-  x_size <- vec_size(x)
+  x_size <- vctrs::vec_size(x)
 
-  if (x_class == "NULL") {
+  if (identical(x_class, "NULL")) {
     x_class <- "non-NULL"
   }
   .stop_must(
@@ -268,7 +276,11 @@
 
   locations <- which(failures)
   location_chrs <- as.character(locations)
-  bad_value_chrs <- as.character(unique(x[failures]))
+  # Some S4 vector classes (e.g. lubridate's Period) report is.atomic() ==
+  # TRUE, which sends base::unique() down a primitive fast path that ignores
+  # their attributes and silently returns the wrong result; vec_unique()
+  # compares full vctrs identity instead, so this works for every type.
+  bad_value_chrs <- as.character(vctrs::vec_unique(x[failures]))
   allowed_value_chrs <- as.character(allowed_values)
   .stop_must(
     "must be one of the allowed values.",

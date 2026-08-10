@@ -264,9 +264,7 @@ to_character <- to_chr
 #' Coerce to length-1 character
 #'
 #' Checks whether a vector can be coerced to a length-1 character vector.
-#' `to_chr_scalar()` is optimized to check for length-1 character vectors
-#' (compared to [stabilize_chr()] with `max_size = 1`). `to_character_scalar()`
-#' is a synonym of `to_chr_scalar()`.
+#' `to_character_scalar()` is a synonym of `to_chr_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'

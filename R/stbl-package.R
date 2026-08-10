@@ -16,8 +16,6 @@
 #' @importFrom rlang is_scalar_logical
 #' @importFrom rlang is_scalar_vector
 #' @importFrom rlang try_fetch
-#' @importFrom vctrs vec_cast
-#' @importFrom vctrs vec_size
 #' @useDynLib stbl, .registration = TRUE
 ## usethis namespace: end
 NULL
