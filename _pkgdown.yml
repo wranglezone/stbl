@@ -49,6 +49,12 @@ reference:
 - contents:
   - matches("lst")
   - assert_present
+- title: dates and times
+- contents:
+  - matches("date")
+  - matches("dttm")
+  - matches("time")
+  - matches("dur")
 - title: any type
 - contents:
   - stabilize_any_of
