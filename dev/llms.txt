@@ -246,12 +246,22 @@ contributing to this project, you agree to abide by its terms.
   : Coerce to length-1 integer with additional checks
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
   value to a target type
+- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
+  Coerce to date
+- [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+  [`to_datetime()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+  : Coerce to date-time
+- [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
+  [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
+  Coerce to a duration
 - [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md)
   [`to_integer()`](https://stbl.wrangle.zone/dev/reference/to_int.md) :
   Coerce to integer
 - [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   [`to_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   : Coerce to length-1 integer
+- [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) :
+  Coerce to time-of-day
 
 ## logical vectors
 
@@ -327,6 +337,76 @@ contributing to this project, you agree to abide by its terms.
   Ensure a list meets expectations
 - [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   : Require a value to be non-NULL
+
+## dates and times
+
+- [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md)
+  [`specify_date_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_date.md)
+  : Create a specified date stabilizer function
+- [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md)
+  [`specify_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md)
+  [`specify_datetime()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md)
+  [`specify_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md)
+  : Create a specified datetime stabilizer function
+- [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
+  [`stabilise_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
+  : Coerce to date with additional checks
+- [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md)
+  [`stabilise_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md)
+  : Coerce to length-1 date with additional checks
+- [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+  [`stabilise_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+  [`stabilize_datetime()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+  [`stabilise_datetime()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+  : Coerce to date-time with additional checks
+- [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+  [`stabilise_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+  [`stabilize_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+  [`stabilise_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+  : Coerce to length-1 date-time with additional checks
+- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
+  Coerce to date
+- [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md)
+  : Coerce to length-1 date
+- [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+  [`to_datetime()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+  : Coerce to date-time
+- [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
+  [`to_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
+  : Coerce to length-1 date-time
+- [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
+  [`specify_time_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
+  : Create a specified time-of-day stabilizer function
+- [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md)
+  [`stabilise_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md)
+  : Coerce to time-of-day with additional checks
+- [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md)
+  [`stabilise_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md)
+  : Coerce to length-1 time-of-day with additional checks
+- [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
+  [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
+  Coerce to a duration
+- [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) :
+  Coerce to time-of-day
+- [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
+  : Coerce to length-1 time-of-day
+- [`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
+  [`specify_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
+  [`specify_duration()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
+  [`specify_duration_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
+  : Create a specified duration stabilizer function
+- [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
+  [`stabilise_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
+  [`stabilize_duration()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
+  [`stabilise_duration()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
+  : Coerce to duration with additional checks
+- [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
+  [`stabilise_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
+  [`stabilize_duration_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
+  [`stabilise_duration_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
+  : Coerce to length-1 duration with additional checks
+- [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
+  : Coerce to length-1 duration
 
 ## any type
 

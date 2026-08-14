@@ -100,11 +100,15 @@ Other list functions:
 
 Other specification functions:
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
+[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+[`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
 
 ## Examples
 

@@ -196,6 +196,12 @@ to make them easier to import and to find.
   An empty object of the target type (e.g.,
   [`integer()`](https://rdrr.io/r/base/integer.html)).
 
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
+  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  Defaults to `"UTC"`.
+
 - unique:
 
   (`logical(1)`) Should all elements in `x` be distinct?

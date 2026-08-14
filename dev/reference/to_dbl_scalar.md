@@ -1,11 +1,7 @@
 # Coerce to length-1 double
 
 Checks whether a vector can be coerced to a length-1 double vector.
-`to_dbl_scalar()` is optimized to check for length-1 double vectors
-(compared to
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
-with `max_size = 1`). `to_double_scalar()` is a synonym of
-`to_dbl_scalar()`.
+`to_double_scalar()` is a synonym of `to_dbl_scalar()`.
 
 ## Usage
 
@@ -88,9 +84,15 @@ Other stabilization functions:
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
 [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
@@ -98,15 +100,25 @@ Other stabilization functions:
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
 [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
 [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
 [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
 [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
 [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
 [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
 [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
 [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
 [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
-[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
 
 ## Examples
 

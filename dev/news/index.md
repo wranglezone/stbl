@@ -86,6 +86,21 @@
   gain new `unique`/`.unique` arguments to enforce distinct elements and
   raise duplicate-element errors when repeated values are found
   ([\#280](https://github.com/wranglezone/stbl/issues/280)).
+- New [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
+  [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md), and
+  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
+  families (plus matching `specify_*()` factories) validate and coerce
+  [RFC 3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO
+  8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values
+  ([\#104](https://github.com/wranglezone/stbl/issues/104),
+  [\#105](https://github.com/wranglezone/stbl/issues/105),
+  [\#294](https://github.com/wranglezone/stbl/issues/294),
+  [\#295](https://github.com/wranglezone/stbl/issues/295)).
 
 ### Bug fixes
 
