@@ -40,7 +40,10 @@ test_that("to_time() wraps offsets across midnight (#294)", {
 
 test_that("to_time() parses fractional seconds (#294)", {
   result <- to_time("13:20:00.5Z")
-  expect_identical(as.numeric(result), as.numeric(hms::as_hms("13:20:00")) + 0.5)
+  expect_identical(
+    as.numeric(result),
+    as.numeric(hms::as_hms("13:20:00")) + 0.5
+  )
 })
 
 test_that("to_time() keeps NA character elements as NA (#294)", {
@@ -107,7 +110,10 @@ test_that("to_time() errors informatively for bad factors (#294)", {
 
 test_that("to_time() extracts time-of-day from POSIXct, normalized to UTC (#294)", {
   given <- as.POSIXct("2024-01-01 13:20:00", tz = "America/Chicago")
-  expect_identical(to_time(given), to_time(as.POSIXct(format(given, tz = "UTC"), tz = "UTC")))
+  expect_identical(
+    to_time(given),
+    to_time(as.POSIXct(format(given, tz = "UTC"), tz = "UTC"))
+  )
 })
 
 test_that("to_time() converts POSIXlt (#294)", {
@@ -122,7 +128,12 @@ test_that("to_time() treats numerics as seconds since midnight (#294)", {
 
 test_that("to_time() rejects out-of-range numerics (#294)", {
   expect_pkg_error_snapshot(to_time(-1), "stbl", "incompatible_values", "time")
-  expect_pkg_error_snapshot(to_time(86400), "stbl", "incompatible_values", "time")
+  expect_pkg_error_snapshot(
+    to_time(86400),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
 })
 
 test_that("to_time() converts difftime values (#294)", {
@@ -132,12 +143,22 @@ test_that("to_time() converts difftime values (#294)", {
 
 test_that("to_time() rejects out-of-range difftime values (#294)", {
   given <- as.difftime(25, units = "hours")
-  expect_pkg_error_snapshot(to_time(given), "stbl", "incompatible_values", "time")
+  expect_pkg_error_snapshot(
+    to_time(given),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
 })
 
 test_that("to_time() rejects out-of-range hms values (#294)", {
   given <- hms::as_hms(90000)
-  expect_pkg_error_snapshot(to_time(given), "stbl", "incompatible_values", "time")
+  expect_pkg_error_snapshot(
+    to_time(given),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
 })
 
 test_that("to_time() errors properly for other types (#294)", {
