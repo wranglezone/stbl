@@ -79,6 +79,8 @@
 #'   coercion.
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
+#' @param tz (`character(1)`) The time zone to normalize `x` to. Must be
+#'   `""` or a value from [OlsonNames()]. Defaults to `"UTC"`.
 #' @param unique (`logical(1)`) Should all elements in `x` be distinct?
 #' @param x The object to stabilize.
 #' @param x_arg (`character(1)`) The name of the object being stabilized to use

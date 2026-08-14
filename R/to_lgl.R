@@ -130,9 +130,7 @@ to_lgl.default <- function(
 #' Coerce to length-1 logical
 #'
 #' Checks whether a vector can be coerced to a length-1 logical vector.
-#' `to_lgl_scalar()` is optimized to check for length-1 logical vectors
-#' (compared to [stabilize_lgl()] with `max_size = 1`). `to_logical_scalar()`
-#' is a synonym of `to_lgl_scalar()`.
+#' `to_logical_scalar()` is a synonym of `to_lgl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'

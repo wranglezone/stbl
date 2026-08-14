@@ -159,15 +159,13 @@ to_dbl.complex <- function(
 
 #' @export
 to_dbl.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vec_cast(x, double(), x_arg = x_arg, call = call)
+  vctrs::vec_cast(x, double(), x_arg = x_arg, call = call)
 }
 
 #' Coerce to length-1 double
 #'
 #' Checks whether a vector can be coerced to a length-1 double vector.
-#' `to_dbl_scalar()` is optimized to check for length-1 double vectors
-#' (compared to [stabilize_dbl()] with `max_size = 1`). `to_double_scalar()`
-#' is a synonym of `to_dbl_scalar()`.
+#' `to_double_scalar()` is a synonym of `to_dbl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'

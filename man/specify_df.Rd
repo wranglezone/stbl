@@ -75,11 +75,15 @@ Other data frame functions:
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_date]{specify_date()}},
 \code{\link[=specify_dbl]{specify_dbl()}},
+\code{\link[=specify_dttm]{specify_dttm()}},
+\code{\link[=specify_dur]{specify_dur()}},
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
-\code{\link[=specify_lst]{specify_lst()}}
+\code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_time]{specify_time()}}
 }
 \concept{data frame functions}
 \concept{specification functions}

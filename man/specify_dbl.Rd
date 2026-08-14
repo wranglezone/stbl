@@ -100,8 +100,8 @@ context or functionality.
 \code{specify_dbl()} creates a function that will call \code{\link[=stabilize_dbl]{stabilize_dbl()}} with the
 provided arguments. \code{specify_dbl_scalar()} creates a function that will call
 \code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}} with the provided arguments. \code{specify_double()} is a
-synonym of \code{specify_dbl()}, and \code{specify_double_scalar()} is a
-synonym of \code{specify_dbl_scalar()}.
+synonym of \code{specify_dbl()}, and \code{specify_double_scalar()} is a synonym of
+\code{specify_dbl_scalar()}.
 }
 \examples{
 stabilize_3_to_5 <- specify_dbl(min_value = 3, max_value = 5)
@@ -119,11 +119,15 @@ Other double functions:
 
 Other specification functions:
 \code{\link[=specify_chr]{specify_chr()}},
+\code{\link[=specify_date]{specify_date()}},
 \code{\link[=specify_df]{specify_df()}},
+\code{\link[=specify_dttm]{specify_dttm()}},
+\code{\link[=specify_dur]{specify_dur()}},
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
-\code{\link[=specify_lst]{specify_lst()}}
+\code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_time]{specify_time()}}
 }
 \concept{double functions}
 \concept{specification functions}

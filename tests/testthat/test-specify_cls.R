@@ -169,6 +169,337 @@ test_that("specify_dbl_scalar defaults to allow_zero_length = FALSE (#197)", {
   expect_identical(checker(double(0), allow_zero_length = TRUE), double(0))
 })
 
+test_that("specify_date can build a value checker (#104)", {
+  checker <- specify_date(min_value = "2000-01-01")
+  expect_identical(checker("2024-01-01"), as.Date("2024-01-01"))
+  expect_pkg_error_classes(
+    checker("1999-12-31"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_date can enforce unique elements (#104)", {
+  checker <- specify_date(unique = TRUE)
+  given <- as.Date(c("2024-01-01", "2024-06-15"))
+  expect_identical(checker(given), given)
+  expect_pkg_error_classes(
+    checker(as.Date(c("2024-01-01", "2024-01-01"))),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("specify_date_scalar can build a value checker (#104)", {
+  checker <- specify_date_scalar(min_value = "2000-01-01")
+  expect_identical(checker("2024-01-01"), as.Date("2024-01-01"))
+  expect_pkg_error_classes(
+    checker(as.Date(c("2024-01-01", "2024-06-15"))),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_date_scalar defaults to allow_null = FALSE (#104)", {
+  checker <- specify_date_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_date_scalar defaults to allow_zero_length = FALSE (#104)", {
+  checker <- specify_date_scalar()
+  expect_pkg_error_classes(
+    checker(as.Date(character(0))),
+    "stbl",
+    "bad_empty"
+  )
+  expect_identical(
+    checker(as.Date(character(0)), allow_zero_length = TRUE),
+    as.Date(character(0))
+  )
+})
+
+test_that("specify_date can enforce allowed_values (#104)", {
+  checker <- specify_date(allowed_values = c("2024-01-01", "2024-06-15"))
+  expect_identical(checker("2024-01-01"), as.Date("2024-01-01"))
+  expect_pkg_error_classes(checker("2024-07-01"), "stbl", "allowed_values")
+})
+
+test_that("specify_date() creates a working stabilizer (#104)", {
+  stabilize_recent <- specify_date(min_value = "2000-01-01")
+  expect_identical(stabilize_recent("2024-01-01"), as.Date("2024-01-01"))
+  expect_pkg_error_classes(
+    stabilize_recent("1999-12-31"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_date_scalar() creates a working scalar stabilizer (#104)", {
+  stabilize_recent <- specify_date_scalar(min_value = "2000-01-01")
+  expect_identical(stabilize_recent("2024-01-01"), as.Date("2024-01-01"))
+  expect_pkg_error_classes(
+    stabilize_recent(c("2024-01-01", "2024-06-15")),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_dttm can build a value checker (#105)", {
+  checker <- specify_dttm(min_value = "2000-01-01T00:00:00Z")
+  expect_identical(
+    checker("2024-01-01T00:00:00Z"),
+    to_dttm("2024-01-01T00:00:00Z")
+  )
+  expect_pkg_error_classes(
+    checker("1999-12-31T00:00:00Z"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_dttm can enforce unique elements (#105)", {
+  checker <- specify_dttm(unique = TRUE)
+  given <- to_dttm(c("2024-01-01T00:00:00Z", "2024-06-15T00:00:00Z"))
+  expect_identical(checker(given), given)
+  expect_pkg_error_classes(
+    checker(to_dttm(c("2024-01-01T00:00:00Z", "2024-01-01T00:00:00Z"))),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("specify_dttm respects tz (#105)", {
+  checker <- specify_dttm(tz = "America/Chicago")
+  result <- checker("2024-01-01T00:00:00Z")
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+})
+
+test_that("specify_dttm_scalar can build a value checker (#105)", {
+  checker <- specify_dttm_scalar(min_value = "2000-01-01T00:00:00Z")
+  expect_identical(
+    checker("2024-01-01T00:00:00Z"),
+    to_dttm("2024-01-01T00:00:00Z")
+  )
+  expect_pkg_error_classes(
+    checker(to_dttm(c(
+      "2024-01-01T00:00:00Z",
+      "2024-06-15T00:00:00Z"
+    ))),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_dttm_scalar defaults to allow_null = FALSE (#105)", {
+  checker <- specify_dttm_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_dttm_scalar defaults to allow_zero_length = FALSE (#105)", {
+  checker <- specify_dttm_scalar()
+  empty <- to_dttm(character())
+  expect_pkg_error_classes(checker(empty), "stbl", "bad_empty")
+  expect_identical(
+    checker(empty, allow_zero_length = TRUE),
+    empty
+  )
+})
+
+test_that("specify_dttm can enforce allowed_values (#105)", {
+  checker <- specify_dttm(
+    allowed_values = c("2024-01-01T00:00:00Z", "2024-06-15T00:00:00Z")
+  )
+  expect_identical(
+    checker("2024-01-01T00:00:00Z"),
+    to_dttm("2024-01-01T00:00:00Z")
+  )
+  expect_pkg_error_classes(
+    checker("2024-07-01T00:00:00Z"),
+    "stbl",
+    "allowed_values"
+  )
+})
+
+test_that("specify_dttm() creates a working stabilizer (#105)", {
+  stabilize_recent <- specify_dttm(min_value = "2000-01-01T00:00:00Z")
+  expect_identical(
+    stabilize_recent("2024-01-01T00:00:00Z"),
+    to_dttm("2024-01-01T00:00:00Z")
+  )
+  expect_pkg_error_classes(
+    stabilize_recent("1999-12-31T00:00:00Z"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_dttm_scalar() creates a working scalar stabilizer (#105)", {
+  stabilize_recent <- specify_dttm_scalar(
+    min_value = "2000-01-01T00:00:00Z"
+  )
+  expect_identical(
+    stabilize_recent("2024-01-01T00:00:00Z"),
+    to_dttm("2024-01-01T00:00:00Z")
+  )
+  expect_pkg_error_classes(
+    stabilize_recent(c("2024-01-01T00:00:00Z", "2024-06-15T00:00:00Z")),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_dur can build a value checker (#295)", {
+  checker <- specify_dur(max_value = "P1D")
+  expect_identical(checker("PT12H"), to_dur("PT12H"))
+  expect_pkg_error_classes(
+    checker("P2D"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_dur can enforce unique elements (#295)", {
+  checker <- specify_dur(unique = TRUE)
+  given <- to_dur(c("P1D", "P2D"))
+  expect_identical(checker(given), given)
+  expect_pkg_error_classes(
+    checker(to_dur(c("P1D", "P1D"))),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("specify_dur_scalar can build a value checker (#295)", {
+  checker <- specify_dur_scalar(max_value = "P1D")
+  expect_identical(checker("PT12H"), to_dur("PT12H"))
+  expect_pkg_error_classes(
+    checker(to_dur(c("P1D", "P2D"))),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_dur_scalar defaults to allow_null = FALSE (#295)", {
+  checker <- specify_dur_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_dur_scalar defaults to allow_zero_length = FALSE (#295)", {
+  checker <- specify_dur_scalar()
+  empty <- to_dur(character())
+  expect_pkg_error_classes(checker(empty), "stbl", "bad_empty")
+  expect_identical(checker(empty, allow_zero_length = TRUE), empty)
+})
+
+test_that("specify_dur can enforce allowed_values (#295)", {
+  checker <- specify_dur(
+    allowed_values = c("P1D", "P2D")
+  )
+  expect_identical(checker("P1D"), to_dur("P1D"))
+  expect_pkg_error_classes(checker("P3D"), "stbl", "allowed_values")
+})
+
+test_that("specify_dur() creates a working stabilizer (#295)", {
+  stabilize_short <- specify_dur(max_value = "P1D")
+  expect_identical(stabilize_short("PT12H"), to_dur("PT12H"))
+  expect_pkg_error_classes(
+    stabilize_short("P2D"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_dur_scalar() creates a working scalar stabilizer (#295)", {
+  stabilize_short <- specify_dur_scalar(max_value = "P1D")
+  expect_identical(stabilize_short("PT12H"), to_dur("PT12H"))
+  expect_pkg_error_classes(
+    stabilize_short(c("P1D", "P2D")),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_time can build a value checker (#294)", {
+  checker <- specify_time(min_value = "12:00:00Z")
+  expect_identical(checker("13:00:00Z"), to_time("13:00:00Z"))
+  expect_pkg_error_classes(
+    checker("06:00:00Z"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_time can enforce unique elements (#294)", {
+  checker <- specify_time(unique = TRUE)
+  given <- to_time(c("06:00:00Z", "14:00:00Z"))
+  expect_identical(checker(given), given)
+  expect_pkg_error_classes(
+    checker(to_time(c("06:00:00Z", "06:00:00Z"))),
+    "stbl",
+    "duplicate_elements"
+  )
+})
+
+test_that("specify_time_scalar can build a value checker (#294)", {
+  checker <- specify_time_scalar(min_value = "12:00:00Z")
+  expect_identical(checker("13:00:00Z"), to_time("13:00:00Z"))
+  expect_pkg_error_classes(
+    checker(to_time(c("13:00:00Z", "14:00:00Z"))),
+    "stbl",
+    "non_scalar"
+  )
+})
+
+test_that("specify_time_scalar defaults to allow_null = FALSE (#294)", {
+  checker <- specify_time_scalar()
+  expect_pkg_error_classes(checker(NULL), "stbl", "bad_null")
+  expect_identical(checker(NULL, allow_null = TRUE), NULL)
+})
+
+test_that("specify_time_scalar defaults to allow_zero_length = FALSE (#294)", {
+  checker <- specify_time_scalar()
+  empty <- to_time(character())
+  expect_pkg_error_classes(checker(empty), "stbl", "bad_empty")
+  expect_identical(checker(empty, allow_zero_length = TRUE), empty)
+})
+
+test_that("specify_time can enforce allowed_values (#294)", {
+  checker <- specify_time(
+    allowed_values = c("06:00:00Z", "14:00:00Z")
+  )
+  expect_identical(checker("06:00:00Z"), to_time("06:00:00Z"))
+  expect_pkg_error_classes(checker("09:00:00Z"), "stbl", "allowed_values")
+})
+
+test_that("specify_time() creates a working stabilizer (#294)", {
+  stabilize_afternoon <- specify_time(min_value = "12:00:00Z")
+  expect_identical(
+    stabilize_afternoon("13:00:00Z"),
+    to_time("13:00:00Z")
+  )
+  expect_pkg_error_classes(
+    stabilize_afternoon("06:00:00Z"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("specify_time_scalar() creates a working scalar stabilizer (#294)", {
+  stabilize_afternoon <- specify_time_scalar(min_value = "12:00:00Z")
+  expect_identical(
+    stabilize_afternoon("13:00:00Z"),
+    to_time("13:00:00Z")
+  )
+  expect_pkg_error_classes(
+    stabilize_afternoon(c("13:00:00Z", "14:00:00Z")),
+    "stbl",
+    "non_scalar"
+  )
+})
+
 test_that("specify_fct can build a level checker (#150)", {
   checker <- specify_fct(levels = c("a", "c"), to_na = "b")
   expect_identical(
