@@ -87,22 +87,33 @@ stabilise_list(
 
 - .named:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). This function is used to validate all named elements of `.x`
-  that are *not* explicitly listed in `...`. If `NULL` (default), any
-  extra named elements will cause an error.
+  Controls how named elements of `.x` that are *not* explicitly listed
+  in `...` are handled. One of:
+
+  - `NULL` or `FALSE` (default): any extra named elements cause an
+    error.
+
+  - `TRUE`: extra named elements are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+    etc), used to validate every extra named element.
 
 - .unnamed:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). This function is used to validate all unnamed elements of `.x`.
-  If `NULL` (default), any unnamed elements will cause an error.
+  Controls how unnamed elements of `.x` are handled. One of:
+
+  - `NULL` or `FALSE` (default): any unnamed elements cause an error.
+
+  - `TRUE`: unnamed elements are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+    etc), used to validate every unnamed element.
 
 - .allow_duplicate_names:
 
@@ -176,10 +187,10 @@ specific class by failure mode:
   absent.
 
 - `<stbl-error-bad_unnamed>` when unnamed elements are present but
-  `.unnamed` is `NULL`.
+  `.unnamed` is `NULL` or `FALSE`.
 
 - `<stbl-error-bad_named>` when extra named elements are present but
-  `.named` is `NULL`.
+  `.named` is `NULL` or `FALSE`.
 
 - `<stbl-error-duplicate_names>` when duplicate names are present and
   `.allow_duplicate_names = FALSE`.
@@ -288,7 +299,7 @@ stabilize_lst(list(data = mtcars), data = assert_present)
 #> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 #> 
 
-# Allow extra named elements via .named
+# Validate extra named elements via .named
 stabilize_lst(
   list(a = 1L, b = 2L, c = 3L),
   .named = specify_int_scalar()
@@ -303,7 +314,16 @@ stabilize_lst(
 #> [1] 3
 #> 
 
-# Allow unnamed elements via .unnamed
+# Allow extra named elements unchecked with .named = TRUE
+stabilize_lst(list(a = 1L, b = "anything"), .named = TRUE)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "anything"
+#> 
+
+# Validate unnamed elements via .unnamed
 stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
 #> [[1]]
 #> [1] 1
@@ -313,6 +333,15 @@ stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
 #> 
 #> [[3]]
 #> [1] 3
+#> 
+
+# Allow unnamed elements unchecked with .unnamed = TRUE
+stabilize_lst(list(1L, "anything"), .unnamed = TRUE)
+#> [[1]]
+#> [1] 1
+#> 
+#> [[2]]
+#> [1] "anything"
 #> 
 
 # NULL is allowed by default

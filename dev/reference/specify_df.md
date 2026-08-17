@@ -40,13 +40,18 @@ specify_data_frame(
 
 - .extra_cols:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). This function is used to validate all columns of `.x` that are
-  *not* explicitly listed in `...`. If `NULL` (default), any extra
-  columns will cause an error.
+  Controls how columns of `.x` that are *not* explicitly listed in `...`
+  are handled. One of:
+
+  - `NULL` or `FALSE` (default): any extra columns cause an error.
+
+  - `TRUE`: extra columns are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+    etc), used to validate every extra column.
 
 - .col_names:
 

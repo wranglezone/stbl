@@ -127,11 +127,13 @@ and the function is used to validate that column.</p></dd>
 
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
-<dd><p>A single stabilizer function, such as a <code>stabilize_*</code>
-function (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
-function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all
-columns of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
-(default), any extra columns will cause an error.</p></dd>
+<dd><p>Controls how columns of <code>.x</code> that are <em>not</em> explicitly
+listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra columns cause an error.</p></li>
+<li><p><code>TRUE</code>: extra columns are allowed, unchecked.</p></li>
+<li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
+function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra column.</p></li>
+</ul></dd>
 
 
 <dt id="arg--col-names">.col_names<a class="anchor" aria-label="anchor" href="#arg--col-names"></a></dt>
@@ -254,12 +256,21 @@ column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name age</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice  30</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Allow extra columns with .extra_cols</span></span></span>
+<span class="r-in"><span><span class="co"># Validate extra columns with .extra_cols</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, age <span class="op">=</span> <span class="fl">30L</span>, score <span class="op">=</span> <span class="fl">99.5</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .extra_cols <span class="op">=</span> <span class="va">assert_present</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name age score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice  30  99.5</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Allow extra columns unchecked with .extra_cols = TRUE</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, age <span class="op">=</span> <span class="fl">30L</span>, score <span class="op">=</span> <span class="fl">99.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .extra_cols <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name age score</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice  30  99.5</span>

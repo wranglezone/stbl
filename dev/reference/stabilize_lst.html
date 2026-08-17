@@ -132,19 +132,23 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
-<dd><p>A single stabilizer function, such as a <code>stabilize_*</code> function
-(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
-(<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all named
-elements of <code>.x</code> that are <em>not</em> explicitly listed in <code>...</code>. If <code>NULL</code>
-(default), any extra named elements will cause an error.</p></dd>
+<dd><p>Controls how named elements of <code>.x</code> that are <em>not</em> explicitly
+listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra named elements cause an error.</p></li>
+<li><p><code>TRUE</code>: extra named elements are allowed, unchecked.</p></li>
+<li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
+function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra named
+element.</p></li>
+</ul></dd>
 
 
 <dt id="arg--unnamed">.unnamed<a class="anchor" aria-label="anchor" href="#arg--unnamed"></a></dt>
-<dd><p>A single stabilizer function, such as a <code>stabilize_*</code>
-function (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
-function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). This function is used to validate all
-unnamed elements of <code>.x</code>. If <code>NULL</code> (default), any unnamed elements will
-cause an error.</p></dd>
+<dd><p>Controls how unnamed elements of <code>.x</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any unnamed elements cause an error.</p></li>
+<li><p><code>TRUE</code>: unnamed elements are allowed, unchecked.</p></li>
+<li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
+function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every unnamed element.</p></li>
+</ul></dd>
 
 
 <dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>
@@ -205,9 +209,9 @@ elements are present.</p></li>
 unnamed.</p></li>
 <li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent.</p></li>
 <li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when unnamed elements are present but
-<code>.unnamed</code> is <code>NULL</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but <code>.named</code>
-is <code>NULL</code>.</p></li>
+<code>.unnamed</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but
+<code>.named</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and
 <code>.allow_duplicate_names = FALSE</code>.</p></li>
 </ul></div>
@@ -314,7 +318,7 @@ is <code>NULL</code>.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Allow extra named elements via .named</span></span></span>
+<span class="r-in"><span><span class="co"># Validate extra named elements via .named</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1L</span>, b <span class="op">=</span> <span class="fl">2L</span>, c <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .named <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -329,7 +333,16 @@ is <code>NULL</code>.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Allow unnamed elements via .unnamed</span></span></span>
+<span class="r-in"><span><span class="co"># Allow extra named elements unchecked with .named = TRUE</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1L</span>, b <span class="op">=</span> <span class="st">"anything"</span><span class="op">)</span>, .named <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "anything"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Validate unnamed elements via .unnamed</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span><span class="op">)</span>, .unnamed <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
@@ -339,6 +352,15 @@ is <code>NULL</code>.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Allow unnamed elements unchecked with .unnamed = TRUE</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="st">"anything"</span><span class="op">)</span>, .unnamed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "anything"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># NULL is allowed by default</span></span></span>

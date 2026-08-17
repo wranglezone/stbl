@@ -101,6 +101,13 @@
   [\#105](https://github.com/wranglezone/stbl/issues/105),
   [\#294](https://github.com/wranglezone/stbl/issues/294),
   [\#295](https://github.com/wranglezone/stbl/issues/295)).
+- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)’s
+  `.extra_cols` argument and
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)/[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)’s
+  `.named` and `.unnamed` arguments now also accept `TRUE` to allow
+  extra or unnamed elements unchecked, in addition to the existing
+  `NULL`/`FALSE` (forbid) and stabilizer-function (validate) forms
+  ([\#281](https://github.com/wranglezone/stbl/issues/281)).
 
 ### Bug fixes
 
