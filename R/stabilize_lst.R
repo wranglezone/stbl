@@ -10,16 +10,20 @@
 #'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
 #'   ([specify_chr()], etc). Each name corresponds to a required element in
 #'   `.x`, and the function is used to validate that element.
-#' @param .named A single stabilizer function, such as a `stabilize_*` function
-#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
-#'   ([specify_chr()], etc). This function is used to validate all named
-#'   elements of `.x` that are *not* explicitly listed in `...`. If `NULL`
-#'   (default), any extra named elements will cause an error.
-#' @param .unnamed A single stabilizer function, such as a `stabilize_*`
-#'   function ([stabilize_chr()], etc) or a function produced by a `specify_*()`
-#'   function ([specify_chr()], etc). This function is used to validate all
-#'   unnamed elements of `.x`. If `NULL` (default), any unnamed elements will
-#'   cause an error.
+#' @param .named Controls how named elements of `.x` that are *not* explicitly
+#'   listed in `...` are handled. One of:
+#'   - `NULL` or `FALSE` (default): any extra named elements cause an error.
+#'   - `TRUE`: extra named elements are allowed, unchecked.
+#'   - A single stabilizer function, such as a `stabilize_*` function
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc), used to validate every extra named
+#'   element.
+#' @param .unnamed Controls how unnamed elements of `.x` are handled. One of:
+#'   - `NULL` or `FALSE` (default): any unnamed elements cause an error.
+#'   - `TRUE`: unnamed elements are allowed, unchecked.
+#'   - A single stabilizer function, such as a `stabilize_*` function
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc), used to validate every unnamed element.
 #' @param .allow_duplicate_names (`logical(1)`) Should `.x` be allowed to
 #'   have duplicate names? If `FALSE` (default), an error is thrown when any
 #'   named element of `.x` shares a name with another.
@@ -40,9 +44,9 @@
 #'   unnamed.
 #'   - `<stbl-error-missing_element>` when a required named element is absent.
 #'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
-#'   `.unnamed` is `NULL`.
-#'   - `<stbl-error-bad_named>` when extra named elements are present but `.named`
-#'   is `NULL`.
+#'   `.unnamed` is `NULL` or `FALSE`.
+#'   - `<stbl-error-bad_named>` when extra named elements are present but
+#'   `.named` is `NULL` or `FALSE`.
 #'   - `<stbl-error-duplicate_names>` when duplicate names are present and
 #'   `.allow_duplicate_names = FALSE`.
 #' @family list functions
@@ -60,14 +64,20 @@
 #' # Allow any non-NULL element with assert_present
 #' stabilize_lst(list(data = mtcars), data = assert_present)
 #'
-#' # Allow extra named elements via .named
+#' # Validate extra named elements via .named
 #' stabilize_lst(
 #'   list(a = 1L, b = 2L, c = 3L),
 #'   .named = specify_int_scalar()
 #' )
 #'
-#' # Allow unnamed elements via .unnamed
+#' # Allow extra named elements unchecked with .named = TRUE
+#' stabilize_lst(list(a = 1L, b = "anything"), .named = TRUE)
+#'
+#' # Validate unnamed elements via .unnamed
 #' stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
+#'
+#' # Allow unnamed elements unchecked with .unnamed = TRUE
+#' stabilize_lst(list(1L, "anything"), .unnamed = TRUE)
 #'
 #' # NULL is allowed by default
 #' stabilize_lst(NULL)
@@ -180,6 +190,35 @@ NULL
 
 ## functions ----
 
+#' Resolve a `.named`/`.unnamed`-style extra-element control argument
+#'
+#' Normalizes the three accepted forms of an extra-element control argument
+#' (`NULL`/`FALSE` to forbid, `TRUE` to allow unchecked, or a stabilizer
+#' function to validate) into either `NULL` (forbid), `TRUE` (allow), or the
+#' stabilizer function (validate).
+#'
+#' @param control `NULL`, `TRUE`, `FALSE`, or a stabilizer function.
+#' @param control_arg (`character(1)`) Name of the argument being resolved,
+#'   used in error messages if `control` can't be coerced to logical.
+#' @inheritParams .shared-params
+#' @returns `NULL`, `TRUE`, or a stabilizer function.
+#' @keywords internal
+.resolve_extra_control <- function(control, control_arg, call) {
+  if (is.function(control)) {
+    return(control)
+  }
+  control <- to_lgl_scalar(
+    control,
+    allow_null = TRUE,
+    x_arg = control_arg,
+    call = call
+  )
+  if (isTRUE(control)) {
+    return(TRUE)
+  }
+  NULL
+}
+
 #' Call a spec function with properly-named context arguments
 #'
 #' @param spec_fn A stabilizer function.
@@ -288,6 +327,10 @@ NULL
   if (!any(is_unnamed)) {
     return(.x)
   }
+  .unnamed <- .resolve_extra_control(.unnamed, ".unnamed", .call)
+  if (isTRUE(.unnamed)) {
+    return(.x)
+  }
   if (is.null(.unnamed)) {
     unnamed_positions <- which(is_unnamed)
     .stop_must(
@@ -330,6 +373,10 @@ NULL
   .call
 ) {
   if (!any(is_extra_named)) {
+    return(.x)
+  }
+  named_spec <- .resolve_extra_control(named_spec, ".named", .call)
+  if (isTRUE(named_spec)) {
     return(.x)
   }
   if (is.null(named_spec)) {

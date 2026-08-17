@@ -87,6 +87,28 @@ test_that("stabilize_lst() validates extra named elements with .named (#110, #31
   )
 })
 
+test_that("stabilize_lst() allows extra named elements unchecked with .named = TRUE (#281)", {
+  given <- list(a = 1L, b = "anything")
+  expect_identical(stabilize_lst(given, .named = TRUE), given)
+})
+
+test_that("stabilize_lst() treats .named = FALSE like the default (forbid) (#281)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(a = 1L, b = 2L), .named = FALSE),
+    "stbl",
+    "bad_named"
+  )
+})
+
+test_that("stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(a = 1L, b = 2L), .named = "yes"),
+    "stbl",
+    "incompatible_values",
+    "logical"
+  )
+})
+
 test_that("stabilize_lst() errors on unnamed elements by default (#110)", {
   expect_pkg_error_snapshot(stabilize_lst(list(1L, 2L)), "stbl", "bad_unnamed")
   expect_pkg_error_snapshot(
@@ -107,6 +129,28 @@ test_that("stabilize_lst() validates unnamed elements with .unnamed (#110, #310)
     "stbl",
     "incompatible_values",
     "integer"
+  )
+})
+
+test_that("stabilize_lst() allows unnamed elements unchecked with .unnamed = TRUE (#281)", {
+  given <- list(1L, "anything")
+  expect_identical(stabilize_lst(given, .unnamed = TRUE), given)
+})
+
+test_that("stabilize_lst() treats .unnamed = FALSE like the default (forbid) (#281)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(1L, 2L), .unnamed = FALSE),
+    "stbl",
+    "bad_unnamed"
+  )
+})
+
+test_that("stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(1L, 2L), .unnamed = "yes"),
+    "stbl",
+    "incompatible_values",
+    "logical"
   )
 })
 

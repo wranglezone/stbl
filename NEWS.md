@@ -15,6 +15,7 @@
 * `stabilize_chr()`, `stabilize_chr_scalar()`, `stabilize_int()`, `stabilize_int_scalar()`, `stabilize_dbl()`, `stabilize_dbl_scalar()`, `stabilize_lgl()`, `stabilize_lgl_scalar()`, and their `specify_*()` factories gain a new `allowed_values` argument, allowing users to restrict `x` to a fixed set of permitted values (#282).
 * `stabilize_chr()`, `stabilize_dbl()`, `stabilize_int()`, `stabilize_lst()`, `specify_chr()`, `specify_dbl()`, `specify_int()`, and `specify_lst()` gain new `unique`/`.unique` arguments to enforce distinct elements and raise duplicate-element errors when repeated values are found (#280).
 * New `to_date()`, `stabilize_date()`, `to_dttm()`, `stabilize_dttm()`, `to_time()`, `stabilize_time()`, `to_dur()`, and `stabilize_dur()` families (plus matching `specify_*()` factories) validate and coerce [RFC 3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values (#104, #105, #294, #295).
+* `stabilize_df()`'s `.extra_cols` argument and `stabilize_lst()`/`specify_lst()`'s `.named` and `.unnamed` arguments now also accept `TRUE` to allow extra or unnamed elements unchecked, in addition to the existing `NULL`/`FALSE` (forbid) and stabilizer-function (validate) forms (#281).
 
 ## Bug fixes
 

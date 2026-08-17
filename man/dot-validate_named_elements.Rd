@@ -21,11 +21,16 @@
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
 \code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
-(\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all named
-elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra named elements will cause an error.}
+\item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
+listed in \code{...} are handled. One of:
+\itemize{
+\item \code{NULL} or \code{FALSE} (default): any extra named elements cause an error.
+\item \code{TRUE}: extra named elements are allowed, unchecked.
+\item A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra named
+element.
+}}
 
 \item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any

@@ -75,17 +75,25 @@ stabilise_list(
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
 \code{.x}, and the function is used to validate that element.}
 
-\item{.named}{A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
-(\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all named
-elements of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra named elements will cause an error.}
+\item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
+listed in \code{...} are handled. One of:
+\itemize{
+\item \code{NULL} or \code{FALSE} (default): any extra named elements cause an error.
+\item \code{TRUE}: extra named elements are allowed, unchecked.
+\item A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra named
+element.
+}}
 
-\item{.unnamed}{A single stabilizer function, such as a \verb{stabilize_*}
-function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
-unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
-cause an error.}
+\item{.unnamed}{Controls how unnamed elements of \code{.x} are handled. One of:
+\itemize{
+\item \code{NULL} or \code{FALSE} (default): any unnamed elements cause an error.
+\item \code{TRUE}: unnamed elements are allowed, unchecked.
+\item A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
+}}
 
 \item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
@@ -130,9 +138,9 @@ elements are present.
 unnamed.
 \item \verb{<stbl-error-missing_element>} when a required named element is absent.
 \item \verb{<stbl-error-bad_unnamed>} when unnamed elements are present but
-\code{.unnamed} is \code{NULL}.
-\item \verb{<stbl-error-bad_named>} when extra named elements are present but \code{.named}
-is \code{NULL}.
+\code{.unnamed} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-bad_named>} when extra named elements are present but
+\code{.named} is \code{NULL} or \code{FALSE}.
 \item \verb{<stbl-error-duplicate_names>} when duplicate names are present and
 \code{.allow_duplicate_names = FALSE}.
 }
@@ -155,14 +163,20 @@ stabilize_lst(
 # Allow any non-NULL element with assert_present
 stabilize_lst(list(data = mtcars), data = assert_present)
 
-# Allow extra named elements via .named
+# Validate extra named elements via .named
 stabilize_lst(
   list(a = 1L, b = 2L, c = 3L),
   .named = specify_int_scalar()
 )
 
-# Allow unnamed elements via .unnamed
+# Allow extra named elements unchecked with .named = TRUE
+stabilize_lst(list(a = 1L, b = "anything"), .named = TRUE)
+
+# Validate unnamed elements via .unnamed
 stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
+
+# Allow unnamed elements unchecked with .unnamed = TRUE
+stabilize_lst(list(1L, "anything"), .unnamed = TRUE)
 
 # NULL is allowed by default
 stabilize_lst(NULL)

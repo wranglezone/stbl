@@ -9,11 +9,14 @@
 \arguments{
 \item{.x}{The object to stabilize.}
 
-\item{.unnamed}{A single stabilizer function, such as a \verb{stabilize_*}
-function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
-unnamed elements of \code{.x}. If \code{NULL} (default), any unnamed elements will
-cause an error.}
+\item{.unnamed}{Controls how unnamed elements of \code{.x} are handled. One of:
+\itemize{
+\item \code{NULL} or \code{FALSE} (default): any unnamed elements cause an error.
+\item \code{TRUE}: unnamed elements are allowed, unchecked.
+\item A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
+}}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
