@@ -111,6 +111,12 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310)"
   )
 })
 
+test_that("stabilize_df() allows extra columns unchecked with .extra_cols = TRUE (#281)", {
+  given <- data.frame(a = 1L, b = "anything")
+  result <- stabilize_df(given, a = specify_int_scalar(), .extra_cols = TRUE)
+  expect_identical(result, given)
+})
+
 test_that("stabilize_df() enforces .min_rows (#142)", {
   expect_pkg_error_classes(
     stabilize_df(

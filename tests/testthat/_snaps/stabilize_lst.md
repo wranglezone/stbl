@@ -58,6 +58,25 @@
       ! `val` must not contain extra named elements.
       x Extra elements: "a" and "b"
 
+# stabilize_lst() treats .named = FALSE like the default (forbid) (#281)
+
+    Code
+      stabilize_lst(list(a = 1L, b = 2L), .named = FALSE)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `list(a = 1L, b = 2L)` must not contain extra named elements.
+      x Extra elements: "a" and "b"
+
+# stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281)
+
+    Code
+      stabilize_lst(list(a = 1L, b = 2L), .named = "yes")
+    Condition <stbl-error-incompatible_values-logical>
+      Error:
+      ! `.named` <character> must be coercible to <logical>
+      x Can't convert some values due to incompatible values.
+      * Locations: 1
+
 # stabilize_lst() errors on unnamed elements by default (#110)
 
     Code
@@ -75,6 +94,25 @@
       Error in `wrapped_stabilize_lst()`:
       ! `val` must not contain unnamed elements.
       x Unnamed positions: 1 and 2
+
+# stabilize_lst() treats .unnamed = FALSE like the default (forbid) (#281)
+
+    Code
+      stabilize_lst(list(1L, 2L), .unnamed = FALSE)
+    Condition <stbl-error-bad_unnamed>
+      Error:
+      ! `list(1L, 2L)` must not contain unnamed elements.
+      x Unnamed positions: 1 and 2
+
+# stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281)
+
+    Code
+      stabilize_lst(list(1L, 2L), .unnamed = "yes")
+    Condition <stbl-error-incompatible_values-logical>
+      Error:
+      ! `.unnamed` <character> must be coercible to <logical>
+      x Can't convert some values due to incompatible values.
+      * Locations: 1
 
 # stabilize_lst() enforces .min_size (#110)
 

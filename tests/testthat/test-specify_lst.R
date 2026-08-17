@@ -48,6 +48,18 @@ test_that("specify_lst() enforces .unique when configured (#280)", {
   expect_pkg_error_classes(spec(list(1L, 2L, 1L)), "stbl", "duplicate_elements")
 })
 
+test_that("specify_lst() allows extra named elements unchecked with .named = TRUE (#281)", {
+  spec <- specify_lst(.named = TRUE)
+  given <- list(a = 1L, b = "anything")
+  expect_identical(spec(given), given)
+})
+
+test_that("specify_lst() allows unnamed elements unchecked with .unnamed = TRUE (#281)", {
+  spec <- specify_lst(.unnamed = TRUE)
+  given <- list(1L, "anything")
+  expect_identical(spec(given), given)
+})
+
 test_that("specify_list() exists (#110)", {
   expect_no_error(specify_list())
 })

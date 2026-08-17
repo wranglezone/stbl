@@ -67,11 +67,15 @@ stabilise_data_frame(
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required column in \code{.x},
 and the function is used to validate that column.}
 
-\item{.extra_cols}{A single stabilizer function, such as a \verb{stabilize_*}
-function (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc). This function is used to validate all
-columns of \code{.x} that are \emph{not} explicitly listed in \code{...}. If \code{NULL}
-(default), any extra columns will cause an error.}
+\item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
+listed in \code{...} are handled. One of:
+\itemize{
+\item \code{NULL} or \code{FALSE} (default): any extra columns cause an error.
+\item \code{TRUE}: extra columns are allowed, unchecked.
+\item A single stabilizer function, such as a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
+function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
+}}
 
 \item{.col_names}{\code{(character)} A character vector of column names that must
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
@@ -137,12 +141,19 @@ stabilize_df(
   age = specify_int_scalar()
 )
 
-# Allow extra columns with .extra_cols
+# Validate extra columns with .extra_cols
 stabilize_df(
   data.frame(name = "Alice", age = 30L, score = 99.5),
   name = specify_chr_scalar(),
   age = specify_int_scalar(),
   .extra_cols = assert_present
+)
+
+# Allow extra columns unchecked with .extra_cols = TRUE
+stabilize_df(
+  data.frame(name = "Alice", age = 30L, score = 99.5),
+  name = specify_chr_scalar(),
+  .extra_cols = TRUE
 )
 
 # Check required column names without validating contents

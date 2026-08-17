@@ -11,11 +11,13 @@
 #'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
 #'   ([specify_chr()], etc). Each name corresponds to a required column in `.x`,
 #'   and the function is used to validate that column.
-#' @param .extra_cols A single stabilizer function, such as a `stabilize_*`
-#'   function ([stabilize_chr()], etc) or a function produced by a `specify_*()`
-#'   function ([specify_chr()], etc). This function is used to validate all
-#'   columns of `.x` that are *not* explicitly listed in `...`. If `NULL`
-#'   (default), any extra columns will cause an error.
+#' @param .extra_cols Controls how columns of `.x` that are *not* explicitly
+#'   listed in `...` are handled. One of:
+#'   - `NULL` or `FALSE` (default): any extra columns cause an error.
+#'   - `TRUE`: extra columns are allowed, unchecked.
+#'   - A single stabilizer function, such as a `stabilize_*` function
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
+#'   function ([specify_chr()], etc), used to validate every extra column.
 #' @param .col_names `(character)` A character vector of column names that must
 #'   be present in `.x`. Any columns listed here that are absent from `.x` will
 #'   cause an error. Unlike `...`, this does not validate the column contents.
@@ -56,12 +58,19 @@
 #'   age = specify_int_scalar()
 #' )
 #'
-#' # Allow extra columns with .extra_cols
+#' # Validate extra columns with .extra_cols
 #' stabilize_df(
 #'   data.frame(name = "Alice", age = 30L, score = 99.5),
 #'   name = specify_chr_scalar(),
 #'   age = specify_int_scalar(),
 #'   .extra_cols = assert_present
+#' )
+#'
+#' # Allow extra columns unchecked with .extra_cols = TRUE
+#' stabilize_df(
+#'   data.frame(name = "Alice", age = 30L, score = 99.5),
+#'   name = specify_chr_scalar(),
+#'   .extra_cols = TRUE
 #' )
 #'
 #' # Check required column names without validating contents
