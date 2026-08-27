@@ -30,6 +30,11 @@
   the input that failed the check. Handlers can read these positions via
   `cnd$locations`
   ([\#274](https://github.com/wranglezone/stbl/issues/274)).
+- Errors raised for incompatible-value coercion failures
+  (e.g. `to_dbl(c("1", "b"))`) now also carry a `values` element on the
+  condition object, giving the values that failed to coerce, and the
+  message includes a “Values:” bullet alongside “Locations:”
+  ([\#332](https://github.com/wranglezone/stbl/issues/332)).
 - New function
   [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
   silently catches a [stbl](https://stbl.wrangle.zone/) error with the

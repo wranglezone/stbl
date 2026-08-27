@@ -210,6 +210,7 @@ try(stabilize_date("11/13/2018"))
 #>   `"11/13/2018"` <character> must be coercible to <date>
 #> ✖ Can't convert some values due to invalid or ambiguous date format.
 #> • Locations: 1
+#> • Values: "11/13/2018"
 try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #> Error in eval(expr, envir) : `"2024-01-01"` must be >= 2024-06-01.
 #> ✖ "2024-01-01" is too low.

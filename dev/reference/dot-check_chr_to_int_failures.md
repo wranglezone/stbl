@@ -5,10 +5,14 @@ Check for character to integer coercion failures
 ## Usage
 
 ``` r
-.check_chr_to_int_failures(res, x_class, x_arg, call)
+.check_chr_to_int_failures(x, res, x_class, x_arg, call)
 ```
 
 ## Arguments
+
+- x:
+
+  The object to stabilize.
 
 - res:
 

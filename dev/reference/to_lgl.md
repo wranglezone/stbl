@@ -135,6 +135,8 @@ try(to_lgl(letters))
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
 #>   25, and 26
+#> • Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+#>   "p", "q", "r", "s", …, "y", and "z"
 try(to_lgl(list(TRUE)))
 #> [1] TRUE
 ```

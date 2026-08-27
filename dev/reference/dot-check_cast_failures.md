@@ -5,10 +5,14 @@ Check for coercion failures and stop if any are found
 ## Usage
 
 ``` r
-.check_cast_failures(failures, x_class, to, due_to, x_arg, call)
+.check_cast_failures(x, failures, x_class, to, due_to, x_arg, call)
 ```
 
 ## Arguments
+
+- x:
+
+  The object to stabilize.
 
 - failures:
 

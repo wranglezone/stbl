@@ -203,9 +203,11 @@ try(to_dur("P"))
 #>   `"P"` <character> must be coercible to <duration>
 #> ✖ Can't convert some values due to invalid or ambiguous duration format.
 #> • Locations: 1
+#> • Values: "P"
 try(to_dur(c("P1D", "not-a-duration")))
 #> Error in eval(expr, envir) : 
 #>   `c("P1D", "not-a-duration")` <character> must be coercible to <duration>
 #> ✖ Can't convert some values due to invalid or ambiguous duration format.
 #> • Locations: 2
+#> • Values: "not-a-duration"
 ```

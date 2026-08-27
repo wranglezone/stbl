@@ -202,9 +202,11 @@ try(to_time("13:20:00"))
 #>   `"13:20:00"` <character> must be coercible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 1
+#> • Values: "13:20:00"
 try(to_time(c("13:20:00Z", "not-a-time")))
 #> Error in eval(expr, envir) : 
 #>   `c("13:20:00Z", "not-a-time")` <character> must be coercible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 2
+#> • Values: "not-a-time"
 ```

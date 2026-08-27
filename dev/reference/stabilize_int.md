@@ -269,6 +269,8 @@ try(stabilize_int(letters))
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …,
 #>   25, and 26
+#> • Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+#>   "o", "p", "q", "r", …, "y", and "z"
 try(stabilize_int("1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"1"` <character> to <integer>.
@@ -277,6 +279,7 @@ try(stabilize_int(factor(c("1", "a"))))
 #>   `factor(c("1", "a"))` <factor> must be coercible to <integer>
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 2
+#> • Values: "a"
 try(stabilize_int(factor("1"), coerce_factor = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `factor("1")` <factor> to <integer>.

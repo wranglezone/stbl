@@ -210,6 +210,8 @@ try(stabilize_lgl(letters))
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
 #>   25, and 26
+#> • Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+#>   "p", "q", "r", "s", …, "y", and "z"
 try(stabilize_lgl(c(TRUE, FALSE, TRUE), min_size = 5))
 #> Error in eval(expr, envir) : 
 #>   `c(TRUE, FALSE, TRUE)` must have size >= 5.

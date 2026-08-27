@@ -252,6 +252,7 @@ try(stabilize_dur("P"))
 #>   `"P"` <character> must be coercible to <duration>
 #> ✖ Can't convert some values due to invalid or ambiguous duration format.
 #> • Locations: 1
+#> • Values: "P"
 try(stabilize_dur("P1D", min_value = "P2D"))
 #> Error in eval(expr, envir) : `"P1D"` must be >= 2d 0H 0M 0S.
 #> ✖ "1d 0H 0M 0S" is too low.

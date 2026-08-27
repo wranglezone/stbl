@@ -176,7 +176,8 @@ character vector, it fails with a helpful error message:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `interests` <span style="color: #0000BB;">&lt;list&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;character&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert some values due to incompatible element types.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 2</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 2</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Values: <span style="color: #0000BB;">"function (x, ...) UseMethod(\"mean\")"</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-2-simple-scalar-coercion-with-to__scalar">Step 2: Simple Scalar Coercion with <code>to_*_scalar()</code><a class="anchor" aria-label="anchor" href="#step-2-simple-scalar-coercion-with-to__scalar"></a>
@@ -251,7 +252,8 @@ converted to an integer:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `age` <span style="color: #0000BB;">&lt;character&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;integer&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert some values due to incompatible values.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Values: <span style="color: #0000BB;">"forty-two"</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-3-complex-validation-with-stabilize_">Step 3: Complex Validation with <code>stabilize_*()</code><a class="anchor" aria-label="anchor" href="#step-3-complex-validation-with-stabilize_"></a>

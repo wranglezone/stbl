@@ -212,6 +212,7 @@ try(stabilize_time("13:20:00"))
 #>   `"13:20:00"` <character> must be coercible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 1
+#> • Values: "13:20:00"
 try(stabilize_time("13:20:00Z", min_value = "18:00:00Z"))
 #> Error in eval(expr, envir) : `"13:20:00Z"` must be >= 18:00:00.
 #> ✖ "13:20:00" is too low.

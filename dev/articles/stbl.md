@@ -127,6 +127,7 @@ register_user(
 #> ! `interests` <list> must be coercible to <character>
 #> ✖ Can't convert some values due to incompatible element types.
 #> • Locations: 2
+#> • Values: "function (x, ...) UseMethod(\"mean\")"
 ```
 
 ## Step 2: Simple Scalar Coercion with `to_*_scalar()`
@@ -217,6 +218,7 @@ register_user(
 #> ! `age` <character> must be coercible to <integer>
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 1
+#> • Values: "forty-two"
 ```
 
 ## Step 3: Complex Validation with `stabilize_*()`

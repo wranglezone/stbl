@@ -6,10 +6,14 @@ converted
 ## Usage
 
 ``` r
-.check_lst_failures(valid, to, x_class, x_arg, call)
+.check_lst_failures(x, valid, to, x_class, x_arg, call)
 ```
 
 ## Arguments
+
+- x:
+
+  The object to stabilize.
 
 - valid:
 

@@ -169,9 +169,11 @@ try(to_date("11/13/2018"))
 #>   `"11/13/2018"` <character> must be coercible to <date>
 #> ✖ Can't convert some values due to invalid or ambiguous date format.
 #> • Locations: 1
+#> • Values: "11/13/2018"
 try(to_date(c("2024-01-01", "not-a-date")))
 #> Error in eval(expr, envir) : 
 #>   `c("2024-01-01", "not-a-date")` <character> must be coercible to <date>
 #> ✖ Can't convert some values due to invalid or ambiguous date format.
 #> • Locations: 2
+#> • Values: "not-a-date"
 ```

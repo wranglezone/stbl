@@ -166,6 +166,7 @@ try(to_dbl("a"))
 #>   `"a"` <character> must be coercible to <double>
 #> ✖ Can't convert some values due to incompatible values.
 #> • Locations: 1
+#> • Values: "a"
 try(to_dbl("1.1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"1.1"` <character> to <double>.

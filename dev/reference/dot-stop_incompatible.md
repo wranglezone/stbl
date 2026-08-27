@@ -6,6 +6,7 @@ Abort with an "incompatible type" message
 
 ``` r
 .stop_incompatible(
+  x,
   x_class,
   to,
   failures,
@@ -18,6 +19,10 @@ Abort with an "incompatible type" message
 ```
 
 ## Arguments
+
+- x:
+
+  The object to stabilize.
 
 - x_class:
 

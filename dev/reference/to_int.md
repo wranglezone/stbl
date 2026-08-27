@@ -166,6 +166,7 @@ try(to_int(c(1, 2, 3.1, 4, 5.2)))
 #>   `c(1, 2, 3.1, 4, 5.2)` <double> must be coercible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
+#> • Values: "3.1" and "5.2"
 try(to_int("1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"1"` <character> to <integer>.
@@ -175,4 +176,5 @@ try(to_int(c("1", "2", "3.1", "4", "5.2")))
 #> <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
+#> • Values: "3.1" and "5.2"
 ```

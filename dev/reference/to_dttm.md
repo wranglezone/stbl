@@ -198,10 +198,12 @@ try(to_dttm("2024-01-01 12:00:00"))
 #>   `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 1
+#> • Values: "2024-01-01 12:00:00"
 try(to_dttm(c("2024-01-01T12:00:00Z", "not-a-datetime")))
 #> Error in eval(expr, envir) : 
 #>   `c("2024-01-01T12:00:00Z", "not-a-datetime")` <character> must be
 #> coercible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 2
+#> • Values: "not-a-datetime"
 ```

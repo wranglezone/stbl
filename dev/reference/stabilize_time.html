@@ -237,6 +237,7 @@ are present.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `"13:20:00"` <span style="color: #0000BB;">&lt;character&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;time&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Can't convert some values due to invalid or ambiguous time format.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Locations: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Values: <span style="color: #0000BB;">"13:20:00"</span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_time</span><span class="op">(</span><span class="st">"13:20:00Z"</span>, min_value <span class="op">=</span> <span class="st">"18:00:00Z"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `"13:20:00Z"` must be &gt;= 18:00:00.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"13:20:00"</span> is too low.</span>
