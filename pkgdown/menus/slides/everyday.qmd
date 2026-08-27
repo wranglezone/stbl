@@ -1,38 +1,435 @@
 ---
-title: |
-  <img src="slide_images/logo.png" alt="stbl hex logo" width="42%" style="float: left;">The Design of Everyday R Functions
+title: The Design of Everyday R Functions
+author: Jon Harmon, Atorus Research
 execute:
   eval: false
   echo: true
 format:
   revealjs:
     theme: dark
-    logo: slide_images/favicon-96x96.png
     footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
     link-external-newwindow: true
     transition: slide
-    incremental: false
 ---
 
-# Make it obvious what the function does
+## 
+
+::::: columns
+
+:::: {.column width="40%"}
+![](slide_images\design_of_everyday_things_book.jpg)
+::::
+
+:::: {.column width="60%"}
+::: fragment
+**"All artificial things are designed."**
+<br>
+<br>
+:::
+::: fragment
+1️⃣ Make functionality obvious
+:::
+::: fragment
+2️⃣ Forgive input
+:::
+::: fragment
+3️⃣ Describe mistake fixes
+:::
+:::: 
+:::::
 
 ::: notes
-- Show a `my_function <- function(x, y, z) {}` example.
-- Have something real in mind. Best option so far: `order_df <- function(items, prices, tax_rate) {}`.
-- Rename to make it obvious what's expected.
-- Defaults can also help make things obvious.
+- Point out link to slides.
+- "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
 :::
+
+
+# Make it obvious what functions do
+
+## Make it obvious what functions do {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-10|1-1
+my_fun <- function(x, y, z) {
+  y2 <- ceiling(y * z * 100) / 100
+  y3 <- y + y2
+  data.frame(
+    item = x,
+    price = y,
+    sales_tax = y2,
+    total_price = y3
+  )
+}
+```
+
+## Make it obvious what functions do {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-1
+compile_order_df <- function(x, y, z) {
+  y2 <- ceiling(y * z * 100) / 100
+  y3 <- y + y2
+  data.frame(
+    item = x,
+    price = y,
+    sales_tax = y2,
+    total_price = y3
+  )
+}
+```
+
+## Make it obvious what functions do {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-1
+compile_order_df <- function(items, prices, tax_rate) {
+  y2 <- ceiling(y * z * 100) / 100
+  y3 <- y + y2
+  data.frame(
+    item = x,
+    price = y,
+    sales_tax = y2,
+    total_price = y3
+  )
+}
+```
+
+## Make it obvious what functions do {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-9|
+compile_order_df <- function(items, prices, tax_rate) {
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Make it obvious what functions do {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-1
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Make it obvious what functions do
+
+1️⃣ Functions = verbs
+
+::: fragment
+<br>
+2️⃣ Arguments = nouns
+:::
+
+::: fragment
+<br>
+3️⃣ Defaults = standards / hints
+:::
+
+## {transition="fade-in fade-out"}
+
+```{r}
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c(12.33, 20.77)
+)
+```
+
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-4|3-3
+#| eval: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c(12.33, 20.77)
+)
+```
+
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+#| error: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
 
 # Forgive "close enough" input
 
-::: notes
-- Show `stbl::to_int()` vs `as.integer()` (NAs introduced) vs over-strict `vctrs::vec_cast("1", integer())`
-- Use this to lead to error section.
+## Forgive "close enough" input
+
+:::: columns
+::: column
+![](slide_images/logo.png)
 :::
+::: column
+<br>
+<br>
+<br>
+<br>
+<br>
+[https://stbl.wrangle.zone](https://stbl.wrangle.zone)
+:::
+::::
+
+## Forgive "close enough" input {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-10|2-2|2-3
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Forgive "close enough" input {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-2
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Forgive "close enough" input {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Forgive "close enough" input {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## Forgive "close enough" input {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- as.double(prices)
+  tax_rate <- as.double(tax_rate)
+  items <- as.character(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
+## {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+#| warning: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
 
 # Tell users how to fix mistakes
 
+## Tell users how to fix mistakes
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Tell users how to fix mistakes {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
+## Tell users how to fix mistakes {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+#| error: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
 ::: notes
-- Show error messages before stbl. `x + y` throws fun, hard to understand errors.
-- Show stbl-style errors.
+I'm actually updating this error message, you'll see the new version on the next slide.
+:::
+
+## Tell users how to fix mistakes
+
+```{r}
+#| eval: true
+#| error: true
+#| echo: false
+cli::cli_abort(c(
+  "!" = "{.arg prices} <character> must be coercible to <double>",
+  x = "Can't convert some values due to incompatible values.",
+  "*" = "Locations: 2",
+  "*" = "Values: \"b\"",
+  i = "Repair or remove these values and try again."
+))
+```
+
+::: fragment
+[https://style.tidyverse.org](https://style.tidyverse.org)
+:::
+
+::: fragment
+❗ Problem statement
+:::
+
+::: fragment
+❌ Exact issue (if known) 
+:::
+
+::: fragment
+🔵 More info 
+:::
+
+::: fragment
+ℹ️ Suggestions 
+:::
+
+::: notes
+Mention style.tidyverse.org
 :::
