@@ -47,6 +47,7 @@
       ! `data.frame(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "not-an-int"
 
 # stabilize_df() errors on extra columns by default (#142)
 
@@ -67,6 +68,7 @@
       ! `data.frame(a = 1L, b = "not-int")[["b"]]` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "not-int"
 
 # stabilize_df() enforces .min_rows (snapshot) (#142)
 

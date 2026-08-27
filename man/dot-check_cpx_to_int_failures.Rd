@@ -4,9 +4,11 @@
 \alias{.check_cpx_to_int_failures}
 \title{Check for complex to integer coercion failures}
 \usage{
-.check_cpx_to_int_failures(res, x_class, x_arg, call)
+.check_cpx_to_int_failures(x, res, x_class, x_arg, call)
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{res}{A list returned by \code{stbl_cpx_to_int}, with elements
 \code{result}, \code{non_number}, and \code{bad_precision}.}
 

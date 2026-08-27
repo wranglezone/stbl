@@ -4,9 +4,11 @@
 \alias{.check_lst_failures}
 \title{Check list coercion failures and error if any element could not be converted}
 \usage{
-.check_lst_failures(valid, to, x_class, x_arg, call)
+.check_lst_failures(x, valid, to, x_class, x_arg, call)
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{valid}{\code{(logical)} The \code{valid} vector returned by a \verb{stbl_lst_to_*}
 C routine.}
 

@@ -108,9 +108,10 @@ test_that(".stop_null() passes dots (#95)", {
   # about the messaging.
 })
 
-test_that(".stop_incompatible() throws the expected error (#95, #310)", {
+test_that(".stop_incompatible() throws the expected error (#95, #310, #332)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
+      c("a", "b", "c", "d"),
       "character",
       integer(),
       c(FALSE, TRUE, FALSE, TRUE),
@@ -124,9 +125,10 @@ test_that(".stop_incompatible() throws the expected error (#95, #310)", {
   )
 })
 
-test_that(".stop_incompatible() passes dots (#95, #310)", {
+test_that(".stop_incompatible() passes dots (#95, #310, #332)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
+      c("a", "b", "c", "d"),
       "character",
       integer(),
       c(FALSE, TRUE, FALSE, TRUE),
@@ -139,4 +141,20 @@ test_that(".stop_incompatible() passes dots (#95, #310)", {
     "incompatible_values",
     "integer"
   )
+})
+
+test_that(".stop_incompatible() attaches failure values (#332)", {
+  cnd <- rlang::catch_cnd(
+    .stop_incompatible(
+      c("a", "b", "c", "d"),
+      "character",
+      integer(),
+      c(FALSE, TRUE, FALSE, TRUE),
+      "some reason",
+      "my_arg",
+      rlang::current_env()
+    )
+  )
+  expect_identical(cnd$locations, c(2L, 4L))
+  expect_identical(cnd$values, c("b", "d"))
 })

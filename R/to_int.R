@@ -59,7 +59,7 @@ to_int.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_int, x)
-  .check_lst_failures(res[["valid"]], integer(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], integer(), x_class, x_arg, call)
   res[["result"]]
 }
 
@@ -72,7 +72,7 @@ to_int.double <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_dbl_to_int, x)
-  .check_dbl_to_int_failures(res, x_class, x_arg, call)
+  .check_dbl_to_int_failures(x, res, x_class, x_arg, call)
   res[["result"]]
 }
 
@@ -97,7 +97,7 @@ to_int.character <- function(
   )
   if (coerce_character) {
     res <- .Call(stbl_chr_to_int, x)
-    .check_chr_to_int_failures(res, x_class, x_arg, call)
+    .check_chr_to_int_failures(x, res, x_class, x_arg, call)
     return(res[["result"]])
   }
   .stop_cant_coerce(
@@ -121,7 +121,7 @@ to_int.factor <- function(
   coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
   if (coerce_factor) {
     res <- .Call(stbl_fct_to_int, x)
-    .check_chr_to_int_failures(res, x_class, x_arg, call)
+    .check_chr_to_int_failures(x, res, x_class, x_arg, call)
     return(res[["result"]])
   }
   .stop_cant_coerce(
@@ -141,7 +141,7 @@ to_int.complex <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_cpx_to_int, x)
-  .check_cpx_to_int_failures(res, x_class, x_arg, call)
+  .check_cpx_to_int_failures(x, res, x_class, x_arg, call)
   return(res[["result"]])
 }
 
@@ -198,13 +198,14 @@ to_integer_scalar <- to_int_scalar
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_chr_to_int_failures <- function(res, x_class, x_arg, call) {
+.check_chr_to_int_failures <- function(x, res, x_class, x_arg, call) {
   non_number <- res[["non_number"]]
   bad_precision <- res[["bad_precision"]]
   if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
   }
   .check_cast_failures(
+    x,
     non_number,
     x_class,
     integer(),
@@ -213,6 +214,7 @@ to_integer_scalar <- to_int_scalar
     call
   )
   .stop_incompatible(
+    x,
     x_class,
     integer(),
     bad_precision,
@@ -229,12 +231,13 @@ to_integer_scalar <- to_int_scalar
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_dbl_to_int_failures <- function(res, x_class, x_arg, call) {
+.check_dbl_to_int_failures <- function(x, res, x_class, x_arg, call) {
   bad_precision <- res[["bad_precision"]]
   if (!any(bad_precision)) {
     return(invisible(NULL))
   }
   .stop_incompatible(
+    x,
     x_class,
     integer(),
     bad_precision,
@@ -251,13 +254,14 @@ to_integer_scalar <- to_int_scalar
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_cpx_to_int_failures <- function(res, x_class, x_arg, call) {
+.check_cpx_to_int_failures <- function(x, res, x_class, x_arg, call) {
   non_number <- res[["non_number"]]
   bad_precision <- res[["bad_precision"]]
   if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
   }
   .check_cast_failures(
+    x,
     non_number,
     x_class,
     integer(),
@@ -266,6 +270,7 @@ to_integer_scalar <- to_int_scalar
     call
   )
   .stop_incompatible(
+    x,
     x_class,
     integer(),
     bad_precision,

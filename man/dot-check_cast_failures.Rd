@@ -4,9 +4,11 @@
 \alias{.check_cast_failures}
 \title{Check for coercion failures and stop if any are found}
 \usage{
-.check_cast_failures(failures, x_class, to, due_to, x_arg, call)
+.check_cast_failures(x, failures, x_class, to, due_to, x_arg, call)
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{failures}{\code{(logical)} A logical vector where \code{TRUE} indicates a
 coercion failure.}
 

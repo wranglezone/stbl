@@ -108,6 +108,7 @@
       ! `"13:20:00"` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
+      * Values: "13:20:00"
 
 # stabilize_time_scalar() respects allow_null (#294)
 

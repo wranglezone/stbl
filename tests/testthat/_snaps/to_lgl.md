@@ -23,6 +23,7 @@
       ! `letters` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
 # to_lgl errors for bad factors (#21, #310)
 
@@ -43,6 +45,7 @@
       ! `given` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
 ---
 
@@ -53,6 +56,7 @@
       ! `val` <factor> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
 # to_lgl() works for lists (#21, #273, #310)
 
@@ -63,6 +67,7 @@
       ! `list(TRUE, 1:5)` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 # to_lgl() errors for other types (#21, #273, #310)
 
@@ -73,6 +78,7 @@
       ! `given` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:10"
 
 ---
 
@@ -83,6 +89,7 @@
       ! `val` <list> must be coercible to <logical>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:10"
 
 ---
 
@@ -127,6 +134,7 @@
       ! `given` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "a"
 
 ---
 
@@ -137,6 +145,7 @@
       ! `val` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "a"
 
 # to_lgl_scalar() respects allow_null (#32, #189)
 

@@ -45,6 +45,7 @@
       ! `list("a", 1:5)` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 # to_fct() errors for things that can't be coerced (#62, #273, #310)
 
@@ -87,6 +88,7 @@
       ! `given` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 1 and 2
+      * Values: "1" and "1:5"
 
 ---
 
@@ -97,6 +99,7 @@
       ! `val` <list> must be coercible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 1 and 2
+      * Values: "1" and "1:5"
 
 # to_fct_scalar() provides informative error messages (#62)
 

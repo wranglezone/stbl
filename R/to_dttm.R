@@ -96,6 +96,7 @@ to_dttm.character <- function(
   }
   failures <- not_na & (!well_shaped | is.na(parsed))
   .check_cast_failures(
+    x,
     failures,
     x_class,
     .datetime_type_obj(),

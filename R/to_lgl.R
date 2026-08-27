@@ -66,6 +66,7 @@ to_lgl.character <- function(
   res <- .Call(stbl_chr_to_lgl, x)
   failures <- !res[["valid"]]
   .check_cast_failures(
+    x,
     failures,
     x_class,
     logical(),
@@ -88,6 +89,7 @@ to_lgl.factor <- function(
   res <- .Call(stbl_fct_to_lgl, x)
   failures <- !res[["valid"]]
   .check_cast_failures(
+    x,
     failures,
     x_class,
     logical(),
@@ -107,7 +109,7 @@ to_lgl.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_lgl, x)
-  .check_lst_failures(res[["valid"]], logical(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], logical(), x_class, x_arg, call)
   res[["result"]]
 }
 

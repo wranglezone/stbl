@@ -5,6 +5,7 @@
 \title{Abort with an "incompatible type" message}
 \usage{
 .stop_incompatible(
+  x,
   x_class,
   to,
   failures,
@@ -16,6 +17,8 @@
 )
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
 object before checking its coercion, but want the error message to match

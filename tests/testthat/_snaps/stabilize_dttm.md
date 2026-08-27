@@ -108,6 +108,7 @@
       ! `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
+      * Values: "2024-01-01 12:00:00"
 
 # stabilize_dttm() rejects an unrecognized tz (#105)
 

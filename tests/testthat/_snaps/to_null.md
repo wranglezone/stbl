@@ -31,6 +31,7 @@
       ! `allow_null` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "fish"
 
 ---
 
@@ -41,6 +42,7 @@
       ! `allow_null` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "fish"
 
 # .to_null() errors informatively for missing value (#129)
 

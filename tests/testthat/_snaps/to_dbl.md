@@ -39,6 +39,7 @@
       ! `given` <character> must be coercible to <double>
       x Can't convert some values due to incompatible values.
       * Locations: 2
+      * Values: "a"
 
 ---
 
@@ -49,6 +50,7 @@
       ! `val` <character> must be coercible to <double>
       x Can't convert some values due to incompatible values.
       * Locations: 2
+      * Values: "a"
 
 # to_dbl() errors informatively for bad complexes (#23, #310)
 
@@ -59,6 +61,7 @@
       ! `given` <complex> must be coercible to <double>
       x Can't convert some values due to non-zero complex components.
       * Locations: 1
+      * Values: "1.1+1i"
 
 ---
 
@@ -69,6 +72,7 @@
       ! `val` <complex> must be coercible to <double>
       x Can't convert some values due to non-zero complex components.
       * Locations: 1
+      * Values: "1.1+1i"
 
 # to_dbl() respects coerce_factor (#23)
 
@@ -95,6 +99,7 @@
       ! `given` <factor> must be coercible to <double>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
 ---
 
@@ -105,6 +110,7 @@
       ! `val` <factor> must be coercible to <double>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
 # to_dbl() works for lists (#128, #273, #310)
 
@@ -115,6 +121,7 @@
       ! `list(1.1, 1:5)` <list> must be coercible to <double>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 # to_dbl_scalar() provides informative error messages (#23)
 
