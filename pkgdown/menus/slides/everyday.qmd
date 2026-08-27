@@ -39,9 +39,7 @@ format:
 :::::
 
 ::: notes
-- Don't need to say my name.
 - Point out link to slides.
-- Get through intro relatively fast. Atorus & DSLC is enough.
 - "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
 :::
 
@@ -99,7 +97,7 @@ compile_order_df <- function(items, prices, tax_rate) {
 ## Make it obvious what functions do {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 1-3|
+#| code-line-numbers: 2-9|
 compile_order_df <- function(items, prices, tax_rate) {
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
@@ -129,7 +127,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## Make it obvious what functions do {transition="fade-in slide-out"}
+## Make it obvious what functions do
 
 1️⃣ Functions = verbs
 
@@ -143,9 +141,16 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 3️⃣ Defaults = standards / hints
 :::
 
-# Forgive "close enough" input
+## {transition="fade-in fade-out"}
 
-## Forgive "close enough" input {transition="slide-in fade-out"}
+```{r}
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c(12.33, 20.77)
+)
+```
+
+## {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 1-4|3-3
@@ -156,7 +161,17 @@ compile_order_df(
 )
 ```
 
-## Forgive "close enough" input {transition="fade-in fade-out"}
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 3-3
@@ -168,114 +183,9 @@ compile_order_df(
 )
 ```
 
-## Forgive "close enough" input {transition="fade-in fade-out"}
+# Forgive "close enough" input
 
-```{r}
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
-  sales_tax <- ceiling(prices * tax_rate * 100) / 100
-  total_price <- prices + sales_tax
-  data.frame(
-    item = items,
-    price = prices,
-    sales_tax = sales_tax,
-    total_price = total_price
-  )
-}
-```
-
-## Forgive "close enough" input: base? {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 2-2
-#| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
-  prices <- as.numeric(prices)
-  sales_tax <- ceiling(prices * tax_rate * 100) / 100
-  total_price <- prices + sales_tax
-  data.frame(
-    item = items,
-    price = prices,
-    sales_tax = sales_tax,
-    total_price = total_price
-  )
-}
-```
-
-## Forgive "close enough" input: base? {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 3-3
-#| eval: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
-)
-```
-
-## Forgive "close enough" input: base? {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 3-3
-#| eval: true
-#| warning: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "b")
-)
-```
-
-## Forgive "close enough" input: vctrs? {transition="fade-in fade-out"}
-
-::::: columns
-:::: column
-![](slide_images/vctrs_logo.png)
-::::
-:::: column
-
-<br>
-<br>
-<br>
-<br>
-[https://vctrs.r-lib.org](https://vctrs.r-lib.org)
-
-::: fragment
-<br>
-"tools for consistent and well-founded **type-coercion**"
-:::
-::::
-:::::
-
-## Forgive "close enough" input: vctrs? {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 2-2
-#| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
-  prices <- vctrs::vec_cast(prices, double())
-  sales_tax <- ceiling(prices * tax_rate * 100) / 100
-  total_price <- prices + sales_tax
-  data.frame(
-    item = items,
-    price = prices,
-    sales_tax = sales_tax,
-    total_price = total_price
-  )
-}
-```
-
-## Forgive "close enough" input: vctrs? {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 3-3
-#| eval: true
-#| error: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
-)
-```
-
-## Forgive "close enough" input: stbl {transition="fade-in fade-out"}
+## Forgive "close enough" input
 
 :::: columns
 ::: column
@@ -291,11 +201,26 @@ compile_order_df(
 :::
 ::::
 
-## Forgive "close enough" input: stbl {transition="fade-in fade-out"}
+## Forgive "close enough" input {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-10|2-2|2-3
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Forgive "close enough" input {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 2-2
-#| eval: true
 compile_order_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
@@ -309,7 +234,152 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## Forgive "close enough" input: stbl {transition="fade-in fade-out"}
+## Forgive "close enough" input {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Forgive "close enough" input {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## Forgive "close enough" input {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- as.double(prices)
+  tax_rate <- as.double(tax_rate)
+  items <- as.character(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "20.77")
+)
+```
+
+## {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
+## {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+#| eval: true
+#| warning: true
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
+# Tell users how to fix mistakes
+
+## Tell users how to fix mistakes
+
+```{r}
+#| code-line-numbers: 2-4
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  tax_rate <- stbl::to_dbl_scalar(tax_rate)
+  items <- stbl::to_chr(items)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Tell users how to fix mistakes {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 3-3
+compile_order_df(
+  c("paper towels", "toilet paper"),
+  c("12.33", "b")
+)
+```
+
+## Tell users how to fix mistakes {transition="fade-in slide-out"}
 
 ```{r}
 #| code-line-numbers: 3-3
@@ -322,26 +392,44 @@ compile_order_df(
 ```
 
 ::: notes
-- Show `stbl::to_int()` vs `as.integer()` (NAs introduced) vs over-strict `vctrs::vec_cast("1", integer())`
-- Use this to lead to error section.
+I'm actually updating this error message, you'll see the new version on the next slide.
 :::
 
-# Tell users how to fix mistakes
-
-## Tell users how to fix mistakes {transition="slide-in fade-out"}
+## Tell users how to fix mistakes
 
 ```{r}
-#| code-line-numbers: 3-3
 #| eval: true
 #| error: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("a", "b")
-)
+#| echo: false
+cli::cli_abort(c(
+  "!" = "{.arg prices} <character> must be coercible to <double>",
+  x = "Can't convert some values due to incompatible values.",
+  "*" = "Locations: 2",
+  "*" = "Values: \"b\"",
+  i = "Repair or remove these values and try again."
+))
 ```
 
+::: fragment
+[https://style.tidyverse.org](https://style.tidyverse.org)
+:::
+
+::: fragment
+❗ Problem statement
+:::
+
+::: fragment
+❌ Exact issue (if known) 
+:::
+
+::: fragment
+🔵 More info 
+:::
+
+::: fragment
+ℹ️ Suggestions 
+:::
+
 ::: notes
-- Show that the error is the same for "a", "b" and "1", "2" (i.e., the error is not helpful).
-- Show error messages before stbl. `x + y` throws fun, hard to understand errors.
-- Show stbl-style errors.
+Mention style.tidyverse.org
 :::
