@@ -23,6 +23,7 @@
       ! `given` <double> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.1"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `val` <double> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.1"
 
 ---
 
@@ -43,6 +45,7 @@
       ! `given` <double> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "Inf"
 
 ---
 
@@ -53,6 +56,7 @@
       ! `val` <double> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "Inf"
 
 # to_int() respects coerce_character (#14)
 
@@ -79,6 +83,7 @@
       ! `given` <character> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.1"
 
 ---
 
@@ -89,6 +94,7 @@
       ! `val` <character> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.1"
 
 ---
 
@@ -99,6 +105,7 @@
       ! `given` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 4
+      * Values: "a"
 
 ---
 
@@ -109,6 +116,7 @@
       ! `val` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 4
+      * Values: "a"
 
 # to_int() errors informatively for bad complexes (#2, #310)
 
@@ -119,6 +127,7 @@
       ! `given` <complex> must be coercible to <integer>
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
+      * Values: "1+1i"
 
 ---
 
@@ -129,6 +138,7 @@
       ! `val` <complex> must be coercible to <integer>
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
+      * Values: "1+1i"
 
 # to_int() errors for complexes that would lose precision (#noissue, #310)
 
@@ -139,6 +149,7 @@
       ! `given` <complex> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.5+0i"
 
 ---
 
@@ -149,6 +160,7 @@
       ! `val` <complex> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "1.5+0i"
 
 ---
 
@@ -159,6 +171,7 @@
       ! `given` <complex> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "Inf+0i"
 
 ---
 
@@ -169,6 +182,7 @@
       ! `val` <complex> must be coercible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
+      * Values: "Inf+0i"
 
 # to_int() respects coerce_factor (#14)
 
@@ -195,6 +209,7 @@
       ! `given` <factor> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
 ---
 
@@ -205,6 +220,7 @@
       ! `val` <factor> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
+      * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
 # to_int() works for lists (#2, #273, #310)
 
@@ -215,6 +231,7 @@
       ! `list(1L, 1:5)` <list> must be coercible to <integer>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 # to_int_scalar() provides informative error messages (#12)
 

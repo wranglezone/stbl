@@ -73,16 +73,17 @@
       * `2` = 2
       * `1` = 1
 
-# .check_cast_failures() works (#310)
+# .check_cast_failures() works (#310, #332)
 
     Code
-      .check_cast_failures(failures = failures, x_class = "character", to = logical(),
-      due_to = "incompatible values", x_arg = "test_arg", call = rlang::current_env())
+      .check_cast_failures(x = c("a", "b", "c", "d"), failures = failures, x_class = "character",
+      to = logical(), due_to = "incompatible values", x_arg = "test_arg", call = rlang::current_env())
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `test_arg` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 2 and 4
+      * Values: "b" and "d"
 
 # .check_all_named() works (#203)
 

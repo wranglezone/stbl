@@ -215,6 +215,7 @@
   x_na <- is.na(x)
   failures <- (cast != x & !x_na) | xor(x_na, is.na(cast))
   .check_cast_failures(
+    x,
     failures,
     x_class,
     to_type_obj,
@@ -233,8 +234,9 @@
 #' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_lst_failures <- function(valid, to, x_class, x_arg, call) {
+.check_lst_failures <- function(x, valid, to, x_class, x_arg, call) {
   .check_cast_failures(
+    x,
     !valid,
     x_class,
     to,

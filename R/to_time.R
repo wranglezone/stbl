@@ -82,6 +82,7 @@ to_time.character <- function(
   }
   failures <- not_na & (!well_shaped | is.na(utc_seconds))
   .check_cast_failures(
+    x,
     failures,
     x_class,
     .time_type_obj(),
@@ -167,6 +168,7 @@ to_time.numeric <- function(
   # doesn't unambiguously resolve to a time of day.
   failures <- !is.na(x) & (x < 0 | x >= 86400)
   .check_cast_failures(
+    x,
     failures,
     x_class,
     .time_type_obj(),

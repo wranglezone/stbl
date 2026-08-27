@@ -126,7 +126,7 @@ to_character <- to_chr
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_chr, x)
-  .check_lst_failures(res[["valid"]], character(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], character(), x_class, x_arg, call)
   res[["result"]]
 }
 

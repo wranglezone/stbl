@@ -32,6 +32,7 @@
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
+      * Values: "function (x, ...) UseMethod(\"mean\")"
 
 ---
 
@@ -42,6 +43,7 @@
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
+      * Values: "function (x, ...) UseMethod(\"mean\")"
 
 ---
 
@@ -52,6 +54,7 @@
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "function (x, ...) UseMethod(\"mean\")"
 
 ---
 
@@ -62,6 +65,7 @@
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "function (x, ...) UseMethod(\"mean\")"
 
 ---
 
@@ -88,6 +92,7 @@
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 ---
 
@@ -98,6 +103,7 @@
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
+      * Values: "1:5"
 
 # to_chr_scalar() errors for non-scalars (#22)
 
@@ -126,6 +132,7 @@
       ! `given` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
+      * Values: "1:10"
 
 ---
 
@@ -136,6 +143,7 @@
       ! `val` <list> must be coercible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
+      * Values: "1:10"
 
 # to_chr_scalar() respects allow_null (#22, #189)
 

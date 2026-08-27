@@ -108,6 +108,7 @@
       ! `"P"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "P"
 
 # stabilize_dur_scalar() respects allow_null (#295)
 

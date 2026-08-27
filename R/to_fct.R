@@ -115,7 +115,7 @@ to_fct.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_fct, x)
-  .check_lst_failures(res[["valid"]], factor(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], factor(), x_class, x_arg, call)
   .coerce_fct_levels(res[["result"]], levels, to_na, x_arg, call)
 }
 

@@ -391,10 +391,6 @@ compile_order_df(
 )
 ```
 
-::: notes
-I'm actually updating this error message, you'll see the new version on the next slide.
-:::
-
 ## Tell users how to fix mistakes
 
 ```{r}

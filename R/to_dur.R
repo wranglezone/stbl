@@ -140,6 +140,7 @@ to_dur.character <- function(
 
   failures <- not_na & !well_shaped
   .check_cast_failures(
+    x,
     failures,
     x_class,
     .duration_type_obj(),

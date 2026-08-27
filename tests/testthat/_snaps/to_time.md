@@ -23,6 +23,7 @@
       ! `"13:20:00"` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
+      * Values: "13:20:00"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `val` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
+      * Values: "13:20:00"
 
 # to_time() rejects unparseable time strings (#294)
 
@@ -43,6 +45,7 @@
       ! `given` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 2
+      * Values: "not-a-time"
 
 # to_time() rejects impossible times (#294)
 
@@ -53,6 +56,7 @@
       ! `"25:00:00Z"` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
+      * Values: "25:00:00Z"
 
 ---
 
@@ -63,6 +67,7 @@
       ! `"13:60:00Z"` <character> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
+      * Values: "13:60:00Z"
 
 # to_time() errors informatively for bad factors (#294)
 
@@ -73,6 +78,7 @@
       ! `given` <factor> must be coercible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 2
+      * Values: "nope"
 
 # to_time() rejects out-of-range numerics (#294)
 
@@ -83,6 +89,7 @@
       ! `-1` <double> must be coercible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
+      * Values: "-1"
 
 ---
 
@@ -93,6 +100,7 @@
       ! `86400` <double> must be coercible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
+      * Values: "86400"
 
 # to_time() rejects out-of-range difftime values (#294)
 
@@ -103,6 +111,7 @@
       ! `given` <difftime> must be coercible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
+      * Values: "90000"
 
 # to_time() rejects out-of-range hms values (#294)
 
@@ -113,6 +122,7 @@
       ! `given` <hms> must be coercible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
+      * Values: "90000"
 
 # to_time_scalar() provides informative error messages (#294)
 

@@ -58,7 +58,7 @@ to_dbl.list <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_dbl, x)
-  .check_lst_failures(res[["valid"]], double(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], double(), x_class, x_arg, call)
   res[["result"]]
 }
 
@@ -89,6 +89,7 @@ to_dbl.character <- function(
   if (coerce_character) {
     res <- .Call(stbl_chr_to_dbl, x)
     .check_cast_failures(
+      x,
       !res[["valid"]],
       x_class,
       double(),
@@ -120,6 +121,7 @@ to_dbl.factor <- function(
   if (coerce_factor) {
     res <- .Call(stbl_fct_to_dbl, x)
     .check_cast_failures(
+      x,
       !res[["valid"]],
       x_class,
       double(),
@@ -147,6 +149,7 @@ to_dbl.complex <- function(
 ) {
   res <- .Call(stbl_cpx_to_dbl, x)
   .check_cast_failures(
+    x,
     !res[["valid"]],
     x_class,
     double(),

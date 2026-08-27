@@ -4,9 +4,11 @@
 \alias{.check_dbl_to_int_failures}
 \title{Check for double to integer coercion failures}
 \usage{
-.check_dbl_to_int_failures(res, x_class, x_arg, call)
+.check_dbl_to_int_failures(x, res, x_class, x_arg, call)
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{res}{A list returned by \code{stbl_dbl_to_int}, with elements
 \code{result} and \code{bad_precision}.}
 

@@ -4,9 +4,11 @@
 \alias{.check_chr_to_int_failures}
 \title{Check for character to integer coercion failures}
 \usage{
-.check_chr_to_int_failures(res, x_class, x_arg, call)
+.check_chr_to_int_failures(x, res, x_class, x_arg, call)
 }
 \arguments{
+\item{x}{The object to stabilize.}
+
 \item{res}{A list returned by \code{stbl_chr_to_int}, with elements
 \code{result}, \code{non_number}, and \code{bad_precision}.}
 

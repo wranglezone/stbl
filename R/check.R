@@ -238,9 +238,18 @@
 #' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_cast_failures <- function(failures, x_class, to, due_to, x_arg, call) {
+.check_cast_failures <- function(
+  x,
+  failures,
+  x_class,
+  to,
+  due_to,
+  x_arg,
+  call
+) {
   if (any(failures)) {
     .stop_incompatible(
+      x = x,
       x_class = x_class,
       to = to,
       failures = failures,

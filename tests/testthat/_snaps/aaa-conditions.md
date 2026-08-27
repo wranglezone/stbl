@@ -73,27 +73,29 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_incompatible() throws the expected error (#95, #310)
+# .stop_incompatible() throws the expected error (#95, #310, #332)
 
     Code
-      .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
-      "some reason", "my_arg", rlang::current_env())
+      .stop_incompatible(c("a", "b", "c", "d"), "character", integer(), c(FALSE, TRUE,
+        FALSE, TRUE), "some reason", "my_arg", rlang::current_env())
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
+      * Values: "b" and "d"
 
-# .stop_incompatible() passes dots (#95, #310)
+# .stop_incompatible() passes dots (#95, #310, #332)
 
     Code
-      .stop_incompatible("character", integer(), c(FALSE, TRUE, FALSE, TRUE),
-      "some reason", "my_arg", rlang::current_env(), .internal = TRUE)
+      .stop_incompatible(c("a", "b", "c", "d"), "character", integer(), c(FALSE, TRUE,
+        FALSE, TRUE), "some reason", "my_arg", rlang::current_env(), .internal = TRUE)
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `my_arg` <character> must be coercible to <integer>
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
+      * Values: "b" and "d"
       i This is an internal error that was detected in the stbl package.
         Please report it at <https://github.com/wranglezone/stbl/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
 

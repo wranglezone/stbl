@@ -194,6 +194,7 @@ rlang::caller_env
 #' @inherit .shared-return-conditions return
 #' @keywords internal
 .stop_incompatible <- function(
+  x,
   x_class,
   to,
   failures,
@@ -205,18 +206,22 @@ rlang::caller_env
 ) {
   to_class <- object_type(to)
   locations <- which(failures)
+  values <- x[locations]
+  value_chrs <- as.character(values)
   .stop_must(
     msg = "{.cls {x_class}} must be coercible to {.cls {to_class}}",
     x_arg = x_arg,
     additional_msg = c(
       x = "Can't convert some values due to {due_to}.",
-      "*" = "Locations: {locations}"
+      "*" = "Locations: {locations}",
+      "*" = "Values: {.val {value_chrs}}"
     ),
     call = call,
     subclass = c("incompatible_values", to_class),
     message_env = rlang::current_env(),
     parent = parent,
     locations = locations,
+    values = values,
     ...
   )
 }

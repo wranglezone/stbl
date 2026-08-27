@@ -72,6 +72,7 @@ to_date.character <- function(
   parsed <- as.Date(x, format = "%Y-%m-%d")
   failures <- not_na & (!well_shaped | is.na(parsed))
   .check_cast_failures(
+    x,
     failures,
     x_class,
     .date_type_obj(),

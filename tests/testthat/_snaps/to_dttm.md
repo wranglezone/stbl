@@ -23,6 +23,7 @@
       ! `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
+      * Values: "2024-01-01 12:00:00"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `val` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
+      * Values: "2024-01-01 12:00:00"
 
 # to_dttm() rejects unparseable date-time strings (#105)
 
@@ -43,6 +45,7 @@
       ! `given` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 2
+      * Values: "not-a-datetime"
 
 # to_dttm() rejects impossible date-times (#105)
 
@@ -53,6 +56,7 @@
       ! `"2024-02-30T12:00:00Z"` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
+      * Values: "2024-02-30T12:00:00Z"
 
 ---
 
@@ -63,6 +67,7 @@
       ! `"2024-01-01T25:00:00Z"` <character> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
+      * Values: "2024-01-01T25:00:00Z"
 
 # to_dttm() rejects an unrecognized tz (#105)
 
@@ -82,6 +87,7 @@
       ! `given` <factor> must be coercible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 2
+      * Values: "nope"
 
 # to_dttm_scalar() provides informative error messages (#105)
 

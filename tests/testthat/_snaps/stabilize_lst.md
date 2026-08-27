@@ -39,6 +39,7 @@
       ! `list(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "not-an-int"
 
 # stabilize_lst() errors on extra named elements by default (#110)
 
@@ -76,6 +77,7 @@
       ! `.named` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "yes"
 
 # stabilize_lst() errors on unnamed elements by default (#110)
 
@@ -113,6 +115,7 @@
       ! `.unnamed` <character> must be coercible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 1
+      * Values: "yes"
 
 # stabilize_lst() enforces .min_size (#110)
 

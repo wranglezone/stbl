@@ -251,6 +251,7 @@ test_that(".to_cls_from_fct() works (#23)", {
 
 test_that(".check_lst_failures() returns NULL when all elements are valid (#273)", {
   result <- .check_lst_failures(
+    list(1, 2, 3),
     c(TRUE, TRUE, TRUE),
     to = character(),
     x_class = "list",
@@ -260,19 +261,19 @@ test_that(".check_lst_failures() returns NULL when all elements are valid (#273)
   expect_null(result)
 })
 
-test_that(".check_lst_failures() errors when any element is invalid (#273, #310)", {
-  expect_pkg_error_classes(
+test_that(".check_lst_failures() errors when any element is invalid (#273, #310, #332)", {
+  cnd <- rlang::catch_cnd(
     .check_lst_failures(
+      list(1, "bad"),
       c(TRUE, FALSE),
       to = character(),
       x_class = "list",
       x_arg = "x",
       call = rlang::current_env()
-    ),
-    "stbl",
-    "incompatible_values",
-    "character"
+    )
   )
+  expect_pkg_error_classes(cnd, "stbl", "incompatible_values", "character")
+  expect_identical(cnd$values, list("bad"))
 })
 
 test_that(".to_num_from_complex() works (#23, #310)", {

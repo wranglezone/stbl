@@ -99,10 +99,11 @@ test_that(".check_x_no_more_than_y() works (#95)", {
   )
 })
 
-test_that(".check_cast_failures() works (#310)", {
+test_that(".check_cast_failures() works (#310, #332)", {
   # Happy path
   expect_null(
     .check_cast_failures(
+      x = c("a", "b"),
       failures = c(FALSE, FALSE),
       x_class = "character",
       to = logical(),
@@ -116,6 +117,7 @@ test_that(".check_cast_failures() works (#310)", {
   failures <- c(FALSE, TRUE, FALSE, TRUE)
   expect_pkg_error_snapshot(
     .check_cast_failures(
+      x = c("a", "b", "c", "d"),
       failures = failures,
       x_class = "character",
       to = logical(),
@@ -129,9 +131,10 @@ test_that(".check_cast_failures() works (#310)", {
   )
 })
 
-test_that(".check_cast_failures() attaches failing locations (#274)", {
+test_that(".check_cast_failures() attaches failing locations and values (#274, #332)", {
   cnd <- rlang::catch_cnd(
     .check_cast_failures(
+      x = c("a", "b", "c", "d"),
       failures = c(FALSE, TRUE, FALSE, TRUE),
       x_class = "character",
       to = logical(),
@@ -141,6 +144,7 @@ test_that(".check_cast_failures() attaches failing locations (#274)", {
     )
   )
   expect_identical(cnd$locations, c(2L, 4L))
+  expect_identical(cnd$values, c("b", "d"))
 })
 
 test_that(".check_all_named() works (#203)", {

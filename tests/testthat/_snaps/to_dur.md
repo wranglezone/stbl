@@ -23,6 +23,7 @@
       ! `"P"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "P"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `"PT"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "PT"
 
 # to_dur() rejects mixing the week form with other units (#295)
 
@@ -43,6 +45,7 @@
       ! `"P1W2D"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "P1W2D"
 
 # to_dur() rejects fractional components (#295)
 
@@ -53,6 +56,7 @@
       ! `"P1.5D"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "P1.5D"
 
 # to_dur() rejects a negative sign (#295)
 
@@ -63,6 +67,7 @@
       ! `"-P1D"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "-P1D"
 
 # to_dur() rejects out-of-order components (#295)
 
@@ -73,6 +78,7 @@
       ! `"P1D1Y"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "P1D1Y"
 
 # to_dur() rejects lowercase durations (#295)
 
@@ -83,6 +89,7 @@
       ! `"p1y2m"` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
+      * Values: "p1y2m"
 
 # to_dur() rejects unparseable duration strings (#295)
 
@@ -93,6 +100,7 @@
       ! `given` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
+      * Values: "not-a-duration"
 
 ---
 
@@ -103,6 +111,7 @@
       ! `val` <character> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
+      * Values: "not-a-duration"
 
 # to_dur() errors informatively for bad factors (#295)
 
@@ -113,6 +122,7 @@
       ! `given` <factor> must be coercible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
+      * Values: "nope"
 
 # to_dur_scalar() provides informative error messages (#295)
 

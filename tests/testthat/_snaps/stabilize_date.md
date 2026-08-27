@@ -108,6 +108,7 @@
       ! `"11/13/2018"` <character> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
+      * Values: "11/13/2018"
 
 # stabilize_date_scalar() respects allow_null (#104)
 

@@ -23,6 +23,7 @@
       ! `"11/13/2018"` <character> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
+      * Values: "11/13/2018"
 
 ---
 
@@ -33,6 +34,7 @@
       ! `val` <character> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
+      * Values: "11/13/2018"
 
 # to_date() rejects unparseable date strings (#104)
 
@@ -43,6 +45,7 @@
       ! `given` <character> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 2
+      * Values: "not-a-date"
 
 # to_date() rejects impossible dates (#104)
 
@@ -53,6 +56,7 @@
       ! `"2024-02-30"` <character> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
+      * Values: "2024-02-30"
 
 # to_date() errors informatively for bad factors (#104)
 
@@ -63,6 +67,7 @@
       ! `given` <factor> must be coercible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 2
+      * Values: "nope"
 
 # to_date_scalar() provides informative error messages (#104)
 
