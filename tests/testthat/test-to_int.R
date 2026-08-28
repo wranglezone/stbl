@@ -88,7 +88,7 @@ test_that("to_int() respects coerce_character (#14)", {
   )
 })
 
-test_that("to_int() errors informatively for bad chrs (#2, #310)", {
+test_that("to_int() errors informatively for bad chrs (#2, #310, #335)", {
   given <- as.character(1:10)
   given[[4]] <- "1.1"
   expect_pkg_error_snapshot(
@@ -196,7 +196,7 @@ test_that("to_int() respects coerce_factor (#14)", {
   )
 })
 
-test_that("to_int() errors informatively for bad factors (#4, #310)", {
+test_that("to_int() errors informatively for bad factors (#4, #310, #335)", {
   given <- factor(letters)
   expect_pkg_error_snapshot(
     to_int(given),

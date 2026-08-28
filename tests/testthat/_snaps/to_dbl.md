@@ -30,14 +30,14 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <character> to <double>.
 
-# to_dbl() errors informatively for bad chrs (#23, #310)
+# to_dbl() errors informatively for bad chrs (#23, #310, #335)
 
     Code
       to_dbl(given)
     Condition <stbl-error-incompatible_values-double>
       Error:
       ! `given` <character> must be coercible to <double>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 2
       * Values: "a"
 
@@ -48,7 +48,7 @@
     Condition <stbl-error-incompatible_values-double>
       Error in `wrapped_to_dbl()`:
       ! `val` <character> must be coercible to <double>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 2
       * Values: "a"
 
@@ -90,14 +90,14 @@
       Error in `wrapped_to_dbl()`:
       ! Can't coerce `val` <factor> to <double>.
 
-# to_dbl() errors informatively for bad factors (#23, #310)
+# to_dbl() errors informatively for bad factors (#23, #310, #335)
 
     Code
       to_dbl(given)
     Condition <stbl-error-incompatible_values-double>
       Error:
       ! `given` <factor> must be coercible to <double>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
@@ -108,7 +108,7 @@
     Condition <stbl-error-incompatible_values-double>
       Error in `wrapped_to_dbl()`:
       ! `val` <factor> must be coercible to <double>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 

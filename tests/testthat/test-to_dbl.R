@@ -56,7 +56,7 @@ test_that("to_dbl() respects coerce_character (#23)", {
   )
 })
 
-test_that("to_dbl() errors informatively for bad chrs (#23, #310)", {
+test_that("to_dbl() errors informatively for bad chrs (#23, #310, #335)", {
   given <- c("1.1", "a")
   expect_pkg_error_snapshot(
     to_dbl(given),
@@ -118,7 +118,7 @@ test_that("to_dbl() respects coerce_factor (#23)", {
   )
 })
 
-test_that("to_dbl() errors informatively for bad factors (#23, #310)", {
+test_that("to_dbl() errors informatively for bad factors (#23, #310, #335)", {
   given <- factor(letters)
   expect_pkg_error_snapshot(
     to_dbl(given),

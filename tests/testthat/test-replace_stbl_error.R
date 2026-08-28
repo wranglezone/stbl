@@ -82,6 +82,32 @@ test_that("replace_stbl_error() does not catch non-matching stbl errors (#178)",
   )
 })
 
+test_that("replace_stbl_error() catches any stbl error by default (#334)", {
+  my_fn <- function(x) {
+    replace_stbl_error(
+      to_chr(x),
+      message = "Custom message."
+    )
+  }
+  expect_error(
+    my_fn(data.frame()),
+    "Custom message.",
+    class = "stbl-error-coerce-character"
+  )
+
+  my_fn2 <- function(x) {
+    replace_stbl_error(
+      stabilize_chr(x, allow_null = FALSE),
+      message = "Custom message."
+    )
+  }
+  expect_error(
+    my_fn2(NULL),
+    "Custom message.",
+    class = "stbl-error-bad_null"
+  )
+})
+
 test_that("replace_stbl_error() catches broad subclass (#178)", {
   my_fn <- function(x) {
     replace_stbl_error(

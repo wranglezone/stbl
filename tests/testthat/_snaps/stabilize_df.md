@@ -38,14 +38,14 @@
       Error:
       ! `data.frame(foo = "a")` must contain element "name".
 
-# stabilize_df() errors informatively when column fails validation (#142, #310)
+# stabilize_df() errors informatively when column fails validation (#142, #310, #335)
 
     Code
       stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar())
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `data.frame(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-an-int"
 
@@ -58,7 +58,7 @@
       ! `data.frame(a = 1L, b = 2L)` must not contain extra named elements.
       x Extra element: "b"
 
-# stabilize_df() validates extra columns with .extra_cols (#142, #310)
+# stabilize_df() validates extra columns with .extra_cols (#142, #310, #335)
 
     Code
       stabilize_df(data.frame(a = 1L, b = "not-int"), a = specify_int_scalar(),
@@ -66,7 +66,7 @@
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `data.frame(a = 1L, b = "not-int")[["b"]]` <character> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-int"
 

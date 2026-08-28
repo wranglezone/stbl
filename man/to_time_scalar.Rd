@@ -37,7 +37,18 @@ object before checking its coercion, but want the error message to match
 the original class.}
 }
 \value{
-The input as a length-1 \code{\link[hms:hms]{hms::hms()}} vector.
+The input as a length-1 \code{\link[hms:hms]{hms::hms()}} vector, or an error
+condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
+failure mode:
+\itemize{
+\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
+safely converted to a time of day.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when
+\code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
+}
 }
 \description{
 Checks whether a vector can be coerced to a length-1 \code{\link[hms:hms]{hms::hms()}} vector.

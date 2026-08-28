@@ -7,10 +7,11 @@
 #'
 #' @param expr An expression to evaluate.
 #' @param subclass (`character`) The subclass(es) of the `stbl` error to
-#'   ignore. Combined with `"stbl-error-"` to form the class name to intercept.
-#'   For example, `c("coerce", "character")` silences errors of class
-#'   `stbl-error-coerce-character` ([stabilize_chr()]), while `c("coerce")`
-#'   silences any `stbl-error-coerce` error.
+#'   ignore or replace. Combined with `"stbl-error"` to form the class name to
+#'   intercept. For example, `c("coerce", "character")` catches errors of class
+#'   `stbl-error-coerce-character` ([stabilize_chr()]), `c("coerce")`
+#'   catches any `stbl-error-coerce` error, and `character()` (the default)
+#'   catches any `stbl` error.
 #'
 #' @returns The result of `expr` if no matching error is thrown, or `NULL`
 #'   if a matching `stbl` error is caught.
@@ -19,7 +20,10 @@
 #' @examples
 #' ignore_stbl_error(to_chr(data.frame()), subclass = c("coerce", "character"))
 #' ignore_stbl_error(to_chr("hello"), subclass = c("coerce", "character"))
-ignore_stbl_error <- function(expr, subclass) {
+#'
+#' # Omit subclass to catch any stbl error
+#' ignore_stbl_error(to_chr(data.frame()))
+ignore_stbl_error <- function(expr, subclass = character()) {
   class_to_catch <- .compile_dash("stbl", "error", .collapse_dash(subclass))
   rlang::try_fetch(
     expr,

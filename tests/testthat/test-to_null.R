@@ -23,7 +23,7 @@ test_that(".to_null() coerces anything to NULL (#129)", {
   expect_null(.to_null(letters))
 })
 
-test_that(".to_null() errors for bad allow_null (#129, #310)", {
+test_that(".to_null() errors for bad allow_null (#129, #310, #335)", {
   expect_pkg_error_snapshot(
     .to_null(NULL, allow_null = NULL),
     "stbl",

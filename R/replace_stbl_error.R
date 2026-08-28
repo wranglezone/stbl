@@ -19,8 +19,8 @@
 #' my_fn <- function(x) {
 #'   x <- to_chr(x) |>
 #'     replace_stbl_error(
-#'       subclass = c("coerce", "character"),
-#'       message = "{.arg x} must be a character vector of widgets"
+#'       message = "{.arg x} must be a character vector of widgets",
+#'       subclass = c("coerce", "character")
 #'     )
 #' }
 #' try(my_fn(data.frame()))
@@ -29,16 +29,23 @@
 #' my_fn2 <- function(x) {
 #'   x <- to_chr(x) |>
 #'     replace_stbl_error(
-#'       subclass = c("coerce", "character"),
 #'       message = "{.arg x} must be a character vector of widgets",
+#'       subclass = c("coerce", "character"),
 #'       additional_class = "mypkg-error-bad_widget"
 #'     )
 #' }
 #' try(my_fn2(data.frame()))
+#'
+#' # Omit subclass to catch any stbl error
+#' my_fn3 <- function(x) {
+#'   x <- to_chr(x) |>
+#'     replace_stbl_error(message = "{.arg x} must be a character vector of widgets")
+#' }
+#' try(my_fn3(data.frame()))
 replace_stbl_error <- function(
   expr,
-  subclass,
   message,
+  subclass = character(),
   additional_class = character(),
   message_env = caller_env()
 ) {

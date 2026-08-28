@@ -87,7 +87,15 @@ the original class.}
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
-The input as an \code{\link[hms:hms]{hms::hms()}} vector, always expressed in UTC.
+The input as an \code{\link[hms:hms]{hms::hms()}} vector, always expressed in UTC, or
+an error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
+failure mode:
+\itemize{
+\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
+safely converted to a time of day.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+}
 }
 \description{
 Checks whether a vector can be coerced to an \code{\link[hms:hms]{hms::hms()}} time-of-day vector

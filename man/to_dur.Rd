@@ -75,7 +75,15 @@ the original class.}
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
-The input as a \link[lubridate:Period-class]{lubridate::Period} vector.
+The input as a \link[lubridate:Period-class]{lubridate::Period} vector, or an error
+condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
+failure mode:
+\itemize{
+\item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
+safely converted to a duration.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+}
 }
 \description{
 Checks whether a vector can be coerced to a \link[lubridate:Period-class]{lubridate::Period} without

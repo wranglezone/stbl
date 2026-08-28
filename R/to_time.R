@@ -19,7 +19,13 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as an [hms::hms()] vector, always expressed in UTC.
+#' @returns The input as an [hms::hms()] vector, always expressed in UTC, or
+#'   an error condition with classes `<stbl-error>`, `<stbl-condition>`,
+#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
+#'   failure mode:
+#'   - `<stbl-error-incompatible_values-time>` when some values cannot be
+#'   safely converted to a time of day.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family time functions
 #' @family stabilization functions
 #' @export
@@ -228,7 +234,16 @@ to_time.default <- function(
 #' @inheritParams .shared-params
 #' @inheritParams to_time
 #'
-#' @returns The input as a length-1 [hms::hms()] vector.
+#' @returns The input as a length-1 [hms::hms()] vector, or an error
+#'   condition with classes `<stbl-error>`, `<stbl-condition>`,
+#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
+#'   failure mode:
+#'   - `<stbl-error-incompatible_values-time>` when some values cannot be
+#'   safely converted to a time of day.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #' @family time functions
 #' @family stabilization functions
 #' @export

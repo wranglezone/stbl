@@ -10,7 +10,7 @@
 \item{...}{Things to paste.}
 }
 \value{
-A length-1 character vector.
+A length-1 character vector, or \code{NULL} if \code{...} is empty.
 }
 \description{
 Paste together collapsing with -

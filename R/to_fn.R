@@ -14,7 +14,17 @@
 #'   ignored when the input is a namespaced string of the form `"pkg::fn"`, in
 #'   which case the package namespace is used instead.
 #' @inheritParams .shared-params
-#' @returns A function.
+#' @returns A function, or an error condition with classes `<stbl-error>`,
+#'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+#'   specific class by failure mode:
+#'   - `<stbl-error-coerce-function>` when `x` cannot be coerced to a
+#'   function.
+#'   - `<stbl-error-invalid_function_name>` when `x` is not a syntactically
+#'   valid function name.
+#'   - `<stbl-error-unknown_function>` when `x` is a syntactically valid name
+#'   that doesn't resolve to a known function.
+#'   - `<stbl-error-non_scalar>` when `x` has more than one element.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family function functions
 #' @export
 #'

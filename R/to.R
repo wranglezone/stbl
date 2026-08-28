@@ -8,7 +8,13 @@
 #' @param ... Arguments passed to methods and on to `to_*()` functions.
 #' @inheritParams .shared-params
 #'
-#' @returns `x` coerced to the type of `.to`.
+#' @returns `x` coerced to the type of `.to`, or an error condition with
+#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - The failure classes documented for the `to_*()` function corresponding
+#'   to the class of `.to` (for example [to_int()] for `.to = integer()`).
+#'   - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
+#'   `to_*()` function.
 #' @family character functions
 #' @family double functions
 #' @family integer functions

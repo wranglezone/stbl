@@ -14,14 +14,14 @@
       Error in `wrapped_to_lgl()`:
       ! `val` must not be <NULL>.
 
-# to_lgl() errors for bad characters (#21, #310)
+# to_lgl() errors for bad characters (#21, #310, #335)
 
     Code
       to_lgl(letters)
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `letters` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
@@ -32,18 +32,18 @@
     Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl()`:
       ! `val` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
-# to_lgl errors for bad factors (#21, #310)
+# to_lgl errors for bad factors (#21, #310, #335)
 
     Code
       to_lgl(given)
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `given` <factor> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
@@ -54,7 +54,7 @@
     Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl()`:
       ! `val` <factor> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", ..., "y", and "z"
 
@@ -125,14 +125,14 @@
       ! `val` must be a single <logical>.
       x `val` has 3 values.
 
-# to_lgl_scalar() errors for bad characters (#32, #310)
+# to_lgl_scalar() errors for bad characters (#32, #310, #335)
 
     Code
       to_lgl_scalar(given)
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `given` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "a"
 
@@ -143,7 +143,7 @@
     Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_lgl_scalar()`:
       ! `val` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "a"
 

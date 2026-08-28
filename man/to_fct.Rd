@@ -54,7 +54,16 @@ the original class.}
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
-The input as a factor.
+The input as a factor, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be coerced to factor.
+\item \verb{<stbl-error-incompatible_values-factor>} when some elements of a list
+cannot be converted to factor.
+\item \verb{<stbl-error-fct_levels>} when values are not present in \code{levels}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+}
 }
 \description{
 Checks whether a vector can be coerced to a factor without losing
