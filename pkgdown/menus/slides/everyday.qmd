@@ -545,9 +545,3 @@ compile_order_df(
 :::
 :::: 
 :::::
-
-::: notes
-- Point out link to slides.
-- "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
-:::
-
