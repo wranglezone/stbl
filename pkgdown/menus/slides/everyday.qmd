@@ -17,7 +17,7 @@ format:
 ::::: columns
 
 :::: {.column width="40%"}
-![](slide_images\design_of_everyday_things_book.jpg)
+![](slide_images/doet_book.jpg)
 ::::
 
 :::: {.column width="60%"}
@@ -516,7 +516,7 @@ compile_order_df(
 ::::: columns
 
 :::: {.column width="40%"}
-![](slide_images\design_of_everyday_things_book.jpg)
+![](slide_images/doet_book.jpg)
 ::::
 
 :::: {.column width="60%"}
