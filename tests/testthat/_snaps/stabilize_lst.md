@@ -30,14 +30,14 @@
       Error in `wrapped_stabilize_lst()`:
       ! `val` must contain element "name".
 
-# stabilize_lst() errors informatively when element fails validation (#110, #310)
+# stabilize_lst() errors informatively when element fails validation (#110, #310, #335)
 
     Code
       stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar())
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `list(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-an-int"
 
@@ -68,14 +68,14 @@
       ! `list(a = 1L, b = 2L)` must not contain extra named elements.
       x Extra elements: "a" and "b"
 
-# stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281)
+# stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335)
 
     Code
       stabilize_lst(list(a = 1L, b = 2L), .named = "yes")
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `.named` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "yes"
 
@@ -106,14 +106,14 @@
       ! `list(1L, 2L)` must not contain unnamed elements.
       x Unnamed positions: 1 and 2
 
-# stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281)
+# stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335)
 
     Code
       stabilize_lst(list(1L, 2L), .unnamed = "yes")
     Condition <stbl-error-incompatible_values-logical>
       Error:
       ! `.unnamed` <character> must be coercible to <logical>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "yes"
 

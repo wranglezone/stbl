@@ -45,7 +45,15 @@ source of error messages.}
 \item{coerce_function}{(\code{logical(1)}) Should functions be coerced?}
 }
 \value{
-The object as a list.
+The object as a list, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-coerce-list>} when \code{x} is a primitive function.
+\item \verb{<stbl-error-bad_function>} for functions when
+\code{coerce_function = FALSE} (the default).
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+}
 }
 \description{
 \code{to_lst()} checks whether an object can be coerced to a list without losing

@@ -74,7 +74,7 @@
       Error in `wrapped_to_int()`:
       ! Can't coerce `val` <character> to <integer>.
 
-# to_int() errors informatively for bad chrs (#2, #310)
+# to_int() errors informatively for bad chrs (#2, #310, #335)
 
     Code
       to_int(given)
@@ -103,7 +103,7 @@
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `given` <character> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 4
       * Values: "a"
 
@@ -114,7 +114,7 @@
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
       ! `val` <character> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 4
       * Values: "a"
 
@@ -200,14 +200,14 @@
       Error in `wrapped_to_int()`:
       ! Can't coerce `val` <factor> to <integer>.
 
-# to_int() errors informatively for bad factors (#4, #310)
+# to_int() errors informatively for bad factors (#4, #310, #335)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `given` <factor> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
@@ -218,7 +218,7 @@
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
       ! `val` <factor> must be coercible to <integer>
-      x Can't convert some values due to incompatible values.
+      x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 

@@ -17,7 +17,13 @@
 #' @param ... Arguments passed to [base::as.list()] or other methods.
 #' @inheritParams .shared-params
 #'
-#' @returns The object as a list.
+#' @returns The object as a list, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-list>` when `x` is a primitive function.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family list functions
 #' @export
 to_lst <- function(

@@ -48,7 +48,7 @@ test_that("stabilize_lst() errors when required named element is missing (#110)"
   )
 })
 
-test_that("stabilize_lst() errors informatively when element fails validation (#110, #310)", {
+test_that("stabilize_lst() errors informatively when element fails validation (#110, #310, #335)", {
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(count = "not-an-int"),
@@ -100,7 +100,7 @@ test_that("stabilize_lst() treats .named = FALSE like the default (forbid) (#281
   )
 })
 
-test_that("stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281)", {
+test_that("stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335)", {
   expect_pkg_error_snapshot(
     stabilize_lst(list(a = 1L, b = 2L), .named = "yes"),
     "stbl",
@@ -145,7 +145,7 @@ test_that("stabilize_lst() treats .unnamed = FALSE like the default (forbid) (#2
   )
 })
 
-test_that("stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281)", {
+test_that("stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335)", {
   expect_pkg_error_snapshot(
     stabilize_lst(list(1L, 2L), .unnamed = "yes"),
     "stbl",

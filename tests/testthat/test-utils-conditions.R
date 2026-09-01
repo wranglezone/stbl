@@ -36,10 +36,20 @@ test_that(".compile_dash() pastes with a dash separator (#213)", {
   expect_equal(.compile_dash("pkg", "error", "sub"), "pkg-error-sub")
 })
 
+test_that(".compile_dash() drops empty components (#334)", {
+  expect_equal(.compile_dash("stbl", "error", character()), "stbl-error")
+  expect_equal(.compile_dash("stbl", "error", NULL), "stbl-error")
+})
+
 test_that(".collapse_dash() collapses a vector with dashes (#213)", {
   expect_equal(.collapse_dash(c("a", "b")), "a-b")
   expect_equal(.collapse_dash(c("outer", "inner")), "outer-inner")
   expect_equal(.collapse_dash("single"), "single")
+})
+
+test_that(".collapse_dash() returns NULL for an empty vector (#334)", {
+  expect_null(.collapse_dash(character()))
+  expect_null(.collapse_dash(NULL))
 })
 
 test_that(".compile_pkg_condition_classes() compiles condition class chains (#213)", {

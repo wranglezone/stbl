@@ -140,7 +140,15 @@ vector's \code{levels} play the same role that \code{allowed_values} plays for o
 types: they restrict \code{x} to a fixed set of permitted values.}
 }
 \value{
-\code{x} coerced to the type of \code{.to}.
+\code{x} coerced to the type of \code{.to}, or an error condition with
+classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item The failure classes documented for the \verb{to_*()} function corresponding
+to the class of \code{.to} (for example \code{\link[=to_int]{to_int()}} for \code{.to = integer()}).
+\item \verb{<stbl-error-coerce-*>} when the class of \code{.to} has no corresponding
+\verb{to_*()} function.
+}
 }
 \description{
 \code{to()} coerces \code{x} to the type of \code{.to}, dispatching on the class of \code{.to}

@@ -7,7 +7,14 @@
 #' @param ... Arguments passed to [base::as.data.frame()] or other methods.
 #' @inheritParams .shared-params
 #'
-#' @returns The object as a data frame.
+#' @returns The object as a data frame, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-data.frame>` when `x` cannot be coerced to a data
+#'   frame.
+#'   - `<stbl-error-bad_named>` when a list has any unnamed elements.
+#'   - `<stbl-error-jagged>` when a list has incompatible element lengths.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family data frame functions
 #' @export
 #'

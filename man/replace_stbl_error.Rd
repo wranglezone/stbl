@@ -6,8 +6,8 @@
 \usage{
 replace_stbl_error(
   expr,
-  subclass,
   message,
+  subclass = character(),
   additional_class = character(),
   message_env = caller_env()
 )
@@ -15,14 +15,15 @@ replace_stbl_error(
 \arguments{
 \item{expr}{An expression to evaluate.}
 
-\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to
-ignore. Combined with \code{"stbl-error-"} to form the class name to intercept.
-For example, \code{c("coerce", "character")} silences errors of class
-\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), while \code{c("coerce")}
-silences any \code{stbl-error-coerce} error.}
-
 \item{message}{(\code{character}) The replacement error message. Formatted with
 \code{\link[cli:cli_bullets]{cli::cli_bullets()}}.}
+
+\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to
+ignore or replace. Combined with \code{"stbl-error"} to form the class name to
+intercept. For example, \code{c("coerce", "character")} catches errors of class
+\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), \code{c("coerce")}
+catches any \code{stbl-error-coerce} error, and \code{character()} (the default)
+catches any \code{stbl} error.}
 
 \item{additional_class}{(\code{character}) Additional classes to prepend to the
 error class list. Useful for the \code{class} argument of
@@ -46,8 +47,8 @@ of errors it throws.
 my_fn <- function(x) {
   x <- to_chr(x) |>
     replace_stbl_error(
-      subclass = c("coerce", "character"),
-      message = "{.arg x} must be a character vector of widgets"
+      message = "{.arg x} must be a character vector of widgets",
+      subclass = c("coerce", "character")
     )
 }
 try(my_fn(data.frame()))
@@ -56,10 +57,17 @@ try(my_fn(data.frame()))
 my_fn2 <- function(x) {
   x <- to_chr(x) |>
     replace_stbl_error(
-      subclass = c("coerce", "character"),
       message = "{.arg x} must be a character vector of widgets",
+      subclass = c("coerce", "character"),
       additional_class = "mypkg-error-bad_widget"
     )
 }
 try(my_fn2(data.frame()))
+
+# Omit subclass to catch any stbl error
+my_fn3 <- function(x) {
+  x <- to_chr(x) |>
+    replace_stbl_error(message = "{.arg x} must be a character vector of widgets")
+}
+try(my_fn3(data.frame()))
 }

@@ -107,7 +107,7 @@ test_that("to_lgl works for characters (#21)", {
   expect_identical(to_lgl(c("1.1", "0.1", "-1.1")), c(TRUE, TRUE, TRUE))
 })
 
-test_that("to_lgl() errors for bad characters (#21, #310)", {
+test_that("to_lgl() errors for bad characters (#21, #310, #335)", {
   expect_pkg_error_snapshot(
     to_lgl(letters),
     "stbl",
@@ -158,7 +158,7 @@ test_that("to_lgl works for factors (#21)", {
   )
 })
 
-test_that("to_lgl errors for bad factors (#21, #310)", {
+test_that("to_lgl errors for bad factors (#21, #310, #335)", {
   given <- factor(letters)
   expect_pkg_error_snapshot(
     to_lgl(given),
@@ -222,7 +222,7 @@ test_that("to_lgl_scalar() errors for non-scalars (#32)", {
   expect_pkg_error_snapshot(wrapped_to_lgl_scalar(given), "stbl", "non_scalar")
 })
 
-test_that("to_lgl_scalar() errors for bad characters (#32, #310)", {
+test_that("to_lgl_scalar() errors for bad characters (#32, #310, #335)", {
   given <- "a"
   expect_pkg_error_snapshot(
     to_lgl_scalar(given),

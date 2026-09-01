@@ -108,17 +108,21 @@
 #' Paste together with - separator
 #'
 #' @param ... Things to paste.
-#' @returns A length-1 character vector.
+#' @returns A length-1 character vector, or `NULL` if `...` is empty.
 #' @keywords internal
 .compile_dash <- function(...) {
-  paste(..., sep = "-")
+  dots <- list(...)
+  dots <- dots[lengths(dots) > 0]
+  do.call(paste, c(dots, sep = "-"))
 }
 
 #' Paste together collapsing with -
 #'
 #' @param ... Things to paste.
-#' @returns A length-1 character vector.
+#' @returns A length-1 character vector, or `NULL` if `...` is empty.
 #' @keywords internal
 .collapse_dash <- function(...) {
-  paste(..., collapse = "-")
+  if (any(lengths(...) > 0)) {
+    paste(..., collapse = "-")
+  }
 }

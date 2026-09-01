@@ -16,6 +16,16 @@ test_that("ignore_stbl_error() does not catch non-matching stbl errors (#178)", 
     expect_pkg_error_classes("stbl", "bad_null")
 })
 
+test_that("ignore_stbl_error() catches any stbl error by default (#334)", {
+  result <- to_chr(data.frame()) |>
+    ignore_stbl_error()
+  expect_null(result)
+
+  stabilize_chr(NULL, allow_null = FALSE) |>
+    ignore_stbl_error() |>
+    expect_null()
+})
+
 test_that("ignore_stbl_error() catches broad subclass (#178)", {
   expect_null(
     ignore_stbl_error(

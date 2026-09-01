@@ -30,10 +30,10 @@ format:
 1️⃣ Make functionality obvious
 :::
 ::: fragment
-2️⃣ Forgive input
+2️⃣ Forgive "close enough" input
 :::
 ::: fragment
-3️⃣ Describe mistake fixes
+3️⃣ Help users fix mistakes
 :::
 :::: 
 :::::
@@ -42,7 +42,6 @@ format:
 - Point out link to slides.
 - "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
 :::
-
 
 # Make it obvious what functions do
 
@@ -129,16 +128,16 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 
 ## Make it obvious what functions do
 
-1️⃣ Functions = verbs
+🟠 Functions = verbs
 
 ::: fragment
 <br>
-2️⃣ Arguments = nouns
+🟣 Arguments = nouns
 :::
 
 ::: fragment
 <br>
-3️⃣ Defaults = standards / hints
+🔵 Defaults = standards / hints
 :::
 
 ## {transition="fade-in fade-out"}
@@ -220,7 +219,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ## Forgive "close enough" input {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-2
+#| code-line-numbers: 2-4|2-2
 compile_order_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
@@ -317,7 +316,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ## {transition="slide-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 3-3
+#| code-line-numbers: 2-3
 #| eval: true
 compile_order_df(
   c("paper towels", "toilet paper"),
@@ -328,28 +327,28 @@ compile_order_df(
 ## {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 3-3
+#| code-line-numbers: 2-3
 compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "b")
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
 ## {transition="fade-in slide-out"}
 
 ```{r}
-#| code-line-numbers: 3-3
+#| code-line-numbers: 2-3
 #| eval: true
 #| warning: true
 compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "b")
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
-# Tell users how to fix mistakes
+# Help users fix mistakes
 
-## Tell users how to fix mistakes
+## Help users fix mistakes
 
 ```{r}
 #| code-line-numbers: 2-4
@@ -369,49 +368,137 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## Tell users how to fix mistakes {transition="slide-in fade-out"}
+## Help users fix mistakes {transition="slide-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 3-3
 compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "b")
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
-## Tell users how to fix mistakes {transition="fade-in slide-out"}
+## Help users fix mistakes {transition="fade-in slide-out"}
 
 ```{r}
-#| code-line-numbers: 3-3
 #| eval: true
 #| error: true
 compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "b")
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
-## Tell users how to fix mistakes
+## Help users fix mistakes {transition="slide-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-2
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices)
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Help users fix mistakes {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-8
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices) |>
+    stbl::replace_stbl_error(
+      c(
+        "{.arg prices} must be numeric",
+        i = "Check that the input CSV is formatted correctly"
+      )
+    )
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Help users fix mistakes {transition="fade-in slide-out"}
+
+```{r}
+#| code-line-numbers: 2-8
+#| eval: true
+compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices) |>
+    stbl::replace_stbl_error(
+      c(
+        "{.arg prices} must be numeric",
+        i = "Check that the input CSV is formatted correctly"
+      ),
+      subclass = c("incompatible_values", "double")
+    )
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
+## Help users fix mistakes {transition="slide-in fade-out"}
+
+```{r}
+compile_order_df(
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
+)
+```
+
+## Help users fix mistakes {transition="fade-in slide-out"}
+
+```{r}
+#| eval: true
+#| error: true
+compile_order_df(
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
+)
+```
+
+## Help users fix mistakes
 
 ```{r}
 #| eval: true
 #| error: true
 #| echo: false
-cli::cli_abort(c(
-  "!" = "{.arg prices} <character> must be coercible to <double>",
-  x = "Can't convert some values due to incompatible values.",
-  "*" = "Locations: 2",
-  "*" = "Values: \"b\"",
-  i = "Repair or remove these values and try again."
-))
+compile_order_df(
+  c("item", "price", "", ""),
+  c("paper towels", "12.33", "toilet paper", "20.77")
+)
 ```
 
 ::: fragment
 [https://style.tidyverse.org](https://style.tidyverse.org)
 :::
+::: fragment
+[https://cli.r-lib.org/](https://cli.r-lib.org/)
+:::
 
 ::: fragment
 ❗ Problem statement
+:::
+
+::: fragment
+ℹ️ Suggestions 
 :::
 
 ::: fragment
@@ -422,10 +509,45 @@ cli::cli_abort(c(
 🔵 More info 
 :::
 
+# You are a designer
+
+## You are a designer
+
+::::: columns
+
+:::: {.column width="40%"}
+![](slide_images\design_of_everyday_things_book.jpg)
+::::
+
+:::: {.column width="60%"}
 ::: fragment
-ℹ️ Suggestions 
+1️⃣ Make functionality obvious
+:::
+::: fragment
+&nbsp;&nbsp;🟠 Functions = verbs
+:::
+::: fragment
+&nbsp;&nbsp;🟣 Arguments = nouns
+:::
+::: fragment
+&nbsp;&nbsp;🔵 Defaults = standards / hints
 :::
 
-::: notes
-Mention style.tidyverse.org
+::: fragment
+2️⃣ Forgive "close enough" input
 :::
+::: fragment
+3️⃣ Help users fix mistakes
+:::
+::: fragment
+<br>
+[stbl.wrangle.zone](https://stbl.wrangle.zone)
+:::
+:::: 
+:::::
+
+::: notes
+- Point out link to slides.
+- "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
+:::
+
