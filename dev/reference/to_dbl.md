@@ -96,7 +96,16 @@ to_dbl(
 
 ## Value
 
-The input as a double vector.
+The input as a double vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+
+- `<stbl-error-incompatible_values-double>` when some values cannot be
+  safely converted to double.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## See also
 
@@ -164,7 +173,7 @@ to_dbl(NULL)
 try(to_dbl("a"))
 #> Error in eval(expr, envir) : 
 #>   `"a"` <character> must be coercible to <double>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "a"
 try(to_dbl("1.1", coerce_character = FALSE))

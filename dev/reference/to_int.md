@@ -96,7 +96,16 @@ to_int(
 
 ## Value
 
-The input as an integer vector.
+The input as an integer vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+
+- `<stbl-error-incompatible_values-integer>` when some values cannot be
+  safely converted to integer.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## See also
 

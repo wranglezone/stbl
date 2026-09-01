@@ -66,7 +66,22 @@ to_character_scalar(
 
 ## Value
 
-The input as a length-1 character vector.
+The input as a length-1 character vector, or an error condition with
+classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+  character (for example a `data.frame`, or an anonymous function).
+
+- `<stbl-error-incompatible_values-character>` when some elements of a
+  list cannot be converted to character.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_empty>` for empty vectors when
+  `allow_zero_length = FALSE`.
+
+- `<stbl-error-non_scalar>` for non-scalar vectors.
 
 ## See also
 

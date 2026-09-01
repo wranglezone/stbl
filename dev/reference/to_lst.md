@@ -65,7 +65,16 @@ to_lst(
 
 ## Value
 
-The object as a list.
+The object as a list, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-coerce-list>` when `x` is a primitive function.
+
+- `<stbl-error-bad_function>` for functions when
+  `coerce_function = FALSE` (the default).
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

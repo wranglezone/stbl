@@ -106,8 +106,14 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The object as a data frame.</p>
-    </div>
+    <p>The object as a data frame, or an error condition with classes
+<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>x</code> cannot be coerced to a data
+frame.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when a list has any unnamed elements.</p></li>
+<li><p><code>&lt;stbl-error-jagged&gt;</code> when a list has incompatible element lengths.</p></li>
+<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other data frame functions:

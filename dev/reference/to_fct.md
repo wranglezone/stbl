@@ -75,7 +75,18 @@ to_fct(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 ## Value
 
-The input as a factor.
+The input as a factor, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+
+- `<stbl-error-incompatible_values-factor>` when some elements of a list
+  cannot be converted to factor.
+
+- `<stbl-error-fct_levels>` when values are not present in `levels`.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

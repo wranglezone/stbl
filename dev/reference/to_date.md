@@ -85,7 +85,15 @@ to_date(x, ...)
 
 ## Value
 
-The input as a [base::Date](https://rdrr.io/r/base/Dates.html) vector.
+The input as a [base::Date](https://rdrr.io/r/base/Dates.html) vector,
+or an error condition with classes `<stbl-error>`, `<stbl-condition>`,
+`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
+failure mode:
+
+- `<stbl-error-incompatible_values-date>` when some values cannot be
+  safely converted to date.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

@@ -95,8 +95,16 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The input as a length-1 <a href="https://rdrr.io/r/base/Dates.html" class="external-link">base::Date</a> vector.</p>
-    </div>
+    <p>The input as a length-1 <a href="https://rdrr.io/r/base/Dates.html" class="external-link">base::Date</a> vector, or an error
+condition with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>,
+<code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by
+failure mode:</p><ul><li><p><code>&lt;stbl-error-incompatible_values-date&gt;</code> when some values cannot be
+safely converted to date.</p></li>
+<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_empty&gt;</code> for empty vectors when
+<code>allow_zero_length = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-non_scalar&gt;</code> for non-scalar vectors.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other date functions:

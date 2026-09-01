@@ -1080,10 +1080,10 @@ Jon Harmon, Atorus Research
 <p>1️⃣ Make functionality obvious</p>
 </div>
 <div class="fragment">
-<p>2️⃣ Forgive input</p>
+<p>2️⃣ Forgive “close enough” input</p>
 </div>
 <div class="fragment">
-<p>3️⃣ Describe mistake fixes</p>
+<p>3️⃣ Help users fix mistakes</p>
 </div>
 </div></div>
 <aside class="notes">
@@ -1185,12 +1185,12 @@ display:block!important;
 </section>
 <section id="make-it-obvious-what-functions-do-6" class="slide level2">
 <h2>Make it obvious what functions do</h2>
-<p>1️⃣ Functions = verbs</p>
+<p>🟠 Functions = verbs</p>
 <div class="fragment">
-<p><br> 2️⃣ Arguments = nouns</p>
+<p><br> 🟣 Arguments = nouns</p>
 </div>
 <div class="fragment">
-<p><br> 3️⃣ Defaults = standards / hints</p>
+<p><br> 🔵 Defaults = standards / hints</p>
 </div>
 </section>
 <section id="section-1" class="slide level2" data-transition="fade-in fade-out">
@@ -1270,7 +1270,7 @@ display:block!important;
 <section id="forgive-close-enough-input-3" class="slide level2" data-transition="fade-in fade-out">
 <h2>Forgive “close enough” input</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" data-code-line-numbers="2-2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" data-code-line-numbers="2-4|2-2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
 <span id="cb13-2"><a href aria-label="2"></a>  prices <span class="ot">&lt;-</span> stbl<span class="sc">::</span><span class="fu">to_dbl</span>(prices)</span>
 <span id="cb13-3"><a href aria-label="3"></a>  sales_tax <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(prices <span class="sc">*</span> tax_rate <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">/</span> <span class="dv">100</span></span>
 <span id="cb13-4"><a href aria-label="4"></a>  total_price <span class="ot">&lt;-</span> prices <span class="sc">+</span> sales_tax</span>
@@ -1363,7 +1363,7 @@ display:block!important;
 <section id="section-7" class="slide level2" data-transition="slide-in fade-out">
 <h2></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" data-code-line-numbers="3-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" data-code-line-numbers="2-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
 <span id="cb20-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>),</span>
 <span id="cb20-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
 <span id="cb20-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1377,37 +1377,39 @@ display:block!important;
 <section id="section-8" class="slide level2" data-transition="fade-in fade-out">
 <h2></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" data-code-line-numbers="3-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
-<span id="cb22-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>),</span>
-<span id="cb22-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" data-code-line-numbers="2-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb22-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb22-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
 <span id="cb22-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="section-9" class="slide level2" data-transition="fade-in slide-out">
 <h2></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" data-code-line-numbers="3-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
-<span id="cb23-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>),</span>
-<span id="cb23-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" data-code-line-numbers="2-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb23-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb23-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
 <span id="cb23-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in compile_order_df(c(&quot;paper towels&quot;, &quot;toilet paper&quot;), c(&quot;12.33&quot;, : NAs
+<pre><code>Warning in compile_order_df(c(&quot;item&quot;, &quot;price&quot;, &quot;&quot;, &quot;&quot;), c(&quot;paper towels&quot;, : NAs
 introduced by coercion</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          item price sales_tax total_price
-1 paper towels 12.33      1.02       13.35
-2 toilet paper    NA        NA          NA</code></pre>
+<pre><code>   item price sales_tax total_price
+1  item    NA        NA          NA
+2 price 12.33      1.02       13.35
+3          NA        NA          NA
+4       20.77      1.72       22.49</code></pre>
 </div>
 </div>
 </section></section>
 <section>
-<section id="tell-users-how-to-fix-mistakes" class="title-slide slide level1 center">
-<h1>Tell users how to fix mistakes</h1>
+<section id="help-users-fix-mistakes" class="title-slide slide level1 center">
+<h1>Help users fix mistakes</h1>
 
 </section>
-<section id="tell-users-how-to-fix-mistakes-1" class="slide level2">
-<h2>Tell users how to fix mistakes</h2>
+<section id="help-users-fix-mistakes-1" class="slide level2">
+<h2>Help users fix mistakes</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26" data-code-line-numbers="2-4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
 <span id="cb26-2"><a href aria-label="2"></a>  prices <span class="ot">&lt;-</span> stbl<span class="sc">::</span><span class="fu">to_dbl</span>(prices)</span>
@@ -1424,48 +1426,135 @@ introduced by coercion</code></pre>
 <span id="cb26-13"><a href aria-label="13"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="tell-users-how-to-fix-mistakes-2" class="slide level2" data-transition="slide-in fade-out">
-<h2>Tell users how to fix mistakes</h2>
+<section id="help-users-fix-mistakes-2" class="slide level2" data-transition="slide-in fade-out">
+<h2>Help users fix mistakes</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27" data-code-line-numbers="3-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
-<span id="cb27-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>),</span>
-<span id="cb27-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb27-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb27-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
 <span id="cb27-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="tell-users-how-to-fix-mistakes-3" class="slide level2" data-transition="fade-in slide-out">
-<h2>Tell users how to fix mistakes</h2>
+<section id="help-users-fix-mistakes-3" class="slide level2" data-transition="fade-in slide-out">
+<h2>Help users fix mistakes</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" data-code-line-numbers="3-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
-<span id="cb28-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>),</span>
-<span id="cb28-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb28-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb28-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
 <span id="cb28-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `compile_order_df()`:
 ! `prices` &lt;character&gt; must be coercible to &lt;double&gt;
-✖ Can&#39;t convert some values due to incompatible values.
-• Locations: 2
-• Values: &quot;b&quot;</code></pre>
+✖ Can&#39;t convert some values due to non-numeric strings.
+• Locations: 1 and 3
+• Values: &quot;paper towels&quot; and &quot;toilet paper&quot;</code></pre>
 </div>
 </div>
 </section>
-<section id="tell-users-how-to-fix-mistakes-4" class="slide level2">
-<h2>Tell users how to fix mistakes</h2>
+<section id="help-users-fix-mistakes-4" class="slide level2" data-transition="slide-in fade-out">
+<h2>Help users fix mistakes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30" data-code-line-numbers="2-2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
+<span id="cb30-2"><a href aria-label="2"></a>  prices <span class="ot">&lt;-</span> stbl<span class="sc">::</span><span class="fu">to_dbl</span>(prices)</span>
+<span id="cb30-3"><a href aria-label="3"></a>  sales_tax <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(prices <span class="sc">*</span> tax_rate <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb30-4"><a href aria-label="4"></a>  total_price <span class="ot">&lt;-</span> prices <span class="sc">+</span> sales_tax</span>
+<span id="cb30-5"><a href aria-label="5"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb30-6"><a href aria-label="6"></a>    <span class="at">item =</span> items,</span>
+<span id="cb30-7"><a href aria-label="7"></a>    <span class="at">price =</span> prices,</span>
+<span id="cb30-8"><a href aria-label="8"></a>    <span class="at">sales_tax =</span> sales_tax,</span>
+<span id="cb30-9"><a href aria-label="9"></a>    <span class="at">total_price =</span> total_price</span>
+<span id="cb30-10"><a href aria-label="10"></a>  )</span>
+<span id="cb30-11"><a href aria-label="11"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="help-users-fix-mistakes-5" class="slide level2" data-transition="fade-in fade-out">
+<h2>Help users fix mistakes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31" data-code-line-numbers="2-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
+<span id="cb31-2"><a href aria-label="2"></a>  prices <span class="ot">&lt;-</span> stbl<span class="sc">::</span><span class="fu">to_dbl</span>(prices) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href aria-label="3"></a>    stbl<span class="sc">::</span><span class="fu">replace_stbl_error</span>(</span>
+<span id="cb31-4"><a href aria-label="4"></a>      <span class="fu">c</span>(</span>
+<span id="cb31-5"><a href aria-label="5"></a>        <span class="st">&quot;{.arg prices} must be numeric&quot;</span>,</span>
+<span id="cb31-6"><a href aria-label="6"></a>        <span class="at">i =</span> <span class="st">&quot;Check that the input CSV is formatted correctly&quot;</span></span>
+<span id="cb31-7"><a href aria-label="7"></a>      )</span>
+<span id="cb31-8"><a href aria-label="8"></a>    )</span>
+<span id="cb31-9"><a href aria-label="9"></a>  sales_tax <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(prices <span class="sc">*</span> tax_rate <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb31-10"><a href aria-label="10"></a>  total_price <span class="ot">&lt;-</span> prices <span class="sc">+</span> sales_tax</span>
+<span id="cb31-11"><a href aria-label="11"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb31-12"><a href aria-label="12"></a>    <span class="at">item =</span> items,</span>
+<span id="cb31-13"><a href aria-label="13"></a>    <span class="at">price =</span> prices,</span>
+<span id="cb31-14"><a href aria-label="14"></a>    <span class="at">sales_tax =</span> sales_tax,</span>
+<span id="cb31-15"><a href aria-label="15"></a>    <span class="at">total_price =</span> total_price</span>
+<span id="cb31-16"><a href aria-label="16"></a>  )</span>
+<span id="cb31-17"><a href aria-label="17"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="help-users-fix-mistakes-6" class="slide level2" data-transition="fade-in slide-out">
+<h2>Help users fix mistakes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32" data-code-line-numbers="2-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-label="1"></a>compile_order_df <span class="ot">&lt;-</span> <span class="cf">function</span>(items, prices, <span class="at">tax_rate =</span> <span class="fl">0.0825</span>) {</span>
+<span id="cb32-2"><a href aria-label="2"></a>  prices <span class="ot">&lt;-</span> stbl<span class="sc">::</span><span class="fu">to_dbl</span>(prices) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href aria-label="3"></a>    stbl<span class="sc">::</span><span class="fu">replace_stbl_error</span>(</span>
+<span id="cb32-4"><a href aria-label="4"></a>      <span class="fu">c</span>(</span>
+<span id="cb32-5"><a href aria-label="5"></a>        <span class="st">&quot;{.arg prices} must be numeric&quot;</span>,</span>
+<span id="cb32-6"><a href aria-label="6"></a>        <span class="at">i =</span> <span class="st">&quot;Check that the input CSV is formatted correctly&quot;</span></span>
+<span id="cb32-7"><a href aria-label="7"></a>      ),</span>
+<span id="cb32-8"><a href aria-label="8"></a>      <span class="at">subclass =</span> <span class="fu">c</span>(<span class="st">&quot;incompatible_values&quot;</span>, <span class="st">&quot;double&quot;</span>)</span>
+<span id="cb32-9"><a href aria-label="9"></a>    )</span>
+<span id="cb32-10"><a href aria-label="10"></a>  sales_tax <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(prices <span class="sc">*</span> tax_rate <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb32-11"><a href aria-label="11"></a>  total_price <span class="ot">&lt;-</span> prices <span class="sc">+</span> sales_tax</span>
+<span id="cb32-12"><a href aria-label="12"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb32-13"><a href aria-label="13"></a>    <span class="at">item =</span> items,</span>
+<span id="cb32-14"><a href aria-label="14"></a>    <span class="at">price =</span> prices,</span>
+<span id="cb32-15"><a href aria-label="15"></a>    <span class="at">sales_tax =</span> sales_tax,</span>
+<span id="cb32-16"><a href aria-label="16"></a>    <span class="at">total_price =</span> total_price</span>
+<span id="cb32-17"><a href aria-label="17"></a>  )</span>
+<span id="cb32-18"><a href aria-label="18"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="help-users-fix-mistakes-7" class="slide level2" data-transition="slide-in fade-out">
+<h2>Help users fix mistakes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb33-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb33-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
+<span id="cb33-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="help-users-fix-mistakes-8" class="slide level2" data-transition="fade-in slide-out">
+<h2>Help users fix mistakes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-label="1"></a><span class="fu">compile_order_df</span>(</span>
+<span id="cb34-2"><a href aria-label="2"></a>  <span class="fu">c</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;price&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb34-3"><a href aria-label="3"></a>  <span class="fu">c</span>(<span class="st">&quot;paper towels&quot;</span>, <span class="st">&quot;12.33&quot;</span>, <span class="st">&quot;toilet paper&quot;</span>, <span class="st">&quot;20.77&quot;</span>)</span>
+<span id="cb34-4"><a href aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `compile_order_df()`:
+! `prices` must be numeric
+ℹ Check that the input CSV is formatted correctly</code></pre>
+</div>
+</div>
+</section>
+<section id="help-users-fix-mistakes-9" class="slide level2">
+<h2>Help users fix mistakes</h2>
 <div class="cell">
 <div class="cell-output cell-output-error">
-<pre><code>Error:
-! `prices` &lt;character&gt; must be coercible to &lt;double&gt;
-✖ Can&#39;t convert some values due to incompatible values.
-• Locations: 2
-• Values: &quot;b&quot;
-ℹ Repair or remove these values and try again.</code></pre>
+<pre><code>Error in `compile_order_df()`:
+! `prices` must be numeric
+ℹ Check that the input CSV is formatted correctly</code></pre>
 </div>
 </div>
 <div class="fragment">
 <p><a href="https://style.tidyverse.org">https://style.tidyverse.org</a></p>
 </div>
 <div class="fragment">
+<p><a href="https://cli.r-lib.org/">https://cli.r-lib.org/</a></p>
+</div>
+<div class="fragment">
 <p>❗ Problem statement</p>
+</div>
+<div class="fragment">
+<p>ℹ️ Suggestions</p>
 </div>
 <div class="fragment">
 <p>❌ Exact issue (if known)</p>
@@ -1473,11 +1562,45 @@ introduced by coercion</code></pre>
 <div class="fragment">
 <p>🔵 More info</p>
 </div>
+</section></section>
+<section>
+<section id="you-are-a-designer" class="title-slide slide level1 center">
+<h1>You are a designer</h1>
+
+</section>
+<section id="you-are-a-designer-1" class="slide level2">
+<h2>You are a designer</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img role="img" data-src="slide_images\design_of_everyday_things_book.jpg"></p>
+</div><div class="column" style="width:60%;">
 <div class="fragment">
-<p>ℹ️ Suggestions</p>
+<p>1️⃣ Make functionality obvious</p>
 </div>
+<div class="fragment">
+<p>  🟠 Functions = verbs</p>
+</div>
+<div class="fragment">
+<p>  🟣 Arguments = nouns</p>
+</div>
+<div class="fragment">
+<p>  🔵 Defaults = standards / hints</p>
+</div>
+<div class="fragment">
+<p>2️⃣ Forgive “close enough” input</p>
+</div>
+<div class="fragment">
+<p>3️⃣ Help users fix mistakes</p>
+</div>
+<div class="fragment">
+<p><br> <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a></p>
+</div>
+</div></div>
 <aside class="notes">
-<p>Mention style.tidyverse.org</p>
+<ul>
+<li>Point out link to slides.</li>
+<li>“This is obviously true for doors and teapots, but it’s also true for functions, even if the ‘design’ is the prompt you gave to AI.”</li>
+</ul>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;

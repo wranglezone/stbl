@@ -8,7 +8,7 @@ the types of errors it throws.
 ## Usage
 
 ``` r
-ignore_stbl_error(expr, subclass)
+ignore_stbl_error(expr, subclass = character())
 ```
 
 ## Arguments
@@ -19,12 +19,14 @@ ignore_stbl_error(expr, subclass)
 
 - subclass:
 
-  (`character`) The subclass(es) of the `stbl` error to ignore. Combined
-  with `"stbl-error-"` to form the class name to intercept. For example,
-  `c("coerce", "character")` silences errors of class
-  `stbl-error-coerce-character`
+  (`character`) The subclass(es) of the `stbl` error to ignore or
+  replace. Combined with `"stbl-error"` to form the class name to
+  intercept. For example, `c("coerce", "character")` catches errors of
+  class `stbl-error-coerce-character`
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)),
-  while `c("coerce")` silences any `stbl-error-coerce` error.
+  `c("coerce")` catches any `stbl-error-coerce` error, and
+  [`character()`](https://rdrr.io/r/base/character.html) (the default)
+  catches any `stbl` error.
 
 ## Value
 
@@ -38,4 +40,8 @@ ignore_stbl_error(to_chr(data.frame()), subclass = c("coerce", "character"))
 #> NULL
 ignore_stbl_error(to_chr("hello"), subclass = c("coerce", "character"))
 #> [1] "hello"
+
+# Omit subclass to catch any stbl error
+ignore_stbl_error(to_chr(data.frame()))
+#> NULL
 ```

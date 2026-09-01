@@ -90,7 +90,22 @@ to_fn(
 
 ## Value
 
-A function.
+A function, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-coerce-function>` when `x` cannot be coerced to a
+  function.
+
+- `<stbl-error-invalid_function_name>` when `x` is not a syntactically
+  valid function name.
+
+- `<stbl-error-unknown_function>` when `x` is a syntactically valid name
+  that doesn't resolve to a known function.
+
+- `<stbl-error-non_scalar>` when `x` has more than one element.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 
@@ -113,24 +128,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5563c9f3f2a0>
+#> <bytecode: 0x557355edef18>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x5563d1a7f628>
+#> <environment: 0x55735b305968>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5563c9f3f2a0>
+#> <bytecode: 0x557355edef18>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x5563c98fa9f8>
+#> <bytecode: 0x5573558611a0>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL

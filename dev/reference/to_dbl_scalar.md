@@ -66,7 +66,21 @@ to_double_scalar(
 
 ## Value
 
-The input as a length-1 double vector.
+The input as a length-1 double vector, or an error condition with
+classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+
+- `<stbl-error-incompatible_values-double>` when some values cannot be
+  safely converted to double.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_empty>` for empty vectors when
+  `allow_zero_length = FALSE`.
+
+- `<stbl-error-non_scalar>` for non-scalar vectors.
 
 ## See also
 

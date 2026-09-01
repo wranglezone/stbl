@@ -55,7 +55,17 @@ to_character(
 
 ## Value
 
-The input as a character vector.
+The input as a character vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+  character (for example a `data.frame`, or an anonymous function).
+
+- `<stbl-error-incompatible_values-character>` when some elements of a
+  list cannot be converted to character.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

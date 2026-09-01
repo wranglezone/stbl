@@ -108,7 +108,14 @@ to_time(
 
 The input as an
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) vector,
-always expressed in UTC.
+always expressed in UTC, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-incompatible_values-time>` when some values cannot be
+  safely converted to a time of day.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

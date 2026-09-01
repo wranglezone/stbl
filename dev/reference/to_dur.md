@@ -95,7 +95,14 @@ to_dur(x, ..., call = caller_env())
 
 The input as a
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
-vector.
+vector, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-incompatible_values-duration>` when some values cannot be
+  safely converted to a duration.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

@@ -160,7 +160,17 @@ to(
 
 ## Value
 
-`x` coerced to the type of `.to`.
+`x` coerced to the type of `.to`, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- The failure classes documented for the `to_*()` function corresponding
+  to the class of `.to` (for example
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md) for
+  `.to = integer()`).
+
+- `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
+  `to_*()` function.
 
 ## See also
 
@@ -236,6 +246,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5563c9f3f2a0>
+#> <bytecode: 0x557355edef18>
 #> <environment: namespace:base>
 ```

@@ -266,7 +266,7 @@ try(stabilize_int(c(1, NA), allow_na = FALSE))
 try(stabilize_int(letters))
 #> Error in eval(expr, envir) : 
 #>   `letters` <character> must be coercible to <integer>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …,
 #>   25, and 26
 #> • Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
@@ -277,7 +277,7 @@ try(stabilize_int("1", coerce_character = FALSE))
 try(stabilize_int(factor(c("1", "a"))))
 #> Error in eval(expr, envir) : 
 #>   `factor(c("1", "a"))` <factor> must be coercible to <integer>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 2
 #> • Values: "a"
 try(stabilize_int(factor("1"), coerce_factor = FALSE))

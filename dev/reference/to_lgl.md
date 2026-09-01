@@ -62,7 +62,16 @@ to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 ## Value
 
-The input as a logical vector.
+The input as a logical vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+
+- `<stbl-error-incompatible_values-logical>` when some values cannot be
+  safely converted to logical.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## See also
 
@@ -132,7 +141,8 @@ try(to_lgl(NULL, allow_null = FALSE))
 try(to_lgl(letters))
 #> Error in eval(expr, envir) : 
 #>   `letters` <character> must be coercible to <logical>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
+#>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
 #>   25, and 26
 #> • Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o",

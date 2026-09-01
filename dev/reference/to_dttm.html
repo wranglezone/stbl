@@ -148,8 +148,14 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The input as a <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">base::POSIXct</a> vector.</p>
-    </div>
+    <p>The input as a <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">base::POSIXct</a> vector, or an error condition with
+classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-incompatible_values-datetime&gt;</code> when some values cannot be
+safely converted to datetime.</p></li>
+<li><p><code>&lt;stbl-error-bad_tz&gt;</code> when <code>tz</code> is not <code>""</code> or a value from
+<code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Character vectors must use the <a href="https://datatracker.ietf.org/doc/html/rfc3339" class="external-link">RFC 3339</a> <code>date-time</code> format

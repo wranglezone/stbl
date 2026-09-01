@@ -207,7 +207,8 @@ try(stabilize_lgl(c(TRUE, NA), allow_na = FALSE))
 try(stabilize_lgl(letters))
 #> Error in eval(expr, envir) : 
 #>   `letters` <character> must be coercible to <logical>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
+#>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
 #>   25, and 26
 #> • Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o",

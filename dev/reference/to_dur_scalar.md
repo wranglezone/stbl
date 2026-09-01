@@ -59,7 +59,19 @@ to_dur_scalar(
 
 The input as a length-1
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
-vector.
+vector, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-incompatible_values-duration>` when some values cannot be
+  safely converted to a duration.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_empty>` for empty vectors when
+  `allow_zero_length = FALSE`.
+
+- `<stbl-error-non_scalar>` for non-scalar vectors.
 
 ## See also
 

@@ -108,7 +108,18 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 ## Value
 
 The input as a
-[base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) vector.
+[base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) vector, or
+an error condition with classes `<stbl-error>`, `<stbl-condition>`,
+`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
+failure mode:
+
+- `<stbl-error-incompatible_values-datetime>` when some values cannot be
+  safely converted to datetime.
+
+- `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 

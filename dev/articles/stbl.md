@@ -216,7 +216,7 @@ register_user(
 )
 #> Error in `register_user()`:
 #> ! `age` <character> must be coercible to <integer>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "forty-two"
 ```
