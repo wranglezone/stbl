@@ -246,6 +246,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x560c6a690f18>
+#> <bytecode: 0x5566c85cdf18>
 #> <environment: namespace:base>
 ```
