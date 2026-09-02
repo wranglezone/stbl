@@ -1,3 +1,7 @@
 div.page-header img.logo {
   width: 220px;
 }
+
+.reveal .slide-logo {
+  max-height: 3rem !important;
+}

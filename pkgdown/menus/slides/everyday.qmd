@@ -1,5 +1,6 @@
 ---
-title: The Design of Everyday R Functions
+title: |
+  <img src="slide_images/qr_logo.png" alt="qr code pointing to stbl.wrangle.zone" width="35%" style="float: right;">The Design of Everyday R Functions
 author: Jon Harmon, Atorus Research
 execute:
   eval: false
@@ -7,9 +8,13 @@ execute:
 format:
   revealjs:
     theme: dark
+    logo: slide_images/qr.png
     footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
     link-external-newwindow: true
     transition: slide
+    css: extra.css
+    width: 1600
+    height: 900
 ---
 
 ## 
@@ -515,11 +520,11 @@ compile_order_df(
 
 ::::: columns
 
-:::: {.column width="40%"}
-![](slide_images/doet_book.jpg)
+:::: {.column width="50%"}
+![](slide_images/qr_logo.png){width="100%"}
 ::::
 
-:::: {.column width="60%"}
+:::: {.column width="50%"}
 ::: fragment
 1️⃣ Make functionality obvious
 :::
