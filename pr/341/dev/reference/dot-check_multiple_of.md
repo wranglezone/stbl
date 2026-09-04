@@ -20,8 +20,8 @@ failures.
 
 - multiple_of:
 
-  (`numeric(1)`) The value `x` must be a multiple of, already coerced to
-  double. `NULL` skips the check.
+  (`numeric(1)`, positive) The value `x` must be a multiple of. `NULL`
+  skips the check.
 
 - x_arg:
 

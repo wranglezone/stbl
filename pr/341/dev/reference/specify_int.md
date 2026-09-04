@@ -125,9 +125,7 @@ specify_integer_scalar(
 
   (`numeric(1)`, positive) `x` must be an integer multiple of this
   value. `NULL` (default) skips the check. For doubles, a small relative
-  tolerance is applied to avoid floating-point false negatives (see
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
-  for details).
+  tolerance is applied to avoid floating-point false negatives.
 
 - allow_zero_length:
 

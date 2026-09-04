@@ -154,8 +154,7 @@ stabilise_double(
 
   (`numeric(1)`, positive) `x` must be an integer multiple of this
   value. `NULL` (default) skips the check. For doubles, a small relative
-  tolerance is applied to avoid floating-point false negatives (see
-  `stabilize_dbl()` for details).
+  tolerance is applied to avoid floating-point false negatives.
 
 - x_arg:
 
