@@ -22,6 +22,7 @@ stabilize_int(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -40,6 +41,7 @@ stabilize_integer(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -58,6 +60,7 @@ stabilise_int(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -76,6 +79,7 @@ stabilise_integer(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -146,6 +150,12 @@ stabilise_integer(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
+- multiple_of:
+
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -193,6 +203,9 @@ The input as an integer vector, or an error condition with classes
   `max_value`.
 
 - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+
+- `<stbl-error-not_multiple>` when values are not a multiple of
+  `multiple_of`.
 
 ## See also
 
@@ -299,4 +312,8 @@ try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
 #> ℹ Allowed values: "1", "2", and "3".
 #> ✖ Unexpected locations: 4 and 5
 #> ✖ Unexpected values: "4" and "5".
+try(stabilize_int(1:5, multiple_of = 2))
+#> Error in eval(expr, envir) : `1:5` must be a multiple of 2.
+#> ✖ Unexpected locations: 1, 3, and 5
+#> ✖ Unexpected values: "1", "3", and "5".
 ```

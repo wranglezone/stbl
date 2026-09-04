@@ -79,6 +79,20 @@
   and their `specify_*()` factories gain a new `allowed_values`
   argument, allowing users to restrict `x` to a fixed set of permitted
   values ([\#282](https://github.com/wranglezone/stbl/issues/282)).
+- [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+  and
+  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  gain a new `multiple_of` argument, requiring that values be a multiple
+  of the given value;
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)/[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
+  apply a small relative tolerance to avoid floating-point false
+  negatives ([\#283](https://github.com/wranglezone/stbl/issues/283)).
 - [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),

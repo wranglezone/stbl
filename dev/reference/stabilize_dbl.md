@@ -22,6 +22,7 @@ stabilize_dbl(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -40,6 +41,7 @@ stabilize_double(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -58,6 +60,7 @@ stabilise_dbl(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -76,6 +79,7 @@ stabilise_double(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -146,6 +150,12 @@ stabilise_double(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
+- multiple_of:
+
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -193,6 +203,9 @@ The input as a double vector, or an error condition with classes
   `max_value`.
 
 - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+
+- `<stbl-error-not_multiple>` when values are not a multiple of
+  `multiple_of`.
 
 ## See also
 
@@ -299,4 +312,6 @@ try(stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)))
 #> ℹ Allowed values: "1.1" and "2.2".
 #> ✖ Unexpected location: 3
 #> ✖ Unexpected value: "3.3".
+try(stabilize_dbl(c(0.1, 0.25), multiple_of = 0.05))
+#> [1] 0.10 0.25
 ```

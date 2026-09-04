@@ -137,6 +137,12 @@ to make them easier to import and to find.
   (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
   values are not checked.
 
+- multiple_of:
+
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
+
 - package:
 
   (`character(1)`) The name of the package to use in classes.

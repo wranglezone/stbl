@@ -22,7 +22,8 @@ specify_int(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_int_scalar(
@@ -33,7 +34,8 @@ specify_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer(
@@ -46,7 +48,8 @@ specify_integer(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer_scalar(
@@ -57,7 +60,8 @@ specify_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 ```
 
@@ -116,6 +120,12 @@ specify_integer_scalar(
   A vector of permitted values (coerced to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
+
+- multiple_of:
+
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
 
 - allow_zero_length:
 

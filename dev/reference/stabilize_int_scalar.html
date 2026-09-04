@@ -66,6 +66,7 @@ stabilize_int_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -82,6 +83,7 @@ stabilize_int_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -98,6 +100,7 @@ stabilize_int_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -114,6 +117,7 @@ stabilize_int_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -172,6 +176,12 @@ type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <c
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
 
+<dt id="arg-multiple-of">multiple_of<a class="anchor" aria-label="anchor" href="#arg-multiple-of"></a></dt>
+<dd><p>(<code>numeric(1)</code>, positive) <code>x</code> must be an integer multiple
+of this value. <code>NULL</code> (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -207,6 +217,8 @@ safely converted to integer.</p></li>
 <code>max_value</code>.</p></li>
 <li><p><code>&lt;stbl-error-allowed_values&gt;</code> when the value is not in
 <code>allowed_values</code>.</p></li>
+<li><p><code>&lt;stbl-error-not_multiple&gt;</code> when the value is not a multiple of
+<code>multiple_of</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

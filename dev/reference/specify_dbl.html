@@ -65,7 +65,8 @@ synonym of <code>specify_dbl()</code>, and <code>specify_double_scalar()</code> 
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_dbl_scalar</span><span class="op">(</span></span>
@@ -76,7 +77,8 @@ synonym of <code>specify_dbl()</code>, and <code>specify_double_scalar()</code> 
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_double</span><span class="op">(</span></span>
@@ -89,7 +91,8 @@ synonym of <code>specify_dbl()</code>, and <code>specify_double_scalar()</code> 
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_double_scalar</span><span class="op">(</span></span>
@@ -100,7 +103,8 @@ synonym of <code>specify_dbl()</code>, and <code>specify_double_scalar()</code> 
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -156,6 +160,12 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 <dd><p>A vector of permitted values (coerced to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
+<dt id="arg-multiple-of">multiple_of<a class="anchor" aria-label="anchor" href="#arg-multiple-of"></a></dt>
+<dd><p>(<code>numeric(1)</code>, positive) <code>x</code> must be an integer multiple
+of this value. <code>NULL</code> (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.</p></dd>
 
 
 <dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
