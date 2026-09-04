@@ -170,6 +170,43 @@ test_that(".check_not_jagged() attaches failing locations (#274)", {
   expect_identical(cnd$locations, 3L)
 })
 
+test_that(".check_multiple_of() works (#283)", {
+  expect_null(.check_multiple_of(c(2, 4, 6), NULL))
+  expect_null(.check_multiple_of(c(2, 4, 6), 2))
+  expect_pkg_error_snapshot(
+    .check_multiple_of(c(2, 3, 6), 2),
+    "stbl",
+    "not_multiple"
+  )
+})
+
+test_that(".check_multiple_of() permits NA independently of multiple_of (#283)", {
+  expect_null(.check_multiple_of(c(2, NA, 6), 2))
+})
+
+test_that(".check_multiple_of() rejects a non-positive multiple_of (#283)", {
+  expect_pkg_error_snapshot(
+    .check_multiple_of(c(2, 4), 0),
+    "stbl",
+    "bad_multiple_of"
+  )
+  expect_pkg_error_snapshot(
+    .check_multiple_of(c(2, 4), -2),
+    "stbl",
+    "bad_multiple_of"
+  )
+})
+
+test_that(".check_multiple_of() tolerates floating-point rounding error (#283)", {
+  expect_null(.check_multiple_of(c(0.3, 0.6, 0.9), 0.3))
+  expect_null(.check_multiple_of(seq(0, 1, by = 0.1), 0.1))
+})
+
+test_that(".check_multiple_of() attaches failing locations (#283)", {
+  cnd <- rlang::catch_cnd(.check_multiple_of(c(2, 3, 6, 7), 2))
+  expect_identical(cnd$locations, c(2L, 4L))
+})
+
 test_that("object-level checks do not attach locations (#274)", {
   expect_null(rlang::catch_cnd(.check_size(1:5, 6, 10))$locations)
   expect_null(rlang::catch_cnd(.check_scalar(1:2))$locations)

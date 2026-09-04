@@ -123,6 +123,43 @@ test_that("stabilize_dbl() checks allowed_values (#282)", {
   )
 })
 
+test_that("stabilize_dbl() checks multiple_of (#283)", {
+  expect_identical(
+    stabilize_dbl(c(0.1, 0.2, 0.3), multiple_of = 0.1),
+    c(0.1, 0.2, 0.3)
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl(c(0.1, 0.25, 0.3), multiple_of = 0.1),
+    "stbl",
+    "not_multiple"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_dbl(c(0.1, 0.25, 0.3), multiple_of = 0.1),
+    "stbl",
+    "not_multiple"
+  )
+})
+
+test_that("stabilize_dbl() rejects a non-positive multiple_of (#283)", {
+  expect_pkg_error_classes(
+    stabilize_dbl(c(1, 2), multiple_of = 0),
+    "stbl",
+    "bad_multiple_of"
+  )
+})
+
+test_that("stabilize_dbl_scalar() checks multiple_of (#283)", {
+  expect_identical(
+    stabilize_dbl_scalar(0.2, multiple_of = 0.1),
+    0.2
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl_scalar(0.25, multiple_of = 0.1),
+    "stbl",
+    "not_multiple"
+  )
+})
+
 test_that("stabilize_dbl_scalar() checks allowed_values (#282)", {
   expect_identical(
     stabilize_dbl_scalar(1.1, allowed_values = c(1.1, 2.2)),

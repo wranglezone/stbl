@@ -21,6 +21,8 @@
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
 #'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+#'   - `<stbl-error-not_multiple>` when values are not a multiple of
+#'   `multiple_of`.
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -39,6 +41,7 @@
 #' try(stabilize_int(1:10, min_value = 3))
 #' try(stabilize_int(1:10, max_value = 7))
 #' try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
+#' try(stabilize_int(1:5, multiple_of = 2))
 stabilize_int <- function(
   x,
   ...,
@@ -52,6 +55,7 @@ stabilize_int <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -67,7 +71,8 @@ stabilize_int <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
-      allowed_values = allowed_values
+      allowed_values = allowed_values,
+      multiple_of = multiple_of
     ),
     allow_null = allow_null,
     allow_na = allow_na,
@@ -118,6 +123,8 @@ stabilise_integer <- stabilize_int
 #'   `max_value`.
 #'   - `<stbl-error-allowed_values>` when the value is not in
 #'   `allowed_values`.
+#'   - `<stbl-error-not_multiple>` when the value is not a multiple of
+#'   `multiple_of`.
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -139,6 +146,7 @@ stabilize_int_scalar <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -154,7 +162,8 @@ stabilize_int_scalar <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
-      allowed_values = allowed_values
+      allowed_values = allowed_values,
+      multiple_of = multiple_of
     ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,

@@ -20,6 +20,7 @@ stabilize_int(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -38,6 +39,7 @@ stabilize_integer(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -56,6 +58,7 @@ stabilise_int(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -74,6 +77,7 @@ stabilise_integer(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -114,6 +118,11 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
+\item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
+of this value. \code{NULL} (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives
+(see \code{\link[=stabilize_dbl]{stabilize_dbl()}} for details).}
+
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -144,6 +153,8 @@ present.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
 \item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
+\item \verb{<stbl-error-not_multiple>} when values are not a multiple of
+\code{multiple_of}.
 }
 }
 \description{
@@ -165,6 +176,7 @@ try(stabilize_int(factor("1"), coerce_factor = FALSE))
 try(stabilize_int(1:10, min_value = 3))
 try(stabilize_int(1:10, max_value = 7))
 try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
+try(stabilize_int(1:5, multiple_of = 2))
 }
 \seealso{
 Other integer functions:

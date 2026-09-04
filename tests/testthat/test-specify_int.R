@@ -55,3 +55,9 @@ test_that("specify_int can enforce allowed_values (#282, #325)", {
   expect_identical(checker(1L), 1L)
   expect_pkg_error_classes(checker(5L), "stbl", "allowed_values")
 })
+
+test_that("specify_int can enforce multiple_of (#283)", {
+  checker <- specify_int(multiple_of = 2)
+  expect_identical(checker(4L), 4L)
+  expect_pkg_error_classes(checker(5L), "stbl", "not_multiple")
+})

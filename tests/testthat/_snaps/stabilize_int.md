@@ -98,6 +98,36 @@
       x Unexpected locations: 4 and 5
       x Unexpected values: "4" and "5".
 
+# stabilize_int() checks multiple_of (#283)
+
+    Code
+      stabilize_int(c(2L, 3L, 6L), multiple_of = 2)
+    Condition <stbl-error-not_multiple>
+      Error:
+      ! `c(2L, 3L, 6L)` must be a multiple of 2.
+      x Unexpected location: 2
+      x Unexpected value: "3".
+
+---
+
+    Code
+      wrapped_stabilize_int(c(2L, 3L, 6L), multiple_of = 2)
+    Condition <stbl-error-not_multiple>
+      Error in `wrapped_stabilize_int()`:
+      ! `val` must be a multiple of 2.
+      x Unexpected location: 2
+      x Unexpected value: "3".
+
+# stabilize_int_scalar() checks multiple_of (#283)
+
+    Code
+      stabilize_int_scalar(3L, multiple_of = 2)
+    Condition <stbl-error-not_multiple>
+      Error:
+      ! `3L` must be a multiple of 2.
+      x Unexpected location: 1
+      x Unexpected value: "3".
+
 # stabilize_int_scalar() checks allowed_values (#282)
 
     Code

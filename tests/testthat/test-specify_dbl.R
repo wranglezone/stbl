@@ -59,3 +59,9 @@ test_that("specify_dbl can enforce allowed_values (#282, #325)", {
   expect_identical(checker(1.1), 1.1)
   expect_pkg_error_classes(checker(3.3), "stbl", "allowed_values")
 })
+
+test_that("specify_dbl can enforce multiple_of (#283)", {
+  checker <- specify_dbl(multiple_of = 0.1)
+  expect_identical(checker(0.2), 0.2)
+  expect_pkg_error_classes(checker(0.25), "stbl", "not_multiple")
+})

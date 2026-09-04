@@ -119,6 +119,43 @@ test_that("stabilize_int() checks allowed_values (#282)", {
   )
 })
 
+test_that("stabilize_int() checks multiple_of (#283)", {
+  expect_identical(
+    stabilize_int(c(2L, 4L, 6L), multiple_of = 2),
+    c(2L, 4L, 6L)
+  )
+  expect_pkg_error_snapshot(
+    stabilize_int(c(2L, 3L, 6L), multiple_of = 2),
+    "stbl",
+    "not_multiple"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_int(c(2L, 3L, 6L), multiple_of = 2),
+    "stbl",
+    "not_multiple"
+  )
+})
+
+test_that("stabilize_int() rejects a non-positive multiple_of (#283)", {
+  expect_pkg_error_classes(
+    stabilize_int(1:5, multiple_of = -2),
+    "stbl",
+    "bad_multiple_of"
+  )
+})
+
+test_that("stabilize_int_scalar() checks multiple_of (#283)", {
+  expect_identical(
+    stabilize_int_scalar(4L, multiple_of = 2),
+    4L
+  )
+  expect_pkg_error_snapshot(
+    stabilize_int_scalar(3L, multiple_of = 2),
+    "stbl",
+    "not_multiple"
+  )
+})
+
 test_that("stabilize_int_scalar() checks allowed_values (#282)", {
   expect_identical(
     stabilize_int_scalar(1L, allowed_values = c(1L, 2L)),

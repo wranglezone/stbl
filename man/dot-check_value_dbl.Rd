@@ -9,6 +9,7 @@
   min_value,
   max_value,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env()
 )
@@ -25,6 +26,11 @@
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
+
+\item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
+of this value. \code{NULL} (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives
+(see \code{\link[=stabilize_dbl]{stabilize_dbl()}} for details).}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

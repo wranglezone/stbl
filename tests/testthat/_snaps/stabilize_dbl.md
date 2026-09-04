@@ -107,6 +107,36 @@
       x Unexpected location: 3
       x Unexpected value: "3.3".
 
+# stabilize_dbl() checks multiple_of (#283)
+
+    Code
+      stabilize_dbl(c(0.1, 0.25, 0.3), multiple_of = 0.1)
+    Condition <stbl-error-not_multiple>
+      Error:
+      ! `c(0.1, 0.25, 0.3)` must be a multiple of 0.1.
+      x Unexpected location: 2
+      x Unexpected value: "0.25".
+
+---
+
+    Code
+      wrapped_stabilize_dbl(c(0.1, 0.25, 0.3), multiple_of = 0.1)
+    Condition <stbl-error-not_multiple>
+      Error in `wrapped_stabilize_dbl()`:
+      ! `val` must be a multiple of 0.1.
+      x Unexpected location: 2
+      x Unexpected value: "0.25".
+
+# stabilize_dbl_scalar() checks multiple_of (#283)
+
+    Code
+      stabilize_dbl_scalar(0.25, multiple_of = 0.1)
+    Condition <stbl-error-not_multiple>
+      Error:
+      ! `0.25` must be a multiple of 0.1.
+      x Unexpected location: 1
+      x Unexpected value: "0.25".
+
 # stabilize_dbl_scalar() checks allowed_values (#282)
 
     Code
