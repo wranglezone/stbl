@@ -60,6 +60,13 @@ test_that("specify_dbl can enforce allowed_values (#282, #325)", {
   expect_pkg_error_classes(checker(3.3), "stbl", "allowed_values")
 })
 
+test_that("specify_dbl can enforce exclusive_min_value and exclusive_max_value (#276, #325)", {
+  checker <- specify_dbl(exclusive_min_value = 1, exclusive_max_value = 10)
+  expect_identical(checker(5), 5)
+  expect_pkg_error_classes(checker(1), "stbl", "outside_range")
+  expect_pkg_error_classes(checker(10), "stbl", "outside_range")
+})
+
 test_that("specify_dbl can enforce multiple_of (#283)", {
   checker <- specify_dbl(multiple_of = 0.1)
   expect_identical(checker(0.2), 0.2)

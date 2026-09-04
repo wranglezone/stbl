@@ -17,6 +17,8 @@ stabilize_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -34,6 +36,8 @@ stabilize_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -51,6 +55,8 @@ stabilise_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -68,6 +74,8 @@ stabilise_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -99,6 +107,14 @@ the integer index of the factor.}
 
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
+
+\item{exclusive_min_value}{(\code{numeric(1)}) \code{x} must be strictly greater than
+this value (JSON Schema \code{exclusiveMinimum} semantics). \code{NULL} (default)
+skips the check.}
+
+\item{exclusive_max_value}{(\code{numeric(1)}) \code{x} must be strictly less than
+this value (JSON Schema \code{exclusiveMaximum} semantics). \code{NULL} (default)
+skips the check.}
 
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
@@ -134,8 +150,8 @@ safely converted to integer.
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
-\code{max_value}.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value},
+\code{max_value}, \code{exclusive_min_value}, or \code{exclusive_max_value}.
 \item \verb{<stbl-error-allowed_values>} when the value is not in
 \code{allowed_values}.
 \item \verb{<stbl-error-not_multiple>} when the value is not a multiple of

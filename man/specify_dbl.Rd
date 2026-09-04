@@ -17,6 +17,8 @@ specify_dbl(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -29,6 +31,8 @@ specify_dbl_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -43,6 +47,8 @@ specify_double(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -55,6 +61,8 @@ specify_double_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -85,6 +93,14 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
+
+\item{exclusive_min_value}{(\code{numeric(1)}) \code{x} must be strictly greater than
+this value (JSON Schema \code{exclusiveMinimum} semantics). \code{NULL} (default)
+skips the check.}
+
+\item{exclusive_max_value}{(\code{numeric(1)}) \code{x} must be strictly less than
+this value (JSON Schema \code{exclusiveMaximum} semantics). \code{NULL} (default)
+skips the check.}
 
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted

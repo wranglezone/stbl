@@ -160,6 +160,66 @@ test_that("stabilize_dbl_scalar() checks multiple_of (#283)", {
   )
 })
 
+test_that("stabilize_dbl() checks exclusive_min_value (#276)", {
+  given <- 1.1:10.1
+  expect_identical(
+    stabilize_dbl(given, exclusive_min_value = 1),
+    given
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl(given, exclusive_min_value = 1.1),
+    "stbl",
+    "outside_range"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_dbl(given, exclusive_min_value = 1.1),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("stabilize_dbl() checks exclusive_max_value (#276)", {
+  given <- 1.1:10.1
+  expect_identical(
+    stabilize_dbl(given, exclusive_max_value = 10.2),
+    given
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl(given, exclusive_max_value = 10.1),
+    "stbl",
+    "outside_range"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_stabilize_dbl(given, exclusive_max_value = 10.1),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("stabilize_dbl() attaches exclusive value failure locations (#276)", {
+  cnd <- rlang::catch_cnd(
+    stabilize_dbl(c(1, 5, 2, 8), exclusive_max_value = 5)
+  )
+  expect_identical(cnd$locations, c(2L, 4L))
+})
+
+test_that("stabilize_dbl_scalar() checks exclusive_min_value and exclusive_max_value (#276)", {
+  expect_identical(
+    stabilize_dbl_scalar(5, exclusive_min_value = 1, exclusive_max_value = 10),
+    5
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl_scalar(1, exclusive_min_value = 1),
+    "stbl",
+    "outside_range"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_dbl_scalar(10, exclusive_max_value = 10),
+    "stbl",
+    "outside_range"
+  )
+})
+
 test_that("stabilize_dbl_scalar() checks allowed_values (#282)", {
   expect_identical(
     stabilize_dbl_scalar(1.1, allowed_values = c(1.1, 2.2)),

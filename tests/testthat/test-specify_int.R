@@ -56,6 +56,13 @@ test_that("specify_int can enforce allowed_values (#282, #325)", {
   expect_pkg_error_classes(checker(5L), "stbl", "allowed_values")
 })
 
+test_that("specify_int can enforce exclusive_min_value and exclusive_max_value (#276, #325)", {
+  checker <- specify_int(exclusive_min_value = 1, exclusive_max_value = 10)
+  expect_identical(checker(5L), 5L)
+  expect_pkg_error_classes(checker(1L), "stbl", "outside_range")
+  expect_pkg_error_classes(checker(10L), "stbl", "outside_range")
+})
+
 test_that("specify_int can enforce multiple_of (#283)", {
   checker <- specify_int(multiple_of = 2)
   expect_identical(checker(4L), 4L)

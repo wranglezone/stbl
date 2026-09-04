@@ -18,8 +18,8 @@
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
 #'   present.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
-#'   `max_value`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
+#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 #'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #'   - `<stbl-error-not_multiple>` when values are not a multiple of
 #'   `multiple_of`.
@@ -40,6 +40,8 @@
 #' try(stabilize_dbl(factor("1.1"), coerce_factor = FALSE))
 #' try(stabilize_dbl(1:10, min_value = 3.5))
 #' try(stabilize_dbl(1:10, max_value = 7.5))
+#' try(stabilize_dbl(1:10, exclusive_min_value = 3))
+#' try(stabilize_dbl(1:10, exclusive_max_value = 8))
 #' try(stabilize_dbl(c(1.1, 2.2, 3.3), allowed_values = c(1.1, 2.2)))
 #' try(stabilize_dbl(c(0.1, 0.25), multiple_of = 0.05))
 stabilize_dbl <- function(
@@ -54,6 +56,8 @@ stabilize_dbl <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -71,6 +75,8 @@ stabilize_dbl <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
+      exclusive_min_value = exclusive_min_value,
+      exclusive_max_value = exclusive_max_value,
       allowed_values = allowed_values,
       multiple_of = multiple_of
     ),
@@ -119,8 +125,8 @@ stabilise_double <- stabilize_dbl
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
-#'   `max_value`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
+#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 #'   - `<stbl-error-allowed_values>` when the value is not in
 #'   `allowed_values`.
 #'   - `<stbl-error-not_multiple>` when the value is not a multiple of
@@ -145,6 +151,8 @@ stabilize_dbl_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -162,6 +170,8 @@ stabilize_dbl_scalar <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
+      exclusive_min_value = exclusive_min_value,
+      exclusive_max_value = exclusive_max_value,
       allowed_values = allowed_values,
       multiple_of = multiple_of
     ),
@@ -196,6 +206,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   x,
   min_value,
   max_value,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -203,13 +215,34 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 ) {
   min_value <- to_dbl_scalar(min_value, allow_null = TRUE, call = call)
   max_value <- to_dbl_scalar(max_value, allow_null = TRUE, call = call)
+  exclusive_min_value <- to_dbl_scalar(
+    exclusive_min_value,
+    allow_null = TRUE,
+    call = call
+  )
+  exclusive_max_value <- to_dbl_scalar(
+    exclusive_max_value,
+    allow_null = TRUE,
+    call = call
+  )
   min_failure_locations <- if (!is.null(min_value)) {
     .Call(stbl_check_min_dbl, x, min_value)
   }
   max_failure_locations <- if (!is.null(max_value)) {
     .Call(stbl_check_max_dbl, x, max_value)
   }
-  if (is.null(min_failure_locations) && is.null(max_failure_locations)) {
+  exclusive_min_failure_locations <- if (!is.null(exclusive_min_value)) {
+    .Call(stbl_check_min_dbl_exclusive, x, exclusive_min_value)
+  }
+  exclusive_max_failure_locations <- if (!is.null(exclusive_max_value)) {
+    .Call(stbl_check_max_dbl_exclusive, x, exclusive_max_value)
+  }
+  if (
+    is.null(min_failure_locations) &&
+      is.null(max_failure_locations) &&
+      is.null(exclusive_min_failure_locations) &&
+      is.null(exclusive_max_failure_locations)
+  ) {
     allowed_values <- to_dbl(allowed_values, allow_null = TRUE, call = call)
     .check_allowed_values(
       x,
@@ -241,9 +274,33 @@ stabilise_double_scalar <- stabilize_dbl_scalar
     target_value = max_value,
     x_arg = x_arg
   )
-  locations <- sort(unique(c(min_failure_locations, max_failure_locations)))
+
+  exclusive_min_msg <- .describe_failure_dbl_value(
+    x,
+    failure_locations = exclusive_min_failure_locations,
+    direction = "low",
+    target_value = exclusive_min_value,
+    x_arg = x_arg,
+    exclusive = TRUE
+  )
+
+  exclusive_max_msg <- .describe_failure_dbl_value(
+    x,
+    failure_locations = exclusive_max_failure_locations,
+    direction = "high",
+    target_value = exclusive_max_value,
+    x_arg = x_arg,
+    exclusive = TRUE
+  )
+
+  locations <- sort(unique(c(
+    min_failure_locations,
+    max_failure_locations,
+    exclusive_min_failure_locations,
+    exclusive_max_failure_locations
+  )))
   .stbl_abort(
-    c(min_msg, max_msg),
+    c(min_msg, max_msg, exclusive_min_msg, exclusive_max_msg),
     subclass = "outside_range",
     call = call,
     message_env = rlang::current_env(),
@@ -258,6 +315,9 @@ stabilise_double_scalar <- stabilize_dbl_scalar
 #' @param direction `(character)` One of `"low"` or `"high"`.
 #' @param target_value `(numeric)` The value against which `x` is being
 #'   compared.
+#' @param exclusive `(logical(1))` Is this an exclusive (strict) bound? When
+#'   `TRUE`, values equal to `target_value` fail the check, and the comparison
+#'   operator in the error message omits `=`.
 #' @inheritParams .shared-params
 #' @returns A named character vector for `.stbl_abort()`.
 #' @keywords internal
@@ -266,14 +326,16 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   failure_locations,
   direction,
   target_value,
-  x_arg
+  x_arg,
+  exclusive = FALSE
 ) {
   if (is.null(failure_locations)) {
     return(NULL)
   }
   direction_sign <- if (direction == "low") ">" else "<"
+  equality_sign <- if (exclusive) "" else "="
   msg_main <- format_inline(
-    "{.arg {x_arg}} must be {direction_sign}= {target_value}."
+    "{.arg {x_arg}} must be {direction_sign}{equality_sign} {target_value}."
   )
   if (length(x) == 1) {
     return(.describe_failure_dbl_value_single(x, msg_main, direction))

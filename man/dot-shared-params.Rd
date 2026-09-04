@@ -49,6 +49,14 @@ parameter.}
 \item{due_to}{(\code{character(1)}) A string describing the reason for the
 failure.}
 
+\item{exclusive_max_value}{(\code{numeric(1)}) \code{x} must be strictly less than
+this value (JSON Schema \code{exclusiveMaximum} semantics). \code{NULL} (default)
+skips the check.}
+
+\item{exclusive_min_value}{(\code{numeric(1)}) \code{x} must be strictly greater than
+this value (JSON Schema \code{exclusiveMinimum} semantics). \code{NULL} (default)
+skips the check.}
+
 \item{failures}{\code{(logical)} A logical vector indicating which elements
 failed.}
 

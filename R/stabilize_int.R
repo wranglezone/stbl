@@ -18,8 +18,8 @@
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
 #'   present.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
-#'   `max_value`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
+#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 #'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #'   - `<stbl-error-not_multiple>` when values are not a multiple of
 #'   `multiple_of`.
@@ -40,6 +40,8 @@
 #' try(stabilize_int(factor("1"), coerce_factor = FALSE))
 #' try(stabilize_int(1:10, min_value = 3))
 #' try(stabilize_int(1:10, max_value = 7))
+#' try(stabilize_int(1:10, exclusive_min_value = 3))
+#' try(stabilize_int(1:10, exclusive_max_value = 8))
 #' try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
 #' try(stabilize_int(1:5, multiple_of = 2))
 stabilize_int <- function(
@@ -54,6 +56,8 @@ stabilize_int <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -71,6 +75,8 @@ stabilize_int <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
+      exclusive_min_value = exclusive_min_value,
+      exclusive_max_value = exclusive_max_value,
       allowed_values = allowed_values,
       multiple_of = multiple_of
     ),
@@ -119,8 +125,8 @@ stabilise_integer <- stabilize_int
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
-#'   `max_value`.
+#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
+#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 #'   - `<stbl-error-allowed_values>` when the value is not in
 #'   `allowed_values`.
 #'   - `<stbl-error-not_multiple>` when the value is not a multiple of
@@ -145,6 +151,8 @@ stabilize_int_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -162,6 +170,8 @@ stabilize_int_scalar <- function(
     check_cls_value_fn_args = list(
       min_value = min_value,
       max_value = max_value,
+      exclusive_min_value = exclusive_min_value,
+      exclusive_max_value = exclusive_max_value,
       allowed_values = allowed_values,
       multiple_of = multiple_of
     ),
