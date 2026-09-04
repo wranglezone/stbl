@@ -24,8 +24,9 @@
 #'   vector, and `valid`, a logical vector indicating whether each element was
 #'   successfully coerced without losing information. `.x_are_yish()`: A logical
 #'   vector indicating whether each element of `x` can be coerced to the target
-#'   type. `.check_min_dbl()` and `.check_max_dbl()`: `NULL` if all values pass
-#'   the check, otherwise a vector of failing indices.
+#'   type. `.check_min_dbl()`, `.check_max_dbl()`,
+#'   `.check_min_dbl_exclusive()`, and `.check_max_dbl_exclusive()`: `NULL` if
+#'   all values pass the check, otherwise a vector of failing indices.
 #' @keywords internal
 #' @name c_x_to_y
 .chr_to_lgl <- function(x) {
@@ -221,4 +222,14 @@
 #' @rdname c_x_to_y
 .check_max_dbl <- function(x, max_val) {
   .Call(stbl_check_max_dbl, x, max_val)
+}
+
+#' @rdname c_x_to_y
+.check_min_dbl_exclusive <- function(x, min_val) {
+  .Call(stbl_check_min_dbl_exclusive, x, min_val)
+}
+
+#' @rdname c_x_to_y
+.check_max_dbl_exclusive <- function(x, max_val) {
+  .Call(stbl_check_max_dbl_exclusive, x, max_val)
 }

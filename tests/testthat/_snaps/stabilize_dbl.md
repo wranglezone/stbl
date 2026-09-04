@@ -137,6 +137,68 @@
       x Unexpected location: 1
       x Unexpected value: "0.25".
 
+# stabilize_dbl() checks exclusive_min_value (#276)
+
+    Code
+      stabilize_dbl(given, exclusive_min_value = 1.1)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `given` must be > 1.1.
+      i Some values are too low.
+      x Location: 1
+      x Value: 1.1
+
+---
+
+    Code
+      wrapped_stabilize_dbl(given, exclusive_min_value = 1.1)
+    Condition <stbl-error-outside_range>
+      Error in `wrapped_stabilize_dbl()`:
+      ! `val` must be > 1.1.
+      i Some values are too low.
+      x Location: 1
+      x Value: 1.1
+
+# stabilize_dbl() checks exclusive_max_value (#276)
+
+    Code
+      stabilize_dbl(given, exclusive_max_value = 10.1)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `given` must be < 10.1.
+      i Some values are too high.
+      x Location: 10
+      x Value: 10.1
+
+---
+
+    Code
+      wrapped_stabilize_dbl(given, exclusive_max_value = 10.1)
+    Condition <stbl-error-outside_range>
+      Error in `wrapped_stabilize_dbl()`:
+      ! `val` must be < 10.1.
+      i Some values are too high.
+      x Location: 10
+      x Value: 10.1
+
+# stabilize_dbl_scalar() checks exclusive_min_value and exclusive_max_value (#276)
+
+    Code
+      stabilize_dbl_scalar(1, exclusive_min_value = 1)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `1` must be > 1.
+      x 1 is too low.
+
+---
+
+    Code
+      stabilize_dbl_scalar(10, exclusive_max_value = 10)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `10` must be < 10.
+      x 10 is too high.
+
 # stabilize_dbl_scalar() checks allowed_values (#282)
 
     Code

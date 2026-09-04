@@ -19,6 +19,8 @@ stabilize_int(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -38,6 +40,8 @@ stabilize_integer(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -57,6 +61,8 @@ stabilise_int(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -76,6 +82,8 @@ stabilise_integer(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -114,6 +122,14 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
+\item{exclusive_min_value}{(\code{numeric(1)}) \code{x} must be strictly greater than
+this value (JSON Schema \code{exclusiveMinimum} semantics). \code{NULL} (default)
+skips the check.}
+
+\item{exclusive_max_value}{(\code{numeric(1)}) \code{x} must be strictly less than
+this value (JSON Schema \code{exclusiveMaximum} semantics). \code{NULL} (default)
+skips the check.}
+
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
@@ -149,8 +165,8 @@ safely converted to integer.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
 \item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
 present.
-\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
-\code{max_value}.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value},
+\code{max_value}, \code{exclusive_min_value}, or \code{exclusive_max_value}.
 \item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 \item \verb{<stbl-error-not_multiple>} when values are not a multiple of
 \code{multiple_of}.
@@ -174,6 +190,8 @@ try(stabilize_int(factor(c("1", "a"))))
 try(stabilize_int(factor("1"), coerce_factor = FALSE))
 try(stabilize_int(1:10, min_value = 3))
 try(stabilize_int(1:10, max_value = 7))
+try(stabilize_int(1:10, exclusive_min_value = 3))
+try(stabilize_int(1:10, exclusive_max_value = 8))
 try(stabilize_int(1:5, allowed_values = c(1L, 2L, 3L)))
 try(stabilize_int(1:5, multiple_of = 2))
 }

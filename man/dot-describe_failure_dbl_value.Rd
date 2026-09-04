@@ -9,7 +9,8 @@
   failure_locations,
   direction,
   target_value,
-  x_arg
+  x_arg,
+  exclusive = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,10 @@ compared.}
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.}
+
+\item{exclusive}{\code{(logical(1))} Is this an exclusive (strict) bound? When
+\code{TRUE}, values equal to \code{target_value} fail the check, and the comparison
+operator in the error message omits \code{=}.}
 }
 \value{
 A named character vector for \code{.stbl_abort()}.
