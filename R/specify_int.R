@@ -31,7 +31,8 @@ specify_int <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("int", factory_args)
@@ -47,7 +48,8 @@ specify_int_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("int", factory_args, scalar = TRUE)

@@ -306,6 +306,64 @@
   )
 }
 
+#' Check that all elements are integer multiples of a value
+#'
+#' Doubles are compared with a small relative tolerance
+#' (`sqrt(.Machine$double.eps)`, the same default used by
+#' [base::all.equal()]) so that representable rounding error (e.g.
+#' `0.3 / 0.1`) doesn't produce spurious failures.
+#'
+#' @param multiple_of (`numeric(1)`, positive) The value `x` must be a multiple
+#'   of. `NULL` skips the check.
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_multiple_of <- function(
+  x,
+  multiple_of,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (is.null(multiple_of)) {
+    return(invisible(NULL))
+  }
+  if (multiple_of <= 0) {
+    .stbl_abort(
+      message = c(
+        "{.arg multiple_of} must be positive.",
+        "x" = "{.arg multiple_of} = {multiple_of}."
+      ),
+      subclass = "bad_multiple_of",
+      call = call,
+      message_env = rlang::current_env()
+    )
+  }
+
+  ratio <- x / multiple_of
+  tolerance <- sqrt(.Machine$double.eps)
+  failures <- !is.na(x) & abs(ratio - round(ratio)) > tolerance
+  if (!any(failures)) {
+    return(invisible(NULL))
+  }
+
+  locations <- which(failures)
+  location_chrs <- as.character(locations)
+  bad_value_chrs <- as.character(x[failures])
+  .stop_must(
+    "must be a multiple of {multiple_of}.",
+    x_arg = x_arg,
+    additional_msg = c(
+      "x" = "Unexpected location{?s}: {location_chrs}",
+      "x" = "Unexpected value{?s}: {.val {bad_value_chrs}}."
+    ),
+    call = call,
+    subclass = "not_multiple",
+    message_env = rlang::current_env(),
+    locations = locations
+  )
+}
+
 #' Check that all list elements are named
 #'
 #' @inheritParams .shared-params

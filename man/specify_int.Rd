@@ -17,7 +17,8 @@ specify_int(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_int_scalar(
@@ -28,7 +29,8 @@ specify_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer(
@@ -41,7 +43,8 @@ specify_integer(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer_scalar(
@@ -52,7 +55,8 @@ specify_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 }
 \arguments{
@@ -85,6 +89,10 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
+
+\item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
+of this value. \code{NULL} (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }

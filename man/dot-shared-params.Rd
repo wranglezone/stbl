@@ -83,6 +83,10 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
+\item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
+of this value. \code{NULL} (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.}
+
 \item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
 \item{parent}{A parent condition, as you might create during a

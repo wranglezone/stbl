@@ -18,6 +18,7 @@ stabilize_dbl_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilize_double_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -50,6 +52,7 @@ stabilise_dbl_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +69,7 @@ stabilise_double_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  multiple_of = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -100,6 +104,10 @@ the integer index of the factor.}
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
+\item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
+of this value. \code{NULL} (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.}
+
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -130,6 +138,8 @@ safely converted to double.
 \code{max_value}.
 \item \verb{<stbl-error-allowed_values>} when the value is not in
 \code{allowed_values}.
+\item \verb{<stbl-error-not_multiple>} when the value is not a multiple of
+\code{multiple_of}.
 }
 }
 \description{

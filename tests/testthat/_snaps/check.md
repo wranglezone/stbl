@@ -103,3 +103,31 @@
       i All list elements must have length 3 or 1.
       x Short elements: b = 2.
 
+# .check_multiple_of() works (#283)
+
+    Code
+      .check_multiple_of(c(2, 3, 6), 2)
+    Condition <stbl-error-not_multiple>
+      Error:
+      ! `c(2, 3, 6)` must be a multiple of 2.
+      x Unexpected location: 2
+      x Unexpected value: "3".
+
+# .check_multiple_of() rejects a non-positive multiple_of (#283)
+
+    Code
+      .check_multiple_of(c(2, 4), 0)
+    Condition <stbl-error-bad_multiple_of>
+      Error:
+      ! `multiple_of` must be positive.
+      x `multiple_of` = 0.
+
+---
+
+    Code
+      .check_multiple_of(c(2, 4), -2)
+    Condition <stbl-error-bad_multiple_of>
+      Error:
+      ! `multiple_of` must be positive.
+      x `multiple_of` = -2.
+
