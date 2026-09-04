@@ -85,8 +85,7 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
 of this value. \code{NULL} (default) skips the check. For doubles, a small
-relative tolerance is applied to avoid floating-point false negatives
-(see \code{\link[=stabilize_dbl]{stabilize_dbl()}} for details).}
+relative tolerance is applied to avoid floating-point false negatives.}
 
 \item{package}{(\code{character(1)}) The name of the package to use in classes.}
 

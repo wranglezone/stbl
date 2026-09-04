@@ -9,8 +9,8 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{multiple_of}{(\code{numeric(1)}) The value \code{x} must be a multiple of,
-already coerced to double. \code{NULL} skips the check.}
+\item{multiple_of}{(\code{numeric(1)}, positive) The value \code{x} must be a multiple
+of. \code{NULL} skips the check.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

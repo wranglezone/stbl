@@ -313,8 +313,8 @@
 #' [base::all.equal()]) so that representable rounding error (e.g.
 #' `0.3 / 0.1`) doesn't produce spurious failures.
 #'
-#' @param multiple_of (`numeric(1)`) The value `x` must be a multiple of,
-#'   already coerced to double. `NULL` skips the check.
+#' @param multiple_of (`numeric(1)`, positive) The value `x` must be a multiple
+#'   of. `NULL` skips the check.
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return

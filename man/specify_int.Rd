@@ -92,8 +92,7 @@ independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{multiple_of}{(\code{numeric(1)}, positive) \code{x} must be an integer multiple
 of this value. \code{NULL} (default) skips the check. For doubles, a small
-relative tolerance is applied to avoid floating-point false negatives
-(see \code{\link[=stabilize_dbl]{stabilize_dbl()}} for details).}
+relative tolerance is applied to avoid floating-point false negatives.}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
