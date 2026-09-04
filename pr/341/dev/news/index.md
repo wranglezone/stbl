@@ -88,8 +88,8 @@
   [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
   and
   [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
-  gain a new `multiple_of` argument, requiring that values be an integer
-  multiple of the given value;
+  gain a new `multiple_of` argument, requiring that values be a multiple
+  of the given value;
   [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)/[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   apply a small relative tolerance to avoid floating-point false
   negatives ([\#283](https://github.com/wranglezone/stbl/issues/283)).
