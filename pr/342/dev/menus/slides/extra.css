@@ -1,0 +1,17 @@
+div.page-header img.logo {
+  width: 220px;
+}
+
+.reveal .slide-logo {
+  max-height: 3rem !important;
+}
+
+.custom-bullet p {
+  display: flex !important;
+  align-items: center !important;
+}
+.custom-bullet img {
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  margin-right: 20px !important;
+}
