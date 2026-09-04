@@ -7,9 +7,9 @@ execute:
   echo: true
 format:
   revealjs:
-    theme: dark
-    logo: slide_images/qr.png
-    footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
+    theme: [dark, custom.scss]
+    # logo: slide_images/qr.png
+    # footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
     link-external-newwindow: true
     transition: slide
     css: extra.css
@@ -22,7 +22,7 @@ format:
 ::::: columns
 
 :::: {.column width="40%"}
-![](slide_images/doet_book.jpg)
+![](slide_images/doet_book.jpg){width="80%"}
 ::::
 
 :::: {.column width="60%"}
@@ -43,14 +43,34 @@ format:
 :::: 
 :::::
 
+::: aside
+Images from *The Design of Everyday Things, Revised and Expanded Edition* Copyright © 2013 by Don Norman
+:::
+
 ::: notes
 - Point out link to slides.
 - "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
 :::
 
-# Make it obvious what functions do
+# Make functionality obvious
 
-## Make it obvious what functions do {transition="slide-in fade-out"}
+## Which dial controls which burner?
+
+::::: colummns
+
+:::: column
+![](slide_images/burners_bad.png)
+::::
+
+:::: column
+::: fragment
+![](slide_images/burners_good.png)
+:::
+::::
+
+:::::
+
+## What does this function do? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 1-10|1-1
@@ -70,7 +90,7 @@ my_fun <- function(x, y, z) {
 
 ```{r}
 #| code-line-numbers: 1-1
-compile_order_df <- function(x, y, z) {
+compile_sales_df <- function(x, y, z) {
   y2 <- ceiling(y * z * 100) / 100
   y3 <- y + y2
   data.frame(
@@ -86,7 +106,7 @@ compile_order_df <- function(x, y, z) {
 
 ```{r}
 #| code-line-numbers: 1-1
-compile_order_df <- function(items, prices, tax_rate) {
+compile_sales_df <- function(items, prices, tax_rate) {
   y2 <- ceiling(y * z * 100) / 100
   y3 <- y + y2
   data.frame(
@@ -101,8 +121,8 @@ compile_order_df <- function(items, prices, tax_rate) {
 ## Make it obvious what functions do {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-9|
-compile_order_df <- function(items, prices, tax_rate) {
+#| code-line-numbers: 2-9|1-10|1-1
+compile_sales_df <- function(items, prices, tax_rate) {
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -119,7 +139,7 @@ compile_order_df <- function(items, prices, tax_rate) {
 ```{r}
 #| code-line-numbers: 1-1
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -145,71 +165,72 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 🔵 Defaults = standards / hints
 :::
 
-## {transition="fade-in fade-out"}
+# Forgive "close enough" input
+
+## Which way do these batteries go?
+
+::::: columns
+
+:::: column
+::: fragment
+![](slide_images/batteries.png){width="100%"}
+:::
+::::
+:::: column
+::: fragment
+non-directional battery<br>
+![](slide_images/battery_new.png){width="100%"}
+:::
+::::
+:::::
+
+## What happens if data types are incorrect? {transition="fade-in fade-out"}
 
 ```{r}
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c(12.33, 20.77)
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c(12.33, 20.77)
 )
 ```
 
-## {transition="fade-in fade-out"}
+## What happens if data types are incorrect? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 1-4|3-3
 #| eval: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c(12.33, 20.77)
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c(12.33, 20.77)
 )
 ```
 
-## {transition="fade-in fade-out"}
+## What happens if data types are incorrect? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 3-3
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c("12.33", "20.77")
 )
 ```
 
-## {transition="fade-in fade-out"}
+## What happens if data types are incorrect? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 3-3
 #| eval: true
 #| error: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c("12.33", "20.77")
 )
 ```
-
-# Forgive "close enough" input
-
-## Forgive "close enough" input
-
-:::: columns
-::: column
-![](slide_images/logo.png)
-:::
-::: column
-<br>
-<br>
-<br>
-<br>
-<br>
-[https://stbl.wrangle.zone](https://stbl.wrangle.zone)
-:::
-::::
 
 ## Forgive "close enough" input {transition="slide-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 1-10|2-2|2-3
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+#| code-line-numbers: 1-10|2-2
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -224,8 +245,8 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ## Forgive "close enough" input {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-4|2-2
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+#| code-line-numbers: 2-3|2-2
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
@@ -243,7 +264,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ```{r}
 #| code-line-numbers: 2-4
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   tax_rate <- stbl::to_dbl_scalar(tax_rate)
   items <- stbl::to_chr(items)
@@ -262,9 +283,9 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 
 ```{r}
 #| code-line-numbers: 3-3
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c("12.33", "20.77")
 )
 ```
 
@@ -273,17 +294,19 @@ compile_order_df(
 ```{r}
 #| code-line-numbers: 3-3
 #| eval: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c("12.33", "20.77")
 )
 ```
 
-## {transition="slide-in fade-out"}
+# Help users fix mistakes
+
+## Why did I make this package? {transition="slide-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 2-4
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   tax_rate <- stbl::to_dbl_scalar(tax_rate)
   items <- stbl::to_chr(items)
@@ -298,12 +321,12 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## {transition="fade-in slide-out"}
+## Why did I make this package? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 2-4
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- as.double(prices)
   tax_rate <- as.double(tax_rate)
   items <- as.character(items)
@@ -318,47 +341,45 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## {transition="slide-in fade-out"}
+## Why did I make this package? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 2-3
 #| eval: true
-compile_order_df(
-  c("paper towels", "toilet paper"),
-  c("12.33", "20.77")
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c("12.33", "20.77")
 )
 ```
 
-## {transition="fade-in fade-out"}
+## Why did I make this package? {transition="fade-in fade-out"}
 
 ```{r}
 #| code-line-numbers: 2-3
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
-## {transition="fade-in slide-out"}
+## Why did I make this package? {transition="fade-in slide-out"}
 
 ```{r}
 #| code-line-numbers: 2-3
 #| eval: true
 #| warning: true
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
-
-# Help users fix mistakes
 
 ## Help users fix mistakes
 
 ```{r}
 #| code-line-numbers: 2-4
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   tax_rate <- stbl::to_dbl_scalar(tax_rate)
   items <- stbl::to_chr(items)
@@ -376,9 +397,9 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ## Help users fix mistakes {transition="slide-in fade-out"}
 
 ```{r}
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
@@ -387,9 +408,9 @@ compile_order_df(
 ```{r}
 #| eval: true
 #| error: true
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
@@ -397,7 +418,7 @@ compile_order_df(
 
 ```{r}
 #| code-line-numbers: 2-2
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
@@ -415,7 +436,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ```{r}
 #| code-line-numbers: 2-8
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices) |>
     stbl::replace_stbl_error(
       c(
@@ -439,7 +460,7 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ```{r}
 #| code-line-numbers: 2-8
 #| eval: true
-compile_order_df <- function(items, prices, tax_rate = 0.0825) {
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices) |>
     stbl::replace_stbl_error(
       c(
@@ -462,9 +483,9 @@ compile_order_df <- function(items, prices, tax_rate = 0.0825) {
 ## Help users fix mistakes {transition="slide-in fade-out"}
 
 ```{r}
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
@@ -473,9 +494,9 @@ compile_order_df(
 ```{r}
 #| eval: true
 #| error: true
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
@@ -485,9 +506,9 @@ compile_order_df(
 #| eval: true
 #| error: true
 #| echo: false
-compile_order_df(
-  c("item", "price", "", ""),
-  c("paper towels", "12.33", "toilet paper", "20.77")
+compile_sales_df(
+  items = c("item", "price", "", ""),
+  prices = c("paper towels", "12.33", "toilet paper", "20.77")
 )
 ```
 
@@ -525,8 +546,8 @@ compile_order_df(
 ::::
 
 :::: {.column width="50%"}
-::: fragment
-1️⃣ Make functionality obvious
+::: {.fragment .custom-bullet}
+![](slide_images/burner_bullet.png){width="75px"} Make functionality obvious
 :::
 ::: fragment
 &nbsp;&nbsp;🟠 Functions = verbs
@@ -539,10 +560,10 @@ compile_order_df(
 :::
 
 ::: fragment
-2️⃣ Forgive "close enough" input
+🔋 Forgive "close enough" input
 :::
 ::: fragment
-3️⃣ Help users fix mistakes
+ℹ️ Help users fix mistakes
 :::
 ::: fragment
 <br>
