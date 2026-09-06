@@ -36,8 +36,6 @@ source of error messages.}
 The updated list.
 }
 \description{
-Named specs not listed in \code{.required} are optional: when absent, they're
-skipped rather than erroring, but they're still validated normally when
-present.
+Validate required named elements against their spec functions
 }
 \keyword{internal}

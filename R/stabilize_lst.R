@@ -146,7 +146,7 @@ stabilize_lst <- function(
   )
 
   .check_specs_named(..., .call = .call)
-  .required <- to_chr(.required, x_arg = ".required", call = .call)
+  .required <- to_chr(.required, call = .call)
   .x <- .validate_named_elements(
     .x,
     ...,
@@ -308,10 +308,6 @@ NULL
 }
 
 #' Validate required named elements against their spec functions
-#'
-#' Named specs not listed in `.required` are optional: when absent, they're
-#' skipped rather than erroring, but they're still validated normally when
-#' present.
 #'
 #' @inheritParams stabilize_lst
 #' @inheritParams .shared-params-lst
