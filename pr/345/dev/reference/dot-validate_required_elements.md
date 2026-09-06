@@ -1,8 +1,6 @@
 # Validate required named elements against their spec functions
 
-Named specs not listed in `.required` are optional: when absent, they're
-skipped rather than erroring, but they're still validated normally when
-present.
+Validate required named elements against their spec functions
 
 ## Usage
 
