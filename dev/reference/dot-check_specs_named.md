@@ -16,8 +16,9 @@ Check that all elements of a spec list are named
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). Each name corresponds to a required element in `.x`, and the
-  function is used to validate that element.
+  etc). Each name corresponds to an element in `.x`, and the function is
+  used to validate that element when present. Whether the element is
+  required (its absence is an error) is controlled by `.required`.
 
 - .call:
 

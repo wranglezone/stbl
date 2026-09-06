@@ -14,7 +14,8 @@ specify_df(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .required = ...names()
 )
 
 specify_data_frame(
@@ -23,7 +24,8 @@ specify_data_frame(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .required = ...names()
 )
 ```
 
@@ -35,8 +37,9 @@ specify_data_frame(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). Each name corresponds to a required column in `.x`, and the
-  function is used to validate that column.
+  etc). Each name corresponds to a column in `.x`, and the function is
+  used to validate that column when present. Whether the column is
+  required is controlled by `.required`.
 
 - .extra_cols:
 
@@ -72,6 +75,15 @@ specify_data_frame(
 - .allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
+
+- .required:
+
+  `(character)` Names (from `...`) of columns that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional.
 
 ## Value
 
@@ -116,4 +128,14 @@ stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 try(stabilize_person_df(data.frame(name = "Alice")))
 #> Error in eval(expr, envir) : 
 #>   `data.frame(name = "Alice")` must contain element "age".
+
+# Mark a column as optional via .required
+stabilize_person_df2 <- specify_df(
+  name = specify_chr_scalar(allow_na = FALSE),
+  age = specify_int_scalar(allow_na = FALSE),
+  .required = "name"
+)
+stabilize_person_df2(data.frame(name = "Alice"))
+#>    name
+#> 1 Alice
 ```

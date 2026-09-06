@@ -49,9 +49,10 @@
 <dl><dt id="arg-element-specs">element_specs<a class="anchor" aria-label="anchor" href="#arg-element-specs"></a></dt>
 <dd><p><code>(list)</code> Named list of stabilizer functions, such as
 <code>stabilize_*</code> functions (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by
-<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a
-required element in <code>.x</code>, and the function is used to validate that
-element.</p></dd>
+<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to
+an element in <code>.x</code>, and the function is used to validate that element
+when present. Whether the element is required is controlled by
+<code>.required</code>.</p></dd>
 
 
 <dt id="arg-is-extra-named">is_extra_named<a class="anchor" aria-label="anchor" href="#arg-is-extra-named"></a></dt>

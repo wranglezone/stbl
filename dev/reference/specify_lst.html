@@ -53,7 +53,8 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .max_size <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_list</span><span class="op">(</span></span>
@@ -63,7 +64,8 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .max_size <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -74,8 +76,10 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Named stabilizer functions, such as <code>stabilize_*</code> functions
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by <code>specify_*()</code> functions
-(<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a required element in
-<code>.x</code>, and the function is used to validate that element.</p></dd>
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to an element in <code>.x</code>, and
+the function is used to validate that element when present. Whether the
+element is required (its absence is an error) is controlled by
+<code>.required</code>.</p></dd>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
@@ -115,6 +119,14 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 <dt id="arg--max-size">.max_size<a class="anchor" aria-label="anchor" href="#arg--max-size"></a></dt>
 <dd><p>(<code>integer(1)</code>) The maximum size of the object. Object size
 will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
+<dd><p><code>(character)</code> Names (from <code>...</code>) of elements that must be
+present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
+required unless you opt it out. Named specs <em>not</em> listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -176,6 +188,17 @@ you want to provide additional context or functionality.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> must be a single <span style="color: #0000BB;">&lt;character&gt;</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))[[4]]` has 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   values.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Mark some elements as optional via .required</span></span></span>
+<span class="r-in"><span><span class="va">stabilize_settings</span> <span class="op">&lt;-</span> <span class="fu">specify_lst</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nickname <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .required <span class="op">=</span> <span class="st">"name"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_settings</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Alice"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

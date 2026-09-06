@@ -9,6 +9,7 @@ Validate all named elements (required and extra)
   .x,
   ...,
   .named,
+  .required,
   .allow_duplicate_names,
   .x_arg,
   .call
@@ -27,8 +28,9 @@ Validate all named elements (required and extra)
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). Each name corresponds to a required element in `.x`, and the
-  function is used to validate that element.
+  etc). Each name corresponds to an element in `.x`, and the function is
+  used to validate that element when present. Whether the element is
+  required (its absence is an error) is controlled by `.required`.
 
 - .named:
 
@@ -45,6 +47,15 @@ Validate all named elements (required and extra)
     etc) or a function produced by a `specify_*()` function
     ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
     etc), used to validate every extra named element.
+
+- .required:
+
+  `(character)` Names (from `...`) of elements that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional.
 
 - .allow_duplicate_names:
 

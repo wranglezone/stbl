@@ -19,6 +19,7 @@ stabilize_lst(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -34,6 +35,7 @@ stabilize_list(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -49,6 +51,7 @@ stabilise_lst(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -64,6 +67,7 @@ stabilise_list(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -82,8 +86,9 @@ stabilise_list(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). Each name corresponds to a required element in `.x`, and the
-  function is used to validate that element.
+  etc). Each name corresponds to an element in `.x`, and the function is
+  used to validate that element when present. Whether the element is
+  required (its absence is an error) is controlled by `.required`.
 
 - .named:
 
@@ -141,6 +146,15 @@ stabilise_list(
   (`integer(1)`) The maximum size of the object. Object size will be
   tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- .required:
+
+  `(character)` Names (from `...`) of elements that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional.
 
 - .x_arg:
 
@@ -371,4 +385,20 @@ stabilize_lst(
 #> $a
 #> [1] 2
 #> 
+
+# Mark named specs as optional via .required
+stabilize_lst(
+  list(a = 1L),
+  a = specify_int_scalar(),
+  b = specify_int_scalar(),
+  .required = "a"
+)
+#> $a
+#> [1] 1
+#> 
+try(
+  stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+)
+#> Error in eval(expr, envir) : 
+#>   `list(a = 1L)` must contain element "b".
 ```

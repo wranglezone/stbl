@@ -18,6 +18,7 @@ stabilize_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -31,6 +32,7 @@ stabilise_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -44,6 +46,7 @@ stabilize_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -57,6 +60,7 @@ stabilise_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -75,8 +79,9 @@ stabilise_data_frame(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc). Each name corresponds to a required column in `.x`, and the
-  function is used to validate that column.
+  etc). Each name corresponds to a column in `.x`, and the function is
+  used to validate that column when present. Whether the column is
+  required is controlled by `.required`.
 
 - .extra_cols:
 
@@ -112,6 +117,15 @@ stabilise_data_frame(
 - .allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
+
+- .required:
+
+  `(character)` Names (from `...`) of columns that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional.
 
 - .x_arg:
 
@@ -311,4 +325,14 @@ stabilize_df(
 try(stabilize_df("not a data frame"))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"not a data frame"` <character> to <data.frame>.
+
+# Mark a column as optional via .required
+stabilize_df(
+  data.frame(name = "Alice"),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar(),
+  .required = "name"
+)
+#>    name
+#> 1 Alice
 ```

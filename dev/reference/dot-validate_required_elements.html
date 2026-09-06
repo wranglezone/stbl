@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.validate_required_elements</span><span class="op">(</span><span class="va">.x</span>, <span class="va">element_specs</span>, <span class="va">nms</span>, <span class="va">.x_arg</span>, <span class="va">.call</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.validate_required_elements</span><span class="op">(</span><span class="va">.x</span>, <span class="va">element_specs</span>, <span class="va">nms</span>, <span class="va">.required</span>, <span class="va">.x_arg</span>, <span class="va">.call</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,13 +57,22 @@
 <dt id="arg-element-specs">element_specs<a class="anchor" aria-label="anchor" href="#arg-element-specs"></a></dt>
 <dd><p><code>(list)</code> Named list of stabilizer functions, such as
 <code>stabilize_*</code> functions (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by
-<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a
-required element in <code>.x</code>, and the function is used to validate that
-element.</p></dd>
+<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to
+an element in <code>.x</code>, and the function is used to validate that element
+when present. Whether the element is required is controlled by
+<code>.required</code>.</p></dd>
 
 
 <dt id="arg-nms">nms<a class="anchor" aria-label="anchor" href="#arg-nms"></a></dt>
 <dd><p><code>(character)</code> Result of <code>rlang::names2(.x)</code>.</p></dd>
+
+
+<dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
+<dd><p><code>(character)</code> Names (from <code>...</code>) of elements that must be
+present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
+required unless you opt it out. Named specs <em>not</em> listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
