@@ -32,6 +32,12 @@
 #'   parameter.
 #' @param due_to (`character(1)`) A string describing the reason for the
 #'   failure.
+#' @param exclusive_max_value (`numeric(1)`) Similar to `max_value`, but `x`
+#'   must be strictly less than this value (`<`, not `<=`). `NULL` (default)
+#'   values are not checked.
+#' @param exclusive_min_value (`numeric(1)`) Similar to `max_value`, but `x`
+#'   must be strictly greater than this value (`>`, not `>=`). `NULL` (default)
+#'   values are not checked.
 #' @param failures `(logical)` A logical vector indicating which elements
 #'   failed.
 #' @param is_rlang_cls_scalar `(function)` An `is_scalar_*()` function from

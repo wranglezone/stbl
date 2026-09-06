@@ -49,6 +49,14 @@ parameter.}
 \item{due_to}{(\code{character(1)}) A string describing the reason for the
 failure.}
 
+\item{exclusive_max_value}{(\code{numeric(1)}) Similar to \code{max_value}, but \code{x}
+must be strictly less than this value (\code{<}, not \code{<=}). \code{NULL} (default)
+values are not checked.}
+
+\item{exclusive_min_value}{(\code{numeric(1)}) Similar to \code{max_value}, but \code{x}
+must be strictly greater than this value (\code{>}, not \code{>=}). \code{NULL} (default)
+values are not checked.}
+
 \item{failures}{\code{(logical)} A logical vector indicating which elements
 failed.}
 

@@ -128,6 +128,68 @@
       x Unexpected location: 1
       x Unexpected value: "3".
 
+# stabilize_int() checks exclusive_min_value (#276)
+
+    Code
+      stabilize_int(given, exclusive_min_value = 1)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `given` must be > 1.
+      i Some values are too low.
+      x Location: 1
+      x Value: 1
+
+---
+
+    Code
+      wrapped_stabilize_int(given, exclusive_min_value = 1)
+    Condition <stbl-error-outside_range>
+      Error in `wrapped_stabilize_int()`:
+      ! `val` must be > 1.
+      i Some values are too low.
+      x Location: 1
+      x Value: 1
+
+# stabilize_int() checks exclusive_max_value (#276)
+
+    Code
+      stabilize_int(given, exclusive_max_value = 10)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `given` must be < 10.
+      i Some values are too high.
+      x Location: 10
+      x Value: 10
+
+---
+
+    Code
+      wrapped_stabilize_int(given, exclusive_max_value = 10)
+    Condition <stbl-error-outside_range>
+      Error in `wrapped_stabilize_int()`:
+      ! `val` must be < 10.
+      i Some values are too high.
+      x Location: 10
+      x Value: 10
+
+# stabilize_int_scalar() checks exclusive_min_value and exclusive_max_value (#276)
+
+    Code
+      stabilize_int_scalar(1L, exclusive_min_value = 1)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `1L` must be > 1.
+      x 1 is too low.
+
+---
+
+    Code
+      stabilize_int_scalar(10L, exclusive_max_value = 10)
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `10L` must be < 10.
+      x 10 is too high.
+
 # stabilize_int_scalar() checks allowed_values (#282)
 
     Code

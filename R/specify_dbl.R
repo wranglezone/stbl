@@ -31,6 +31,8 @@ specify_dbl <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 ) {
@@ -48,6 +50,8 @@ specify_dbl_scalar <- function(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 ) {

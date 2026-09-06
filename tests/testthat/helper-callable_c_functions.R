@@ -51,5 +51,7 @@ expected_c_symbols <- c(
   "stbl_lst_to_fct",
   # range checks
   "stbl_check_min_dbl",
-  "stbl_check_max_dbl"
+  "stbl_check_max_dbl",
+  "stbl_check_min_dbl_exclusive",
+  "stbl_check_max_dbl_exclusive"
 )

@@ -64,6 +64,8 @@ extern SEXP (*stbl_lst_to_fct)(SEXP);
 /* range checks */
 extern SEXP (*stbl_check_min_dbl)(SEXP, SEXP);
 extern SEXP (*stbl_check_max_dbl)(SEXP, SEXP);
+extern SEXP (*stbl_check_min_dbl_exclusive)(SEXP, SEXP);
+extern SEXP (*stbl_check_max_dbl_exclusive)(SEXP, SEXP);
 
 /* to */
 extern SEXP (*stbl_to)(SEXP, SEXP);

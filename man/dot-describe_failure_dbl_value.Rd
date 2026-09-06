@@ -9,6 +9,7 @@
   failure_locations,
   direction,
   target_value,
+  exclusive = FALSE,
   x_arg
 )
 }
@@ -21,6 +22,10 @@
 
 \item{target_value}{\code{(numeric)} The value against which \code{x} is being
 compared.}
+
+\item{exclusive}{\code{(logical(1))} Is this an exclusive (strict) bound? When
+\code{TRUE}, values equal to \code{target_value} fail the check, and the comparison
+operator in the error message omits \code{=}.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

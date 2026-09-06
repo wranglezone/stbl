@@ -80,6 +80,8 @@ SEXP stbl_lst_to_fct(SEXP x);
 /* range checks */
 SEXP stbl_check_min_dbl(SEXP x, SEXP min_val);
 SEXP stbl_check_max_dbl(SEXP x, SEXP max_val);
+SEXP stbl_check_min_dbl_exclusive(SEXP x, SEXP min_val);
+SEXP stbl_check_max_dbl_exclusive(SEXP x, SEXP max_val);
 
 /* to */
 SEXP stbl_to(SEXP x, SEXP to);
@@ -139,8 +141,10 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_lst_to_chr",      (DL_FUNC) &stbl_lst_to_chr,      1},
   {"stbl_lst_to_fct",      (DL_FUNC) &stbl_lst_to_fct,      1},
   /* range checks */
-  {"stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl,   2},
-  {"stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl,   2},
+  {"stbl_check_min_dbl",             (DL_FUNC) &stbl_check_min_dbl,             2},
+  {"stbl_check_max_dbl",             (DL_FUNC) &stbl_check_max_dbl,             2},
+  {"stbl_check_min_dbl_exclusive",   (DL_FUNC) &stbl_check_min_dbl_exclusive,   2},
+  {"stbl_check_max_dbl_exclusive",   (DL_FUNC) &stbl_check_max_dbl_exclusive,   2},
   /* to */
   {"stbl_to",              (DL_FUNC) &stbl_to,              2},
   {NULL, NULL, 0}
@@ -205,8 +209,10 @@ void R_init_stbl(DllInfo* dll) {
   R_RegisterCCallable("stbl", "stbl_lst_to_chr",      (DL_FUNC) &stbl_lst_to_chr);
   R_RegisterCCallable("stbl", "stbl_lst_to_fct",      (DL_FUNC) &stbl_lst_to_fct);
   /* range checks */
-  R_RegisterCCallable("stbl", "stbl_check_min_dbl",   (DL_FUNC) &stbl_check_min_dbl);
-  R_RegisterCCallable("stbl", "stbl_check_max_dbl",   (DL_FUNC) &stbl_check_max_dbl);
+  R_RegisterCCallable("stbl", "stbl_check_min_dbl",           (DL_FUNC) &stbl_check_min_dbl);
+  R_RegisterCCallable("stbl", "stbl_check_max_dbl",           (DL_FUNC) &stbl_check_max_dbl);
+  R_RegisterCCallable("stbl", "stbl_check_min_dbl_exclusive", (DL_FUNC) &stbl_check_min_dbl_exclusive);
+  R_RegisterCCallable("stbl", "stbl_check_max_dbl_exclusive", (DL_FUNC) &stbl_check_max_dbl_exclusive);
   /* to */
   R_RegisterCCallable("stbl", "stbl_to",              (DL_FUNC) &stbl_to);
 }

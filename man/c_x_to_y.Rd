@@ -40,6 +40,8 @@
 \alias{.stbl_to}
 \alias{.check_min_dbl}
 \alias{.check_max_dbl}
+\alias{.check_min_dbl_exclusive}
+\alias{.check_max_dbl_exclusive}
 \title{Call the C routine to convert a vector to another type}
 \usage{
 .chr_are_fnish(x)
@@ -117,6 +119,10 @@
 .check_min_dbl(x, min_val)
 
 .check_max_dbl(x, max_val)
+
+.check_min_dbl_exclusive(x, min_val)
+
+.check_max_dbl_exclusive(x, max_val)
 }
 \arguments{
 \item{x}{The object to stabilize.}
@@ -134,8 +140,9 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 vector, and \code{valid}, a logical vector indicating whether each element was
 successfully coerced without losing information. \code{.x_are_yish()}: A logical
 vector indicating whether each element of \code{x} can be coerced to the target
-type. \code{.check_min_dbl()} and \code{.check_max_dbl()}: \code{NULL} if all values pass
-the check, otherwise a vector of failing indices.
+type. \code{.check_min_dbl()}, \code{.check_max_dbl()},
+\code{.check_min_dbl_exclusive()}, and \code{.check_max_dbl_exclusive()}: \code{NULL} if
+all values pass the check, otherwise a vector of failing indices.
 }
 \description{
 Call the C routine to convert a vector to another type

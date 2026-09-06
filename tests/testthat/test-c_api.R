@@ -1125,6 +1125,48 @@ test_that(".check_max_dbl() handles integer input (#220)", {
   expect_null(.check_max_dbl(c(NA_integer_, 1L), 2.0))
 })
 
+test_that(".check_min_dbl_exclusive() returns NULL when all values pass (#276)", {
+  expect_null(.check_min_dbl_exclusive(c(1.0, 2.0, 3.0), 0.0))
+  expect_null(.check_min_dbl_exclusive(double(0), 0.0))
+})
+
+test_that(".check_min_dbl_exclusive() fails on values equal to the boundary (#276)", {
+  expect_identical(.check_min_dbl_exclusive(c(1.0, 2.0, 3.0), 1.0), 1L)
+  expect_identical(.check_min_dbl_exclusive(c(0.0, 1.0, 2.0), 1.0), c(1L, 2L))
+})
+
+test_that(".check_min_dbl_exclusive() treats NA as passing (#276)", {
+  expect_null(.check_min_dbl_exclusive(c(NA_real_, 2.0), 1.0))
+  expect_identical(.check_min_dbl_exclusive(c(NA_real_, 1.0), 1.0), 2L)
+})
+
+test_that(".check_min_dbl_exclusive() handles integer input (#276)", {
+  expect_null(.check_min_dbl_exclusive(c(2L, 3L), 1.0))
+  expect_identical(.check_min_dbl_exclusive(c(1L, 2L, 3L), 1.0), 1L)
+  expect_null(.check_min_dbl_exclusive(c(NA_integer_, 2L), 1.0))
+})
+
+test_that(".check_max_dbl_exclusive() returns NULL when all values pass (#276)", {
+  expect_null(.check_max_dbl_exclusive(c(1.0, 2.0, 3.0), 4.0))
+  expect_null(.check_max_dbl_exclusive(double(0), 0.0))
+})
+
+test_that(".check_max_dbl_exclusive() fails on values equal to the boundary (#276)", {
+  expect_identical(.check_max_dbl_exclusive(c(1.0, 2.0, 3.0), 3.0), 3L)
+  expect_identical(.check_max_dbl_exclusive(c(1.0, 2.0, 3.0), 2.0), c(2L, 3L))
+})
+
+test_that(".check_max_dbl_exclusive() treats NA as passing (#276)", {
+  expect_null(.check_max_dbl_exclusive(c(NA_real_, 1.0), 2.0))
+  expect_identical(.check_max_dbl_exclusive(c(NA_real_, 2.0), 2.0), 2L)
+})
+
+test_that(".check_max_dbl_exclusive() handles integer input (#276)", {
+  expect_null(.check_max_dbl_exclusive(c(1L, 2L), 3.0))
+  expect_identical(.check_max_dbl_exclusive(c(1L, 2L, 3L), 3.0), 3L)
+  expect_null(.check_max_dbl_exclusive(c(NA_integer_, 1L), 2.0))
+})
+
 # dbl -> chr -------------------------------------------------------------------
 
 test_that(".dbl_to_chr() converts doubles to character (#noissue)", {
