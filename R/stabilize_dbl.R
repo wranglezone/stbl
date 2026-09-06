@@ -280,8 +280,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
     failure_locations = exclusive_min_failure_locations,
     direction = "low",
     target_value = exclusive_min_value,
-    x_arg = x_arg,
-    exclusive = TRUE
+    exclusive = TRUE,
+    x_arg = x_arg
   )
 
   exclusive_max_msg <- .describe_failure_dbl_value(
@@ -289,8 +289,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
     failure_locations = exclusive_max_failure_locations,
     direction = "high",
     target_value = exclusive_max_value,
-    x_arg = x_arg,
-    exclusive = TRUE
+    exclusive = TRUE,
+    x_arg = x_arg
   )
 
   locations <- sort(unique(c(
@@ -326,8 +326,8 @@ stabilise_double_scalar <- stabilize_dbl_scalar
   failure_locations,
   direction,
   target_value,
-  x_arg,
-  exclusive = FALSE
+  exclusive = FALSE,
+  x_arg
 ) {
   if (is.null(failure_locations)) {
     return(NULL)
