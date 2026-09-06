@@ -10,8 +10,8 @@ Describe a numeric value validation failure
   failure_locations,
   direction,
   target_value,
-  x_arg,
-  exclusive = FALSE
+  exclusive = FALSE,
+  x_arg
 )
 ```
 
@@ -33,18 +33,18 @@ Describe a numeric value validation failure
 
   `(numeric)` The value against which `x` is being compared.
 
+- exclusive:
+
+  `(logical(1))` Is this an exclusive (strict) bound? When `TRUE`,
+  values equal to `target_value` fail the check, and the comparison
+  operator in the error message omits `=`.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
-
-- exclusive:
-
-  `(logical(1))` Is this an exclusive (strict) bound? When `TRUE`,
-  values equal to `target_value` fail the check, and the comparison
-  operator in the error message omits `=`.
 
 ## Value
 

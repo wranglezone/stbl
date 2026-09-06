@@ -48,8 +48,8 @@
 <span>  <span class="va">failure_locations</span>,</span>
 <span>  <span class="va">direction</span>,</span>
 <span>  <span class="va">target_value</span>,</span>
-<span>  <span class="va">x_arg</span>,</span>
-<span>  exclusive <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  exclusive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">x_arg</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -74,17 +74,17 @@
 compared.</p></dd>
 
 
+<dt id="arg-exclusive">exclusive<a class="anchor" aria-label="anchor" href="#arg-exclusive"></a></dt>
+<dd><p><code>(logical(1))</code> Is this an exclusive (strict) bound? When
+<code>TRUE</code>, values equal to <code>target_value</code> fail the check, and the comparison
+operator in the error message omits <code>=</code>.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.</p></dd>
-
-
-<dt id="arg-exclusive">exclusive<a class="anchor" aria-label="anchor" href="#arg-exclusive"></a></dt>
-<dd><p><code>(logical(1))</code> Is this an exclusive (strict) bound? When
-<code>TRUE</code>, values equal to <code>target_value</code> fail the check, and the comparison
-operator in the error message omits <code>=</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
