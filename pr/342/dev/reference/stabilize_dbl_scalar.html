@@ -179,15 +179,15 @@ the integer index of the factor.</p></dd>
 
 
 <dt id="arg-exclusive-min-value">exclusive_min_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-min-value"></a></dt>
-<dd><p>(<code>numeric(1)</code>) <code>x</code> must be strictly greater than
-this value (JSON Schema <code>exclusiveMinimum</code> semantics). <code>NULL</code> (default)
-skips the check.</p></dd>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly greater than this value (<code>&gt;</code>, not <code>&gt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
 
 
 <dt id="arg-exclusive-max-value">exclusive_max_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-max-value"></a></dt>
-<dd><p>(<code>numeric(1)</code>) <code>x</code> must be strictly less than
-this value (JSON Schema <code>exclusiveMaximum</code> semantics). <code>NULL</code> (default)
-skips the check.</p></dd>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly less than this value (<code>&lt;</code>, not <code>&lt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>

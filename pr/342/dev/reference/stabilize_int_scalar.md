@@ -136,14 +136,15 @@ stabilise_integer_scalar(
 
 - exclusive_min_value:
 
-  (`numeric(1)`) `x` must be strictly greater than this value (JSON
-  Schema `exclusiveMinimum` semantics). `NULL` (default) skips the
-  check.
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
 
 - exclusive_max_value:
 
-  (`numeric(1)`) `x` must be strictly less than this value (JSON Schema
-  `exclusiveMaximum` semantics). `NULL` (default) skips the check.
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
 
 - allowed_values:
 
