@@ -117,7 +117,11 @@
 <span></span>
 <span><span class="fu">.check_min_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_val</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">.check_max_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">.check_max_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.check_min_dbl_exclusive</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_val</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.check_max_dbl_exclusive</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -148,8 +152,9 @@ types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 vector, and <code>valid</code>, a logical vector indicating whether each element was
 successfully coerced without losing information. <code>.x_are_yish()</code>: A logical
 vector indicating whether each element of <code>x</code> can be coerced to the target
-type. <code>.check_min_dbl()</code> and <code>.check_max_dbl()</code>: <code>NULL</code> if all values pass
-the check, otherwise a vector of failing indices.</p>
+type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
+<code>.check_min_dbl_exclusive()</code>, and <code>.check_max_dbl_exclusive()</code>: <code>NULL</code> if
+all values pass the check, otherwise a vector of failing indices.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

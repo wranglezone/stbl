@@ -88,6 +88,20 @@
   [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
   and
   [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
+  gain new `exclusive_min_value` and `exclusive_max_value` arguments,
+  enforcing strict (open-interval) numeric bounds that reject values
+  equal to the boundary, matching JSON Schema
+  `exclusiveMinimum`/`exclusiveMaximum` semantics
+  ([\#276](https://github.com/wranglezone/stbl/issues/276)).
+- [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
+  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+  and
+  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
   gain a new `multiple_of` argument, requiring that values be a multiple
   of the given value;
   [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)/[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)

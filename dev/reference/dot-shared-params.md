@@ -82,6 +82,18 @@ to make them easier to import and to find.
 
   (`character(1)`) A string describing the reason for the failure.
 
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
+
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
 - failures:
 
   `(logical)` A logical vector indicating which elements failed.

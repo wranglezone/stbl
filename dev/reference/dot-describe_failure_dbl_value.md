@@ -10,6 +10,7 @@ Describe a numeric value validation failure
   failure_locations,
   direction,
   target_value,
+  exclusive = FALSE,
   x_arg
 )
 ```
@@ -31,6 +32,12 @@ Describe a numeric value validation failure
 - target_value:
 
   `(numeric)` The value against which `x` is being compared.
+
+- exclusive:
+
+  `(logical(1))` Is this an exclusive (strict) bound? When `TRUE`,
+  values equal to `target_value` fail the check, and the comparison
+  operator in the error message omits `=`.
 
 - x_arg:
 

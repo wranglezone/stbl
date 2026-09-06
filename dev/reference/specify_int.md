@@ -22,6 +22,8 @@ specify_int(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -34,6 +36,8 @@ specify_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -48,6 +52,8 @@ specify_integer(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -60,6 +66,8 @@ specify_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL
 )
@@ -114,6 +122,18 @@ specify_integer_scalar(
 
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
+
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
 
 - allowed_values:
 

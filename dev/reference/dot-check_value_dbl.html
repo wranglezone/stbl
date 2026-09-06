@@ -47,6 +47,8 @@
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">min_value</span>,</span>
 <span>  <span class="va">max_value</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -70,6 +72,18 @@
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
 <dd><p>(<code>numeric(1)</code>) The highest allowed value for <code>x</code>. If <code>NULL</code>
 (default) values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-min-value">exclusive_min_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-min-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly greater than this value (<code>&gt;</code>, not <code>&gt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-max-value">exclusive_max_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-max-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly less than this value (<code>&lt;</code>, not <code>&lt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>

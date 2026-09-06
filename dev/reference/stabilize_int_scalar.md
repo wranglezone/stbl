@@ -21,6 +21,8 @@ stabilize_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -38,6 +40,8 @@ stabilize_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -55,6 +59,8 @@ stabilise_int_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -72,6 +78,8 @@ stabilise_integer_scalar(
   coerce_factor = TRUE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -126,6 +134,18 @@ stabilise_integer_scalar(
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
 
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
+
 - allowed_values:
 
   A vector of permitted values (coerced to the target type). `NULL`
@@ -177,8 +197,8 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 
-- `<stbl-error-outside_range>` when values fall outside `min_value` or
-  `max_value`.
+- `<stbl-error-outside_range>` when values fall outside `min_value`,
+  `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 
 - `<stbl-error-allowed_values>` when the value is not in
   `allowed_values`.

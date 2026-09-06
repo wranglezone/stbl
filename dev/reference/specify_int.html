@@ -65,6 +65,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
@@ -77,6 +79,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
@@ -91,6 +95,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
@@ -103,6 +109,8 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -154,6 +162,18 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
 <dd><p>(<code>numeric(1)</code>) The highest allowed value for <code>x</code>. If <code>NULL</code>
 (default) values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-min-value">exclusive_min_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-min-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly greater than this value (<code>&gt;</code>, not <code>&gt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-max-value">exclusive_max_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-max-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly less than this value (<code>&lt;</code>, not <code>&lt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>

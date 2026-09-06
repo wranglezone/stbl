@@ -21,6 +21,8 @@ stabilize_dbl(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -40,6 +42,8 @@ stabilize_double(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -59,6 +63,8 @@ stabilise_dbl(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -78,6 +84,8 @@ stabilise_double(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
   x_arg = caller_arg(x),
@@ -144,6 +152,18 @@ stabilise_double(
   (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
   values are not checked.
 
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
+
 - allowed_values:
 
   A vector of permitted values (coerced to the target type). `NULL`
@@ -199,8 +219,8 @@ The input as a double vector, or an error condition with classes
 - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
   are present.
 
-- `<stbl-error-outside_range>` when values fall outside `min_value` or
-  `max_value`.
+- `<stbl-error-outside_range>` when values fall outside `min_value`,
+  `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
 
 - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
@@ -303,6 +323,16 @@ try(stabilize_dbl(1:10, min_value = 3.5))
 #> ✖ Values: 1, 2, and 3
 try(stabilize_dbl(1:10, max_value = 7.5))
 #> Error in eval(expr, envir) : `1:10` must be <= 7.5.
+#> ℹ Some values are too high.
+#> ✖ Locations: 8, 9, and 10
+#> ✖ Values: 8, 9, and 10
+try(stabilize_dbl(1:10, exclusive_min_value = 3))
+#> Error in eval(expr, envir) : `1:10` must be > 3.
+#> ℹ Some values are too low.
+#> ✖ Locations: 1, 2, and 3
+#> ✖ Values: 1, 2, and 3
+try(stabilize_dbl(1:10, exclusive_max_value = 8))
+#> Error in eval(expr, envir) : `1:10` must be < 8.
 #> ℹ Some values are too high.
 #> ✖ Locations: 8, 9, and 10
 #> ✖ Values: 8, 9, and 10

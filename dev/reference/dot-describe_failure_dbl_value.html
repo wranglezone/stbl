@@ -48,6 +48,7 @@
 <span>  <span class="va">failure_locations</span>,</span>
 <span>  <span class="va">direction</span>,</span>
 <span>  <span class="va">target_value</span>,</span>
+<span>  exclusive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">x_arg</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -71,6 +72,12 @@
 <dt id="arg-target-value">target_value<a class="anchor" aria-label="anchor" href="#arg-target-value"></a></dt>
 <dd><p><code>(numeric)</code> The value against which <code>x</code> is being
 compared.</p></dd>
+
+
+<dt id="arg-exclusive">exclusive<a class="anchor" aria-label="anchor" href="#arg-exclusive"></a></dt>
+<dd><p><code>(logical(1))</code> Is this an exclusive (strict) bound? When
+<code>TRUE</code>, values equal to <code>target_value</code> fail the check, and the comparison
+operator in the error message omits <code>=</code>.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
