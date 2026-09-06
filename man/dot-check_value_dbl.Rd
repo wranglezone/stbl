@@ -25,13 +25,13 @@
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{exclusive_min_value}{(\code{numeric(1)}) \code{x} must be strictly greater than
-this value (JSON Schema \code{exclusiveMinimum} semantics). \code{NULL} (default)
-skips the check.}
+\item{exclusive_min_value}{(\code{numeric(1)}) Similar to \code{max_value}, but \code{x}
+must be strictly greater than this value (\code{>}, not \code{>=}). \code{NULL} (default)
+values are not checked.}
 
-\item{exclusive_max_value}{(\code{numeric(1)}) \code{x} must be strictly less than
-this value (JSON Schema \code{exclusiveMaximum} semantics). \code{NULL} (default)
-skips the check.}
+\item{exclusive_max_value}{(\code{numeric(1)}) Similar to \code{max_value}, but \code{x}
+must be strictly less than this value (\code{<}, not \code{<=}). \code{NULL} (default)
+values are not checked.}
 
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
