@@ -29,6 +29,14 @@
 #'     list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))
 #'   )
 #' )
+#'
+#' # Mark some elements as optional via .required
+#' stabilize_settings <- specify_lst(
+#'   name = specify_chr_scalar(),
+#'   nickname = specify_chr_scalar(),
+#'   .required = "name"
+#' )
+#' stabilize_settings(list(name = "Alice"))
 specify_lst <- function(
   ...,
   .named = NULL,
@@ -36,7 +44,8 @@ specify_lst <- function(
   .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
-  .max_size = NULL
+  .max_size = NULL,
+  .required = ...names()
 ) {
   element_specs <- list(...)
   structure(
@@ -58,6 +67,7 @@ specify_lst <- function(
           .allow_null = .allow_null,
           .min_size = .min_size,
           .max_size = .max_size,
+          .required = .required,
           .x_arg = .x_arg,
           .call = .call,
           .x_class = .x_class

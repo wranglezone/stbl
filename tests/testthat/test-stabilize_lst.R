@@ -249,6 +249,73 @@ test_that("stabilize_lst() validates nested lists (#110)", {
   )
 })
 
+test_that("stabilize_lst() requires all named specs by default (#279)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(
+      list(a = 1L),
+      a = specify_int_scalar(),
+      b = specify_int_scalar()
+    ),
+    "stbl",
+    "missing_element"
+  )
+})
+
+test_that("stabilize_lst() allows an absent optional element via .required (#279)", {
+  given <- list(a = 1L)
+  expect_identical(
+    stabilize_lst(
+      given,
+      a = specify_int_scalar(),
+      b = specify_int_scalar(),
+      .required = "a"
+    ),
+    given
+  )
+})
+
+test_that("stabilize_lst() still validates an optional element when present (#279)", {
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(a = 1L, b = "not-int"),
+      a = specify_int_scalar(),
+      b = specify_int_scalar(),
+      .required = "a"
+    ),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+})
+
+test_that("stabilize_lst() treats .required = NULL as making everything optional (#279)", {
+  given <- list(z = 1L)
+  expect_identical(
+    stabilize_lst(
+      given,
+      a = specify_int_scalar(),
+      b = specify_int_scalar(),
+      .named = TRUE,
+      .required = NULL
+    ),
+    given
+  )
+})
+
+test_that("stabilize_lst() still errors on required elements not in .required (#279)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(
+      list(z = 1L),
+      a = specify_int_scalar(),
+      b = specify_int_scalar(),
+      .named = TRUE,
+      .required = "a"
+    ),
+    "stbl",
+    "missing_element"
+  )
+})
+
 test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
   expect_pkg_error_classes(
     stabilize_lst(list(1L), specify_int_scalar()),

@@ -134,6 +134,23 @@
       Error:
       ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))[["aes"]][["x"]]` <data.frame> to <character>.
 
+# stabilize_lst() requires all named specs by default (#279)
+
+    Code
+      stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `list(a = 1L)` must contain element "b".
+
+# stabilize_lst() still errors on required elements not in .required (#279)
+
+    Code
+      stabilize_lst(list(z = 1L), a = specify_int_scalar(), b = specify_int_scalar(),
+      .named = TRUE, .required = "a")
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `list(z = 1L)` must contain element "a".
+
 # .check_duplicate_names(): errors on duplicate names by default (#110)
 
     Code

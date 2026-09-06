@@ -11,7 +11,8 @@ specify_df(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .required = ...names()
 )
 
 specify_data_frame(
@@ -20,14 +21,16 @@ specify_data_frame(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .required = ...names()
 )
 }
 \arguments{
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
-(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required column in \code{.x},
-and the function is used to validate that column.}
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a column in \code{.x}, and the
+function is used to validate that column when present. Whether the column
+is required is controlled by \code{.required}.}
 
 \item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -50,6 +53,12 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 \code{.x}. If \code{NULL} (default), the row count is not checked.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
+
+\item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
+present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
+required unless you opt it out. Named specs \emph{not} listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -70,6 +79,14 @@ stabilize_person_df <- specify_df(
 )
 stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 try(stabilize_person_df(data.frame(name = "Alice")))
+
+# Mark a column as optional via .required
+stabilize_person_df2 <- specify_df(
+  name = specify_chr_scalar(allow_na = FALSE),
+  age = specify_int_scalar(allow_na = FALSE),
+  .required = "name"
+)
+stabilize_person_df2(data.frame(name = "Alice"))
 }
 \seealso{
 Other data frame functions:

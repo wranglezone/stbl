@@ -9,8 +9,10 @@
 \arguments{
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
-(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
-\code{.x}, and the function is used to validate that element.}
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an element in \code{.x}, and
+the function is used to validate that element when present. Whether the
+element is required (its absence is an error) is controlled by
+\code{.required}.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

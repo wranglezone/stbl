@@ -17,6 +17,7 @@ stabilize_lst(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -32,6 +33,7 @@ stabilize_list(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -47,6 +49,7 @@ stabilise_lst(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -62,6 +65,7 @@ stabilise_list(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -72,8 +76,10 @@ stabilise_list(
 
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
-(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
-\code{.x}, and the function is used to validate that element.}
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an element in \code{.x}, and
+the function is used to validate that element when present. Whether the
+element is required (its absence is an error) is controlled by
+\code{.required}.}
 
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -109,6 +115,12 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
+present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
+required unless you opt it out. Named specs \emph{not} listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -191,6 +203,17 @@ stabilize_lst(
   list(a = 1L, a = 2L),
   .named = specify_int_scalar(),
   .allow_duplicate_names = TRUE
+)
+
+# Mark named specs as optional via .required
+stabilize_lst(
+  list(a = 1L),
+  a = specify_int_scalar(),
+  b = specify_int_scalar(),
+  .required = "a"
+)
+try(
+  stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
 )
 }
 \seealso{
