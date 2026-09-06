@@ -149,8 +149,7 @@
   gain a new `.required` argument, letting you mark named specs passed
   via `...` as optional. `.required` defaults to all names in `...`,
   preserving the previous “every named spec is required” behavior; specs
-  left out of `.required` are only validated when present, modeling JSON
-  Schema’s `required` array
+  left out of `.required` are only validated when present
   ([\#279](https://github.com/wranglezone/stbl/issues/279)).
 
 ### Bug fixes
