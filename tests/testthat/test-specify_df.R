@@ -19,6 +19,16 @@ test_that("specify_df() errors when required column is missing (#142)", {
   )
 })
 
+test_that("specify_df() passes through .required (#279)", {
+  validator <- specify_df(
+    name = specify_chr_scalar(),
+    age = specify_int_scalar(),
+    .required = "name"
+  )
+  given <- data.frame(name = "Alice")
+  expect_identical(validator(given), given)
+})
+
 test_that("specify_df() passes through .min_rows, .max_rows (#142)", {
   validator <- specify_df(.min_rows = 2, .extra_cols = assert_present)
   expect_pkg_error_snapshot(

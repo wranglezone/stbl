@@ -8,8 +8,10 @@
 #'
 #' @param ... Named stabilizer functions, such as `stabilize_*` functions
 #'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
-#'   ([specify_chr()], etc). Each name corresponds to a required element in
-#'   `.x`, and the function is used to validate that element.
+#'   ([specify_chr()], etc). Each name corresponds to an element in `.x`, and
+#'   the function is used to validate that element when present. Whether the
+#'   element is required (its absence is an error) is controlled by
+#'   `.required`.
 #' @param .named Controls how named elements of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
 #'   - `NULL` or `FALSE` (default): any extra named elements cause an error.
@@ -29,6 +31,11 @@
 #'   named element of `.x` shares a name with another.
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct?
 #'   If `TRUE`, duplicated elements are rejected.
+#' @param .required `(character)` Names (from `...`) of elements that must be
+#'   present in `.x`. Defaults to all names in `...`, so every named spec is
+#'   required unless you opt it out. Named specs *not* listed here are
+#'   optional: if absent, no error is raised; if present, they're validated
+#'   normally. Pass `NULL` or `character()` to make every named spec optional.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list, or an error condition with classes
@@ -93,6 +100,17 @@
 #'   .named = specify_int_scalar(),
 #'   .allow_duplicate_names = TRUE
 #' )
+#'
+#' # Mark named specs as optional via .required
+#' stabilize_lst(
+#'   list(a = 1L),
+#'   a = specify_int_scalar(),
+#'   b = specify_int_scalar(),
+#'   .required = "a"
+#' )
+#' try(
+#'   stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+#' )
 stabilize_lst <- function(
   .x,
   ...,
@@ -103,6 +121,7 @@ stabilize_lst <- function(
   .allow_null = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -127,10 +146,12 @@ stabilize_lst <- function(
   )
 
   .check_specs_named(..., .call = .call)
+  .required <- to_chr(.required, call = .call)
   .x <- .validate_named_elements(
     .x,
     ...,
     .named = .named,
+    .required = .required,
     .allow_duplicate_names = .allow_duplicate_names,
     .x_arg = .x_arg,
     .call = .call
@@ -173,9 +194,10 @@ stabilise_list <- stabilize_lst
 #'
 #' @param element_specs `(list)` Named list of stabilizer functions, such as
 #'   `stabilize_*` functions ([stabilize_chr()], etc) or functions produced by
-#'   `specify_*()` functions ([specify_chr()], etc). Each name corresponds to a
-#'   required element in `.x`, and the function is used to validate that
-#'   element.
+#'   `specify_*()` functions ([specify_chr()], etc). Each name corresponds to
+#'   an element in `.x`, and the function is used to validate that element
+#'   when present. Whether the element is required is controlled by
+#'   `.required`.
 #' @param is_extra_named `(logical)` Element-wise indicator of extra named
 #'   positions.
 #' @param named_spec A single stabilizer function, such as a `stabilize_*`
@@ -249,6 +271,7 @@ NULL
   .x,
   ...,
   .named,
+  .required,
   .allow_duplicate_names,
   .x_arg,
   .call
@@ -269,6 +292,7 @@ NULL
     .x,
     element_specs,
     nms,
+    .required = .required,
     .x_arg = .x_arg,
     .call = .call
   )
@@ -289,17 +313,27 @@ NULL
 #' @inheritParams .shared-params-lst
 #' @returns The updated list.
 #' @keywords internal
-.validate_required_elements <- function(.x, element_specs, nms, .x_arg, .call) {
+.validate_required_elements <- function(
+  .x,
+  element_specs,
+  nms,
+  .required,
+  .x_arg,
+  .call
+) {
   for (nm in names(element_specs)) {
     positions <- which(nms == nm)
     if (!length(positions)) {
-      .stop_must(
-        "must contain element {.val {nm}}.",
-        x_arg = .x_arg,
-        call = .call,
-        subclass = "missing_element",
-        message_env = rlang::current_env()
-      )
+      if (nm %in% .required) {
+        .stop_must(
+          "must contain element {.val {nm}}.",
+          x_arg = .x_arg,
+          call = .call,
+          subclass = "missing_element",
+          message_env = rlang::current_env()
+        )
+      }
+      next
     }
     for (i in positions) {
       # Use name-based path when unambiguous; fall back to position for

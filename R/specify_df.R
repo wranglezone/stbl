@@ -22,13 +22,22 @@
 #' )
 #' stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 #' try(stabilize_person_df(data.frame(name = "Alice")))
+#'
+#' # Mark a column as optional via .required
+#' stabilize_person_df2 <- specify_df(
+#'   name = specify_chr_scalar(allow_na = FALSE),
+#'   age = specify_int_scalar(allow_na = FALSE),
+#'   .required = "name"
+#' )
+#' stabilize_person_df2(data.frame(name = "Alice"))
 specify_df <- function(
   ...,
   .extra_cols = NULL,
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .required = ...names()
 ) {
   element_specs <- list(...)
   structure(
@@ -49,6 +58,7 @@ specify_df <- function(
           .min_rows = .min_rows,
           .max_rows = .max_rows,
           .allow_null = .allow_null,
+          .required = .required,
           .x_arg = .x_arg,
           .call = .call,
           .x_class = .x_class

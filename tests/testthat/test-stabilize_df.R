@@ -68,6 +68,31 @@ test_that("stabilize_df() errors when required column is missing (#142)", {
   )
 })
 
+test_that("stabilize_df() allows an absent optional column via .required (#279)", {
+  given <- data.frame(name = "Alice")
+  result <- stabilize_df(
+    given,
+    name = specify_chr_scalar(),
+    age = specify_int_scalar(),
+    .required = "name"
+  )
+  expect_identical(result, given)
+})
+
+test_that("stabilize_df() still validates an optional column when present (#279)", {
+  expect_pkg_error_classes(
+    stabilize_df(
+      data.frame(name = "Alice", age = "not-int"),
+      name = specify_chr_scalar(),
+      age = specify_int_scalar(),
+      .required = "name"
+    ),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+})
+
 test_that("stabilize_df() errors informatively when column fails validation (#142, #310, #335)", {
   expect_pkg_error_snapshot(
     stabilize_df(

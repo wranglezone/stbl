@@ -9,8 +9,9 @@
 #'
 #' @param ... Named stabilizer functions, such as `stabilize_*` functions
 #'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
-#'   ([specify_chr()], etc). Each name corresponds to a required column in `.x`,
-#'   and the function is used to validate that column.
+#'   ([specify_chr()], etc). Each name corresponds to a column in `.x`, and the
+#'   function is used to validate that column when present. Whether the column
+#'   is required is controlled by `.required`.
 #' @param .extra_cols Controls how columns of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
 #'   - `NULL` or `FALSE` (default): any extra columns cause an error.
@@ -25,6 +26,11 @@
 #'   `.x`. If `NULL` (default), the row count is not checked.
 #' @param .max_rows (`integer(1)`) The maximum number of rows allowed in
 #'   `.x`. If `NULL` (default), the row count is not checked.
+#' @param .required `(character)` Names (from `...`) of columns that must be
+#'   present in `.x`. Defaults to all names in `...`, so every named spec is
+#'   required unless you opt it out. Named specs *not* listed here are
+#'   optional: if absent, no error is raised; if present, they're validated
+#'   normally. Pass `NULL` or `character()` to make every named spec optional.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated data frame, or an error condition with classes
@@ -98,6 +104,14 @@
 #'
 #' # Non-coercible inputs are rejected
 #' try(stabilize_df("not a data frame"))
+#'
+#' # Mark a column as optional via .required
+#' stabilize_df(
+#'   data.frame(name = "Alice"),
+#'   name = specify_chr_scalar(),
+#'   age = specify_int_scalar(),
+#'   .required = "name"
+#' )
 stabilize_df <- function(
   .x,
   ...,
@@ -106,6 +120,7 @@ stabilize_df <- function(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -134,6 +149,7 @@ stabilize_df <- function(
     .x,
     ...,
     .named = .extra_cols,
+    .required = .required,
     .x_arg = .x_arg,
     .call = .call,
     .x_class = .x_class

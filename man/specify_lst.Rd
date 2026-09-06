@@ -12,7 +12,8 @@ specify_lst(
   .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
-  .max_size = NULL
+  .max_size = NULL,
+  .required = ...names()
 )
 
 specify_list(
@@ -22,14 +23,17 @@ specify_list(
   .unique = FALSE,
   .allow_null = TRUE,
   .min_size = NULL,
-  .max_size = NULL
+  .max_size = NULL,
+  .required = ...names()
 )
 }
 \arguments{
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
-(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required element in
-\code{.x}, and the function is used to validate that element.}
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an element in \code{.x}, and
+the function is used to validate that element when present. Whether the
+element is required (its absence is an error) is controlled by
+\code{.required}.}
 
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -61,6 +65,12 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
+present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
+required unless you opt it out. Named specs \emph{not} listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -86,6 +96,14 @@ try(
     list(name = "myapp", version = 1L, debug = FALSE, c("a", "b"))
   )
 )
+
+# Mark some elements as optional via .required
+stabilize_settings <- specify_lst(
+  name = specify_chr_scalar(),
+  nickname = specify_chr_scalar(),
+  .required = "name"
+)
+stabilize_settings(list(name = "Alice"))
 }
 \seealso{
 Other list functions:

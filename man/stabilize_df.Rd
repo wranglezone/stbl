@@ -15,6 +15,7 @@ stabilize_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -28,6 +29,7 @@ stabilise_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -41,6 +43,7 @@ stabilize_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -54,6 +57,7 @@ stabilise_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -64,8 +68,9 @@ stabilise_data_frame(
 
 \item{...}{Named stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
-(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a required column in \code{.x},
-and the function is used to validate that column.}
+(\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a column in \code{.x}, and the
+function is used to validate that column when present. Whether the column
+is required is controlled by \code{.required}.}
 
 \item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -88,6 +93,12 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 \code{.x}. If \code{NULL} (default), the row count is not checked.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
+
+\item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
+present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
+required unless you opt it out. Named specs \emph{not} listed here are
+optional: if absent, no error is raised; if present, they're validated
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -181,6 +192,14 @@ stabilize_df(
 
 # Non-coercible inputs are rejected
 try(stabilize_df("not a data frame"))
+
+# Mark a column as optional via .required
+stabilize_df(
+  data.frame(name = "Alice"),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar(),
+  .required = "name"
+)
 }
 \seealso{
 Other data frame functions:
