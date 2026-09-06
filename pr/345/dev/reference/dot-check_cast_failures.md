@@ -1,0 +1,51 @@
+# Check for coercion failures and stop if any are found
+
+Check for coercion failures and stop if any are found
+
+## Usage
+
+``` r
+.check_cast_failures(x, failures, x_class, to, due_to, x_arg, call)
+```
+
+## Arguments
+
+- x:
+
+  The object to stabilize.
+
+- failures:
+
+  `(logical)` A logical vector where `TRUE` indicates a coercion
+  failure.
+
+- x_class:
+
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
+  match the original class.
+
+- to:
+
+  The target object for the coercion.
+
+- due_to:
+
+  (`character(1)`) A string describing the reason for the failure.
+
+- x_arg:
+
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
+
+- call:
+
+  `(environment)` The execution environment to mention as the source of
+  error messages.
+
+## Value
+
+`NULL` invisibly (called for side effects).
