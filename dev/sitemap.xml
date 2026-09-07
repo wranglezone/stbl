@@ -102,8 +102,11 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_time.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-label_matched_specs.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-map_each_fast.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-map_each_safe.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-name_like.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-new_period_vec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_offset.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_parts.html</loc></url>
@@ -115,6 +118,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-return-conditions.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-simplify_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-specify_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
@@ -125,6 +129,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
@@ -172,6 +177,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_df.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_dttm.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_dur.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
@@ -192,6 +198,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_int.html</loc></url>
@@ -216,6 +223,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_dur_scalar.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/to_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_fct_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/to_fn.html</loc></url>

@@ -222,6 +222,19 @@ attach a <code>negate</code> attribute set to <code>TRUE</code>. If a complex re
 throws an error, try installing the stringi package.</p></dd>
 
 
+<dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into
+a single atomic vector when possible (every result has size 1 and shares
+a common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+
+
+<dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
+<dd><p><code>(function)</code> A single stabilizer or coercion function, such as
+a <code>to_*</code> function (<code><a href="to_chr.html">to_chr()</a></code>, etc.), a <code>stabilize_*</code> function
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), or a function produced by a <code>specify_*()</code> call
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc.). Applied independently to each element of <code>x</code>.</p></dd>
+
+
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>The target object for the coercion.</p></dd>
 

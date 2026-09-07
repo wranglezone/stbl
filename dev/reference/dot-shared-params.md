@@ -180,6 +180,23 @@ to make them easier to import and to find.
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- simplify:
+
+  (`logical(1)`) Should per-element results be combined into a single
+  atomic vector when possible (every result has size 1 and shares a
+  common type)? If `FALSE`, a list is always returned.
+
+- spec:
+
+  `(function)` A single stabilizer or coercion function, such as a
+  `to_*` function
+  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  etc.), a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc.), or a function produced by a `specify_*()` call
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc.). Applied independently to each element of `x`.
+
 - to:
 
   The target object for the coercion.

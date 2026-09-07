@@ -71,6 +71,17 @@
   if any stabilizer fails or if the stabilized values are different
   ([\#278](https://github.com/wranglezone/stbl/issues/278)).
 - New function
+  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
+  applies a single `spec` to every element of `x`. New function
+  [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
+  works analogously but stops at the first failing element. New function
+  [`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md)
+  creates a pre-configured `stbl_specified_fn` that calls
+  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
+  with a fixed `spec`, letting an element-wise spec be reused and nested
+  inside other `specify_*()`/`stabilize_*()` calls
+  ([\#287](https://github.com/wranglezone/stbl/issues/287)).
+- New function
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   validates `x` by trying each stabilizer function in `...` in order,
   returning the first successful result. If all functions fail, an
