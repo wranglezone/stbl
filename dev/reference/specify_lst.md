@@ -14,6 +14,7 @@ specify_lst(
   .unnamed = NULL,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names()
@@ -25,6 +26,7 @@ specify_list(
   .unnamed = NULL,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names()
@@ -82,6 +84,10 @@ specify_list(
 
   (`logical(1)`) Is NULL an acceptable value?
 
+- .allow_zero_length:
+
+  (`logical(1)`) Are zero-length vectors acceptable?
+
 - .min_size:
 
   (`integer(1)`) The minimum size of the object. Object size will be
@@ -101,7 +107,9 @@ specify_list(
   unless you opt it out. Named specs *not* listed here are optional: if
   absent, no error is raised; if present, they're validated normally.
   Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional.
+  to make every named spec optional. A zero-length `.x` (such as
+  [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
+  `.allow_zero_length = TRUE`.
 
 ## Value
 

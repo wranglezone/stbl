@@ -18,6 +18,7 @@ stabilize_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
@@ -32,6 +33,7 @@ stabilise_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
@@ -46,6 +48,7 @@ stabilize_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
@@ -60,6 +63,7 @@ stabilise_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
@@ -118,6 +122,10 @@ stabilise_data_frame(
 
   (`logical(1)`) Is NULL an acceptable value?
 
+- .allow_zero_length:
+
+  (`logical(1)`) Are zero-length vectors acceptable?
+
 - .required:
 
   `(character)` Names (from `...`) of columns that must be present in
@@ -125,7 +133,8 @@ stabilise_data_frame(
   unless you opt it out. Named specs *not* listed here are optional: if
   absent, no error is raised; if present, they're validated normally.
   Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional.
+  to make every named spec optional. A `.x` with zero columns skips this
+  check when `.allow_zero_length = TRUE` (the default).
 
 - .x_arg:
 

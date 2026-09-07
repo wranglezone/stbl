@@ -36,7 +36,9 @@ Validate required named elements against their spec functions
   unless you opt it out. Named specs *not* listed here are optional: if
   absent, no error is raised; if present, they're validated normally.
   Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional.
+  to make every named spec optional. A zero-length `.x` (such as
+  [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
+  `.allow_zero_length = TRUE`.
 
 - .x_arg:
 

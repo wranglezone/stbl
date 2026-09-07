@@ -66,6 +66,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -80,6 +81,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -94,6 +96,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -108,6 +111,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -161,12 +165,18 @@ cause an error. Unlike <code>...</code>, this does not validate the column conte
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
+<dt id="arg--allow-zero-length">.allow_zero_length<a class="anchor" aria-label="anchor" href="#arg--allow-zero-length"></a></dt>
+<dd><p>(<code>logical(1)</code>) Are zero-length vectors acceptable?</p></dd>
+
+
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
 <dd><p><code>(character)</code> Names (from <code>...</code>) of columns that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
 required unless you opt it out. Named specs <em>not</em> listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+A <code>.x</code> with zero columns skips this check when
+<code>.allow_zero_length = TRUE</code> (the default).</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>

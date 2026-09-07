@@ -53,6 +53,7 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -63,6 +64,7 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -109,12 +111,18 @@ cause an error. Unlike <code>...</code>, this does not validate the column conte
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
+<dt id="arg--allow-zero-length">.allow_zero_length<a class="anchor" aria-label="anchor" href="#arg--allow-zero-length"></a></dt>
+<dd><p>(<code>logical(1)</code>) Are zero-length vectors acceptable?</p></dd>
+
+
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
 <dd><p><code>(character)</code> Names (from <code>...</code>) of columns that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
 required unless you opt it out. Named specs <em>not</em> listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+A <code>.x</code> with zero columns skips this check when
+<code>.allow_zero_length = TRUE</code> (the default).</p></dd>
 
 </dl></div>
     <div class="section level2">

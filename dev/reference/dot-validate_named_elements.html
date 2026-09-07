@@ -87,7 +87,9 @@ element.</p></li>
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
 required unless you opt it out. Named specs <em>not</em> listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+A zero-length <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when
+<code>.allow_zero_length = TRUE</code>.</p></dd>
 
 
 <dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>

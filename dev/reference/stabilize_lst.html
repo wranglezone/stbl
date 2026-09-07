@@ -63,6 +63,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -79,6 +80,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -95,6 +97,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -111,6 +114,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -172,6 +176,10 @@ If <code>TRUE</code>, duplicated elements are rejected.</p></dd>
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
+<dt id="arg--allow-zero-length">.allow_zero_length<a class="anchor" aria-label="anchor" href="#arg--allow-zero-length"></a></dt>
+<dd><p>(<code>logical(1)</code>) Are zero-length vectors acceptable?</p></dd>
+
+
 <dt id="arg--min-size">.min_size<a class="anchor" aria-label="anchor" href="#arg--min-size"></a></dt>
 <dd><p>(<code>integer(1)</code>) The minimum size of the object. Object size
 will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
@@ -187,7 +195,9 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
 required unless you opt it out. Named specs <em>not</em> listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+A zero-length <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when
+<code>.allow_zero_length = TRUE</code>.</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>

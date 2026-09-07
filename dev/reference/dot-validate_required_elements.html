@@ -72,7 +72,9 @@ when present. Whether the element is required is controlled by
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
 required unless you opt it out. Named specs <em>not</em> listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.</p></dd>
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+A zero-length <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when
+<code>.allow_zero_length = TRUE</code>.</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>

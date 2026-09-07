@@ -151,9 +151,28 @@
   preserving the previous “every named spec is required” behavior; specs
   left out of `.required` are only validated when present
   ([\#279](https://github.com/wranglezone/stbl/issues/279)).
+- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  gain a new `.allow_zero_length` argument (default `TRUE`) that lets a
+  zero-length `.x` (such as [`list()`](https://rdrr.io/r/base/list.html)
+  or a data frame with no columns) skip the required-element check even
+  if it’s missing elements listed in `.required`
+  ([\#344](https://github.com/wranglezone/stbl/issues/344)).
 
 ### Bug fixes
 
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  (and
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+  which delegates to it) now correctly detects missing required named
+  elements even when `.x` has no named elements at all, such as
+  [`list()`](https://rdrr.io/r/base/list.html) or `list(1L, 2L)`.
+  Previously, the required-element check was silently skipped whenever
+  `.x` had no named elements
+  ([\#344](https://github.com/wranglezone/stbl/issues/344)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
   [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
