@@ -142,6 +142,8 @@ Other double functions:
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}}
 
 Other specification functions:
+\code{\link[=specify_all_of]{specify_all_of()}},
+\code{\link[=specify_any_of]{specify_any_of()}},
 \code{\link[=specify_chr]{specify_chr()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=specify_df]{specify_df()}},
@@ -151,6 +153,7 @@ Other specification functions:
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
 \code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_one_of]{specify_one_of()}},
 \code{\link[=specify_time]{specify_time()}}
 }
 \concept{double functions}
