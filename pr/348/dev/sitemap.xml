@@ -100,6 +100,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dttm.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_time.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-label_matched_specs.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-new_period_vec.html</loc></url>

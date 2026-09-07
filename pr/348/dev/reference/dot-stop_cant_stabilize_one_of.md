@@ -6,7 +6,7 @@ stabilize_one_of()/to_one_of()
 ## Usage
 
 ``` r
-.stop_cant_stabilize_one_of(errors, matched, x_arg, call)
+.stop_cant_stabilize_one_of(errors, matched, matched_at, x_arg, call)
 ```
 
 ## Arguments
@@ -20,6 +20,12 @@ stabilize_one_of()/to_one_of()
 
   `(character)` Labels of the specifications that succeeded. Only used
   when there are two or more.
+
+- matched_at:
+
+  `(integer)` Positions in `...` of the specifications that succeeded,
+  parallel to `matched`. Used to disambiguate `matched` labels that are
+  identical (e.g. the same function passed more than once).
 
 - x_arg:
 
