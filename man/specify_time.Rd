@@ -76,6 +76,8 @@ Other time functions:
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 
 Other specification functions:
+\code{\link[=specify_all_of]{specify_all_of()}},
+\code{\link[=specify_any_of]{specify_any_of()}},
 \code{\link[=specify_chr]{specify_chr()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=specify_dbl]{specify_dbl()}},
@@ -85,7 +87,8 @@ Other specification functions:
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
-\code{\link[=specify_lst]{specify_lst()}}
+\code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_one_of]{specify_one_of()}}
 }
 \concept{specification functions}
 \concept{time functions}

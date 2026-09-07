@@ -57,6 +57,9 @@ reference:
   - matches("dur")
 - title: multiple types
 - contents:
+  - specify_all_of
+  - specify_any_of
+  - specify_one_of
   - stabilize_all_of
   - stabilize_any_of
   - stabilize_one_of
