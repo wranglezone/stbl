@@ -59,6 +59,7 @@ reference:
 - contents:
   - stabilize_all_of
   - stabilize_any_of
+  - stabilize_one_of
 - title: generic args
 - contents:
   - object_type

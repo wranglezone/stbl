@@ -143,6 +143,7 @@ Other stabilization functions:
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
 \code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
 \code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
 \code{\link[=to_chr]{to_chr()}},
 \code{\link[=to_chr_scalar]{to_chr_scalar()}},
