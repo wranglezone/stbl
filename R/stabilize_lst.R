@@ -37,7 +37,7 @@
 #'   optional: if absent, no error is raised; if present, they're validated
 #'   normally. Pass `NULL` or `character()` to make every named spec optional.
 #'   A zero-length `.x` (such as `list()`) skips this check when
-#'   `.allow_zero_length = TRUE` (the default); see `allow_zero_length`.
+#'   `.allow_zero_length = TRUE`.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list, or an error condition with classes
@@ -148,9 +148,8 @@ stabilize_lst <- function(
     call = .call
   )
   .check_specs_named(..., .call = .call)
-  # .min_size/.max_size are checked above regardless of .allow_zero_length;
-  # this only lets an empty .x skip the *required-element* check.
-  if (!length(.x) && to_lgl_scalar(.allow_zero_length, call = .call)) {
+  .allow_zero_length <- to_lgl_scalar(.allow_zero_length, call = .call)
+  if (!length(.x) && .allow_zero_length) {
     return(.x)
   }
 

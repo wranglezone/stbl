@@ -32,7 +32,7 @@
 #'   optional: if absent, no error is raised; if present, they're validated
 #'   normally. Pass `NULL` or `character()` to make every named spec optional.
 #'   A `.x` with zero columns skips this check when
-#'   `.allow_zero_length = TRUE` (the default); see `allow_zero_length`.
+#'   `.allow_zero_length = TRUE` (the default).
 #' @inheritParams .shared-params
 #'
 #' @returns The validated data frame, or an error condition with classes

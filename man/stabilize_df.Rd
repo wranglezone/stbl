@@ -106,7 +106,7 @@ required unless you opt it out. Named specs \emph{not} listed here are
 optional: if absent, no error is raised; if present, they're validated
 normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
 A \code{.x} with zero columns skips this check when
-\code{.allow_zero_length = TRUE} (the default); see \code{allow_zero_length}.}
+\code{.allow_zero_length = TRUE} (the default).}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

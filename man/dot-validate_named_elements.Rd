@@ -41,7 +41,7 @@ required unless you opt it out. Named specs \emph{not} listed here are
 optional: if absent, no error is raised; if present, they're validated
 normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
 A zero-length \code{.x} (such as \code{list()}) skips this check when
-\code{.allow_zero_length = TRUE} (the default); see \code{allow_zero_length}.}
+\code{.allow_zero_length = TRUE}.}
 
 \item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
 have duplicate names? If \code{FALSE} (default), an error is thrown when any
