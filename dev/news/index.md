@@ -25,6 +25,11 @@
 
 ### New features
 
+- New function
+  [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
+  errors when `x` would be accepted (coerced or validated) by a single
+  `spec`, and returns `x` unchanged otherwise
+  ([\#289](https://github.com/wranglezone/stbl/issues/289)).
 - Errors raised for element-wise failures now carry an integer
   `locations` element on the condition object, giving the positions in
   the input that failed the check. Handlers can read these positions via

@@ -17,6 +17,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_fn_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_int_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_lgl_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/assert_not.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/assert_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/c_x_to_y.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_fns_requiring_consensus.html</loc></url>
@@ -129,6 +130,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_inconsistent_all_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_matched_spec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_must.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-strip_covr_from_expr.html</loc></url>

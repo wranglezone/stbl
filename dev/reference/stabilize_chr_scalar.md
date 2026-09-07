@@ -181,6 +181,7 @@ Other character functions:
 [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
 
 Other stabilization functions:
+[`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),

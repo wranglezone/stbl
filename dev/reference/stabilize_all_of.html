@@ -82,10 +82,11 @@ synonym.</p>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Unnamed stabilizer functions, such as <code>stabilize_*</code> functions
-(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), <code>to_*</code> functions (<code><a href="to_chr.html">to_chr()</a></code>, etc.), or
-functions produced by <code>specify_*()</code> calls (<code><a href="specify_chr.html">specify_chr()</a></code>, etc.). Each is
-applied to the original <code>x</code>; <code>x</code> must pass every one of them, and they must
-all return the same value.</p></dd>
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), <code>to_*</code> functions (<code><a href="to_chr.html">to_chr()</a></code>, etc.), functions
+produced by <code>specify_*()</code> calls (<code><a href="specify_chr.html">specify_chr()</a></code>, etc.), or <code>assert_*()</code>
+functions (such as <code><a href="assert_not.html">assert_not()</a></code>) that return their input unchanged. Each
+is applied to the original <code>x</code>; <code>x</code> must pass every one of them, and they
+must all return the same value.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -120,6 +121,7 @@ they don't all produce the same coerced value.</p></li>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other stabilization functions:
+<code><a href="assert_not.html">assert_not()</a></code>,
 <code><a href="assert_present.html">assert_present()</a></code>,
 <code><a href="stabilize_any_of.html">stabilize_any_of()</a></code>,
 <code><a href="stabilize_arg.html">stabilize_arg()</a></code>,

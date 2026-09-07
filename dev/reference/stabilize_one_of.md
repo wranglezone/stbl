@@ -56,10 +56,12 @@ to_one_of(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), `to_*` functions
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
-  etc.), or functions produced by `specify_*()` calls
+  etc.), functions produced by `specify_*()` calls
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc.). For `to_one_of()`: prototype objects (e.g.
-  [`integer()`](https://rdrr.io/r/base/integer.html),
+  etc.), or `assert_*()` functions (such as
+  [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md))
+  that return their input unchanged. For `to_one_of()`: prototype
+  objects (e.g. [`integer()`](https://rdrr.io/r/base/integer.html),
   [`character()`](https://rdrr.io/r/base/character.html)) that determine
   the target types to try, passed as the `.to` argument of
   [`to()`](https://stbl.wrangle.zone/dev/reference/to.md).
@@ -100,6 +102,7 @@ specific class by failure mode:
 ## See also
 
 Other stabilization functions:
+[`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),

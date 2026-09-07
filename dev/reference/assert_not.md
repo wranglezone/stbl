@@ -1,35 +1,16 @@
-# Ensure an object meets expectations
+# Require a value not to match a specification
 
-`stabilize_arg()` is used by other functions such as
-[`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md).
-Use `stabilize_arg()` if the type-specific functions will not work for
-your use case, but you would still like to check things like size or
-whether the object is NULL.
-
-`stabilize_arg_scalar()` is optimized to check for length-1 vectors.
+`assert_not()` is the inverse of a single specification: it errors when
+`x` **would** be accepted by `spec`, and returns `x` unchanged
+otherwise.
 
 ## Usage
 
 ``` r
-stabilize_arg(
+assert_not(
   x,
+  spec,
   ...,
-  allow_null = TRUE,
-  allow_na = TRUE,
-  min_size = NULL,
-  max_size = NULL,
-  unique = FALSE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_arg_scalar(
-  x,
-  ...,
-  allow_null = TRUE,
-  allow_zero_length = TRUE,
-  allow_na = TRUE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -42,33 +23,14 @@ stabilize_arg_scalar(
 
   The object to stabilize.
 
+- spec:
+
+  A single stabilizer function, `to_*` function, `specify_*()` result,
+  or `assert_*` function that `x` must **not** match.
+
 - ...:
 
-  Arguments passed to methods.
-
-- allow_null:
-
-  (`logical(1)`) Is NULL an acceptable value?
-
-- allow_na:
-
-  (`logical(1)`) Are NA values ok?
-
-- min_size:
-
-  (`integer(1)`) The minimum size of the object. Object size will be
-  tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- max_size:
-
-  (`integer(1)`) The maximum size of the object. Object size will be
-  tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- unique:
-
-  (`logical(1)`) Should all elements in `x` be distinct?
+  Reserved for future use; must be empty.
 
 - x_arg:
 
@@ -89,39 +51,19 @@ stabilize_arg_scalar(
   object before checking its coercion, but want the error message to
   match the original class.
 
-- allow_zero_length:
-
-  (`logical(1)`) Are zero-length vectors acceptable?
-
 ## Value
 
-`x`, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
-
-- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-
-- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-
-- `<stbl-error-size_too_small>` when the vector is shorter than
-  `min_size`.
-
-- `<stbl-error-size_too_large>` when the vector is longer than
-  `max_size`.
-
-- `<stbl-error-bad_empty>` for empty vectors when
-  `allow_zero_length = FALSE` in `stabilize_arg_scalar()`.
-
-- `<stbl-error-non_scalar>` for non-scalar vectors in
-  `stabilize_arg_scalar()`.
+`x`, unchanged, if `x` does not match `spec`, or an error condition with
+classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and `<stbl-error-matched_spec>` when `x` matches `spec`.
 
 ## See also
 
 Other stabilization functions:
-[`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
+[`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
 [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
@@ -165,36 +107,18 @@ Other stabilization functions:
 ## Examples
 
 ``` r
-wrapper <- function(this_arg, ...) {
-  stabilize_arg(this_arg, ...)
-}
-wrapper(1)
-#> [1] 1
-wrapper(NULL)
-#> NULL
-wrapper(NA)
-#> [1] NA
-try(wrapper(NULL, allow_null = FALSE))
-#> Error in wrapper(NULL, allow_null = FALSE) : 
-#>   `this_arg` must not be <NULL>.
-try(wrapper(NA, allow_na = FALSE))
-#> Error in wrapper(NA, allow_na = FALSE) : 
-#>   `this_arg` must not contain NA values.
-#> • NA locations: 1
-try(wrapper(1, min_size = 2))
-#> Error in wrapper(1, min_size = 2) : 
-#>   `this_arg` must have size >= 2.
-#> ✖ 1 is too small.
-try(wrapper(1:10, max_size = 5))
-#> Error in wrapper(1:10, max_size = 5) : 
-#>   `this_arg` must have size <= 5.
-#> ✖ 10 is too big.
-stabilize_arg_scalar("a")
+assert_not("a", specify_int())
 #> [1] "a"
-stabilize_arg_scalar(1L)
-#> [1] 1
-try(stabilize_arg_scalar(1:10))
+assert_not(1.5, stabilize_int)
+#> [1] 1.5
+
+# Errors because "1" is int-ish, even though it isn't literally an integer
+try(assert_not("1", specify_int()))
 #> Error in eval(expr, envir) : 
-#>   `1:10` must be a single <integer>.
-#> ✖ `1:10` has 10 values.
+#>   `"1"` must not match "specify_int()".
+
+# Errors because stabilize_int() succeeds outright on 1L
+try(assert_not(1L, stabilize_int))
+#> Error in eval(expr, envir) : 
+#>   `1L` must not match "stabilize_int".
 ```
