@@ -81,7 +81,13 @@
   works analogously but stops at the first failing element. Both gain a
   `simplify` argument (default `TRUE`) that combines per-element results
   into an atomic vector when every result has size 1 and shares a common
-  type ([\#287](https://github.com/wranglezone/stbl/issues/287)).
+  type. New function
+  [`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md)
+  creates a pre-configured `stbl_specified_fn` that calls
+  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
+  with a fixed `spec`, letting an element-wise spec be reused and nested
+  inside other `specify_*()`/`stabilize_*()` calls
+  ([\#287](https://github.com/wranglezone/stbl/issues/287)).
 - New function
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   validates `x` by trying each stabilizer function in `...` in order,
