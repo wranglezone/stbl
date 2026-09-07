@@ -6,13 +6,6 @@ and all specs must agree on the coerced result; if any spec fails, or
 specs disagree on the coerced value, an informative error is thrown.
 `stabilise_all_of()` is a synonym.
 
-Unlike
-[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
-the order of `...` doesn't affect whether `x` passes: every spec sees
-the same, original `x`, not the output of the previous spec. Order only
-affects which spec's failure message is reported first when several
-specs fail.
-
 ## Usage
 
 ``` r
