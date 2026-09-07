@@ -281,7 +281,7 @@
 - [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
   : Coerce to length-1 duration
 
-## any type
+## multiple types
 
 - [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   [`stabilise_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)

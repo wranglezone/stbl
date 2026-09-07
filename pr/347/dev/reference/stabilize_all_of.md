@@ -1,15 +1,17 @@
 # Try to coerce or validate x as all of several specs
 
-`stabilize_all_of()` validates and coerces `x` by applying each function
-in `...` in order, feeding the result of each spec into the next. `x`
-must satisfy every spec; if any spec fails, an informative error is
-thrown. `stabilise_all_of()` is a synonym.
+`stabilize_all_of()` validates and coerces `x` by applying every
+function in `...` to `x`, independently. `x` must satisfy every spec,
+and all specs must agree on the coerced result; if any spec fails, or
+specs disagree on the coerced value, an informative error is thrown.
+`stabilise_all_of()` is a synonym.
 
-Because specs are applied in sequence and each may coerce `x`, order
-matters: `stabilize_all_of(x, spec_a, spec_b)` first stabilizes `x` with
-`spec_a`, then passes *that* result to `spec_b`. There is no
-`to_all_of()` counterpart, because it doesn't make sense to match more
-than one prototype at once.
+Unlike
+[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
+the order of `...` doesn't affect whether `x` passes: every spec sees
+the same, original `x`, not the output of the previous spec. Order only
+affects which spec's failure message is reported first when several
+specs fail.
 
 ## Usage
 
@@ -45,8 +47,8 @@ stabilise_all_of(
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), or functions produced by `specify_*()` calls
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  etc.). Applied to `x` in order; the output of each becomes the input
-  to the next.
+  etc.). Each is applied to the original `x`; `x` must pass every one of
+  them, and they must all return the same value.
 
 - x_arg:
 
@@ -69,16 +71,19 @@ stabilise_all_of(
 
 ## Value
 
-`x` coerced or validated by every function in `...`, applied in
-sequence, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+`x` coerced or validated by every function in `...`, or an error
+condition with classes `<stbl-error>`, `<stbl-condition>`,
+`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
+failure mode:
 
 - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
 
 - `<stbl-error-named_spec>` when any element of `...` is named.
 
 - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
+
+- `<stbl-error-inconsistent_all_of>` when every function succeeds, but
+  they don't all produce the same coerced value.
 
 ## See also
 
@@ -129,22 +134,30 @@ Other stabilization functions:
 
 ``` r
 # Returns x unchanged when all functions succeed
-stabilize_all_of(1L, stabilize_int, stabilize_dbl)
+stabilize_all_of(1L, stabilize_int, stabilize_int_scalar)
 #> [1] 1
 
-# Specs are applied in order, each fed the previous result ("1" -> 1L -> 1)
-stabilize_all_of("1", stabilize_int, stabilize_dbl)
-#> [1] 1
+# Each spec is applied to the original x, independently
+stabilize_all_of("ab", specify_chr(regex = "^a"), specify_chr(regex = "b$"))
+#> [1] "ab"
 
 # Errors with a combined message when a spec fails
-try(stabilize_all_of("a", stabilize_int, stabilize_dbl))
+try(stabilize_all_of("a", stabilize_int, stabilize_chr))
 #> Error in eval(expr, envir) : 
 #>   `"a"` must match all of the provided stabilizers.
 #> ✖ `"a"` <character> must be coercible to <integer> (Locations: 1)
 
-# Errors when an earlier spec's result fails a later spec
-try(stabilize_all_of(1L, stabilize_int, specify_dbl(min_value = 10)))
+# Errors because each spec sees the original "1" (a string); the second
+# spec would succeed on 1L, but doesn't get the chance to see it
+try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 #> Error in eval(expr, envir) : 
-#>   `1L` must match all of the provided stabilizers.
-#> ✖ `1L` must be >= 10.
+#>   `"1"` must match all of the provided stabilizers.
+#> ✖ Can't coerce `"1"` <character> to <double>.
+
+# Errors when specs succeed but disagree on the coerced value
+# (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
+try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
+#> Error in eval(expr, envir) : 
+#>   `1L` must be coerced the same way by every provided stabilizer.
+#> ℹ The provided stabilizers succeeded, but disagreed on the coerced value.
 ```
