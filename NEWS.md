@@ -20,7 +20,7 @@
 * New `to_date()`, `stabilize_date()`, `to_dttm()`, `stabilize_dttm()`, `to_time()`, `stabilize_time()`, `to_dur()`, and `stabilize_dur()` families (plus matching `specify_*()` factories) validate and coerce [RFC 3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values (#104, #105, #294, #295).
 * `stabilize_df()`'s `.extra_cols` argument and `stabilize_lst()`/`specify_lst()`'s `.named` and `.unnamed` arguments now also accept `TRUE` to allow extra or unnamed elements unchecked, in addition to the existing `NULL`/`FALSE` (forbid) and stabilizer-function (validate) forms (#281).
 * `stabilize_df()`, `stabilize_lst()`, `specify_df()`, and `specify_lst()` gain a new `.required` argument, letting you mark named specs passed via `...` as optional. `.required` defaults to all names in `...`, preserving the previous "every named spec is required" behavior; specs left out of `.required` are only validated when present (#279).
-* `stabilize_df()`, `stabilize_lst()`, `specify_df()`, and `specify_lst()` gain a new `.allow_zero_length` argument (default `TRUE`) that lets a zero-length `.x` (such as `list()` or a data frame with no columns) skip the required-element check even if it's missing elements listed in `.required` (#344).
+* `stabilize_df()`, `stabilize_lst()`, `specify_df()`, and `specify_lst()` gain a new `.allow_zero_length` argument (default `TRUE`) that lets a zero-length `.x` (such as `list()` or a data frame with no columns) skip the required-element check even if it's missing elements listed in `.required`; `.min_size`/`.max_size` (and, for data frames, `.min_rows`/`.max_rows`) are still enforced regardless of `.allow_zero_length` (#344).
 
 ## Bug fixes
 

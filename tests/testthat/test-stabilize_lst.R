@@ -331,6 +331,14 @@ test_that("stabilize_lst() skips required-element check for empty .x by default 
   )
 })
 
+test_that("stabilize_lst() still enforces .min_size on empty .x when .allow_zero_length = TRUE (#344)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(), .min_size = 2),
+    "stbl",
+    "size_too_small"
+  )
+})
+
 test_that("stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)", {
   expect_pkg_error_snapshot(
     stabilize_lst(list(), a = specify_int_scalar(), .allow_zero_length = FALSE),

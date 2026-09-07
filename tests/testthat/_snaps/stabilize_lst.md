@@ -159,6 +159,15 @@
       Error:
       ! `list(1L, 2L)` must contain element "a".
 
+# stabilize_lst() still enforces .min_size on empty .x when .allow_zero_length = TRUE (#344)
+
+    Code
+      stabilize_lst(list(), .min_size = 2)
+    Condition <stbl-error-size_too_small>
+      Error:
+      ! `list()` must have size >= 2.
+      x 0 is too small.
+
 # stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)
 
     Code

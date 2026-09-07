@@ -140,9 +140,6 @@ stabilize_lst <- function(
     ))
   }
   .x <- to_lst(.x, x_arg = .x_arg, call = .call)
-  if (!length(.x) && to_lgl_scalar(.allow_zero_length, call = .call)) {
-    return(.x)
-  }
   .check_size(
     .x,
     min_size = .min_size,
@@ -150,8 +147,13 @@ stabilize_lst <- function(
     x_arg = .x_arg,
     call = .call
   )
-
   .check_specs_named(..., .call = .call)
+  # .min_size/.max_size are checked above regardless of .allow_zero_length;
+  # this only lets an empty .x skip the *required-element* check.
+  if (!length(.x) && to_lgl_scalar(.allow_zero_length, call = .call)) {
+    return(.x)
+  }
+
   .required <- to_chr(.required, call = .call)
   .x <- .validate_named_elements(
     .x,
