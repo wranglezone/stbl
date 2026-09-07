@@ -55,7 +55,7 @@ reference:
   - matches("dttm")
   - matches("time")
   - matches("dur")
-- title: any type
+- title: multiple types
 - contents:
   - stabilize_all_of
   - stabilize_any_of

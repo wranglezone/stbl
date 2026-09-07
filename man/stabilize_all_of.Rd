@@ -26,8 +26,9 @@ stabilise_all_of(
 
 \item{...}{Unnamed stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), \verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), or
-functions produced by \verb{specify_*()} calls (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied
-to \code{x} in order; the output of each becomes the input to the next.}
+functions produced by \verb{specify_*()} calls (\code{\link[=specify_chr]{specify_chr()}}, etc.). Each is
+applied to the original \code{x}; \code{x} must pass every one of them, and they
+must all return the same value.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -43,40 +44,47 @@ object before checking its coercion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced or validated by every function in \code{...}, applied in
-sequence, or an error condition with classes \verb{<stbl-error>},
-\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
-specific class by failure mode:
+\code{x} coerced or validated by every function in \code{...}, or an error
+condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
+failure mode:
 \itemize{
 \item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
 \item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 \item \verb{<stbl-error-cant_stabilize_all_of>} when any provided function fails.
+\item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but
+they don't all produce the same coerced value.
 }
 }
 \description{
 \code{stabilize_all_of()} validates and coerces \code{x} by applying
-each function in \code{...} in order, feeding the result of each spec into the
-next. \code{x} must satisfy every spec; if any spec fails, an informative
-error is thrown. \code{stabilise_all_of()} is a synonym.
+every function in \code{...} to \code{x}, independently. \code{x} must satisfy every
+spec, and all specs must agree on the coerced result; if any spec fails,
+or specs disagree on the coerced value, an informative error is thrown.
+\code{stabilise_all_of()} is a synonym.
 
-Because specs are applied in sequence and each may coerce \code{x}, order
-matters: \code{stabilize_all_of(x, spec_a, spec_b)} first stabilizes \code{x} with
-\code{spec_a}, then passes \emph{that} result to \code{spec_b}. There is no \code{to_all_of()}
-counterpart, because it doesn't make sense to match more than one
-prototype at once.
+Unlike \code{\link[=stabilize_any_of]{stabilize_any_of()}}, the order of \code{...} doesn't affect whether
+\code{x} passes: every spec sees the same, original \code{x}, not the output of the
+previous spec. Order only affects which spec's failure message is
+reported first when several specs fail.
 }
 \examples{
 # Returns x unchanged when all functions succeed
-stabilize_all_of(1L, stabilize_int, stabilize_dbl)
+stabilize_all_of(1L, stabilize_int, stabilize_int_scalar)
 
-# Specs are applied in order, each fed the previous result ("1" -> 1L -> 1)
-stabilize_all_of("1", stabilize_int, stabilize_dbl)
+# Each spec is applied to the original x, independently
+stabilize_all_of("ab", specify_chr(regex = "^a"), specify_chr(regex = "b$"))
 
 # Errors with a combined message when a spec fails
-try(stabilize_all_of("a", stabilize_int, stabilize_dbl))
+try(stabilize_all_of("a", stabilize_int, stabilize_chr))
 
-# Errors when an earlier spec's result fails a later spec
-try(stabilize_all_of(1L, stabilize_int, specify_dbl(min_value = 10)))
+# Errors because each spec sees the original "1" (a string); the second
+# spec would succeed on 1L, but doesn't get the chance to see it
+try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
+
+# Errors when specs succeed but disagree on the coerced value
+# (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
+try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
 }
 \seealso{
 Other stabilization functions:
