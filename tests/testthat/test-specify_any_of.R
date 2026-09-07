@@ -17,7 +17,10 @@ test_that("specify_any_of() passes through additional specs from ... (#288)", {
 })
 
 test_that("specify_any_of() errors when all specs fail (#288)", {
-  spec <- specify_any_of(specify_int(allow_null = FALSE), specify_chr(allow_null = FALSE))
+  spec <- specify_any_of(
+    specify_int(allow_null = FALSE),
+    specify_chr(allow_null = FALSE)
+  )
   expect_pkg_error_classes(spec(NULL), "stbl", "cant_stabilize_any_of")
 })
 
