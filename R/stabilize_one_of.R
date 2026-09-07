@@ -14,8 +14,10 @@
 #'
 #' @param ... For `stabilize_one_of()`: unnamed stabilizer or coercion
 #'   functions, such as `stabilize_*` functions ([stabilize_chr()], etc.),
-#'   `to_*` functions ([to_chr()], etc.), or functions produced by `specify_*()`
-#'   calls ([specify_chr()], etc.). For `to_one_of()`: prototype objects (e.g.
+#'   `to_*` functions ([to_chr()], etc.), functions produced by `specify_*()`
+#'   calls ([specify_chr()], etc.), or `assert_*()` functions (such as
+#'   [assert_not()]) that return their input unchanged. For `to_one_of()`:
+#'   prototype objects (e.g.
 #'   `integer()`, `character()`) that determine the target types to try, passed
 #'   as the `.to` argument of [to()].
 #' @inheritParams .shared-params

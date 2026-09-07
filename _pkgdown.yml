@@ -57,6 +57,7 @@ reference:
   - matches("dur")
 - title: multiple types
 - contents:
+  - assert_not
   - specify_all_of
   - specify_any_of
   - specify_one_of
