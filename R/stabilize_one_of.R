@@ -144,7 +144,7 @@ stabilise_one_of <- stabilize_one_of
       message_env = rlang::current_env()
     )
   }
-  msgs <- vapply(errors, .extract_stabilizer_msg, character(1L))
+  msgs <- unique(vapply(errors, .extract_stabilizer_msg, character(1L)))
   additional_msg <- stats::setNames(msgs, rep("x", length(msgs)))
   .stop_must(
     "must match exactly one of the provided specifications, but matched none.",

@@ -6,7 +6,6 @@
       Error:
       ! `NULL` must match at least one of the provided stabilizers.
       x `NULL` must not be <NULL>.
-      x `NULL` must not be <NULL>.
 
 ---
 
@@ -16,7 +15,6 @@
     Condition <stbl-error-cant_stabilize_any_of>
       Error in `wrapped_stabilize_any_of()`:
       ! `val` must match at least one of the provided stabilizers.
-      x `val` must not be <NULL>.
       x `val` must not be <NULL>.
 
 # stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, #310)

@@ -24,7 +24,6 @@
       Error:
       ! `NULL` must match exactly one of the provided specifications, but matched none.
       x `NULL` must not be <NULL>.
-      x `NULL` must not be <NULL>.
 
 ---
 
@@ -34,7 +33,6 @@
     Condition <stbl-error-cant_stabilize_one_of>
       Error in `wrapped_stabilize_one_of()`:
       ! `val` must match exactly one of the provided specifications, but matched none.
-      x `val` must not be <NULL>.
       x `val` must not be <NULL>.
 
 # stabilize_one_of() includes Locations from incompatible_values errors (#286)

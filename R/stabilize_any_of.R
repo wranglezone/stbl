@@ -159,7 +159,7 @@ stabilise_any_of <- stabilize_any_of
 #' @returns Does not return; throws an error.
 #' @keywords internal
 .stop_cant_stabilize_any_of <- function(errors, x_arg, call) {
-  msgs <- vapply(errors, .extract_stabilizer_msg, character(1L))
+  msgs <- unique(vapply(errors, .extract_stabilizer_msg, character(1L)))
   additional_msg <- stats::setNames(msgs, rep("x", length(msgs)))
   .stop_must(
     "must match at least one of the provided stabilizers.",
