@@ -253,6 +253,7 @@ Other stabilization functions:
 \code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
 \code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
 \code{\link[=stabilize_time]{stabilize_time()}},
 \code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
 \code{\link[=to_chr]{to_chr()}},
