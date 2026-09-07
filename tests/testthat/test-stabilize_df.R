@@ -79,6 +79,23 @@ test_that("stabilize_df() allows an absent optional column via .required (#279)"
   expect_identical(result, given)
 })
 
+test_that("stabilize_df() skips required-column check for zero-column .x by default (#344)", {
+  result <- stabilize_df(data.frame(), name = specify_chr_scalar())
+  expect_identical(result, data.frame())
+})
+
+test_that("stabilize_df() checks required columns for zero-column .x when .allow_zero_length = FALSE (#344)", {
+  expect_pkg_error_snapshot(
+    stabilize_df(
+      data.frame(),
+      name = specify_chr_scalar(),
+      .allow_zero_length = FALSE
+    ),
+    "stbl",
+    "missing_element"
+  )
+})
+
 test_that("stabilize_df() still validates an optional column when present (#279)", {
   expect_pkg_error_classes(
     stabilize_df(

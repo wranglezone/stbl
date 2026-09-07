@@ -151,6 +151,31 @@
       Error:
       ! `list(z = 1L)` must contain element "a".
 
+# stabilize_lst() errors on missing required element in unnamed non-empty list (#344)
+
+    Code
+      stabilize_lst(list(1L, 2L), a = specify_int_scalar())
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `list(1L, 2L)` must contain element "a".
+
+# stabilize_lst() still enforces .min_size on empty .x when .allow_zero_length = TRUE (#344)
+
+    Code
+      stabilize_lst(list(), .min_size = 2)
+    Condition <stbl-error-size_too_small>
+      Error:
+      ! `list()` must have size >= 2.
+      x 0 is too small.
+
+# stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)
+
+    Code
+      stabilize_lst(list(), a = specify_int_scalar(), .allow_zero_length = FALSE)
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `list()` must contain element "a".
+
 # .check_duplicate_names(): errors on duplicate names by default (#110)
 
     Code

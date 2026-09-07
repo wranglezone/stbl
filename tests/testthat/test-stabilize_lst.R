@@ -316,6 +316,37 @@ test_that("stabilize_lst() still errors on required elements not in .required (#
   )
 })
 
+test_that("stabilize_lst() errors on missing required element in unnamed non-empty list (#344)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(1L, 2L), a = specify_int_scalar()),
+    "stbl",
+    "missing_element"
+  )
+})
+
+test_that("stabilize_lst() skips required-element check for empty .x by default (#344)", {
+  expect_identical(
+    stabilize_lst(list(), a = specify_int_scalar()),
+    list()
+  )
+})
+
+test_that("stabilize_lst() still enforces .min_size on empty .x when .allow_zero_length = TRUE (#344)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(), .min_size = 2),
+    "stbl",
+    "size_too_small"
+  )
+})
+
+test_that("stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(), a = specify_int_scalar(), .allow_zero_length = FALSE),
+    "stbl",
+    "missing_element"
+  )
+})
+
 test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
   expect_pkg_error_classes(
     stabilize_lst(list(1L), specify_int_scalar()),

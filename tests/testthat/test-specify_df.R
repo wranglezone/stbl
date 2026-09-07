@@ -50,6 +50,21 @@ test_that("specify_df() passes through .col_names (#142)", {
   )
 })
 
+test_that("specify_df() passes through .allow_zero_length (#344)", {
+  validator <- specify_df(name = specify_chr_scalar())
+  expect_identical(validator(data.frame()), data.frame())
+
+  validator_strict <- specify_df(
+    name = specify_chr_scalar(),
+    .allow_zero_length = FALSE
+  )
+  expect_pkg_error_classes(
+    validator_strict(data.frame()),
+    "stbl",
+    "missing_element"
+  )
+})
+
 test_that("specify_df() allows additional specs via ... (#142)", {
   base_validator <- specify_df(.extra_cols = assert_present)
   given <- data.frame(a = 1L, b = "hello")

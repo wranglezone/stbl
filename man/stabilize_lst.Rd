@@ -15,6 +15,7 @@ stabilize_lst(
   .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
@@ -31,6 +32,7 @@ stabilize_list(
   .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
@@ -47,6 +49,7 @@ stabilise_lst(
   .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
@@ -63,6 +66,7 @@ stabilise_list(
   .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
@@ -110,6 +114,8 @@ If \code{TRUE}, duplicated elements are rejected.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
+\item{.allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
+
 \item{.min_size}{(\code{integer(1)}) The minimum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
@@ -120,7 +126,9 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
 required unless you opt it out. Named specs \emph{not} listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
+A zero-length \code{.x} (such as \code{list()}) skips this check when
+\code{.allow_zero_length = TRUE}.}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

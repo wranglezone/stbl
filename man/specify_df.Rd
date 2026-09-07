@@ -12,6 +12,7 @@ specify_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names()
 )
 
@@ -22,6 +23,7 @@ specify_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names()
 )
 }
@@ -54,11 +56,15 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
+\item{.allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
+
 \item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
 required unless you opt it out. Named specs \emph{not} listed here are
 optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.}
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
+A \code{.x} with zero columns skips this check when
+\code{.allow_zero_length = TRUE} (the default).}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
