@@ -67,10 +67,8 @@
   [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
   validates `x` against every stabilizer function in `...` and requires
   that exactly one succeeds, returning that function’s result; an error
-  is thrown if zero functions succeed (combining the individual failure
-  messages) or if more than one succeeds (naming the specifications that
-  matched). This mirrors JSON Schema `oneOf` semantics and is intended
-  for mutually exclusive specifications. New function
+  is thrown if zero functions succeed or if more than one succeeds. New
+  function
   [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
   works analogously with type prototypes via
   [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
