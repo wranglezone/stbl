@@ -1,5 +1,3 @@
-# any_of ----
-
 #' Create a specified any-of stabilizer function
 #'
 #' `specify_any_of()` creates a function that will call [stabilize_any_of()]
