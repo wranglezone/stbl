@@ -47,6 +47,19 @@
   `subclass` and replaces its message with a custom one. An optional
   `additional_class` argument prepends extra classes to the error class
   list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+- New functions
+  [`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
+  [`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
+  and
+  [`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md)
+  create pre-configured `stbl_specified_fn`s that call
+  [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
+  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
+  and
+  [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  respectively, letting composition specs be reused and nested inside
+  other `specify_*()`/`stabilize_*()` calls
+  ([\#288](https://github.com/wranglezone/stbl/issues/288)).
 - New function
   [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   validates `x` by applying each stabilizer function in `...`, failing

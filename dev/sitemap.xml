@@ -162,6 +162,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/reexports.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/replace_stbl_error.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_all_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_date.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_dbl.html</loc></url>
@@ -172,6 +174,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_time.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_any_of.html</loc></url>

@@ -283,6 +283,12 @@
 
 ## multiple types
 
+- [`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md)
+  : Create a specified all-of stabilizer function
+- [`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md)
+  : Create a specified any-of stabilizer function
+- [`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md)
+  : Create a specified one-of stabilizer function
 - [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   [`stabilise_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   : Try to coerce or validate x as all of several specs

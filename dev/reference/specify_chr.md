@@ -140,6 +140,8 @@ Other character functions:
 [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
 
 Other specification functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
 [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
@@ -149,6 +151,7 @@ Other specification functions:
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
 [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
 
 ## Examples
