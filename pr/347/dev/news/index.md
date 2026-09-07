@@ -49,12 +49,8 @@
   list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
 - New function
   [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
-  validates `x` by applying each unnamed stabilizer function in `...` to
-  the original `x`, independently; `x` must satisfy every spec, and
-  every spec must produce the same coerced value, or an informative
-  error is thrown.
-  [`stabilise_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
-  is a synonym
+  validates `x` by applying each stabilizer function in `...`, failing
+  if any stabilizer fails or if the stabilized values are different
   ([\#278](https://github.com/wranglezone/stbl/issues/278)).
 - New function
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
