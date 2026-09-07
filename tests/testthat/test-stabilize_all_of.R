@@ -1,18 +1,29 @@
 test_that("stabilize_all_of() returns x unchanged when all functions succeed (#278)", {
-  expect_identical(stabilize_all_of(1L, stabilize_int, stabilize_int_scalar), 1L)
+  expect_identical(
+    stabilize_all_of(1L, stabilize_int, stabilize_int_scalar),
+    1L
+  )
 })
 
 test_that("stabilize_all_of() applies each spec to the original x, not chained results (#278)", {
   # Both specs see the original "ab", independently
   expect_identical(
-    stabilize_all_of("ab", specify_chr(regex = "^a"), specify_chr(regex = "b$")),
+    stabilize_all_of(
+      "ab",
+      specify_chr(regex = "^a"),
+      specify_chr(regex = "b$")
+    ),
     "ab"
   )
 })
 
 test_that("stabilize_all_of() order doesn't affect whether x passes (#278)", {
   expect_identical(
-    stabilize_all_of("ab", specify_chr(regex = "^a"), specify_chr(regex = "b$")),
+    stabilize_all_of(
+      "ab",
+      specify_chr(regex = "^a"),
+      specify_chr(regex = "b$")
+    ),
     stabilize_all_of("ab", specify_chr(regex = "b$"), specify_chr(regex = "^a"))
   )
 })
