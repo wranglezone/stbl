@@ -74,14 +74,6 @@ messages is thrown; if two or more functions succeed, an error naming
 the specifications that matched is thrown. \code{stabilise_one_of()} is a
 synonym.
 
-Because stbl coerces liberally (Postel's law), overlapping
-specifications will frequently \emph{both} succeed; for example, \code{"1"} is
-both int-ish and dbl-ish, so \code{stabilize_one_of("1", stabilize_int, stabilize_dbl)} errors as ambiguous. This mirrors JSON Schema's own
-\code{oneOf} behavior, where \verb{oneOf: [integer, number]} fails to validate \code{1}
-because it matches both. \code{stabilize_one_of()} is therefore intended for
-\strong{mutually exclusive} specifications; use \code{\link[=stabilize_any_of]{stabilize_any_of()}} if any
-matching specification (including more than one) is acceptable.
-
 \code{to_one_of()} is analogous to \code{\link[=to]{to()}}: it tries to coerce \code{x} to each type
 given in \code{...} (as a prototype such as \code{integer()} or \code{character()}) and
 requires that exactly one succeeds.
