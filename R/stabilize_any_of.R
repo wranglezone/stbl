@@ -99,10 +99,7 @@ stabilise_any_of <- stabilize_any_of
   nms <- names(fns) %||% character(length(fns))
   if (any(nms != "")) {
     .stbl_abort(
-      c(
-        "All elements passed via `...` must be unnamed.",
-        i = "Functions are applied to `x` in sequence, not by name."
-      ),
+      "All elements passed via `...` must be unnamed.",
       subclass = "named_spec",
       call = .call
     )

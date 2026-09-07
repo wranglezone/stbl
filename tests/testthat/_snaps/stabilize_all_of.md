@@ -68,5 +68,4 @@
     Condition <stbl-error-named_spec>
       Error:
       ! All elements passed via `...` must be unnamed.
-      i Functions are applied to `x` in sequence, not by name.
 
