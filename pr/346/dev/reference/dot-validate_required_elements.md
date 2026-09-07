@@ -38,7 +38,7 @@ Validate required named elements against their spec functions
   Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
   to make every named spec optional. A zero-length `.x` (such as
   [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
-  `.allow_zero_length = TRUE` (the default); see `allow_zero_length`.
+  `.allow_zero_length = TRUE`.
 
 - .x_arg:
 

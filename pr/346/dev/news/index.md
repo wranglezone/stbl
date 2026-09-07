@@ -159,10 +159,7 @@
   gain a new `.allow_zero_length` argument (default `TRUE`) that lets a
   zero-length `.x` (such as [`list()`](https://rdrr.io/r/base/list.html)
   or a data frame with no columns) skip the required-element check even
-  if it’s missing elements listed in `.required`;
-  `.min_size`/`.max_size` (and, for data frames,
-  `.min_rows`/`.max_rows`) are still enforced regardless of
-  `.allow_zero_length`
+  if it’s missing elements listed in `.required`
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
 
 ### Bug fixes
