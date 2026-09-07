@@ -1,68 +1,42 @@
-# Coerce to length-1 duration with additional checks
+# Try to coerce or validate x as exactly one of several specifications
 
-Checks whether a vector can be coerced to a length-1
-[lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
-vector. `stabilize_dur_scalar()` is optimized to check for length-1
-duration vectors (compared to
-[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
-with `max_size = 1`). `stabilise_dur_scalar`,
-`stabilize_duration_scalar`, and `stabilise_duration_scalar` are
-synonyms of `stabilize_dur_scalar()`.
+`stabilize_one_of()` evaluates every function in `...` against `x` and
+requires that exactly one of them succeeds. It returns the result of
+that single successful function. If zero functions succeed, an
+informative error that combines the individual failure messages is
+thrown; if two or more functions succeed, an error naming the
+specifications that matched is thrown. `stabilise_one_of()` is a
+synonym.
+
+`to_one_of()` is analogous to
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
+coerce `x` to each type given in `...` (as a prototype such as
+[`integer()`](https://rdrr.io/r/base/integer.html) or
+[`character()`](https://rdrr.io/r/base/character.html)) and requires
+that exactly one succeeds.
 
 ## Usage
 
 ``` r
-stabilize_dur_scalar(
+stabilize_one_of(
   x,
   ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 )
 
-stabilise_dur_scalar(
+stabilise_one_of(
   x,
   ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 )
 
-stabilize_duration_scalar(
+to_one_of(
   x,
   ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  allowed_values = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_duration_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  min_value = NULL,
-  max_value = NULL,
-  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -77,35 +51,18 @@ stabilise_duration_scalar(
 
 - ...:
 
-  Arguments passed to methods.
-
-- allow_null:
-
-  (`logical(1)`) Is NULL an acceptable value?
-
-- allow_zero_length:
-
-  (`logical(1)`) Are zero-length vectors acceptable?
-
-- allow_na:
-
-  (`logical(1)`) Are NA values ok?
-
-- min_value:
-
-  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
-  values are not checked.
-
-- max_value:
-
-  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
-  values are not checked.
-
-- allowed_values:
-
-  A vector of permitted values (coerced to the target type). `NULL`
-  (default) skips the check. `NA` values in `x` are permitted
-  independently of `allowed_values`, subject to `allow_na`.
+  For `stabilize_one_of()`: unnamed stabilizer or coercion functions,
+  such as `stabilize_*` functions
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  etc.), `to_*` functions
+  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  etc.), or functions produced by `specify_*()` calls
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  etc.). For `to_one_of()`: prototype objects (e.g.
+  [`integer()`](https://rdrr.io/r/base/integer.html),
+  [`character()`](https://rdrr.io/r/base/character.html)) that determine
+  the target types to try, passed as the `.to` argument of
+  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md).
 
 - x_arg:
 
@@ -128,40 +85,19 @@ stabilise_duration_scalar(
 
 ## Value
 
-The input as a length-1
-[lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
-vector, or an error condition with classes `<stbl-error>`,
+`x` coerced or validated by the single successful function or prototype
+in `...`, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
-- `<stbl-error-coerce-duration>` when `x` cannot be coerced to a
-  duration.
+- `<stbl-error-empty_specs>` when no functions are supplied in `...`.
 
-- `<stbl-error-incompatible_values-duration>` when some values cannot be
-  safely converted to a duration.
+- `<stbl-error-named_spec>` when any element of `...` is named.
 
-- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-
-- `<stbl-error-bad_empty>` for empty vectors when
-  `allow_zero_length = FALSE`.
-
-- `<stbl-error-non_scalar>` for non-scalar vectors.
-
-- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-
-- `<stbl-error-outside_range>` when values fall outside `min_value` or
-  `max_value`.
-
-- `<stbl-error-allowed_values>` when the value is not in
-  `allowed_values`.
+- `<stbl-error-cant_stabilize_one_of>` when zero, or more than one,
+  provided functions succeed.
 
 ## See also
-
-Other duration functions:
-[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
-[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
-[`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
-[`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
 
 Other stabilization functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
@@ -178,6 +114,7 @@ Other stabilization functions:
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
@@ -185,7 +122,6 @@ Other stabilization functions:
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
 [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
 [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
@@ -210,16 +146,42 @@ Other stabilization functions:
 ## Examples
 
 ``` r
-stabilize_dur_scalar(lubridate::period(day = 1))
-#> [1] "1d 0H 0M 0S"
-stabilize_dur_scalar("P1D")
-#> [1] "1d 0H 0M 0S"
-try(stabilize_dur_scalar(c("P1D", "P2D")))
+# Returns x unchanged when exactly one function succeeds
+stabilize_one_of("a", stabilize_int, stabilize_chr)
+#> [1] "a"
+
+# Coerces via the single matching function (1.5 can't become an integer)
+stabilize_one_of(1.5, stabilize_int, stabilize_chr)
+#> [1] "1.5"
+
+# Errors as ambiguous: "1" is both int-ish and dbl-ish
+try(stabilize_one_of("1", stabilize_int, stabilize_dbl))
 #> Error in eval(expr, envir) : 
-#>   `c("P1D", "P2D")` must be a single <Period>.
-#> ✖ `c("P1D", "P2D")` has 2 values.
-try(stabilize_dur_scalar(NULL))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-stabilize_dur_scalar(NULL, allow_null = TRUE)
-#> NULL
+#>   `"1"` must match exactly one of the provided specifications, but matched
+#> 2.
+#> ℹ Matched specifications: "stabilize_int" and "stabilize_dbl"
+
+# Errors with a combined message when no function succeeds
+try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int))
+#> Error in eval(expr, envir) : 
+#>   `list(1, TRUE, "23", "maybe")` must match exactly one of the provided
+#> specifications, but matched none.
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <logical>
+#>   (Locations: 4)
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <integer>
+#>   (Locations: 4)
+# to_one_of() uses prototypes instead of functions
+to_one_of("a", integer(), character())
+#> [1] "a"
+
+# "FALSE" coerces to logical, but not to integer
+to_one_of("FALSE", logical(), integer())
+#> [1] FALSE
+
+# Errors as ambiguous: "1" coerces to both integer and double
+try(to_one_of("1", integer(), double()))
+#> Error in eval(expr, envir) : 
+#>   `"1"` must match exactly one of the provided specifications, but matched
+#> 2.
+#> ℹ Matched specifications: "integer" and "double"
 ```

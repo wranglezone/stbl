@@ -290,6 +290,10 @@
   [`stabilise_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   : Try to coerce or validate x as one of several types
+- [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  [`stabilise_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  : Try to coerce or validate x as exactly one of several specifications
 
 ## generic args
 

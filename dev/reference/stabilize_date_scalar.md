@@ -154,6 +154,7 @@ Other stabilization functions:
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
 [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
 [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),

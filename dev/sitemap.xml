@@ -100,6 +100,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dttm.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_time.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-label_matched_specs.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-new_period_vec.html</loc></url>
@@ -123,6 +124,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
@@ -137,6 +139,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_df_vector.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_num_from_complex.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_exactly_one.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_fns.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_extra_named_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_named_elements.html</loc></url>
@@ -191,6 +194,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_time.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.html</loc></url>
