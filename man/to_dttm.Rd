@@ -130,6 +130,7 @@ Other datetime functions:
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}}
 
 Other stabilization functions:
+\code{\link[=assert_not]{assert_not()}},
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_all_of]{stabilize_all_of()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},

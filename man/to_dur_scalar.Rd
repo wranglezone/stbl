@@ -66,6 +66,7 @@ Other duration functions:
 \code{\link[=to_dur]{to_dur()}}
 
 Other stabilization functions:
+\code{\link[=assert_not]{assert_not()}},
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_all_of]{stabilize_all_of()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},

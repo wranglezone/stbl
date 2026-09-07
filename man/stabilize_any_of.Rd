@@ -35,8 +35,10 @@ to_any_of(
 
 \item{...}{For \code{stabilize_any_of()}: unnamed stabilizer or coercion
 functions, such as \verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.),
-\verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), or functions produced by \verb{specify_*()}
-calls (\code{\link[=specify_chr]{specify_chr()}}, etc.). For \code{to_any_of()}: prototype objects (e.g.
+\verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), functions produced by \verb{specify_*()}
+calls (\code{\link[=specify_chr]{specify_chr()}}, etc.), or \verb{assert_*()} functions (such as
+\code{\link[=assert_not]{assert_not()}}) that return their input unchanged. For \code{to_any_of()}:
+prototype objects (e.g.
 \code{integer()}, \code{character()}) that determine the target types to try, passed
 as the \code{.to} argument of \code{\link[=to]{to()}}.}
 
@@ -98,6 +100,7 @@ try(to_any_of(list(), integer(), character()))
 }
 \seealso{
 Other stabilization functions:
+\code{\link[=assert_not]{assert_not()}},
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_all_of]{stabilize_all_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},

@@ -7,10 +7,11 @@
 #' synonym.
 #'
 #' @param ... Unnamed stabilizer functions, such as `stabilize_*` functions
-#'   ([stabilize_chr()], etc.), `to_*` functions ([to_chr()], etc.), or
-#'   functions produced by `specify_*()` calls ([specify_chr()], etc.). Each is
-#'   applied to the original `x`; `x` must pass every one of them, and they must
-#'   all return the same value.
+#'   ([stabilize_chr()], etc.), `to_*` functions ([to_chr()], etc.), functions
+#'   produced by `specify_*()` calls ([specify_chr()], etc.), or `assert_*()`
+#'   functions (such as [assert_not()]) that return their input unchanged. Each
+#'   is applied to the original `x`; `x` must pass every one of them, and they
+#'   must all return the same value.
 #' @inheritParams .shared-params
 #'
 #' @returns `x` coerced or validated by every function in `...`, or an error
