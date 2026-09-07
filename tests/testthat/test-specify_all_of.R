@@ -1,5 +1,3 @@
-# specify_all_of ----
-
 test_that("specify_all_of() creates a working specifier (#288)", {
   spec <- specify_all_of(specify_int(), specify_int_scalar())
   expect_identical(spec(1L), 1L)

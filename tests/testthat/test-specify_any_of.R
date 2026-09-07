@@ -1,5 +1,3 @@
-# specify_any_of ----
-
 test_that("specify_any_of() creates a working specifier (#288)", {
   spec <- specify_any_of(specify_int(), specify_chr())
   expect_identical(spec(1L), 1L)
