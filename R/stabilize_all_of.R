@@ -55,23 +55,7 @@ stabilize_all_of <- function(
   .check_specs_not_empty(fns, .call = call)
   .check_specs_unnamed(fns, .call = call)
 
-  result <- NULL
-  for (i in seq_along(fns)) {
-    fn_result <- rlang::try_fetch(
-      .call_specified_fn(fns[[i]], x, .x_arg = x_arg, .call = call),
-      error = function(cnd) cnd
-    )
-    if (inherits(fn_result, "error")) {
-      .stop_cant_stabilize_all_of(error = fn_result, x_arg = x_arg, call = call)
-    }
-    if (i == 1L) {
-      result <- fn_result
-    } else if (!identical(result, fn_result)) {
-      .stop_inconsistent_all_of(x_arg = x_arg, call = call)
-    }
-  }
-
-  result
+  .apply_fns_requiring_consensus(x, fns = fns, x_arg = x_arg, call = call)
 }
 
 #' @export
@@ -79,6 +63,57 @@ stabilize_all_of <- function(
 stabilise_all_of <- stabilize_all_of
 
 # helpers ----
+
+#' Apply every function to x independently, requiring identical results
+#'
+#' Applies each function in `fns` to the original `x`, independently. Errors
+#' if any function fails, or if the successful results disagree.
+#'
+#' @param x The value to test.
+#' @param fns `(list)` The list of stabilizer functions to apply.
+#' @inheritParams stabilize_lst
+#' @returns The common result of applying every function in `fns` to `x`.
+#' @keywords internal
+.apply_fns_requiring_consensus <- function(x, fns, x_arg, call) {
+  result <- .apply_spec_or_stop(fns[[1L]], x, x_arg = x_arg, call = call)
+  for (fn in fns[-1L]) {
+    result <- .check_consensus(result, fn, x, x_arg = x_arg, call = call)
+  }
+  result
+}
+
+#' Apply a spec and check that it agrees with the running result
+#'
+#' @param result The value obtained from the specs applied so far.
+#' @param fn A stabilizer or coercion function to apply to `x`.
+#' @param x The value to test.
+#' @inheritParams stabilize_lst
+#' @returns `fn`'s result, if it agrees with `result`; otherwise, throws an
+#'   error.
+#' @keywords internal
+.check_consensus <- function(result, fn, x, x_arg, call) {
+  fn_result <- .apply_spec_or_stop(fn, x, x_arg = x_arg, call = call)
+  if (!identical(result, fn_result)) {
+    .stop_inconsistent_all_of(x_arg = x_arg, call = call)
+  }
+  fn_result
+}
+
+#' Apply a single spec to x, stopping if it errors
+#'
+#' @param fn A stabilizer or coercion function to apply to `x`.
+#' @param x The value to test.
+#' @inheritParams stabilize_lst
+#' @returns The result of applying `fn` to `x`.
+#' @keywords internal
+.apply_spec_or_stop <- function(fn, x, x_arg, call) {
+  rlang::try_fetch(
+    .call_specified_fn(fn, x, .x_arg = x_arg, .call = call),
+    error = function(cnd) {
+      .stop_cant_stabilize_all_of(error = cnd, x_arg = x_arg, call = call)
+    }
+  )
+}
 
 #' Signal an error when a spec fails in stabilize_all_of()
 #'
