@@ -72,16 +72,9 @@
   ([\#278](https://github.com/wranglezone/stbl/issues/278)).
 - New function
   [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
-  applies a single `spec` (a `to_*`/`stabilize_*` function or
-  `specify_*()` result) to every element of `x`, reporting every failing
-  location at once via the condition’s `locations` element;
-  [`stabilise_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
-  is a synonym. New function
+  applies a single `spec` to every element of `x`. New function
   [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
-  works analogously but stops at the first failing element. Both gain a
-  `simplify` argument (default `TRUE`) that combines per-element results
-  into an atomic vector when every result has size 1 and shares a common
-  type. New function
+  works analogously but stops at the first failing element. New function
   [`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md)
   creates a pre-configured `stbl_specified_fn` that calls
   [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)

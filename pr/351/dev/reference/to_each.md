@@ -2,9 +2,7 @@
 
 `to_each()` applies `spec` (a `to_*` function, `stabilize_*` function,
 or `specify_*()` result) to every element of `x`, and stops at the first
-element that fails. When every result has size 1 and shares a common
-type, the results are simplified into a single atomic vector; otherwise
-a list is returned.
+element that fails.
 
 ## Usage
 
