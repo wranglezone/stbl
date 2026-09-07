@@ -48,12 +48,12 @@ Other specification functions:
 ## Examples
 
 ``` r
-stabilize_int_xor_chr <- specify_one_of(specify_int(), specify_chr())
+stabilize_int_xor_chr <- specify_one_of(stabilize_int, stabilize_chr)
 stabilize_int_xor_chr("a")
 #> [1] "a"
 try(stabilize_int_xor_chr("1"))
 #> Error in eval(expr, envir) : 
 #>   `"1"` must match exactly one of the provided specifications, but matched
 #> 2.
-#> ℹ Matched specifications: "<stbl_sp_>" (1) and "<stbl_sp_>" (2)
+#> ℹ Matched specifications: "<fn>" (1) and "<fn>" (2)
 ```
