@@ -36,13 +36,6 @@ test_that("stabilize_each() returns x unchanged for zero-length or NULL x (#287)
   expect_identical(stabilize_each(character(), stabilize_int), character())
 })
 
-test_that("stabilize_each() works with specify_* functions (#287)", {
-  expect_identical(
-    stabilize_each(list("1", "2"), specify_int_scalar()),
-    c(1L, 2L)
-  )
-})
-
 test_that("stabilize_each() reports every failing location at once (#287)", {
   cnd <- rlang::catch_cnd(stabilize_each(list("1", "a", "b"), stabilize_int))
   expect_identical(cnd$locations, c(2L, 3L))

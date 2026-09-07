@@ -43,9 +43,7 @@ whatever condition \code{spec} throws for the first failing element.
 \description{
 \code{to_each()} applies \code{spec} (a \verb{to_*} function, \verb{stabilize_*} function, or
 \verb{specify_*()} result) to every element of \code{x}, and stops at the first
-element that fails. When every result has size 1 and shares a common type,
-the results are simplified into a single atomic vector; otherwise a list is
-returned.
+element that fails.
 }
 \examples{
 to_each(list("1", "2", "3"), to_int)
