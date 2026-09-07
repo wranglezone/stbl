@@ -8,17 +8,6 @@ thrown; if two or more functions succeed, an error naming the
 specifications that matched is thrown. `stabilise_one_of()` is a
 synonym.
 
-Because stbl coerces liberally (Postel's law), overlapping
-specifications will frequently *both* succeed; for example, `"1"` is
-both int-ish and dbl-ish, so
-`stabilize_one_of("1", stabilize_int, stabilize_dbl)` errors as
-ambiguous. This mirrors JSON Schema's own `oneOf` behavior, where
-`oneOf: [integer, number]` fails to validate `1` because it matches
-both. `stabilize_one_of()` is therefore intended for **mutually
-exclusive** specifications; use
-[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-if any matching specification (including more than one) is acceptable.
-
 `to_one_of()` is analogous to
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
 coerce `x` to each type given in `...` (as a prototype such as

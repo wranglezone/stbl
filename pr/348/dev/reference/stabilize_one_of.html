@@ -6,13 +6,6 @@ succeed, an informative error that combines the individual failure
 messages is thrown; if two or more functions succeed, an error naming
 the specifications that matched is thrown. stabilise_one_of() is a
 synonym.
-Because stbl coerces liberally (Postel's law), overlapping
-specifications will frequently both succeed; for example, &quot;1&quot; is
-both int-ish and dbl-ish, so stabilize_one_of(&quot;1&quot;, stabilize_int, stabilize_dbl) errors as ambiguous. This mirrors JSON Schema's own
-oneOf behavior, where oneOf: [integer, number] fails to validate 1
-because it matches both. stabilize_one_of() is therefore intended for
-mutually exclusive specifications; use stabilize_any_of() if any
-matching specification (including more than one) is acceptable.
 to_one_of() is analogous to to(): it tries to coerce x to each type
 given in ... (as a prototype such as integer() or character()) and
 requires that exactly one succeeds."><meta property="og:description" content="stabilize_one_of() evaluates every function in ...
@@ -22,13 +15,6 @@ succeed, an informative error that combines the individual failure
 messages is thrown; if two or more functions succeed, an error naming
 the specifications that matched is thrown. stabilise_one_of() is a
 synonym.
-Because stbl coerces liberally (Postel's law), overlapping
-specifications will frequently both succeed; for example, &quot;1&quot; is
-both int-ish and dbl-ish, so stabilize_one_of(&quot;1&quot;, stabilize_int, stabilize_dbl) errors as ambiguous. This mirrors JSON Schema's own
-oneOf behavior, where oneOf: [integer, number] fails to validate 1
-because it matches both. stabilize_one_of() is therefore intended for
-mutually exclusive specifications; use stabilize_any_of() if any
-matching specification (including more than one) is acceptable.
 to_one_of() is analogous to to(): it tries to coerce x to each type
 given in ... (as a prototype such as integer() or character()) and
 requires that exactly one succeeds."><meta property="og:image" content="https://stbl.wrangle.zone/logo.svg"><meta name="robots" content="noindex"></head><body>
@@ -77,13 +63,6 @@ succeed, an informative error that combines the individual failure
 messages is thrown; if two or more functions succeed, an error naming
 the specifications that matched is thrown. <code>stabilise_one_of()</code> is a
 synonym.</p>
-<p>Because stbl coerces liberally (Postel's law), overlapping
-specifications will frequently <em>both</em> succeed; for example, <code>"1"</code> is
-both int-ish and dbl-ish, so <code>stabilize_one_of("1", stabilize_int, stabilize_dbl)</code> errors as ambiguous. This mirrors JSON Schema's own
-<code>oneOf</code> behavior, where <code>oneOf: [integer, number]</code> fails to validate <code>1</code>
-because it matches both. <code>stabilize_one_of()</code> is therefore intended for
-<strong>mutually exclusive</strong> specifications; use <code><a href="stabilize_any_of.html">stabilize_any_of()</a></code> if any
-matching specification (including more than one) is acceptable.</p>
 <p><code>to_one_of()</code> is analogous to <code><a href="to.html">to()</a></code>: it tries to coerce <code>x</code> to each type
 given in <code>...</code> (as a prototype such as <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>) and
 requires that exactly one succeeds.</p>
