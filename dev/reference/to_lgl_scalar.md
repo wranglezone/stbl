@@ -94,6 +94,7 @@ Other logical functions:
 
 Other stabilization functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),

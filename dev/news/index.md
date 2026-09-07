@@ -48,16 +48,19 @@
   `additional_class` argument prepends extra classes to the error class
   list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
 - New function
+  [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
+  validates `x` by applying each stabilizer function in `...`, failing
+  if any stabilizer fails or if the stabilized values are different
+  ([\#278](https://github.com/wranglezone/stbl/issues/278)).
+- New function
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  validates `x` by trying each unnamed stabilizer function in `...` in
-  order, returning the first successful result. If all functions fail,
-  an informative error combining the individual failure messages is
-  thrown. New function
+  validates `x` by trying each stabilizer function in `...` in order,
+  returning the first successful result. If all functions fail, an
+  informative error combining the individual failure messages is thrown.
+  New function
   [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  works analogously, accepting type prototypes
-  (e.g. [`integer()`](https://rdrr.io/r/base/integer.html),
-  [`character()`](https://rdrr.io/r/base/character.html)) in `...` and
-  dispatching to \[to()\]
+  works analogously, coercing to the first successful type prototype in
+  `...` via [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
   ([\#215](https://github.com/wranglezone/stbl/issues/215),
   [\#285](https://github.com/wranglezone/stbl/issues/285)).
 - [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
