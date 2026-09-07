@@ -55,8 +55,10 @@ reference:
   - matches("dttm")
   - matches("time")
   - matches("dur")
-- title: any type
-- contents: stabilize_any_of
+- title: multiple types
+- contents:
+  - stabilize_all_of
+  - stabilize_any_of
 - title: generic args
 - contents:
   - object_type

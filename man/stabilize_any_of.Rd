@@ -99,6 +99,7 @@ try(to_any_of(list(), integer(), character()))
 \seealso{
 Other stabilization functions:
 \code{\link[=assert_present]{assert_present()}},
+\code{\link[=stabilize_all_of]{stabilize_all_of()}},
 \code{\link[=stabilize_arg]{stabilize_arg()}},
 \code{\link[=stabilize_chr]{stabilize_chr()}},
 \code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
