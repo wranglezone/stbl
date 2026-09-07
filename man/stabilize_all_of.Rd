@@ -27,8 +27,8 @@ stabilise_all_of(
 \item{...}{Unnamed stabilizer functions, such as \verb{stabilize_*} functions
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), \verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), or
 functions produced by \verb{specify_*()} calls (\code{\link[=specify_chr]{specify_chr()}}, etc.). Each is
-applied to the original \code{x}; \code{x} must pass every one of them, and they
-must all return the same value.}
+applied to the original \code{x}; \code{x} must pass every one of them, and they must
+all return the same value.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -45,9 +45,8 @@ the original class.}
 }
 \value{
 \code{x} coerced or validated by every function in \code{...}, or an error
-condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
-failure mode:
+condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
+\verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
 \item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
@@ -57,16 +56,11 @@ they don't all produce the same coerced value.
 }
 }
 \description{
-\code{stabilize_all_of()} validates and coerces \code{x} by applying
-every function in \code{...} to \code{x}, independently. \code{x} must satisfy every
-spec, and all specs must agree on the coerced result; if any spec fails,
-or specs disagree on the coerced value, an informative error is thrown.
-\code{stabilise_all_of()} is a synonym.
-
-Unlike \code{\link[=stabilize_any_of]{stabilize_any_of()}}, the order of \code{...} doesn't affect whether
-\code{x} passes: every spec sees the same, original \code{x}, not the output of the
-previous spec. Order only affects which spec's failure message is
-reported first when several specs fail.
+\code{stabilize_all_of()} validates and coerces \code{x} by applying every function in
+\code{...} to \code{x}, independently. \code{x} must satisfy every spec, and all specs must
+agree on the coerced result; if any spec fails, or specs disagree on the
+coerced value, an informative error is thrown. \code{stabilise_all_of()} is a
+synonym.
 }
 \examples{
 # Returns x unchanged when all functions succeed

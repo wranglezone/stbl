@@ -1,27 +1,21 @@
 #' Try to coerce or validate x as all of several specs
 #'
-#' @description `stabilize_all_of()` validates and coerces `x` by applying
-#'   every function in `...` to `x`, independently. `x` must satisfy every
-#'   spec, and all specs must agree on the coerced result; if any spec fails,
-#'   or specs disagree on the coerced value, an informative error is thrown.
-#'   `stabilise_all_of()` is a synonym.
-#'
-#'   Unlike [stabilize_any_of()], the order of `...` doesn't affect whether
-#'   `x` passes: every spec sees the same, original `x`, not the output of the
-#'   previous spec. Order only affects which spec's failure message is
-#'   reported first when several specs fail.
+#' `stabilize_all_of()` validates and coerces `x` by applying every function in
+#' `...` to `x`, independently. `x` must satisfy every spec, and all specs must
+#' agree on the coerced result; if any spec fails, or specs disagree on the
+#' coerced value, an informative error is thrown. `stabilise_all_of()` is a
+#' synonym.
 #'
 #' @param ... Unnamed stabilizer functions, such as `stabilize_*` functions
 #'   ([stabilize_chr()], etc.), `to_*` functions ([to_chr()], etc.), or
 #'   functions produced by `specify_*()` calls ([specify_chr()], etc.). Each is
-#'   applied to the original `x`; `x` must pass every one of them, and they
-#'   must all return the same value.
+#'   applied to the original `x`; `x` must pass every one of them, and they must
+#'   all return the same value.
 #' @inheritParams .shared-params
 #'
 #' @returns `x` coerced or validated by every function in `...`, or an error
-#'   condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-#'   failure mode:
+#'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
+#'   `<error>`, `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
 #'   - `<stbl-error-named_spec>` when any element of `...` is named.
 #'   - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
