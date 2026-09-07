@@ -111,6 +111,15 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into
+a single atomic vector when possible (every result has size 1 and shares
+a common type)? If \code{FALSE}, a list is always returned.}
+
+\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
+(\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
+
 \item{to}{The target object for the coercion.}
 
 \item{to_class}{(\code{character(1)}) The name of the class to coerce to.}

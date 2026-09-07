@@ -60,10 +60,13 @@ reference:
   - assert_not
   - specify_all_of
   - specify_any_of
+  - specify_each
   - specify_one_of
   - stabilize_all_of
   - stabilize_any_of
+  - stabilize_each
   - stabilize_one_of
+  - to_each
 - title: generic args
 - contents:
   - object_type

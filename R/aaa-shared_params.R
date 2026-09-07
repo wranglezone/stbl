@@ -77,6 +77,13 @@
 #'   message that should be displayed. To check that a pattern is *not* matched,
 #'   attach a `negate` attribute set to `TRUE`. If a complex regex pattern
 #'   throws an error, try installing the stringi package.
+#' @param simplify (`logical(1)`) Should per-element results be combined into
+#'   a single atomic vector when possible (every result has size 1 and shares
+#'   a common type)? If `FALSE`, a list is always returned.
+#' @param spec `(function)` A single stabilizer or coercion function, such as
+#'   a `to_*` function ([to_chr()], etc.), a `stabilize_*` function
+#'   ([stabilize_chr()], etc.), or a function produced by a `specify_*()` call
+#'   ([specify_chr()], etc.). Applied independently to each element of `x`.
 #' @param to The target object for the coercion.
 #' @param to_class (`character(1)`) The name of the class to coerce to.
 #' @param to_cls_args `(list)` A list of additional arguments to pass to
