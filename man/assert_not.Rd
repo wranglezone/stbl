@@ -16,8 +16,8 @@ assert_not(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{spec}{A single stabilizer function, \verb{to_*} function, or
-\verb{specify_*()} result that \code{x} must \strong{not} match.}
+\item{spec}{A single stabilizer function, \verb{to_*} function, \verb{specify_*()}
+result, or \verb{assert_*} function that \code{x} must \strong{not} match.}
 
 \item{...}{Reserved for future use; must be empty.}
 
@@ -42,17 +42,7 @@ condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
 }
 \description{
 \code{assert_not()} is the inverse of a single specification: it errors when \code{x}
-\strong{would} be accepted by \code{spec}, and returns \code{x} unchanged otherwise. Under
-Postel's law, "would be accepted" means "would coerce" — so
-\code{assert_not("1", specify_int())} errors because \code{"1"} is int-ish, even
-though it isn't literally an integer.
-}
-\details{
-Because \verb{assert_*()} functions return their input unchanged, they compose
-cleanly with the \verb{stabilize_*_of()} family (\code{\link[=stabilize_any_of]{stabilize_any_of()}},
-\code{\link[=stabilize_one_of]{stabilize_one_of()}}, \code{\link[=stabilize_all_of]{stabilize_all_of()}}): wrap \code{assert_not()} in a
-function that forwards \code{x_arg}/\code{call} and pass it alongside other specs to
-require that \code{x} is \emph{not} something, in addition to other constraints.
+\strong{would} be accepted by \code{spec}, and returns \code{x} unchanged otherwise.
 }
 \examples{
 assert_not("a", specify_int())

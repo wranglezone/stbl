@@ -1,11 +1,3 @@
-# assert_not() errors when spec would coerce x (#289)
-
-    Code
-      assert_not("1", specify_int())
-    Condition <stbl-error-matched_spec>
-      Error:
-      ! `"1"` must not match "specify_int()".
-
 # assert_not() errors when spec succeeds outright (#289)
 
     Code

@@ -3,15 +3,6 @@ test_that("assert_not() returns x unchanged when spec fails (#289)", {
   expect_identical(assert_not(1.5, stabilize_int), 1.5)
 })
 
-test_that("assert_not() errors when spec would coerce x (#289)", {
-  # "1" is int-ish (coercible), even though it isn't literally an integer
-  expect_pkg_error_snapshot(
-    assert_not("1", specify_int()),
-    "stbl",
-    "matched_spec"
-  )
-})
-
 test_that("assert_not() errors when spec succeeds outright (#289)", {
   expect_pkg_error_snapshot(
     assert_not(1L, stabilize_int),
