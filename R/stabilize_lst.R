@@ -36,6 +36,8 @@
 #'   required unless you opt it out. Named specs *not* listed here are
 #'   optional: if absent, no error is raised; if present, they're validated
 #'   normally. Pass `NULL` or `character()` to make every named spec optional.
+#'   A zero-length `.x` (such as `list()`) skips this check when
+#'   `.allow_zero_length = TRUE` (the default); see `allow_zero_length`.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list, or an error condition with classes
@@ -119,6 +121,7 @@ stabilize_lst <- function(
   .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
@@ -137,6 +140,9 @@ stabilize_lst <- function(
     ))
   }
   .x <- to_lst(.x, x_arg = .x_arg, call = .call)
+  if (!length(.x) && to_lgl_scalar(.allow_zero_length, call = .call)) {
+    return(.x)
+  }
   .check_size(
     .x,
     min_size = .min_size,
@@ -276,9 +282,6 @@ NULL
   .x_arg,
   .call
 ) {
-  if (!any(rlang::have_name(.x))) {
-    return(.x)
-  }
   .check_duplicate_names(
     .x,
     .allow_duplicate_names,

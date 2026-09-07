@@ -38,6 +38,14 @@
       Error:
       ! `data.frame(foo = "a")` must contain element "name".
 
+# stabilize_df() checks required columns for zero-column .x when .allow_zero_length = FALSE (#344)
+
+    Code
+      stabilize_df(data.frame(), name = specify_chr_scalar(), .allow_zero_length = FALSE)
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `data.frame()` must contain element "name".
+
 # stabilize_df() errors informatively when column fails validation (#142, #310, #335)
 
     Code

@@ -43,6 +43,7 @@ specify_lst <- function(
   .unnamed = NULL,
   .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names()
@@ -65,6 +66,7 @@ specify_lst <- function(
           .unnamed = .unnamed,
           .unique = .unique,
           .allow_null = .allow_null,
+          .allow_zero_length = .allow_zero_length,
           .min_size = .min_size,
           .max_size = .max_size,
           .required = .required,

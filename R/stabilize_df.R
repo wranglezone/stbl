@@ -31,6 +31,8 @@
 #'   required unless you opt it out. Named specs *not* listed here are
 #'   optional: if absent, no error is raised; if present, they're validated
 #'   normally. Pass `NULL` or `character()` to make every named spec optional.
+#'   A `.x` with zero columns skips this check when
+#'   `.allow_zero_length = TRUE` (the default); see `allow_zero_length`.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated data frame, or an error condition with classes
@@ -120,6 +122,7 @@ stabilize_df <- function(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
@@ -149,6 +152,7 @@ stabilize_df <- function(
     .x,
     ...,
     .named = .extra_cols,
+    .allow_zero_length = .allow_zero_length,
     .required = .required,
     .x_arg = .x_arg,
     .call = .call,

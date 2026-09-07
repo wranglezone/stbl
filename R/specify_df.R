@@ -37,6 +37,7 @@ specify_df <- function(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .required = ...names()
 ) {
   element_specs <- list(...)
@@ -58,6 +59,7 @@ specify_df <- function(
           .min_rows = .min_rows,
           .max_rows = .max_rows,
           .allow_null = .allow_null,
+          .allow_zero_length = .allow_zero_length,
           .required = .required,
           .x_arg = .x_arg,
           .call = .call,

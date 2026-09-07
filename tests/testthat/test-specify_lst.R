@@ -58,6 +58,17 @@ test_that("specify_lst() passes through .required (#279)", {
   expect_identical(spec(given), given)
 })
 
+test_that("specify_lst() passes through .allow_zero_length (#344)", {
+  spec <- specify_lst(a = specify_int_scalar())
+  expect_identical(spec(list()), list())
+
+  spec_strict <- specify_lst(
+    a = specify_int_scalar(),
+    .allow_zero_length = FALSE
+  )
+  expect_pkg_error_classes(spec_strict(list()), "stbl", "missing_element")
+})
+
 test_that("specify_lst() requires all element specs by default (#279)", {
   spec <- specify_lst(a = specify_int_scalar(), b = specify_int_scalar())
   expect_pkg_error_classes(spec(list(a = 1L)), "stbl", "missing_element")
