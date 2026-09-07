@@ -56,7 +56,9 @@ reference:
   - matches("time")
   - matches("dur")
 - title: any type
-- contents: stabilize_any_of
+- contents:
+  - stabilize_all_of
+  - stabilize_any_of
 - title: generic args
 - contents:
   - object_type
