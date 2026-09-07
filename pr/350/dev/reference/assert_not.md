@@ -2,9 +2,7 @@
 
 `assert_not()` is the inverse of a single specification: it errors when
 `x` **would** be accepted by `spec`, and returns `x` unchanged
-otherwise. Under Postel's law, "would be accepted" means "would coerce"
-— so `assert_not("1", specify_int())` errors because `"1"` is int-ish,
-even though it isn't literally an integer.
+otherwise.
 
 ## Usage
 
@@ -27,8 +25,8 @@ assert_not(
 
 - spec:
 
-  A single stabilizer function, `to_*` function, or `specify_*()` result
-  that `x` must **not** match.
+  A single stabilizer function, `to_*` function, `specify_*()` result,
+  or `assert_*` function that `x` must **not** match.
 
 - ...:
 
@@ -58,17 +56,6 @@ assert_not(
 `x`, unchanged, if `x` does not match `spec`, or an error condition with
 classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and `<stbl-error-matched_spec>` when `x` matches `spec`.
-
-## Details
-
-Because `assert_*()` functions return their input unchanged, they
-compose cleanly with the `stabilize_*_of()` family
-([`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
-[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
-[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)):
-wrap `assert_not()` in a function that forwards `x_arg`/`call` and pass
-it alongside other specs to require that `x` is *not* something, in
-addition to other constraints.
 
 ## See also
 
