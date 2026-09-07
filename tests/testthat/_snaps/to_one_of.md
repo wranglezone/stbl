@@ -36,6 +36,15 @@
       x `val` must be a vector, not an environment.
       x Can't coerce `val` <environment> to <character>.
 
+# to_one_of() disambiguates identical matched labels by position (#286)
+
+    Code
+      to_one_of(1.5, double(), integer(), double())
+    Condition <stbl-error-cant_stabilize_one_of>
+      Error:
+      ! `1.5` must match exactly one of the provided specifications, but matched 2.
+      i Matched specifications: "double" (1) and "double" (3)
+
 # to_one_of() errors when ... is empty (#286)
 
     Code

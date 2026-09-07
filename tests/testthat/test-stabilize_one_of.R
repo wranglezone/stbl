@@ -82,6 +82,16 @@ test_that("stabilize_one_of() names the matched specs when more than one succeed
   )
 })
 
+test_that("stabilize_one_of() disambiguates identical matched labels by position (#286)", {
+  # The same specify_dbl() spec is passed twice; both match 1.5, so their
+  # (otherwise identical) labels must be told apart by position
+  expect_pkg_error_snapshot(
+    stabilize_one_of(1.5, specify_dbl(), specify_int(), specify_dbl()),
+    "stbl",
+    "cant_stabilize_one_of"
+  )
+})
+
 test_that("stabilize_one_of() errors when ... is empty (#286)", {
   expect_pkg_error_snapshot(
     stabilize_one_of(1L),

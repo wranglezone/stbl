@@ -99,6 +99,7 @@ stabilise_one_of <- stabilize_one_of
 .try_exactly_one <- function(items, run_one, labels, x_arg, call) {
   errors <- list()
   matched <- character(0L)
+  matched_at <- integer(0L)
   result <- NULL
   for (i in seq_along(items)) {
     attempt <- rlang::try_fetch(
@@ -109,6 +110,7 @@ stabilise_one_of <- stabilize_one_of
       errors <- c(errors, list(attempt))
     } else {
       matched <- c(matched, labels[[i]])
+      matched_at <- c(matched_at, i)
       result <- attempt
     }
   }
@@ -118,9 +120,35 @@ stabilise_one_of <- stabilize_one_of
   .stop_cant_stabilize_one_of(
     errors = errors,
     matched = matched,
+    matched_at = matched_at,
     x_arg = x_arg,
     call = call
   )
+}
+
+#' Format matched specification labels for an error message
+#'
+#' When two or more matched labels are identical (e.g. the same function or
+#' prototype passed more than once via `...`), appends each label's position
+#' in `...` so the matches can be told apart; otherwise returns `matched`
+#' unchanged, letting the caller quote it with `{.val {matched}}`.
+#'
+#' @param matched `(character)` Labels of the specifications that succeeded.
+#' @param matched_at `(integer)` Positions in `...` of the specifications
+#'   that succeeded, parallel to `matched`.
+#' @returns A character vector, pre-quoted with position suffixes if `matched`
+#'   contains duplicates, or `matched` itself otherwise.
+#' @keywords internal
+.label_matched_specs <- function(matched, matched_at) {
+  if (!anyDuplicated(matched)) {
+    return(cli::format_inline("{.val {matched}}"))
+  }
+  quoted <- vapply(
+    matched,
+    function(label) cli::format_inline("{.val {label}}"),
+    character(1L)
+  )
+  paste0(quoted, " (", matched_at, ")")
 }
 
 #' Signal an error when zero, or more than one, specs match in
@@ -130,15 +158,25 @@ stabilise_one_of <- stabilize_one_of
 #'   used when `matched` is empty.
 #' @param matched `(character)` Labels of the specifications that succeeded.
 #'   Only used when there are two or more.
+#' @param matched_at `(integer)` Positions in `...` of the specifications that
+#'   succeeded, parallel to `matched`. Used to disambiguate `matched` labels
+#'   that are identical (e.g. the same function passed more than once).
 #' @inheritParams stabilize_lst
 #' @returns Does not return; throws an error.
 #' @keywords internal
-.stop_cant_stabilize_one_of <- function(errors, matched, x_arg, call) {
+.stop_cant_stabilize_one_of <- function(
+  errors,
+  matched,
+  matched_at,
+  x_arg,
+  call
+) {
   if (length(matched) >= 2L) {
+    labeled <- .label_matched_specs(matched, matched_at)
     .stop_must(
       "must match exactly one of the provided specifications, but matched {length(matched)}.",
       x_arg = x_arg,
-      additional_msg = c(i = "Matched specifications: {.val {matched}}"),
+      additional_msg = c(i = "Matched specifications: {labeled}"),
       call = call,
       subclass = "cant_stabilize_one_of",
       message_env = rlang::current_env()

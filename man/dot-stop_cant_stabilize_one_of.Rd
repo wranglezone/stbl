@@ -5,7 +5,7 @@
 \title{Signal an error when zero, or more than one, specs match in
 stabilize_one_of()/to_one_of()}
 \usage{
-.stop_cant_stabilize_one_of(errors, matched, x_arg, call)
+.stop_cant_stabilize_one_of(errors, matched, matched_at, x_arg, call)
 }
 \arguments{
 \item{errors}{\code{(list)} List of error conditions from failed attempts. Only
@@ -13,6 +13,10 @@ used when \code{matched} is empty.}
 
 \item{matched}{\code{(character)} Labels of the specifications that succeeded.
 Only used when there are two or more.}
+
+\item{matched_at}{\code{(integer)} Positions in \code{...} of the specifications that
+succeeded, parallel to \code{matched}. Used to disambiguate \code{matched} labels
+that are identical (e.g. the same function passed more than once).}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

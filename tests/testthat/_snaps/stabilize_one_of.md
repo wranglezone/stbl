@@ -64,6 +64,15 @@
       ! `1L` must match exactly one of the provided specifications, but matched 3.
       i Matched specifications: "stabilize_int", "stabilize_int_scalar", and "stabilize_chr"
 
+# stabilize_one_of() disambiguates identical matched labels by position (#286)
+
+    Code
+      stabilize_one_of(1.5, specify_dbl(), specify_int(), specify_dbl())
+    Condition <stbl-error-cant_stabilize_one_of>
+      Error:
+      ! `1.5` must match exactly one of the provided specifications, but matched 2.
+      i Matched specifications: "specify_dbl()" (1) and "specify_dbl()" (3)
+
 # stabilize_one_of() errors when ... is empty (#286)
 
     Code
