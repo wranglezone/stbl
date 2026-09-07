@@ -1,5 +1,3 @@
-# one_of ----
-
 #' Create a specified one-of stabilizer function
 #'
 #' `specify_one_of()` creates a function that will call [stabilize_one_of()]
@@ -17,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' stabilize_int_xor_chr <- specify_one_of(specify_int(), specify_chr())
+#' stabilize_int_xor_chr <- specify_one_of(stabilize_int, stabilize_chr)
 #' stabilize_int_xor_chr("a")
 #' try(stabilize_int_xor_chr("1"))
 specify_one_of <- function(...) {

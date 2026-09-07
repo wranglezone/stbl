@@ -23,7 +23,7 @@ with the provided specs. \code{specify_one_of()}'s function requires that
 exactly one of the provided specs succeeds.
 }
 \examples{
-stabilize_int_xor_chr <- specify_one_of(specify_int(), specify_chr())
+stabilize_int_xor_chr <- specify_one_of(stabilize_int, stabilize_chr)
 stabilize_int_xor_chr("a")
 try(stabilize_int_xor_chr("1"))
 }
