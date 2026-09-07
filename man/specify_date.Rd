@@ -83,6 +83,7 @@ Other specification functions:
 \code{\link[=specify_df]{specify_df()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=specify_dur]{specify_dur()}},
+\code{\link[=specify_each]{specify_each()}},
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
