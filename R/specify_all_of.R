@@ -1,5 +1,3 @@
-# all_of ----
-
 #' Create a specified all-of stabilizer function
 #'
 #' `specify_all_of()` creates a function that will call [stabilize_all_of()]
