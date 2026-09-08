@@ -151,7 +151,11 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_chr_impl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_from_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_date_locale.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_date_locale_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_df_vector.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_dttm_locale.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_dttm_locale_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_num_from_complex.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_date_formats.html</loc></url>

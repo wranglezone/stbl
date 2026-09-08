@@ -64,7 +64,6 @@ message is signaled.</p>
 <span><span class="fu">to_date</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  accepted_datetime_formats <span class="op">=</span> <span class="st">"%Y-%m-%d"</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -125,16 +124,6 @@ the original class.</p></dd>
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
-
-
-<dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
-<dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
-strings to try, in order, when parsing a character <code>x</code>. The first format
-that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
-<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
-shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
-falling back to the current locale's conventional date order.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -181,6 +181,24 @@
   [\#105](https://github.com/wranglezone/stbl/issues/105),
   [\#294](https://github.com/wranglezone/stbl/issues/294),
   [\#295](https://github.com/wranglezone/stbl/issues/295)).
+- New function
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)
+  returns a locale-aware set of
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style
+  date/date-time formats.
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+  [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+  and their `specify_*()` factories gain a new
+  `accepted_datetime_formats` argument (defaulting to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md))
+  so that locale-dependent formats such as `"11/13/2018"` are accepted
+  where unambiguous;
+  [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) and
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) are
+  unaffected and continue to require the strict RFC 3339 shape
+  ([\#326](https://github.com/wranglezone/stbl/issues/326)).
 - [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)’s
   `.extra_cols` argument and
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)/[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)’s
