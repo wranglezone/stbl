@@ -44,7 +44,7 @@ assert_contains(
 - min_matches:
 
   (`integer(1)`) The minimum number of elements of `x` that must match
-  `spec`. Must be `>= 0`. Set to `0` (with non-`NULL` `max_matches` to
+  `spec`. Must be `>= 0`. Set to `0` (with non-`NULL` `max_matches`) to
   check only an upper bound on the number of matches.
 
 - max_matches:
