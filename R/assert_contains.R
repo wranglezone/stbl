@@ -7,7 +7,7 @@
 #'
 #' @param min_matches (`integer(1)`) The minimum number of elements of `x`
 #'   that must match `spec`. Must be `>= 0`. Set to `0` (with non-`NULL`
-#'   `max_matches` to check only an upper bound on the number of matches.
+#'   `max_matches`) to check only an upper bound on the number of matches.
 #' @param max_matches (`integer(1)` or `NULL`) The maximum number of elements
 #'   of `x` that may match `spec`. Must be `>= min_matches`. `NULL` (default)
 #'   skips the upper-bound check.
@@ -84,7 +84,7 @@ assert_contains <- function(
     )
   }
 
-  if (min_matches == 0 && is.null(max_matches)) {
+  if (!min_matches && is.null(max_matches)) {
     return(x)
   }
 
