@@ -52,6 +52,30 @@ test_that(".stabilize_cls() calls to_cls_fn with to_cls_args", {
   )
 })
 
+test_that(".stabilize_cls() returns NULL if allowed (#353)", {
+  to_fn <- function(x, ..., allow_null = TRUE) {
+    if (is.null(x) && allow_null) {
+      return(NULL)
+    }
+    as.integer(x)
+  }
+  expect_null(
+    .stabilize_cls(
+      NULL,
+      to_cls_fn = to_fn,
+      allow_null = TRUE
+    )
+  )
+  expect_equal(
+    .stabilize_cls(
+      1:5,
+      to_cls_fn = to_fn,
+      allow_null = TRUE
+    ),
+    1:5
+  )
+})
+
 test_that(".stabilize_cls() calls check_cls_value_fn", {
   check_fn <- function(x, ..., my_arg = "default") {
     if (my_arg != "success") {
