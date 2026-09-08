@@ -17,6 +17,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_fn_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_int_ish.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/are_lgl_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/assert_contains.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/assert_not.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/assert_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/c_x_to_y.html</loc></url>
@@ -40,6 +41,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_function_allowed.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_is_not_primitive.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_lst_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_match_count.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_multiple_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_not_jagged.html</loc></url>
@@ -93,6 +95,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-extract_stabilizer_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-fast_false.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_failures.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_spec_matches.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-glue2.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-has_regex_pattern.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>

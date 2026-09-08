@@ -82,6 +82,7 @@ Other duration functions:
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md),
 [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),

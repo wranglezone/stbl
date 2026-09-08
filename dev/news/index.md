@@ -26,6 +26,11 @@
 ### New features
 
 - New function
+  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
+  counts how many elements of `x` match a `spec` and checks that the
+  count is within a specified range
+  ([\#290](https://github.com/wranglezone/stbl/issues/290)).
+- New function
   [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   errors when `x` would be accepted (coerced or validated) by a single
   `spec`, and returns `x` unchanged otherwise

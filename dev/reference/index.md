@@ -283,6 +283,9 @@
 
 ## multiple types
 
+- [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
+  : Require that x contains a number of elements matching a
+  specification
 - [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   : Require a value not to match a specification
 - [`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md)

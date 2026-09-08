@@ -84,6 +84,7 @@ failure mode:
 ## See also
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md),
 [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
