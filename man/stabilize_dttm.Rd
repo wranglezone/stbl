@@ -155,13 +155,9 @@ are present.
 }
 \description{
 Compared to \code{\link[=to_dttm]{to_dttm()}}, \code{stabilize_dttm()} checks more details, but is
-slower. Unlike \code{\link[=to_dttm]{to_dttm()}}, character input is tried against a list of
-\code{accepted_datetime_formats} rather than only the strict RFC 3339 shape:
-locale-dependent date orders such as \code{"11/13/2018"} are accepted where
-unambiguous, and a UTC offset is no longer required (date-times without
-one are treated as wall-clock time in \code{tz}). \code{stabilise_dttm()},
-\code{stabilize_datetime()}, \code{stabilise_dttm()}, \code{stabilize_datetime()}, and
-\code{stabilise_datetime()} are synonyms of \code{stabilize_dttm()}.
+slower. \code{stabilise_dttm()}, \code{stabilize_datetime()}, \code{stabilise_dttm()},
+\code{stabilize_datetime()}, and \code{stabilise_datetime()} are synonyms of
+\code{stabilize_dttm()}.
 }
 \examples{
 stabilize_dttm(as.POSIXct("2024-01-01 12:00:00", tz = "UTC"))

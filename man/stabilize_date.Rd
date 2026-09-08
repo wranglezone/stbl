@@ -108,10 +108,7 @@ present.
 }
 \description{
 Compared to \code{\link[=to_date]{to_date()}}, \code{stabilize_date()} checks more details, but is
-slower. Unlike \code{\link[=to_date]{to_date()}}, character input is tried against a list of
-\code{accepted_datetime_formats} rather than only the strict RFC 3339 shape, so
-locale-dependent formats such as \code{"11/13/2018"} or \code{"13/11/2018"} are
-accepted where unambiguous. \code{stabilise_date()} is a synonym of
+slower. \code{stabilise_date()} is a synonym of
 \code{stabilize_date()}.
 }
 \examples{
@@ -120,7 +117,10 @@ stabilize_date("2024-01-01")
 stabilize_date(NULL)
 try(stabilize_date(NULL, allow_null = FALSE))
 try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
-stabilize_date("11/13/2018")
+stabilize_date(
+  "11/13/2018",
+   accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+)
 try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 try(stabilize_date("2024-12-01", max_value = "2024-06-01"))
 try(stabilize_date(

@@ -1,10 +1,7 @@
 #' Coerce to date with additional checks
 #'
 #' Compared to [to_date()], `stabilize_date()` checks more details, but is
-#' slower. Unlike [to_date()], character input is tried against a list of
-#' `accepted_datetime_formats` rather than only the strict RFC 3339 shape, so
-#' locale-dependent formats such as `"11/13/2018"` or `"13/11/2018"` are
-#' accepted where unambiguous. `stabilise_date()` is a synonym of
+#' slower. `stabilise_date()` is a synonym of
 #' `stabilize_date()`.
 #'
 #' @inheritParams .shared-params
@@ -34,7 +31,10 @@
 #' stabilize_date(NULL)
 #' try(stabilize_date(NULL, allow_null = FALSE))
 #' try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
-#' stabilize_date("11/13/2018")
+#' stabilize_date(
+#'   "11/13/2018",
+#'    accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+#' )
 #' try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #' try(stabilize_date("2024-12-01", max_value = "2024-06-01"))
 #' try(stabilize_date(

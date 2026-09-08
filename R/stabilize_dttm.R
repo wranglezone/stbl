@@ -1,13 +1,9 @@
 #' Coerce to date-time with additional checks
 #'
 #' Compared to [to_dttm()], `stabilize_dttm()` checks more details, but is
-#' slower. Unlike [to_dttm()], character input is tried against a list of
-#' `accepted_datetime_formats` rather than only the strict RFC 3339 shape:
-#' locale-dependent date orders such as `"11/13/2018"` are accepted where
-#' unambiguous, and a UTC offset is no longer required (date-times without
-#' one are treated as wall-clock time in `tz`). `stabilise_dttm()`,
-#' `stabilize_datetime()`, `stabilise_dttm()`, `stabilize_datetime()`, and
-#' `stabilise_datetime()` are synonyms of `stabilize_dttm()`.
+#' slower. `stabilise_dttm()`, `stabilize_datetime()`, `stabilise_dttm()`,
+#' `stabilize_datetime()`, and `stabilise_datetime()` are synonyms of
+#' `stabilize_dttm()`.
 #'
 #' @inheritParams .shared-params
 #' @inheritParams to_dttm
