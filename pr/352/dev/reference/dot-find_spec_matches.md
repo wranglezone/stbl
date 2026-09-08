@@ -1,6 +1,7 @@
-# Find which elements of x match a spec applied to x as a whole
+# Find which elements of x match a spec applied independently to each element
 
-Find which elements of x match a spec applied to x as a whole
+Find which elements of x match a spec applied independently to each
+element
 
 ## Usage
 
@@ -16,7 +17,8 @@ Find which elements of x match a spec applied to x as a whole
 
 - fn:
 
-  A stabilizer or coercion function, applied to `x` as a whole.
+  A stabilizer or coercion function, applied to each element of `x`
+  independently.
 
 - x_arg:
 

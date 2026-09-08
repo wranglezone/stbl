@@ -1,9 +1,9 @@
 # Require that x contains a number of elements matching a specification
 
-`assert_contains()` counts how many elements of `x` match a single
-`spec`, and requires that count to fall between `min_matches` and
-`max_matches` (inclusive). It returns `x` unchanged if the count is
-within bounds, and errors otherwise.
+`assert_contains()` applies `spec` to each element of `x` independently
+and counts how many elements match. It returns `x` unchanged if that
+count falls between `min_matches` and `max_matches` (inclusive), and
+errors otherwise.
 
 ## Usage
 
@@ -83,16 +83,6 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-too_many_matches>` when more than `max_matches` elements
   match `spec`.
-
-## Details
-
-`spec` is applied to `x` as a whole (not element-by-element), reusing
-the `locations`-reporting machinery used by `stabilize_*()` functions:
-if `spec` succeeds outright, every element of `x` counts as a match; if
-`spec` fails and the resulting condition carries a `locations` element
-(as most `{stbl}` failures do), every element *not* in `locations`
-counts as a match; if `spec` fails without a `locations` element, no
-elements count as matches.
 
 ## See also
 
@@ -181,4 +171,22 @@ try(assert_contains(list("1", "2", "3"), stabilize_int, max_matches = 2))
 #>   `list("1", "2", "3")` <list> must contain at most 2 elements matching
 #> `spec`.
 #> ✖ Found 3 matching elements.
+
+# spec is applied to each element, not to x as a whole, so a scalar spec
+# like stabilize_int_scalar() still matches every element of a list
+assert_contains(
+  list(1L, 2L, 3L),
+  stabilize_int_scalar,
+  min_matches = 2,
+  max_matches = 3
+)
+#> [[1]]
+#> [1] 1
+#> 
+#> [[2]]
+#> [1] 2
+#> 
+#> [[3]]
+#> [1] 3
+#> 
 ```
