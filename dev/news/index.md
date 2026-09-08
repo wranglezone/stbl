@@ -229,6 +229,10 @@
   instead of a generic “can’t coerce” error when a list contains
   elements that can’t be converted
   ([\#273](https://github.com/wranglezone/stbl/issues/273)).
+- `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without
+  checking other `stabilize_*()` rules. For example,
+  `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than
+  erroring ([\#353](https://github.com/wranglezone/stbl/issues/353)).
 
 ## stbl 0.4.0
 

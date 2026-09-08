@@ -82,6 +82,8 @@
 <code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code> (and <code><a href="../reference/stabilize_df.html">stabilize_df()</a></code>, which delegates to it) now correctly detects missing required named elements even when <code>.x</code> has no named elements at all, such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> or <code>list(1L, 2L)</code>. Previously, the required-element check was silently skipped whenever <code>.x</code> had no named elements (<a href="https://github.com/wranglezone/stbl/issues/344" class="external-link">#344</a>).</li>
 <li>
 <code><a href="../reference/to_chr.html">to_chr()</a></code>, <code><a href="../reference/to_dbl.html">to_dbl()</a></code>, <code><a href="../reference/to_fct.html">to_fct()</a></code>, <code><a href="../reference/to_int.html">to_int()</a></code>, and <code><a href="../reference/to_lgl.html">to_lgl()</a></code> now throw an “incompatible type” error (with failing element locations) instead of a generic “can’t coerce” error when a list contains elements that can’t be converted (<a href="https://github.com/wranglezone/stbl/issues/273" class="external-link">#273</a>).</li>
+<li>
+<code>stabilize_*(NULL, allow_null = TRUE)</code> always returns <code>NULL</code>, without checking other <code>stabilize_*()</code> rules. For example, <code>stabilize_int(NULL, min_value = 1)</code> now returns <code>NULL</code>, rather than erroring (<a href="https://github.com/wranglezone/stbl/issues/353" class="external-link">#353</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
