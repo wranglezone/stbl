@@ -26,7 +26,8 @@ a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabiliz
 \item{...}{Arguments passed to methods.}
 
 \item{min_matches}{(\code{integer(1)}) The minimum number of elements of \code{x}
-that must match \code{spec}. Must be \verb{>= 1}.}
+that must match \code{spec}. Must be \verb{>= 0}. Set to \code{0} (with non-\code{NULL}
+\code{max_matches} to check only an upper bound on the number of matches.}
 
 \item{max_matches}{(\code{integer(1)} or \code{NULL}) The maximum number of elements
 of \code{x} that may match \code{spec}. Must be \verb{>= min_matches}. \code{NULL} (default)
@@ -84,6 +85,14 @@ assert_contains(
   min_matches = 2,
   max_matches = 3
 )
+
+# Use min_matches = 0 to check only an upper bound on the number of matches
+ assert_contains(
+   list("1", "a", "b"),
+   stabilize_int,
+   min_matches = 0,
+   max_matches = 1
+ )
 }
 \seealso{
 Other stabilization functions:

@@ -68,11 +68,40 @@ test_that("assert_contains() applies spec independently to each element (#290)",
   )
 })
 
-test_that("assert_contains() errors when min_matches < 1 (#290)", {
+test_that("assert_contains() errors when min_matches < 0 (#290)", {
   expect_pkg_error_snapshot(
-    assert_contains(list(1L), stabilize_int, min_matches = 0),
+    assert_contains(list(1L), stabilize_int, min_matches = -1),
     "stbl",
     "outside_range"
+  )
+})
+
+test_that("assert_contains() allows min_matches = 0 to check only an upper bound (#290)", {
+  expect_identical(
+    assert_contains(
+      list("a", "b"),
+      stabilize_int,
+      min_matches = 0,
+      max_matches = 1
+    ),
+    list("a", "b")
+  )
+  expect_pkg_error_snapshot(
+    assert_contains(
+      list("1", "2"),
+      stabilize_int,
+      min_matches = 0,
+      max_matches = 1
+    ),
+    "stbl",
+    "too_many_matches"
+  )
+})
+
+test_that("assert_contains() returns x unchanged early when min_matches = 0 and max_matches is NULL (#290)", {
+  expect_identical(
+    assert_contains(list("a", "b"), stabilize_int, min_matches = 0),
+    list("a", "b")
   )
 })
 

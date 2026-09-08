@@ -6,7 +6,8 @@
 #' otherwise.
 #'
 #' @param min_matches (`integer(1)`) The minimum number of elements of `x`
-#'   that must match `spec`. Must be `>= 1`.
+#'   that must match `spec`. Must be `>= 0`. Set to `0` (with non-`NULL`
+#'   `max_matches` to check only an upper bound on the number of matches.
 #' @param max_matches (`integer(1)` or `NULL`) The maximum number of elements
 #'   of `x` that may match `spec`. Must be `>= min_matches`. `NULL` (default)
 #'   skips the upper-bound check.
@@ -43,6 +44,14 @@
 #'   min_matches = 2,
 #'   max_matches = 3
 #' )
+#'
+#' # Use min_matches = 0 to check only an upper bound on the number of matches
+#'  assert_contains(
+#'    list("1", "a", "b"),
+#'    stabilize_int,
+#'    min_matches = 0,
+#'    max_matches = 1
+#'  )
 assert_contains <- function(
   x,
   spec,
@@ -61,7 +70,7 @@ assert_contains <- function(
 
   min_matches <- stabilize_int_scalar(
     min_matches,
-    min_value = 1,
+    min_value = 0,
     x_arg = "min_matches",
     call = call
   )
@@ -73,6 +82,10 @@ assert_contains <- function(
       x_arg = "max_matches",
       call = call
     )
+  }
+
+  if (min_matches == 0 && is.null(max_matches)) {
+    return(x)
   }
 
   fn <- rlang::eval_tidy(spec_quo)

@@ -34,14 +34,23 @@
       ! `list("a", "b")` <list> must contain at least 1 element matching `spec`.
       x Found 0 matching elements.
 
-# assert_contains() errors when min_matches < 1 (#290)
+# assert_contains() errors when min_matches < 0 (#290)
 
     Code
-      assert_contains(list(1L), stabilize_int, min_matches = 0)
+      assert_contains(list(1L), stabilize_int, min_matches = -1)
     Condition <stbl-error-outside_range>
       Error:
-      ! `min_matches` must be >= 1.
-      x 0 is too low.
+      ! `min_matches` must be >= 0.
+      x -1 is too low.
+
+# assert_contains() allows min_matches = 0 to check only an upper bound (#290)
+
+    Code
+      assert_contains(list("1", "2"), stabilize_int, min_matches = 0, max_matches = 1)
+    Condition <stbl-error-too_many_matches>
+      Error:
+      ! `list("1", "2")` <list> must contain at most 1 element matching `spec`.
+      x Found 2 matching elements.
 
 # assert_contains() errors when max_matches < min_matches (#290)
 
