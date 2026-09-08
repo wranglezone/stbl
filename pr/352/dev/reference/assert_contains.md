@@ -44,7 +44,8 @@ assert_contains(
 - min_matches:
 
   (`integer(1)`) The minimum number of elements of `x` that must match
-  `spec`. Must be `>= 1`.
+  `spec`. Must be `>= 0`. Set to `0` (with non-`NULL` `max_matches` to
+  check only an upper bound on the number of matches.
 
 - max_matches:
 
@@ -188,5 +189,22 @@ assert_contains(
 #> 
 #> [[3]]
 #> [1] 3
+#> 
+
+# Use min_matches = 0 to check only an upper bound on the number of matches
+ assert_contains(
+   list("1", "a", "b"),
+   stabilize_int,
+   min_matches = 0,
+   max_matches = 1
+ )
+#> [[1]]
+#> [1] "1"
+#> 
+#> [[2]]
+#> [1] "a"
+#> 
+#> [[3]]
+#> [1] "b"
 #> 
 ```

@@ -28,9 +28,9 @@
 - New function
   [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
   counts how many elements of `x` match a single `spec` and errors
-  unless that count is between `min_matches` and `max_matches`,
-  returning `x` unchanged otherwise
-  ([\#290](https://github.com/wranglezone/stbl/issues/290)).
+  unless that count is between `min_matches` (which can be `0`, to check
+  only an upper bound) and `max_matches`, returning `x` unchanged
+  otherwise ([\#290](https://github.com/wranglezone/stbl/issues/290)).
 - New function
   [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   errors when `x` would be accepted (coerced or validated) by a single
