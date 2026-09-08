@@ -1,7 +1,11 @@
 #' Coerce to date with additional checks
 #'
 #' Compared to [to_date()], `stabilize_date()` checks more details, but is
-#' slower. `stabilise_date()` is a synonym of `stabilize_date()`.
+#' slower. Unlike [to_date()], character input is tried against a list of
+#' `accepted_datetime_formats` rather than only the strict RFC 3339 shape, so
+#' locale-dependent formats such as `"11/13/2018"` or `"13/11/2018"` are
+#' accepted where unambiguous. `stabilise_date()` is a synonym of
+#' `stabilize_date()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -30,7 +34,7 @@
 #' stabilize_date(NULL)
 #' try(stabilize_date(NULL, allow_null = FALSE))
 #' try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
-#' try(stabilize_date("11/13/2018"))
+#' stabilize_date("11/13/2018")
 #' try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #' try(stabilize_date("2024-12-01", max_value = "2024-06-01"))
 #' try(stabilize_date(
@@ -48,6 +52,7 @@ stabilize_date <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -55,6 +60,7 @@ stabilize_date <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_date,
+    to_cls_args = list(accepted_datetime_formats = accepted_datetime_formats),
     check_cls_value_fn = .check_value_date,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -119,6 +125,7 @@ stabilize_date_scalar <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -126,6 +133,9 @@ stabilize_date_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_date_scalar,
+    to_cls_scalar_args = list(
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_date,
     check_cls_value_fn_args = list(
       min_value = min_value,

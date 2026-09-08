@@ -6,6 +6,14 @@
 \arguments{
 \item{...}{Arguments passed to methods.}
 
+\item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
+strings to try, in order, when parsing a character \code{x}. The first format
+that parses every non-\code{NA} element of \code{x} is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
+shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.}
+
 \item{additional_class}{(\code{character}) Additional classes to prepend to the
 error class list. Useful for the \code{class} argument of
 \code{\link[testthat:expect_error]{testthat::expect_error()}}.}

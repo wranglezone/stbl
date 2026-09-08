@@ -16,6 +16,7 @@ stabilize_date(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -32,6 +33,7 @@ stabilise_date(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -63,6 +65,14 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
+
+\item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
+strings to try, in order, when parsing a character \code{x}. The first format
+that parses every non-\code{NA} element of \code{x} is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
+shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -98,7 +108,11 @@ present.
 }
 \description{
 Compared to \code{\link[=to_date]{to_date()}}, \code{stabilize_date()} checks more details, but is
-slower. \code{stabilise_date()} is a synonym of \code{stabilize_date()}.
+slower. Unlike \code{\link[=to_date]{to_date()}}, character input is tried against a list of
+\code{accepted_datetime_formats} rather than only the strict RFC 3339 shape, so
+locale-dependent formats such as \code{"11/13/2018"} or \code{"13/11/2018"} are
+accepted where unambiguous. \code{stabilise_date()} is a synonym of
+\code{stabilize_date()}.
 }
 \examples{
 stabilize_date(as.Date("2024-01-01"))
@@ -106,7 +120,7 @@ stabilize_date("2024-01-01")
 stabilize_date(NULL)
 try(stabilize_date(NULL, allow_null = FALSE))
 try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
-try(stabilize_date("11/13/2018"))
+stabilize_date("11/13/2018")
 try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 try(stabilize_date("2024-12-01", max_value = "2024-06-01"))
 try(stabilize_date(
@@ -116,6 +130,7 @@ try(stabilize_date(
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
 \code{\link[=to_date]{to_date()}},

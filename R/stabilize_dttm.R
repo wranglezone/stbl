@@ -1,9 +1,13 @@
 #' Coerce to date-time with additional checks
 #'
 #' Compared to [to_dttm()], `stabilize_dttm()` checks more details, but is
-#' slower. `stabilise_dttm()`, `stabilize_datetime()`, `stabilise_dttm()`,
-#' `stabilize_datetime()`, and `stabilise_datetime()` are synonyms of
-#' `stabilize_dttm()`.
+#' slower. Unlike [to_dttm()], character input is tried against a list of
+#' `accepted_datetime_formats` rather than only the strict RFC 3339 shape:
+#' locale-dependent date orders such as `"11/13/2018"` are accepted where
+#' unambiguous, and a UTC offset is no longer required (date-times without
+#' one are treated as wall-clock time in `tz`). `stabilise_dttm()`,
+#' `stabilize_datetime()`, `stabilise_dttm()`, `stabilize_datetime()`, and
+#' `stabilise_datetime()` are synonyms of `stabilize_dttm()`.
 #'
 #' @inheritParams .shared-params
 #' @inheritParams to_dttm
@@ -40,7 +44,7 @@
 #'   c("2024-01-01T12:00:00Z", NA),
 #'   allow_na = FALSE
 #' ))
-#' try(stabilize_dttm("2024-01-01 12:00:00"))
+#' stabilize_dttm("2024-01-01 12:00:00")
 #' try(stabilize_dttm(
 #'   "2024-01-01T12:00:00Z",
 #'   min_value = "2024-06-01T00:00:00Z"
@@ -61,6 +65,7 @@ stabilize_dttm <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -68,7 +73,10 @@ stabilize_dttm <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_dttm,
-    to_cls_args = list(tz = tz),
+    to_cls_args = list(
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_dttm,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -149,6 +157,7 @@ stabilize_dttm_scalar <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -156,7 +165,10 @@ stabilize_dttm_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_dttm_scalar,
-    to_cls_scalar_args = list(tz = tz),
+    to_cls_scalar_args = list(
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_dttm,
     check_cls_value_fn_args = list(
       min_value = min_value,

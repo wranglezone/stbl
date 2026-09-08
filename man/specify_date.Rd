@@ -13,7 +13,8 @@ specify_date(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 
 specify_date_scalar(
@@ -22,7 +23,8 @@ specify_date_scalar(
   allow_na = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 }
 \arguments{
@@ -48,6 +50,14 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
+\item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
+strings to try, in order, when parsing a character \code{x}. The first format
+that parses every non-\code{NA} element of \code{x} is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
+shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.}
+
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
 \value{
@@ -70,6 +80,7 @@ try(stabilize_recent("1999-12-31"))
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
 \code{\link[=to_date]{to_date()}},

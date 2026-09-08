@@ -54,6 +54,13 @@ test_that("specify_date can enforce allowed_values (#104, #325)", {
   expect_pkg_error_classes(checker("2024-07-01"), "stbl", "allowed_values")
 })
 
+test_that("specify_date can set accepted_datetime_formats (#326)", {
+  checker <- specify_date(
+    accepted_datetime_formats = locale_datetime_formats("en_GB.UTF-8")
+  )
+  expect_identical(checker("13/11/2018"), as.Date("2018-11-13"))
+})
+
 test_that("specify_date() creates a working stabilizer (#104, #325)", {
   stabilize_recent <- specify_date(min_value = "2000-01-01")
   expect_identical(stabilize_recent("2024-01-01"), as.Date("2024-01-01"))

@@ -65,27 +65,26 @@ to_date.NULL <- function(
 to_date.character <- function(
   x,
   ...,
+  accepted_datetime_formats = "%Y-%m-%d",
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  # Only non-NA elements can fail; NA elements pass through as NA dates.
-  not_na <- !is.na(x)
-  # Enforce the RFC 3339 full-date shape up front so ambiguous formats such as
-  # "11/13/2018" are rejected rather than silently reinterpreted.
-  well_shaped <- grepl("^\\d{4}-\\d{2}-\\d{2}$", x)
-  parsed <- as.Date(x, format = "%Y-%m-%d")
-  failures <- not_na & (!well_shaped | is.na(parsed))
+  # Each format is tried in order, and must parse every non-NA element to be
+  # accepted; this is what rejects ambiguous formats such as "11/13/2018"
+  # under the default (single, RFC 3339) format. stabilize_date() passes a
+  # locale-aware list of formats to be more permissive.
+  result <- .try_date_formats(x, accepted_datetime_formats)
   .check_cast_failures(
     x,
-    failures,
+    result$failures,
     x_class,
     .date_type_obj(),
     "invalid or ambiguous date format",
     x_arg,
     call
   )
-  return(parsed)
+  return(result$parsed)
 }
 
 #' @export

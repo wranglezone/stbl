@@ -4,6 +4,13 @@
 #' make them easier to import and to find.
 #'
 #' @param ... Arguments passed to methods.
+#' @param accepted_datetime_formats (`character`) `strptime()`-style format
+#'   strings to try, in order, when parsing a character `x`. The first format
+#'   that parses every non-`NA` element of `x` is used; if none do, the
+#'   result (and any error) is based on the first format tried. Defaults to
+#'   [locale_datetime_formats()], which starts with the unambiguous RFC 3339
+#'   shape (`"%Y-%m-%d"`, optionally with a time-of-day component) before
+#'   falling back to the current locale's conventional date order.
 #' @param additional_class (`character`) Additional classes to prepend to the
 #'   error class list. Useful for the `class` argument of
 #'   [testthat::expect_error()].

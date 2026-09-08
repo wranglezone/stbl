@@ -30,7 +30,8 @@ specify_dttm <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("dttm", factory_args)
@@ -45,7 +46,8 @@ specify_dttm_scalar <- function(
   allow_na = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("datetime", factory_args, scalar = TRUE)

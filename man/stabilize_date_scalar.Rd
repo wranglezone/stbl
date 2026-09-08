@@ -14,6 +14,7 @@ stabilize_date_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -28,6 +29,7 @@ stabilise_date_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -53,6 +55,14 @@ stabilise_date_scalar(
 \item{allowed_values}{A vector of permitted values (coerced to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
+
+\item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
+strings to try, in order, when parsing a character \code{x}. The first format
+that parses every non-\code{NA} element of \code{x} is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
+shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -100,6 +110,7 @@ stabilize_date_scalar(NULL, allow_null = TRUE)
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=to_date]{to_date()}},

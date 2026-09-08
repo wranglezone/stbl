@@ -59,6 +59,7 @@ try(to_date_scalar(c("2024-01-01", "2024-01-02")))
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},

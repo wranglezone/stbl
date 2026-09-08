@@ -24,6 +24,7 @@ to_date(
 \method{to_date}{character}(
   x,
   ...,
+  accepted_datetime_formats = "\%Y-\%m-\%d",
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -64,6 +65,14 @@ object before checking its coercion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
+
+\item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
+strings to try, in order, when parsing a character \code{x}. The first format
+that parses every non-\code{NA} element of \code{x} is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
+shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.}
 }
 \value{
 The input as a \link[base:Date]{base::Date} vector, or an error condition with
@@ -100,6 +109,7 @@ try(to_date(c("2024-01-01", "not-a-date")))
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},

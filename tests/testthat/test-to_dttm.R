@@ -91,6 +91,30 @@ test_that("to_dttm() rejects date-times without an offset (#105)", {
   )
 })
 
+test_that("to_dttm() tries accepted_datetime_formats, offset optional (#326)", {
+  expect_identical(
+    to_dttm(
+      "11/13/2018 08:00:00",
+      accepted_datetime_formats = c("%Y-%m-%d %H:%M:%S", "%m/%d/%Y %H:%M:%S")
+    ),
+    as.POSIXct("2018-11-13 08:00:00", tz = "UTC")
+  )
+  expect_identical(
+    to_dttm(
+      "2024-01-01 12:00:00-05:00",
+      accepted_datetime_formats = "%Y-%m-%d %H:%M:%S"
+    ),
+    as.POSIXct("2024-01-01 17:00:00", tz = "UTC")
+  )
+})
+
+test_that("to_dttm() defaults time-of-day to midnight for date-only formats (#326)", {
+  expect_identical(
+    to_dttm("11/13/2018", accepted_datetime_formats = "%m/%d/%Y"),
+    as.POSIXct("2018-11-13 00:00:00", tz = "UTC")
+  )
+})
+
 test_that("to_dttm() rejects unparseable date-time strings (#105)", {
   given <- c("2024-01-01T12:00:00Z", "not-a-datetime")
   expect_pkg_error_snapshot(
