@@ -2,14 +2,16 @@
 % Please edit documentation in R/assert_contains.R
 \name{.find_spec_matches}
 \alias{.find_spec_matches}
-\title{Find which elements of x match a spec applied to x as a whole}
+\title{Find which elements of x match a spec applied independently to each
+element}
 \usage{
 .find_spec_matches(x, fn, x_arg, call)
 }
 \arguments{
 \item{x}{The object to test.}
 
-\item{fn}{A stabilizer or coercion function, applied to \code{x} as a whole.}
+\item{fn}{A stabilizer or coercion function, applied to each element of
+\code{x} independently.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -23,6 +25,7 @@ source of error messages.}
 An integer vector of positions in \code{x} that match \code{fn}.
 }
 \description{
-Find which elements of x match a spec applied to x as a whole
+Find which elements of x match a spec applied independently to each
+element
 }
 \keyword{internal}

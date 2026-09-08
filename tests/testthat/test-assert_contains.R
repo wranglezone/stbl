@@ -56,13 +56,18 @@ test_that("assert_contains() reports matched locations from a failing spec (#290
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
-test_that("assert_contains() treats all elements as non-matching without locations info (#290)", {
-  # stabilize_int_scalar() fails with `non_scalar`, which carries no
-  # `locations` element, so no elements can be credited as matches
-  expect_pkg_error_snapshot(
-    assert_contains(list(1L, 2L), stabilize_int_scalar),
-    "stbl",
-    "too_few_matches"
+test_that("assert_contains() applies spec independently to each element, even for scalar specs (#290)", {
+  # stabilize_int_scalar() requires a length-1 input, but assert_contains()
+  # calls it once per element rather than on x as a whole, so every element
+  # of this list still counts as a match
+  expect_identical(
+    assert_contains(
+      list(1L, 2L, 3L),
+      stabilize_int_scalar,
+      min_matches = 2L,
+      max_matches = 3L
+    ),
+    list(1L, 2L, 3L)
   )
 })
 

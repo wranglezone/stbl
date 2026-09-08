@@ -1,17 +1,9 @@
 #' Require that x contains a number of elements matching a specification
 #'
-#' `assert_contains()` counts how many elements of `x` match a single `spec`,
-#' and requires that count to fall between `min_matches` and `max_matches`
-#' (inclusive). It returns `x` unchanged if the count is within bounds, and
-#' errors otherwise.
-#'
-#' `spec` is applied to `x` as a whole (not element-by-element), reusing the
-#' `locations`-reporting machinery used by `stabilize_*()` functions: if
-#' `spec` succeeds outright, every element of `x` counts as a match; if `spec`
-#' fails and the resulting condition carries a `locations` element (as most
-#' `{stbl}` failures do), every element *not* in `locations` counts as a
-#' match; if `spec` fails without a `locations` element, no elements count as
-#' matches.
+#' `assert_contains()` applies `spec` to each element of `x` independently
+#' and counts how many elements match. It returns `x` unchanged if that count
+#' falls between `min_matches` and `max_matches` (inclusive), and errors
+#' otherwise.
 #'
 #' @param min_matches (`integer(1)`) The minimum number of elements of `x`
 #'   that must match `spec`. Must be `>= 1`.
@@ -42,6 +34,15 @@
 #'
 #' # Errors because too many elements are int-ish
 #' try(assert_contains(list("1", "2", "3"), stabilize_int, max_matches = 2))
+#'
+#' # spec is applied to each element, not to x as a whole, so a scalar spec
+#' # like stabilize_int_scalar() still matches every element of a list
+#' assert_contains(
+#'   list(1L, 2L, 3L),
+#'   stabilize_int_scalar,
+#'   min_matches = 2,
+#'   max_matches = 3
+#' )
 assert_contains <- function(
   x,
   spec,
@@ -91,27 +92,19 @@ assert_contains <- function(
 
 # helpers ----
 
-#' Find which elements of x match a spec applied to x as a whole
+#' Find which elements of x match a spec applied independently to each
+#' element
 #'
 #' @param x The object to test.
-#' @param fn A stabilizer or coercion function, applied to `x` as a whole.
+#' @param fn A stabilizer or coercion function, applied to each element of
+#'   `x` independently.
 #' @inheritParams stabilize_lst
 #' @returns An integer vector of positions in `x` that match `fn`.
 #' @keywords internal
 .find_spec_matches <- function(x, fn, x_arg, call) {
-  attempt <- rlang::try_fetch(
-    .call_specified_fn(fn, x, .x_arg = x_arg, .call = call),
-    error = function(cnd) cnd
-  )
-  n <- length(x)
-  if (!inherits(attempt, "error")) {
-    return(seq_len(n))
-  }
-  failing <- attempt$locations
-  if (is.null(failing)) {
-    return(integer())
-  }
-  setdiff(seq_len(n), failing)
+  result <- .map_each_safe(x, fn, x_arg = x_arg, call = call)
+  failed <- !vapply(result$errors, is.null, logical(1))
+  which(!failed)
 }
 
 #' Signal an error when the match count falls outside min_matches/max_matches

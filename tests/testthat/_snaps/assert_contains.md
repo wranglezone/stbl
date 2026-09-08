@@ -34,15 +34,6 @@
       ! `list("a", "b")` <list> must contain at least 1 element matching `spec`.
       x Found 0 matching elements.
 
-# assert_contains() treats all elements as non-matching without locations info (#290)
-
-    Code
-      assert_contains(list(1L, 2L), stabilize_int_scalar)
-    Condition <stbl-error-too_few_matches>
-      Error:
-      ! `list(1L, 2L)` <list> must contain at least 1 element matching `spec`.
-      x Found 0 matching elements.
-
 # assert_contains() errors when min_matches < 1 (#290)
 
     Code
