@@ -80,6 +80,7 @@ Other character functions:
 \code{\link[=to_chr]{to_chr()}}
 
 Other stabilization functions:
+\code{\link[=assert_contains]{assert_contains()}},
 \code{\link[=assert_not]{assert_not()}},
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_all_of]{stabilize_all_of()}},

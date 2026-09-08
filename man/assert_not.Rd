@@ -56,6 +56,7 @@ try(assert_not(1L, stabilize_int))
 }
 \seealso{
 Other stabilization functions:
+\code{\link[=assert_contains]{assert_contains()}},
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=stabilize_all_of]{stabilize_all_of()}},
 \code{\link[=stabilize_any_of]{stabilize_any_of()}},
