@@ -7,6 +7,7 @@
 
 ## New features
 
+* New function `assert_contains()` counts how many elements of `x` match a single `spec` and errors unless that count is between `min_matches` and `max_matches`, returning `x` unchanged otherwise (#290).
 * New function `assert_not()` errors when `x` would be accepted (coerced or validated) by a single `spec`, and returns `x` unchanged otherwise (#289).
 * Errors raised for element-wise failures now carry an integer `locations` element on the condition object, giving the positions in the input that failed the check. Handlers can read these positions via `cnd$locations` (#274).
 * Errors raised for incompatible-value coercion failures (e.g. `to_dbl(c("1", "b"))`) now also carry a `values` element on the condition object, giving the values that failed to coerce, and the message includes a "Values:" bullet alongside "Locations:" (#332).
