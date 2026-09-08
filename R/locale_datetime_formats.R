@@ -6,12 +6,11 @@
 #' each format in turn, in order, until one of them parses every element (see
 #' those functions for details).
 #'
-#' @param locale_time (`character(1)`) The current `LC_TIME` locale, as
-#'   returned by `Sys.getlocale("LC_TIME")`. Used only to guess whether the
-#'   locale's conventional date order is month-first (as in the United
-#'   States) or day-first (most other locales); this is a coarse heuristic
-#'   based on the locale string, not a full locale-aware calendar
-#'   implementation.
+#' @param locale_time (`character(1)`) `LC_TIME` locale, as returned by
+#'   `Sys.getlocale("LC_TIME")`. Used to guess whether the locale's conventional
+#'   date order is month-first (as in the United States) or day-first (most
+#'   other locales); this is a coarse heuristic based on the locale string, not
+#'   a full locale-aware calendar implementation.
 #' @returns A `character()` vector of `strptime()`-style format strings,
 #'   always starting with `"%Y-%m-%dT%H:%M:%S"`, `"%Y-%m-%d %H:%M:%S"`, and
 #'   `"%Y-%m-%d"` (in that order), followed by the locale's conventional

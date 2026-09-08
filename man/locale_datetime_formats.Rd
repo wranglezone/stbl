@@ -7,12 +7,11 @@
 locale_datetime_formats(locale_time = Sys.getlocale("LC_TIME"))
 }
 \arguments{
-\item{locale_time}{(\code{character(1)}) The current \code{LC_TIME} locale, as
-returned by \code{Sys.getlocale("LC_TIME")}. Used only to guess whether the
-locale's conventional date order is month-first (as in the United
-States) or day-first (most other locales); this is a coarse heuristic
-based on the locale string, not a full locale-aware calendar
-implementation.}
+\item{locale_time}{(\code{character(1)}) \code{LC_TIME} locale, as returned by
+\code{Sys.getlocale("LC_TIME")}. Used to guess whether the locale's conventional
+date order is month-first (as in the United States) or day-first (most
+other locales); this is a coarse heuristic based on the locale string, not
+a full locale-aware calendar implementation.}
 }
 \value{
 A \code{character()} vector of \code{strptime()}-style format strings,

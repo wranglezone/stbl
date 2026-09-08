@@ -7,12 +7,11 @@
 .locale_date_order(locale_time)
 }
 \arguments{
-\item{locale_time}{(\code{character(1)}) The current \code{LC_TIME} locale, as
-returned by \code{Sys.getlocale("LC_TIME")}. Used only to guess whether the
-locale's conventional date order is month-first (as in the United
-States) or day-first (most other locales); this is a coarse heuristic
-based on the locale string, not a full locale-aware calendar
-implementation.}
+\item{locale_time}{(\code{character(1)}) \code{LC_TIME} locale, as returned by
+\code{Sys.getlocale("LC_TIME")}. Used to guess whether the locale's conventional
+date order is month-first (as in the United States) or day-first (most
+other locales); this is a coarse heuristic based on the locale string, not
+a full locale-aware calendar implementation.}
 }
 \value{
 A length-2 character vector, either \code{c("m", "d")} (month before
