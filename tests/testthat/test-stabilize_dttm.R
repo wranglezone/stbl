@@ -126,9 +126,36 @@ test_that("stabilize_dttm() checks allowed_values (#105)", {
   )
 })
 
-test_that("stabilize_dttm() rejects date-times without an offset (#105)", {
-  expect_pkg_error_snapshot(
-    stabilize_dttm("2024-01-01 12:00:00"),
+test_that("stabilize_dttm() accepts locale-dependent date orders (#326)", {
+  expect_identical(
+    stabilize_dttm(
+      "11/13/2018 08:00:00",
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    as.POSIXct("2018-11-13 08:00:00", tz = "UTC")
+  )
+})
+
+test_that("stabilize_dttm() treats a missing offset as wall-clock time in tz (#326)", {
+  expect_identical(
+    stabilize_dttm("2024-01-01 12:00:00", tz = "America/Chicago"),
+    as.POSIXct("2024-01-01 12:00:00", tz = "America/Chicago")
+  )
+})
+
+test_that("stabilize_dttm() still uses an explicit offset when present (#326)", {
+  expect_identical(
+    stabilize_dttm("2024-01-01 12:00:00-05:00"),
+    as.POSIXct("2024-01-01 17:00:00", tz = "UTC")
+  )
+})
+
+test_that("stabilize_dttm() requires one format to work for every element (#326)", {
+  expect_pkg_error_classes(
+    stabilize_dttm(
+      c("2024-01-01 00:00:00", "11/13/2018 08:00:00"),
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
     "stbl",
     "incompatible_values",
     "datetime"

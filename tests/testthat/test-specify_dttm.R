@@ -75,6 +75,16 @@ test_that("specify_dttm can enforce allowed_values (#105, #325)", {
   )
 })
 
+test_that("specify_dttm can set accepted_datetime_formats (#326)", {
+  checker <- specify_dttm(
+    accepted_datetime_formats = locale_datetime_formats("en_GB.UTF-8")
+  )
+  expect_identical(
+    checker("13/11/2018 08:00:00"),
+    as.POSIXct("2018-11-13 08:00:00", tz = "UTC")
+  )
+})
+
 test_that("specify_dttm() creates a working stabilizer (#105, #325)", {
   stabilize_recent <- specify_dttm(min_value = "2000-01-01T00:00:00Z")
   expect_identical(

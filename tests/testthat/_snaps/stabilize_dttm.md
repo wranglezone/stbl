@@ -99,17 +99,6 @@
       x Unexpected location: 2
       x Unexpected value: "2024-06-15".
 
-# stabilize_dttm() rejects date-times without an offset (#105)
-
-    Code
-      stabilize_dttm("2024-01-01 12:00:00")
-    Condition <stbl-error-incompatible_values-datetime>
-      Error:
-      ! `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
-      x Can't convert some values due to invalid or ambiguous date-time format.
-      * Locations: 1
-      * Values: "2024-01-01 12:00:00"
-
 # stabilize_dttm() rejects an unrecognized tz (#105)
 
     Code

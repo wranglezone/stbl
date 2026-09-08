@@ -107,9 +107,48 @@ test_that("stabilize_date() checks allowed_values (#104)", {
   )
 })
 
-test_that("stabilize_date() rejects ambiguous formats (#104)", {
-  expect_pkg_error_snapshot(
-    stabilize_date("11/13/2018"),
+test_that("stabilize_date() resolves locale-dependent formats (#326)", {
+  expect_identical(
+    stabilize_date(
+      "13/11/2018",
+      accepted_datetime_formats = locale_datetime_formats("en_GB.UTF-8")
+    ),
+    as.Date("2018-11-13")
+  )
+  expect_identical(
+    stabilize_date(
+      "11/13/2018",
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    as.Date("2018-11-13")
+  )
+})
+
+test_that("stabilize_date() truncates date-time strings to their date (#326)", {
+  expect_identical(
+    stabilize_date(
+      "2024-01-01T10:30:00",
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    as.Date("2024-01-01")
+  )
+})
+
+test_that("stabilize_date() requires one format to work for every element (#326)", {
+  expect_pkg_error_classes(
+    stabilize_date(
+      c("2024-01-01", "11/13/2018"),
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    "stbl",
+    "incompatible_values",
+    "date"
+  )
+})
+
+test_that("stabilize_date() still rejects formats no candidate matches (#326)", {
+  expect_pkg_error_classes(
+    stabilize_date("2018-13-40"),
     "stbl",
     "incompatible_values",
     "date"

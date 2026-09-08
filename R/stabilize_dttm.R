@@ -40,7 +40,7 @@
 #'   c("2024-01-01T12:00:00Z", NA),
 #'   allow_na = FALSE
 #' ))
-#' try(stabilize_dttm("2024-01-01 12:00:00"))
+#' stabilize_dttm("2024-01-01 12:00:00")
 #' try(stabilize_dttm(
 #'   "2024-01-01T12:00:00Z",
 #'   min_value = "2024-06-01T00:00:00Z"
@@ -61,14 +61,18 @@ stabilize_dttm <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   .stabilize_cls(
     x,
-    to_cls_fn = to_dttm,
-    to_cls_args = list(tz = tz),
+    to_cls_fn = .to_dttm_locale,
+    to_cls_args = list(
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_dttm,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -149,14 +153,18 @@ stabilize_dttm_scalar <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   .stabilize_cls_scalar(
     x,
-    to_cls_scalar_fn = to_dttm_scalar,
-    to_cls_scalar_args = list(tz = tz),
+    to_cls_scalar_fn = .to_dttm_locale_scalar,
+    to_cls_scalar_args = list(
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_dttm,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -184,6 +192,98 @@ stabilize_datetime_scalar <- stabilize_dttm_scalar
 #' @export
 #' @rdname stabilize_dttm_scalar
 stabilise_datetime_scalar <- stabilize_dttm_scalar
+
+#' Coerce to date-time, trying `accepted_datetime_formats` for character input
+#'
+#' Used by [stabilize_dttm()] in place of [to_dttm()], so that character input
+#' can be tried against a list of `accepted_datetime_formats` (with an
+#' optional UTC offset) rather than only the strict RFC 3339 shape that
+#' [to_dttm()] enforces. Non-character input (and factors, once converted to
+#' character) is delegated to [to_dttm()] unchanged.
+#'
+#' @inheritParams .shared-params
+#' @inheritParams to_dttm
+#' @returns The input as a [base::POSIXct] vector.
+#' @keywords internal
+.to_dttm_locale <- function(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  tz <- .check_tz(tz, call = call)
+  if (inherits(x, "factor")) {
+    return(.to_dttm_locale(
+      as.character(x),
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
+  if (!is.character(x)) {
+    return(to_dttm(
+      x,
+      ...,
+      tz = tz,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
+  result <- .try_dttm_formats(x, accepted_datetime_formats, tz = tz)
+  .check_cast_failures(
+    x,
+    result$failures,
+    x_class,
+    .datetime_type_obj(),
+    "invalid or ambiguous date-time format",
+    x_arg,
+    call
+  )
+  attr(result$parsed, "tzone") <- tz
+  return(result$parsed)
+}
+
+#' Coerce to length-1 date-time, trying `accepted_datetime_formats`
+#'
+#' The scalar counterpart of [.to_dttm_locale()], used by
+#' [stabilize_dttm_scalar()] in place of [to_dttm_scalar()].
+#'
+#' @inheritParams .shared-params
+#' @inheritParams to_dttm
+#' @returns The input as a length-1 [base::POSIXct] vector.
+#' @keywords internal
+.to_dttm_locale_scalar <- function(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  .to_cls_scalar(
+    x,
+    is_rlang_cls_scalar = .is_scalar_dttm,
+    to_cls_fn = .to_dttm_locale,
+    to_cls_args = list(
+      tz = tz,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
+    allow_null = allow_null,
+    allow_zero_length = allow_zero_length,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
 
 #' Check date-time values against min, max, and allowed values
 #'

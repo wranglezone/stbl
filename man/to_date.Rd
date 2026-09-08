@@ -100,6 +100,7 @@ try(to_date(c("2024-01-01", "not-a-date")))
 }
 \seealso{
 Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},

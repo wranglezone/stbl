@@ -1,7 +1,8 @@
 #' Coerce to date with additional checks
 #'
 #' Compared to [to_date()], `stabilize_date()` checks more details, but is
-#' slower. `stabilise_date()` is a synonym of `stabilize_date()`.
+#' slower. `stabilise_date()` is a synonym of
+#' `stabilize_date()`.
 #'
 #' @inheritParams .shared-params
 #'
@@ -30,7 +31,10 @@
 #' stabilize_date(NULL)
 #' try(stabilize_date(NULL, allow_null = FALSE))
 #' try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
-#' try(stabilize_date("11/13/2018"))
+#' stabilize_date(
+#'   "11/13/2018",
+#'    accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+#' )
 #' try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #' try(stabilize_date("2024-12-01", max_value = "2024-06-01"))
 #' try(stabilize_date(
@@ -48,13 +52,15 @@ stabilize_date <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   .stabilize_cls(
     x,
-    to_cls_fn = to_date,
+    to_cls_fn = .to_date_locale,
+    to_cls_args = list(accepted_datetime_formats = accepted_datetime_formats),
     check_cls_value_fn = .check_value_date,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -119,13 +125,17 @@ stabilize_date_scalar <- function(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   .stabilize_cls_scalar(
     x,
-    to_cls_scalar_fn = to_date_scalar,
+    to_cls_scalar_fn = .to_date_locale_scalar,
+    to_cls_scalar_args = list(
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_date,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -145,6 +155,81 @@ stabilize_date_scalar <- function(
 #' @export
 #' @rdname stabilize_date_scalar
 stabilise_date_scalar <- stabilize_date_scalar
+
+#' Coerce to date, trying `accepted_datetime_formats` for character input
+#'
+#' Used by [stabilize_date()] in place of [to_date()], so that character input
+#' can be tried against a list of `accepted_datetime_formats` rather than only
+#' the strict RFC 3339 shape that [to_date()] enforces. Non-character input
+#' (and factors, once converted to character) is delegated to [to_date()]
+#' unchanged.
+#'
+#' @inheritParams .shared-params
+#' @returns The input as a [base::Date] vector.
+#' @keywords internal
+.to_date_locale <- function(
+  x,
+  ...,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (inherits(x, "factor")) {
+    return(.to_date_locale(
+      as.character(x),
+      accepted_datetime_formats = accepted_datetime_formats,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
+  if (!is.character(x)) {
+    return(to_date(x, ..., x_arg = x_arg, call = call, x_class = x_class))
+  }
+  result <- .try_date_formats(x, accepted_datetime_formats)
+  .check_cast_failures(
+    x,
+    result$failures,
+    x_class,
+    .date_type_obj(),
+    "invalid or ambiguous date format",
+    x_arg,
+    call
+  )
+  return(result$parsed)
+}
+
+#' Coerce to length-1 date, trying `accepted_datetime_formats`
+#'
+#' The scalar counterpart of [.to_date_locale()], used by
+#' [stabilize_date_scalar()] in place of [to_date_scalar()].
+#'
+#' @inheritParams .shared-params
+#' @returns The input as a length-1 [base::Date] vector.
+#' @keywords internal
+.to_date_locale_scalar <- function(
+  x,
+  ...,
+  accepted_datetime_formats,
+  allow_null = FALSE,
+  allow_zero_length = FALSE,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  .to_cls_scalar(
+    x,
+    is_rlang_cls_scalar = .is_scalar_date,
+    to_cls_fn = .to_date_locale,
+    to_cls_args = list(accepted_datetime_formats = accepted_datetime_formats),
+    allow_null = allow_null,
+    allow_zero_length = allow_zero_length,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
 
 #' Check date values against min, max, and allowed values
 #'

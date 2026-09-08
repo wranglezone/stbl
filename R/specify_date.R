@@ -27,7 +27,8 @@ specify_date <- function(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("date", factory_args)
@@ -41,7 +42,8 @@ specify_date_scalar <- function(
   allow_na = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("date", factory_args, scalar = TRUE)

@@ -124,6 +124,7 @@ try(to_dttm(c("2024-01-01T12:00:00Z", "not-a-datetime")))
 }
 \seealso{
 Other datetime functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},

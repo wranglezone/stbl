@@ -81,6 +81,7 @@ try(to_dttm_scalar(c(
 }
 \seealso{
 Other datetime functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
