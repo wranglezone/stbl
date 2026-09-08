@@ -2,11 +2,7 @@
 
 Compared to
 [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
-`stabilize_date()` checks more details, but is slower. Unlike
-[`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
-character input is tried against a list of `accepted_datetime_formats`
-rather than only the strict RFC 3339 shape, so locale-dependent formats
-such as `"11/13/2018"` or `"13/11/2018"` are accepted where unambiguous.
+`stabilize_date()` checks more details, but is slower.
 `stabilise_date()` is a synonym of `stabilize_date()`.
 
 ## Usage
@@ -229,11 +225,11 @@ try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
 #> Error in eval(expr, envir) : 
 #>   `c(as.Date("2024-01-01"), NA)` must not contain NA values.
 #> • NA locations: 2
-stabilize_date("11/13/2018")
-#> Error: `"11/13/2018"` <character> must be coercible to <date>
-#> ✖ Can't convert some values due to invalid or ambiguous date format.
-#> • Locations: 1
-#> • Values: "11/13/2018"
+stabilize_date(
+  "11/13/2018",
+   accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+)
+#> [1] "2018-11-13"
 try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #> Error in eval(expr, envir) : `"2024-01-01"` must be >= 2024-06-01.
 #> ✖ "2024-01-01" is too low.
