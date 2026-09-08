@@ -340,6 +340,8 @@ contributing to this project, you agree to abide by its terms.
 
 ## dates and times
 
+- [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)
+  : Determine locale-aware date and date-time formats
 - [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md)
   [`specify_date_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_date.md)
   : Create a specified date stabilizer function

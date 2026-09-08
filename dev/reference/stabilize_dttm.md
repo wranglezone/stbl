@@ -22,6 +22,7 @@ stabilize_dttm(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -39,6 +40,7 @@ stabilise_dttm(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -56,6 +58,7 @@ stabilize_datetime(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -73,6 +76,7 @@ stabilise_datetime(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -135,6 +139,19 @@ stabilise_datetime(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
+- accepted_datetime_formats:
+
+  (`character`)
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
+  strings to try, in order, when parsing a character `x`. The first
+  format that parses every non-`NA` element of `x` is used; if none do,
+  the result (and any error) is based on the first format tried.
+  Defaults to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+  which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
+  optionally with a time-of-day component) before falling back to the
+  current locale's conventional date order.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -191,6 +208,7 @@ failure mode:
 ## See also
 
 Other datetime functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
@@ -260,12 +278,8 @@ try(stabilize_dttm(
 #> Error in eval(expr, envir) : 
 #>   `c("2024-01-01T12:00:00Z", NA)` must not contain NA values.
 #> • NA locations: 2
-try(stabilize_dttm("2024-01-01 12:00:00"))
-#> Error in eval(expr, envir) : 
-#>   `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
-#> ✖ Can't convert some values due to invalid or ambiguous date-time format.
-#> • Locations: 1
-#> • Values: "2024-01-01 12:00:00"
+stabilize_dttm("2024-01-01 12:00:00")
+#> [1] "2024-01-01 12:00:00 UTC"
 try(stabilize_dttm(
   "2024-01-01T12:00:00Z",
   min_value = "2024-06-01T00:00:00Z"

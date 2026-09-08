@@ -20,6 +20,7 @@ stabilize_date_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilise_date_scalar(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -77,6 +79,19 @@ stabilise_date_scalar(
   A vector of permitted values (coerced to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
+
+- accepted_datetime_formats:
+
+  (`character`)
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
+  strings to try, in order, when parsing a character `x`. The first
+  format that parses every non-`NA` element of `x` is used; if none do,
+  the result (and any error) is based on the first format tried.
+  Defaults to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+  which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
+  optionally with a time-of-day component) before falling back to the
+  current locale's conventional date order.
 
 - x_arg:
 
@@ -127,6 +142,7 @@ specific class by failure mode:
 ## See also
 
 Other date functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
 [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
 [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),

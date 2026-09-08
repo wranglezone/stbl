@@ -74,6 +74,7 @@ specific class by failure mode:
 ## See also
 
 Other date functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
 [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
 [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),

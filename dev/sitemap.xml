@@ -78,6 +78,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_specification_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-date_type_obj.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_format_variants.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_type_obj.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-define_main_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_chr.html</loc></url>
@@ -96,6 +97,8 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-fast_false.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-find_spec_matches.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-format_to_capture_regex.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-format_to_regex.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-glue2.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-has_regex_pattern.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
@@ -105,12 +108,14 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dur.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_time.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-label_matched_specs.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-locale_date_order.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-map_each_fast.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-map_each_safe.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-name_like.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-new_period_vec.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_matches.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_offset.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_parts.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dur_date_time_parts.html</loc></url>
@@ -146,9 +151,15 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_chr_impl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_from_fct.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_date_locale.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_date_locale_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_df_vector.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_dttm_locale.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_dttm_locale_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-to_num_from_complex.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_date_formats.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_dttm_formats.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_exactly_one.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_fns.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_extra_named_elements.html</loc></url>
@@ -165,6 +176,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/index.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/injection-operator.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/object_type.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_abort.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/pkg_inform.html</loc></url>

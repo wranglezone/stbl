@@ -19,6 +19,7 @@ stabilize_date(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -35,6 +36,7 @@ stabilise_date(
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats(),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -91,6 +93,19 @@ stabilise_date(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
+- accepted_datetime_formats:
+
+  (`character`)
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
+  strings to try, in order, when parsing a character `x`. The first
+  format that parses every non-`NA` element of `x` is used; if none do,
+  the result (and any error) is based on the first format tried.
+  Defaults to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+  which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
+  optionally with a time-of-day component) before falling back to the
+  current locale's conventional date order.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -143,6 +158,7 @@ failure mode:
 ## See also
 
 Other date functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
 [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
 [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
 [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
@@ -209,12 +225,11 @@ try(stabilize_date(c(as.Date("2024-01-01"), NA), allow_na = FALSE))
 #> Error in eval(expr, envir) : 
 #>   `c(as.Date("2024-01-01"), NA)` must not contain NA values.
 #> • NA locations: 2
-try(stabilize_date("11/13/2018"))
-#> Error in eval(expr, envir) : 
-#>   `"11/13/2018"` <character> must be coercible to <date>
-#> ✖ Can't convert some values due to invalid or ambiguous date format.
-#> • Locations: 1
-#> • Values: "11/13/2018"
+stabilize_date(
+  "11/13/2018",
+   accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+)
+#> [1] "2018-11-13"
 try(stabilize_date("2024-01-01", min_value = "2024-06-01"))
 #> Error in eval(expr, envir) : `"2024-01-01"` must be >= 2024-06-01.
 #> ✖ "2024-01-01" is too low.

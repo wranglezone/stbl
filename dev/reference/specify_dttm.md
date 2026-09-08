@@ -21,7 +21,8 @@ specify_dttm(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 
 specify_dttm_scalar(
@@ -31,7 +32,8 @@ specify_dttm_scalar(
   allow_na = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 
 specify_datetime(
@@ -43,7 +45,8 @@ specify_datetime(
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 
 specify_datetime_scalar(
@@ -53,7 +56,8 @@ specify_datetime_scalar(
   allow_na = TRUE,
   min_value = NULL,
   max_value = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  accepted_datetime_formats = locale_datetime_formats()
 )
 ```
 
@@ -105,6 +109,19 @@ specify_datetime_scalar(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
+- accepted_datetime_formats:
+
+  (`character`)
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
+  strings to try, in order, when parsing a character `x`. The first
+  format that parses every non-`NA` element of `x` is used; if none do,
+  the result (and any error) is based on the first format tried.
+  Defaults to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+  which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
+  optionally with a time-of-day component) before falling back to the
+  current locale's conventional date order.
+
 - allow_zero_length:
 
   (`logical(1)`) Are zero-length vectors acceptable?
@@ -126,6 +143,7 @@ provide additional context or functionality.
 ## See also
 
 Other datetime functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),

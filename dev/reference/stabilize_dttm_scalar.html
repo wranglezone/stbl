@@ -62,6 +62,7 @@ vectors (compared to <code><a href="stabilize_dttm.html">stabilize_dttm()</a></c
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -77,6 +78,7 @@ vectors (compared to <code><a href="stabilize_dttm.html">stabilize_dttm()</a></c
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -92,6 +94,7 @@ vectors (compared to <code><a href="stabilize_dttm.html">stabilize_dttm()</a></c
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -107,6 +110,7 @@ vectors (compared to <code><a href="stabilize_dttm.html">stabilize_dttm()</a></c
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -158,6 +162,16 @@ type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <c
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
 
+<dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
+<dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
+strings to try, in order, when parsing a character <code>x</code>. The first format
+that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
+shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -199,6 +213,7 @@ safely converted to datetime.</p></li>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other datetime functions:
+<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
 <code><a href="specify_dttm.html">specify_dttm()</a></code>,
 <code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>,
 <code><a href="to_dttm.html">to_dttm()</a></code>,
