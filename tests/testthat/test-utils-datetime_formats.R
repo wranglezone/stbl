@@ -1,4 +1,4 @@
-test_that(".format_to_regex() converts specifiers to a shape-checking regex", {
+test_that(".format_to_regex() converts specifiers to a shape-checking regex (#326)", {
   regex <- .format_to_regex("%Y-%m-%d")
   expect_equal(regex, "^\\d{4}-\\d{2}-\\d{2}$")
   expect_true(grepl(regex, "2024-01-01"))
@@ -6,20 +6,20 @@ test_that(".format_to_regex() converts specifiers to a shape-checking regex", {
   expect_false(grepl(regex, "2024-01-01T12:00:00"))
 })
 
-test_that(".format_to_regex() handles all supported specifiers", {
+test_that(".format_to_regex() handles all supported specifiers (#326)", {
   regex <- .format_to_regex("%Y-%m-%d %H:%M:%S")
   expect_equal(regex, "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$")
   expect_true(grepl(regex, "2024-01-01 12:30:45"))
   expect_false(grepl(regex, "2024-01-01 12:30"))
 })
 
-test_that(".format_to_capture_regex() tracks field order", {
+test_that(".format_to_capture_regex() tracks field order (#326)", {
   parts <- .format_to_capture_regex("%m/%d/%Y")
   expect_equal(parts$regex, "(\\d{2})/(\\d{2})/(\\d{4})")
   expect_equal(parts$fields, c("m", "d", "Y"))
 })
 
-test_that(".format_to_capture_regex() handles all specifiers and reordering", {
+test_that(".format_to_capture_regex() handles all specifiers and reordering (#326)", {
   parts <- .format_to_capture_regex("%Y-%m-%d %H:%M:%S")
   expect_equal(
     parts$regex,
@@ -28,7 +28,7 @@ test_that(".format_to_capture_regex() handles all specifiers and reordering", {
   expect_equal(parts$fields, c("Y", "m", "d", "H", "M", "S"))
 })
 
-test_that(".try_date_formats() returns early when the first format succeeds", {
+test_that(".try_date_formats() returns early when the first format succeeds (#326)", {
   result <- .try_date_formats(
     c("2024-01-01", "2024-01-02"),
     c("%Y-%m-%d", "%m/%d/%Y")
@@ -37,7 +37,7 @@ test_that(".try_date_formats() returns early when the first format succeeds", {
   expect_equal(result$failures, c(FALSE, FALSE))
 })
 
-test_that(".try_date_formats() falls back to a later format", {
+test_that(".try_date_formats() falls back to a later format (#326)", {
   result <- .try_date_formats(
     c("01/02/2024", "03/04/2024"),
     c("%Y-%m-%d", "%m/%d/%Y")
@@ -46,7 +46,7 @@ test_that(".try_date_formats() falls back to a later format", {
   expect_equal(result$failures, c(FALSE, FALSE))
 })
 
-test_that(".try_date_formats() returns the first format's result when none succeed", {
+test_that(".try_date_formats() returns the first format's result when none succeed (#326)", {
   result <- .try_date_formats(
     c("13/01/2024", "2024-02-30"),
     c("%d/%m/%Y", "%Y-%m-%d")
@@ -55,13 +55,13 @@ test_that(".try_date_formats() returns the first format's result when none succe
   expect_equal(result$failures, c(FALSE, TRUE))
 })
 
-test_that(".try_date_formats() skips NA elements", {
+test_that(".try_date_formats() skips NA elements (#326)", {
   result <- .try_date_formats(c(NA_character_, NA_character_), c("%Y-%m-%d"))
   expect_true(all(is.na(result$parsed)))
   expect_equal(result$failures, c(FALSE, FALSE))
 })
 
-test_that(".try_dttm_formats() returns early when the first format succeeds", {
+test_that(".try_dttm_formats() returns early when the first format succeeds (#326)", {
   result <- .try_dttm_formats(
     c(
       "2024-01-01T12:00:00Z",
@@ -81,7 +81,7 @@ test_that(".try_dttm_formats() returns early when the first format succeeds", {
   expect_equal(result$failures, c(FALSE, FALSE, FALSE))
 })
 
-test_that(".try_dttm_formats() falls back to a later format", {
+test_that(".try_dttm_formats() falls back to a later format (#326)", {
   result <- .try_dttm_formats(
     c("2024-01-01", "2024-01-02"),
     c("%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"),
@@ -94,7 +94,7 @@ test_that(".try_dttm_formats() falls back to a later format", {
   expect_equal(result$failures, c(FALSE, FALSE))
 })
 
-test_that(".try_dttm_formats() treats a missing offset as wall-clock time in tz", {
+test_that(".try_dttm_formats() treats a missing offset as wall-clock time in tz (#326)", {
   result <- .try_dttm_formats(
     "2024-01-01T12:00:00",
     "%Y-%m-%dT%H:%M:%S",
@@ -107,7 +107,7 @@ test_that(".try_dttm_formats() treats a missing offset as wall-clock time in tz"
   expect_false(result$failures)
 })
 
-test_that(".try_dttm_formats() skips elements that are NA or the wrong shape", {
+test_that(".try_dttm_formats() skips elements that are NA or the wrong shape (#326)", {
   result <- .try_dttm_formats(
     c(NA_character_, "not-a-date"),
     "%Y-%m-%dT%H:%M:%S",
@@ -117,7 +117,7 @@ test_that(".try_dttm_formats() skips elements that are NA or the wrong shape", {
   expect_equal(result$failures, c(FALSE, TRUE))
 })
 
-test_that(".try_dttm_formats() returns the first format's result when none succeed", {
+test_that(".try_dttm_formats() returns the first format's result when none succeed (#326)", {
   result <- .try_dttm_formats(
     "2024-02-30T12:00:00",
     "%Y-%m-%dT%H:%M:%S",
@@ -127,7 +127,7 @@ test_that(".try_dttm_formats() returns the first format's result when none succe
   expect_true(result$failures)
 })
 
-test_that(".parse_dttm_matches() defaults missing time fields to midnight", {
+test_that(".parse_dttm_matches() defaults missing time fields to midnight (#326)", {
   parts <- .format_to_capture_regex("%Y-%m-%d")
   pattern <- paste0("^", parts$regex, "(Z|z|[+-]\\d{2}:\\d{2})?$")
   x <- c("2024-01-01", "2024-06-15")
@@ -136,7 +136,7 @@ test_that(".parse_dttm_matches() defaults missing time fields to midnight", {
   expect_equal(parsed, as.POSIXct(c("2024-01-01", "2024-06-15"), tz = "UTC"))
 })
 
-test_that(".parse_dttm_matches() returns NA for calendar-invalid dates", {
+test_that(".parse_dttm_matches() returns NA for calendar-invalid dates (#326)", {
   parts <- .format_to_capture_regex("%Y-%m-%dT%H:%M:%S")
   pattern <- paste0("^", parts$regex, "(Z|z|[+-]\\d{2}:\\d{2})?$")
   x <- "2024-02-30T12:00:00"
@@ -145,7 +145,7 @@ test_that(".parse_dttm_matches() returns NA for calendar-invalid dates", {
   expect_true(is.na(parsed))
 })
 
-test_that(".parse_dttm_matches() applies an explicit UTC offset", {
+test_that(".parse_dttm_matches() applies an explicit UTC offset (#326)", {
   parts <- .format_to_capture_regex("%Y-%m-%dT%H:%M:%S")
   pattern <- paste0("^", parts$regex, "(Z|z|[+-]\\d{2}:\\d{2})?$")
   x <- "2024-01-01T12:00:00+05:00"
