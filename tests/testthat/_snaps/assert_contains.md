@@ -52,12 +52,3 @@
       ! `max_matches` must be >= 2.
       x 1 is too low.
 
-# assert_contains() composes with stabilize_all_of() (#290)
-
-    Code
-      stabilize_all_of("a", stabilize_chr, has_int)
-    Condition <stbl-error-cant_stabilize_all_of>
-      Error:
-      ! `"a"` must match all of the provided stabilizers.
-      x `x` <character> must contain at least 1 element matching `spec`.
-

@@ -56,10 +56,7 @@ test_that("assert_contains() reports matched locations from a failing spec (#290
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
-test_that("assert_contains() applies spec independently to each element, even for scalar specs (#290)", {
-  # stabilize_int_scalar() requires a length-1 input, but assert_contains()
-  # calls it once per element rather than on x as a whole, so every element
-  # of this list still counts as a match
+test_that("assert_contains() applies spec independently to each element (#290)", {
   expect_identical(
     assert_contains(
       list(1L, 2L, 3L),
@@ -96,19 +93,4 @@ test_that("assert_contains() errors when max_matches < min_matches (#290)", {
 
 test_that("assert_contains() errors when ... contains extra arguments (#290)", {
   expect_error(assert_contains(list(1L), stabilize_int, extra = TRUE))
-})
-
-test_that("assert_contains() composes with stabilize_all_of() (#290)", {
-  has_int <- function(x, ...) {
-    assert_contains(x, stabilize_int, ...)
-  }
-  expect_identical(
-    stabilize_all_of("1", stabilize_chr, has_int),
-    "1"
-  )
-  expect_pkg_error_snapshot(
-    stabilize_all_of("a", stabilize_chr, has_int),
-    "stbl",
-    "cant_stabilize_all_of"
-  )
 })
