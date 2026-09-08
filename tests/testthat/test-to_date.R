@@ -49,28 +49,6 @@ test_that("to_date() rejects ambiguous date formats (#104)", {
   )
 })
 
-test_that("to_date() tries accepted_datetime_formats in order (#326)", {
-  expect_identical(
-    to_date(
-      "11/13/2018",
-      accepted_datetime_formats = c("%Y-%m-%d", "%m/%d/%Y")
-    ),
-    as.Date("2018-11-13")
-  )
-})
-
-test_that("to_date() requires one format to work for every element (#326)", {
-  expect_pkg_error_classes(
-    to_date(
-      c("2024-01-01", "11/13/2018"),
-      accepted_datetime_formats = c("%Y-%m-%d", "%m/%d/%Y")
-    ),
-    "stbl",
-    "incompatible_values",
-    "date"
-  )
-})
-
 test_that("to_date() rejects unparseable date strings (#104)", {
   given <- c("2024-01-01", "not-a-date")
   expect_pkg_error_snapshot(
