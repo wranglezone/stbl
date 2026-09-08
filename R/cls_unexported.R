@@ -74,6 +74,9 @@
       x_class = x_class
     )
   )
+  if (is.null(x)) {
+    return(x)
+  }
   if (!is.null(check_cls_value_fn)) {
     inject(
       check_cls_value_fn(

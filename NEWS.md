@@ -32,6 +32,7 @@
 
 * `stabilize_lst()` (and `stabilize_df()`, which delegates to it) now correctly detects missing required named elements even when `.x` has no named elements at all, such as `list()` or `list(1L, 2L)`. Previously, the required-element check was silently skipped whenever `.x` had no named elements (#344).
 * `to_chr()`, `to_dbl()`, `to_fct()`, `to_int()`, and `to_lgl()` now throw an "incompatible type" error (with failing element locations) instead of a generic "can't coerce" error when a list contains elements that can't be converted (#273).
+* `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without checking other `stabilize_*()` rules. For example, `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than erroring (#353).
 
 # stbl 0.4.0
 
