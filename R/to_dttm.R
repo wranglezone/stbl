@@ -89,9 +89,7 @@ to_dttm.character <- function(
   tz <- .check_tz(tz, call = call)
   not_na <- !is.na(x)
   # RFC 3339 date-time, with an optional space instead of "T" and optional
-  # fractional seconds. A UTC offset (or "Z") is mandatory in this strict
-  # mode; stabilize_dttm() tries a locale-aware list of formats (with an
-  # optional offset) to be more permissive.
+  # fractional seconds.
   pattern <- paste0(
     "^(\\d{4})-(\\d{2})-(\\d{2})[Tt ](\\d{2}):(\\d{2}):(\\d{2})",
     "(\\.\\d+)?(Z|z|[+-]\\d{2}:\\d{2})$"
