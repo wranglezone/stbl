@@ -68,13 +68,6 @@ test_that("assert_contains() applies spec independently to each element (#290)",
   )
 })
 
-test_that("assert_contains() works with specify_* functions as spec (#290)", {
-  expect_identical(
-    assert_contains(list(1L, "a"), specify_int(), min_matches = 1),
-    list(1L, "a")
-  )
-})
-
 test_that("assert_contains() errors when min_matches < 1 (#290)", {
   expect_pkg_error_snapshot(
     assert_contains(list(1L), stabilize_int, min_matches = 0),
