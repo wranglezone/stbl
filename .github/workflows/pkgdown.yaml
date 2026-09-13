@@ -35,10 +35,13 @@ jobs:
       - name: Install pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::.
+          extra-packages: any::pkgdown, gilead-public/gsm.utils@*release, local::.
           needs: website
 
       # Releases (published from a version tag) build the main site; everything
@@ -53,9 +56,12 @@ jobs:
             echo "PKGDOWN_DEV_MODE=devel" >> $GITHUB_ENV
           fi
 
-      # The rendered slides are committed in pkgdown/assets/, so no
-      # gsm.utils::build_assets() step is needed here. Re-render them locally
-      # when pkgdown/menus/slides/*.qmd changes.
+      # Render slides (etc.) from pkgdown/menus/ so the deployed assets always
+      # match the latest sources, even if they weren't rebuilt locally.
+      - name: Build pkgdown assets
+        shell: Rscript {0}
+        run: gsm.utils::build_assets()
+
       - name: Build site
         if: github.event_name == 'pull_request'
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
