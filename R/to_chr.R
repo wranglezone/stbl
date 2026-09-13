@@ -169,6 +169,18 @@ to_character <- to_chr
   .chr_from_fn_sym(x, x_name = rlang::as_string(x_expr))
 }
 
+#' @export
+.to_chr_impl.formula <- function(x, ...) {
+  x_chr <- as.character(x)
+  if (length(x_chr) == 2L) {
+    return(paste(x_chr[[1]], x_chr[[2]]))
+  }
+  if (length(x_chr) == 3L) {
+    return(paste(x_chr[[2]], x_chr[[1]], x_chr[[3]]))
+  }
+  paste(x_chr, collapse = " ")
+}
+
 #' Build a string from a `::` or `:::` call expression
 #'
 #' @param x_expr A `::` or `:::` call expression.
