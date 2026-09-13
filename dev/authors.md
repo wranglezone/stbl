@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/fix-pkgdown-dev-deploy/DESCRIPTION)
 
 Harmon J (2026). *stbl: Stabilize Objects*. R package version
 0.5.0.9000, <https://stbl.wrangle.zone/>.
