@@ -298,12 +298,44 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # raw — lowercase hex
   expect_identical(to_chr(as.raw(c(0x0a, 0xff))), c("0a", "ff"))
 
-  # condition — as.character() returns the formatted message with class prefix
-  # and trailing newline, not just conditionMessage() (see #258)
-  expect_identical(to_chr(simpleError("oops")), "Error: oops\n")
+  # condition — should include full class hierarchy, no trailing newline
+  expect_identical(
+    to_chr(simpleError("oops")),
+    "simpleError/error/condition: oops"
+  )
 
   # formula — splits into a 3-element vector: operator, LHS, RHS (see #259)
   expect_identical(to_chr(y ~ x), c("~", "y", "x"))
+})
+
+test_that("to_chr() formats conditions with full class hierarchy (#258)", {
+  stbl_abort_cnd <- rlang::catch_cnd(
+    .stbl_abort("A message.", "a_subclass"),
+    classes = "error"
+  )
+  expect_identical(
+    to_chr(stbl_abort_cnd),
+    paste0(
+      paste(class(stbl_abort_cnd), collapse = "/"),
+      ": ",
+      conditionMessage(stbl_abort_cnd)
+    )
+  )
+  expect_false(endsWith(to_chr(stbl_abort_cnd), "\n"))
+
+  cant_coerce_cnd <- rlang::catch_cnd(
+    .stop_cant_coerce("character", "integer", "x", rlang::current_env()),
+    classes = "error"
+  )
+  expect_identical(
+    to_chr(cant_coerce_cnd),
+    paste0(
+      paste(class(cant_coerce_cnd), collapse = "/"),
+      ": ",
+      conditionMessage(cant_coerce_cnd)
+    )
+  )
+  expect_false(endsWith(to_chr(cant_coerce_cnd), "\n"))
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {
