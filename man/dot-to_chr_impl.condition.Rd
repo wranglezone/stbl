@@ -4,7 +4,13 @@
 \alias{.to_chr_impl.condition}
 \title{Coerce a condition object to a single character string}
 \usage{
-\method{.to_chr_impl}{condition}(x, ...)
+\method{.to_chr_impl}{condition}(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
 }
 \arguments{
 \item{x}{(\code{condition}) A condition object.}

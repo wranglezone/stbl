@@ -176,7 +176,13 @@ to_character <- to_chr
 #'   condition message.
 #' @keywords internal
 #' @export
-.to_chr_impl.condition <- function(x, ...) {
+.to_chr_impl.condition <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
   paste0(
     paste(class(x), collapse = "/"),
     ": ",

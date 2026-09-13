@@ -336,6 +336,20 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
     )
   )
   expect_false(endsWith(to_chr(cant_coerce_cnd), "\n"))
+
+  warning_cnd <- rlang::catch_cnd(
+    warning("heads up"),
+    classes = "warning"
+  )
+  expect_identical(
+    to_chr(warning_cnd),
+    paste0(
+      paste(class(warning_cnd), collapse = "/"),
+      ": ",
+      conditionMessage(warning_cnd)
+    )
+  )
+  expect_false(endsWith(to_chr(warning_cnd), "\n"))
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {
