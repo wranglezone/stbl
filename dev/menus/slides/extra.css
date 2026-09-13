@@ -15,3 +15,8 @@ div.page-header img.logo {
   margin-top: 0px !important;
   margin-right: 20px !important;
 }
+
+.big-img img {
+  max-width: 1000% !important;
+  max-height: 1000% !important;
+}
