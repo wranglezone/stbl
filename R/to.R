@@ -95,7 +95,7 @@ to.factor <- function(
   .to,
   ...,
   levels = NULL,
-  ordered = FALSE,
+  ordered,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
