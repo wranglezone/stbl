@@ -55,7 +55,7 @@ to(
   .to,
   ...,
   levels = NULL,
-  ordered = is.ordered(x) || is.ordered(.to),
+  ordered = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
