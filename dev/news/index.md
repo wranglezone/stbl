@@ -4,6 +4,8 @@
 
 ## stbl 0.5.0
 
+CRAN release: 2026-09-13
+
 ### Breaking changes
 
 - [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
