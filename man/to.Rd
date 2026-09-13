@@ -55,6 +55,7 @@ to(
   .to,
   ...,
   levels = NULL,
+  ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -138,6 +139,8 @@ the original class.}
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
 vector's \code{levels} play the same role that \code{allowed_values} plays for other
 types: they restrict \code{x} to a fixed set of permitted values.}
+
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 }
 \value{
 \code{x} coerced to the type of \code{.to}, or an error condition with

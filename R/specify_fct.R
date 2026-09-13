@@ -28,6 +28,7 @@ specify_fct <- function(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 ) {
   factory_args <- .capture_factory_args()
@@ -41,6 +42,7 @@ specify_fct_scalar <- function(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 ) {
   factory_args <- .capture_factory_args()

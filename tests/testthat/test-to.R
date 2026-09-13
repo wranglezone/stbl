@@ -186,6 +186,21 @@ test_that("to() respects explicit levels argument in to.factor (#182)", {
   expect_identical(levels(result), c("a", "b"))
 })
 
+test_that("to() preserves ordered input when converting to factor (#246)", {
+  proto <- factor(levels = c("a", "b"))
+  given <- ordered("a", levels = c("a", "b"))
+  result <- to(given, proto)
+  expect_s3_class(result, "ordered")
+  expect_identical(levels(result), c("a", "b"))
+})
+
+test_that("to() uses orderedness from factor .to (#246)", {
+  proto <- ordered(NA_character_, levels = c("a", "b"))
+  result <- to("a", proto)
+  expect_s3_class(result, "ordered")
+  expect_identical(levels(result), c("a", "b"))
+})
+
 test_that("to() respects to_na argument in to.factor (#182)", {
   proto <- factor(levels = c("a", "b", "c"))
   result <- to(c("a", "b"), proto, to_na = "b")

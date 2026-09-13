@@ -11,6 +11,13 @@ test_that("specify_fct can build a level checker (#150, #325)", {
   )
 })
 
+test_that("specify_fct() accepts ordered = TRUE (#246)", {
+  checker <- specify_fct(levels = c("a", "b"), ordered = TRUE)
+  result <- checker("a")
+  expect_s3_class(result, "ordered")
+  expect_identical(levels(result), c("a", "b"))
+})
+
 test_that("specify_fct_scalar can build a level checker (#150, #325)", {
   checker <- specify_fct_scalar(levels = c("a", "c"), to_na = "b")
   expect_identical(
