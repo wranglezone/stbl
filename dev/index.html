@@ -121,14 +121,16 @@
 <span><span class="co">#&gt; Error in `my_fun()`:</span></span>
 <span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be coercible to &lt;integer&gt;</span></span>
 <span><span class="co">#&gt; ✖ Can't convert some values due to loss of precision.</span></span>
-<span><span class="co">#&gt; • Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; • Locations: 1</span></span>
+<span><span class="co">#&gt; • Values: "1.1"</span></span></code></pre></div>
 <p>The errors help locate issues within vectors.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">my_fun</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3.1"</span>, <span class="st">"4"</span>, <span class="st">"5.2"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in `my_fun()`:</span></span>
 <span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be coercible to &lt;integer&gt;</span></span>
 <span><span class="co">#&gt; ✖ Can't convert some values due to loss of precision.</span></span>
-<span><span class="co">#&gt; • Locations: 3 and 5</span></span></code></pre></div>
+<span><span class="co">#&gt; • Locations: 3 and 5</span></span>
+<span><span class="co">#&gt; • Values: "3.1" and "5.2"</span></span></code></pre></div>
 <p>See <code><a href="articles/stbl.html">vignette("stbl")</a></code> to learn more about how to use stbl, and when to “upgrade” from <code>to_*()</code> functions to <code>stabilize_*()</code> functions.</p>
 </div>
 </div>

@@ -4,15 +4,6 @@
 
 ### Breaking changes
 
-- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
-  and
-  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
-  now produce snapshots that mirror
-  [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html),
-  showing the bare expression under `Code` and the condition class
-  alongside its message. Existing snapshots must be re-accepted
-  ([\#301](https://github.com/wranglezone/stbl/issues/301)).
 - [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   is now named
   [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
@@ -22,209 +13,114 @@
   now throws a “deprecated”-classed error directing you to
   [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   ([\#299](https://github.com/wranglezone/stbl/issues/299)).
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
+  and
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
+  now produce snapshots that mirror
+  [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html),
+  showing the bare expression under `Code` and the condition class
+  alongside its message
+  ([\#301](https://github.com/wranglezone/stbl/issues/301)). Error
+  messages for element-wise and incompatible-value failures also now
+  list the failing locations and, where relevant, values, and the
+  condition objects carry matching `locations` and `values` elements
+  ([\#274](https://github.com/wranglezone/stbl/issues/274),
+  [\#332](https://github.com/wranglezone/stbl/issues/332)). Existing
+  snapshots of these messages must be re-accepted; use
+  `testthat::skip_if_not_installed("stbl", minimum_version = "0.5.0")`
+  to skip such tests with older versions of
+  [stbl](https://stbl.wrangle.zone/).
 
 ### New features
 
-- New function
-  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
-  counts how many elements of `x` match a `spec` and checks that the
-  count is within a specified range
-  ([\#290](https://github.com/wranglezone/stbl/issues/290)).
-- New function
+- New assertion functions
+  [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
+  and
+  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md):
   [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   errors when `x` would be accepted (coerced or validated) by a single
-  `spec`, and returns `x` unchanged otherwise
-  ([\#289](https://github.com/wranglezone/stbl/issues/289)).
-- Errors raised for element-wise failures now carry an integer
-  `locations` element on the condition object, giving the positions in
-  the input that failed the check. Handlers can read these positions via
-  `cnd$locations`
-  ([\#274](https://github.com/wranglezone/stbl/issues/274)).
-- Errors raised for incompatible-value coercion failures
-  (e.g. `to_dbl(c("1", "b"))`) now also carry a `values` element on the
-  condition object, giving the values that failed to coerce, and the
-  message includes a “Values:” bullet alongside “Locations:”
-  ([\#332](https://github.com/wranglezone/stbl/issues/332)).
-- New function
-  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
-  silently catches a [stbl](https://stbl.wrangle.zone/) error with the
-  specified `subclass` and returns `NULL`, allowing callers to suppress
-  expected validation failures
-  ([\#178](https://github.com/wranglezone/stbl/issues/178)).
-- New function
-  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
-  catches a [stbl](https://stbl.wrangle.zone/) error with the specified
-  `subclass` and replaces its message with a custom one. An optional
-  `additional_class` argument prepends extra classes to the error class
-  list ([\#178](https://github.com/wranglezone/stbl/issues/178)).
+  `spec`, and
+  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
+  checks that the number of elements matching a `spec` falls within a
+  given range ([\#289](https://github.com/wranglezone/stbl/issues/289),
+  [\#290](https://github.com/wranglezone/stbl/issues/290)).
 - New functions
-  [`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
-  [`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
   and
-  [`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md)
-  create pre-configured `stbl_specified_fn`s that call
-  [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
-  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
-  and
-  [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
-  respectively, letting composition specs be reused and nested inside
-  other `specify_*()`/`stabilize_*()` calls
-  ([\#288](https://github.com/wranglezone/stbl/issues/288)).
-- New function
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  catch a [stbl](https://stbl.wrangle.zone/) error of a given `subclass`
+  (defaulting to any [stbl](https://stbl.wrangle.zone/) error).
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
+  returns `NULL`, allowing callers to suppress expected validation
+  failures;
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
+  replaces the error’s message with a custom one, with an optional
+  `additional_class` argument to prepend extra classes to the error
+  class list ([\#178](https://github.com/wranglezone/stbl/issues/178),
+  [\#334](https://github.com/wranglezone/stbl/issues/334)).
+- New “meta-stabilizer” functions compose other stabilizers and specs:
   [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
-  validates `x` by applying each stabilizer function in `...`, failing
-  if any stabilizer fails or if the stabilized values are different
-  ([\#278](https://github.com/wranglezone/stbl/issues/278)).
-- New function
-  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
-  applies a single `spec` to every element of `x`. New function
-  [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
-  works analogously but stops at the first failing element. New function
-  [`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md)
-  creates a pre-configured `stbl_specified_fn` that calls
-  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
-  with a fixed `spec`, letting an element-wise spec be reused and nested
-  inside other `specify_*()`/`stabilize_*()` calls
-  ([\#287](https://github.com/wranglezone/stbl/issues/287)).
-- New function
+  requires every stabilizer in `...` to succeed,
   [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  validates `x` by trying each stabilizer function in `...` in order,
-  returning the first successful result. If all functions fail, an
-  informative error combining the individual failure messages is thrown.
-  New function
-  [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  works analogously, coercing to the first successful type prototype in
-  `...` via [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
-  ([\#215](https://github.com/wranglezone/stbl/issues/215),
-  [\#285](https://github.com/wranglezone/stbl/issues/285)).
-- New function
+  returns the first successful result,
   [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
-  validates `x` against every stabilizer function in `...` and requires
-  that exactly one succeeds, returning that function’s result; an error
-  is thrown if zero functions succeed or if more than one succeeds. New
-  function
-  [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
-  works analogously with type prototypes via
-  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
-  ([\#286](https://github.com/wranglezone/stbl/issues/286)).
-- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
-  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  and
-  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  gain new `min_characters` and `max_characters` arguments to constrain
-  the number of characters in each element of a character vector
-  ([\#275](https://github.com/wranglezone/stbl/issues/275)).
-- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
-  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
-  [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
-  and their `specify_*()` factories gain a new `allowed_values`
-  argument, allowing users to restrict `x` to a fixed set of permitted
-  values ([\#282](https://github.com/wranglezone/stbl/issues/282)).
-- [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
-  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-  and
-  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
-  gain new `exclusive_min_value` and `exclusive_max_value` arguments,
-  enforcing strict (open-interval) numeric bounds that reject values
-  equal to the boundary, matching JSON Schema
-  `exclusiveMinimum`/`exclusiveMaximum` semantics
-  ([\#276](https://github.com/wranglezone/stbl/issues/276)).
-- [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
-  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-  and
-  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
-  gain a new `multiple_of` argument, requiring that values be a multiple
-  of the given value;
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)/[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
-  apply a small relative tolerance to avoid floating-point false
-  negatives ([\#283](https://github.com/wranglezone/stbl/issues/283)).
-- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-  [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-  [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-  and
-  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
-  gain new `unique`/`.unique` arguments to enforce distinct elements and
-  raise duplicate-element errors when repeated values are found
-  ([\#280](https://github.com/wranglezone/stbl/issues/280)).
-- New [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  requires exactly one success, and
+  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
+  applies a single spec to every element. Matching `to_*()` and
+  `specify_*()` variants are also available
+  ([\#215](https://github.com/wranglezone/stbl/issues/215),
+  [\#278](https://github.com/wranglezone/stbl/issues/278),
+  [\#285](https://github.com/wranglezone/stbl/issues/285),
+  [\#286](https://github.com/wranglezone/stbl/issues/286),
+  [\#287](https://github.com/wranglezone/stbl/issues/287),
+  [\#288](https://github.com/wranglezone/stbl/issues/288)).
+- The `stabilize_*()` and `specify_*()` functions gain new constraint
+  arguments: `min_characters`/`max_characters` for character vectors
+  ([\#275](https://github.com/wranglezone/stbl/issues/275)),
+  `allowed_values` to restrict input to a fixed set of permitted values
+  ([\#282](https://github.com/wranglezone/stbl/issues/282)),
+  `exclusive_min_value`/`exclusive_max_value` for strict numeric bounds
+  ([\#276](https://github.com/wranglezone/stbl/issues/276)),
+  `multiple_of` to require values that are a multiple of a given value
+  ([\#283](https://github.com/wranglezone/stbl/issues/283)), and
+  `unique`/`.unique` to reject duplicate elements
+  ([\#280](https://github.com/wranglezone/stbl/issues/280)). See each
+  function’s documentation for details.
+- New `date`, `dttm`, `time`, and `dur` function families
+  ([`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
   [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
   [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
   [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
   [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
   [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
-  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md), and
-  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
-  families (plus matching `specify_*()` factories) validate and coerce
-  [RFC 3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO
-  8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values
-  ([\#104](https://github.com/wranglezone/stbl/issues/104),
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+  plus matching `specify_*()` factories) validate and coerce [RFC
+  3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO
+  8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values.
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
+  and
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+  also accept unambiguous locale-dependent formats via a new
+  `accepted_datetime_formats` argument and the
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)
+  helper ([\#104](https://github.com/wranglezone/stbl/issues/104),
   [\#105](https://github.com/wranglezone/stbl/issues/105),
   [\#294](https://github.com/wranglezone/stbl/issues/294),
-  [\#295](https://github.com/wranglezone/stbl/issues/295)).
-- New function
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)
-  returns a locale-aware set of
-  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style
-  date/date-time formats.
-  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
-  [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
-  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
-  [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
-  and their `specify_*()` factories gain a new
-  `accepted_datetime_formats` argument (defaulting to
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md))
-  so that locale-dependent formats such as `"11/13/2018"` are accepted
-  where unambiguous;
-  [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) and
-  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) are
-  unaffected and continue to require the strict RFC 3339 shape
-  ([\#326](https://github.com/wranglezone/stbl/issues/326)).
-- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)’s
-  `.extra_cols` argument and
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)/[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)’s
-  `.named` and `.unnamed` arguments now also accept `TRUE` to allow
-  extra or unnamed elements unchecked, in addition to the existing
-  `NULL`/`FALSE` (forbid) and stabilizer-function (validate) forms
-  ([\#281](https://github.com/wranglezone/stbl/issues/281)).
-- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
+  [\#295](https://github.com/wranglezone/stbl/issues/295),
+  [\#326](https://github.com/wranglezone/stbl/issues/326)).
+- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and
-  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
-  gain a new `.required` argument, letting you mark named specs passed
-  via `...` as optional. `.required` defaults to all names in `...`,
-  preserving the previous “every named spec is required” behavior; specs
-  left out of `.required` are only validated when present
-  ([\#279](https://github.com/wranglezone/stbl/issues/279)).
-- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
-  and
-  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
-  gain a new `.allow_zero_length` argument (default `TRUE`) that lets a
-  zero-length `.x` (such as [`list()`](https://rdrr.io/r/base/list.html)
-  or a data frame with no columns) skip the required-element check even
-  if it’s missing elements listed in `.required`
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  (and their `specify_*()` factories) are more flexible about named
+  elements: `.required` marks named specs as optional
+  ([\#279](https://github.com/wranglezone/stbl/issues/279)),
+  `.extra_cols`/`.named`/`.unnamed` accept `TRUE` to allow extra or
+  unnamed elements unchecked
+  ([\#281](https://github.com/wranglezone/stbl/issues/281)), and
+  `.allow_zero_length` lets a zero-length input skip the
+  required-element check
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
 
 ### Bug fixes
@@ -243,10 +139,11 @@
   [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
   [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md), and
   [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) now
-  throw an “incompatible type” error (with failing element locations)
-  instead of a generic “can’t coerce” error when a list contains
-  elements that can’t be converted
-  ([\#273](https://github.com/wranglezone/stbl/issues/273)).
+  throw an informative “incompatible values” error listing the failing
+  locations and values when a list contains elements that can’t be
+  converted, instead of a generic “can’t coerce” error
+  ([\#273](https://github.com/wranglezone/stbl/issues/273),
+  [\#335](https://github.com/wranglezone/stbl/issues/335)).
 - `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without
   checking other `stabilize_*()` rules. For example,
   `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than

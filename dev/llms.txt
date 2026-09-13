@@ -85,6 +85,7 @@ my_fun("1.1")
 #> ! `my_arg_name` <character> must be coercible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 1
+#> • Values: "1.1"
 ```
 
 The errors help locate issues within vectors.
@@ -96,6 +97,7 @@ my_fun(c("1", "2", "3.1", "4", "5.2"))
 #> ! `my_arg_name` <character> must be coercible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
+#> • Values: "3.1" and "5.2"
 ```
 
 See [`vignette("stbl")`](https://stbl.wrangle.zone/dev/articles/stbl.md)
