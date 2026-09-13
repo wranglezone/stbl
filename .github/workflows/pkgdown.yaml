@@ -88,7 +88,9 @@ jobs:
           script: |
             const marker = '<!-- pkgdown-preview-url -->';
             const url = `https://stbl.wrangle.zone/pr-preview/${context.issue.number}/`;
-            const body = `${marker}\n🌐 pkgdown preview: ${url}`;
+            const runUrl = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const timestamp = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+            const body = `${marker}\n🌐 pkgdown preview: ${url}\n\n_Deployed by [this GitHub Action](${runUrl}). Updated: ${timestamp}_`;
 
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
