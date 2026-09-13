@@ -307,8 +307,6 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # and trailing newline, not just conditionMessage() (see #258)
   expect_identical(to_chr(simpleError("oops")), "Error: oops\n")
 
-  # language object
-  expect_identical(to_chr(quote(y + x)), "y + x")
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {

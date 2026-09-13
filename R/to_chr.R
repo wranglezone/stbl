@@ -175,10 +175,7 @@ to_character <- to_chr
   if (length(x_chr) == 2L) {
     return(paste(x_chr[[1]], x_chr[[2]]))
   }
-  if (length(x_chr) == 3L) {
-    return(paste(x_chr[[2]], x_chr[[1]], x_chr[[3]]))
-  }
-  paste(x_chr, collapse = " ")
+  paste(x_chr[[2]], x_chr[[1]], x_chr[[3]])
 }
 
 #' Build a string from a `::` or `:::` call expression
