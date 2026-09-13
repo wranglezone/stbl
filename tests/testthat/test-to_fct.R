@@ -22,6 +22,11 @@ test_that("to_fct() preserves unused factor levels (#246)", {
   expect_identical(to_fct(given), given)
 })
 
+test_that("to_fct() preserves literal NA levels separately from missing values (#246)", {
+  given <- factor(c("NA", NA), levels = c("NA", "a"))
+  expect_identical(to_fct(given), given)
+})
+
 test_that("to_fct() can return ordered factors from non-factors (#246)", {
   result <- to_fct(c("a", "b"), levels = c("a", "b"), ordered = TRUE)
   expect_s3_class(result, "ordered")
