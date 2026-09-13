@@ -281,6 +281,11 @@ test_that("to_chr() works for fcts via C (#241)", {
   expect_identical(to_chr(given), c("x", "y"))
 })
 
+test_that("to_chr() converts formulas to readable strings (#259)", {
+  expect_identical(to_chr(y ~ x), "y ~ x")
+  expect_identical(to_chr(~ y + x), "~ y + x")
+})
+
 test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # complex
   expect_identical(to_chr(1 + 2i), "1+2i")
@@ -302,8 +307,8 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # and trailing newline, not just conditionMessage() (see #258)
   expect_identical(to_chr(simpleError("oops")), "Error: oops\n")
 
-  # formula — splits into a 3-element vector: operator, LHS, RHS (see #259)
-  expect_identical(to_chr(y ~ x), c("~", "y", "x"))
+  # language object
+  expect_identical(to_chr(quote(y + x)), "y + x")
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {
