@@ -14,9 +14,9 @@ common type can be found; otherwise `out` is returned unchanged.
 - out:
 
   `(list)` Per-element results, such as produced by
-  [`.map_each_fast()`](https://stbl.wrangle.zone/reference/dot-map_each_fast.md)
+  [`.map_each_fast()`](https://stbl.wrangle.zone/dev/reference/dot-map_each_fast.md)
   or the `out` element of
-  [`.map_each_safe()`](https://stbl.wrangle.zone/reference/dot-map_each_safe.md)'s
+  [`.map_each_safe()`](https://stbl.wrangle.zone/dev/reference/dot-map_each_safe.md)'s
   result.
 
 - simplify:

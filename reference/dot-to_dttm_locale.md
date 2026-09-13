@@ -1,16 +1,17 @@
 # Coerce to date-time, trying `accepted_datetime_formats` for character input
 
 Used by
-[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
 in place of
-[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md), so that
-character input can be tried against a list of
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md), so
+that character input can be tried against a list of
 `accepted_datetime_formats` (with an optional UTC offset) rather than
 only the strict RFC 3339 shape that
-[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md) enforces.
-Non-character input (and factors, once converted to character) is
-delegated to
-[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md) unchanged.
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+enforces. Non-character input (and factors, once converted to character)
+is delegated to
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
+unchanged.
 
 ## Usage
 
@@ -50,7 +51,7 @@ delegated to
   format that parses every non-`NA` element of `x` is used; if none do,
   the result (and any error) is based on the first format tried.
   Defaults to
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.

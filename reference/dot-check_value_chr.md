@@ -29,7 +29,7 @@ Check character values against character count and regex patterns
   vector, a list of character vectors, or a pattern object from the
   {stringr} package (e.g., `stringr::fixed("a.b")`). The default error
   message for non-matching values will include the pattern itself (see
-  [`regex_must_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)).
+  [`regex_must_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)).
   To provide a custom message, supply a named character vector where the
   value is the regex pattern and the name is the message that should be
   displayed. To check that a pattern is *not* matched, attach a `negate`

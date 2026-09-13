@@ -49,4 +49,4 @@ Describe a numeric value validation failure
 ## Value
 
 A named character vector for
-[`.stbl_abort()`](https://stbl.wrangle.zone/reference/dot-stbl_abort.md).
+[`.stbl_abort()`](https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.md).

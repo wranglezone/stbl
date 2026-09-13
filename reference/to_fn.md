@@ -119,8 +119,8 @@ character method. When the input is a length-0 character vector,
 ## See also
 
 Other function functions:
-[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
 
 ## Examples
 
@@ -128,24 +128,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x000001de3d856ce8>
+#> <bytecode: 0x55c3e2807650>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x000001de41392b30>
+#> <environment: 0x55c3e51bcd20>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x000001de3d856ce8>
+#> <bytecode: 0x55c3e2807650>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x000001de3cf88b68>
+#> <bytecode: 0x55c3e21890e0>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL

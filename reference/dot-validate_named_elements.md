@@ -25,9 +25,9 @@ Validate all named elements (required and extra)
 - ...:
 
   Named stabilizer functions, such as `stabilize_*` functions
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   etc). Each name corresponds to an element in `.x`, and the function is
   used to validate that element when present. Whether the element is
   required (its absence is an error) is controlled by `.required`.
@@ -43,9 +43,9 @@ Validate all named elements (required and extra)
   - `TRUE`: extra named elements are allowed, unchecked.
 
   - A single stabilizer function, such as a `stabilize_*` function
-    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
     etc) or a function produced by a `specify_*()` function
-    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
     etc), used to validate every extra named element.
 
 - .required:

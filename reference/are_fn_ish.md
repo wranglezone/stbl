@@ -6,7 +6,7 @@ each element of its input can be safely coerced to a function.
 
 `is_fn_ish()` is a scalar predicate that checks whether its input can be
 safely coerced to a function by
-[`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md).
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md).
 `is_function_ish()` is a synonym of `is_fn_ish()`.
 
 ## Usage
@@ -51,7 +51,7 @@ input. `is_fn_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`).
   environment.
 
 `is_fn_ish()` returns `TRUE` for objects that
-[`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md) can coerce
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) can coerce
 without error (assuming a matching function exists in the search path):
 
 - Functions (including lambda functions created with `~` or `\()`)
@@ -63,21 +63,22 @@ without error (assuming a matching function exists in the search path):
 
 `NULL` and length-0 character vectors are *not* considered function-ish
 because they do not represent a callable object;
-[`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md) converts them
-to `NULL` only as a permissive special case controlled by `allow_null`.
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) converts
+them to `NULL` only as a permissive special case controlled by
+`allow_null`.
 
 ## See also
 
 Other function functions:
-[`to()`](https://stbl.wrangle.zone/reference/to.md),
-[`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md)
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
 
 Other check functions:
-[`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
-[`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
-[`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
-[`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
-[`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
+[`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
+[`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
+[`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
+[`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
+[`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
 
 ## Examples
 

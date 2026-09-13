@@ -1,11 +1,11 @@
 # Deprecated: use `assert_present()` instead
 
 `stabilize_present()` was renamed to
-[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md)
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
 because it doesn't stabilize (coerce) `x` in any way; it only asserts
 that `x` is not `NULL`. Calling `stabilize_present()` now throws an
 error directing you to
-[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md)
+[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
 instead.
 
 ## Usage

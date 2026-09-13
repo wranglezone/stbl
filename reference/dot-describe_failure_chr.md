@@ -26,4 +26,4 @@ Describe a character-based validation failure
 ## Value
 
 A named character vector to be used as `additional_msg` in
-[`.stop_must()`](https://stbl.wrangle.zone/reference/dot-stop_must.md).
+[`.stop_must()`](https://stbl.wrangle.zone/dev/reference/dot-stop_must.md).

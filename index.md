@@ -28,6 +28,15 @@ Install the released version of stbl from
 install.packages("stbl")
 ```
 
+Install the development version of stbl from
+[GitHub](https://github.com/):
+
+``` r
+
+# install.packages("pak")
+pak::pak("wranglezone/stbl")
+```
+
 ## Usage
 
 The primary use-case for stbl is to stabilize objects, such as function
@@ -91,8 +100,8 @@ my_fun(c("1", "2", "3.1", "4", "5.2"))
 #> • Values: "3.1" and "5.2"
 ```
 
-See [`vignette("stbl")`](https://stbl.wrangle.zone/articles/stbl.md) to
-learn more about how to use stbl, and when to “upgrade” from `to_*()`
+See [`vignette("stbl")`](https://stbl.wrangle.zone/dev/articles/stbl.md)
+to learn more about how to use stbl, and when to “upgrade” from `to_*()`
 functions to `stabilize_*()` functions.
 
 ## Similar Packages

@@ -1,11 +1,11 @@
 # Coerce to length-1 date-time, trying `accepted_datetime_formats`
 
 The scalar counterpart of
-[`.to_dttm_locale()`](https://stbl.wrangle.zone/reference/dot-to_dttm_locale.md),
+[`.to_dttm_locale()`](https://stbl.wrangle.zone/dev/reference/dot-to_dttm_locale.md),
 used by
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
 in place of
-[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md).
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md).
 
 ## Usage
 
@@ -47,7 +47,7 @@ in place of
   format that parses every non-`NA` element of `x` is used; if none do,
   the result (and any error) is based on the first format tried.
   Defaults to
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.

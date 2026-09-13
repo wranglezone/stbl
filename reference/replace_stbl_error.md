@@ -35,7 +35,7 @@ replace_stbl_error(
   replace. Combined with `"stbl-error"` to form the class name to
   intercept. For example, `c("coerce", "character")` catches errors of
   class `stbl-error-coerce-character`
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)),
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)),
   `c("coerce")` catches any `stbl-error-coerce` error, and
   [`character()`](https://rdrr.io/r/base/character.html) (the default)
   catches any `stbl` error.

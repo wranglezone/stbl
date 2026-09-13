@@ -17,7 +17,7 @@ to make them easier to import and to find.
   format that parses every non-`NA` element of `x` is used; if none do,
   the result (and any error) is based on the first format tried.
   Defaults to
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
@@ -186,7 +186,7 @@ to make them easier to import and to find.
   vector, a list of character vectors, or a pattern object from the
   {stringr} package (e.g., `stringr::fixed("a.b")`). The default error
   message for non-matching values will include the pattern itself (see
-  [`regex_must_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)).
+  [`regex_must_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)).
   To provide a custom message, supply a named character vector where the
   value is the regex pattern and the name is the message that should be
   displayed. To check that a pattern is *not* matched, attach a `negate`
@@ -203,11 +203,11 @@ to make them easier to import and to find.
 
   `(function)` A single stabilizer or coercion function, such as a
   `to_*` function
-  ([`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md), etc.), a
-  `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  etc.), a `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), or a function produced by a `specify_*()` call
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   etc.). Applied independently to each element of `x`.
 
 - to:

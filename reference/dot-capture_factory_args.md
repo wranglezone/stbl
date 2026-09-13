@@ -2,7 +2,7 @@
 
 Used inside `specify_*()` functions to build the `factory_args` list
 passed to
-[`.specify_cls()`](https://stbl.wrangle.zone/reference/dot-specify_cls.md),
+[`.specify_cls()`](https://stbl.wrangle.zone/dev/reference/dot-specify_cls.md),
 keeping only the arguments that the caller of the `specify_*()` function
 actually supplied (as opposed to those left at their default value).
 

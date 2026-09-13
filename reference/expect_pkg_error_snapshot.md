@@ -3,7 +3,7 @@
 A convenience wrapper around
 [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html)
 and
-[`expect_pkg_error_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_error_classes.md)
+[`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
 that captures both the error class hierarchy and the user-facing message
 in a single snapshot.
 
@@ -52,7 +52,7 @@ expect_pkg_error_snapshot(
   (`environment`) The environment in which `object` should be evaluated.
   Assignments made inside `object` are visible to the caller after this
   function returns.
-  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_error_classes.md)
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
   is temporarily injected into `env` if it is not already findable, so
   this works even when this package is not attached.
 

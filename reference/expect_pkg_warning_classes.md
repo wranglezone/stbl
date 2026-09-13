@@ -1,7 +1,7 @@
 # Test package warning classes
 
 When you use
-[`pkg_warn()`](https://stbl.wrangle.zone/reference/pkg_warn.md) to
+[`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md) to
 signal warnings, you can use this function to test that those warnings
 are generated as expected.
 

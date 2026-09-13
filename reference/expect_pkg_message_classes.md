@@ -1,9 +1,9 @@
 # Test package message classes
 
 When you use
-[`pkg_inform()`](https://stbl.wrangle.zone/reference/pkg_inform.md) to
-signal messages, you can use this function to test that those messages
-are generated as expected.
+[`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
+to signal messages, you can use this function to test that those
+messages are generated as expected.
 
 ## Usage
 

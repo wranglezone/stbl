@@ -1,7 +1,7 @@
 # Parse the regex captures from `to_dttm.character()` into instants
 
 Parse the regex captures from
-[`to_dttm.character()`](https://stbl.wrangle.zone/reference/to_dttm.md)
+[`to_dttm.character()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
 into instants
 
 ## Usage

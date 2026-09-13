@@ -3,8 +3,8 @@
 Returns an ordered set of
 [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
 strings, used as the default value of `accepted_datetime_formats` in
-[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
-[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 and their siblings. Character input is tried against each format in
 turn, in order, until one of them parses every element (see those
 functions for details).
@@ -37,18 +37,18 @@ separators (each listed with, then without, a `" %H:%M:%S"` suffix).
 ## See also
 
 Other date functions:
-[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
-[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
-[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
-[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
-[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
+[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md)
 
 Other datetime functions:
-[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
-[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
-[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
-[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
+[`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
 
 ## Examples
 

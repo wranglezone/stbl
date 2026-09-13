@@ -1,22 +1,24 @@
 # Changelog
 
+## stbl (development version)
+
 ## stbl 0.5.0
 
 ### Breaking changes
 
-- [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+- [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   is now named
-  [`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+  [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
   since it doesn’t stabilize (coerce) its input; it only asserts that
   the input is not `NULL`. Calling
-  [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   now throws a “deprecated”-classed error directing you to
-  [`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md)
+  [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   ([\#299](https://github.com/wranglezone/stbl/issues/299)).
-- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_error_snapshot.md),
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_message_snapshot.md),
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
   and
-  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_snapshot.md)
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   now produce snapshots that mirror
   [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html),
   showing the bare expression under `Code` and the condition class
@@ -35,38 +37,38 @@
 ### New features
 
 - New assertion functions
-  [`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md)
+  [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   and
-  [`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md):
-  [`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md)
+  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md):
+  [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   errors when `x` would be accepted (coerced or validated) by a single
   `spec`, and
-  [`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md)
+  [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md)
   checks that the number of elements matching a `spec` falls within a
   given range ([\#289](https://github.com/wranglezone/stbl/issues/289),
   [\#290](https://github.com/wranglezone/stbl/issues/290)).
 - New functions
-  [`ignore_stbl_error()`](https://stbl.wrangle.zone/reference/ignore_stbl_error.md)
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
   and
-  [`replace_stbl_error()`](https://stbl.wrangle.zone/reference/replace_stbl_error.md)
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
   catch a [stbl](https://stbl.wrangle.zone/) error of a given `subclass`
   (defaulting to any [stbl](https://stbl.wrangle.zone/) error).
-  [`ignore_stbl_error()`](https://stbl.wrangle.zone/reference/ignore_stbl_error.md)
+  [`ignore_stbl_error()`](https://stbl.wrangle.zone/dev/reference/ignore_stbl_error.md)
   returns `NULL`, allowing callers to suppress expected validation
   failures;
-  [`replace_stbl_error()`](https://stbl.wrangle.zone/reference/replace_stbl_error.md)
+  [`replace_stbl_error()`](https://stbl.wrangle.zone/dev/reference/replace_stbl_error.md)
   replaces the error’s message with a custom one, with an optional
   `additional_class` argument to prepend extra classes to the error
   class list ([\#178](https://github.com/wranglezone/stbl/issues/178),
   [\#334](https://github.com/wranglezone/stbl/issues/334)).
 - New “meta-stabilizer” functions compose other stabilizers and specs:
-  [`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md)
+  [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   requires every stabilizer in `...` to succeed,
-  [`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md)
+  [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   returns the first successful result,
-  [`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md)
+  [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
   requires exactly one success, and
-  [`stabilize_each()`](https://stbl.wrangle.zone/reference/stabilize_each.md)
+  [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
   applies a single spec to every element. Matching `to_*()` and
   `specify_*()` variants are also available
   ([\#215](https://github.com/wranglezone/stbl/issues/215),
@@ -88,31 +90,31 @@
   ([\#280](https://github.com/wranglezone/stbl/issues/280)). See each
   function’s documentation for details.
 - New `date`, `dttm`, `time`, and `dur` function families
-  ([`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
-  [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
-  [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
-  [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
-  [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
-  [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
-  [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
-  [`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+  ([`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
+  [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
   plus matching `specify_*()` factories) validate and coerce [RFC
   3339](https://www.rfc-editor.org/info/rfc3339/) / [ISO
   8601](https://en.wikipedia.org/wiki/ISO_8601) temporal values.
-  [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md)
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
   and
-  [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
   also accept unambiguous locale-dependent formats via a new
   `accepted_datetime_formats` argument and the
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md)
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)
   helper ([\#104](https://github.com/wranglezone/stbl/issues/104),
   [\#105](https://github.com/wranglezone/stbl/issues/105),
   [\#294](https://github.com/wranglezone/stbl/issues/294),
   [\#295](https://github.com/wranglezone/stbl/issues/295),
   [\#326](https://github.com/wranglezone/stbl/issues/326)).
-- [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
+- [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and
-  [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   (and their `specify_*()` factories) are more flexible about named
   elements: `.required` marks named specs as optional
   ([\#279](https://github.com/wranglezone/stbl/issues/279)),
@@ -125,21 +127,21 @@
 
 ### Bug fixes
 
-- [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   (and
-  [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
   which delegates to it) now correctly detects missing required named
   elements even when `.x` has no named elements at all, such as
   [`list()`](https://rdrr.io/r/base/list.html) or `list(1L, 2L)`.
   Previously, the required-element check was silently skipped whenever
   `.x` had no named elements
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
-- [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
-  [`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
-  [`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
-  [`to_int()`](https://stbl.wrangle.zone/reference/to_int.md), and
-  [`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md) now throw
-  an informative “incompatible values” error listing the failing
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+  [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md), and
+  [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) now
+  throw an informative “incompatible values” error listing the failing
   locations and values when a list contains elements that can’t be
   converted, instead of a generic “can’t coerce” error
   ([\#273](https://github.com/wranglezone/stbl/issues/273),
@@ -155,84 +157,86 @@ CRAN release: 2026-07-28
 
 ### Breaking changes
 
-- [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md) and
-  [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md) now error
-  if extra arguments are passed in `...`. Previously, these extra
+- [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
+  error if extra arguments are passed in `...`. Previously, these extra
   arguments were silently discarded
   ([\#200](https://github.com/wranglezone/stbl/issues/200)).
-- [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md) now
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
   converts named functions to a string representing their name instead
   of erroring. Package functions are returned as `"pkg::fn"` (e.g.,
   `to_chr(mean)` returns `"base::mean"`). Anonymous functions still
   produce an informative error. This behavior extends to
-  [`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
-  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   and
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md)
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   ([\#251](https://github.com/wranglezone/stbl/issues/251)).
 
 ### New functions
 
 - New
-  [`pkg_inform()`](https://stbl.wrangle.zone/reference/pkg_inform.md)
-  and [`pkg_warn()`](https://stbl.wrangle.zone/reference/pkg_warn.md)
+  [`pkg_inform()`](https://stbl.wrangle.zone/dev/reference/pkg_inform.md)
+  and
+  [`pkg_warn()`](https://stbl.wrangle.zone/dev/reference/pkg_warn.md)
   signal classed messages and warnings, respectively, with an
   opinionated class hierarchy, mirroring
-  [`pkg_abort()`](https://stbl.wrangle.zone/reference/pkg_abort.md). New
-  [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_message_classes.md)
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md).
+  New
+  [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
   and
-  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_classes.md)
+  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
   test that the expected classes are thrown, and
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_message_snapshot.md)
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
   and
-  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_snapshot.md)
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   snapshot-test the full output in one step
   ([\#213](https://github.com/wranglezone/stbl/issues/213)).
-- New function [`to()`](https://stbl.wrangle.zone/reference/to.md)
+- New function [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
   coerces `x` to the type of its `.to` argument. `stbl_to()` is also
   registered as a C callable in a new public C API
   ([\#182](https://github.com/wranglezone/stbl/issues/182)).
-- New [`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md),
-  [`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
-  and [`is_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+- New [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md),
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+  and
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   add the `fn` type family to stbl.
-  [`to_fn()`](https://stbl.wrangle.zone/reference/to_fn.md) coerces
+  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) coerces
   strings and symbols to functions.
-  [`is_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   checks whether a single object can be safely coerced to a function.
-  [`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md)
+  [`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   checks each element of a character vector for syntactic fn-ishness
   (bare name or `"pkg::fn"` form)
   ([\#250](https://github.com/wranglezone/stbl/issues/250)).
 
 ### Bug fixes
 
-- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_error_snapshot.md),
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_message_snapshot.md),
+- [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md),
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md),
   and
-  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_snapshot.md)
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   now produce stable snapshots when run under
-  [`devtools::test_coverage_active_file()`](https://devtools.r-lib.org/reference/test.html).
-  `specify_*()` functions now also produce stable function-body
-  snapshots under coverage
+  `devtools::test_coverage_active_file()`. `specify_*()` functions now
+  also produce stable function-body snapshots under coverage
   ([\#253](https://github.com/wranglezone/stbl/issues/253)).
-- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_message_classes.md)
+- [`expect_pkg_message_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_classes.md)
   and
-  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_classes.md)
+  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
   now support assignments inside `object`
   (e.g. `result <- fn_that_warns()`).
-  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_message_snapshot.md)
+  [`expect_pkg_message_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_message_snapshot.md)
   and
-  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_snapshot.md)
+  [`expect_pkg_warning_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_snapshot.md)
   inherit the same fix
   ([\#234](https://github.com/wranglezone/stbl/issues/234)).
 
 ### Other changes
 
 - `are_*_ish()`, `to_*()`,
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   and
-  [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
+  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
   are all significantly faster for large vectors, with benchmarks
   showing roughly 3–20× throughput improvements
   ([\#217](https://github.com/wranglezone/stbl/issues/217),
@@ -251,7 +255,7 @@ CRAN release: 2026-07-28
   ([\#235](https://github.com/wranglezone/stbl/issues/235),
   [\#237](https://github.com/wranglezone/stbl/issues/237),
   [\#241](https://github.com/wranglezone/stbl/issues/241)).
-- [`is_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md)
+- [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   now accepts a `max_levels` argument to limit the number of unique
   non-`NA` levels
   ([\#231](https://github.com/wranglezone/stbl/issues/231)).
@@ -262,22 +266,22 @@ CRAN release: 2026-04-04
 
 ### Breaking changes
 
-- [`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
-  [`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
-  [`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
-  [`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
-  [`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
-  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
-  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
-  [`specify_chr_scalar()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
-  [`specify_fct_scalar()`](https://stbl.wrangle.zone/reference/specify_fct.md),
-  [`specify_int_scalar()`](https://stbl.wrangle.zone/reference/specify_int.md),
+- [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+  [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+  [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
+  [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
+  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
+  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
+  [`specify_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
+  [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
   and
-  [`specify_lgl_scalar()`](https://stbl.wrangle.zone/reference/specify_lgl.md)
+  [`specify_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   (and their synonyms) now default to `allow_null = FALSE` and
   `allow_zero_length = FALSE`. Pass `allow_null = TRUE` or
   `allow_zero_length = TRUE` to restore the previous behavior
@@ -297,26 +301,27 @@ CRAN release: 2026-04-04
 
 - New long-form and British-spelling synonym functions for all class
   functions. For example,
-  [`to_character()`](https://stbl.wrangle.zone/reference/to_chr.md) is a
-  synonym for
-  [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
-  [`specify_logical()`](https://stbl.wrangle.zone/reference/specify_lgl.md)
+  [`to_character()`](https://stbl.wrangle.zone/dev/reference/to_chr.md)
+  is a synonym for
+  [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   for
-  [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
+  [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
   and `stabilise_*()` for all `stabilize_*()` functions
   ([\#164](https://github.com/wranglezone/stbl/issues/164),
   [\#167](https://github.com/wranglezone/stbl/issues/167)).
 - New
-  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_error_classes.md)
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
   checks that an error with the expected set of classes is thrown by
-  [`pkg_abort()`](https://stbl.wrangle.zone/reference/pkg_abort.md), and
-  [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/reference/expect_pkg_error_snapshot.md)
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md),
+  and
+  [`expect_pkg_error_snapshot()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_snapshot.md)
   snapshot-tests the full error output in one step by combining
   `expect_snapshot()` with
-  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_error_classes.md)
+  [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.md)
   ([\#136](https://github.com/wranglezone/stbl/issues/136),
   [\#188](https://github.com/wranglezone/stbl/issues/188)). New
-  [`pkg_abort()`](https://stbl.wrangle.zone/reference/pkg_abort.md)
+  [`pkg_abort()`](https://stbl.wrangle.zone/dev/reference/pkg_abort.md)
   throws errors with a standardized, opinionated collection of classes
   ([\#136](https://github.com/wranglezone/stbl/issues/136)).
 - New specification functions: `specify_*()` creates a
@@ -332,34 +337,35 @@ CRAN release: 2026-04-04
   [\#153](https://github.com/wranglezone/stbl/issues/153),
   [\#161](https://github.com/wranglezone/stbl/issues/161)).
 - New
-  [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
   and
-  [`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md)
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
   validate data frame structure and contents
   ([\#142](https://github.com/wranglezone/stbl/issues/142)).
 - New
-  [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
-  [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
   validate list structure and contents and create pre-configured
   validators for nested validation
   ([\#110](https://github.com/wranglezone/stbl/issues/110),
   [\#204](https://github.com/wranglezone/stbl/issues/204)).
 - New
-  [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+  [`stabilize_present()`](https://stbl.wrangle.zone/dev/reference/stabilize_present.md)
   validates that a value is non-`NULL` without imposing any type
   constraints ([\#110](https://github.com/wranglezone/stbl/issues/110)).
-- New [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md) (and
+- New [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) (and
   synonym
-  [`to_data_frame()`](https://stbl.wrangle.zone/reference/to_df.md))
+  [`to_data_frame()`](https://stbl.wrangle.zone/dev/reference/to_df.md))
   coerces compatible objects to a data frame, including named lists and
   named atomic vectors (e.g., `to_df(letters)`), with informative errors
   for incompatible inputs such as jagged lists
   ([\#142](https://github.com/wranglezone/stbl/issues/142),
   [\#201](https://github.com/wranglezone/stbl/issues/201),
   [\#203](https://github.com/wranglezone/stbl/issues/203)).
-- New [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md) (and
-  synonym [`to_list()`](https://stbl.wrangle.zone/reference/to_lst.md))
+- New [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+  (and synonym
+  [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md))
   coerces an object to a list, with conditional checks for `NULL` and
   functions ([\#157](https://github.com/wranglezone/stbl/issues/157),
   [\#166](https://github.com/wranglezone/stbl/issues/166)).
@@ -383,30 +389,30 @@ CRAN release: 2025-09-16
 
 - New predicate functions check if an object can be safely coerced to a
   specific type. The `is_*_ish()` family
-  ([`is_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
-  [`is_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
-  [`is_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
-  [`is_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
+  ([`is_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
+  [`is_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
+  [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
+  [`is_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
   and
-  [`is_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md))
+  [`is_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md))
   checks the entire object at once. The `are_*_ish()` family
-  ([`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
-  [`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
-  [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
-  [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
+  ([`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
+  [`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
+  [`are_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md),
+  [`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
   and
-  [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md))
+  [`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md))
   checks each element of a vector individually
   ([\#23](https://github.com/wranglezone/stbl/issues/23),
   [\#93](https://github.com/wranglezone/stbl/issues/93)).
 - New functions for working with doubles are available:
-  [`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
-  [`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
-  [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+  [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
   and
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
+  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   ([\#23](https://github.com/wranglezone/stbl/issues/23)).
-- [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
+- [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
   now accepts patterns from
   [`stringr::regex()`](https://stringr.tidyverse.org/reference/modifiers.html),
   [`stringr::fixed()`](https://stringr.tidyverse.org/reference/modifiers.html),
@@ -415,9 +421,9 @@ CRAN release: 2025-09-16
   ([\#87](https://github.com/wranglezone/stbl/issues/87)), and can
   generate more informative error messages for regex failures via the
   new
-  [`regex_must_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)
+  [`regex_must_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
   and
-  [`regex_must_not_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)
+  [`regex_must_not_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
   helper functions
   ([\#52](https://github.com/wranglezone/stbl/issues/52),
   [\#85](https://github.com/wranglezone/stbl/issues/85),
@@ -431,11 +437,11 @@ CRAN release: 2025-09-16
 - `to_*()` functions now consistently flatten list-like inputs when no
   information would be lost in the process
   ([\#128](https://github.com/wranglezone/stbl/issues/128)).
-- [`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md) now lists
-  the allowed values in its error message when a value is not in the
-  expected set, making it easier to debug
+- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md) now
+  lists the allowed values in its error message when a value is not in
+  the expected set, making it easier to debug
   ([\#67](https://github.com/wranglezone/stbl/issues/67)).
-- [`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md) now
+- [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) now
   coerces character representations of numbers (e.g., “0” and “1”) to
   `FALSE` and `TRUE` respectively
   ([\#30](https://github.com/wranglezone/stbl/issues/30)).
@@ -446,7 +452,8 @@ CRAN release: 2025-09-16
   described in documentation
   ([\#56](https://github.com/wranglezone/stbl/issues/56),
   [\#77](https://github.com/wranglezone/stbl/issues/77)).
-- New [`vignette("stbl")`](https://stbl.wrangle.zone/articles/stbl.md)
+- New
+  [`vignette("stbl")`](https://stbl.wrangle.zone/dev/articles/stbl.md)
   provides an overview of the package and its functions
   ([\#42](https://github.com/wranglezone/stbl/issues/42)).
 

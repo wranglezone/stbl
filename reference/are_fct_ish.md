@@ -62,19 +62,19 @@ for the entire vector.
 ## See also
 
 Other factor functions:
-[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
-[`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md),
-[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
-[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md)
+[`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
+[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
 
 Other check functions:
-[`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
-[`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
-[`are_fn_ish()`](https://stbl.wrangle.zone/reference/are_fn_ish.md),
-[`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
-[`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md)
+[`are_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md),
+[`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
+[`are_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md),
+[`are_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md),
+[`are_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
 
 ## Examples
 

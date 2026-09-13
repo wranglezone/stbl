@@ -72,7 +72,7 @@ Snapshot-test a package condition
   (`environment`) The environment in which `object` should be evaluated.
   Assignments made inside `object` are visible to the caller after this
   function returns.
-  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_warning_classes.md)
+  [`expect_pkg_warning_classes()`](https://stbl.wrangle.zone/dev/reference/expect_pkg_warning_classes.md)
   is temporarily injected into `env` if it is not already findable, so
   this works even when this package is not attached.
 
