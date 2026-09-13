@@ -17,7 +17,7 @@ is_character_ish() is a synonym of is_chr_ish()."><meta property="og:image" cont
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@ is_character_ish() is a synonym of is_chr_ish()."><meta property="og:image" cont
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Check if an object can be safely coerced to character</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/are_chr_ish.R" class="external-link"><code>R/are_chr_ish.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/are_chr_ish.R" class="external-link"><code>R/are_chr_ish.R</code></a></small>
       <div class="d-none name"><code>are_chr_ish.Rd</code></div>
     </div>
 
@@ -83,8 +83,8 @@ of its input can be safely coerced to a character vector.
 
 
 <dt id="arg-depth">depth<a class="anchor" aria-label="anchor" href="#arg-depth"></a></dt>
-<dd><p><code>(length-1 integer)</code> Current recursion depth. Do not manually
-set this parameter.</p></dd>
+<dd><p>(<code>integer(1)</code>) Current recursion depth. Do not manually set this
+parameter.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,7 +98,10 @@ the entire vector.</p>
     <div class="dont-index"><p>Other character functions:
 <code><a href="specify_chr.html">specify_chr()</a></code>,
 <code><a href="stabilize_chr.html">stabilize_chr()</a></code>,
-<code><a href="to.html">to()</a></code></p>
+<code><a href="stabilize_chr_scalar.html">stabilize_chr_scalar()</a></code>,
+<code><a href="to.html">to()</a></code>,
+<code><a href="to_chr.html">to_chr()</a></code>,
+<code><a href="to_chr_scalar.html">to_chr_scalar()</a></code></p>
 <p>Other check functions:
 <code><a href="are_dbl_ish.html">are_dbl_ish()</a></code>,
 <code><a href="are_fct_ish.html">are_fct_ish()</a></code>,

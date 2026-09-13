@@ -12,7 +12,7 @@ Describe a character-based validation failure
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - success:
 
@@ -21,7 +21,7 @@ Describe a character-based validation failure
 
 - negate:
 
-  `(length-1 logical)` Was the check a negative one?
+  (`logical(1)`) Was the check a negative one?
 
 ## Value
 

@@ -9,17 +9,42 @@ to make them easier to import and to find.
 
   Arguments passed to methods.
 
+- accepted_datetime_formats:
+
+  (`character`)
+  [`strptime()`](https://rdrr.io/r/base/strptime.html)-style format
+  strings to try, in order, when parsing a character `x`. The first
+  format that parses every non-`NA` element of `x` is used; if none do,
+  the result (and any error) is based on the first format tried.
+  Defaults to
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+  which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
+  optionally with a time-of-day component) before falling back to the
+  current locale's conventional date order.
+
+- additional_class:
+
+  (`character`) Additional classes to prepend to the error class list.
+  Useful for the `class` argument of
+  [`testthat::expect_error()`](https://testthat.r-lib.org/reference/expect_error.html).
+
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 - are_cls_ish_fn:
 
@@ -45,13 +70,13 @@ to make them easier to import and to find.
 
 - coerce_character:
 
-  `(length-1 logical)` Should character vectors such as "1" and "2.0" be
+  (`logical(1)`) Should character vectors such as "1" and "2.0" be
   considered numeric-ish?
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -59,12 +84,32 @@ to make them easier to import and to find.
 
 - coerce_function:
 
-  `(length-1 logical)` Should functions be coerced?
+  (`logical(1)`) Should functions be coerced?
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
+
+- due_to:
+
+  (`character(1)`) A string describing the reason for the failure.
+
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
+
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
+- failures:
+
+  `(logical)` A logical vector indicating which elements failed.
 
 - is_rlang_cls_scalar:
 
@@ -73,43 +118,59 @@ to make them easier to import and to find.
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+
+- max_levels:
+
+  (`numeric(1)`) Maximum number of distinct non-`NA` values allowed
+  across the whole vector after applying `to_na`.
+
+- max_size:
+
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
+  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- max_value:
+
+  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - message_env:
 
   (`environment`) The execution environment to use to evaluate variables
   in error messages.
 
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - min_value:
 
-  `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
-- max_size:
+- multiple_of:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
-  [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
-
-- max_levels:
-
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
-
-- max_value:
-
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
 
 - package:
 
-  `(length-1 character)` The name of the package to use in classes.
+  (`character(1)`) The name of the package to use in classes.
 
 - parent:
 
@@ -132,9 +193,30 @@ to make them easier to import and to find.
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- simplify:
+
+  (`logical(1)`) Should per-element results be combined into a single
+  atomic vector when possible (every result has size 1 and shares a
+  common type)? If `FALSE`, a list is always returned.
+
+- spec:
+
+  `(function)` A single stabilizer or coercion function, such as a
+  `to_*` function
+  ([`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md), etc.), a
+  `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  etc.), or a function produced by a `specify_*()` call
+  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+  etc.). Applied independently to each element of `x`.
+
+- to:
+
+  The target object for the coercion.
+
 - to_class:
 
-  `(length-1 character)` The name of the class to coerce to.
+  (`character(1)`) The name of the class to coerce to.
 
 - to_cls_args:
 
@@ -162,20 +244,30 @@ to make them easier to import and to find.
   An empty object of the target type (e.g.,
   [`integer()`](https://rdrr.io/r/base/integer.html)).
 
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
+  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  Defaults to `"UTC"`.
+
+- unique:
+
+  (`logical(1)`) Should all elements in `x` be distinct?
+
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.

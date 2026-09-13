@@ -4,7 +4,7 @@
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
 with the provided arguments. `specify_int_scalar()` creates a function
 that will call
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
 with the provided arguments. `specify_integer()` is a synonym of
 `specify_int()`, and `specify_integer_scalar()` is a synonym of
 `specify_int_scalar()`.
@@ -19,8 +19,13 @@ specify_int(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_int_scalar(
@@ -30,7 +35,11 @@ specify_int_scalar(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer(
@@ -40,8 +49,13 @@ specify_integer(
   coerce_factor = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 
 specify_integer_scalar(
@@ -51,7 +65,11 @@ specify_integer_scalar(
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
-  max_value = NULL
+  max_value = NULL,
+  exclusive_min_value = NULL,
+  exclusive_max_value = NULL,
+  allowed_values = NULL,
+  multiple_of = NULL
 )
 ```
 
@@ -59,21 +77,21 @@ specify_integer_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - coerce_character:
 
-  `(length-1 logical)` Should character vectors such as "1" and "2.0" be
+  (`logical(1)`) Should character vectors such as "1" and "2.0" be
   considered numeric-ish?
 
 - coerce_factor:
 
-  `(length-1 logical)` Should factors with values such as "1" and "2.0"
-  be considered numeric-ish? Note that this package uses the character
+  (`logical(1)`) Should factors with values such as "1" and "2.0" be
+  considered numeric-ish? Note that this package uses the character
   value from the factor, while
   [`as.integer()`](https://rdrr.io/r/base/integer.html) and
   [`as.double()`](https://rdrr.io/r/base/double.html) use the integer
@@ -81,41 +99,69 @@ specify_integer_scalar(
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  (`logical(1)`) Should all elements in `x` be distinct?
 
 - min_value:
 
-  `(length-1 numeric)` The lowest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The lowest allowed value for `x`. If `NULL` (default)
+  values are not checked.
 
 - max_value:
 
-  `(length-1 numeric)` The highest allowed value for `x`. If `NULL`
-  (default) values are not checked.
+  (`numeric(1)`) The highest allowed value for `x`. If `NULL` (default)
+  values are not checked.
+
+- exclusive_min_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly
+  greater than this value (`>`, not `>=`). `NULL` (default) values are
+  not checked.
+
+- exclusive_max_value:
+
+  (`numeric(1)`) Similar to `max_value`, but `x` must be strictly less
+  than this value (`<`, not `<=`). `NULL` (default) values are not
+  checked.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
+- multiple_of:
+
+  (`numeric(1)`, positive) `x` must be an integer multiple of this
+  value. `NULL` (default) skips the check. For doubles, a small relative
+  tolerance is applied to avoid floating-point false negatives.
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
 or
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
 or
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md).
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -124,15 +170,26 @@ provide additional context or functionality.
 Other integer functions:
 [`are_int_ish()`](https://stbl.wrangle.zone/reference/are_int_ish.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md)
 
 Other specification functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
 [`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
-[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

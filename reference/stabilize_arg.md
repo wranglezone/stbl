@@ -1,10 +1,10 @@
-# Ensure an argument meets expectations
+# Ensure an object meets expectations
 
 `stabilize_arg()` is used by other functions such as
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md).
 Use `stabilize_arg()` if the type-specific functions will not work for
 your use case, but you would still like to check things like size or
-whether the argument is NULL.
+whether the object is NULL.
 
 `stabilize_arg_scalar()` is optimized to check for length-1 vectors.
 
@@ -18,6 +18,7 @@ stabilize_arg(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -39,7 +40,7 @@ stabilize_arg_scalar(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -47,30 +48,34 @@ stabilize_arg_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  (`logical(1)`) Should all elements in `x` be distinct?
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -79,30 +84,84 @@ stabilize_arg_scalar(
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 ## Value
 
-`x`, unless one of the checks fails.
+`x`, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
+
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
+
+- `<stbl-error-bad_empty>` for empty vectors when
+  `allow_zero_length = FALSE` in `stabilize_arg_scalar()`.
+
+- `<stbl-error-non_scalar>` for non-scalar vectors in
+  `stabilize_arg_scalar()`.
 
 ## See also
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 

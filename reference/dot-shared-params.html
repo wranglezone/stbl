@@ -9,7 +9,7 @@ make them easier to import and to find."><meta property="og:image" content="http
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ make them easier to import and to find."><meta property="og:image" content="http
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Shared parameters</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/aaa-shared_params.R" class="external-link"><code>R/aaa-shared_params.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/aaa-shared_params.R" class="external-link"><code>R/aaa-shared_params.R</code></a></small>
       <div class="d-none name"><code>dot-shared-params.Rd</code></div>
     </div>
 
@@ -53,17 +53,38 @@ make them easier to import and to find.</p>
 <dd><p>Arguments passed to methods.</p></dd>
 
 
+<dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
+<dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
+strings to try, in order, when parsing a character <code>x</code>. The first format
+that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
+result (and any error) is based on the first format tried. Defaults to
+<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
+shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
+falling back to the current locale's conventional date order.</p></dd>
+
+
+<dt id="arg-additional-class">additional_class<a class="anchor" aria-label="anchor" href="#arg-additional-class"></a></dt>
+<dd><p>(<code>character</code>) Additional classes to prepend to the
+error class list. Useful for the <code>class</code> argument of
+<code><a href="https://testthat.r-lib.org/reference/expect_error.html" class="external-link">testthat::expect_error()</a></code>.</p></dd>
+
+
 <dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
-<dd><p><code>(length-1 logical)</code> Are NA values ok?</p></dd>
+<dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
+
+
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
-<dd><p><code>(length-1 logical)</code> Is NULL an acceptable value?</p></dd>
+<dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
 <dt id="arg-allow-zero-length">allow_zero_length<a class="anchor" aria-label="anchor" href="#arg-allow-zero-length"></a></dt>
-<dd><p><code>(length-1 logical)</code> Are zero-length vectors
-acceptable?</p></dd>
+<dd><p>(<code>logical(1)</code>) Are zero-length vectors acceptable?</p></dd>
 
 
 <dt id="arg-are-cls-ish-fn">are_cls_ish_fn<a class="anchor" aria-label="anchor" href="#arg-are-cls-ish-fn"></a></dt>
@@ -90,24 +111,46 @@ pass to <code>check_cls_value_fn()</code>.</p></dd>
 
 
 <dt id="arg-coerce-character">coerce_character<a class="anchor" aria-label="anchor" href="#arg-coerce-character"></a></dt>
-<dd><p><code>(length-1 logical)</code> Should character vectors such as
-"1" and "2.0" be considered numeric-ish?</p></dd>
+<dd><p>(<code>logical(1)</code>) Should character vectors such as "1"
+and "2.0" be considered numeric-ish?</p></dd>
 
 
 <dt id="arg-coerce-factor">coerce_factor<a class="anchor" aria-label="anchor" href="#arg-coerce-factor"></a></dt>
-<dd><p><code>(length-1 logical)</code> Should factors with values such as
-"1" and "2.0" be considered numeric-ish? Note that this package uses the
+<dd><p>(<code>logical(1)</code>) Should factors with values such as "1"
+and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code> and <code><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double()</a></code> use
 the integer index of the factor.</p></dd>
 
 
 <dt id="arg-coerce-function">coerce_function<a class="anchor" aria-label="anchor" href="#arg-coerce-function"></a></dt>
-<dd><p><code>(length-1 logical)</code> Should functions be coerced?</p></dd>
+<dd><p>(<code>logical(1)</code>) Should functions be coerced?</p></dd>
 
 
 <dt id="arg-depth">depth<a class="anchor" aria-label="anchor" href="#arg-depth"></a></dt>
-<dd><p><code>(length-1 integer)</code> Current recursion depth. Do not manually
-set this parameter.</p></dd>
+<dd><p>(<code>integer(1)</code>) Current recursion depth. Do not manually set this
+parameter.</p></dd>
+
+
+<dt id="arg-due-to">due_to<a class="anchor" aria-label="anchor" href="#arg-due-to"></a></dt>
+<dd><p>(<code>character(1)</code>) A string describing the reason for the
+failure.</p></dd>
+
+
+<dt id="arg-exclusive-max-value">exclusive_max_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-max-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly less than this value (<code>&lt;</code>, not <code>&lt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-min-value">exclusive_min_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-min-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly greater than this value (<code>&gt;</code>, not <code>&gt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-failures">failures<a class="anchor" aria-label="anchor" href="#arg-failures"></a></dt>
+<dd><p><code>(logical)</code> A logical vector indicating which elements
+failed.</p></dd>
 
 
 <dt id="arg-is-rlang-cls-scalar">is_rlang_cls_scalar<a class="anchor" aria-label="anchor" href="#arg-is-rlang-cls-scalar"></a></dt>
@@ -116,7 +159,29 @@ rlang, used for a fast path if <code>x</code> is already the right type.</p></dd
 
 
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
-<dd><p><code>(character)</code> The desired factor levels.</p></dd>
+<dd><p><code>(character)</code> The desired factor levels. For factors, a
+vector's <code>levels</code> play the same role that <code>allowed_values</code> plays for other
+types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
+
+
+<dt id="arg-max-characters">max_characters<a class="anchor" aria-label="anchor" href="#arg-max-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Maximum number of characters allowed in
+each element.</p></dd>
+
+
+<dt id="arg-max-levels">max_levels<a class="anchor" aria-label="anchor" href="#arg-max-levels"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Maximum number of distinct non-<code>NA</code> values
+allowed across the whole vector after applying <code>to_na</code>.</p></dd>
+
+
+<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
+<dd><p>(<code>integer(1)</code>) The maximum size of the object. Object size
+will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+
+
+<dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) The highest allowed value for <code>x</code>. If <code>NULL</code>
+(default) values are not checked.</p></dd>
 
 
 <dt id="arg-message-env">message_env<a class="anchor" aria-label="anchor" href="#arg-message-env"></a></dt>
@@ -124,34 +189,29 @@ rlang, used for a fast path if <code>x</code> is already the right type.</p></dd
 evaluate variables in error messages.</p></dd>
 
 
+<dt id="arg-min-characters">min_characters<a class="anchor" aria-label="anchor" href="#arg-min-characters"></a></dt>
+<dd><p>(<code>integer(1)</code>) Minimum number of characters allowed in
+each element.</p></dd>
+
+
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The minimum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
+<dd><p>(<code>integer(1)</code>) The minimum size of the object. Object size
+will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
 
 
 <dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
-<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
+<dd><p>(<code>numeric(1)</code>) The lowest allowed value for <code>x</code>. If <code>NULL</code>
+(default) values are not checked.</p></dd>
 
 
-<dt id="arg-max-size">max_size<a class="anchor" aria-label="anchor" href="#arg-max-size"></a></dt>
-<dd><p><code>(length-1 integer)</code> The maximum size of the object. Object
-size will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
-
-
-<dt id="arg-max-levels">max_levels<a class="anchor" aria-label="anchor" href="#arg-max-levels"></a></dt>
-<dd><p><code>(length-1 numeric)</code> Maximum number of distinct non-<code>NA</code>
-values allowed across the whole vector after applying <code>to_na</code>.</p></dd>
-
-
-<dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
-<dd><p><code>(length-1 numeric)</code> The highest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
+<dt id="arg-multiple-of">multiple_of<a class="anchor" aria-label="anchor" href="#arg-multiple-of"></a></dt>
+<dd><p>(<code>numeric(1)</code>, positive) <code>x</code> must be an integer multiple
+of this value. <code>NULL</code> (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.</p></dd>
 
 
 <dt id="arg-package">package<a class="anchor" aria-label="anchor" href="#arg-package"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the package to use in
-classes.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the package to use in classes.</p></dd>
 
 
 <dt id="arg-parent">parent<a class="anchor" aria-label="anchor" href="#arg-parent"></a></dt>
@@ -172,8 +232,25 @@ attach a <code>negate</code> attribute set to <code>TRUE</code>. If a complex re
 throws an error, try installing the stringi package.</p></dd>
 
 
+<dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into
+a single atomic vector when possible (every result has size 1 and shares
+a common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+
+
+<dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
+<dd><p><code>(function)</code> A single stabilizer or coercion function, such as
+a <code>to_*</code> function (<code><a href="to_chr.html">to_chr()</a></code>, etc.), a <code>stabilize_*</code> function
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), or a function produced by a <code>specify_*()</code> call
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc.). Applied independently to each element of <code>x</code>.</p></dd>
+
+
+<dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
+<dd><p>The target object for the coercion.</p></dd>
+
+
 <dt id="arg-to-class">to_class<a class="anchor" aria-label="anchor" href="#arg-to-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the class to coerce to.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the class to coerce to.</p></dd>
 
 
 <dt id="arg-to-cls-args">to_cls_args<a class="anchor" aria-label="anchor" href="#arg-to-cls-args"></a></dt>
@@ -203,22 +280,31 @@ coercion.</p></dd>
 <dd><p>An empty object of the target type (e.g., <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code>).</p></dd>
 
 
+<dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be
+<code>""</code> or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+
+
+<dt id="arg-unique">unique<a class="anchor" aria-label="anchor" href="#arg-unique"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should all elements in <code>x</code> be distinct?</p></dd>
+
+
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>The argument to stabilize.</p></dd>
+<dd><p>The object to stabilize.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.</p></dd>
 
 
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
-<dd><p><code>(length-1 character)</code> The class name of the argument being
-stabilized to use in error messages. Use this if you remove a special class
-from the object before checking its coercion, but want the error message to
-match the original class.</p></dd>
+<dd><p>(<code>character(1)</code>) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.</p></dd>
 
 </dl></div>
 

@@ -21,15 +21,18 @@
   [`stabilize_character()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
   [`stabilise_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
   [`stabilise_character()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`stabilize_character_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`stabilise_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`stabilise_character_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`to_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`to_character()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`to_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  [`to_character_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
-  : Ensure a character argument meets expectations
+  : Coerce to character with additional checks
+- [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md)
+  [`stabilize_character_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md)
+  [`stabilise_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md)
+  [`stabilise_character_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md)
+  : Coerce to length-1 character with additional checks
+- [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md)
+  [`to_character()`](https://stbl.wrangle.zone/reference/to_chr.md) :
+  Coerce to character
+- [`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md)
+  [`to_character_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md)
+  : Coerce to length-1 character
 - [`regex_must_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)
   [`regex_must_not_match()`](https://stbl.wrangle.zone/reference/regex_must_match.md)
   : Create a regex matching rule
@@ -50,15 +53,18 @@
   [`stabilize_double()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
   [`stabilise_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
   [`stabilise_double()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`stabilize_double_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`stabilise_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`stabilise_double_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`to_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`to_double()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  [`to_double_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
-  : Ensure a double argument meets expectations
+  : Coerce to double with additional checks
+- [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
+  [`stabilize_double_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
+  [`stabilise_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
+  [`stabilise_double_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
+  : Coerce to length-1 double with additional checks
+- [`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md)
+  [`to_double()`](https://stbl.wrangle.zone/reference/to_dbl.md) :
+  Coerce to double
+- [`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md)
+  [`to_double_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md)
+  : Coerce to length-1 double
 
 ## factors
 
@@ -76,15 +82,18 @@
   [`stabilize_factor()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
   [`stabilise_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
   [`stabilise_factor()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`stabilize_factor_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`stabilise_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`stabilise_factor_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`to_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`to_factor()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`to_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  [`to_factor_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
-  : Ensure a factor argument meets expectations
+  : Coerce to factor with additional checks
+- [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
+  [`stabilize_factor_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
+  [`stabilise_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
+  [`stabilise_factor_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
+  : Coerce to length-1 factor with additional checks
+- [`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md)
+  [`to_factor()`](https://stbl.wrangle.zone/reference/to_fct.md) :
+  Coerce to factor
+- [`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md)
+  [`to_factor_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md)
+  : Coerce to length-1 factor
 
 ## integer vectors
 
@@ -102,17 +111,30 @@
   [`stabilize_integer()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
   [`stabilise_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
   [`stabilise_integer()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`stabilize_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`stabilise_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`stabilise_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`to_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`to_integer()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`to_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  [`to_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int.md)
-  : Ensure an integer argument meets expectations
+  : Coerce to integer with additional checks
+- [`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
+  [`stabilize_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
+  [`stabilise_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
+  [`stabilise_integer_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md)
+  : Coerce to length-1 integer with additional checks
 - [`to()`](https://stbl.wrangle.zone/reference/to.md) : Convert a value
   to a target type
+- [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md) : Coerce
+  to date
+- [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md)
+  [`to_datetime()`](https://stbl.wrangle.zone/reference/to_dttm.md) :
+  Coerce to date-time
+- [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md)
+  [`to_duration()`](https://stbl.wrangle.zone/reference/to_dur.md) :
+  Coerce to a duration
+- [`to_int()`](https://stbl.wrangle.zone/reference/to_int.md)
+  [`to_integer()`](https://stbl.wrangle.zone/reference/to_int.md) :
+  Coerce to integer
+- [`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md)
+  [`to_integer_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md)
+  : Coerce to length-1 integer
+- [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md) : Coerce
+  to time-of-day
 
 ## logical vectors
 
@@ -130,15 +152,18 @@
   [`stabilize_logical()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
   [`stabilise_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
   [`stabilise_logical()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`stabilize_logical_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`stabilise_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`stabilise_logical_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`to_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`to_logical()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  [`to_logical_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
-  : Ensure a logical argument meets expectations
+  : Coerce to logical with additional checks
+- [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
+  [`stabilize_logical_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
+  [`stabilise_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
+  [`stabilise_logical_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
+  : Coerce to length-1 logical with additional checks
+- [`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md)
+  [`to_logical()`](https://stbl.wrangle.zone/reference/to_lgl.md) :
+  Coerce to logical
+- [`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md)
+  [`to_logical_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md)
+  : Coerce to length-1 logical
 
 ## data frames
 
@@ -149,10 +174,10 @@
   [`stabilise_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
   [`stabilize_data_frame()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
   [`stabilise_data_frame()`](https://stbl.wrangle.zone/reference/stabilize_df.md)
-  : Ensure a data frame argument meets expectations
+  : Ensure a data frame meets expectations
 - [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md)
   [`to_data_frame()`](https://stbl.wrangle.zone/reference/to_df.md) :
-  Ensure a data frame argument meets expectations
+  Ensure a data frame meets expectations
 
 ## functions
 
@@ -168,7 +193,7 @@
   to a target type
 - [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/reference/to_lst.md) : Ensure
-  a list argument meets expectations
+  a list meets expectations
 
 ## lists
 
@@ -179,12 +204,116 @@
   [`stabilize_list()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
   [`stabilise_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
   [`stabilise_list()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
-  : Ensure a list argument meets expectations
+  : Ensure a list meets expectations
 - [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/reference/to_lst.md) : Ensure
-  a list argument meets expectations
-- [`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+  a list meets expectations
+- [`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md)
   : Require a value to be non-NULL
+
+## dates and times
+
+- [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md)
+  : Determine locale-aware date and date-time formats
+- [`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md)
+  [`specify_date_scalar()`](https://stbl.wrangle.zone/reference/specify_date.md)
+  : Create a specified date stabilizer function
+- [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md)
+  [`specify_dttm_scalar()`](https://stbl.wrangle.zone/reference/specify_dttm.md)
+  [`specify_datetime()`](https://stbl.wrangle.zone/reference/specify_dttm.md)
+  [`specify_datetime_scalar()`](https://stbl.wrangle.zone/reference/specify_dttm.md)
+  : Create a specified datetime stabilizer function
+- [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md)
+  [`stabilise_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md)
+  : Coerce to date with additional checks
+- [`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md)
+  [`stabilise_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md)
+  : Coerce to length-1 date with additional checks
+- [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+  [`stabilise_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+  [`stabilize_datetime()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+  [`stabilise_datetime()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
+  : Coerce to date-time with additional checks
+- [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
+  [`stabilise_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
+  [`stabilize_datetime_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
+  [`stabilise_datetime_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
+  : Coerce to length-1 date-time with additional checks
+- [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md) : Coerce
+  to date
+- [`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
+  : Coerce to length-1 date
+- [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md)
+  [`to_datetime()`](https://stbl.wrangle.zone/reference/to_dttm.md) :
+  Coerce to date-time
+- [`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
+  [`to_datetime_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
+  : Coerce to length-1 date-time
+- [`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
+  [`specify_time_scalar()`](https://stbl.wrangle.zone/reference/specify_time.md)
+  : Create a specified time-of-day stabilizer function
+- [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md)
+  [`stabilise_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md)
+  : Coerce to time-of-day with additional checks
+- [`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md)
+  [`stabilise_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md)
+  : Coerce to length-1 time-of-day with additional checks
+- [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md)
+  [`to_duration()`](https://stbl.wrangle.zone/reference/to_dur.md) :
+  Coerce to a duration
+- [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md) : Coerce
+  to time-of-day
+- [`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
+  : Coerce to length-1 time-of-day
+- [`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md)
+  [`specify_dur_scalar()`](https://stbl.wrangle.zone/reference/specify_dur.md)
+  [`specify_duration()`](https://stbl.wrangle.zone/reference/specify_dur.md)
+  [`specify_duration_scalar()`](https://stbl.wrangle.zone/reference/specify_dur.md)
+  : Create a specified duration stabilizer function
+- [`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md)
+  [`stabilise_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md)
+  [`stabilize_duration()`](https://stbl.wrangle.zone/reference/stabilize_dur.md)
+  [`stabilise_duration()`](https://stbl.wrangle.zone/reference/stabilize_dur.md)
+  : Coerce to duration with additional checks
+- [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md)
+  [`stabilise_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md)
+  [`stabilize_duration_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md)
+  [`stabilise_duration_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md)
+  : Coerce to length-1 duration with additional checks
+- [`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md)
+  : Coerce to length-1 duration
+
+## multiple types
+
+- [`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md)
+  : Require that x contains a number of elements matching a
+  specification
+- [`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md) :
+  Require a value not to match a specification
+- [`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md)
+  : Create a specified all-of stabilizer function
+- [`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md)
+  : Create a specified any-of stabilizer function
+- [`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md)
+  : Create a specified each stabilizer function
+- [`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md)
+  : Create a specified one-of stabilizer function
+- [`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md)
+  [`stabilise_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md)
+  : Try to coerce or validate x as all of several specs
+- [`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md)
+  [`stabilise_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md)
+  [`to_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md)
+  : Try to coerce or validate x as one of several types
+- [`stabilize_each()`](https://stbl.wrangle.zone/reference/stabilize_each.md)
+  [`stabilise_each()`](https://stbl.wrangle.zone/reference/stabilize_each.md)
+  : Ensure every element of x satisfies a single spec
+- [`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md)
+  [`stabilise_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md)
+  [`to_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md)
+  : Try to coerce or validate x as exactly one of several specifications
+- [`to_each()`](https://stbl.wrangle.zone/reference/to_each.md) : Coerce
+  each element of x with a single spec
 
 ## generic args
 
@@ -192,10 +321,14 @@
   : Identify the class, type, etc of an object
 - [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md)
   [`stabilize_arg_scalar()`](https://stbl.wrangle.zone/reference/stabilize_arg.md)
-  : Ensure an argument meets expectations
+  : Ensure an object meets expectations
 
 ## conditions
 
+- [`ignore_stbl_error()`](https://stbl.wrangle.zone/reference/ignore_stbl_error.md)
+  : Ignore a stbl error class
+- [`replace_stbl_error()`](https://stbl.wrangle.zone/reference/replace_stbl_error.md)
+  : Replace a stbl error with a custom message
 - [`pkg_abort()`](https://stbl.wrangle.zone/reference/pkg_abort.md) :
   Signal an error with standards applied
 - [`expect_pkg_error_classes()`](https://stbl.wrangle.zone/reference/expect_pkg_error_classes.md)

@@ -12,23 +12,28 @@ Validate or reject unnamed elements
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - .unnamed:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). This function is used to validate all unnamed elements of `.x`.
-  If `NULL` (default), any unnamed elements will cause an error.
+  Controls how unnamed elements of `.x` are handled. One of:
+
+  - `NULL` or `FALSE` (default): any unnamed elements cause an error.
+
+  - `TRUE`: unnamed elements are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    etc), used to validate every unnamed element.
 
 - .x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - .call:
 

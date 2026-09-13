@@ -1,4 +1,4 @@
-# Ensure a list argument meets expectations
+# Ensure a list meets expectations
 
 `stabilize_lst()` validates the structure and contents of a list. It can
 check that specific named elements are present and valid, that extra
@@ -15,9 +15,12 @@ stabilize_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -29,9 +32,12 @@ stabilize_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -43,9 +49,12 @@ stabilise_lst(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -57,9 +66,12 @@ stabilise_list(
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
+  .unique = FALSE,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -70,7 +82,7 @@ stabilise_list(
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -78,56 +90,88 @@ stabilise_list(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). Each name corresponds to a required element in `.x`, and the
-  function is used to validate that element.
+  etc). Each name corresponds to an element in `.x`, and the function is
+  used to validate that element when present. Whether the element is
+  required (its absence is an error) is controlled by `.required`.
 
 - .named:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). This function is used to validate all named elements of `.x`
-  that are *not* explicitly listed in `...`. If `NULL` (default), any
-  extra named elements will cause an error.
+  Controls how named elements of `.x` that are *not* explicitly listed
+  in `...` are handled. One of:
+
+  - `NULL` or `FALSE` (default): any extra named elements cause an
+    error.
+
+  - `TRUE`: extra named elements are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    etc), used to validate every extra named element.
 
 - .unnamed:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). This function is used to validate all unnamed elements of `.x`.
-  If `NULL` (default), any unnamed elements will cause an error.
+  Controls how unnamed elements of `.x` are handled. One of:
+
+  - `NULL` or `FALSE` (default): any unnamed elements cause an error.
+
+  - `TRUE`: unnamed elements are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    etc), used to validate every unnamed element.
 
 - .allow_duplicate_names:
 
-  `(length-1 logical)` Should `.x` be allowed to have duplicate names?
-  If `FALSE` (default), an error is thrown when any named element of
-  `.x` shares a name with another.
+  (`logical(1)`) Should `.x` be allowed to have duplicate names? If
+  `FALSE` (default), an error is thrown when any named element of `.x`
+  shares a name with another.
+
+- .unique:
+
+  (`logical(1)`) Should all elements in `.x` be distinct? If `TRUE`,
+  duplicated elements are rejected.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
+
+- .allow_zero_length:
+
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 - .min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - .max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- .required:
+
+  `(character)` Names (from `...`) of elements that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional. A zero-length `.x` (such as
+  [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
+  `.allow_zero_length = TRUE`.
 
 - .x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - .call:
 
@@ -136,32 +180,98 @@ stabilise_list(
 
 - .x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 ## Value
 
-The validated list.
+The validated list, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+
+- `<stbl-error-coerce-list>` when `.x` cannot be coerced to a list.
+
+- `<stbl-error-size_too_small>` when the list is shorter than
+  `.min_size`.
+
+- `<stbl-error-size_too_large>` when the list is longer than
+  `.max_size`.
+
+- `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
+  elements are present.
+
+- `<stbl-error-unnamed_spec>` when any element passed through `...` is
+  unnamed.
+
+- `<stbl-error-missing_element>` when a required named element is
+  absent.
+
+- `<stbl-error-bad_unnamed>` when unnamed elements are present but
+  `.unnamed` is `NULL` or `FALSE`.
+
+- `<stbl-error-bad_named>` when extra named elements are present but
+  `.named` is `NULL` or `FALSE`.
+
+- `<stbl-error-duplicate_names>` when duplicate names are present and
+  `.allow_duplicate_names = FALSE`.
 
 ## See also
 
 Other list functions:
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md),
 [`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 
@@ -179,8 +289,8 @@ stabilize_lst(
 #> [1] 30
 #> 
 
-# Allow any non-NULL element with stabilize_present
-stabilize_lst(list(data = mtcars), data = stabilize_present)
+# Allow any non-NULL element with assert_present
+stabilize_lst(list(data = mtcars), data = assert_present)
 #> $data
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -217,7 +327,7 @@ stabilize_lst(list(data = mtcars), data = stabilize_present)
 #> Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 #> 
 
-# Allow extra named elements via .named
+# Validate extra named elements via .named
 stabilize_lst(
   list(a = 1L, b = 2L, c = 3L),
   .named = specify_int_scalar()
@@ -232,7 +342,16 @@ stabilize_lst(
 #> [1] 3
 #> 
 
-# Allow unnamed elements via .unnamed
+# Allow extra named elements unchecked with .named = TRUE
+stabilize_lst(list(a = 1L, b = "anything"), .named = TRUE)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "anything"
+#> 
+
+# Validate unnamed elements via .unnamed
 stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
 #> [[1]]
 #> [1] 1
@@ -242,6 +361,15 @@ stabilize_lst(list(1L, 2L, 3L), .unnamed = specify_int_scalar())
 #> 
 #> [[3]]
 #> [1] 3
+#> 
+
+# Allow unnamed elements unchecked with .unnamed = TRUE
+stabilize_lst(list(1L, "anything"), .unnamed = TRUE)
+#> [[1]]
+#> [1] 1
+#> 
+#> [[2]]
+#> [1] "anything"
 #> 
 
 # NULL is allowed by default
@@ -271,4 +399,20 @@ stabilize_lst(
 #> $a
 #> [1] 2
 #> 
+
+# Mark named specs as optional via .required
+stabilize_lst(
+  list(a = 1L),
+  a = specify_int_scalar(),
+  b = specify_int_scalar(),
+  .required = "a"
+)
+#> $a
+#> [1] 1
+#> 
+try(
+  stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+)
+#> Error in eval(expr, envir) : 
+#>   `list(a = 1L)` must contain element "b".
 ```

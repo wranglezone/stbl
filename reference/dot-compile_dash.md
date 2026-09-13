@@ -16,4 +16,4 @@ Paste together with - separator
 
 ## Value
 
-A length-1 character vector.
+A length-1 character vector, or `NULL` if `...` is empty.

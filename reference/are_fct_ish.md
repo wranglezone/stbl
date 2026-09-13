@@ -35,7 +35,9 @@ are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
 
 - to_na:
 
@@ -43,12 +45,12 @@ are_fct_ish(x, ..., levels = NULL, to_na = character(), depth = 1)
 
 - max_levels:
 
-  `(length-1 numeric)` Maximum number of distinct non-`NA` values
-  allowed across the whole vector after applying `to_na`.
+  (`numeric(1)`) Maximum number of distinct non-`NA` values allowed
+  across the whole vector after applying `to_na`.
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 ## Value
@@ -62,7 +64,10 @@ for the entire vector.
 Other factor functions:
 [`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),

@@ -35,7 +35,7 @@ are_lgl_ish(x, ..., depth = 1)
 
 - depth:
 
-  `(length-1 integer)` Current recursion depth. Do not manually set this
+  (`integer(1)`) Current recursion depth. Do not manually set this
   parameter.
 
 ## Value
@@ -49,7 +49,10 @@ for the entire vector.
 Other logical functions:
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md)
 
 Other check functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),

@@ -1,4 +1,4 @@
-# Ensure a data frame argument meets expectations
+# Ensure a data frame meets expectations
 
 `stabilize_df()` validates the structure and contents of a data frame.
 It can check that specific named columns are present and valid, that
@@ -18,6 +18,8 @@ stabilize_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -31,6 +33,8 @@ stabilise_df(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -44,6 +48,8 @@ stabilize_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -57,6 +63,8 @@ stabilise_data_frame(
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names(),
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -67,7 +75,7 @@ stabilise_data_frame(
 
 - .x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -75,18 +83,24 @@ stabilise_data_frame(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). Each name corresponds to a required column in `.x`, and the
-  function is used to validate that column.
+  etc). Each name corresponds to a column in `.x`, and the function is
+  used to validate that column when present. Whether the column is
+  required is controlled by `.required`.
 
 - .extra_cols:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). This function is used to validate all columns of `.x` that are
-  *not* explicitly listed in `...`. If `NULL` (default), any extra
-  columns will cause an error.
+  Controls how columns of `.x` that are *not* explicitly listed in `...`
+  are handled. One of:
+
+  - `NULL` or `FALSE` (default): any extra columns cause an error.
+
+  - `TRUE`: extra columns are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    etc), used to validate every extra column.
 
 - .col_names:
 
@@ -96,24 +110,38 @@ stabilise_data_frame(
 
 - .min_rows:
 
-  `(length-1 integer)` The minimum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The minimum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .max_rows:
 
-  `(length-1 integer)` The maximum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The maximum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
+
+- .allow_zero_length:
+
+  (`logical(1)`) Are zero-length vectors acceptable?
+
+- .required:
+
+  `(character)` Names (from `...`) of columns that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional. A `.x` with zero columns skips this
+  check when `.allow_zero_length = TRUE` (the default).
 
 - .x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - .call:
 
@@ -122,14 +150,42 @@ stabilise_data_frame(
 
 - .x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 ## Value
 
-The validated data frame.
+The validated data frame, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+
+- `<stbl-error-coerce-data.frame>` when `.x` cannot be coerced to a data
+  frame.
+
+- `<stbl-error-jagged>` when list input has incompatible element lengths
+  for conversion to a data frame.
+
+- `<stbl-error-too_few_rows>` when the data frame has fewer than
+  `.min_rows` rows.
+
+- `<stbl-error-too_many_rows>` when the data frame has more than
+  `.max_rows` rows.
+
+- `<stbl-error-missing_cols>` when required names in `.col_names` are
+  absent.
+
+- `<stbl-error-unnamed_spec>` when any element passed through `...` is
+  unnamed.
+
+- `<stbl-error-missing_element>`, `<stbl-error-bad_named>`,
+  `<stbl-error-bad_unnamed>`, or `<stbl-error-duplicate_names>` when
+  list-like column checks delegated to
+  [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
+  fail.
 
 ## See also
 
@@ -139,14 +195,50 @@ Other data frame functions:
 [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md)
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 
@@ -160,12 +252,21 @@ stabilize_df(
 #>    name age
 #> 1 Alice  30
 
-# Allow extra columns with .extra_cols
+# Validate extra columns with .extra_cols
 stabilize_df(
   data.frame(name = "Alice", age = 30L, score = 99.5),
   name = specify_chr_scalar(),
   age = specify_int_scalar(),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
+)
+#>    name age score
+#> 1 Alice  30  99.5
+
+# Allow extra columns unchecked with .extra_cols = TRUE
+stabilize_df(
+  data.frame(name = "Alice", age = 30L, score = 99.5),
+  name = specify_chr_scalar(),
+  .extra_cols = TRUE
 )
 #>    name age score
 #> 1 Alice  30  99.5
@@ -174,7 +275,7 @@ stabilize_df(
 stabilize_df(
   mtcars,
   .col_names = c("mpg", "cyl"),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -212,7 +313,7 @@ stabilize_df(
 
 # Enforce row count constraints
 try(
-  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = stabilize_present)
+  stabilize_df(mtcars[0, ], .min_rows = 1, .extra_cols = assert_present)
 )
 #> Error in eval(expr, envir) : 
 #>   `mtcars[0, ]` must have at least 1 row.
@@ -237,4 +338,14 @@ stabilize_df(
 try(stabilize_df("not a data frame"))
 #> Error in eval(expr, envir) : 
 #>   Can't coerce `"not a data frame"` <character> to <data.frame>.
+
+# Mark a column as optional via .required
+stabilize_df(
+  data.frame(name = "Alice"),
+  name = specify_chr_scalar(),
+  age = specify_int_scalar(),
+  .required = "name"
+)
+#>    name
+#> 1 Alice
 ```

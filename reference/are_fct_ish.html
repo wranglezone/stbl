@@ -17,7 +17,7 @@ synonym of is_fct_ish()."><meta property="og:image" content="https://stbl.wrangl
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@ synonym of is_fct_ish()."><meta property="og:image" content="https://stbl.wrangl
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Check if an object can be safely coerced to a factor</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/are_fct_ish.R" class="external-link"><code>R/are_fct_ish.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/are_fct_ish.R" class="external-link"><code>R/are_fct_ish.R</code></a></small>
       <div class="d-none name"><code>are_fct_ish.Rd</code></div>
     </div>
 
@@ -83,7 +83,9 @@ synonym of <code>is_fct_ish()</code>.</p>
 
 
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
-<dd><p><code>(character)</code> The desired factor levels.</p></dd>
+<dd><p><code>(character)</code> The desired factor levels. For factors, a
+vector's <code>levels</code> play the same role that <code>allowed_values</code> plays for other
+types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>
@@ -91,13 +93,13 @@ synonym of <code>is_fct_ish()</code>.</p>
 
 
 <dt id="arg-max-levels">max_levels<a class="anchor" aria-label="anchor" href="#arg-max-levels"></a></dt>
-<dd><p><code>(length-1 numeric)</code> Maximum number of distinct non-<code>NA</code>
-values allowed across the whole vector after applying <code>to_na</code>.</p></dd>
+<dd><p>(<code>numeric(1)</code>) Maximum number of distinct non-<code>NA</code> values
+allowed across the whole vector after applying <code>to_na</code>.</p></dd>
 
 
 <dt id="arg-depth">depth<a class="anchor" aria-label="anchor" href="#arg-depth"></a></dt>
-<dd><p><code>(length-1 integer)</code> Current recursion depth. Do not manually
-set this parameter.</p></dd>
+<dd><p>(<code>integer(1)</code>) Current recursion depth. Do not manually set this
+parameter.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -111,7 +113,10 @@ the entire vector.</p>
     <div class="dont-index"><p>Other factor functions:
 <code><a href="specify_fct.html">specify_fct()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
-<code><a href="to.html">to()</a></code></p>
+<code><a href="stabilize_fct_scalar.html">stabilize_fct_scalar()</a></code>,
+<code><a href="to.html">to()</a></code>,
+<code><a href="to_fct.html">to_fct()</a></code>,
+<code><a href="to_fct_scalar.html">to_fct_scalar()</a></code></p>
 <p>Other check functions:
 <code><a href="are_chr_ish.html">are_chr_ish()</a></code>,
 <code><a href="are_dbl_ish.html">are_dbl_ish()</a></code>,

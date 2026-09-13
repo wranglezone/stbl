@@ -14,7 +14,9 @@ specify_df(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names()
 )
 
 specify_data_frame(
@@ -23,7 +25,9 @@ specify_data_frame(
   .col_names = NULL,
   .min_rows = NULL,
   .max_rows = NULL,
-  .allow_null = TRUE
+  .allow_null = TRUE,
+  .allow_zero_length = TRUE,
+  .required = ...names()
 )
 ```
 
@@ -35,18 +39,24 @@ specify_data_frame(
   ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
   ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). Each name corresponds to a required column in `.x`, and the
-  function is used to validate that column.
+  etc). Each name corresponds to a column in `.x`, and the function is
+  used to validate that column when present. Whether the column is
+  required is controlled by `.required`.
 
 - .extra_cols:
 
-  A single stabilizer function, such as a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
-  etc) or a function produced by a `specify_*()` function
-  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-  etc). This function is used to validate all columns of `.x` that are
-  *not* explicitly listed in `...`. If `NULL` (default), any extra
-  columns will cause an error.
+  Controls how columns of `.x` that are *not* explicitly listed in `...`
+  are handled. One of:
+
+  - `NULL` or `FALSE` (default): any extra columns cause an error.
+
+  - `TRUE`: extra columns are allowed, unchecked.
+
+  - A single stabilizer function, such as a `stabilize_*` function
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+    etc) or a function produced by a `specify_*()` function
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+    etc), used to validate every extra column.
 
 - .col_names:
 
@@ -56,17 +66,31 @@ specify_data_frame(
 
 - .min_rows:
 
-  `(length-1 integer)` The minimum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The minimum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .max_rows:
 
-  `(length-1 integer)` The maximum number of rows allowed in `.x`. If
-  `NULL` (default), the row count is not checked.
+  (`integer(1)`) The maximum number of rows allowed in `.x`. If `NULL`
+  (default), the row count is not checked.
 
 - .allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
+
+- .allow_zero_length:
+
+  (`logical(1)`) Are zero-length vectors acceptable?
+
+- .required:
+
+  `(character)` Names (from `...`) of columns that must be present in
+  `.x`. Defaults to all names in `...`, so every named spec is required
+  unless you opt it out. Named specs *not* listed here are optional: if
+  absent, no error is raised; if present, they're validated normally.
+  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
+  to make every named spec optional. A `.x` with zero columns skips this
+  check when `.allow_zero_length = TRUE` (the default).
 
 ## Value
 
@@ -86,12 +110,20 @@ Other data frame functions:
 [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md)
 
 Other specification functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
 [`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
-[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 
@@ -99,7 +131,7 @@ Other specification functions:
 stabilize_person_df <- specify_df(
   name = specify_chr_scalar(allow_na = FALSE),
   age = specify_int_scalar(allow_na = FALSE),
-  .extra_cols = stabilize_present
+  .extra_cols = assert_present
 )
 stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 #>    name age score
@@ -107,4 +139,14 @@ stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
 try(stabilize_person_df(data.frame(name = "Alice")))
 #> Error in eval(expr, envir) : 
 #>   `data.frame(name = "Alice")` must contain element "age".
+
+# Mark a column as optional via .required
+stabilize_person_df2 <- specify_df(
+  name = specify_chr_scalar(allow_na = FALSE),
+  age = specify_int_scalar(allow_na = FALSE),
+  .required = "name"
+)
+stabilize_person_df2(data.frame(name = "Alice"))
+#>    name
+#> 1 Alice
 ```

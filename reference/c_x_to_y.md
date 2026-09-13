@@ -80,21 +80,31 @@ Call the C routine to convert a vector to another type
 .check_min_dbl(x, min_val)
 
 .check_max_dbl(x, max_val)
+
+.check_min_dbl_exclusive(x, min_val)
+
+.check_max_dbl_exclusive(x, max_val)
 ```
 
 ## Arguments
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - levels:
 
-  `(character)` The desired factor levels.
+  `(character)` The desired factor levels. For factors, a vector's
+  `levels` play the same role that `allowed_values` plays for other
+  types: they restrict `x` to a fixed set of permitted values.
 
 - to_na:
 
   `(character)` Values to convert to `NA`.
+
+- to:
+
+  The target object for the coercion.
 
 ## Value
 
@@ -102,5 +112,6 @@ Call the C routine to convert a vector to another type
 and `valid`, a logical vector indicating whether each element was
 successfully coerced without losing information. `.x_are_yish()`: A
 logical vector indicating whether each element of `x` can be coerced to
-the target type. `.check_min_dbl()` and `.check_max_dbl()`: `NULL` if
-all values pass the check, otherwise a vector of failing indices.
+the target type. `.check_min_dbl()`, `.check_max_dbl()`,
+`.check_min_dbl_exclusive()`, and `.check_max_dbl_exclusive()`: `NULL`
+if all values pass the check, otherwise a vector of failing indices.

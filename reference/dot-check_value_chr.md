@@ -1,18 +1,26 @@
-# Check character values against one or more regex patterns
+# Check character values against character count and regex patterns
 
-Check character values against one or more regex patterns
+Check character values against character count and regex patterns
 
 ## Usage
 
 ``` r
-.check_value_chr(x, regex, x_arg = caller_arg(x), call = caller_env())
+.check_value_chr(
+  x,
+  regex,
+  min_characters = NULL,
+  max_characters = NULL,
+  allowed_values = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+)
 ```
 
 ## Arguments
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - regex:
 
@@ -28,12 +36,26 @@ Check character values against one or more regex patterns
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 

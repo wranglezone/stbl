@@ -12,6 +12,7 @@ Snapshot-test a package condition
   expect_fn_name,
   expect_fn,
   check_installed_msg,
+  error,
   transform,
   variant,
   env
@@ -27,7 +28,7 @@ Snapshot-test a package condition
 
 - package:
 
-  `(length-1 character)` The name of the package to use in classes.
+  (`character(1)`) The name of the package to use in classes.
 
 - class_components:
 
@@ -46,6 +47,13 @@ Snapshot-test a package condition
 
   (`character(1)`) The `"to ..."` string passed to
   [`rlang::check_installed()`](https://rlang.r-lib.org/reference/is_installed.html).
+
+- error:
+
+  (`logical(1)`) Passed to
+  [`testthat::expect_snapshot()`](https://testthat.r-lib.org/reference/expect_snapshot.html).
+  Set to `TRUE` when snapshotting an error, so the error is captured
+  rather than propagated.
 
 - transform:
 

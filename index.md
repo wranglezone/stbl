@@ -1,12 +1,12 @@
 # stbl
 
 R is flexible about classes. Variables are not declared with explicit
-classes, and arguments of the “wrong” class don’t cause errors until
-they explicitly fail at some point in the call stack. It would be
-helpful to keep that flexibility from a user standpoint, but to error
-informatively and quickly if the inputs will not work for a computation.
-The purpose of stbl is to allow programmers to specify what they want,
-and to then see if what the user supplied can work for that purpose.
+classes, and objects of the “wrong” class don’t cause errors until they
+explicitly fail at some point in the call stack. It would be helpful to
+keep that flexibility from a user standpoint, but to error informatively
+and quickly if the inputs will not work for a computation. The purpose
+of stbl is to allow programmers to specify what they want, and to then
+see if what the user supplied can work for that purpose.
 
 This approach aligns with [Postel’s
 Law](https://en.wikipedia.org/wiki/Robustness_principle):
@@ -30,9 +30,9 @@ install.packages("stbl")
 
 ## Usage
 
-The primary use-case for stbl is to stabilize function arguments. The
-goal is to make sure arguments will work the way you expect them to
-work, and to give meaningful error messages when they won’t.
+The primary use-case for stbl is to stabilize objects, such as function
+arguments. The goal is to make sure objects will work the way you expect
+them to work, and to give meaningful error messages when they won’t.
 
 For example, perhaps you would like to protect against the case where
 data is not properly translated from character to integer when it’s
@@ -40,8 +40,8 @@ loaded by a user.
 
 ### Without stbl:
 
-Without the argument-stabilizers provided in stbl, error messages can be
-cryptic, and errors trigger when you might not want them to.
+Without the stabilizers provided in stbl, error messages can be cryptic,
+and errors trigger when you might not want them to.
 
 ``` r
 
@@ -55,7 +55,7 @@ my_old_fun("1")
 
 ### With stbl:
 
-stbl helps to ensure that arguments are what you expect them to be.
+stbl helps to ensure that objects are what you expect them to be.
 
 ``` r
 
@@ -76,6 +76,7 @@ my_fun("1.1")
 #> ! `my_arg_name` <character> must be coercible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 1
+#> • Values: "1.1"
 ```
 
 The errors help locate issues within vectors.
@@ -87,6 +88,7 @@ my_fun(c("1", "2", "3.1", "4", "5.2"))
 #> ! `my_arg_name` <character> must be coercible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
+#> • Values: "3.1" and "5.2"
 ```
 
 See [`vignette("stbl")`](https://stbl.wrangle.zone/articles/stbl.md) to

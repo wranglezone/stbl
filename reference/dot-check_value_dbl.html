@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Check double values against min and max values</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/stabilize_dbl.R" class="external-link"><code>R/stabilize_dbl.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/stabilize_dbl.R" class="external-link"><code>R/stabilize_dbl.R</code></a></small>
       <div class="d-none name"><code>dot-check_value_dbl.Rd</code></div>
     </div>
 
@@ -47,6 +47,10 @@
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">min_value</span>,</span>
 <span>  <span class="va">max_value</span>,</span>
+<span>  exclusive_min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -57,24 +61,48 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>The argument to stabilize.</p></dd>
+<dd><p>The object to stabilize.</p></dd>
 
 
 <dt id="arg-min-value">min_value<a class="anchor" aria-label="anchor" href="#arg-min-value"></a></dt>
-<dd><p><code>(length-1 numeric)</code> The lowest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
+<dd><p>(<code>numeric(1)</code>) The lowest allowed value for <code>x</code>. If <code>NULL</code>
+(default) values are not checked.</p></dd>
 
 
 <dt id="arg-max-value">max_value<a class="anchor" aria-label="anchor" href="#arg-max-value"></a></dt>
-<dd><p><code>(length-1 numeric)</code> The highest allowed value for <code>x</code>. If
-<code>NULL</code> (default) values are not checked.</p></dd>
+<dd><p>(<code>numeric(1)</code>) The highest allowed value for <code>x</code>. If <code>NULL</code>
+(default) values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-min-value">exclusive_min_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-min-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly greater than this value (<code>&gt;</code>, not <code>&gt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-exclusive-max-value">exclusive_max_value<a class="anchor" aria-label="anchor" href="#arg-exclusive-max-value"></a></dt>
+<dd><p>(<code>numeric(1)</code>) Similar to <code>max_value</code>, but <code>x</code>
+must be strictly less than this value (<code>&lt;</code>, not <code>&lt;=</code>). <code>NULL</code> (default)
+values are not checked.</p></dd>
+
+
+<dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
+<dd><p>A vector of permitted values (coerced to the target
+type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
+independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
+
+
+<dt id="arg-multiple-of">multiple_of<a class="anchor" aria-label="anchor" href="#arg-multiple-of"></a></dt>
+<dd><p>(<code>numeric(1)</code>, positive) <code>x</code> must be an integer multiple
+of this value. <code>NULL</code> (default) skips the check. For doubles, a small
+relative tolerance is applied to avoid floating-point false negatives.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>

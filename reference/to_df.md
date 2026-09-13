@@ -1,6 +1,6 @@
-# Ensure a data frame argument meets expectations
+# Ensure a data frame meets expectations
 
-`to_df()` checks whether an argument can be coerced to a data frame,
+`to_df()` checks whether an object can be coerced to a data frame,
 returning it silently if so. Otherwise an informative error message is
 signaled. `to_data_frame()` is a synonym of `to_df()`.
 
@@ -31,7 +31,7 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -41,10 +41,10 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -53,18 +53,29 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 ## Value
 
-The argument as a data frame.
+The object as a data frame, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-data.frame>` when `x` cannot be coerced to a data
+  frame.
+
+- `<stbl-error-bad_named>` when a list has any unnamed elements.
+
+- `<stbl-error-jagged>` when a list has incompatible element lengths.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## See also
 

@@ -1,19 +1,9 @@
-# Ensure a character argument meets expectations
+# Coerce to character with additional checks
 
-`to_chr()` checks whether an argument can be coerced to character
-without losing information, returning it silently if so. Otherwise an
-informative error message is signaled. `to_character` is a synonym of
-`to_chr()`.
-
-`stabilize_chr()` can check more details about the argument, but is
-slower than `to_chr()`. `stabilise_chr()`, `stabilize_character()`, and
-`stabilise_character()` are synonyms of `stabilize_chr()`.
-
-`stabilize_chr_scalar()` and `to_chr_scalar()` are optimized to check
-for length-1 character vectors. `stabilise_chr_scalar`,
-`stabilize_character_scalar()`, and `stabilise_character_scalar` are
-synonyms of `stabilize_chr_scalar()`, and `to_character_scalar()` is a
-synonym of `to_chr_scalar()`.
+Compared to [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+`stabilize_chr()` checks more details, but is slower. `stabilise_chr()`,
+`stabilize_character()`, and `stabilise_character()` are synonyms of
+`stabilize_chr()`.
 
 ## Usage
 
@@ -25,7 +15,11 @@ stabilize_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -38,7 +32,11 @@ stabilize_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,7 +49,11 @@ stabilise_chr(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -64,91 +66,11 @@ stabilise_character(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  unique = FALSE,
+  min_characters = NULL,
+  max_characters = NULL,
   regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  regex = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_chr(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_character(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_chr_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_character_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -159,7 +81,7 @@ to_character_scalar(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -167,23 +89,35 @@ to_character_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- unique:
+
+  (`logical(1)`) Should all elements in `x` be distinct?
+
+- min_characters:
+
+  (`integer(1)`) Minimum number of characters allowed in each element.
+
+- max_characters:
+
+  (`integer(1)`) Maximum number of characters allowed in each element.
 
 - regex:
 
@@ -199,12 +133,18 @@ to_character_scalar(
   attribute set to `TRUE`. If a complex regex pattern throws an error,
   try installing the stringi package.
 
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
+
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -213,98 +153,102 @@ to_character_scalar(
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
-
-- allow_zero_length:
-
-  `(length-1 logical)` Are zero-length vectors acceptable?
 
 ## Value
 
-The argument as a character vector.
+The input as a character vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
-## Details
+- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+  character.
 
-These functions have two important differences from
-[`base::as.character()`](https://rdrr.io/r/base/character.html):
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
-- `list`s and `data.frame`s are *not* coerced to character. In base R,
-  such objects are coerced to character representations of their
-  elements. For example, `as.character(list(1:3))` returns "1:10". In
-  the unlikely event that this is the expected behavior, use
-  [`as.character()`](https://rdrr.io/r/base/character.html) instead.
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 
-- `NULL` values can be rejected as part of the call to this function
-  (with `allow_null = FALSE`).
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
 
-Named functions are converted to their string name. If the function
-comes from a package namespace, the result is a `"pkg::fn"` string. For
-example, `to_chr(mean)` returns `"base::mean"`. Anonymous functions
-produce an error.
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
 
-To preserve the original call-site symbol when `to_chr()` is called
-inside a wrapper function, use the embrace operator `{{ }}`. For
-example:
+- `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
+  are present.
 
-    my_wrapper <- function(fn) {
-      to_chr({{ fn }})
-    }
-    my_wrapper(mean)  # Returns "base::mean"
+- `<stbl-error-n_characters-too_few>` when elements have fewer
+  characters than `min_characters`.
+
+- `<stbl-error-n_characters-too_many>` when elements have more
+  characters than `max_characters`.
+
+- `<stbl-error-regex_mismatch>` when `regex` checks fail.
+
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 ## See also
 
 Other character functions:
 [`are_chr_ish()`](https://stbl.wrangle.zone/reference/are_chr_ish.md),
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md)
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 
 ``` r
-to_chr("a")
-#> [1] "a"
-to_chr(letters)
-#>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-#> [20] "t" "u" "v" "w" "x" "y" "z"
-to_chr(1:10)
-#>  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
-to_chr(1 + 0i)
-#> [1] "1+0i"
-to_chr(NULL)
-#> NULL
-try(to_chr(NULL, allow_null = FALSE))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-
-# Named functions are converted to their string name.
-to_chr(mean)
-#> [1] "base::mean"
-to_chr(base::mean)
-#> [1] "base::mean"
-try(to_chr(function(x) x))
-#> Error in eval(expr, envir) : 
-#>   Can't coerce `function(x) x` <function> to <character>.
-#> ℹ Anonymous functions can't be converted to a string name.
-
-to_chr_scalar("a")
-#> [1] "a"
-try(to_chr_scalar(letters))
-#> Error in eval(expr, envir) : 
-#>   `letters` must be a single <character>.
-#> ✖ `letters` has 26 values.
-
 stabilize_chr(letters)
 #>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 #> [20] "t" "u" "v" "w" "x" "y" "z"
@@ -324,23 +268,28 @@ try(stabilize_chr(letters, min_size = 50))
 try(stabilize_chr(letters, max_size = 20))
 #> Error in eval(expr, envir) : `letters` must have size <= 20.
 #> ✖ 26 is too big.
+try(stabilize_chr(c("hi", "hey"), min_characters = 3))
+#> Error in eval(expr, envir) : 
+#>   Each element of `c("hi", "hey")` must have >= 3 characters.
+#> ℹ Some elements have too few characters.
+#> ✖ Location: 1
+#> ✖ Value: hi
+try(stabilize_chr(c("hi", "hey"), max_characters = 2))
+#> Error in eval(expr, envir) : 
+#>   Each element of `c("hi", "hey")` must have <= 2 characters.
+#> ℹ Some elements have too many characters.
+#> ✖ Location: 2
+#> ✖ Value: hey
 try(stabilize_chr(c("hide", "find", "find", "hide"), regex = "hide"))
 #> Error in eval(expr, envir) : 
 #>   `c("hide", "find", "find", "hide")` must match the regex pattern "hide"
 #> ✖ Some values fail the check.
 #> ✖ Locations: 2 and 3
 #> ✖ Values: find and find
-
-stabilize_chr_scalar(TRUE)
-#> [1] "TRUE"
-stabilize_chr_scalar("TRUE")
-#> [1] "TRUE"
-try(stabilize_chr_scalar(c(TRUE, FALSE, TRUE)))
+try(stabilize_chr(c("a", "b", "z"), allowed_values = c("a", "b", "c")))
 #> Error in eval(expr, envir) : 
-#>   `c(TRUE, FALSE, TRUE)` must be a single <character>.
-#> ✖ `c(TRUE, FALSE, TRUE)` has 3 values.
-try(stabilize_chr_scalar(NULL))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-stabilize_chr_scalar(NULL, allow_null = TRUE)
-#> NULL
+#>   `c("a", "b", "z")` must be one of the allowed values.
+#> ℹ Allowed values: "a", "b", and "c".
+#> ✖ Unexpected location: 3
+#> ✖ Unexpected value: "z".
 ```

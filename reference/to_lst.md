@@ -1,6 +1,6 @@
-# Ensure a list argument meets expectations
+# Ensure a list meets expectations
 
-`to_lst()` checks whether an argument can be coerced to a list without
+`to_lst()` checks whether an object can be coerced to a list without
 losing information, returning it silently if so. Otherwise an
 informative error message is signaled. `to_list()` is a synonym of
 `to_lst()`.
@@ -35,7 +35,7 @@ to_lst(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -45,10 +45,10 @@ to_lst(
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -57,15 +57,24 @@ to_lst(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - coerce_function:
 
-  `(length-1 logical)` Should functions be coerced?
+  (`logical(1)`) Should functions be coerced?
 
 ## Value
 
-The argument as a list.
+The object as a list, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-coerce-list>` when `x` is a primitive function.
+
+- `<stbl-error-bad_function>` for functions when
+  `coerce_function = FALSE` (the default).
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 
@@ -88,7 +97,7 @@ This function has important distinctions from
 ## See also
 
 Other list functions:
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md),
 [`to()`](https://stbl.wrangle.zone/reference/to.md)

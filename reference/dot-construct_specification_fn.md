@@ -23,12 +23,12 @@ Construct a specified stabilizer function
 
 - stabilizer:
 
-  `(length-1 character)` Name of the stabilizer function to call.
+  (`character(1)`) Name of the stabilizer function to call.
 
 - factory_args:
 
   Arguments passed to
-  [`specify_cls()`](https://stbl.wrangle.zone/reference/specify_cls.md)
+  [`.specify_cls()`](https://stbl.wrangle.zone/reference/dot-specify_cls.md)
   as `...`.
 
 - ...:

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Check that a data frame has an acceptable number of rows</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/stabilize_df.R" class="external-link"><code>R/stabilize_df.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/stabilize_df.R" class="external-link"><code>R/stabilize_df.R</code></a></small>
       <div class="d-none name"><code>dot-check_df_rows.Rd</code></div>
     </div>
 
@@ -55,20 +55,20 @@
 
 
 <dt id="arg-min-rows">min_rows<a class="anchor" aria-label="anchor" href="#arg-min-rows"></a></dt>
-<dd><p><code>(length-1 integer)</code> Minimum number of rows allowed, or
+<dd><p>(<code>integer(1)</code>) Minimum number of rows allowed, or
 <code>NULL</code> to skip this check.</p></dd>
 
 
 <dt id="arg-max-rows">max_rows<a class="anchor" aria-label="anchor" href="#arg-max-rows"></a></dt>
-<dd><p><code>(length-1 integer)</code> Maximum number of rows allowed, or
+<dd><p>(<code>integer(1)</code>) Maximum number of rows allowed, or
 <code>NULL</code> to skip this check.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>

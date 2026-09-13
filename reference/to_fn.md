@@ -51,7 +51,7 @@ to_fn(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -59,10 +59,10 @@ to_fn(
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -71,14 +71,14 @@ to_fn(
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - definition_env:
 
@@ -90,7 +90,22 @@ to_fn(
 
 ## Value
 
-A function.
+A function, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-coerce-function>` when `x` cannot be coerced to a
+  function.
+
+- `<stbl-error-invalid_function_name>` when `x` is not a syntactically
+  valid function name.
+
+- `<stbl-error-unknown_function>` when `x` is a syntactically valid name
+  that doesn't resolve to a known function.
+
+- `<stbl-error-non_scalar>` when `x` has more than one element.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 ## Details
 
@@ -113,24 +128,24 @@ Other function functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x563bed129500>
+#> <bytecode: 0x000001de3d856ce8>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x563bf26b1de0>
+#> <environment: 0x000001de41392b30>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x563bed129500>
+#> <bytecode: 0x000001de3d856ce8>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x563becae4a48>
+#> <bytecode: 0x000001de3cf88b68>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL

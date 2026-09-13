@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Shared params for list helpers</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/stabilize_lst.R" class="external-link"><code>R/stabilize_lst.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/stabilize_lst.R" class="external-link"><code>R/stabilize_lst.R</code></a></small>
       <div class="d-none name"><code>dot-shared-params-lst.Rd</code></div>
     </div>
 
@@ -49,9 +49,10 @@
 <dl><dt id="arg-element-specs">element_specs<a class="anchor" aria-label="anchor" href="#arg-element-specs"></a></dt>
 <dd><p><code>(list)</code> Named list of stabilizer functions, such as
 <code>stabilize_*</code> functions (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by
-<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a
-required element in <code>.x</code>, and the function is used to validate that
-element.</p></dd>
+<code>specify_*()</code> functions (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to
+an element in <code>.x</code>, and the function is used to validate that element
+when present. Whether the element is required is controlled by
+<code>.required</code>.</p></dd>
 
 
 <dt id="arg-is-extra-named">is_extra_named<a class="anchor" aria-label="anchor" href="#arg-is-extra-named"></a></dt>

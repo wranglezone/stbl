@@ -4,7 +4,7 @@
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
 with the provided arguments. `specify_lgl_scalar()` creates a function
 that will call
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
 with the provided arguments. `specify_logical()` is a synonym of
 `specify_lgl()`, and `specify_logical_scalar()` is a synonym of
 `specify_lgl_scalar()`.
@@ -16,26 +16,30 @@ specify_lgl(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 
 specify_logical(
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
-  max_size = NULL
+  max_size = NULL,
+  allowed_values = NULL
 )
 
 specify_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
-  allow_na = TRUE
+  allow_na = TRUE,
+  allowed_values = NULL
 )
 ```
 
@@ -43,39 +47,45 @@ specify_logical_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
 or
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md)
 or
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md).
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -84,15 +94,26 @@ provide additional context or functionality.
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md)
 
 Other specification functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
 [`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
-[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

@@ -1,6 +1,6 @@
-# Ensure an argument is NULL
+# Ensure an object is NULL
 
-Ensure an argument is NULL
+Ensure an object is NULL
 
 ## Usage
 
@@ -12,18 +12,18 @@ Ensure an argument is NULL
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 

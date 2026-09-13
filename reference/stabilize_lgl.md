@@ -1,19 +1,9 @@
-# Ensure a logical argument meets expectations
+# Coerce to logical with additional checks
 
-`to_lgl()` checks whether an argument can be coerced to logical without
-losing information, returning it silently if so. Otherwise an
-informative error message is signaled. `to_logical` is a synonym of
-`to_lgl()`.
-
-`stabilize_lgl()` can check more details about the argument, but is
-slower than `to_lgl()`. `stabilise_lgl()`, `stabilize_logical()`, and
-`stabilise_logical()` are synonyms of `stabilize_lgl()`.
-
-`stabilize_lgl_scalar()` and `to_lgl_scalar()` are optimized to check
-for length-1 logical vectors. `stabilise_lgl_scalar()`,
-`stabilize_logical_scalar()`, and `stabilise_logical_scalar()` are
-synonyms of `stabilize_lgl_scalar()`, and `to_logical_scalar()` is a
-synonym of `to_lgl_scalar()`.
+Compared to [`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+`stabilize_lgl()` checks more details, but is slower. `stabilise_lgl()`,
+`stabilize_logical()`, and `stabilise_logical()` are synonyms of
+`stabilize_lgl()`.
 
 ## Usage
 
@@ -25,6 +15,7 @@ stabilize_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -37,6 +28,7 @@ stabilize_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -49,6 +41,7 @@ stabilise_lgl(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -61,89 +54,7 @@ stabilise_logical(
   allow_na = TRUE,
   min_size = NULL,
   max_size = NULL,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_lgl_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilize_logical_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_lgl_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-stabilise_logical_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  allow_na = TRUE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_lgl(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_logical(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class '`NULL`'
-to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
-
-to_lgl_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-to_logical_scalar(
-  x,
-  ...,
-  allow_null = FALSE,
-  allow_zero_length = FALSE,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -154,7 +65,7 @@ to_logical_scalar(
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - ...:
 
@@ -162,30 +73,36 @@ to_logical_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
+
+- allowed_values:
+
+  A vector of permitted values (coerced to the target type). `NULL`
+  (default) skips the check. `NA` values in `x` are permitted
+  independently of `allowed_values`, subject to `allow_na`.
 
 - x_arg:
 
-  `(length-1 character)` The name of the argument being stabilized to
-  use in error messages. The automatic value will work in most cases, or
-  pass it through from higher-level functions to make error messages
-  clearer in unexported functions.
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
 
 - call:
 
@@ -194,65 +111,90 @@ to_logical_scalar(
 
 - x_class:
 
-  `(length-1 character)` The class name of the argument being stabilized
-  to use in error messages. Use this if you remove a special class from
-  the object before checking its coercion, but want the error message to
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its coercion, but want the error message to
   match the original class.
-
-- allow_zero_length:
-
-  `(length-1 logical)` Are zero-length vectors acceptable?
 
 ## Value
 
-The argument as a logical vector.
+The input as a logical vector, or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+
+- `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
+
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
+
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 ## See also
 
 Other logical functions:
 [`are_lgl_ish()`](https://stbl.wrangle.zone/reference/are_lgl_ish.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md)
 
 Other stabilization functions:
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
 [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
 [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
-[`stabilize_present()`](https://stbl.wrangle.zone/reference/stabilize_present.md)
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 
 ``` r
-to_lgl(TRUE)
-#> [1] TRUE
-to_lgl("TRUE")
-#> [1] TRUE
-to_lgl(1:10)
-#>  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-to_lgl(NULL)
-#> NULL
-try(to_lgl(NULL, allow_null = FALSE))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-try(to_lgl(letters))
-#> Error in eval(expr, envir) : 
-#>   `letters` <character> must be coercible to <logical>
-#> ✖ Can't convert some values due to incompatible values.
-#> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
-#>   25, and 26
-try(to_lgl(list(TRUE)))
-#> [1] TRUE
-
-to_lgl_scalar("TRUE")
-#> [1] TRUE
-try(to_lgl_scalar(c(TRUE, FALSE)))
-#> Error in eval(expr, envir) : 
-#>   `c(TRUE, FALSE)` must be a single <logical>.
-#> ✖ `c(TRUE, FALSE)` has 2 values.
-
 stabilize_lgl(c(TRUE, FALSE, TRUE))
 #> [1]  TRUE FALSE  TRUE
 stabilize_lgl("true")
@@ -268,9 +210,12 @@ try(stabilize_lgl(c(TRUE, NA), allow_na = FALSE))
 try(stabilize_lgl(letters))
 #> Error in eval(expr, envir) : 
 #>   `letters` <character> must be coercible to <logical>
-#> ✖ Can't convert some values due to incompatible values.
+#> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
+#>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,
 #>   25, and 26
+#> • Values: "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+#>   "p", "q", "r", "s", …, "y", and "z"
 try(stabilize_lgl(c(TRUE, FALSE, TRUE), min_size = 5))
 #> Error in eval(expr, envir) : 
 #>   `c(TRUE, FALSE, TRUE)` must have size >= 5.
@@ -279,17 +224,10 @@ try(stabilize_lgl(c(TRUE, FALSE, TRUE), max_size = 2))
 #> Error in eval(expr, envir) : 
 #>   `c(TRUE, FALSE, TRUE)` must have size <= 2.
 #> ✖ 3 is too big.
-
-stabilize_lgl_scalar(TRUE)
-#> [1] TRUE
-stabilize_lgl_scalar("TRUE")
-#> [1] TRUE
-try(stabilize_lgl_scalar(c(TRUE, FALSE, TRUE)))
+try(stabilize_lgl(c(TRUE, FALSE), allowed_values = TRUE))
 #> Error in eval(expr, envir) : 
-#>   `c(TRUE, FALSE, TRUE)` must be a single <logical>.
-#> ✖ `c(TRUE, FALSE, TRUE)` has 3 values.
-try(stabilize_lgl_scalar(NULL))
-#> Error in eval(expr, envir) : `NULL` must not be <NULL>.
-stabilize_lgl_scalar(NULL, allow_null = TRUE)
-#> NULL
+#>   `c(TRUE, FALSE)` must be one of the allowed values.
+#> ℹ Allowed value: "TRUE".
+#> ✖ Unexpected location: 2
+#> ✖ Unexpected value: "FALSE".
 ```

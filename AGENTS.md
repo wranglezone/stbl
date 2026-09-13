@@ -2,11 +2,11 @@
 
 ## Repository overview
 
-**stbl** — Stabilize Function Arguments
+**stbl** — Stabilize Objects
 
-A set of consistent, opinionated functions to quickly check function
-arguments, coerce them to the desired configuration, or deliver
-informative error messages when that is not possible.
+A set of consistent, opinionated functions to quickly check objects,
+coerce them to the desired configuration, or deliver informative error
+messages when that is not possible.
 
 <https://stbl.wrangle.zone/>, <https://github.com/wranglezone/stbl>
 

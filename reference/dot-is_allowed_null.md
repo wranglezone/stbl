@@ -16,7 +16,7 @@ Check if a value is NULL and NULLs are allowed
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - call:
 
@@ -25,5 +25,5 @@ Check if a value is NULL and NULLs are allowed
 
 ## Value
 
-`(length-1 logical)` `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`,
-else `FALSE`.
+(`logical(1)`) `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`, else
+`FALSE`.

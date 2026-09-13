@@ -1,13 +1,13 @@
 # Create a regex matching rule
 
-Attach a standardized error message to a `regex` argument. By default,
+Attach a standardized error message to a `regex` pattern. By default,
 the message will be "must match the regex pattern {regex}". If the input
 `regex` has a `negate` attribute set to `TRUE` (set automatically by
 `regex_must_not_match()`), the message will instead be "must not
 match...". This message can be used with
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
 and
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr.md).
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md).
 
 ## Usage
 

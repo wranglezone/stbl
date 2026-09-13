@@ -4,7 +4,7 @@
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
 with the provided arguments. `specify_fct_scalar()` creates a function
 that will call
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
 with the provided arguments. `specify_factor()` is a synonym of
 `specify_fct()`, and `specify_factor_scalar()` is a synonym of
 `specify_fct_scalar()`.
@@ -51,22 +51,22 @@ specify_factor_scalar(
 
 - allow_null:
 
-  `(length-1 logical)` Is NULL an acceptable value?
+  (`logical(1)`) Is NULL an acceptable value?
 
 - allow_na:
 
-  `(length-1 logical)` Are NA values ok?
+  (`logical(1)`) Are NA values ok?
 
 - min_size:
 
-  `(length-1 integer)` The minimum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The minimum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - max_size:
 
-  `(length-1 integer)` The maximum size of the object. Object size will
-  be tested using
+  (`integer(1)`) The maximum size of the object. Object size will be
+  tested using
   [`vctrs::vec_size()`](https://vctrs.r-lib.org/reference/vec_size.html).
 
 - levels:
@@ -80,19 +80,19 @@ specify_factor_scalar(
 
 - allow_zero_length:
 
-  `(length-1 logical)` Are zero-length vectors acceptable?
+  (`logical(1)`) Are zero-length vectors acceptable?
 
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
 or
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
 or
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct.md).
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
@@ -101,15 +101,26 @@ provide additional context or functionality.
 Other factor functions:
 [`are_fct_ish()`](https://stbl.wrangle.zone/reference/are_fct_ish.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
-[`to()`](https://stbl.wrangle.zone/reference/to.md)
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md)
 
 Other specification functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
 [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
 [`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
 [`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
-[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

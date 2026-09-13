@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Describe a numeric value validation failure</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/stabilize_dbl.R" class="external-link"><code>R/stabilize_dbl.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/stabilize_dbl.R" class="external-link"><code>R/stabilize_dbl.R</code></a></small>
       <div class="d-none name"><code>dot-describe_failure_dbl_value.Rd</code></div>
     </div>
 
@@ -48,6 +48,7 @@
 <span>  <span class="va">failure_locations</span>,</span>
 <span>  <span class="va">direction</span>,</span>
 <span>  <span class="va">target_value</span>,</span>
+<span>  exclusive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">x_arg</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -73,11 +74,17 @@
 compared.</p></dd>
 
 
+<dt id="arg-exclusive">exclusive<a class="anchor" aria-label="anchor" href="#arg-exclusive"></a></dt>
+<dd><p><code>(logical(1))</code> Is this an exclusive (strict) bound? When
+<code>TRUE</code>, values equal to <code>target_value</code> fail the check, and the comparison
+operator in the error message omits <code>=</code>.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the argument being stabilized
-to use in error messages. The automatic value will work in most cases, or
-pass it through from higher-level functions to make error messages clearer
-in unexported functions.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.</p></dd>
 
 </dl></div>
     <div class="section level2">

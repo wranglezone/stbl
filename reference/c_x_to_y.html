@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Call the C routine to convert a vector to another type</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/c_api.R" class="external-link"><code>R/c_api.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/c_api.R" class="external-link"><code>R/c_api.R</code></a></small>
       <div class="d-none name"><code>c_x_to_y.Rd</code></div>
     </div>
 
@@ -117,7 +117,11 @@
 <span></span>
 <span><span class="fu">.check_min_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_val</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">.check_max_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">.check_max_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.check_min_dbl_exclusive</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_val</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.check_max_dbl_exclusive</span><span class="op">(</span><span class="va">x</span>, <span class="va">max_val</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -125,15 +129,21 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>The argument to stabilize.</p></dd>
+<dd><p>The object to stabilize.</p></dd>
 
 
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
-<dd><p><code>(character)</code> The desired factor levels.</p></dd>
+<dd><p><code>(character)</code> The desired factor levels. For factors, a
+vector's <code>levels</code> play the same role that <code>allowed_values</code> plays for other
+types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>
 <dd><p><code>(character)</code> Values to convert to <code>NA</code>.</p></dd>
+
+
+<dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
+<dd><p>The target object for the coercion.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -142,8 +152,9 @@
 vector, and <code>valid</code>, a logical vector indicating whether each element was
 successfully coerced without losing information. <code>.x_are_yish()</code>: A logical
 vector indicating whether each element of <code>x</code> can be coerced to the target
-type. <code>.check_min_dbl()</code> and <code>.check_max_dbl()</code>: <code>NULL</code> if all values pass
-the check, otherwise a vector of failing indices.</p>
+type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
+<code>.check_min_dbl_exclusive()</code>, and <code>.check_max_dbl_exclusive()</code>: <code>NULL</code> if
+all values pass the check, otherwise a vector of failing indices.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

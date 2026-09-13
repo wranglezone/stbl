@@ -12,7 +12,7 @@ Coerce specified values to NA
 
 - x:
 
-  The argument to stabilize.
+  The object to stabilize.
 
 - to_na:
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Snapshot-test a package condition</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/main/R/utils-conditions.R" class="external-link"><code>R/utils-conditions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/utils-conditions.R" class="external-link"><code>R/utils-conditions.R</code></a></small>
       <div class="d-none name"><code>dot-expect_pkg_condition_snapshot.Rd</code></div>
     </div>
 
@@ -50,6 +50,7 @@
 <span>  <span class="va">expect_fn_name</span>,</span>
 <span>  <span class="va">expect_fn</span>,</span>
 <span>  <span class="va">check_installed_msg</span>,</span>
+<span>  <span class="va">error</span>,</span>
 <span>  <span class="va">transform</span>,</span>
 <span>  <span class="va">variant</span>,</span>
 <span>  <span class="va">env</span></span>
@@ -65,8 +66,7 @@
 
 
 <dt id="arg-package">package<a class="anchor" aria-label="anchor" href="#arg-package"></a></dt>
-<dd><p><code>(length-1 character)</code> The name of the package to use in
-classes.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the package to use in classes.</p></dd>
 
 
 <dt id="arg-class-components">class_components<a class="anchor" aria-label="anchor" href="#arg-class-components"></a></dt>
@@ -85,6 +85,12 @@ to look up or inject into <code>env</code>.</p></dd>
 <dt id="arg-check-installed-msg">check_installed_msg<a class="anchor" aria-label="anchor" href="#arg-check-installed-msg"></a></dt>
 <dd><p>(<code>character(1)</code>) The <code>"to ..."</code> string passed to
 <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code>.</p></dd>
+
+
+<dt id="arg-error">error<a class="anchor" aria-label="anchor" href="#arg-error"></a></dt>
+<dd><p>(<code>logical(1)</code>) Passed to <code><a href="https://testthat.r-lib.org/reference/expect_snapshot.html" class="external-link">testthat::expect_snapshot()</a></code>. Set to
+<code>TRUE</code> when snapshotting an error, so the error is captured rather than
+propagated.</p></dd>
 
 
 <dt id="arg-transform">transform<a class="anchor" aria-label="anchor" href="#arg-transform"></a></dt>
