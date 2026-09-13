@@ -1,7 +1,7 @@
 # Try candidate date-time formats against a character vector
 
 Like
-[`.try_date_formats()`](https://stbl.wrangle.zone/dev/reference/dot-try_date_formats.md),
+[`.try_date_formats()`](https://stbl.wrangle.zone/reference/dot-try_date_formats.md),
 but for date-time strings, with an optional trailing UTC offset (`"Z"`
 or a numeric offset such as `"+05:00"`). Elements with an offset are
 converted using that offset; elements without one are treated as

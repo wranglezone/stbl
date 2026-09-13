@@ -113,7 +113,7 @@ components (years, months, days, hours, minutes, seconds) of an [RFC
 separately, rather than collapsing them into a single number of seconds.
 That fidelity comes at a cost: years and months have no fixed length, so
 comparisons (`min_value`, `max_value`, `allowed_values` in
-[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md))
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md))
 use lubridate's approximate, nominal lengths (a 365.25-day year, a
 30.4375-day month) and may not reflect the actual elapsed time implied
 by a specific calendar date.
@@ -139,56 +139,56 @@ since a number of seconds cannot unambiguously imply a calendar length.
 ## See also
 
 Other duration functions:
-[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
-[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
-[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
-[`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md)
 
 Other stabilization functions:
-[`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md),
-[`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md),
-[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
-[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
-[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
-[`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
-[`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
-[`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
-[`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
-[`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
-[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
-[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
-[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
-[`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
-[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
-[`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
-[`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
-[`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
-[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
-[`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
-[`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
-[`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
-[`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
-[`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
-[`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
-[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
-[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
-[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
-[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
-[`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
-[`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
-[`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
-[`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
-[`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
-[`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
-[`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
-[`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
-[`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
+[`assert_contains()`](https://stbl.wrangle.zone/reference/assert_contains.md),
+[`assert_not()`](https://stbl.wrangle.zone/reference/assert_not.md),
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/reference/stabilize_any_of.md),
+[`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
+[`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+[`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
+[`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
+[`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+[`stabilize_fct_scalar()`](https://stbl.wrangle.zone/reference/stabilize_fct_scalar.md),
+[`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+[`stabilize_int_scalar()`](https://stbl.wrangle.zone/reference/stabilize_int_scalar.md),
+[`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+[`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_lgl_scalar.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
+[`stabilize_one_of()`](https://stbl.wrangle.zone/reference/stabilize_one_of.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md),
+[`to_chr_scalar()`](https://stbl.wrangle.zone/reference/to_chr_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md),
+[`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md),
+[`to_fct_scalar()`](https://stbl.wrangle.zone/reference/to_fct_scalar.md),
+[`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+[`to_int_scalar()`](https://stbl.wrangle.zone/reference/to_int_scalar.md),
+[`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
+[`to_lgl_scalar()`](https://stbl.wrangle.zone/reference/to_lgl_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 ## Examples
 

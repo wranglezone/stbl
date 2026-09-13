@@ -1,7 +1,7 @@
 # Parse the regex captures from `to_dur.character()`'s date/time form
 
 Parse the regex captures from
-[`to_dur.character()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)'s
+[`to_dur.character()`](https://stbl.wrangle.zone/reference/to_dur.md)'s
 date/time form
 
 ## Usage

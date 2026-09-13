@@ -1,7 +1,7 @@
 # Parse the regex captures from `to_time.character()` into seconds
 
 Parse the regex captures from
-[`to_time.character()`](https://stbl.wrangle.zone/dev/reference/to_time.md)
+[`to_time.character()`](https://stbl.wrangle.zone/reference/to_time.md)
 into seconds
 
 ## Usage

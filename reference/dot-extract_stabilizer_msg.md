@@ -2,7 +2,7 @@
 
 Returns the first line of the condition message. If the condition
 carries a `"Locations:"` bullet in its `body` (as set by
-[`.stop_incompatible()`](https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.md)),
+[`.stop_incompatible()`](https://stbl.wrangle.zone/reference/dot-stop_incompatible.md)),
 that text is appended in parentheses so callers can see which elements
 failed.
 

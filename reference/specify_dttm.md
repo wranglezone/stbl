@@ -1,10 +1,10 @@
 # Create a specified datetime stabilizer function
 
 `specify_dttm()` creates a function that will call
-[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
 with the provided arguments. `specify_dttm_scalar()` creates a function
 that will call
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
 with the provided arguments. `specify_datetime()` is a synonym of
 `specify_dttm()`, and `specify_datetime_scalar()` is a synonym of
 `specify_dttm_scalar()`.
@@ -117,7 +117,7 @@ specify_datetime_scalar(
   format that parses every non-`NA` element of `x` is used; if none do,
   the result (and any error) is based on the first format tried.
   Defaults to
-  [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+  [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
@@ -129,41 +129,41 @@ specify_datetime_scalar(
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
-[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
 or
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
-[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md)
 or
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md).
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
 ## See also
 
 Other datetime functions:
-[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
-[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
-[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
-[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
-[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
 
 Other specification functions:
-[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
-[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
-[`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
-[`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
-[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
-[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
-[`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
-[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
-[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
-[`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
+[`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
+[`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
+[`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
+[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
+[`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
+[`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

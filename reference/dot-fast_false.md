@@ -1,7 +1,7 @@
 # Force slow path in `.to_cls_scalar()`
 
 Force slow path in
-[`.to_cls_scalar()`](https://stbl.wrangle.zone/dev/reference/dot-to_cls_scalar.md)
+[`.to_cls_scalar()`](https://stbl.wrangle.zone/reference/dot-to_cls_scalar.md)
 
 ## Usage
 

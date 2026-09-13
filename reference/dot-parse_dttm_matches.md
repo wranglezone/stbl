@@ -1,7 +1,7 @@
 # Parse capture-group matches from `.try_dttm_formats()` into instants
 
 Parse capture-group matches from
-[`.try_dttm_formats()`](https://stbl.wrangle.zone/dev/reference/dot-try_dttm_formats.md)
+[`.try_dttm_formats()`](https://stbl.wrangle.zone/reference/dot-try_dttm_formats.md)
 into instants
 
 ## Usage

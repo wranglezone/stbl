@@ -1,7 +1,7 @@
 # Convert a strptime()-style format string to a field-capturing regex
 
 Unlike
-[`.format_to_regex()`](https://stbl.wrangle.zone/dev/reference/dot-format_to_regex.md),
+[`.format_to_regex()`](https://stbl.wrangle.zone/reference/dot-format_to_regex.md),
 this keeps track of which calendar field each capture group corresponds
 to, so the captured digits can be reassembled regardless of the order in
 which the format places them (for example `"%m/%d/%Y"` vs.

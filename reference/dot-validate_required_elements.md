@@ -18,9 +18,9 @@ Validate required named elements against their spec functions
 
   `(list)` Named list of stabilizer functions, such as `stabilize_*`
   functions
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
   etc). Each name corresponds to an element in `.x`, and the function is
   used to validate that element when present. Whether the element is
   required is controlled by `.required`.

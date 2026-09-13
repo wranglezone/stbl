@@ -8,15 +8,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/fix-pkgdown-release/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/HEAD/DESCRIPTION)
 
-Harmon J (2026). *stbl: Stabilize Objects*. R package version
-0.5.0.9000, <https://stbl.wrangle.zone/>.
+Harmon J (2026). *stbl: Stabilize Objects*. R package version 0.5.0,
+<https://stbl.wrangle.zone/>.
 
     @Manual{,
       title = {stbl: Stabilize Objects},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.5.0.9000},
+      note = {R package version 0.5.0},
       url = {https://stbl.wrangle.zone/},
     }

@@ -4,7 +4,7 @@
 function, or `specify_*()` result) to every element of `x`
 independently, collecting *every* failing location before erroring,
 rather than stopping at the first failure like
-[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md).
+[`to_each()`](https://stbl.wrangle.zone/reference/to_each.md).
 `stabilise_each()` is a synonym.
 
 ## Usage
@@ -41,11 +41,11 @@ stabilise_each(
 
   `(function)` A single stabilizer or coercion function, such as a
   `to_*` function
-  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
-  etc.), a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  ([`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md), etc.), a
+  `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc.), or a function produced by a `specify_*()` call
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
   etc.). Applied independently to each element of `x`.
 
 - ...:
@@ -89,7 +89,7 @@ that failed.
 ## See also
 
 Other multiple type functions:
-[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
+[`to_each()`](https://stbl.wrangle.zone/reference/to_each.md)
 
 ## Examples
 

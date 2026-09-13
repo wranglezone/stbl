@@ -1,10 +1,10 @@
 # Create a specified double stabilizer function
 
 `specify_dbl()` creates a function that will call
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
 with the provided arguments. `specify_dbl_scalar()` creates a function
 that will call
-[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
 with the provided arguments. `specify_double()` is a synonym of
 `specify_dbl()`, and `specify_double_scalar()` is a synonym of
 `specify_dbl_scalar()`.
@@ -154,42 +154,42 @@ specify_double_scalar(
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
 or
-[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md)
 with the provided arguments. The generated function will also accept
 `...` for additional arguments to pass to
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md)
 or
-[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md).
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
 ## See also
 
 Other double functions:
-[`are_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md),
-[`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
-[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
-[`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
-[`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md)
+[`are_dbl_ish()`](https://stbl.wrangle.zone/reference/are_dbl_ish.md),
+[`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+[`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dbl_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+[`to_dbl_scalar()`](https://stbl.wrangle.zone/reference/to_dbl_scalar.md)
 
 Other specification functions:
-[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
-[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
-[`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
-[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
-[`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
-[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
-[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
-[`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
-[`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
-[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
-[`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
+[`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
+[`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
+[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
+[`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
+[`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
+[`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

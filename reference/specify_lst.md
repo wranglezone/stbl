@@ -1,7 +1,7 @@
 # Create a specified list stabilizer function
 
 `specify_lst()` creates a function that will call
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
 with the provided arguments. `specify_list()` is a synonym of
 `specify_lst()`.
 
@@ -38,9 +38,9 @@ specify_list(
 - ...:
 
   Named stabilizer functions, such as `stabilize_*` functions
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc) or functions produced by `specify_*()` functions
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
   etc). Each name corresponds to an element in `.x`, and the function is
   used to validate that element when present. Whether the element is
   required (its absence is an error) is controlled by `.required`.
@@ -56,9 +56,9 @@ specify_list(
   - `TRUE`: extra named elements are allowed, unchecked.
 
   - A single stabilizer function, such as a `stabilize_*` function
-    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
     etc) or a function produced by a `specify_*()` function
-    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
     etc), used to validate every extra named element.
 
 - .unnamed:
@@ -70,9 +70,9 @@ specify_list(
   - `TRUE`: unnamed elements are allowed, unchecked.
 
   - A single stabilizer function, such as a `stabilize_*` function
-    ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+    ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
     etc) or a function produced by a `specify_*()` function
-    ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+    ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
     etc), used to validate every unnamed element.
 
 - .unique:
@@ -114,36 +114,36 @@ specify_list(
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+[`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
 with the provided arguments. The generated function will also accept
 `...` for additional named element specifications to pass to
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md).
+[`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
 
 ## See also
 
 Other list functions:
-[`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
-[`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
-[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
-[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
+[`assert_present()`](https://stbl.wrangle.zone/reference/assert_present.md),
+[`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
+[`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md)
 
 Other specification functions:
-[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
-[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
-[`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
-[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
-[`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md),
-[`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md),
-[`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
-[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
-[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
-[`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
-[`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
-[`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
-[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
-[`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
+[`specify_all_of()`](https://stbl.wrangle.zone/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/reference/specify_any_of.md),
+[`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
+[`specify_dbl()`](https://stbl.wrangle.zone/reference/specify_dbl.md),
+[`specify_df()`](https://stbl.wrangle.zone/reference/specify_df.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`specify_each()`](https://stbl.wrangle.zone/reference/specify_each.md),
+[`specify_fct()`](https://stbl.wrangle.zone/reference/specify_fct.md),
+[`specify_int()`](https://stbl.wrangle.zone/reference/specify_int.md),
+[`specify_lgl()`](https://stbl.wrangle.zone/reference/specify_lgl.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/reference/specify_one_of.md),
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md)
 
 ## Examples
 

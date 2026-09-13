@@ -27,11 +27,11 @@ to_each(
 
   `(function)` A single stabilizer or coercion function, such as a
   `to_*` function
-  ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
-  etc.), a `stabilize_*` function
-  ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  ([`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md), etc.), a
+  `stabilize_*` function
+  ([`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
   etc.), or a function produced by a `specify_*()` call
-  ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  ([`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md),
   etc.). Applied independently to each element of `x`.
 
 - ...:
@@ -65,7 +65,7 @@ whatever condition `spec` throws for the first failing element.
 ## See also
 
 Other multiple type functions:
-[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
+[`stabilize_each()`](https://stbl.wrangle.zone/reference/stabilize_each.md)
 
 ## Examples
 
