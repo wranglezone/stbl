@@ -1,5 +1,5 @@
 # name: pkgdown.yaml
-# version: 2.0.0
+# version: 2.0.1
 # Description: Builds and deploys the pkgdown site. Pushes to main (or dev)
 #   update the development site at /dev, published releases update the main
 #   site at /, and pull requests get previews at /pr-preview/<number>.
