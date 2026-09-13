@@ -138,6 +138,12 @@ CRAN release: 2026-09-13
   Previously, the required-element check was silently skipped whenever
   `.x` had no named elements
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  has a dedicated condition method that returns a single string
+  including the full condition class hierarchy and message (for example,
+  `simpleError/error/condition: oops`) without the trailing newline from
+  [`as.character()`](https://rdrr.io/r/base/character.html)
+  ([\#258](https://github.com/wranglezone/stbl/issues/258)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
   [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
