@@ -62,6 +62,7 @@ stabilize_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -75,6 +76,7 @@ stabilize_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -88,6 +90,7 @@ stabilize_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -101,6 +104,7 @@ stabilize_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -135,6 +139,10 @@ stabilize_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
 <dd><p><code>(character)</code> Expected levels. If <code>NULL</code> (default), the levels
 will be computed by <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code>.</p></dd>
+
+
+<dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should the result be an ordered factor?</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>

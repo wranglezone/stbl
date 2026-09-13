@@ -65,6 +65,8 @@
 <li>
 <code><a href="../reference/to_chr.html">to_chr()</a></code>, <code><a href="../reference/to_dbl.html">to_dbl()</a></code>, <code><a href="../reference/to_fct.html">to_fct()</a></code>, <code><a href="../reference/to_int.html">to_int()</a></code>, and <code><a href="../reference/to_lgl.html">to_lgl()</a></code> now throw an informative “incompatible values” error listing the failing locations and values when a list contains elements that can’t be converted, instead of a generic “can’t coerce” error (<a href="https://github.com/wranglezone/stbl/issues/273" class="external-link">#273</a>, <a href="https://github.com/wranglezone/stbl/issues/335" class="external-link">#335</a>).</li>
 <li>
+<code><a href="../reference/to_fct.html">to_fct()</a></code> and related factor helpers now support an <code>ordered</code> argument, preserving ordered factors by default and allowing <code>to(..., factor(...))</code> to inherit orderedness from either <code>x</code> or <code>.to</code> (<a href="https://github.com/wranglezone/stbl/issues/246" class="external-link">#246</a>).</li>
+<li>
 <code>stabilize_*(NULL, allow_null = TRUE)</code> always returns <code>NULL</code>, without checking other <code>stabilize_*()</code> rules. For example, <code>stabilize_int(NULL, min_value = 1)</code> now returns <code>NULL</code>, rather than erroring (<a href="https://github.com/wranglezone/stbl/issues/353" class="external-link">#353</a>).</li>
 </ul></div>
 </div>

@@ -16,6 +16,7 @@ to_fct_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -28,6 +29,7 @@ to_factor_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -57,6 +59,10 @@ to_factor_scalar(
 
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
 
 - to_na:
 

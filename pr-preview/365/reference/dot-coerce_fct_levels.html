@@ -46,6 +46,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.coerce_fct_levels</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -64,6 +65,10 @@
 <dd><p><code>(character)</code> The desired factor levels. For factors, a
 vector's <code>levels</code> play the same role that <code>allowed_values</code> plays for other
 types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
+
+
+<dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should the result be an ordered factor?</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>
