@@ -8,8 +8,6 @@ execute:
 format:
   revealjs:
     theme: [dark, custom.scss]
-    # logo: slide_images/qr.png
-    # footer: <a href="https://stbl.wrangle.zone">stbl.wrangle.zone</a>
     link-external-newwindow: true
     transition: slide
     css: extra.css
@@ -17,58 +15,58 @@ format:
     height: 900
 ---
 
-## 
+## {transition="slide-in fade-out"}
 
 ::::: columns
 
 :::: {.column width="40%"}
-![](slide_images/doet_book.jpg){width="80%"}
+::: {.fragment .fade-out fragment-index=2 .absolute top=0}
+![](slide_images/doet_book.jpg){width="60%"}
+:::
+::: {.fragment .fade-in-then-out fragment-index=2 .absolute top=0 .big-img}
+![](slide_images/ge_stovetop_bad.png){width="100%"}
+:::
+::: {.fragment .fade-in fragment-index=3 .absolute top=0 .big-img}
+::: {.fragment .fade-out fragment-index=5}
+![](slide_images/ge_stovetop_good.png){width="100%"}
+:::
+:::
+::: {.fragment .fade-in-then-out fragment-index=5 .absolute top=0 .big-img}
+![](slide_images/batteries.png){width="110%"}
+:::
+::: {.fragment .fade-in fragment-index=6 .absolute top=0 .big-img}
+::: {.fragment .fade-out fragment-index=8}
+![](slide_images/instaload.png){width="38%"}
+:::
+:::
+::: {.fragment .fade-in-then-out fragment-index=8 .absolute top=0}
+![](slide_images/error_code.png){width="40%"}
+:::
+::: {.fragment .fade-in fragment-index=9 .absolute top=0 .big-img}
+![](slide_images/lg_washing_machine_error_display.png){width="150%"}
+:::
 ::::
 
 :::: {.column width="60%"}
-::: fragment
+::: {.fragment fragment-index=1}
 **"All artificial things are designed."**
 <br>
 <br>
 :::
-::: fragment
-1️⃣ Make functionality obvious
+::: {.fragment .custom-bullet fragment-index=4}
+![](slide_images/burner_bullet.png){width="75px"} Make functionality obvious
 :::
-::: fragment
-2️⃣ Forgive "close enough" input
+::: {.fragment fragment-index=7}
+🔋 Forgive "close enough" input
 :::
-::: fragment
-3️⃣ Help users fix mistakes
+::: {.fragment fragment-index=10}
+ℹ️ Help users fix mistakes
 :::
 :::: 
 :::::
 
-::: aside
-Images from *The Design of Everyday Things, Revised and Expanded Edition* Copyright © 2013 by Don Norman
-:::
-
-::: notes
-- Point out link to slides.
-- "This is obviously true for doors and teapots, but it's also true for functions, even if the 'design' is the prompt you gave to AI."
-:::
 
 # Make functionality obvious
-
-## Which dial controls which burner?
-
-::::: colummns
-
-:::: column
-![](slide_images/burners_bad.png)
-::::
-
-:::: column
-::: fragment
-![](slide_images/burners_good.png)
-:::
-::::
-
-:::::
 
 ## What does this function do? {transition="fade-in fade-out"}
 
@@ -121,7 +119,7 @@ compile_sales_df <- function(items, prices, tax_rate) {
 ## Make it obvious what functions do {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-9|1-10|1-1
+#| code-line-numbers: 1-10|1-1
 compile_sales_df <- function(items, prices, tax_rate) {
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
@@ -151,42 +149,20 @@ compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## Make it obvious what functions do
-
-🟠 Functions = verbs
-
-::: fragment
-<br>
-🟣 Arguments = nouns
-:::
-
-::: fragment
-<br>
-🔵 Defaults = standards / hints
-:::
-
-# Forgive "close enough" input
-
-## Which way do these batteries go?
-
-::::: columns
-
-:::: column
-::: fragment
-![](slide_images/batteries.png){width="100%"}
-:::
-::::
-:::: column
-::: fragment
-non-directional battery<br>
-![](slide_images/battery_new.png){width="100%"}
-:::
-::::
-:::::
-
-## What happens if data types are incorrect? {transition="fade-in fade-out"}
+## The function works with "normal" input {transition="fade-in fade-out"}
 
 ```{r}
+compile_sales_df(
+  items = c("paper towels", "toilet paper"),
+  prices = c(12.33, 20.77)
+)
+```
+
+## The function works with "normal" input {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 1-4
+#| eval: true
 compile_sales_df(
   items = c("paper towels", "toilet paper"),
   prices = c(12.33, 20.77)
@@ -197,7 +173,6 @@ compile_sales_df(
 
 ```{r}
 #| code-line-numbers: 1-4|3-3
-#| eval: true
 compile_sales_df(
   items = c("paper towels", "toilet paper"),
   prices = c(12.33, 20.77)
@@ -226,6 +201,8 @@ compile_sales_df(
 )
 ```
 
+# Forgive "close enough" input
+
 ## Forgive "close enough" input {transition="slide-in fade-out"}
 
 ```{r}
@@ -242,32 +219,13 @@ compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
-## Forgive "close enough" input {transition="fade-in fade-out"}
-
-```{r}
-#| code-line-numbers: 2-3|2-2
-compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
-  prices <- stbl::to_dbl(prices)
-  sales_tax <- ceiling(prices * tax_rate * 100) / 100
-  total_price <- prices + sales_tax
-  data.frame(
-    item = items,
-    price = prices,
-    sales_tax = sales_tax,
-    total_price = total_price
-  )
-}
-```
-
 ## Forgive "close enough" input {transition="fade-in slide-out"}
 
 ```{r}
-#| code-line-numbers: 2-4
+#| code-line-numbers: 2-3|2-2
 #| eval: true
 compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
-  tax_rate <- stbl::to_dbl_scalar(tax_rate)
-  items <- stbl::to_chr(items)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -300,16 +258,12 @@ compile_sales_df(
 )
 ```
 
-# Help users fix mistakes
-
 ## Why did I make this package? {transition="slide-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-4
+#| code-line-numbers: 2-2
 compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
-  tax_rate <- stbl::to_dbl_scalar(tax_rate)
-  items <- stbl::to_chr(items)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -324,12 +278,10 @@ compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
 ## Why did I make this package? {transition="fade-in fade-out"}
 
 ```{r}
-#| code-line-numbers: 2-4
+#| code-line-numbers: 2-2
 #| eval: true
 compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- as.double(prices)
-  tax_rate <- as.double(tax_rate)
-  items <- as.character(items)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -374,15 +326,15 @@ compile_sales_df(
 )
 ```
 
+# Help users fix mistakes
+
 ## Help users fix mistakes
 
 ```{r}
-#| code-line-numbers: 2-4
+#| code-line-numbers: 2-2
 #| eval: true
 compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices)
-  tax_rate <- stbl::to_dbl_scalar(tax_rate)
-  items <- stbl::to_chr(items)
   sales_tax <- ceiling(prices * tax_rate * 100) / 100
   total_price <- prices + sales_tax
   data.frame(
@@ -455,10 +407,34 @@ compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
 }
 ```
 
+## Help users fix mistakes {transition="fade-in fade-out"}
+
+```{r}
+#| code-line-numbers: 2-9
+compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
+  prices <- stbl::to_dbl(prices) |>
+    stbl::replace_stbl_error(
+      c(
+        "{.arg prices} must be numeric",
+        i = "Check that the input CSV is formatted correctly"
+      ),
+      subclass = c("incompatible_values")
+    )
+  sales_tax <- ceiling(prices * tax_rate * 100) / 100
+  total_price <- prices + sales_tax
+  data.frame(
+    item = items,
+    price = prices,
+    sales_tax = sales_tax,
+    total_price = total_price
+  )
+}
+```
+
 ## Help users fix mistakes {transition="fade-in slide-out"}
 
 ```{r}
-#| code-line-numbers: 2-8
+#| code-line-numbers: 2-9
 #| eval: true
 compile_sales_df <- function(items, prices, tax_rate = 0.0825) {
   prices <- stbl::to_dbl(prices) |>
@@ -489,7 +465,7 @@ compile_sales_df(
 )
 ```
 
-## Help users fix mistakes {transition="fade-in slide-out"}
+## Help users fix mistakes {transition="fade-in fade-out"}
 
 ```{r}
 #| eval: true
@@ -500,7 +476,7 @@ compile_sales_df(
 )
 ```
 
-## Help users fix mistakes
+## Help users fix mistakes {transition="fade-in slide-out"}
 
 ```{r}
 #| eval: true
@@ -550,16 +526,6 @@ compile_sales_df(
 ![](slide_images/burner_bullet.png){width="75px"} Make functionality obvious
 :::
 ::: fragment
-&nbsp;&nbsp;🟠 Functions = verbs
-:::
-::: fragment
-&nbsp;&nbsp;🟣 Arguments = nouns
-:::
-::: fragment
-&nbsp;&nbsp;🔵 Defaults = standards / hints
-:::
-
-::: fragment
 🔋 Forgive "close enough" input
 :::
 ::: fragment
@@ -571,3 +537,5 @@ compile_sales_df(
 :::
 :::: 
 :::::
+
+# Thank you!
