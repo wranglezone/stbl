@@ -214,6 +214,9 @@ to_fct.default <- function(
     }
     return(factor(as.character(x), levels = levels, ordered = ordered))
   }
+  if (is.factor(x)) {
+    return(factor(as.character(x), levels = levels(x), ordered = ordered))
+  }
   return(factor(x, ordered = ordered))
 }
 

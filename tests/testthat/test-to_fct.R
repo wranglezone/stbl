@@ -17,6 +17,11 @@ test_that("to_fct() preserves ordered factors by default (#246)", {
   expect_identical(to_fct(given), given)
 })
 
+test_that("to_fct() preserves unused factor levels (#246)", {
+  given <- ordered("a", levels = c("a", "b"))
+  expect_identical(to_fct(given), given)
+})
+
 test_that("to_fct() can return ordered factors from non-factors (#246)", {
   result <- to_fct(c("a", "b"), levels = c("a", "b"), ordered = TRUE)
   expect_s3_class(result, "ordered")
