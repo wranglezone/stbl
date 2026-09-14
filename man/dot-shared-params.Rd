@@ -105,6 +105,8 @@ relative tolerance is applied to avoid floating-point false negatives.}
 
 \item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
+
 \item{parent}{A parent condition, as you might create during a
 \code{\link[rlang:try_fetch]{rlang::try_fetch()}}. See \code{\link[rlang:abort]{rlang::abort()}} for additional information.}
 

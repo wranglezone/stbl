@@ -7,6 +7,7 @@
 .coerce_fct_levels_impl(
   x,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env()
@@ -18,6 +19,8 @@
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
 vector's \code{levels} play the same role that \code{allowed_values} plays for other
 types: they restrict \code{x} to a fixed set of permitted values.}
+
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
