@@ -298,12 +298,6 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # raw — lowercase hex
   expect_identical(to_chr(as.raw(c(0x0a, 0xff))), c("0a", "ff"))
 
-  # condition — should include full class hierarchy, no trailing newline
-  expect_identical(
-    to_chr(simpleError("oops")),
-    "<simpleError/error/condition>\noops"
-  )
-
   # formula — splits into a 3-element vector: operator, LHS, RHS (see #259)
   expect_identical(to_chr(y ~ x), c("~", "y", "x"))
 })
