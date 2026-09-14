@@ -306,7 +306,6 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # condition — as.character() returns the formatted message with class prefix
   # and trailing newline, not just conditionMessage() (see #258)
   expect_identical(to_chr(simpleError("oops")), "Error: oops\n")
-
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {
