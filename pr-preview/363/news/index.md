@@ -2,6 +2,17 @@
 
 ## stbl (development version)
 
+### Bug fixes
+
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  has a dedicated condition method that returns a single string
+  including the full condition class hierarchy and message in
+  snapshot-style formatting
+  ([\#258](https://github.com/wranglezone/stbl/issues/258)).
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  converts formulas to a single readable string (for example, `"x ~ y"`)
+  ([\#259](https://github.com/wranglezone/stbl/issues/259)).
+
 ## stbl 0.5.0
 
 CRAN release: 2026-09-13
@@ -138,11 +149,6 @@ CRAN release: 2026-09-13
   Previously, the required-element check was silently skipped whenever
   `.x` had no named elements
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
-  converts formulas to a single readable string (for example,
-  `"x ~ y"`), instead of returning the multi-element vector from
-  [`as.character()`](https://rdrr.io/r/base/character.html)
-  ([\#259](https://github.com/wranglezone/stbl/issues/259)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
   [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
@@ -153,6 +159,11 @@ CRAN release: 2026-09-13
   converted, instead of a generic “can’t coerce” error
   ([\#273](https://github.com/wranglezone/stbl/issues/273),
   [\#335](https://github.com/wranglezone/stbl/issues/335)).
+- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md) and
+  related factor helpers now support an `ordered` argument, preserving
+  ordered factors by default and allowing `to(..., factor(...))` to
+  inherit orderedness from either `x` or `.to`
+  ([\#246](https://github.com/wranglezone/stbl/issues/246)).
 - `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without
   checking other `stabilize_*()` rules. For example,
   `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than

@@ -18,6 +18,7 @@ stabilize_fct_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -31,6 +32,7 @@ stabilize_factor_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -44,6 +46,7 @@ stabilise_fct_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -57,6 +60,7 @@ stabilise_factor_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -90,6 +94,10 @@ stabilise_factor_scalar(
 
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
 
 - to_na:
 
