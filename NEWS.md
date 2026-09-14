@@ -1,8 +1,9 @@
 # stbl (development version)
 
-## New features
+## Bug fixes
 
-* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (for example, `<simpleError/error/condition>` on one line, then `oops` on the next) without the trailing newline from `as.character()` (#258).
+* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258).
+* `to_chr()` now converts formulas to a single readable string (for example, `"x ~ y"`) (#259).
 
 # stbl 0.5.0
 
@@ -23,7 +24,6 @@
 ## Bug fixes
 
 * `stabilize_lst()` (and `stabilize_df()`, which delegates to it) now correctly detects missing required named elements even when `.x` has no named elements at all, such as `list()` or `list(1L, 2L)`. Previously, the required-element check was silently skipped whenever `.x` had no named elements (#344).
-* `to_chr()` now converts formulas to a single readable string (for example, `"x ~ y"`), instead of returning the multi-element vector from `as.character()` (#259).
 * `to_chr()`, `to_dbl()`, `to_fct()`, `to_int()`, and `to_lgl()` now throw an informative "incompatible values" error listing the failing locations and values when a list contains elements that can't be converted, instead of a generic "can't coerce" error (#273, #335).
 * `to_fct()` and related factor helpers now support an `ordered` argument, preserving ordered factors by default and allowing `to(..., factor(...))` to inherit orderedness from either `x` or `.to` (#246).
 * `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without checking other `stabilize_*()` rules. For example, `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than erroring (#353).

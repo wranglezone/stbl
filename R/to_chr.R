@@ -176,13 +176,8 @@ to_character <- to_chr
     return(paste(x_chr[[1]], x_chr[[2]]))
   }
   paste(x_chr[[2]], x_chr[[1]], x_chr[[3]])
+}
 
-#' Coerce a condition object to a single character string
-#'
-#' @param x (`condition`) A condition object.
-#' @returns A length-1 character string containing the full class hierarchy and
-#'   condition message.
-#' @keywords internal
 #' @export
 .to_chr_impl.condition <- function(
   x,
