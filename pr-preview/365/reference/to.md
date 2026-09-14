@@ -51,7 +51,7 @@ to(
   .to,
   ...,
   levels = NULL,
-  ordered = is.ordered(x) || is.ordered(.to),
+  ordered,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -251,6 +251,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5570e48af2d8>
+#> <bytecode: 0x55ac6a0172d8>
 #> <environment: namespace:base>
 ```
