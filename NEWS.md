@@ -1,8 +1,9 @@
 # stbl (development version)
 
-## New features
+## Bug fixes
 
-* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (for example, `<simpleError/error/condition>` on one line, then `oops` on the next) without the trailing newline from `as.character()` (#258).
+* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258).
+* `to_chr()` now converts formulas to a single readable string (for example, `"x ~ y"`) (#259).
 
 # stbl 0.5.0
 

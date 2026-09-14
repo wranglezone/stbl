@@ -169,12 +169,15 @@ to_character <- to_chr
   .chr_from_fn_sym(x, x_name = rlang::as_string(x_expr))
 }
 
-#' Coerce a condition object to a single character string
-#'
-#' @param x (`condition`) A condition object.
-#' @returns A length-1 character string containing the full class hierarchy and
-#'   condition message.
-#' @keywords internal
+#' @export
+.to_chr_impl.formula <- function(x, ...) {
+  x_chr <- as.character(x)
+  if (length(x_chr) == 2L) {
+    return(paste(x_chr[[1]], x_chr[[2]]))
+  }
+  paste(x_chr[[2]], x_chr[[1]], x_chr[[3]])
+}
+
 #' @export
 .to_chr_impl.condition <- function(
   x,
