@@ -10,6 +10,7 @@ to_fct(
   x,
   ...,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -20,6 +21,7 @@ to_factor(
   x,
   ...,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -35,6 +37,8 @@ to_factor(
 
 \item{levels}{\code{(character)} Expected levels. If \code{NULL} (default), the levels
 will be computed by \code{\link[base:factor]{base::factor()}}.}
+
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 

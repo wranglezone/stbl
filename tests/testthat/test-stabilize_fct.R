@@ -2,6 +2,12 @@ test_that("stabilize_fct() works (#62)", {
   expect_identical(stabilize_fct(letters), factor(letters))
 })
 
+test_that("stabilize_fct() passes ordered through to to_fct() (#246)", {
+  result <- stabilize_fct(c("a", "b"), levels = c("a", "b"), ordered = TRUE)
+  expect_s3_class(result, "ordered")
+  expect_identical(levels(result), c("a", "b"))
+})
+
 test_that("stabilize_fct() throws errors for bad levels (#62, #67)", {
   expect_pkg_error_snapshot(
     stabilize_fct(letters[1:5], levels = c("a", "c"), to_na = "b"),

@@ -13,6 +13,7 @@ specify_fct(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
@@ -21,6 +22,7 @@ specify_fct_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
@@ -30,6 +32,7 @@ specify_factor(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
@@ -38,6 +41,7 @@ specify_factor_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 }
@@ -54,6 +58,8 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{levels}{\code{(character)} Expected levels. If \code{NULL} (default), the levels
 will be computed by \code{\link[base:factor]{base::factor()}}.}
+
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 

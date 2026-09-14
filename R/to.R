@@ -95,6 +95,7 @@ to.factor <- function(
   .to,
   ...,
   levels = NULL,
+  ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -104,6 +105,7 @@ to.factor <- function(
     x,
     ...,
     levels = levels,
+    ordered = ordered,
     x_arg = x_arg,
     call = call,
     x_class = x_class
