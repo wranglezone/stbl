@@ -148,6 +148,11 @@ CRAN release: 2026-09-13
   converted, instead of a generic “can’t coerce” error
   ([\#273](https://github.com/wranglezone/stbl/issues/273),
   [\#335](https://github.com/wranglezone/stbl/issues/335)).
+- [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md) and
+  related factor helpers now support an `ordered` argument, preserving
+  ordered factors by default and allowing `to(..., factor(...))` to
+  inherit orderedness from either `x` or `.to`
+  ([\#246](https://github.com/wranglezone/stbl/issues/246)).
 - `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without
   checking other `stabilize_*()` rules. For example,
   `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than

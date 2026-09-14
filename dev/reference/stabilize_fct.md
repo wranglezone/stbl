@@ -17,6 +17,7 @@ stabilize_fct(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -31,6 +32,7 @@ stabilize_factor(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -45,6 +47,7 @@ stabilise_fct(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -59,6 +62,7 @@ stabilise_factor(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -100,6 +104,10 @@ stabilise_factor(
 
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
 
 - to_na:
 

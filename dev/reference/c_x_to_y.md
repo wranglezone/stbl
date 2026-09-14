@@ -106,6 +106,10 @@ Call the C routine to convert a vector to another type
 
   The target object for the coercion.
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 ## Value
 
 `.x_to_y()`: A list with two elements: `result`, the converted vector,
