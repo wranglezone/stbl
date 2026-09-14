@@ -2,6 +2,17 @@
 
 ## stbl (development version)
 
+### New features
+
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  has a dedicated condition method that returns a single string
+  including the full condition class hierarchy and message in
+  snapshot-style formatting (for example,
+  `<simpleError/error/condition>` on one line, then `oops` on the next)
+  without the trailing newline from
+  [`as.character()`](https://rdrr.io/r/base/character.html)
+  ([\#258](https://github.com/wranglezone/stbl/issues/258)).
+
 ## stbl 0.5.0
 
 CRAN release: 2026-09-13
