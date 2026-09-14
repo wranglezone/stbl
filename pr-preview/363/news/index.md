@@ -138,6 +138,11 @@ CRAN release: 2026-09-13
   Previously, the required-element check was silently skipped whenever
   `.x` had no named elements
   ([\#344](https://github.com/wranglezone/stbl/issues/344)).
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  converts formulas to a single readable string (for example,
+  `"x ~ y"`), instead of returning the multi-element vector from
+  [`as.character()`](https://rdrr.io/r/base/character.html)
+  ([\#259](https://github.com/wranglezone/stbl/issues/259)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
   [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
