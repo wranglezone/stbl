@@ -39,9 +39,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
 <ul><li>
-<code><a href="../reference/to_chr.html">to_chr()</a></code> now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (for example, <code>&lt;simpleError/error/condition&gt;</code> on one line, then <code>oops</code> on the next) without the trailing newline from <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> (<a href="https://github.com/wranglezone/stbl/issues/258" class="external-link">#258</a>).</li>
+<code><a href="../reference/to_chr.html">to_chr()</a></code> now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (<a href="https://github.com/wranglezone/stbl/issues/258" class="external-link">#258</a>).</li>
+<li>
+<code><a href="../reference/to_chr.html">to_chr()</a></code> now converts formulas to a single readable string (for example, <code>"x ~ y"</code>) (<a href="https://github.com/wranglezone/stbl/issues/259" class="external-link">#259</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">

@@ -2,16 +2,16 @@
 
 ## stbl (development version)
 
-### New features
+### Bug fixes
 
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
   has a dedicated condition method that returns a single string
   including the full condition class hierarchy and message in
-  snapshot-style formatting (for example,
-  `<simpleError/error/condition>` on one line, then `oops` on the next)
-  without the trailing newline from
-  [`as.character()`](https://rdrr.io/r/base/character.html)
+  snapshot-style formatting
   ([\#258](https://github.com/wranglezone/stbl/issues/258)).
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  converts formulas to a single readable string (for example, `"x ~ y"`)
+  ([\#259](https://github.com/wranglezone/stbl/issues/259)).
 
 ## stbl 0.5.0
 
