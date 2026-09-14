@@ -184,8 +184,9 @@ to_character <- to_chr
   x_class = object_type(x)
 ) {
   paste0(
+    "<",
     paste(class(x), collapse = "/"),
-    ": ",
+    ">\n",
     conditionMessage(x)
   )
 }

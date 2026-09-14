@@ -301,7 +301,7 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   # condition — should include full class hierarchy, no trailing newline
   expect_identical(
     to_chr(simpleError("oops")),
-    "simpleError/error/condition: oops"
+    "<simpleError/error/condition>\noops"
   )
 
   # formula — splits into a 3-element vector: operator, LHS, RHS (see #259)
@@ -316,8 +316,9 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
   expect_identical(
     to_chr(stbl_abort_cnd),
     paste0(
+      "<",
       paste(class(stbl_abort_cnd), collapse = "/"),
-      ": ",
+      ">\n",
       conditionMessage(stbl_abort_cnd)
     )
   )
@@ -330,8 +331,9 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
   expect_identical(
     to_chr(cant_coerce_cnd),
     paste0(
+      "<",
       paste(class(cant_coerce_cnd), collapse = "/"),
-      ": ",
+      ">\n",
       conditionMessage(cant_coerce_cnd)
     )
   )
@@ -344,12 +346,19 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
   expect_identical(
     to_chr(warning_cnd),
     paste0(
+      "<",
       paste(class(warning_cnd), collapse = "/"),
-      ": ",
+      ">\n",
       conditionMessage(warning_cnd)
     )
   )
   expect_false(endsWith(to_chr(warning_cnd), "\n"))
+
+  expect_snapshot({
+    cat(to_chr(stbl_abort_cnd), "\n", sep = "")
+    cat(to_chr(cant_coerce_cnd), "\n", sep = "")
+    cat(to_chr(warning_cnd), "\n", sep = "")
+  })
 })
 
 test_that("to_chr() errors for types that can't be coerced (#noissue)", {
