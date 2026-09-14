@@ -170,6 +170,24 @@
       ! `given` must be a single <character (non-empty)>.
       x `given` has no values.
 
+# to_chr() formats conditions with full class hierarchy (#258)
+
+    Code
+      cat(to_chr(stbl_abort_cnd), "\n", sep = "")
+    Output
+      <stbl-error-a_subclass/stbl-error/stbl-condition/rlang_error/error/condition>
+      A message.
+    Code
+      cat(to_chr(cant_coerce_cnd), "\n", sep = "")
+    Output
+      <stbl-error-coerce-integer/stbl-error-coerce/stbl-error/stbl-condition/rlang_error/error/condition>
+      Can't coerce `x` <character> to <integer>.
+    Code
+      cat(to_chr(warning_cnd), "\n", sep = "")
+    Output
+      <simpleWarning/warning/condition>
+      heads up
+
 # to_chr() errors for types that can't be coerced (#noissue)
 
     Code

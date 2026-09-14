@@ -2,6 +2,7 @@
 
 S3method(.to_chr_impl,"NULL")
 S3method(.to_chr_impl,character)
+S3method(.to_chr_impl,condition)
 S3method(.to_chr_impl,data.frame)
 S3method(.to_chr_impl,double)
 S3method(.to_chr_impl,factor)
