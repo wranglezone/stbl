@@ -134,6 +134,8 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
 \item{to}{The target object for the coercion.}
+
+\item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 }
 \value{
 \code{.x_to_y()}: A list with two elements: \code{result}, the converted

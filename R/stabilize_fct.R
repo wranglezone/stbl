@@ -35,6 +35,7 @@ stabilize_fct <- function(
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -43,7 +44,7 @@ stabilize_fct <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_fct,
-    to_cls_args = list(levels = levels, to_na = to_na),
+    to_cls_args = list(levels = levels, ordered = ordered, to_na = to_na),
     allow_null = allow_null,
     allow_na = allow_na,
     min_size = min_size,
@@ -104,6 +105,7 @@ stabilize_fct_scalar <- function(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -112,7 +114,11 @@ stabilize_fct_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_fct_scalar,
-    to_cls_scalar_args = list(levels = levels, to_na = to_na),
+    to_cls_scalar_args = list(
+      levels = levels,
+      ordered = ordered,
+      to_na = to_na
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,

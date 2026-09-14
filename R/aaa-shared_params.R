@@ -72,6 +72,7 @@
 #'   of this value. `NULL` (default) skips the check. For doubles, a small
 #'   relative tolerance is applied to avoid floating-point false negatives.
 #' @param package (`character(1)`) The name of the package to use in classes.
+#' @param ordered (`logical(1)`) Should the result be an ordered factor?
 #' @param parent A parent condition, as you might create during a
 #'   [rlang::try_fetch()]. See [rlang::abort()] for additional information.
 #' @param regex `(character, list, or stringr_pattern)` One or more optional
