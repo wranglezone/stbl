@@ -172,6 +172,10 @@ to make them easier to import and to find.
 
   (`character(1)`) The name of the package to use in classes.
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 - parent:
 
   A parent condition, as you might create during a

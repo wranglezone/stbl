@@ -51,6 +51,7 @@ to(
   .to,
   ...,
   levels = NULL,
+  ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -158,6 +159,10 @@ to(
   `levels` play the same role that `allowed_values` plays for other
   types: they restrict `x` to a fixed set of permitted values.
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 ## Value
 
 `x` coerced to the type of `.to`, or an error condition with classes
@@ -246,6 +251,6 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x56478509d2d8>
+#> <bytecode: 0x55a96f95bb98>
 #> <environment: namespace:base>
 ```
