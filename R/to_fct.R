@@ -69,12 +69,19 @@ to_fct.character <- function(
   x,
   ...,
   levels = NULL,
-  ordered = is.ordered(x),
+  ordered = FALSE,
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  return(.coerce_fct_levels(x, levels, ordered, to_na, x_arg, call))
+  return(.coerce_fct_levels(
+    x,
+    levels = levels,
+    ordered = ordered,
+    to_na = to_na,
+    x_arg = x_arg,
+    call = call
+  ))
 }
 
 #' @export
@@ -82,12 +89,11 @@ to_fct.integer <- function(
   x,
   ...,
   levels = NULL,
-  ordered = is.ordered(x),
+  ordered = FALSE,
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  ordered <- to_lgl_scalar(ordered, call = call)
   if (is.null(levels)) {
     # Use stbl_int_to_fct for numerically-ordered levels, then pass those
     # levels explicitly to .coerce_fct_levels so to_na and error handling
@@ -95,15 +101,22 @@ to_fct.integer <- function(
     fct <- .Call(stbl_int_to_fct, x, NULL, ordered)
     return(.coerce_fct_levels(
       fct[["result"]],
-      levels(fct[["result"]]),
-      ordered,
-      to_na,
-      x_arg,
-      call
+      levels = levels(fct[["result"]]),
+      ordered = ordered,
+      to_na = to_na,
+      x_arg = x_arg,
+      call = call
     ))
   }
   x <- .Call(stbl_int_to_chr, x)[["result"]]
-  return(.coerce_fct_levels(x, levels, ordered, to_na, x_arg, call))
+  return(.coerce_fct_levels(
+    x,
+    levels = levels,
+    ordered = ordered,
+    to_na = to_na,
+    x_arg = x_arg,
+    call = call
+  ))
 }
 #' @export
 #' @rdname to_fct
@@ -130,7 +143,14 @@ to_fct.list <- function(
 ) {
   res <- .Call(stbl_lst_to_fct, x)
   .check_lst_failures(x, res[["valid"]], factor(), x_class, x_arg, call)
-  .coerce_fct_levels(res[["result"]], levels, ordered, to_na, x_arg, call)
+  .coerce_fct_levels(
+    res[["result"]],
+    levels = levels,
+    ordered = ordered,
+    to_na = to_na,
+    x_arg = x_arg,
+    call = call
+  )
 }
 
 #' @export
@@ -157,7 +177,14 @@ to_fct.default <- function(
       )
     }
   )
-  return(.coerce_fct_levels(x, levels, ordered, to_na, x_arg, call))
+  return(.coerce_fct_levels(
+    x,
+    levels = levels,
+    ordered = ordered,
+    to_na = to_na,
+    x_arg = x_arg,
+    call = call
+  ))
 }
 
 #' Coerce to factor with specified levels
@@ -174,7 +201,14 @@ to_fct.default <- function(
   call = caller_env()
 ) {
   x <- .coerce_fct_to_na(x, to_na, call)
-  x <- .coerce_fct_levels_impl(x, levels, ordered, to_na, x_arg, call)
+  x <- .coerce_fct_levels_impl(
+    x,
+    levels = levels,
+    ordered = ordered,
+    to_na = to_na,
+    x_arg = x_arg,
+    call = call
+  )
   return(x)
 }
 

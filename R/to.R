@@ -95,15 +95,12 @@ to.factor <- function(
   .to,
   ...,
   levels = NULL,
-  ordered,
+  ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   levels <- levels %||% levels(.to)
-  if (missing(ordered)) {
-    ordered <- is.ordered(x) || is.ordered(.to)
-  }
   to_fct(
     x,
     ...,
