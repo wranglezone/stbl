@@ -20,8 +20,16 @@
 #' When the class of `.to` does not have a corresponding `to_*()` function,
 #' `to()` falls back to [vctrs::vec_cast()]. This fallback also applies to
 #' classes such as `POSIXlt` and `difftime`, for which stbl does not provide a
-#' dedicated coercion. Arguments in `...` are passed to `to_*()` functions but
-#' are ignored by the [vctrs::vec_cast()] fallback.
+#' dedicated coercion, and to subclasses of supported targets (for example, a
+#' tibble prototype is handled by [vctrs::vec_cast()], not [to_df()]).
+#' Arguments in `...` are passed to `to_*()` functions but are ignored by the
+#' [vctrs::vec_cast()] fallback.
+#'
+#' Errors from the [vctrs::vec_cast()] fallback are intentionally replaced
+#' with the standard `<stbl-error-coerce-*>` condition, so that `to()` always
+#' fails with a consistent stbl error regardless of which coercion path was
+#' taken. This is a deliberate deviation from a pure pass-through of `vctrs`
+#' errors.
 #'
 #' @family character functions
 #' @family double functions
@@ -67,6 +75,9 @@ to.character <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (!is.null(attr(.to, "dim"))) {
+    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
+  }
   to_chr(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
@@ -80,6 +91,9 @@ to.double <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (!is.null(attr(.to, "dim"))) {
+    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
+  }
   to_dbl(
     x,
     ...,
@@ -112,6 +126,17 @@ to.data.frame <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # Subclasses of data.frame (e.g. tibble) are not stbl targets; let vctrs
+  # handle them.
+  if (!identical(class(.to), "data.frame")) {
+    return(to.default(
+      x,
+      .to,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
   to_df(x, ..., x_arg = x_arg, call = call)
 }
 
@@ -162,6 +187,9 @@ to.integer <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (!is.null(attr(.to, "dim"))) {
+    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
+  }
   to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
@@ -175,6 +203,9 @@ to.logical <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  if (!is.null(attr(.to, "dim"))) {
+    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
+  }
   to_lgl(
     x,
     ...,
@@ -194,6 +225,21 @@ to.list <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # Subclasses of list (e.g. vctrs_list_of) are not stbl targets; let vctrs
+  # handle them.
+  if (!identical(class(.to), "list")) {
+    return(to.default(
+      x,
+      .to,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
+  # Language objects (calls, symbols) are data, not lists to splice.
+  if (is.language(x)) {
+    return(list(x))
+  }
   to_lst(x, ..., x_arg = x_arg, call = call)
 }
 
@@ -247,8 +293,10 @@ to.POSIXct <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  tz <- tz %||% attr(.to, "tzone") %||% "UTC"
-  if (!nzchar(tz)) {
+  # The tzone attribute can be a 3-element vector (zone plus standard and
+  # daylight abbreviations); only the zone name is relevant here.
+  tz <- tz %||% attr(.to, "tzone")[1] %||% "UTC"
+  if (is.na(tz) || !nzchar(tz)) {
     tz <- "UTC"
   }
   to_dttm(x, ..., tz = tz, x_arg = x_arg, call = call, x_class = x_class)

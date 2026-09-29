@@ -30,8 +30,10 @@ SEXP stbl_to(SEXP x, SEXP to) {
 
   if (to_type == INTSXP && Rf_inherits(to, "factor")) return to_factor(x, to);
 
-  /* Fast C paths only apply to unclassed atomic targets */
-  if (!Rf_isObject(to)) {
+  /* Fast C paths only apply to plain atomic targets: no class and no dim
+   * (matrices/arrays are not marked as R objects but still need the R-level
+   * path to preserve dimensions). */
+  if (!Rf_isObject(to) && Rf_getAttrib(to, R_DimSymbol) == R_NilValue) {
     switch (to_type) {
       case LGLSXP:  return to_logical(x);
       case INTSXP:  return to_integer(x);
@@ -40,10 +42,15 @@ SEXP stbl_to(SEXP x, SEXP to) {
     }
   }
 
-  /* Everything else delegates to the R-level to() */
+  /* Everything else delegates to the R-level to(). x and to are passed as
+   * bound values (not as call arguments) so that language-valued inputs are
+   * treated as data rather than evaluated. */
   SEXP stbl_ns = R_FindNamespace(Rf_mkString("stbl"));
-  SEXP call = PROTECT(Rf_lang3(Rf_install("to"), x, to));
-  SEXP result = Rf_eval(call, stbl_ns);
-  UNPROTECT(1);
+  SEXP env = PROTECT(R_NewEnv(stbl_ns, 0, 0));
+  Rf_defineVar(Rf_install("x"), x, env);
+  Rf_defineVar(Rf_install(".to"), to, env);
+  SEXP call = PROTECT(Rf_lang3(Rf_install("to"), Rf_install("x"), Rf_install(".to")));
+  SEXP result = Rf_eval(call, env);
+  UNPROTECT(2);
   return result;
 }

@@ -26,7 +26,8 @@ Suggests:
     rmarkdown,
     stringi,
     stringr,
-    testthat (>= 3.3.0)
+    testthat (>= 3.3.0),
+    tibble
 VignetteBuilder:
     knitr
 Config/Needs/website: quarto

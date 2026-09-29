@@ -205,8 +205,16 @@ to the appropriate \verb{to_*()} function.
 When the class of \code{.to} does not have a corresponding \verb{to_*()} function,
 \code{to()} falls back to \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}. This fallback also applies to
 classes such as \code{POSIXlt} and \code{difftime}, for which stbl does not provide a
-dedicated coercion. Arguments in \code{...} are passed to \verb{to_*()} functions but
-are ignored by the \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} fallback.
+dedicated coercion, and to subclasses of supported targets (for example, a
+tibble prototype is handled by \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}, not \code{\link[=to_df]{to_df()}}).
+Arguments in \code{...} are passed to \verb{to_*()} functions but are ignored by the
+\code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} fallback.
+
+Errors from the \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} fallback are intentionally replaced
+with the standard \verb{<stbl-error-coerce-*>} condition, so that \code{to()} always
+fails with a consistent stbl error regardless of which coercion path was
+taken. This is a deliberate deviation from a pure pass-through of \code{vctrs}
+errors.
 }
 \examples{
 to(1L, double())

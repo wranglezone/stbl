@@ -215,6 +215,11 @@ test_that("to() converts to list (#182)", {
   expect_length(result, 3L)
 })
 
+test_that("to() treats language input as data for list targets (#366)", {
+  given <- quote(a + b)
+  expect_identical(to(given, list()), list(given))
+})
+
 # allow_null -------------------------------------------------------------------
 
 test_that("to() returns NULL by default when x is NULL (#182)", {
@@ -341,6 +346,20 @@ test_that("to() defaults to UTC when POSIXct .to has empty tzone (#366)", {
   expect_identical(attr(result, "tzone"), "UTC")
 })
 
+test_that("to() uses first element of a 3-element tzone attribute (#366)", {
+  proto <- as.POSIXct("2024-01-01", tz = "America/Chicago")
+  attr(proto, "tzone") <- c("America/Chicago", "CST", "CDT")
+  result <- to("2024-01-01T12:00:00Z", proto)
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+})
+
+test_that("to() defaults to UTC when POSIXct .to has empty tzone attribute (#366)", {
+  proto <- as.POSIXct("2024-01-01 12:00:00")
+  attr(proto, "tzone") <- character()
+  result <- to("2024-01-01T12:00:00Z", proto)
+  expect_identical(attr(result, "tzone"), "UTC")
+})
+
 test_that("to() converts Date to POSIXct (#366)", {
   result <- to(as.Date("2024-01-01"), as.POSIXct("2024-01-01", tz = "UTC"))
   expect_s3_class(result, "POSIXct")
@@ -412,6 +431,39 @@ test_that("to() routes difftime prototypes through vctrs (#366)", {
   proto <- as.difftime(1, units = "days")
   result <- to(proto, proto)
   expect_s3_class(result, "difftime")
+})
+
+test_that("to() routes tibble prototypes through vctrs (#367)", {
+  skip_if_not_installed("tibble")
+  proto <- tibble::tibble(a = integer())
+  result <- to(data.frame(a = 1L), proto)
+  expect_s3_class(result, "tbl_df")
+  expect_identical(result$a, 1L)
+})
+
+test_that("to() routes list_of prototypes through vctrs (#367)", {
+  proto <- vctrs::list_of(integer())
+  result <- to(list(1L, 2L), proto)
+  expect_s3_class(result, "vctrs_list_of")
+})
+
+test_that("to() routes matrix targets through vctrs (#366)", {
+  expect_identical(
+    to(1:4, matrix(0L, 2, 2)),
+    vctrs::vec_cast(1:4, matrix(0L, 2, 2))
+  )
+  expect_identical(
+    to(c(1.5, 2.5), matrix(0.0, 1, 2)),
+    vctrs::vec_cast(c(1.5, 2.5), matrix(0.0, 1, 2))
+  )
+  expect_identical(
+    to(c(TRUE, FALSE), matrix(TRUE, 1, 2)),
+    vctrs::vec_cast(c(TRUE, FALSE), matrix(TRUE, 1, 2))
+  )
+  expect_identical(
+    to(c("a", "b"), matrix("", 1, 2)),
+    vctrs::vec_cast(c("a", "b"), matrix("", 1, 2))
+  )
 })
 
 # unsupported ------------------------------------------------------------------

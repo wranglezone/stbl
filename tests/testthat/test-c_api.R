@@ -999,6 +999,19 @@ test_that(".stbl_to() errors for unsupported target types (#367)", {
   expect_error(.stbl_to(1L, as.raw(1L)))
 })
 
+test_that(".stbl_to() routes matrix targets through R-level to() (#366)", {
+  result <- .stbl_to(1:4, matrix(0L, 2, 2))
+  # vctrs recycles to size-4 rows; the point is that dims are preserved.
+  expect_identical(dim(result), c(4L, 2L))
+  expect_identical(result[, 1], 1:4)
+})
+
+test_that(".stbl_to() treats language-valued input as data (#366)", {
+  given <- quote(a + b)
+  result <- .stbl_to(given, list())
+  expect_identical(result, list(given))
+})
+
 # -> factor --------------------------------------------------------------------
 
 test_that(".stbl_to() converts chr to fct, inferring levels", {
