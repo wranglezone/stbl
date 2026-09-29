@@ -232,10 +232,21 @@ When the class of `.to` does not have a corresponding `to_*()` function,
 `to()` falls back to
 [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
 This fallback also applies to classes such as `POSIXlt` and `difftime`,
-for which stbl does not provide a dedicated coercion. Arguments in `...`
-are passed to `to_*()` functions but are ignored by the
+for which stbl does not provide a dedicated coercion, and to subclasses
+of supported targets (for example, a tibble prototype is handled by
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html),
+not [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)).
+Arguments in `...` are passed to `to_*()` functions but are ignored by
+the
 [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
 fallback.
+
+Errors from the
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+fallback are intentionally replaced with the standard
+`<stbl-error-coerce-*>` condition, so that `to()` always fails with a
+consistent stbl error regardless of which coercion path was taken. This
+is a deliberate deviation from a pure pass-through of `vctrs` errors.
 
 ## See also
 
@@ -341,7 +352,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55811089c2d8>
+#> <bytecode: 0x5563b6b242d8>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"
