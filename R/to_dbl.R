@@ -1,3 +1,4 @@
+# target class: double
 #' Coerce to double
 #'
 #' Checks whether a vector can be coerced to double without losing information,

@@ -4,6 +4,7 @@
 \alias{to}
 \alias{to.character}
 \alias{to.double}
+\alias{to.Date}
 \alias{to.data.frame}
 \alias{to.factor}
 \alias{to.function}
@@ -11,6 +12,9 @@
 \alias{to.logical}
 \alias{to.list}
 \alias{to.NULL}
+\alias{to.hms}
+\alias{to.Period}
+\alias{to.POSIXct}
 \alias{to.default}
 \title{Convert a value to a target type}
 \usage{
@@ -33,6 +37,15 @@ to(
 )
 
 \method{to}{double}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{Date}(
   x,
   .to,
   ...,
@@ -106,6 +119,34 @@ to(
   x_class = object_type(x)
 )
 
+\method{to}{hms}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{Period}(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{to}{POSIXct}(
+  x,
+  .to,
+  ...,
+  tz = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 \method{to}{default}(
   x,
   .to,
@@ -141,6 +182,9 @@ vector's \code{levels} play the same role that \code{allowed_values} plays for o
 types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
+
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
+\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
 }
 \value{
 \code{x} coerced to the type of \code{.to}, or an error condition with
@@ -150,12 +194,19 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \item The failure classes documented for the \verb{to_*()} function corresponding
 to the class of \code{.to} (for example \code{\link[=to_int]{to_int()}} for \code{.to = integer()}).
 \item \verb{<stbl-error-coerce-*>} when the class of \code{.to} has no corresponding
-\verb{to_*()} function.
+\verb{to_*()} function and \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} cannot cast \code{x} to \code{.to}.
 }
 }
 \description{
 \code{to()} coerces \code{x} to the type of \code{.to}, dispatching on the class of \code{.to}
 to the appropriate \verb{to_*()} function.
+}
+\details{
+When the class of \code{.to} does not have a corresponding \verb{to_*()} function,
+\code{to()} falls back to \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}. This fallback also applies to
+classes such as \code{POSIXlt} and \code{difftime}, for which stbl does not provide a
+dedicated coercion. Arguments in \code{...} are passed to \verb{to_*()} functions but
+are ignored by the \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} fallback.
 }
 \examples{
 to(1L, double())
@@ -164,6 +215,8 @@ to(TRUE, character())
 to("1", integer())
 to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
+to("2024-01-01", as.Date("2024-01-01"))
+to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC"))
 }
 \seealso{
 Other character functions:
@@ -220,12 +273,46 @@ Other data frame functions:
 \code{\link[=specify_df]{specify_df()}},
 \code{\link[=stabilize_df]{stabilize_df()}},
 \code{\link[=to_df]{to_df()}}
+
+Other date functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
+\code{\link[=specify_date]{specify_date()}},
+\code{\link[=stabilize_date]{stabilize_date()}},
+\code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=to_date]{to_date()}},
+\code{\link[=to_date_scalar]{to_date_scalar()}}
+
+Other datetime functions:
+\code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
+\code{\link[=specify_dttm]{specify_dttm()}},
+\code{\link[=stabilize_dttm]{stabilize_dttm()}},
+\code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
+\code{\link[=to_dttm]{to_dttm()}},
+\code{\link[=to_dttm_scalar]{to_dttm_scalar()}}
+
+Other time functions:
+\code{\link[=specify_time]{specify_time()}},
+\code{\link[=stabilize_time]{stabilize_time()}},
+\code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
+\code{\link[=to_time]{to_time()}},
+\code{\link[=to_time_scalar]{to_time_scalar()}}
+
+Other duration functions:
+\code{\link[=specify_dur]{specify_dur()}},
+\code{\link[=stabilize_dur]{stabilize_dur()}},
+\code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=to_dur]{to_dur()}},
+\code{\link[=to_dur_scalar]{to_dur_scalar()}}
 }
 \concept{character functions}
 \concept{data frame functions}
+\concept{date functions}
+\concept{datetime functions}
 \concept{double functions}
+\concept{duration functions}
 \concept{factor functions}
 \concept{function functions}
 \concept{integer functions}
 \concept{list functions}
 \concept{logical functions}
+\concept{time functions}

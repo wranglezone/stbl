@@ -297,9 +297,126 @@ test_that("to() errors for non-coercible types to function (#250)", {
   expect_snapshot(to(1L, mean), error = TRUE)
 })
 
+# to Date ----------------------------------------------------------------------
+
+test_that("to() converts character to Date (#366)", {
+  expect_identical(
+    to("2024-01-01", as.Date("2024-01-01")),
+    as.Date("2024-01-01")
+  )
+})
+
+test_that("to() passes Date through unchanged (#366)", {
+  given <- as.Date("2024-01-01")
+  expect_identical(to(given, as.Date("2024-01-01")), given)
+})
+
+test_that("to() converts POSIXct to Date (#366)", {
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(to(given, as.Date("2024-01-01")), as.Date("2024-01-01"))
+})
+
+test_that("to() errors for incompatible character -> Date (#366)", {
+  expect_error(to("not-a-date", as.Date("2024-01-01")))
+})
+
+# to POSIXct -------------------------------------------------------------------
+
+test_that("to() converts character to POSIXct (#366)", {
+  result <- to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC"))
+  expect_s3_class(result, "POSIXct")
+  expect_identical(result, as.POSIXct("2024-01-01 12:00:00", tz = "UTC"))
+})
+
+test_that("to() uses tzone from POSIXct .to (#366)", {
+  proto <- as.POSIXct("2024-01-01", tz = "America/Chicago")
+  result <- to("2024-01-01T12:00:00Z", proto)
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+})
+
+test_that("to() defaults to UTC when POSIXct .to has empty tzone (#366)", {
+  proto <- as.POSIXct("2024-01-01 12:00:00")
+  attr(proto, "tzone") <- ""
+  result <- to("2024-01-01T12:00:00Z", proto)
+  expect_identical(attr(result, "tzone"), "UTC")
+})
+
+test_that("to() converts Date to POSIXct (#366)", {
+  result <- to(as.Date("2024-01-01"), as.POSIXct("2024-01-01", tz = "UTC"))
+  expect_s3_class(result, "POSIXct")
+})
+
+test_that("to() errors for incompatible character -> POSIXct (#366)", {
+  expect_error(to("not-a-datetime", as.POSIXct("2024-01-01", tz = "UTC")))
+})
+
+# to hms -----------------------------------------------------------------------
+
+test_that("to() converts character to hms (#366)", {
+  skip_if_not_installed("hms")
+  expect_identical(
+    to("13:20:00Z", hms::hms()),
+    hms::as_hms("13:20:00")
+  )
+})
+
+test_that("to() passes hms through unchanged (#366)", {
+  skip_if_not_installed("hms")
+  given <- hms::as_hms("13:20:00")
+  expect_identical(to(given, hms::hms()), given)
+})
+
+test_that("to() errors for incompatible character -> hms (#366)", {
+  skip_if_not_installed("hms")
+  expect_error(to("not-a-time", hms::hms()))
+})
+
+# to Period --------------------------------------------------------------------
+
+test_that("to() converts character to Period (#366)", {
+  skip_if_not_installed("lubridate")
+  result <- to("P1Y", lubridate::period())
+  expect_s4_class(result, "Period")
+})
+
+test_that("to() passes Period through unchanged (#366)", {
+  skip_if_not_installed("lubridate")
+  given <- lubridate::period(1, "year")
+  expect_identical(to(given, lubridate::period()), given)
+})
+
+test_that("to() errors for incompatible character -> Period (#366)", {
+  skip_if_not_installed("lubridate")
+  expect_error(to("not-a-duration", lubridate::period()))
+})
+
+# vctrs fallback ---------------------------------------------------------------
+
+test_that("to() falls back to vctrs::vec_cast for unknown prototypes (#367)", {
+  # vctrs supports rational-class casts that stbl does not dispatch on.
+  proto <- vctrs::new_rcrd(
+    list(a = integer(), b = integer()),
+    class = "vctrs_rational"
+  )
+  given <- vctrs::new_rcrd(list(a = 1L, b = 2L), class = "vctrs_rational")
+  expect_identical(to(given, proto), given)
+})
+
+test_that("to() routes POSIXlt prototypes through vctrs (#366)", {
+  proto <- as.POSIXlt("2024-01-01", tz = "UTC")
+  result <- to(proto, proto)
+  expect_s3_class(result, "POSIXlt")
+})
+
+test_that("to() routes difftime prototypes through vctrs (#366)", {
+  proto <- as.difftime(1, units = "days")
+  result <- to(proto, proto)
+  expect_s3_class(result, "difftime")
+})
+
 # unsupported ------------------------------------------------------------------
 
-test_that("to() errors for unsupported target types (#182)", {
+test_that("to() errors for unsupported target types (#182, #367)", {
   to(1L, as.raw(1L)) |>
     expect_pkg_error_classes("stbl", "coerce", "raw")
 })

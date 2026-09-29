@@ -1,3 +1,4 @@
+# target class: Period
 #' Coerce to a duration
 #'
 #' Checks whether a vector can be coerced to a [lubridate::Period-class] without

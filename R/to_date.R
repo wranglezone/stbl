@@ -1,3 +1,4 @@
+# target class: Date
 #' Coerce to date
 #'
 #' Checks whether a vector can be coerced to a [base::Date] without losing

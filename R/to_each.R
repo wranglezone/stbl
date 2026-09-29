@@ -1,3 +1,4 @@
+# target class: NA
 #' Coerce each element of x with a single spec
 #'
 #' `to_each()` applies `spec` (a `to_*` function, `stabilize_*` function, or

@@ -157,6 +157,7 @@ try(stabilize_dur("P2D", max_value = "P1D"))
 Other duration functions:
 \code{\link[=specify_dur]{specify_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}}
 

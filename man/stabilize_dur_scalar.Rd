@@ -136,6 +136,7 @@ stabilize_dur_scalar(NULL, allow_null = TRUE)
 Other duration functions:
 \code{\link[=specify_dur]{specify_dur()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}}
 

@@ -970,9 +970,33 @@ test_that(".stbl_to() converts list of chr scalars to chr", {
   expect_identical(.stbl_to(list("a", "b"), ""), c("a", "b"))
 })
 
-# unsupported target types
-test_that(".stbl_to() errors on list target", {
-  expect_error(.stbl_to("a", list()), "List targets are not supported")
+# targets delegated to R-level to() --------------------------------------------
+
+test_that(".stbl_to() converts to list via R-level to() (#366)", {
+  expect_identical(.stbl_to(1:3, list()), as.list(1:3))
+})
+
+test_that(".stbl_to() converts chr to Date via R-level to() (#366)", {
+  expect_identical(
+    .stbl_to("2024-01-01", as.Date("2024-01-01")),
+    as.Date("2024-01-01")
+  )
+})
+
+test_that(".stbl_to() converts chr to POSIXct via R-level to() (#366)", {
+  expect_identical(
+    .stbl_to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC")),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+})
+
+test_that(".stbl_to() falls back to vctrs for unknown targets (#367)", {
+  proto <- as.difftime(1, units = "days")
+  expect_identical(.stbl_to(proto, proto), proto)
+})
+
+test_that(".stbl_to() errors for unsupported target types (#367)", {
+  expect_error(.stbl_to(1L, as.raw(1L)))
 })
 
 # -> factor --------------------------------------------------------------------
@@ -1077,8 +1101,8 @@ test_that(".stbl_to() errors on cpx source -> fct target", {
   expect_error(.stbl_to(1 + 0i, factor()), "Can't convert to <factor>.")
 })
 
-test_that(".stbl_to() errors on raw target", {
-  expect_error(.stbl_to(1L, as.raw(0)), "Unsupported target type in stbl_to().")
+test_that(".stbl_to() errors on raw target (#367)", {
+  expect_error(.stbl_to(1L, as.raw(0)), "Can't coerce")
 })
 
 # range checks -----------------------------------------------------------------

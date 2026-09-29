@@ -1,3 +1,4 @@
+# target class: data.frame
 #' Ensure a data frame meets expectations
 #'
 #' `to_df()` checks whether an object can be coerced to a data frame,

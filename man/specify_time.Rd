@@ -72,6 +72,7 @@ try(stabilize_afternoon("06:00:00Z"))
 Other time functions:
 \code{\link[=stabilize_time]{stabilize_time()}},
 \code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 

@@ -83,6 +83,7 @@ Other date functions:
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_date]{to_date()}},
 \code{\link[=to_date_scalar]{to_date_scalar()}}
 

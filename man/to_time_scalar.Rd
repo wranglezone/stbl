@@ -62,6 +62,7 @@ Other time functions:
 \code{\link[=specify_time]{specify_time()}},
 \code{\link[=stabilize_time]{stabilize_time()}},
 \code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_time]{to_time()}}
 
 Other stabilization functions:

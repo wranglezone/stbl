@@ -1,5 +1,7 @@
 # stbl (development version)
 
+* `to()` now dispatches to `to_date()`, `to_dttm()`, `to_time()`, and `to_dur()` for `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and falls back to `vctrs::vec_cast()` for other prototype classes (#366, #367).
+
 ## Bug fixes
 
 * `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258).
