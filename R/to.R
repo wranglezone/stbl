@@ -223,7 +223,7 @@ to.list <- function(
 
 #' @export
 #' @rdname to
-to.matrix <- function(
+to.array <- function(
   x,
   .to,
   ...,
@@ -234,10 +234,6 @@ to.matrix <- function(
   # Matrices and arrays are not stbl targets; let vctrs handle them.
   to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class)
 }
-
-#' @export
-#' @rdname to
-to.array <- to.matrix
 
 #' @export
 #' @rdname to

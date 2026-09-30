@@ -11,7 +11,6 @@
 \alias{to.integer}
 \alias{to.logical}
 \alias{to.list}
-\alias{to.matrix}
 \alias{to.array}
 \alias{to.NULL}
 \alias{to.hms}
@@ -104,15 +103,6 @@ to(
 )
 
 \method{to}{list}(
-  x,
-  .to,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to}{matrix}(
   x,
   .to,
   ...,
