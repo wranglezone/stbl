@@ -214,10 +214,6 @@ to.list <- function(
       x_class = x_class
     ))
   }
-  # Language objects (calls, symbols) are data, not lists to splice.
-  if (is.language(x)) {
-    return(list(x))
-  }
   to_lst(x, ..., x_arg = x_arg, call = call)
 }
 

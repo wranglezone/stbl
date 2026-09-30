@@ -217,7 +217,7 @@ test_that("to() converts to list (#182)", {
 
 test_that("to() treats language input as data for list targets (#366)", {
   given <- quote(a + b)
-  expect_identical(to(given, list()), list(given))
+  expect_identical(to(given, list()), as.list(given))
 })
 
 # allow_null -------------------------------------------------------------------

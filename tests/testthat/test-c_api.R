@@ -1009,7 +1009,7 @@ test_that(".stbl_to() routes matrix targets through R-level to() (#366)", {
 test_that(".stbl_to() treats language-valued input as data (#366)", {
   given <- quote(a + b)
   result <- .stbl_to(given, list())
-  expect_identical(result, list(given))
+  expect_identical(result, to(given, list()))
 })
 
 # -> factor --------------------------------------------------------------------
