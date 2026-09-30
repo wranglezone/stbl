@@ -85,6 +85,7 @@ Other datetime functions:
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_dttm]{to_dttm()}}
 
 Other stabilization functions:

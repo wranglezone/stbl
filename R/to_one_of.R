@@ -1,3 +1,5 @@
+# target class: NA
+
 #' @rdname stabilize_one_of
 #' @export
 #'

@@ -104,6 +104,7 @@ stabilize_time_scalar(NULL, allow_null = TRUE)
 Other time functions:
 \code{\link[=specify_time]{specify_time()}},
 \code{\link[=stabilize_time]{stabilize_time()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 

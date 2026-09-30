@@ -1,3 +1,5 @@
+# target class: function
+
 #' Coerce to a function
 #'
 #' `to_fn()` coerces `x` to a function. `to_function()` is a synonym of

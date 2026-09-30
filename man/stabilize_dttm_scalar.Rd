@@ -158,6 +158,7 @@ Other datetime functions:
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}}
 

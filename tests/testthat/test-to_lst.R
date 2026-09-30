@@ -85,6 +85,17 @@ test_that("to_lst() errors informatively for primitives (#157)", {
   )
 })
 
+test_that("to_lst() coerces language objects like as.list() (#366)", {
+  given <- quote(a + b)
+  expect_identical(to_lst(given), as.list(given))
+
+  given <- quote(sym)
+  expect_identical(to_lst(given), as.list(given))
+
+  given <- expression(a, b)
+  expect_identical(to_lst(given), as.list(given))
+})
+
 test_that("to_list() exists (#157, #166)", {
   expect_no_error(to_list(TRUE))
 })

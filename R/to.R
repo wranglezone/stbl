@@ -14,7 +14,13 @@
 #'   - The failure classes documented for the `to_*()` function corresponding
 #'   to the class of `.to` (for example [to_int()] for `.to = integer()`).
 #'   - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-#'   `to_*()` function.
+#'   `to_*()` function and [vctrs::vec_cast()] cannot cast `x` to `.to`.
+#'
+#' @details
+#' When the class of `.to` does not have a corresponding `to_*()` function,
+#' `to()` falls back to [vctrs::vec_cast()]. Arguments in `...` are passed to
+#' `to_*()` functions but are ignored by the [vctrs::vec_cast()] fallback.
+#'
 #' @family character functions
 #' @family double functions
 #' @family integer functions
@@ -23,6 +29,10 @@
 #' @family function functions
 #' @family list functions
 #' @family data frame functions
+#' @family date functions
+#' @family datetime functions
+#' @family time functions
+#' @family duration functions
 #' @export
 #'
 #' @examples
@@ -32,6 +42,8 @@
 #' to("1", integer())
 #' to(c("a", "b"), factor(levels = c("a", "b", "c")))
 #' to("mean", mean)
+#' to("2024-01-01", as.Date("2024-01-01"))
+#' to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC"))
 to <- function(
   x,
   .to,
@@ -77,6 +89,19 @@ to.double <- function(
 
 #' @export
 #' @rdname to
+to.Date <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_date(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
 to.data.frame <- function(
   x,
   .to,
@@ -85,6 +110,17 @@ to.data.frame <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # Subclasses of data.frame (e.g. tibble) are not stbl targets; let vctrs
+  # handle them.
+  if (!identical(class(.to), "data.frame")) {
+    return(to.default(
+      x,
+      .to,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
   to_df(x, ..., x_arg = x_arg, call = call)
 }
 
@@ -167,7 +203,32 @@ to.list <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # Subclasses of list (e.g. vctrs_list_of) are not stbl targets; let vctrs
+  # handle them.
+  if (!identical(class(.to), "list")) {
+    return(to.default(
+      x,
+      .to,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
+  }
   to_lst(x, ..., x_arg = x_arg, call = call)
+}
+
+#' @export
+#' @rdname to
+to.array <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  # Matrices and arrays are not stbl targets; let vctrs handle them.
+  to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class)
 }
 
 #' @export
@@ -185,6 +246,52 @@ to.NULL <- function(
 
 #' @export
 #' @rdname to
+to.hms <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_time(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.Period <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_dur(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.POSIXct <- function(
+  x,
+  .to,
+  ...,
+  tz = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  # The tzone attribute can be a 3-element vector (zone plus standard and
+  # daylight abbreviations); only the zone name is relevant here.
+  tz <- tz %||% attr(.to, "tzone")[1] %||% "UTC"
+  if (is.na(tz) || !nzchar(tz)) {
+    tz <- "UTC"
+  }
+  to_dttm(x, ..., tz = tz, x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
 to.default <- function(
   x,
   .to,
@@ -193,10 +300,15 @@ to.default <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .stop_cant_coerce(
-    from_class = x_class,
-    to_class = object_type(.to),
-    x_arg = x_arg,
-    call = call
+  rlang::try_fetch(
+    vctrs::vec_cast(x, .to),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = object_type(.to),
+        x_arg = x_arg,
+        call = call
+      )
+    }
   )
 }

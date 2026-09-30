@@ -63,6 +63,7 @@ Other date functions:
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_date]{to_date()}}
 
 Other stabilization functions:

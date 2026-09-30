@@ -1,0 +1,21 @@
+# Verify that every R/to_*.R file declares its target class(es) and that each
+# declared class has a to() method in R/to.R.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+name: to-registry
+
+jobs:
+  to-registry:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/api2r/pkgskills-ci:release
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check to() registry
+        run: Rscript .github/scripts/check-to-registry.R
+        shell: bash

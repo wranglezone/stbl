@@ -1,3 +1,5 @@
+# target class: factor
+
 #' Coerce to factor
 #'
 #' Checks whether a vector can be coerced to a factor without losing

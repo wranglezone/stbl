@@ -36,6 +36,7 @@ Other date functions:
 \code{\link[=specify_date]{specify_date()}},
 \code{\link[=stabilize_date]{stabilize_date()}},
 \code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_date]{to_date()}},
 \code{\link[=to_date_scalar]{to_date_scalar()}}
 
@@ -43,6 +44,7 @@ Other datetime functions:
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
+\code{\link[=to]{to()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}}
 }
