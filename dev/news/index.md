@@ -2,6 +2,18 @@
 
 ## stbl (development version)
 
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) now dispatches
+  to [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md), and
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) for
+  `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and
+  falls back to
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+  for other prototype classes
+  ([\#366](https://github.com/wranglezone/stbl/issues/366),
+  [\#367](https://github.com/wranglezone/stbl/issues/367)).
+
 ### Bug fixes
 
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now

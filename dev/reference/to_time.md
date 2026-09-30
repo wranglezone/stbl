@@ -142,6 +142,7 @@ Other time functions:
 [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
 
 Other stabilization functions:

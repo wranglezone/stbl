@@ -118,6 +118,7 @@ provide additional context or functionality.
 Other duration functions:
 [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
 

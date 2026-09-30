@@ -75,6 +75,16 @@ to the appropriate <code>to_*()</code> function.</p>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class 'Date'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for class 'data.frame'</span></span>
 <span><span class="fu">to</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
@@ -137,11 +147,52 @@ to the appropriate <code>to_*()</code> function.</p>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class 'array'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for class '`NULL`'</span></span>
 <span><span class="fu">to</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">.to</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'hms'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'Period'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  tz <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -203,6 +254,11 @@ types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 <dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
 <dd><p>(<code>logical(1)</code>) Should the result be an ordered factor?</p></dd>
 
+
+<dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be
+<code>""</code> or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -211,8 +267,14 @@ classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <c
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p>The failure classes documented for the <code>to_*()</code> function corresponding
 to the class of <code>.to</code> (for example <code><a href="to_int.html">to_int()</a></code> for <code>.to = integer()</code>).</p></li>
 <li><p><code>&lt;stbl-error-coerce-*&gt;</code> when the class of <code>.to</code> has no corresponding
-<code>to_*()</code> function.</p></li>
+<code>to_*()</code> function and <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code> cannot cast <code>x</code> to <code>.to</code>.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When the class of <code>.to</code> does not have a corresponding <code>to_*()</code> function,
+<code>to()</code> falls back to <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code>. Arguments in <code>...</code> are passed to
+<code>to_*()</code> functions but are ignored by the <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code> fallback.</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other character functions:
@@ -261,7 +323,33 @@ to the class of <code>.to</code> (for example <code><a href="to_int.html">to_int
 <p>Other data frame functions:
 <code><a href="specify_df.html">specify_df()</a></code>,
 <code><a href="stabilize_df.html">stabilize_df()</a></code>,
-<code><a href="to_df.html">to_df()</a></code></p></div>
+<code><a href="to_df.html">to_df()</a></code></p>
+<p>Other date functions:
+<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
+<code><a href="specify_date.html">specify_date()</a></code>,
+<code><a href="stabilize_date.html">stabilize_date()</a></code>,
+<code><a href="stabilize_date_scalar.html">stabilize_date_scalar()</a></code>,
+<code><a href="to_date.html">to_date()</a></code>,
+<code><a href="to_date_scalar.html">to_date_scalar()</a></code></p>
+<p>Other datetime functions:
+<code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
+<code><a href="specify_dttm.html">specify_dttm()</a></code>,
+<code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>,
+<code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
+<code><a href="to_dttm.html">to_dttm()</a></code>,
+<code><a href="to_dttm_scalar.html">to_dttm_scalar()</a></code></p>
+<p>Other time functions:
+<code><a href="specify_time.html">specify_time()</a></code>,
+<code><a href="stabilize_time.html">stabilize_time()</a></code>,
+<code><a href="stabilize_time_scalar.html">stabilize_time_scalar()</a></code>,
+<code><a href="to_time.html">to_time()</a></code>,
+<code><a href="to_time_scalar.html">to_time_scalar()</a></code></p>
+<p>Other duration functions:
+<code><a href="specify_dur.html">specify_dur()</a></code>,
+<code><a href="stabilize_dur.html">stabilize_dur()</a></code>,
+<code><a href="stabilize_dur_scalar.html">stabilize_dur_scalar()</a></code>,
+<code><a href="to_dur.html">to_dur()</a></code>,
+<code><a href="to_dur_scalar.html">to_dur_scalar()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -280,8 +368,12 @@ to the class of <code>.to</code> (for example <code><a href="to_int.html">to_int
 <span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"mean"</span>, <span class="va">mean</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("mean")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55bd29eb7528&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55e586f24528&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
+<span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2024-01-01"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01"</span>
+<span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"2024-01-01T12:00:00Z"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2024-01-01"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01 12:00:00 UTC"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

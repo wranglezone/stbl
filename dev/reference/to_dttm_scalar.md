@@ -101,6 +101,7 @@ Other datetime functions:
 [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
 
 Other stabilization functions:

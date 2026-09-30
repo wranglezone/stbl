@@ -35,6 +35,16 @@ to(
   x_class = object_type(x)
 )
 
+# S3 method for class 'Date'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 # S3 method for class 'data.frame'
 to(
   x,
@@ -97,11 +107,52 @@ to(
   x_class = object_type(x)
 )
 
+# S3 method for class 'array'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
 # S3 method for class '`NULL`'
 to(
   x,
   .to,
   ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'hms'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'Period'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'POSIXct'
+to(
+  x,
+  .to,
+  ...,
+  tz = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -163,6 +214,12 @@ to(
 
   (`logical(1)`) Should the result be an ordered factor?
 
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
+  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  Defaults to `"UTC"`.
+
 ## Value
 
 `x` coerced to the type of `.to`, or an error condition with classes
@@ -175,7 +232,19 @@ to(
   `.to = integer()`).
 
 - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-  `to_*()` function.
+  `to_*()` function and
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+  cannot cast `x` to `.to`.
+
+## Details
+
+When the class of `.to` does not have a corresponding `to_*()` function,
+`to()` falls back to
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
+Arguments in `...` are passed to `to_*()` functions but are ignored by
+the
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+fallback.
 
 ## See also
 
@@ -234,6 +303,36 @@ Other data frame functions:
 [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
 [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
 
+Other date functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+[`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md)
+
+Other datetime functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
+
+Other time functions:
+[`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
+
+Other duration functions:
+[`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
+
 ## Examples
 
 ``` r
@@ -251,6 +350,10 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x55bd29eb7528>
+#> <bytecode: 0x55e586f24528>
 #> <environment: namespace:base>
+to("2024-01-01", as.Date("2024-01-01"))
+#> [1] "2024-01-01"
+to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC"))
+#> [1] "2024-01-01 12:00:00 UTC"
 ```

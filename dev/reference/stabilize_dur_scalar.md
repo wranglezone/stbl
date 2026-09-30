@@ -160,6 +160,7 @@ specific class by failure mode:
 Other duration functions:
 [`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+[`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
 
