@@ -18,18 +18,8 @@
 #'
 #' @details
 #' When the class of `.to` does not have a corresponding `to_*()` function,
-#' `to()` falls back to [vctrs::vec_cast()]. This fallback also applies to
-#' classes such as `POSIXlt` and `difftime`, for which stbl does not provide a
-#' dedicated coercion, and to subclasses of supported targets (for example, a
-#' tibble prototype is handled by [vctrs::vec_cast()], not [to_df()]).
-#' Arguments in `...` are passed to `to_*()` functions but are ignored by the
-#' [vctrs::vec_cast()] fallback.
-#'
-#' Errors from the [vctrs::vec_cast()] fallback are intentionally replaced
-#' with the standard `<stbl-error-coerce-*>` condition, so that `to()` always
-#' fails with a consistent stbl error regardless of which coercion path was
-#' taken. This is a deliberate deviation from a pure pass-through of `vctrs`
-#' errors.
+#' `to()` falls back to [vctrs::vec_cast()]. Arguments in `...` are passed to
+#' `to_*()` functions but are ignored by the [vctrs::vec_cast()] fallback.
 #'
 #' @family character functions
 #' @family double functions
@@ -75,9 +65,6 @@ to.character <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (!is.null(attr(.to, "dim"))) {
-    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
-  }
   to_chr(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
@@ -91,9 +78,6 @@ to.double <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (!is.null(attr(.to, "dim"))) {
-    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
-  }
   to_dbl(
     x,
     ...,
@@ -187,9 +171,6 @@ to.integer <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (!is.null(attr(.to, "dim"))) {
-    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
-  }
   to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
 }
 
@@ -203,9 +184,6 @@ to.logical <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  if (!is.null(attr(.to, "dim"))) {
-    return(to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class))
-  }
   to_lgl(
     x,
     ...,
@@ -242,6 +220,24 @@ to.list <- function(
   }
   to_lst(x, ..., x_arg = x_arg, call = call)
 }
+
+#' @export
+#' @rdname to
+to.matrix <- function(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  # Matrices and arrays are not stbl targets; let vctrs handle them.
+  to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class)
+}
+
+#' @export
+#' @rdname to
+to.array <- to.matrix
 
 #' @export
 #' @rdname to

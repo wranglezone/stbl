@@ -464,6 +464,10 @@ test_that("to() routes matrix targets through vctrs (#366)", {
     to(c("a", "b"), matrix("", 1, 2)),
     vctrs::vec_cast(c("a", "b"), matrix("", 1, 2))
   )
+  expect_identical(
+    to(1:8, array(0L, c(2, 2, 2))),
+    vctrs::vec_cast(1:8, array(0L, c(2, 2, 2)))
+  )
 })
 
 # unsupported ------------------------------------------------------------------
