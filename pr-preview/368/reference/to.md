@@ -107,16 +107,6 @@ to(
   x_class = object_type(x)
 )
 
-# S3 method for class 'matrix'
-to(
-  x,
-  .to,
-  ...,
-  x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
 # S3 method for class 'array'
 to(
   x,
@@ -360,7 +350,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x564ab0fa4798>
+#> <bytecode: 0x564ea57cc798>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"
