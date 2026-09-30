@@ -1,4 +1,5 @@
 # target class: POSIXct
+
 #' Coerce to date-time
 #'
 #' Checks whether a vector can be coerced to a [base::POSIXct] without losing

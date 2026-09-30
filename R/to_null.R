@@ -1,4 +1,5 @@
-# target class: NA
+# target class: NULL
+
 #' Ensure an object is NULL
 #'
 #' @inheritParams .shared-params

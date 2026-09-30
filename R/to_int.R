@@ -1,4 +1,5 @@
 # target class: integer
+
 #' Coerce to integer
 #'
 #' Checks whether a vector can be coerced to integer without losing information,

@@ -1,4 +1,5 @@
 # target class: hms
+
 #' Coerce to time-of-day
 #'
 #' Checks whether a vector can be coerced to an [hms::hms()] time-of-day vector

@@ -1,4 +1,5 @@
 # target class: logical
+
 #' Coerce to logical
 #'
 #' Checks whether a vector can be coerced to logical without losing information,

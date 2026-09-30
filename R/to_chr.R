@@ -1,4 +1,5 @@
 # target class: character
+
 #' Coerce to character
 #'
 #' Checks whether a vector can be coerced to character without losing

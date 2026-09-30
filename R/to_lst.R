@@ -1,4 +1,5 @@
 # target class: list
+
 #' Ensure a list meets expectations
 #'
 #' `to_lst()` checks whether an object can be coerced to a list without losing
