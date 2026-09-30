@@ -147,6 +147,26 @@ to the appropriate <code>to_*()</code> function.</p>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class 'matrix'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'array'</span></span>
+<span><span class="fu">to</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for class '`NULL`'</span></span>
 <span><span class="fu">to</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
@@ -262,17 +282,8 @@ to the class of <code>.to</code> (for example <code><a href="to_int.html">to_int
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>When the class of <code>.to</code> does not have a corresponding <code>to_*()</code> function,
-<code>to()</code> falls back to <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code>. This fallback also applies to
-classes such as <code>POSIXlt</code> and <code>difftime</code>, for which stbl does not provide a
-dedicated coercion, and to subclasses of supported targets (for example, a
-tibble prototype is handled by <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code>, not <code><a href="to_df.html">to_df()</a></code>).
-Arguments in <code>...</code> are passed to <code>to_*()</code> functions but are ignored by the
-<code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code> fallback.</p>
-<p>Errors from the <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code> fallback are intentionally replaced
-with the standard <code>&lt;stbl-error-coerce-*&gt;</code> condition, so that <code>to()</code> always
-fails with a consistent stbl error regardless of which coercion path was
-taken. This is a deliberate deviation from a pure pass-through of <code>vctrs</code>
-errors.</p>
+<code>to()</code> falls back to <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code>. Arguments in <code>...</code> are passed to
+<code>to_*()</code> functions but are ignored by the <code><a href="https://vctrs.r-lib.org/reference/vec_cast.html" class="external-link">vctrs::vec_cast()</a></code> fallback.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -367,7 +378,7 @@ errors.</p>
 <span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"mean"</span>, <span class="va">mean</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("mean")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5563b6b242d8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x564ab0fa4798&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span><span class="fu">to</span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2024-01-01"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01"</span>
