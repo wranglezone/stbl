@@ -99,3 +99,10 @@ test_that("to_lst() coerces language objects like as.list() (#366)", {
 test_that("to_list() exists (#157, #166)", {
   expect_no_error(to_list(TRUE))
 })
+
+test_that("to_lst() rethrows as.list() errors as stbl errors (#369)", {
+  as.list.stbl_bad_list <- function(x, ...) stop("nope")
+  local_mocked_s3_method("as.list", "stbl_bad_list", as.list.stbl_bad_list)
+  given <- structure(1, class = "stbl_bad_list")
+  expect_pkg_error_classes(to_lst(given), "stbl", "coerce", "list")
+})

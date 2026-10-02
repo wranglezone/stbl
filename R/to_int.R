@@ -154,8 +154,24 @@ to_int.complex <- function(
 }
 
 #' @export
-to_int.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vctrs::vec_cast(x, integer(), x_arg = x_arg, call = call)
+to_int.default <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  try_fetch(
+    vctrs::vec_cast(x, integer(), x_arg = x_arg, call = call),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = "integer",
+        x_arg = x_arg,
+        call = call
+      )
+    }
+  )
 }
 
 #' Coerce to length-1 integer

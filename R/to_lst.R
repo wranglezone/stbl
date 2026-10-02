@@ -50,8 +50,24 @@ to_lst.list <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
 
 #' @export
 #' @rdname to_lst
-to_lst.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  as.list(x, ...)
+to_lst.default <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  try_fetch(
+    as.list(x, ...),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = "list",
+        x_arg = x_arg,
+        call = call
+      )
+    }
+  )
 }
 
 #' @export

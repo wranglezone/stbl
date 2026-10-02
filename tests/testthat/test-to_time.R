@@ -161,9 +161,9 @@ test_that("to_time() rejects out-of-range hms values (#294)", {
   )
 })
 
-test_that("to_time() errors properly for other types (#294)", {
+test_that("to_time() errors properly for other types (#294, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_time(given), class = "vctrs_error_cast")
+  expect_pkg_error_classes(to_time(given), "stbl", "coerce", "time")
 })
 
 test_that("to_time_scalar() allows length-1 times through (#294)", {

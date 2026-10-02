@@ -208,8 +208,8 @@
 # stbl_to ----
 
 #' @rdname c_x_to_y
-.stbl_to <- function(x, to) {
-  .Call(stbl_to, x, to)
+.stbl_to <- function(x, to, x_arg = NULL, call = NULL) {
+  .Call(stbl_to, x, to, x_arg, call)
 }
 
 # range checks ----

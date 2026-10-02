@@ -114,7 +114,7 @@
 
 .lst_to_fct(x)
 
-.stbl_to(x, to)
+.stbl_to(x, to, x_arg = NULL, call = NULL)
 
 .check_min_dbl(x, min_val)
 
@@ -136,6 +136,14 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 \item{to}{The target object for the coercion.}
 
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
+
+\item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.}
+
+\item{call}{\code{(environment)} The execution environment to mention as the
+source of error messages.}
 }
 \value{
 \code{.x_to_y()}: A list with two elements: \code{result}, the converted

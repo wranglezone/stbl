@@ -69,13 +69,16 @@ extern SEXP (*stbl_check_max_dbl_exclusive)(SEXP, SEXP);
 
 /* to
  *
- * stbl_to(x, to) coerces `x` to the type of `to`. Unclassed logical,
+ * stbl_to(x, to, x_arg, call) coerces `x` to the type of `to`. Unclassed logical,
  * integer, double, and character targets (and factor targets) use fast C
  * conversion routines; all other targets (Date, POSIXct, hms, Period, list,
  * and other classed prototypes) are delegated to the R-level stbl::to(),
  * which falls back to vctrs::vec_cast() for classes stbl does not handle.
+ * `x_arg` (a string) and `call` (a call or environment) supply error context;
+ * pass R_NilValue for either to use the defaults. Failures raise the same
+ * classed rlang errors as the R-level to().
  */
-extern SEXP (*stbl_to)(SEXP, SEXP);
+extern SEXP (*stbl_to)(SEXP, SEXP, SEXP, SEXP);
 
 void stbl_init_api(void);
 

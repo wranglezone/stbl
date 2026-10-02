@@ -18,15 +18,16 @@ SEXP stbl_lst_to_chr(SEXP x);
  *                Always succeeds.
  *   - logical:   "TRUE", "FALSE", or NA_character_.  Always succeeds.
  *   - list:      each element must be a character scalar (or a one-element
- *                list/vector that unpacks to one).  Calls Rf_error() for
+ *                list/vector that unpacks to one).  Fails (via to_fail()) for
  *                elements that cannot be reduced to a single string.
  *
  * @param x  The vector to convert.
+ * @param to,x_arg,call  Context forwarded to the R-level to() on failure.
  * @return   A character vector of the same length as @p x.
- * @note     Calls Rf_error() on conversion failure.  For richly formatted
- *           rlang errors call the R-level to() instead.
+ * @note     On failure, re-runs the R-level to() so the rlang error is thrown
+ *           from one place.
  */
-SEXP to_character(SEXP x) {
+SEXP to_character(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   int x_type = TYPEOF(x);
   SEXP res;
 
@@ -57,9 +58,9 @@ SEXP to_character(SEXP x) {
   }
   if (x_type == VECSXP) {
     res = PROTECT(stbl_lst_to_chr(x));
-    SEXP out = check_valid(res, "character");
+    SEXP out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(1);
     return out;
   }
-  Rf_error("Can't convert to <character>.");
+  return to_fail(x, to, x_arg, call);
 }

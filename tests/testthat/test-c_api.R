@@ -845,8 +845,13 @@ test_that(".stbl_to() converts chr to lgl", {
   )
 })
 
-test_that(".stbl_to() errors on non-coercible chr to lgl", {
-  expect_error(.stbl_to("a", TRUE), "Can't convert to <logical>.")
+test_that(".stbl_to() errors on non-coercible chr to lgl (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to("a", TRUE),
+    "stbl",
+    "incompatible_values",
+    "logical"
+  )
 })
 
 test_that(".stbl_to() converts factor to lgl", {
@@ -866,10 +871,12 @@ test_that(".stbl_to() converts whole-number dbl to int", {
   expect_identical(.stbl_to(c(1.0, 2.0), 0L), c(1L, 2L))
 })
 
-test_that(".stbl_to() errors on fractional dbl to int", {
-  expect_error(
+test_that(".stbl_to() errors on fractional dbl to int (#369)", {
+  expect_pkg_error_classes(
     .stbl_to(1.5, 0L),
-    "Can't convert <double> to <integer> due to loss of precision."
+    "stbl",
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -877,10 +884,12 @@ test_that(".stbl_to() converts chr integer strings to int", {
   expect_identical(.stbl_to(c("1", "2"), 0L), c(1L, 2L))
 })
 
-test_that(".stbl_to() errors on non-number chr to int", {
-  expect_error(
+test_that(".stbl_to() errors on non-number chr to int (#369)", {
+  expect_pkg_error_classes(
     .stbl_to("a", 0L),
-    "Can't convert <character> to <integer>: incompatible values."
+    "stbl",
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -896,17 +905,21 @@ test_that(".stbl_to() converts cpx with Im == 0 to int", {
   expect_identical(.stbl_to(c(1 + 0i, -3 + 0i), 0L), c(1L, -3L))
 })
 
-test_that(".stbl_to() errors on cpx with Im != 0 to int", {
-  expect_error(
+test_that(".stbl_to() errors on cpx with Im != 0 to int (#369)", {
+  expect_pkg_error_classes(
     .stbl_to(1 + 2i, 0L),
-    "Can't convert <complex> to <integer>: incompatible values."
+    "stbl",
+    "incompatible_values",
+    "integer"
   )
 })
 
-test_that(".stbl_to() errors on fractional cpx to int", {
-  expect_error(
+test_that(".stbl_to() errors on fractional cpx to int (#369)", {
+  expect_pkg_error_classes(
     .stbl_to(1.5 + 0i, 0L),
-    "Can't convert <complex> to <integer> due to loss of precision."
+    "stbl",
+    "incompatible_values",
+    "integer"
   )
 })
 
@@ -923,8 +936,13 @@ test_that(".stbl_to() converts chr numeric strings to dbl", {
   expect_identical(.stbl_to(c("1.5", "-3.14"), 0.0), c(1.5, -3.14))
 })
 
-test_that(".stbl_to() errors on non-numeric chr to dbl", {
-  expect_error(.stbl_to("a", 0.0), "Can't convert to <double>.")
+test_that(".stbl_to() errors on non-numeric chr to dbl (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to("a", 0.0),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 test_that(".stbl_to() converts factor numeric levels to dbl", {
@@ -939,8 +957,13 @@ test_that(".stbl_to() converts cpx with Im == 0 to dbl", {
   expect_identical(.stbl_to(c(1 + 0i, -2 + 0i), 0.0), c(1.0, -2.0))
 })
 
-test_that(".stbl_to() errors on cpx with Im != 0 to dbl", {
-  expect_error(.stbl_to(1 + 2i, 0.0), "Can't convert to <double>.")
+test_that(".stbl_to() errors on cpx with Im != 0 to dbl (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to(1 + 2i, 0.0),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 # -> character
@@ -1027,10 +1050,11 @@ test_that(".stbl_to() converts chr to fct, respecting levels from `to`", {
   expect_identical(as.character(out), c("a", "b"))
 })
 
-test_that(".stbl_to() errors on chr to fct when value not in levels", {
-  expect_error(
+test_that(".stbl_to() errors on chr to fct when value not in levels (#369)", {
+  expect_pkg_error_classes(
     .stbl_to("c", factor(NA_character_, levels = c("a", "b"))),
-    "Can't convert to <factor>."
+    "stbl",
+    "fct_levels"
   )
 })
 
@@ -1094,24 +1118,39 @@ test_that(".stbl_to() passes NA through in fct conversion", {
 })
 
 # unsupported source and target types
-test_that(".stbl_to() errors on raw source -> lgl target", {
-  expect_error(.stbl_to(as.raw(1), TRUE), "Can't convert to <logical>.")
+test_that(".stbl_to() errors on raw source -> lgl target (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to(as.raw(1), TRUE),
+    "stbl",
+    "coerce",
+    "logical"
+  )
 })
 
-test_that(".stbl_to() errors on raw source -> int target", {
-  expect_error(.stbl_to(as.raw(1), 1L), "Can't convert to <integer>.")
+test_that(".stbl_to() errors on raw source -> int target (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to(as.raw(1), 1L),
+    "stbl",
+    "coerce",
+    "integer"
+  )
 })
 
-test_that(".stbl_to() errors on raw source -> dbl target", {
-  expect_error(.stbl_to(as.raw(1), 1.0), "Can't convert to <double>.")
+test_that(".stbl_to() errors on raw source -> dbl target (#369)", {
+  expect_pkg_error_classes(
+    .stbl_to(as.raw(1), 1.0),
+    "stbl",
+    "coerce",
+    "double"
+  )
 })
 
-test_that(".stbl_to() errors on raw source -> chr target", {
-  expect_error(.stbl_to(as.raw(1), ""), "Can't convert to <character>.")
+test_that(".stbl_to() matches to() for raw source -> chr target (#369)", {
+  expect_identical(.stbl_to(as.raw(1), ""), to(as.raw(1), character()))
 })
 
-test_that(".stbl_to() errors on cpx source -> fct target", {
-  expect_error(.stbl_to(1 + 0i, factor()), "Can't convert to <factor>.")
+test_that(".stbl_to() matches to() for cpx source -> fct target (#369)", {
+  expect_identical(.stbl_to(1 + 0i, factor()), to(1 + 0i, factor()))
 })
 
 test_that(".stbl_to() errors on raw target (#367)", {
@@ -1460,4 +1499,14 @@ test_that(".lst_to_chr() marks raw scalar elements as not valid (#noissue)", {
   res <- .lst_to_chr(list(as.raw(1)))
   expect_identical(res[["result"]], NA_character_)
   expect_identical(res[["valid"]], FALSE)
+})
+
+test_that(".stbl_to() uses x_arg and call when supplied (#369)", {
+  err <- rlang::catch_cnd(
+    .stbl_to("a", logical(), x_arg = "my_arg", call = quote(my_fn())),
+    classes = "error"
+  )
+  expect_s3_class(err, "stbl-error-incompatible_values-logical")
+  expect_match(conditionMessage(err), "my_arg", fixed = TRUE)
+  expect_identical(err$call, quote(my_fn()))
 })

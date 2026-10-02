@@ -4,8 +4,9 @@
 
 ## Bug fixes
 
-* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258).
-* `to_chr()` now converts formulas to a single readable string (for example, `"x ~ y"`) (#259).
+* `stbl_to()` (C API) failures now have the same classes, messages, and fields as `to()` errors. `stbl_to()` gains `x_arg` and `call` arguments for error context; pass `R_NilValue` to use the defaults (#369).
+* `to_date()`, `to_dbl()`, `to_dttm()`, `to_dur()`, `to_int()`, `to_lst()`, and `to_time()` now raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors when the default method cannot coerce `x` (such as raw vectors) (#369).
+* `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258). It also now converts formulas to a single readable string (for example, `"x ~ y"`) (#259).
 
 # stbl 0.5.0
 

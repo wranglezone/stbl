@@ -23,7 +23,7 @@
     Condition <stbl-error-cant_stabilize_one_of>
       Error:
       ! `new.env()` must match exactly one of the provided specifications, but matched none.
-      x `new.env()` must be a vector, not an environment.
+      x Can't coerce `new.env()` <environment> to <integer>.
       x Can't coerce `new.env()` <environment> to <character>.
 
 ---
@@ -33,7 +33,7 @@
     Condition <stbl-error-cant_stabilize_one_of>
       Error in `wrapped_to_one_of()`:
       ! `val` must match exactly one of the provided specifications, but matched none.
-      x `val` must be a vector, not an environment.
+      x Can't coerce `val` <environment> to <integer>.
       x Can't coerce `val` <environment> to <character>.
 
 # to_one_of() disambiguates identical matched labels by position (#286)
