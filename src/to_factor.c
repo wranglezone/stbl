@@ -12,7 +12,7 @@ SEXP stbl_lst_to_fct(SEXP x);
  *
  * Levels and ordered-ness are read from @p to:
  *   - If @p to has a non-empty levels attribute those levels are enforced;
- *     values absent from the levels cause Rf_error().
+ *     values absent from the levels raise the R-level to() error.
  *   - A zero-length (or absent) levels attribute — as produced by factor() —
  *     means levels are inferred from the data.
  *   - If @p to inherits from "ordered" the result is an ordered factor.
@@ -32,10 +32,10 @@ SEXP stbl_lst_to_fct(SEXP x);
  *            class (ordered vs. unordered) are inspected — its values are
  *            ignored.
  * @return    A factor (or ordered factor) of the same length as @p x.
- * @note      Calls Rf_error() on conversion failure.  For richly formatted
- *            rlang errors call the R-level to() instead.
+ * @note     On failure, re-runs the R-level to() so the rlang error is thrown
+ *           from one place.
  */
-SEXP to_factor(SEXP x, SEXP to) {
+SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   int x_type = TYPEOF(x);
 
   /* Extract levels and ordered from `to`.
@@ -51,14 +51,14 @@ SEXP to_factor(SEXP x, SEXP to) {
   /* chr -> fct */
   if (x_type == STRSXP) {
     res = PROTECT(stbl_chr_to_fct(x, to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(2); /* ordered, res */
     return out;
   }
   /* int -> fct */
   if (x_type == INTSXP && !Rf_inherits(x, "factor")) {
     res = PROTECT(stbl_int_to_fct(x, to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(2);
     return out;
   }
@@ -66,7 +66,7 @@ SEXP to_factor(SEXP x, SEXP to) {
   if (x_type == INTSXP && Rf_inherits(x, "factor")) {
     chr = PROTECT(stbl_fct_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(3); /* ordered, chr, res */
     return out;
   }
@@ -74,7 +74,7 @@ SEXP to_factor(SEXP x, SEXP to) {
   if (x_type == REALSXP) {
     chr = PROTECT(stbl_dbl_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(3);
     return out;
   }
@@ -82,19 +82,19 @@ SEXP to_factor(SEXP x, SEXP to) {
   if (x_type == LGLSXP) {
     chr = PROTECT(stbl_lgl_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(3);
     return out;
   }
   /* lst -> fct: lst_to_fct produces a chr result, then chr_to_fct */
   if (x_type == VECSXP) {
     chr = PROTECT(stbl_lst_to_fct(x));
-    out = check_valid(chr, "factor"); /* validates chr step */
+    out = check_valid(chr, x, to, x_arg, call); /* validates chr step */
     res = PROTECT(stbl_chr_to_fct(out, to_levels, ordered));
-    out = check_valid(res, "factor");
+    out = check_valid(res, x, to, x_arg, call);
     UNPROTECT(3); /* ordered, chr, res */
     return out;
   }
   UNPROTECT(1); /* ordered */
-  Rf_error("Can't convert to <factor>.");
+  return to_fail(x, to, x_arg, call);
 }

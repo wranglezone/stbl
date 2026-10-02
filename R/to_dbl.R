@@ -169,8 +169,24 @@ to_dbl.complex <- function(
 }
 
 #' @export
-to_dbl.default <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
-  vctrs::vec_cast(x, double(), x_arg = x_arg, call = call)
+to_dbl.default <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  try_fetch(
+    vctrs::vec_cast(x, double(), x_arg = x_arg, call = call),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = "double",
+        x_arg = x_arg,
+        call = call
+      )
+    }
+  )
 }
 
 #' Coerce to length-1 double

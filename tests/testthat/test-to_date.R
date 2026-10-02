@@ -100,9 +100,9 @@ test_that("to_date() treats numerics as days since the epoch (#104)", {
   expect_identical(to_date(19723L), as.Date("2024-01-01"))
 })
 
-test_that("to_date() errors properly for other types (#104)", {
+test_that("to_date() errors properly for other types (#104, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_date(given), class = "vctrs_error_cast")
+  expect_pkg_error_classes(to_date(given), "stbl", "coerce", "date")
 })
 
 test_that("to_date_scalar() allows length-1 dates through (#104)", {

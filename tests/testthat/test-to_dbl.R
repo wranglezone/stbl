@@ -145,10 +145,10 @@ test_that("to_dbl() works for lists (#128, #273, #310)", {
   )
 })
 
-test_that("to_dbl() errors properly for other types (#23)", {
+test_that("to_dbl() errors properly for other types (#23, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_dbl(given), class = "vctrs_error_cast")
-  expect_error(to_dbl(mean), class = "vctrs_error_scalar_type")
+  expect_pkg_error_classes(to_dbl(given), "stbl", "coerce", "double")
+  expect_pkg_error_classes(to_dbl(mean), "stbl", "coerce", "double")
 })
 
 test_that("to_dbl_scalar() allows length-1 dbls through (#23)", {

@@ -15,7 +15,13 @@ to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
 
 \method{to_lst}{list}(x, ..., x_arg = caller_arg(x), call = caller_env())
 
-\method{to_lst}{default}(x, ..., x_arg = caller_arg(x), call = caller_env())
+\method{to_lst}{default}(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
 
 \method{to_lst}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
@@ -39,6 +45,11 @@ unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its coercion, but want the error message to match
+the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

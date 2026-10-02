@@ -161,9 +161,9 @@ test_that("to_dttm() treats numerics as seconds since the epoch (#105)", {
   expect_identical(to_dttm(0L), as.POSIXct("1970-01-01 00:00:00", tz = "UTC"))
 })
 
-test_that("to_dttm() errors properly for other types (#105)", {
+test_that("to_dttm() errors properly for other types (#105, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_dttm(given), class = "vctrs_error_cast")
+  expect_pkg_error_classes(to_dttm(given), "stbl", "coerce", "datetime")
 })
 
 test_that("to_dttm_scalar() allows length-1 date-times through (#105)", {

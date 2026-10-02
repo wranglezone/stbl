@@ -224,9 +224,20 @@ to_time.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
-  vctrs::vec_cast(x, .time_type_obj(), x_arg = x_arg, call = call)
+  try_fetch(
+    vctrs::vec_cast(x, .time_type_obj(), x_arg = x_arg, call = call),
+    error = function(cnd) {
+      .stop_cant_coerce(
+        from_class = x_class,
+        to_class = "time",
+        x_arg = x_arg,
+        call = call
+      )
+    }
+  )
 }
 
 #' Coerce to length-1 time-of-day

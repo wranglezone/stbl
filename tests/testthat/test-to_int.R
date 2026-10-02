@@ -223,11 +223,10 @@ test_that("to_int() works for lists (#2, #273, #310)", {
   )
 })
 
-test_that("to_int() errors properly for other types (#2)", {
-  # These errors are from vctrs, so just watch for that error class
+test_that("to_int() errors properly for other types (#2, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_int(given), class = "vctrs_error_cast")
-  expect_error(to_int(mean), class = "vctrs_error_scalar_type")
+  expect_pkg_error_classes(to_int(given), "stbl", "coerce", "integer")
+  expect_pkg_error_classes(to_int(mean), "stbl", "coerce", "integer")
 })
 
 test_that("to_int_scalar() allows length-1 ints through (#12)", {

@@ -172,9 +172,9 @@ test_that("to_dur() treats numerics as seconds (#295)", {
   expect_identical(to_dur(3661L), lubridate::seconds_to_period(3661))
 })
 
-test_that("to_dur() errors properly for other types (#295)", {
+test_that("to_dur() errors properly for other types (#295, #369)", {
   given <- as.raw(1:10)
-  expect_error(to_dur(given), class = "vctrs_error_cast")
+  expect_pkg_error_classes(to_dur(given), "stbl", "coerce", "duration")
 })
 
 test_that("to_dur_scalar() allows length-1 durations through (#295)", {

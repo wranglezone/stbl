@@ -84,7 +84,7 @@ SEXP stbl_check_min_dbl_exclusive(SEXP x, SEXP min_val);
 SEXP stbl_check_max_dbl_exclusive(SEXP x, SEXP max_val);
 
 /* to */
-SEXP stbl_to(SEXP x, SEXP to);
+SEXP stbl_to(SEXP x, SEXP to, SEXP x_arg, SEXP call);
 
 static const R_CallMethodDef callMethods[] = {
   /* chr -> fn */
@@ -146,7 +146,7 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_check_min_dbl_exclusive",   (DL_FUNC) &stbl_check_min_dbl_exclusive,   2},
   {"stbl_check_max_dbl_exclusive",   (DL_FUNC) &stbl_check_max_dbl_exclusive,   2},
   /* to */
-  {"stbl_to",              (DL_FUNC) &stbl_to,              2},
+  {"stbl_to",              (DL_FUNC) &stbl_to,              4},
   {NULL, NULL, 0}
 };
 
