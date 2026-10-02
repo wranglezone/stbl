@@ -16,12 +16,26 @@
 
 ### Bug fixes
 
+- `stbl_to()` (C API) failures now have the same classes, messages, and
+  fields as [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
+  errors. `stbl_to()` gains `x_arg` and `call` arguments for error
+  context; pass `R_NilValue` to use the defaults
+  ([\#369](https://github.com/wranglezone/stbl/issues/369)).
+- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+  [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md), and
+  [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) now
+  raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors
+  when the default method cannot coerce `x` (such as raw vectors)
+  ([\#369](https://github.com/wranglezone/stbl/issues/369)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
   has a dedicated condition method that returns a single string
   including the full condition class hierarchy and message in
   snapshot-style formatting
-  ([\#258](https://github.com/wranglezone/stbl/issues/258)).
-- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md) now
+  ([\#258](https://github.com/wranglezone/stbl/issues/258)). It also now
   converts formulas to a single readable string (for example, `"x ~ y"`)
   ([\#259](https://github.com/wranglezone/stbl/issues/259)).
 
