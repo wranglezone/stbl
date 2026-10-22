@@ -76,8 +76,12 @@ stabilise_datetime_scalar(
 
 \item{...}{Arguments passed to methods.}
 
-\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
-\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
+from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
+time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
+\code{\link[=resolve_tz]{resolve_tz()}}).}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
@@ -125,7 +129,7 @@ condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlan
 \item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
 safely converted to datetime.
 \item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
-\code{\link[=OlsonNames]{OlsonNames()}}.
+\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
@@ -156,6 +160,7 @@ stabilize_dttm_scalar(NULL, allow_null = TRUE)
 \seealso{
 Other datetime functions:
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
+\code{\link[=resolve_tz]{resolve_tz()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=to]{to()}},

@@ -151,7 +151,7 @@ to(
   x,
   .to,
   ...,
-  tz = NULL,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -193,8 +193,10 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
-\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
-\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
+\item{tz}{(\code{character(1)}) The time zone to use when \code{.to} is a
+\link[base:POSIXct]{base::POSIXct}. Must be a value from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""} (your local
+time zone). Defaults to the time zone of \code{.to}, or your local time zone if
+\code{.to} doesn't name one (see \code{\link[=resolve_tz]{resolve_tz()}}).}
 }
 \value{
 \code{x} coerced to the type of \code{.to}, or an error condition with
@@ -292,6 +294,7 @@ Other date functions:
 
 Other datetime functions:
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
+\code{\link[=resolve_tz]{resolve_tz()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},

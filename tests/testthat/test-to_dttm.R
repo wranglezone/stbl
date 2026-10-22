@@ -202,3 +202,48 @@ test_that("to_dttm_scalar() respects allow_zero_length (#105)", {
   given <- as.POSIXct(character(), tz = "UTC")
   expect_pkg_error_snapshot(to_dttm_scalar(given), "stbl", "bad_empty")
 })
+
+test_that("to_dttm() lets tz override the tzone of POSIXct input (#370)", {
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "Asia/Tokyo")
+  result <- to_dttm(given, tz = "America/Chicago")
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+  expect_identical(as.numeric(result), as.numeric(given))
+})
+
+test_that("to_dttm() resolves an empty tz to the local time zone (#370)", {
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  inputs <- list(
+    given,
+    as.POSIXlt(given),
+    "2024-01-01T12:00:00Z",
+    0,
+    as.Date("2024-01-01")
+  )
+  for (zone in c("America/Chicago", "Asia/Tokyo")) {
+    withr::local_timezone(zone)
+    for (x in inputs) {
+      result <- to_dttm(x, tz = "")
+      expect_identical(attr(result, "tzone"), zone)
+    }
+  }
+})
+
+test_that("to_dttm() keeps the instant when resolving an empty tz (#370)", {
+  withr::local_timezone("America/Chicago")
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(as.numeric(to_dttm(given, tz = "")), as.numeric(given))
+})
+
+test_that("to_dttm() rejects tz values that aren't time zones (#370)", {
+  expect_pkg_error_snapshot(
+    to_dttm("2024-01-01T12:00:00Z", tz = "this is not a timezone"),
+    "stbl",
+    "bad_tz"
+  )
+})
+
+test_that("to_dttm_scalar() resolves an empty tz (#370)", {
+  withr::local_timezone("Asia/Tokyo")
+  result <- to_dttm_scalar("2024-01-01T12:00:00Z", tz = "")
+  expect_identical(attr(result, "tzone"), "Asia/Tokyo")
+})

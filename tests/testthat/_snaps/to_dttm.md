@@ -132,3 +132,12 @@
       ! `given` must be a single <POSIXct (non-empty)/POSIXt (non-empty)>.
       x `given` has no values.
 
+# to_dttm() rejects tz values that aren't time zones (#370)
+
+    Code
+      to_dttm("2024-01-01T12:00:00Z", tz = "this is not a timezone")
+    Condition <stbl-error-bad_tz>
+      Error:
+      ! `tz` must be "" or a value from `OlsonNames()`.
+      x "this is not a timezone" is not a recognized time zone.
+

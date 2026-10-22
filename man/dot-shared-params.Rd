@@ -149,8 +149,12 @@ coercion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
-\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
-\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
+from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
+time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
+\code{\link[=resolve_tz]{resolve_tz()}}).}
 
 \item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 

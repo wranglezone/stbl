@@ -330,3 +330,59 @@ stabilise_date_scalar <- stabilize_date_scalar
     "x" = format_inline("{qty(n_failures)}Value{?s}: {failure_values}")
   )
 }
+
+#' Convert a strptime()-style format string to a shape-checking regex
+#'
+#' Used to verify that a character vector's *shape* matches a candidate
+#' format before handing it to [as.Date()], since that function silently
+#' ignores unmatched trailing characters rather than failing.
+#'
+#' @param fmt (`character(1)`) A `strptime()`-style format string built from
+#'   `%Y`, `%m`, `%d`, `%H`, `%M`, and `%S` specifiers and literal separators.
+#' @returns A `character(1)` regular expression, anchored with `^` and `$`,
+#'   that matches strings shaped like `fmt`.
+#' @keywords internal
+.format_to_regex <- function(fmt) {
+  pattern <- gsub("%Y", "\\d{4}", fmt, fixed = TRUE)
+  # Each specifier is substituted separately with fixed = TRUE; a single
+  # gsub() with a specifier-matching regex would need the replacement to go
+  # through non-fixed backslash processing, which mangles "\\d".
+  for (specifier in c("%m", "%d", "%H", "%M", "%S")) {
+    pattern <- gsub(specifier, "\\d{2}", pattern, fixed = TRUE)
+  }
+  paste0("^", pattern, "$")
+}
+
+#' Try candidate date formats against a character vector
+#'
+#' Tries each format in `formats`, in order, and returns the first one that
+#' parses every non-`NA` element of `x` without failure. If none succeed for
+#' every element, returns the result of the first format tried, so that error
+#' messages describe a concrete (if incomplete) failure rather than an
+#' arbitrary one.
+#'
+#' @param x `(character)` The vector to parse.
+#' @param formats `(character)` Candidate `strptime()`-style format strings,
+#'   tried in order.
+#' @returns A list with `parsed` (a [base::Date] vector) and `failures` (a
+#'   logical vector, the same length as `x`, `TRUE` where an element could not
+#'   be parsed with the chosen format).
+#' @keywords internal
+.try_date_formats <- function(x, formats) {
+  not_na <- !is.na(x)
+  first <- NULL
+  for (fmt in formats) {
+    regex <- .format_to_regex(fmt)
+    well_shaped <- grepl(regex, x)
+    parsed <- as.Date(x, format = fmt)
+    failures <- not_na & (!well_shaped | is.na(parsed))
+    result <- list(parsed = parsed, failures = failures)
+    if (is.null(first)) {
+      first <- result
+    }
+    if (!any(failures)) {
+      return(result)
+    }
+  }
+  first
+}

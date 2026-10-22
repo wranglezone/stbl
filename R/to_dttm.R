@@ -18,8 +18,6 @@
 #' UTC"`). [base::Date] values are treated as midnight UTC on that date.
 #'
 #' @inheritParams .shared-params
-#' @param tz (`character(1)`) The time zone to normalize `x` to. Must be `""` or
-#'   a value from [OlsonNames()]. Defaults to `"UTC"`.
 #'
 #' @returns The input as a [base::POSIXct] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
@@ -27,7 +25,7 @@
 #'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
 #'   safely converted to datetime.
 #'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-#'   [OlsonNames()].
+#'   [OlsonNames()], or is `""` and your local time zone can't be determined.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family datetime functions
 #' @family stabilization functions
@@ -250,7 +248,7 @@ to_dttm.default <- function(
 #'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
 #'   safely converted to datetime.
 #'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-#'   [OlsonNames()].
+#'   [OlsonNames()], or is `""` and your local time zone can't be determined.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
@@ -299,27 +297,6 @@ to_datetime_scalar <- to_dttm_scalar
 #' @keywords internal
 .is_scalar_dttm <- function(x) {
   inherits(x, "POSIXct") && length(x) == 1L
-}
-
-#' Check that a time zone is valid
-#'
-#' @param tz (`character(1)`) The time zone to validate.
-#' @inheritParams .shared-params
-#' @returns `tz`, coerced to a scalar character, if it is valid.
-#' @keywords internal
-.check_tz <- function(tz, x_arg = "tz", call = caller_env()) {
-  tz <- to_chr_scalar(tz, x_arg = x_arg, call = call)
-  if (identical(tz, "") || tz %in% OlsonNames()) {
-    return(tz)
-  }
-  .stop_must(
-    "must be \"\" or a value from {.fun OlsonNames}.",
-    x_arg = x_arg,
-    additional_msg = c(x = "{.val {tz}} is not a recognized time zone."),
-    call = call,
-    subclass = "bad_tz",
-    message_env = rlang::current_env()
-  )
 }
 
 #' An empty date-time object for error messages

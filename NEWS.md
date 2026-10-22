@@ -1,9 +1,13 @@
 # stbl (development version)
 
+## New features
+
 * `to()` now dispatches to `to_date()`, `to_dttm()`, `to_time()`, and `to_dur()` for `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and falls back to `vctrs::vec_cast()` for other prototype classes (#366, #367).
+* New `resolve_tz()` returns the name of the time zone an object is displayed in, using your local time zone if the object doesn't name one. Use it as the `tz` argument of `to_dttm()`, `stabilize_dttm()`, and related functions to keep an object's time zone instead of converting to UTC (#370).
 
 ## Bug fixes
 
+* `to_dttm()`, `stabilize_dttm()`, `specify_dttm()`, and their scalar and `datetime` variants now convert `tz = ""` to the name of your local time zone (such as `"America/Chicago"`) instead of returning a date-time with an empty `tzone`. The instant in time is unchanged. Similarly, `to()` with a `POSIXct` target whose time zone is `""` or missing (such as `Sys.time()`) now returns a date-time in your local time zone, named explicitly, instead of UTC (#370).
 * `stbl_to()` (C API) failures now have the same classes, messages, and fields as `to()` errors. `stbl_to()` gains `x_arg` and `call` arguments for error context; pass `R_NilValue` to use the defaults (#369).
 * `to_date()`, `to_dbl()`, `to_dttm()`, `to_dur()`, `to_int()`, `to_lst()`, and `to_time()` now raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors when the default method cannot coerce `x` (such as raw vectors) (#369).
 * `to_chr()` now has a dedicated condition method that returns a single string including the full condition class hierarchy and message in snapshot-style formatting (#258). It also now converts formulas to a single readable string (for example, `"x ~ y"`) (#259).
