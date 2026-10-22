@@ -103,8 +103,12 @@
 #'   coercion.
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
-#' @param tz (`character(1)`) The time zone to normalize `x` to. Must be
-#'   `""` or a value from [OlsonNames()]. Defaults to `"UTC"`.
+#' @param tz (`character(1)`) The time zone to normalize `x` to. Must be a value
+#'   from [OlsonNames()] or `""`, which is replaced by the name of your local
+#'   time zone (as reported by [Sys.timezone()]) so that the result always names
+#'   its time zone. To use the time zone of an existing object, or your local
+#'   time zone if it doesn't have one, use `tz = resolve_tz(x)` (see
+#'   [resolve_tz()]).
 #' @param unique (`logical(1)`) Should all elements in `x` be distinct?
 #' @param x The object to stabilize.
 #' @param x_arg (`character(1)`) The name of the object being stabilized to use

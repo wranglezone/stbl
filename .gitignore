@@ -13,3 +13,4 @@ tests/testthat/_problems
 tests/testthat/testthat-problems.rds
 
 /.quarto/
+.vscode/settings.json

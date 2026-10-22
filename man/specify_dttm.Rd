@@ -56,8 +56,12 @@ specify_datetime_scalar(
 )
 }
 \arguments{
-\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be
-\code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}. Defaults to \code{"UTC"}.}
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
+from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
+time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
+\code{\link[=resolve_tz]{resolve_tz()}}).}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
@@ -114,6 +118,7 @@ try(stabilize_recent("1999-12-31T00:00:00Z"))
 \seealso{
 Other datetime functions:
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}},
+\code{\link[=resolve_tz]{resolve_tz()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=to]{to()}},

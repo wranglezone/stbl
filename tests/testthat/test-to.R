@@ -339,27 +339,6 @@ test_that("to() uses tzone from POSIXct .to (#366)", {
   expect_identical(attr(result, "tzone"), "America/Chicago")
 })
 
-test_that("to() defaults to UTC when POSIXct .to has empty tzone (#366)", {
-  proto <- as.POSIXct("2024-01-01 12:00:00")
-  attr(proto, "tzone") <- ""
-  result <- to("2024-01-01T12:00:00Z", proto)
-  expect_identical(attr(result, "tzone"), "UTC")
-})
-
-test_that("to() uses first element of a 3-element tzone attribute (#366)", {
-  proto <- as.POSIXct("2024-01-01", tz = "America/Chicago")
-  attr(proto, "tzone") <- c("America/Chicago", "CST", "CDT")
-  result <- to("2024-01-01T12:00:00Z", proto)
-  expect_identical(attr(result, "tzone"), "America/Chicago")
-})
-
-test_that("to() defaults to UTC when POSIXct .to has empty tzone attribute (#366)", {
-  proto <- as.POSIXct("2024-01-01 12:00:00")
-  attr(proto, "tzone") <- character()
-  result <- to("2024-01-01T12:00:00Z", proto)
-  expect_identical(attr(result, "tzone"), "UTC")
-})
-
 test_that("to() converts Date to POSIXct (#366)", {
   result <- to(as.Date("2024-01-01"), as.POSIXct("2024-01-01", tz = "UTC"))
   expect_s3_class(result, "POSIXct")

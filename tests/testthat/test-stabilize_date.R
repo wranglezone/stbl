@@ -210,3 +210,51 @@ test_that("stabilize_date_scalar() checks allowed_values (#104)", {
 test_that("stabilise_date_scalar() exists (#104)", {
   expect_no_error(stabilise_date_scalar("2024-01-01"))
 })
+
+test_that(".format_to_regex() converts specifiers to a shape-checking regex (#326)", {
+  regex <- .format_to_regex("%Y-%m-%d")
+  expect_equal(regex, "^\\d{4}-\\d{2}-\\d{2}$")
+  expect_true(grepl(regex, "2024-01-01"))
+  # Trailing characters aren't part of the shape, so they should fail.
+  expect_false(grepl(regex, "2024-01-01T12:00:00"))
+})
+
+test_that(".format_to_regex() handles all supported specifiers (#326)", {
+  regex <- .format_to_regex("%Y-%m-%d %H:%M:%S")
+  expect_equal(regex, "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$")
+  expect_true(grepl(regex, "2024-01-01 12:30:45"))
+  expect_false(grepl(regex, "2024-01-01 12:30"))
+})
+
+test_that(".try_date_formats() returns early when the first format succeeds (#326)", {
+  result <- .try_date_formats(
+    c("2024-01-01", "2024-01-02"),
+    c("%Y-%m-%d", "%m/%d/%Y")
+  )
+  expect_equal(result$parsed, as.Date(c("2024-01-01", "2024-01-02")))
+  expect_equal(result$failures, c(FALSE, FALSE))
+})
+
+test_that(".try_date_formats() falls back to a later format (#326)", {
+  result <- .try_date_formats(
+    c("01/02/2024", "03/04/2024"),
+    c("%Y-%m-%d", "%m/%d/%Y")
+  )
+  expect_equal(result$parsed, as.Date(c("2024-01-02", "2024-03-04")))
+  expect_equal(result$failures, c(FALSE, FALSE))
+})
+
+test_that(".try_date_formats() returns the first format's result when none succeed (#326)", {
+  result <- .try_date_formats(
+    c("13/01/2024", "2024-02-30"),
+    c("%d/%m/%Y", "%Y-%m-%d")
+  )
+  expect_equal(result$parsed, as.Date(c("2024-01-13", NA)))
+  expect_equal(result$failures, c(FALSE, TRUE))
+})
+
+test_that(".try_date_formats() skips NA elements (#326)", {
+  result <- .try_date_formats(c(NA_character_, NA_character_), c("%Y-%m-%d"))
+  expect_true(all(is.na(result$parsed)))
+  expect_equal(result$failures, c(FALSE, FALSE))
+})

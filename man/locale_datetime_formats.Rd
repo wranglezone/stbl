@@ -41,6 +41,7 @@ Other date functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}}
 
 Other datetime functions:
+\code{\link[=resolve_tz]{resolve_tz()}},
 \code{\link[=specify_dttm]{specify_dttm()}},
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},

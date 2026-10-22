@@ -6,6 +6,10 @@
 #' @param .to A prototype that determines the target type (e.g., `integer()`,
 #'   `factor(levels = c("a", "b"))`).
 #' @param ... Arguments passed to methods and on to `to_*()` functions.
+#' @param tz (`character(1)`) The time zone to use when `.to` is a
+#'   [base::POSIXct]. Must be a value from [OlsonNames()] or `""` (your local
+#'   time zone). Defaults to the time zone of `.to`, or your local time zone if
+#'   `.to` doesn't name one (see [resolve_tz()]).
 #' @inheritParams .shared-params
 #'
 #' @returns `x` coerced to the type of `.to`, or an error condition with
@@ -276,17 +280,11 @@ to.POSIXct <- function(
   x,
   .to,
   ...,
-  tz = NULL,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  # The tzone attribute can be a 3-element vector (zone plus standard and
-  # daylight abbreviations); only the zone name is relevant here.
-  tz <- tz %||% attr(.to, "tzone")[1] %||% "UTC"
-  if (is.na(tz) || !nzchar(tz)) {
-    tz <- "UTC"
-  }
   to_dttm(x, ..., tz = tz, x_arg = x_arg, call = call, x_class = x_class)
 }
 
