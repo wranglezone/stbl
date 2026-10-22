@@ -2,6 +2,8 @@
 
 ## stbl (development version)
 
+### New features
+
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) now dispatches
   to [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
   [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
@@ -13,9 +15,31 @@
   for other prototype classes
   ([\#366](https://github.com/wranglezone/stbl/issues/366),
   [\#367](https://github.com/wranglezone/stbl/issues/367)).
+- New
+  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)
+  returns the name of the time zone an object is displayed in, using
+  your local time zone if the object doesn’t name one. Use it as the
+  `tz` argument of
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  and related functions to keep an object’s time zone instead of
+  converting to UTC
+  ([\#370](https://github.com/wranglezone/stbl/issues/370)).
 
 ### Bug fixes
 
+- [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
+  and their scalar and `datetime` variants now convert `tz = ""` to the
+  name of your local time zone (such as `"America/Chicago"`) instead of
+  returning a date-time with an empty `tzone`. The instant in time is
+  unchanged. Similarly,
+  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
+  `POSIXct` target whose time zone is `""` or missing (such as
+  [`Sys.time()`](https://rdrr.io/r/base/Sys.time.html)) now returns a
+  date-time in your local time zone, named explicitly, instead of UTC
+  ([\#370](https://github.com/wranglezone/stbl/issues/370)).
 - `stbl_to()` (C API) failures now have the same classes, messages, and
   fields as [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)
   errors. `stbl_to()` gains `x_arg` and `call` arguments for error

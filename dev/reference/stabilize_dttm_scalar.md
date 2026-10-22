@@ -88,9 +88,14 @@ stabilise_datetime_scalar(
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
 
 - allow_null:
 
@@ -166,7 +171,8 @@ failure mode:
   safely converted to datetime.
 
 - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
+  and your local time zone can't be determined.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
@@ -187,6 +193,7 @@ failure mode:
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),

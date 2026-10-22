@@ -285,8 +285,12 @@ coercion.</p></dd>
 
 
 <dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
-<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be
-<code>""</code> or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
+from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local
+time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
+<code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
 
 
 <dt id="arg-unique">unique<a class="anchor" aria-label="anchor" href="#arg-unique"></a></dt>

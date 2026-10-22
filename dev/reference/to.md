@@ -152,7 +152,7 @@ to(
   x,
   .to,
   ...,
-  tz = NULL,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -216,9 +216,12 @@ to(
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to use when `.to` is a
+  [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html). Must be
+  a value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html)
+  or `""` (your local time zone). Defaults to the time zone of `.to`, or
+  your local time zone if `.to` doesn't name one (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
 
 ## Value
 
@@ -313,6 +316,7 @@ Other date functions:
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
@@ -350,7 +354,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5a6a41278528>
+#> <bytecode: 0x641da6061528>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

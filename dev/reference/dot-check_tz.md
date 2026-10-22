@@ -28,4 +28,6 @@ Check that a time zone is valid
 
 ## Value
 
-`tz`, coerced to a scalar character, if it is valid.
+`tz`, coerced to a scalar character, if it is valid and in
+[`OlsonNames()`](https://rdrr.io/r/base/timezones.html). The name of the
+local time zone if `tz` is `""`.

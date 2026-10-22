@@ -282,6 +282,8 @@
   : Coerce to length-1 duration with additional checks
 - [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
   : Coerce to length-1 duration
+- [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)
+  : Resolve a time zone
 
 ## multiple types
 

@@ -109,8 +109,12 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 
 
 <dl><dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
-<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be
-<code>""</code> or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
+from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local
+time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
+<code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
@@ -178,6 +182,7 @@ additional context or functionality.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other datetime functions:
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
+<code><a href="resolve_tz.html">resolve_tz()</a></code>,
 <code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>,
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
 <code><a href="to.html">to()</a></code>,

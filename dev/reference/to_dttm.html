@@ -119,8 +119,12 @@ message is signaled. <code>to_datetime()</code> is a synonym of <code>to_dttm()<
 
 
 <dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
-<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be <code>""</code> or
-a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
+from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local
+time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
+<code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -153,7 +157,7 @@ classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <c
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-incompatible_values-datetime&gt;</code> when some values cannot be
 safely converted to datetime.</p></li>
 <li><p><code>&lt;stbl-error-bad_tz&gt;</code> when <code>tz</code> is not <code>""</code> or a value from
-<code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>.</p></li>
+<code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>, or is <code>""</code> and your local time zone can't be determined.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
 </ul></div>
     <div class="section level2">
@@ -171,6 +175,7 @@ treated as the number of seconds since the Unix epoch (<code>"1970-01-01 00:00:0
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other datetime functions:
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
+<code><a href="resolve_tz.html">resolve_tz()</a></code>,
 <code><a href="specify_dttm.html">specify_dttm()</a></code>,
 <code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>,
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,

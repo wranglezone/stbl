@@ -25,6 +25,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_regex_rule.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_spec_or_stop.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-bad_tz_msgs_local.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_factory_args.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_first_pkg_condition.html</loc></url>
@@ -134,6 +135,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_inform.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_warn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_tz.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
@@ -184,6 +186,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/reexports.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/regex_must_match.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/replace_stbl_error.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/resolve_tz.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_chr.html</loc></url>
