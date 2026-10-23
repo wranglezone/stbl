@@ -77,7 +77,10 @@ test_that("stabilize_dttm() attaches value failure locations (#105)", {
 
 test_that("stabilize_dttm() describes a single out-of-range value (#105)", {
   expect_pkg_error_snapshot(
-    stabilize_dttm(to_dttm("2024-01-01T00:00:00Z"), min_value = "2024-06-01T00:00:00Z"),
+    stabilize_dttm(
+      to_dttm("2024-01-01T00:00:00Z"),
+      min_value = "2024-06-01T00:00:00Z"
+    ),
     "stbl",
     "outside_range"
   )
