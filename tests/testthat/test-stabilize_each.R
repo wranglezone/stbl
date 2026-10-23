@@ -64,3 +64,10 @@ test_that("stabilize_each() errors when ... contains extra arguments (#287)", {
 test_that("stabilise_each() is a synonym for stabilize_each() (#287)", {
   expect_identical(stabilise_each, stabilize_each)
 })
+
+test_that("stabilize_each() returns a list when any result is not length 1 (#287)", {
+  expect_identical(
+    stabilize_each(list(1L, 1:2), stabilize_int),
+    list(1L, 1:2)
+  )
+})

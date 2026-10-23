@@ -75,6 +75,30 @@ test_that("stabilize_dttm() attaches value failure locations (#105)", {
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
+test_that("stabilize_dttm() describes a single out-of-range value (#105)", {
+  expect_pkg_error_snapshot(
+    stabilize_dttm(
+      to_dttm("2024-01-01T00:00:00Z"),
+      min_value = "2024-06-01T00:00:00Z"
+    ),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("stabilize_dttm() accepts factors with locale-dependent formats (#326)", {
+  expect_identical(
+    stabilize_dttm(
+      factor("11/13/2018 10:00:00"),
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    stabilize_dttm(
+      "11/13/2018 10:00:00",
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    )
+  )
+})
+
 test_that("stabilize_dttm() checks size (#105)", {
   given <- to_dttm(c("2024-01-01T00:00:00Z", "2024-06-15T00:00:00Z"))
   expect_pkg_error_snapshot(

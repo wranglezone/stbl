@@ -62,6 +62,14 @@ test_that("stabilize_time() attaches value failure locations (#294)", {
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
+test_that("stabilize_time() describes a single out-of-range value (#294)", {
+  expect_pkg_error_snapshot(
+    stabilize_time(to_time("01:00:00Z"), min_value = "12:00:00Z"),
+    "stbl",
+    "outside_range"
+  )
+})
+
 test_that("stabilize_time() checks size (#294)", {
   given <- to_time(c("06:00:00Z", "14:00:00Z"))
   expect_pkg_error_snapshot(

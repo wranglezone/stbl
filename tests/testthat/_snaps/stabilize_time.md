@@ -59,6 +59,15 @@
       x Location: 2
       x Value: 14:00:00
 
+# stabilize_time() describes a single out-of-range value (#294)
+
+    Code
+      stabilize_time(to_time("01:00:00Z"), min_value = "12:00:00Z")
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `to_time("01:00:00Z")` must be >= 12:00:00.
+      x "01:00:00" is too low.
+
 # stabilize_time() checks size (#294)
 
     Code

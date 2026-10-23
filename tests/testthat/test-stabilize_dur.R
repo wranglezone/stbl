@@ -62,6 +62,14 @@ test_that("stabilize_dur() attaches value failure locations (#295)", {
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
+test_that("stabilize_dur() describes a single out-of-range value (#295)", {
+  expect_pkg_error_snapshot(
+    stabilize_dur(to_dur("P1D"), min_value = "P3D"),
+    "stbl",
+    "outside_range"
+  )
+})
+
 test_that("stabilize_dur() checks size (#295)", {
   given <- to_dur(c("P1D", "P2D"))
   expect_pkg_error_snapshot(
