@@ -59,6 +59,15 @@
       x Location: 2
       x Value: 3d 0H 0M 0S
 
+# stabilize_dur() describes a single out-of-range value (#295)
+
+    Code
+      stabilize_dur(to_dur("P1D"), min_value = "P3D")
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `to_dur("P1D")` must be >= 3d 0H 0M 0S.
+      x "1d 0H 0M 0S" is too low.
+
 # stabilize_dur() checks size (#295)
 
     Code

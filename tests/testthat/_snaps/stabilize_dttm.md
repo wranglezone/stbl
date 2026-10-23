@@ -59,6 +59,15 @@
       x Location: 2
       x Value: 2024-06-15 UTC
 
+# stabilize_dttm() describes a single out-of-range value (#105)
+
+    Code
+      stabilize_dttm(to_dttm("2024-01-01T00:00:00Z"), min_value = "2024-06-01T00:00:00Z")
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `to_dttm("2024-01-01T00:00:00Z")` must be >= 2024-06-01 UTC.
+      x "2024-01-01 UTC" is too low.
+
 # stabilize_dttm() checks size (#105)
 
     Code

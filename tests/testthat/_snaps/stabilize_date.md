@@ -59,6 +59,15 @@
       x Location: 2
       x Value: 2024-06-15
 
+# stabilize_date() describes a single out-of-range value (#104)
+
+    Code
+      stabilize_date(as.Date("2024-01-01"), min_value = "2024-06-01")
+    Condition <stbl-error-outside_range>
+      Error:
+      ! `as.Date("2024-01-01")` must be >= 2024-06-01.
+      x "2024-01-01" is too low.
+
 # stabilize_date() checks size (#104)
 
     Code

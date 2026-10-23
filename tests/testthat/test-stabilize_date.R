@@ -62,6 +62,24 @@ test_that("stabilize_date() attaches value failure locations (#104)", {
   expect_identical(cnd$locations, c(1L, 3L))
 })
 
+test_that("stabilize_date() describes a single out-of-range value (#104)", {
+  expect_pkg_error_snapshot(
+    stabilize_date(as.Date("2024-01-01"), min_value = "2024-06-01"),
+    "stbl",
+    "outside_range"
+  )
+})
+
+test_that("stabilize_date() accepts factors with locale-dependent formats (#326)", {
+  expect_identical(
+    stabilize_date(
+      factor("11/13/2018"),
+      accepted_datetime_formats = locale_datetime_formats("en_US.UTF-8")
+    ),
+    as.Date("2018-11-13")
+  )
+})
+
 test_that("stabilize_date() checks size (#104)", {
   given <- as.Date(c("2024-01-01", "2024-06-15"))
   expect_pkg_error_snapshot(

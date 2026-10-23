@@ -41,3 +41,26 @@ to_each <- function(
   out <- .map_each_fast(x, spec, x_arg = x_arg, call = call)
   .simplify_each(out, simplify = simplify)
 }
+
+#' Apply a spec to each element of x, failing on the first error
+#'
+#' @param spec A single stabilizer/coercion function applied to each element.
+#' @inheritParams stabilize_each
+#' @returns A list of per-element results, the same length as `x`.
+#' @keywords internal
+.map_each_fast <- function(x, spec, x_arg, call) {
+  n <- length(x)
+  out <- vector("list", n)
+  out <- .name_like(out, x)
+  for (i in seq_len(n)) {
+    element_arg <- paste0(x_arg, "[[", i, "]]")
+    out[[i]] <- .call_specified_fn(
+      spec,
+      x[[i]],
+      .x_arg = element_arg,
+      .call = call
+    )
+  }
+  out
+}
+
