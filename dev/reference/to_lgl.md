@@ -11,6 +11,7 @@ to_lgl(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -19,12 +20,20 @@ to_logical(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_lgl(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 ```
 
 ## Arguments
@@ -43,6 +52,13 @@ to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 

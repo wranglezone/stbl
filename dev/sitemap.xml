@@ -27,6 +27,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-bad_tz_msgs_local.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-cant_coerce_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_factory_args.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_first_pkg_condition.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
@@ -51,6 +52,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_specs_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_specs_not_empty.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_specs_unnamed.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_to_arg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_tz.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_unique.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_value_chr.html</loc></url>

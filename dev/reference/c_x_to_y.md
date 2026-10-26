@@ -75,7 +75,7 @@ Call the C routine to convert a vector to another type
 
 .lst_to_fct(x)
 
-.stbl_to(x, to, x_arg = NULL, call = NULL)
+.stbl_to(x, to, x_arg = NULL, to_arg = NULL, call = NULL)
 
 .check_min_dbl(x, min_val)
 
@@ -116,6 +116,13 @@ Call the C routine to convert a vector to another type
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 

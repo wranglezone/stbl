@@ -5,7 +5,7 @@ Error if a function expression is anonymous (not a symbol)
 ## Usage
 
 ``` r
-.stop_if_anon_fn(x_expr, x_class, x_arg, call)
+.stop_if_anon_fn(x_expr, x_class, x_arg, call, to_arg = NULL)
 ```
 
 ## Arguments
@@ -32,3 +32,10 @@ Error if a function expression is anonymous (not a symbol)
 
   `(environment)` The execution environment to mention as the source of
   error messages.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.

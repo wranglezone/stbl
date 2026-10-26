@@ -12,6 +12,7 @@ to_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -22,6 +23,7 @@ to_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -51,6 +53,13 @@ to_logical_scalar(
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 

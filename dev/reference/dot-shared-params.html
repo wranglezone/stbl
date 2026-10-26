@@ -9,7 +9,7 @@ make them easier to import and to find."><meta property="og:image" content="http
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -251,6 +251,13 @@ a <code>to_*</code> function (<code><a href="to_chr.html">to_chr()</a></code>, e
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>The target object for the coercion.</p></dd>
+
+
+<dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
+being coerced to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, coercion failure messages name
+both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
 <dt id="arg-to-class">to_class<a class="anchor" aria-label="anchor" href="#arg-to-class"></a></dt>

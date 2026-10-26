@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.to_df_vector</span><span class="op">(</span><span class="va">x</span>, <span class="va">x_expr</span>, <span class="va">x_arg</span>, <span class="va">call</span>, <span class="va">x_class</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.to_df_vector</span><span class="op">(</span><span class="va">x</span>, <span class="va">x_expr</span>, <span class="va">x_arg</span>, <span class="va">to_arg</span>, <span class="va">call</span>, <span class="va">x_class</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -64,6 +64,13 @@
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.</p></dd>
+
+
+<dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
+being coerced to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, coercion failure messages name
+both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>

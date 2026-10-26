@@ -5,7 +5,16 @@ Check for coercion failures and stop if any are found
 ## Usage
 
 ``` r
-.check_cast_failures(x, failures, x_class, to, due_to, x_arg, call)
+.check_cast_failures(
+  x,
+  failures,
+  x_class,
+  to,
+  due_to,
+  x_arg,
+  call,
+  to_arg = NULL
+)
 ```
 
 ## Arguments
@@ -45,6 +54,13 @@ Check for coercion failures and stop if any are found
 
   `(environment)` The execution environment to mention as the source of
   error messages.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
 
 ## Value
 

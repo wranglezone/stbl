@@ -218,6 +218,13 @@ to make them easier to import and to find.
 
   The target object for the coercion.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
+
 - to_class:
 
   (`character(1)`) The name of the class to coerce to.

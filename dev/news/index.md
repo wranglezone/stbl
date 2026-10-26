@@ -4,6 +4,11 @@
 
 ### New features
 
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md), all `to_*()`
+  functions, and `stbl_to()` (C API) gain a `to_arg` argument, like
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
+  When supplied, conversion errors name both sides
+  ([\#371](https://github.com/wranglezone/stbl/issues/371)).
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) now dispatches
   to [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
   [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),

@@ -11,6 +11,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -21,6 +22,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -31,6 +33,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -41,6 +44,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -51,6 +55,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -63,6 +68,7 @@ to(
   levels = NULL,
   ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -73,6 +79,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -83,6 +90,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -93,6 +101,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -103,6 +112,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -113,6 +123,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -123,6 +134,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -133,6 +145,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -143,6 +156,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -154,6 +168,7 @@ to(
   ...,
   tz = resolve_tz(.to),
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -164,6 +179,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -191,6 +207,13 @@ to(
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  coerced to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, coercion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 
@@ -354,7 +377,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5dbcc4714528>
+#> <bytecode: 0x5f5423cee528>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"
