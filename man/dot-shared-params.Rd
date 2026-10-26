@@ -132,6 +132,11 @@ a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabiliz
 
 \item{to}{The target object for the coercion.}
 
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
+
 \item{to_class}{(\code{character(1)}) The name of the class to coerce to.}
 
 \item{to_cls_args}{\code{(list)} A list of additional arguments to pass to

@@ -53,6 +53,7 @@ to <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -66,10 +67,11 @@ to.character <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_chr(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_chr(x, ..., x_arg = x_arg, to_arg = to_arg, call = call, x_class = x_class)
 }
 
 #' @export
@@ -79,6 +81,7 @@ to.double <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -86,6 +89,7 @@ to.double <- function(
     x,
     ...,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )
@@ -98,10 +102,18 @@ to.Date <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_date(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_date(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -111,6 +123,7 @@ to.data.frame <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -121,11 +134,12 @@ to.data.frame <- function(
       x,
       .to,
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call,
       x_class = x_class
     ))
   }
-  to_df(x, ..., x_arg = x_arg, call = call)
+  to_df(x, ..., x_arg = x_arg, to_arg = to_arg, call = call)
 }
 
 #' @export
@@ -137,6 +151,7 @@ to.factor <- function(
   levels = NULL,
   ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -147,6 +162,7 @@ to.factor <- function(
     levels = levels,
     ordered = ordered,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )
@@ -159,10 +175,11 @@ to.function <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_fn(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_fn(x, ..., x_arg = x_arg, to_arg = to_arg, call = call, x_class = x_class)
 }
 
 #' @export
@@ -172,10 +189,11 @@ to.integer <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_int(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_int(x, ..., x_arg = x_arg, to_arg = to_arg, call = call, x_class = x_class)
 }
 
 #' @export
@@ -185,6 +203,7 @@ to.logical <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -192,6 +211,7 @@ to.logical <- function(
     x,
     ...,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )
@@ -204,6 +224,7 @@ to.list <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -214,11 +235,12 @@ to.list <- function(
       x,
       .to,
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call,
       x_class = x_class
     ))
   }
-  to_lst(x, ..., x_arg = x_arg, call = call)
+  to_lst(x, ..., x_arg = x_arg, to_arg = to_arg, call = call)
 }
 
 #' @export
@@ -228,11 +250,19 @@ to.array <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   # Matrices and arrays are not stbl targets; let vctrs handle them.
-  to.default(x, .to, x_arg = x_arg, call = call, x_class = x_class)
+  to.default(
+    x,
+    .to,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -242,6 +272,7 @@ to.NULL <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -255,10 +286,18 @@ to.hms <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_time(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_time(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -268,10 +307,11 @@ to.Period <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_dur(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_dur(x, ..., x_arg = x_arg, to_arg = to_arg, call = call, x_class = x_class)
 }
 
 #' @export
@@ -282,10 +322,19 @@ to.POSIXct <- function(
   ...,
   tz = resolve_tz(.to),
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_dttm(x, ..., tz = tz, x_arg = x_arg, call = call, x_class = x_class)
+  to_dttm(
+    x,
+    ...,
+    tz = tz,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -295,16 +344,24 @@ to.default <- function(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   rlang::try_fetch(
-    vctrs::vec_cast(x, .to),
+    vctrs::vec_cast(
+      x,
+      .to,
+      x_arg = x_arg,
+      to_arg = to_arg %||% "",
+      call = call
+    ),
     error = function(cnd) {
       .stop_cant_coerce(
         from_class = x_class,
         to_class = object_type(.to),
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }

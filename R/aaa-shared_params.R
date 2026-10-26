@@ -93,6 +93,10 @@
 #'   ([stabilize_chr()], etc.), or a function produced by a `specify_*()` call
 #'   ([specify_chr()], etc.). Applied independently to each element of `x`.
 #' @param to The target object for the coercion.
+#' @param to_arg (`character(1)` or `NULL`) The name of the object that `x` is
+#'   being coerced to match, for use in error messages. When `NULL`, error
+#'   messages describe only `x`. When supplied, coercion failure messages name
+#'   both `x_arg` and `to_arg`.
 #' @param to_class (`character(1)`) The name of the class to coerce to.
 #' @param to_cls_args `(list)` A list of additional arguments to pass to
 #'   `to_cls_fn()`.

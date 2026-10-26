@@ -4,7 +4,7 @@
 \alias{.stop_if_anon_fn}
 \title{Error if a function expression is anonymous (not a symbol)}
 \usage{
-.stop_if_anon_fn(x_expr, x_class, x_arg, call)
+.stop_if_anon_fn(x_expr, x_class, x_arg, call, to_arg = NULL)
 }
 \arguments{
 \item{x_expr}{The expression from the quosure.}
@@ -21,6 +21,11 @@ unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
 }
 \description{
 Error if a function expression is anonymous (not a symbol)

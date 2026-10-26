@@ -24,12 +24,12 @@ SEXP stbl_lst_to_dbl(SEXP x);
  *               same rules.  Raises the R-level to() error if any element is invalid.
  *
  * @param x  The vector to convert.
- * @param to,x_arg,call  Context forwarded to the R-level to() on failure.
+ * @param to,x_arg,to_arg,call  Context forwarded to the R-level to() on failure.
  * @return   A double vector of the same length as @p x.
  * @note     On failure, re-runs the R-level to() so the rlang error is thrown
  *           from one place.
  */
-SEXP to_double(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
+SEXP to_double(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   int x_type = TYPEOF(x);
   SEXP res;
 
@@ -37,7 +37,7 @@ SEXP to_double(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   if (x_type == INTSXP) {
     if (Rf_inherits(x, "factor")) {
       res = PROTECT(stbl_fct_to_dbl(x));
-      SEXP out = check_valid(res, x, to, x_arg, call);
+      SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
       UNPROTECT(1);
       return out;
     }
@@ -54,21 +54,21 @@ SEXP to_double(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   }
   if (x_type == STRSXP) {
     res = PROTECT(stbl_chr_to_dbl(x));
-    SEXP out = check_valid(res, x, to, x_arg, call);
+    SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == CPLXSXP) {
     res = PROTECT(stbl_cpx_to_dbl(x));
-    SEXP out = check_valid(res, x, to, x_arg, call);
+    SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == VECSXP) {
     res = PROTECT(stbl_lst_to_dbl(x));
-    SEXP out = check_valid(res, x, to, x_arg, call);
+    SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
-  return to_fail(x, to, x_arg, call);
+  return to_fail(x, to, x_arg, to_arg, call);
 }

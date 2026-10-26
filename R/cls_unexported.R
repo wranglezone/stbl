@@ -11,6 +11,7 @@
   allow_null = TRUE,
   allow_zero_length = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -26,6 +27,7 @@
       allow_null = allow_null,
       !!!to_cls_args,
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call,
       x_class = x_class
     )
@@ -176,6 +178,7 @@
   to_class,
   coerce_factor = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -187,6 +190,7 @@
           as.character(x),
           !!!to_cls_args,
           x_arg = x_arg,
+          to_arg = to_arg,
           call = call,
           x_class = x_class
         )
@@ -197,6 +201,7 @@
     from_class = x_class,
     to_class = to_class,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -211,6 +216,7 @@
   cast_fn,
   to_type_obj,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -218,13 +224,14 @@
   x_na <- is.na(x)
   failures <- (cast != x & !x_na) | xor(x_na, is.na(cast))
   .check_cast_failures(
-    x,
-    failures,
-    x_class,
-    to_type_obj,
-    "non-zero complex components",
-    x_arg,
-    call
+    x = x,
+    failures = failures,
+    x_class = x_class,
+    to = to_type_obj,
+    due_to = "non-zero complex components",
+    x_arg = x_arg,
+    call = call,
+    to_arg = to_arg
   )
   return(cast)
 }
@@ -237,14 +244,23 @@
 #' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_lst_failures <- function(x, valid, to, x_class, x_arg, call) {
+.check_lst_failures <- function(
+  x,
+  valid,
+  to,
+  x_class,
+  x_arg,
+  call,
+  to_arg = NULL
+) {
   .check_cast_failures(
-    x,
-    !valid,
-    x_class,
-    to,
-    "incompatible element types",
-    x_arg,
-    call
+    x = x,
+    failures = !valid,
+    x_class = x_class,
+    to = to,
+    due_to = "incompatible element types",
+    x_arg = x_arg,
+    call = call,
+    to_arg = to_arg
   )
 }

@@ -22,12 +22,12 @@ SEXP stbl_lst_to_chr(SEXP x);
  *                elements that cannot be reduced to a single string.
  *
  * @param x  The vector to convert.
- * @param to,x_arg,call  Context forwarded to the R-level to() on failure.
+ * @param to,x_arg,to_arg,call  Context forwarded to the R-level to() on failure.
  * @return   A character vector of the same length as @p x.
  * @note     On failure, re-runs the R-level to() so the rlang error is thrown
  *           from one place.
  */
-SEXP to_character(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
+SEXP to_character(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   int x_type = TYPEOF(x);
   SEXP res;
 
@@ -58,9 +58,9 @@ SEXP to_character(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   }
   if (x_type == VECSXP) {
     res = PROTECT(stbl_lst_to_chr(x));
-    SEXP out = check_valid(res, x, to, x_arg, call);
+    SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
-  return to_fail(x, to, x_arg, call);
+  return to_fail(x, to, x_arg, to_arg, call);
 }

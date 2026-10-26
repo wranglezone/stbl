@@ -276,3 +276,25 @@
       ! `given` must be a single <integer (non-empty)>.
       x `given` has no values.
 
+# to_*() functions name both sides when to_arg is supplied (#371)
+
+    Code
+      to_int("a", x_arg = "x", to_arg = "y")
+    Condition <stbl-error-incompatible_values-integer>
+      Error:
+      ! Can't coerce `x` <character> to match `y` <integer>.
+      x Can't convert some values due to non-numeric strings.
+      * Locations: 1
+      * Values: "a"
+
+# to_*() messages are unchanged when to_arg is NULL (#371)
+
+    Code
+      to_int("a", x_arg = "x")
+    Condition <stbl-error-incompatible_values-integer>
+      Error:
+      ! `x` <character> must be coercible to <integer>
+      x Can't convert some values due to non-numeric strings.
+      * Locations: 1
+      * Values: "a"
+

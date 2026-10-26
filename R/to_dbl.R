@@ -30,6 +30,7 @@ to_dbl <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -52,6 +53,7 @@ to_dbl.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -62,11 +64,12 @@ to_dbl.list <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_dbl, x)
-  .check_lst_failures(x, res[["valid"]], double(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], double(), x_class, x_arg, call, to_arg)
   res[["result"]]
 }
 
@@ -87,6 +90,7 @@ to_dbl.character <- function(
   ...,
   coerce_character = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -103,7 +107,8 @@ to_dbl.character <- function(
       double(),
       "non-numeric strings",
       x_arg,
-      call
+      call,
+      to_arg
     )
     return(res[["result"]])
   }
@@ -111,6 +116,7 @@ to_dbl.character <- function(
     from_class = x_class,
     to_class = "double",
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -122,6 +128,7 @@ to_dbl.factor <- function(
   ...,
   coerce_factor = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -135,7 +142,8 @@ to_dbl.factor <- function(
       double(),
       "non-numeric strings",
       x_arg,
-      call
+      call,
+      to_arg
     )
     return(res[["result"]])
   }
@@ -143,6 +151,7 @@ to_dbl.factor <- function(
     from_class = x_class,
     to_class = "double",
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -152,6 +161,7 @@ to_dbl.complex <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -163,7 +173,8 @@ to_dbl.complex <- function(
     double(),
     "non-zero complex components",
     x_arg,
-    call
+    call,
+    to_arg
   )
   return(res[["result"]])
 }
@@ -173,6 +184,7 @@ to_dbl.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -183,6 +195,7 @@ to_dbl.default <- function(
         from_class = x_class,
         to_class = "double",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -219,6 +232,7 @@ to_dbl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -230,6 +244,7 @@ to_dbl_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

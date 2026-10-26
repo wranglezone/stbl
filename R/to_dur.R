@@ -61,6 +61,7 @@ to_dur <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -78,6 +79,7 @@ to_dur.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -95,6 +97,7 @@ to_dur.character <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -154,7 +157,8 @@ to_dur.character <- function(
     .duration_type_obj(),
     "invalid or ambiguous duration format",
     x_arg,
-    call
+    call,
+    to_arg
   )
 
   .new_period_vec(year, month, day, hour, minute, second)
@@ -208,6 +212,7 @@ to_dur.factor <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -215,6 +220,7 @@ to_dur.factor <- function(
     as.character(x),
     ...,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )
@@ -258,6 +264,7 @@ to_dur.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -268,6 +275,7 @@ to_dur.default <- function(
         from_class = x_class,
         to_class = "duration",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -328,6 +336,7 @@ to_dur_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -339,6 +348,7 @@ to_dur_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

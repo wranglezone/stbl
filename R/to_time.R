@@ -46,6 +46,7 @@ to_time <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -59,6 +60,7 @@ to_time.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -70,6 +72,7 @@ to_time.character <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -96,7 +99,8 @@ to_time.character <- function(
     .time_type_obj(),
     "invalid or ambiguous time format",
     x_arg,
-    call
+    call,
+    to_arg
   )
   return(hms::as_hms(utc_seconds))
 }
@@ -134,10 +138,18 @@ to_time.factor <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_time(as.character(x), ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_time(
+    as.character(x),
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -165,6 +177,7 @@ to_time.numeric <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -182,7 +195,8 @@ to_time.numeric <- function(
     .time_type_obj(),
     "not a valid number of seconds since midnight (must be at least 0 and less than 86400)",
     x_arg,
-    call
+    call,
+    to_arg
   )
   return(hms::as_hms(as.numeric(x)))
 }
@@ -193,10 +207,17 @@ to_time.integer <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_time.numeric(x, x_arg = x_arg, call = call, x_class = x_class)
+  to_time.numeric(
+    x,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -205,6 +226,7 @@ to_time.difftime <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -216,7 +238,13 @@ to_time.difftime <- function(
   # there is no to_time.hms() method; hms values that are already valid times
   # of day round-trip through this path unchanged.
   seconds <- as.numeric(x, units = "secs")
-  to_time.numeric(seconds, x_arg = x_arg, call = call, x_class = x_class)
+  to_time.numeric(
+    seconds,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -224,6 +252,7 @@ to_time.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -234,6 +263,7 @@ to_time.default <- function(
         from_class = x_class,
         to_class = "time",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -270,6 +300,7 @@ to_time_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -281,6 +312,7 @@ to_time_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

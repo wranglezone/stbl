@@ -30,7 +30,7 @@ to_one_of <- function(
   .try_exactly_one(
     protos,
     run_one = function(proto) {
-      to(x, proto, x_arg = x_arg, call = call, x_class = x_class)
+      to(x, proto, x_arg = x_arg, to_arg = NULL, call = call, x_class = x_class)
     },
     labels = labels,
     x_arg = x_arg,

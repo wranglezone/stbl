@@ -115,11 +115,17 @@ rlang::caller_env
   additional_msg = NULL,
   message_env = call,
   parent = NULL,
+  to_arg = NULL,
   ...
 ) {
-  main_msg <- .glue2(
-    "Can't coerce {.arg [x_arg]} {.cls [from_class]} to {.cls [to_class]}."
-  )
+  to_arg <- .check_to_arg(to_arg, call)
+  main_msg <- if (is.null(to_arg)) {
+    .glue2(
+      "Can't coerce {.arg [x_arg]} {.cls [from_class]} to {.cls [to_class]}."
+    )
+  } else {
+    .cant_coerce_msg(from_class, to_class, x_arg, to_arg)
+  }
   .stbl_abort(
     message = c(main_msg, additional_msg),
     subclass = c("coerce", to_class),
@@ -201,6 +207,7 @@ rlang::caller_env
   due_to,
   x_arg,
   call,
+  to_arg = NULL,
   parent = NULL,
   ...
 ) {
@@ -208,20 +215,55 @@ rlang::caller_env
   locations <- which(failures)
   values <- x[locations]
   value_chrs <- as.character(values)
-  .stop_must(
-    msg = "{.cls {x_class}} must be coercible to {.cls {to_class}}",
-    x_arg = x_arg,
-    additional_msg = c(
+  to_arg <- .check_to_arg(to_arg, call)
+  main_msg <- if (is.null(to_arg)) {
+    .define_main_msg(
+      x_arg,
+      "{.cls {x_class}} must be coercible to {.cls {to_class}}"
+    )
+  } else {
+    .cant_coerce_msg(x_class, to_class, x_arg, to_arg)
+  }
+  .stbl_abort(
+    message = c(
+      main_msg,
       x = "Can't convert some values due to {due_to}.",
       "*" = "Locations: {locations}",
       "*" = "Values: {.val {value_chrs}}"
     ),
-    call = call,
     subclass = c("incompatible_values", to_class),
+    call = call,
     message_env = rlang::current_env(),
     parent = parent,
     locations = locations,
     values = values,
     ...
   )
+}
+
+#' Define the main message for a coercion failure that names both sides
+#'
+#' @param from_class (`character(1)`) The class of the object being coerced.
+#' @param to_class (`character(1)`) The class being coerced to.
+#' @param to_arg (`character(1)`) The name of the coercion target, already
+#'   checked with `.check_to_arg()`.
+#' @inheritParams .shared-params
+#' @returns A character string.
+#' @keywords internal
+.cant_coerce_msg <- function(from_class, to_class, x_arg, to_arg) {
+  .glue2(
+    "Can't coerce {.arg [x_arg]} {.cls [from_class]} to match {.arg [to_arg]} {.cls [to_class]}."
+  )
+}
+
+#' Check that `to_arg` is `NULL` or a single string
+#'
+#' @inheritParams .shared-params
+#' @returns `to_arg`, unchanged, or an error if it is not `NULL` or a string.
+#' @keywords internal
+.check_to_arg <- function(to_arg, call = caller_env()) {
+  if (is.null(to_arg)) {
+    return(NULL)
+  }
+  to_chr_scalar(to_arg, call = call, x_arg = "to_arg")
 }

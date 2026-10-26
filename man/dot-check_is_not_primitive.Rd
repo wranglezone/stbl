@@ -4,7 +4,12 @@
 \alias{.check_is_not_primitive}
 \title{Error if an object is a primitive function}
 \usage{
-.check_is_not_primitive(x, x_arg = caller_arg(x), call = caller_env())
+.check_is_not_primitive(
+  x,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 }
 \arguments{
 \item{x}{The object to check.}
@@ -13,6 +18,11 @@
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.}
+
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

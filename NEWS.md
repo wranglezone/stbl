@@ -2,6 +2,7 @@
 
 ## New features
 
+* `to()`, all `to_*()` functions, and `stbl_to()` (C API) gain a `to_arg` argument, like `vctrs::vec_cast()`. When supplied, conversion errors name both sides (#371).
 * `to()` now dispatches to `to_date()`, `to_dttm()`, `to_time()`, and `to_dur()` for `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and falls back to `vctrs::vec_cast()` for other prototype classes (#366, #367).
 * New `resolve_tz()` returns the name of the time zone an object is displayed in, using your local time zone if the object doesn't name one. Use it as the `tz` argument of `to_dttm()`, `stabilize_dttm()`, and related functions to keep an object's time zone instead of converting to UTC (#370).
 

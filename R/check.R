@@ -245,7 +245,8 @@
   to,
   due_to,
   x_arg,
-  call
+  call,
+  to_arg = NULL
 ) {
   if (any(failures)) {
     .stop_incompatible(
@@ -255,7 +256,8 @@
       failures = failures,
       due_to = due_to,
       x_arg = x_arg,
-      call = call
+      call = call,
+      to_arg = to_arg
     )
   }
 }

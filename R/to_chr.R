@@ -60,6 +60,7 @@ to_chr <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -68,7 +69,14 @@ to_chr <- function(
     force(x_class)
     x <- x_quo
   }
-  .to_chr_impl(x, ..., x_arg = x_arg, call = call, x_class = x_class)
+  .to_chr_impl(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -84,6 +92,7 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -121,6 +130,7 @@ to_character <- to_chr
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -131,11 +141,20 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_chr, x)
-  .check_lst_failures(x, res[["valid"]], character(), x_class, x_arg, call)
+  .check_lst_failures(
+    x,
+    res[["valid"]],
+    character(),
+    x_class,
+    x_arg,
+    call,
+    to_arg
+  )
   res[["result"]]
 }
 
@@ -144,6 +163,7 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -151,6 +171,7 @@ to_character <- to_chr
     from_class = x_class,
     to_class = "character",
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -160,6 +181,7 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -167,7 +189,13 @@ to_character <- to_chr
   if (rlang::is_call(x_expr, c("::", ":::"))) {
     return(.chr_from_op_call(x_expr))
   }
-  .stop_if_anon_fn(x_expr, x_class = x_class, x_arg = x_arg, call = call)
+  .stop_if_anon_fn(
+    x_expr,
+    x_class = x_class,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call
+  )
   .chr_from_fn_sym(x, x_name = rlang::as_string(x_expr))
 }
 
@@ -185,6 +213,7 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -211,12 +240,13 @@ to_character <- to_chr
 #' @param x_expr The expression from the quosure.
 #' @inheritParams .shared-params
 #' @keywords internal
-.stop_if_anon_fn <- function(x_expr, x_class, x_arg, call) {
+.stop_if_anon_fn <- function(x_expr, x_class, x_arg, call, to_arg = NULL) {
   if (!rlang::is_symbol(x_expr)) {
     .stop_cant_coerce(
       from_class = x_class,
       to_class = "character",
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call,
       additional_msg = c(
         i = "Anonymous functions can't be converted to a string name."
@@ -279,6 +309,7 @@ to_character <- to_chr
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -289,6 +320,7 @@ to_character <- to_chr
         from_class = x_class,
         to_class = "character",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -326,6 +358,7 @@ to_chr_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -342,6 +375,7 @@ to_chr_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

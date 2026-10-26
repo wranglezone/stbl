@@ -39,6 +39,7 @@ to_date <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -57,6 +58,7 @@ to_date.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -68,6 +70,7 @@ to_date.character <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -85,7 +88,8 @@ to_date.character <- function(
     .date_type_obj(),
     "invalid or ambiguous date format",
     x_arg,
-    call
+    call,
+    to_arg
   )
   return(parsed)
 }
@@ -96,10 +100,18 @@ to_date.factor <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_date(as.character(x), ..., x_arg = x_arg, call = call, x_class = x_class)
+  to_date(
+    as.character(x),
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -134,6 +146,7 @@ to_date.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -144,6 +157,7 @@ to_date.default <- function(
         from_class = x_class,
         to_class = "date",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -179,6 +193,7 @@ to_date_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -190,6 +205,7 @@ to_date_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

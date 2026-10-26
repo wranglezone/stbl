@@ -1502,11 +1502,16 @@ test_that(".lst_to_chr() marks raw scalar elements as not valid (#noissue)", {
 })
 
 test_that(".stbl_to() uses x_arg and call when supplied (#369)", {
-  err <- rlang::catch_cnd(
-    .stbl_to("a", logical(), x_arg = "my_arg", call = quote(my_fn())),
-    classes = "error"
-  )
-  expect_s3_class(err, "stbl-error-incompatible_values-logical")
-  expect_match(conditionMessage(err), "my_arg", fixed = TRUE)
-  expect_identical(err$call, quote(my_fn()))
+  .stbl_to("a", logical(), x_arg = "my_arg", call = quote(my_fn())) |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
+})
+
+test_that(".stbl_to() uses to_arg when supplied (#371)", {
+  .stbl_to("a", logical(), x_arg = "my_arg", to_arg = "my_to") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
+})
+
+test_that(".stbl_to() doesn't derive a to_arg when it is NULL (#371)", {
+  .stbl_to("a", logical(), x_arg = "my_arg") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
 })
