@@ -42,6 +42,7 @@ to_fct <- function(
   ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -127,6 +128,7 @@ to_fct.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -140,11 +142,12 @@ to_fct.list <- function(
   ordered = FALSE,
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_fct, x)
-  .check_lst_failures(x, res[["valid"]], factor(), x_class, x_arg, call)
+  .check_lst_failures(x, res[["valid"]], factor(), x_class, x_arg, call, to_arg)
   .coerce_fct_levels(
     res[["result"]],
     levels = levels,
@@ -163,6 +166,7 @@ to_fct.default <- function(
   ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -175,6 +179,7 @@ to_fct.default <- function(
         from_class = x_class,
         to_class = "factor",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -328,6 +333,7 @@ to_fct_scalar <- function(
   ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -339,6 +345,7 @@ to_fct_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

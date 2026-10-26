@@ -25,7 +25,14 @@ to_any_of <- function(
   errors <- list()
   for (proto in protos) {
     result <- rlang::try_fetch(
-      to(x, proto, x_arg = x_arg, call = call, x_class = x_class),
+      to(
+        x,
+        proto,
+        x_arg = x_arg,
+        to_arg = NULL,
+        call = call,
+        x_class = x_class
+      ),
       error = function(cnd) cnd
     )
     if (!inherits(result, "error")) {

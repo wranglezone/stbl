@@ -35,7 +35,7 @@ SEXP stbl_lst_to_fct(SEXP x);
  * @note     On failure, re-runs the R-level to() so the rlang error is thrown
  *           from one place.
  */
-SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
+SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   int x_type = TYPEOF(x);
 
   /* Extract levels and ordered from `to`.
@@ -51,14 +51,14 @@ SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   /* chr -> fct */
   if (x_type == STRSXP) {
     res = PROTECT(stbl_chr_to_fct(x, to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(2); /* ordered, res */
     return out;
   }
   /* int -> fct */
   if (x_type == INTSXP && !Rf_inherits(x, "factor")) {
     res = PROTECT(stbl_int_to_fct(x, to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(2);
     return out;
   }
@@ -66,7 +66,7 @@ SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   if (x_type == INTSXP && Rf_inherits(x, "factor")) {
     chr = PROTECT(stbl_fct_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(3); /* ordered, chr, res */
     return out;
   }
@@ -74,7 +74,7 @@ SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   if (x_type == REALSXP) {
     chr = PROTECT(stbl_dbl_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(3);
     return out;
   }
@@ -82,19 +82,19 @@ SEXP to_factor(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   if (x_type == LGLSXP) {
     chr = PROTECT(stbl_lgl_to_chr(x));
     res = PROTECT(stbl_chr_to_fct(result_of(chr), to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(3);
     return out;
   }
   /* lst -> fct: lst_to_fct produces a chr result, then chr_to_fct */
   if (x_type == VECSXP) {
     chr = PROTECT(stbl_lst_to_fct(x));
-    out = check_valid(chr, x, to, x_arg, call); /* validates chr step */
+    out = check_valid(chr, x, to, x_arg, to_arg, call); /* validates chr step */
     res = PROTECT(stbl_chr_to_fct(out, to_levels, ordered));
-    out = check_valid(res, x, to, x_arg, call);
+    out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(3); /* ordered, chr, res */
     return out;
   }
   UNPROTECT(1); /* ordered */
-  return to_fail(x, to, x_arg, call);
+  return to_fail(x, to, x_arg, to_arg, call);
 }

@@ -16,6 +16,7 @@ to_dur(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -24,11 +25,19 @@ to_duration(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
-\method{to_dur}{`NULL`}(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+\method{to_dur}{`NULL`}(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 \method{to_dur}{Period}(x, ...)
 
@@ -36,6 +45,7 @@ to_duration(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -44,6 +54,7 @@ to_duration(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -63,6 +74,11 @@ to_duration(
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.}
+
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

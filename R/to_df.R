@@ -31,6 +31,7 @@ to_df <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -46,6 +47,7 @@ to_df.data.frame <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   check_dots_empty0(..., call = call)
@@ -59,6 +61,7 @@ to_df.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   check_dots_empty0(..., call = call)
@@ -70,6 +73,7 @@ to_df.list <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -83,6 +87,7 @@ to_df.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -90,6 +95,7 @@ to_df.default <- function(
     from_class = x_class,
     to_class = "data.frame",
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -101,12 +107,13 @@ to_df.default <- function(
 #' @inheritParams .shared-params
 #' @returns A one-column data frame.
 #' @keywords internal
-.to_df_vector <- function(x, x_expr, x_arg, call, x_class, ...) {
+.to_df_vector <- function(x, x_expr, x_arg, to_arg, call, x_class, ...) {
   if (!is.symbol(x_expr)) {
     .stop_cant_coerce(
       from_class = x_class,
       to_class = "data.frame",
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call
     )
   }
@@ -119,6 +126,7 @@ to_df.character <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -127,6 +135,7 @@ to_df.character <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...
@@ -138,6 +147,7 @@ to_df.numeric <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -146,6 +156,7 @@ to_df.numeric <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...
@@ -157,6 +168,7 @@ to_df.logical <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -165,6 +177,7 @@ to_df.logical <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...
@@ -176,6 +189,7 @@ to_df.complex <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -184,6 +198,7 @@ to_df.complex <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...
@@ -195,6 +210,7 @@ to_df.raw <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -203,6 +219,7 @@ to_df.raw <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...
@@ -214,6 +231,7 @@ to_df.factor <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -222,6 +240,7 @@ to_df.factor <- function(
     x,
     x_expr = x_expr,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class,
     ...

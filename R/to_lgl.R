@@ -31,6 +31,7 @@ to_lgl <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -53,6 +54,7 @@ to_lgl.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -68,6 +70,7 @@ to_lgl.character <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -80,7 +83,8 @@ to_lgl.character <- function(
     logical(),
     "unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer)",
     x_arg,
-    call
+    call,
+    to_arg
   )
 
   return(res[["result"]])
@@ -91,6 +95,7 @@ to_lgl.factor <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -103,7 +108,8 @@ to_lgl.factor <- function(
     logical(),
     "unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer)",
     x_arg,
-    call
+    call,
+    to_arg
   )
   return(res[["result"]])
 }
@@ -113,11 +119,20 @@ to_lgl.list <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_lst_to_lgl, x)
-  .check_lst_failures(x, res[["valid"]], logical(), x_class, x_arg, call)
+  .check_lst_failures(
+    x,
+    res[["valid"]],
+    logical(),
+    x_class,
+    x_arg,
+    call,
+    to_arg
+  )
   res[["result"]]
 }
 
@@ -126,6 +141,7 @@ to_lgl.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -133,6 +149,7 @@ to_lgl.default <- function(
     from_class = x_class,
     to_class = "logical",
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call
   )
 }
@@ -167,6 +184,7 @@ to_lgl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -178,6 +196,7 @@ to_lgl_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

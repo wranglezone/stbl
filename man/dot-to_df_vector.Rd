@@ -4,7 +4,7 @@
 \alias{.to_df_vector}
 \title{Coerce a vector to a one-column data frame}
 \usage{
-.to_df_vector(x, x_expr, x_arg, call, x_class, ...)
+.to_df_vector(x, x_expr, x_arg, to_arg, call, x_class, ...)
 }
 \arguments{
 \item{x}{The object to stabilize.}
@@ -16,6 +16,11 @@
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.}
+
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

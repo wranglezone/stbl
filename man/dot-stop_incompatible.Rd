@@ -12,6 +12,7 @@
   due_to,
   x_arg,
   call,
+  to_arg = NULL,
   parent = NULL,
   ...
 )
@@ -39,6 +40,11 @@ unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being coerced to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, coercion failure messages name
+both \code{x_arg} and \code{to_arg}.}
 
 \item{parent}{A parent condition, as you might create during a
 \code{\link[rlang:try_fetch]{rlang::try_fetch()}}. See \code{\link[rlang:abort]{rlang::abort()}} for additional information.}

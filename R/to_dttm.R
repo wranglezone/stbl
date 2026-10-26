@@ -46,6 +46,7 @@ to_dttm <- function(
   ...,
   tz = "UTC",
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -71,6 +72,7 @@ to_dttm.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -83,6 +85,7 @@ to_dttm.character <- function(
   ...,
   tz = "UTC",
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -109,7 +112,8 @@ to_dttm.character <- function(
     .datetime_type_obj(),
     "invalid or ambiguous date-time format",
     x_arg,
-    call
+    call,
+    to_arg
   )
   attr(parsed, "tzone") <- tz
   return(parsed)
@@ -169,6 +173,7 @@ to_dttm.factor <- function(
   ...,
   tz = "UTC",
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -177,6 +182,7 @@ to_dttm.factor <- function(
     ...,
     tz = tz,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )
@@ -217,6 +223,7 @@ to_dttm.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -227,6 +234,7 @@ to_dttm.default <- function(
         from_class = x_class,
         to_class = "datetime",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -270,6 +278,7 @@ to_dttm_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -281,6 +290,7 @@ to_dttm_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
+    to_arg = to_arg,
     call = call,
     x_class = x_class
   )

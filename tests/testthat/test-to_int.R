@@ -258,3 +258,13 @@ test_that("to_integer() exists (#164)", {
 test_that("to_integer_scalar() exists (#164)", {
   expect_no_error(to_integer_scalar(1))
 })
+
+test_that("to_*() functions name both sides when to_arg is supplied (#371)", {
+  to_int("a", x_arg = "x", to_arg = "y") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
+})
+
+test_that("to_*() messages are unchanged when to_arg is NULL (#371)", {
+  to_int("a", x_arg = "x") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
+})

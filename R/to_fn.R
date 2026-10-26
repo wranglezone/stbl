@@ -40,6 +40,7 @@ to_fn <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -62,6 +63,7 @@ to_fn.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -75,6 +77,7 @@ to_fn.character <- function(
   allow_null = TRUE,
   definition_env = rlang::global_env(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -123,6 +126,7 @@ to_fn.default <- function(
   ...,
   definition_env = rlang::global_env(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -133,6 +137,7 @@ to_fn.default <- function(
         from_class = x_class,
         to_class = "function",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }

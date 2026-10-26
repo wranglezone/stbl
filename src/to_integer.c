@@ -25,19 +25,19 @@ SEXP stbl_lst_to_int(SEXP x);
  *               same rules.  Raises the R-level to() error if any element is invalid.
  *
  * @param x  The vector to convert.
- * @param to,x_arg,call  Context forwarded to the R-level to() on failure.
+ * @param to,x_arg,to_arg,call  Context forwarded to the R-level to() on failure.
  * @return   An integer vector of the same length as @p x.
  * @note     On failure, re-runs the R-level to() so the rlang error is thrown
  *           from one place.
  */
-SEXP to_integer(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
+SEXP to_integer(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   int x_type = TYPEOF(x);
   SEXP res;
 
   if (x_type == INTSXP) {
     if (Rf_inherits(x, "factor")) {
       res = PROTECT(stbl_fct_to_int(x));
-      SEXP out = check_int_cast(res, x, to, x_arg, call);
+      SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
       UNPROTECT(1);
       return out;
     }
@@ -51,27 +51,27 @@ SEXP to_integer(SEXP x, SEXP to, SEXP x_arg, SEXP call) {
   }
   if (x_type == REALSXP) {
     res = PROTECT(stbl_dbl_to_int(x));
-    SEXP out = check_precision(res, x, to, x_arg, call);
+    SEXP out = check_precision(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == STRSXP) {
     res = PROTECT(stbl_chr_to_int(x));
-    SEXP out = check_int_cast(res, x, to, x_arg, call);
+    SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == CPLXSXP) {
     res = PROTECT(stbl_cpx_to_int(x));
-    SEXP out = check_int_cast(res, x, to, x_arg, call);
+    SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == VECSXP) {
     res = PROTECT(stbl_lst_to_int(x));
-    SEXP out = check_valid(res, x, to, x_arg, call);
+    SEXP out = check_valid(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
-  return to_fail(x, to, x_arg, call);
+  return to_fail(x, to, x_arg, to_arg, call);
 }

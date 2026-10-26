@@ -32,6 +32,7 @@ to_lst <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   UseMethod("to_lst")
@@ -54,6 +55,7 @@ to_lst.default <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -64,6 +66,7 @@ to_lst.default <- function(
         from_class = x_class,
         to_class = "list",
         x_arg = x_arg,
+        to_arg = to_arg,
         call = call
       )
     }
@@ -77,6 +80,7 @@ to_lst.NULL <- function(
   ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   check_dots_empty0(..., call = call)
@@ -90,11 +94,12 @@ to_lst.function <- function(
   ...,
   coerce_function = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   check_dots_empty0(..., call = call)
   .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
-  .check_is_not_primitive(x, x_arg = x_arg, call = call)
+  .check_is_not_primitive(x, x_arg = x_arg, to_arg = to_arg, call = call)
   as.list(x, ...)
 }
 
@@ -108,6 +113,7 @@ to_lst.function <- function(
   x,
   coerce_function = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   if (is.function(x) && !coerce_function) {
@@ -139,6 +145,7 @@ to_lst.function <- function(
 .check_is_not_primitive <- function(
   x,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 ) {
   if (is.primitive(x)) {
@@ -146,6 +153,7 @@ to_lst.function <- function(
       "primitive function",
       "list",
       x_arg = x_arg,
+      to_arg = to_arg,
       call = call
     )
   }

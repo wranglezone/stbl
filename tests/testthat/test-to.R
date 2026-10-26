@@ -455,3 +455,34 @@ test_that("to() errors for unsupported target types (#182, #367)", {
   to(1L, as.raw(1L)) |>
     expect_pkg_error_classes("stbl", "coerce", "raw")
 })
+
+# to_arg -----------------------------------------------------------------------
+
+test_that("to() names both sides of a stbl-handled conversion (#371)", {
+  ptype <- integer()
+  to("a", ptype, x_arg = "x") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
+})
+
+test_that("to() uses a supplied to_arg (#371)", {
+  to("a", integer(), x_arg = "x", to_arg = "my_ptype") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
+})
+
+test_that("to() shows a literal .to as to_arg (#371)", {
+  to("a", integer(), x_arg = "x") |>
+    expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
+})
+
+test_that("to() names both sides when falling through to vctrs (#371)", {
+  proto <- as.raw(1L)
+  to(1L, proto, x_arg = "x") |>
+    expect_pkg_error_snapshot("stbl", "coerce", "raw")
+  to(1L, as.raw(1L), x_arg = "x", to_arg = "y") |>
+    expect_pkg_error_snapshot("stbl", "coerce", "raw")
+})
+
+test_that("to() rejects a non-scalar to_arg (#371)", {
+  to("a", integer(), to_arg = c("a", "b")) |>
+    expect_pkg_error_snapshot("stbl", "non_scalar")
+})
