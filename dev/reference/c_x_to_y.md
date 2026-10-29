@@ -104,7 +104,7 @@ Call the C routine to convert a vector to another type
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
 
 - ordered:
 
@@ -120,8 +120,8 @@ Call the C routine to convert a vector to another type
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -133,8 +133,8 @@ Call the C routine to convert a vector to another type
 
 `.x_to_y()`: A list with two elements: `result`, the converted vector,
 and `valid`, a logical vector indicating whether each element was
-successfully coerced without losing information. `.x_are_yish()`: A
-logical vector indicating whether each element of `x` can be coerced to
-the target type. `.check_min_dbl()`, `.check_max_dbl()`,
+successfully converted without losing information. `.x_are_yish()`: A
+logical vector indicating whether each element of `x` can be converted
+to the target type. `.check_min_dbl()`, `.check_max_dbl()`,
 `.check_min_dbl_exclusive()`, and `.check_max_dbl_exclusive()`: `NULL`
 if all values pass the check, otherwise a vector of failing indices.

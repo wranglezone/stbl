@@ -16,7 +16,7 @@ Try each function in sequence, returning the first success
 
 - fns:
 
-  `(list)` The list of stabilizer or coercion functions to try.
+  `(list)` The list of stabilizer or conversion functions to try.
 
 - x_arg:
 

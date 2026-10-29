@@ -29,7 +29,7 @@ Stabilize a scalar object of a specific class
 
 - to_cls_scalar_fn:
 
-  `(function)` The `to_*_scalar()` function to use for coercion.
+  `(function)` The `to_*_scalar()` function to use for conversion.
 
 - ...:
 
@@ -42,7 +42,7 @@ Stabilize a scalar object of a specific class
 
 - check_cls_value_fn:
 
-  `(function)` A function to check the values of `x` after coercion.
+  `(function)` A function to check the values of `x` after conversion.
 
 - check_cls_value_fn_args:
 
@@ -77,7 +77,7 @@ Stabilize a scalar object of a specific class
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value

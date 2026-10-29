@@ -74,8 +74,8 @@ unexported functions.</p></dd>
 
 <dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
-being coerced to match, for use in error messages. When <code>NULL</code>, error
-messages describe only <code>x</code>. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, conversion failure messages name
 both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
@@ -87,13 +87,13 @@ source of error messages.</p></dd>
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
 <dd><p>(<code>character(1)</code>) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The object coerced to character.</p>
+    <p>The object converted to character.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

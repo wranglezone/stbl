@@ -11,7 +11,7 @@
   [`is_chr_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
   [`are_character_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
   [`is_character_ish()`](https://stbl.wrangle.zone/dev/reference/are_chr_ish.md)
-  : Check if an object can be safely coerced to character
+  : Check if an object can be safely converted to character
 - [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   [`specify_character()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
@@ -21,18 +21,18 @@
   [`stabilize_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
   [`stabilise_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
   [`stabilise_character()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
-  : Coerce to character with additional checks
+  : Convert to character with additional checks
 - [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   [`stabilize_character_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   [`stabilise_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
   [`stabilise_character_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md)
-  : Coerce to length-1 character with additional checks
+  : Convert to length-1 character with additional checks
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md)
   [`to_character()`](https://stbl.wrangle.zone/dev/reference/to_chr.md)
-  : Coerce to character
+  : Convert to character
 - [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
   [`to_character_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md)
-  : Coerce to length-1 character
+  : Convert to length-1 character
 - [`regex_must_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
   [`regex_must_not_match()`](https://stbl.wrangle.zone/dev/reference/regex_must_match.md)
   : Create a regex matching rule
@@ -43,7 +43,7 @@
   [`is_dbl_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
   [`are_double_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
   [`is_double_ish()`](https://stbl.wrangle.zone/dev/reference/are_dbl_ish.md)
-  : Check if an object can be safely coerced to double
+  : Check if an object can be safely converted to double
 - [`specify_dbl()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
   [`specify_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
   [`specify_double()`](https://stbl.wrangle.zone/dev/reference/specify_dbl.md)
@@ -53,18 +53,18 @@
   [`stabilize_double()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
   [`stabilise_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
   [`stabilise_double()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md)
-  : Coerce to double with additional checks
+  : Convert to double with additional checks
 - [`stabilize_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   [`stabilize_double_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   [`stabilise_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
   [`stabilise_double_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl_scalar.md)
-  : Coerce to length-1 double with additional checks
+  : Convert to length-1 double with additional checks
 - [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md)
   [`to_double()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md) :
-  Coerce to double
+  Convert to double
 - [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md)
   [`to_double_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md)
-  : Coerce to length-1 double
+  : Convert to length-1 double
 
 ## factors
 
@@ -72,7 +72,7 @@
   [`is_fct_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   [`are_factor_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
   [`is_factor_ish()`](https://stbl.wrangle.zone/dev/reference/are_fct_ish.md)
-  : Check if an object can be safely coerced to a factor
+  : Check if an object can be safely converted to a factor
 - [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
   [`specify_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
   [`specify_factor()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md)
@@ -82,18 +82,18 @@
   [`stabilize_factor()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
   [`stabilise_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
   [`stabilise_factor()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
-  : Coerce to factor with additional checks
+  : Convert to factor with additional checks
 - [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
   [`stabilize_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
   [`stabilise_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
   [`stabilise_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md)
-  : Coerce to length-1 factor with additional checks
+  : Convert to length-1 factor with additional checks
 - [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md)
   [`to_factor()`](https://stbl.wrangle.zone/dev/reference/to_fct.md) :
-  Coerce to factor
+  Convert to factor
 - [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
   [`to_factor_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md)
-  : Coerce to length-1 factor
+  : Convert to length-1 factor
 
 ## integer vectors
 
@@ -101,7 +101,7 @@
   [`is_int_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
   [`are_integer_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
   [`is_integer_ish()`](https://stbl.wrangle.zone/dev/reference/are_int_ish.md)
-  : Check if an object can be safely coerced to integer
+  : Check if an object can be safely converted to integer
 - [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
   [`specify_int_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
   [`specify_integer()`](https://stbl.wrangle.zone/dev/reference/specify_int.md)
@@ -111,30 +111,30 @@
   [`stabilize_integer()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
   [`stabilise_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
   [`stabilise_integer()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md)
-  : Coerce to integer with additional checks
+  : Convert to integer with additional checks
 - [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
   [`stabilize_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
   [`stabilise_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
   [`stabilise_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md)
-  : Coerce to length-1 integer with additional checks
+  : Convert to length-1 integer with additional checks
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
   value to a target type
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
-  Coerce to date
+  Convert to date
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
   [`to_datetime()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
-  : Coerce to date-time
+  : Convert to date-time
 - [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
   [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
-  Coerce to a duration
+  Convert to a duration
 - [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md)
   [`to_integer()`](https://stbl.wrangle.zone/dev/reference/to_int.md) :
-  Coerce to integer
+  Convert to integer
 - [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   [`to_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
-  : Coerce to length-1 integer
+  : Convert to length-1 integer
 - [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) :
-  Coerce to time-of-day
+  Convert to time-of-day
 
 ## logical vectors
 
@@ -142,7 +142,7 @@
   [`is_lgl_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
   [`are_logical_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
   [`is_logical_ish()`](https://stbl.wrangle.zone/dev/reference/are_lgl_ish.md)
-  : Check if an object can be safely coerced to logical
+  : Check if an object can be safely converted to logical
 - [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   [`specify_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
   [`specify_logical()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md)
@@ -152,18 +152,18 @@
   [`stabilize_logical()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
   [`stabilise_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
   [`stabilise_logical()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md)
-  : Coerce to logical with additional checks
+  : Convert to logical with additional checks
 - [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
   [`stabilize_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
   [`stabilise_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
   [`stabilise_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md)
-  : Coerce to length-1 logical with additional checks
+  : Convert to length-1 logical with additional checks
 - [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md)
   [`to_logical()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md) :
-  Coerce to logical
+  Convert to logical
 - [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
   [`to_logical_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md)
-  : Coerce to length-1 logical
+  : Convert to length-1 logical
 
 ## data frames
 
@@ -185,10 +185,10 @@
   [`are_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   [`is_fn_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
   [`is_function_ish()`](https://stbl.wrangle.zone/dev/reference/are_fn_ish.md)
-  : Check if an object can be safely coerced to a function
+  : Check if an object can be safely converted to a function
 - [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md)
   [`to_function()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) :
-  Coerce to a function
+  Convert to a function
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
   value to a target type
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
@@ -225,46 +225,46 @@
   : Create a specified datetime stabilizer function
 - [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
   [`stabilise_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md)
-  : Coerce to date with additional checks
+  : Convert to date with additional checks
 - [`stabilize_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md)
   [`stabilise_date_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_date_scalar.md)
-  : Coerce to length-1 date with additional checks
+  : Convert to length-1 date with additional checks
 - [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
   [`stabilise_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
   [`stabilize_datetime()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
   [`stabilise_datetime()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md)
-  : Coerce to date-time with additional checks
+  : Convert to date-time with additional checks
 - [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
   [`stabilise_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
   [`stabilize_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
   [`stabilise_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md)
-  : Coerce to length-1 date-time with additional checks
+  : Convert to length-1 date-time with additional checks
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
-  Coerce to date
+  Convert to date
 - [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md)
-  : Coerce to length-1 date
+  : Convert to length-1 date
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
   [`to_datetime()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
-  : Coerce to date-time
+  : Convert to date-time
 - [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
   [`to_datetime_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md)
-  : Coerce to length-1 date-time
+  : Convert to length-1 date-time
 - [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
   [`specify_time_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
   : Create a specified time-of-day stabilizer function
 - [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md)
   [`stabilise_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md)
-  : Coerce to time-of-day with additional checks
+  : Convert to time-of-day with additional checks
 - [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md)
   [`stabilise_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md)
-  : Coerce to length-1 time-of-day with additional checks
+  : Convert to length-1 time-of-day with additional checks
 - [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
   [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
-  Coerce to a duration
+  Convert to a duration
 - [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) :
-  Coerce to time-of-day
+  Convert to time-of-day
 - [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
-  : Coerce to length-1 time-of-day
+  : Convert to length-1 time-of-day
 - [`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
   [`specify_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
   [`specify_duration()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md)
@@ -274,14 +274,14 @@
   [`stabilise_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
   [`stabilize_duration()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
   [`stabilise_duration()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md)
-  : Coerce to duration with additional checks
+  : Convert to duration with additional checks
 - [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
   [`stabilise_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
   [`stabilize_duration_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
   [`stabilise_duration_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md)
-  : Coerce to length-1 duration with additional checks
+  : Convert to length-1 duration with additional checks
 - [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md)
-  : Coerce to length-1 duration
+  : Convert to length-1 duration
 - [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)
   : Resolve a time zone
 
@@ -302,20 +302,21 @@
   : Create a specified one-of stabilizer function
 - [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   [`stabilise_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
-  : Try to coerce or validate x as all of several specs
+  : Try to convert or validate x as all of several specs
 - [`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   [`stabilise_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
   [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
-  : Try to coerce or validate x as one of several types
+  : Try to convert or validate x as one of several types
 - [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
   [`stabilise_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
   : Ensure every element of x satisfies a single spec
 - [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
   [`stabilise_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
   [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
-  : Try to coerce or validate x as exactly one of several specifications
+  : Try to convert or validate x as exactly one of several
+  specifications
 - [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md) :
-  Coerce each element of x with a single spec
+  Convert each element of x with a single spec
 
 ## generic args
 

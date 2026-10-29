@@ -1,4 +1,4 @@
-# Coerce to double with additional checks
+# Convert to double with additional checks
 
 Compared to
 [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
@@ -166,7 +166,7 @@ stabilise_double(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -192,7 +192,7 @@ stabilise_double(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -201,7 +201,7 @@ The input as a double vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+- `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 
 - `<stbl-error-incompatible_values-double>` when some values cannot be
   safely converted to double.
@@ -302,7 +302,7 @@ try(stabilize_dbl(c(1.1, NA), allow_na = FALSE))
 #> • NA locations: 2
 try(stabilize_dbl(letters))
 #> Error in eval(expr, envir) : 
-#>   `letters` <character> must be coercible to <double>
+#>   `letters` <character> must be convertible to <double>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …,
 #>   25, and 26
@@ -310,16 +310,16 @@ try(stabilize_dbl(letters))
 #>   "o", "p", "q", "r", …, "y", and "z"
 try(stabilize_dbl("1.1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `"1.1"` <character> to <double>.
+#>   Can't convert `"1.1"` <character> to <double>.
 try(stabilize_dbl(factor(c("1.1", "a"))))
 #> Error in eval(expr, envir) : 
-#>   `factor(c("1.1", "a"))` <factor> must be coercible to <double>
+#>   `factor(c("1.1", "a"))` <factor> must be convertible to <double>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 2
 #> • Values: "a"
 try(stabilize_dbl(factor("1.1"), coerce_factor = FALSE))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `factor("1.1")` <factor> to <double>.
+#>   Can't convert `factor("1.1")` <factor> to <double>.
 try(stabilize_dbl(1:10, min_value = 3.5))
 #> Error in eval(expr, envir) : `1:10` must be >= 3.5.
 #> ℹ Some values are too low.

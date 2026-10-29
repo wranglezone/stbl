@@ -1,6 +1,6 @@
-# Coerce to integer
+# Convert to integer
 
-Checks whether a vector can be coerced to integer without losing
+Checks whether a vector can be converted to integer without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. `to_integer` is a synonym of `to_int()`.
 
@@ -78,8 +78,8 @@ to_int(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -91,7 +91,7 @@ to_int(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -118,7 +118,7 @@ The input as an integer vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+- `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
 
 - `<stbl-error-incompatible_values-integer>` when some values cannot be
   safely converted to integer.
@@ -194,16 +194,16 @@ to_int(NULL)
 #> NULL
 try(to_int(c(1, 2, 3.1, 4, 5.2)))
 #> Error in eval(expr, envir) : 
-#>   `c(1, 2, 3.1, 4, 5.2)` <double> must be coercible to <integer>
+#>   `c(1, 2, 3.1, 4, 5.2)` <double> must be convertible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
 #> • Values: "3.1" and "5.2"
 try(to_int("1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `"1"` <character> to <integer>.
+#>   Can't convert `"1"` <character> to <integer>.
 try(to_int(c("1", "2", "3.1", "4", "5.2")))
 #> Error in eval(expr, envir) : 
-#>   `c("1", "2", "3.1", "4", "5.2")` <character> must be coercible to
+#>   `c("1", "2", "3.1", "4", "5.2")` <character> must be convertible to
 #> <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5

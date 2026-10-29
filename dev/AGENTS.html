@@ -41,11 +41,11 @@
 <div class="section level2">
 <h2 id="repository-overview">Repository overview<a class="anchor" aria-label="anchor" href="#repository-overview"></a></h2>
 <p><strong>stbl</strong> — Stabilize Objects</p>
-<p>A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.</p>
+<p>A set of consistent, opinionated functions to quickly check objects, convert them to the desired configuration, or deliver informative error messages when that is not possible.</p>
 <p><a href="https://stbl.wrangle.zone/" class="uri">https://stbl.wrangle.zone/</a>, <a href="https://github.com/wranglezone/stbl" class="external-link uri">https://github.com/wranglezone/stbl</a></p>
 <div class="section level3">
 <h3 id="philosophy">Philosophy<a class="anchor" aria-label="anchor" href="#philosophy"></a></h3>
-<p>stbl follows <a href="https://en.wikipedia.org/wiki/Robustness_principle" class="external-link">Postel’s Law</a>: be liberal in what you accept (coerce when safe), conservative in what you return (ensure inputs have the expected classes and features). The goal is to fail fast with clear error messages before expensive operations, and to intelligently coerce compatible types (e.g., <code>"1"</code> to <code>1L</code>).</p>
+<p>stbl follows <a href="https://en.wikipedia.org/wiki/Robustness_principle" class="external-link">Postel’s Law</a>: be liberal in what you accept (convert when safe), conservative in what you return (ensure inputs have the expected classes and features). The goal is to fail fast with clear error messages before expensive operations, and to intelligently convert compatible types (e.g., <code>"1"</code> to <code>1L</code>).</p>
 </div>
 <div class="section level3">
 <h3 id="function-families">Function families<a class="anchor" aria-label="anchor" href="#function-families"></a></h3>
@@ -54,19 +54,19 @@
 <th>Speed</th>
 <th>Example</th>
 </tr></thead><tbody><tr class="odd"><td><code>to_*()</code></td>
-<td>Fast type coercion</td>
+<td>Fast type conversion</td>
 <td>Fast</td>
 <td>
 <code>to_int("1")</code> → <code>1L</code>
 </td>
 </tr><tr class="even"><td><code>is_*_ish()</code></td>
-<td>Check if coercible (single logical)</td>
+<td>Check if convertible (single logical)</td>
 <td>Fast</td>
 <td>
 <code>is_int_ish(1.0)</code> → <code>TRUE</code>
 </td>
 </tr><tr class="odd"><td><code>are_*_ish()</code></td>
-<td>Check if coercible (element-wise)</td>
+<td>Check if convertible (element-wise)</td>
 <td>Fast</td>
 <td>
 <code>are_int_ish(c(1, 1.5))</code> → <code>c(TRUE, FALSE)</code>
@@ -85,7 +85,7 @@
 <div class="section level3">
 <h3 id="overall-structure">Overall structure<a class="anchor" aria-label="anchor" href="#overall-structure"></a></h3>
 <p>The project follows standard R package conventions with these key directories:</p>
-<p>stbl/ ├── R/ # R source code │ ├── aaa-conditions.R # Error helpers (.stbl_abort, .stop_cant_coerce, etc.) │ ├── aaa-shared_params.R # Shared roxygen parameter definitions │ ├── stbl-package.R # Auto-generated package docs │ └── *.R # Function definitions, 1 file ~= 1 exported function ├── .github/ │ ├── ISSUE_TEMPLATE/ # GitHub issue templates │ ├── skills/ # Agent skill definitions │ └── workflows/ # CI/CD configurations ├── tests/testthat/ # Test suite ├── man/ # Generated documentation ├── AGENTS.md # Main agent setup file ├── DESCRIPTION # Package metadata ├── NAMESPACE # Auto-generated export information ├── NEWS.md # Changelog └── Various config files # .gitignore, codecov.yml, etc.</p>
+<p>stbl/ ├── R/ # R source code │ ├── aaa-conditions.R # Error helpers (.stbl_abort, .stop_cant_convert, etc.) │ ├── aaa-shared_params.R # Shared roxygen parameter definitions │ ├── stbl-package.R # Auto-generated package docs │ └── *.R # Function definitions, 1 file ~= 1 exported function ├── .github/ │ ├── ISSUE_TEMPLATE/ # GitHub issue templates │ ├── skills/ # Agent skill definitions │ └── workflows/ # CI/CD configurations ├── tests/testthat/ # Test suite ├── man/ # Generated documentation ├── AGENTS.md # Main agent setup file ├── DESCRIPTION # Package metadata ├── NAMESPACE # Auto-generated export information ├── NEWS.md # Changelog └── Various config files # .gitignore, codecov.yml, etc.</p>
 <hr></div>
 </div>
 <div class="section level2">

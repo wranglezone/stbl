@@ -51,15 +51,15 @@
 
 
 <dl><dt id="arg-matches">matches<a class="anchor" aria-label="anchor" href="#arg-matches"></a></dt>
-<dd><p><code>(list)</code> Regex captures from <code><a href="https://rdrr.io/r/base/regmatches.html" class="external-link">regmatches()</a></code>: the full
-match, one group per calendar field named in <code>fields</code>, and a trailing
-UTC-offset group (possibly <code>""</code> when absent).</p></dd>
+<dd><p><code>(list)</code> Regex captures from <code><a href="https://rdrr.io/r/base/regmatches.html" class="external-link">regmatches()</a></code>: the full match,
+one group per calendar field named in <code>fields</code>, and a trailing UTC-offset
+group (possibly <code>""</code> when absent).</p></dd>
 
 
 <dt id="arg-fields">fields<a class="anchor" aria-label="anchor" href="#arg-fields"></a></dt>
-<dd><p><code>(character)</code> Which calendar field (<code>"Y"</code>, <code>"m"</code>, <code>"d"</code>,
-<code>"H"</code>, <code>"M"</code>, or <code>"S"</code>) each non-offset capture group corresponds to, in
-the order the groups appear.</p></dd>
+<dd><p><code>(character)</code> Which calendar field (<code>"Y"</code>, <code>"m"</code>, <code>"d"</code>, <code>"H"</code>,
+<code>"M"</code>, or <code>"S"</code>) each non-offset capture group corresponds to, in the order
+the groups appear.</p></dd>
 
 
 <dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
@@ -70,8 +70,8 @@ explicit offset.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">base::POSIXct</a> vector (in <code>tz</code>), the same length as <code>matches</code>,
-with <code>NA</code> at any position that describes an impossible date-time (such
-as <code>"2024-02-30"</code>).</p>
+with <code>NA</code> at any position that describes an impossible date-time (such as
+<code>"2024-02-30"</code>).</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

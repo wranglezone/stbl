@@ -1,6 +1,6 @@
-# Coerce to length-1 character
+# Convert to length-1 character
 
-Checks whether a vector can be coerced to a length-1 character vector.
+Checks whether a vector can be converted to a length-1 character vector.
 `to_character_scalar()` is a synonym of `to_chr_scalar()`.
 
 ## Usage
@@ -57,8 +57,8 @@ to_character_scalar(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -70,7 +70,7 @@ to_character_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -79,7 +79,7 @@ The input as a length-1 character vector, or an error condition with
 classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+- `<stbl-error-coerce-character>` when `x` cannot be converted to
   character (for example a `data.frame`, or an anonymous function).
 
 - `<stbl-error-incompatible_values-character>` when some elements of a

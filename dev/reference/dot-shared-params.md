@@ -34,7 +34,7 @@ to make them easier to import and to find.
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -55,13 +55,13 @@ to make them easier to import and to find.
   `(environment)` The execution environment to mention as the source of
   error messages.
 
-- cast_fn:
+- convert_fn:
 
-  `(function)` The `as.*()` function to use for coercion.
+  `(function)` The `as.*()` function to use for conversion.
 
 - check_cls_value_fn:
 
-  `(function)` A function to check the values of `x` after coercion.
+  `(function)` A function to check the values of `x` after conversion.
 
 - check_cls_value_fn_args:
 
@@ -84,7 +84,7 @@ to make them easier to import and to find.
 
 - coerce_function:
 
-  (`logical(1)`) Should functions be coerced?
+  (`logical(1)`) Should functions be converted?
 
 - depth:
 
@@ -205,7 +205,7 @@ to make them easier to import and to find.
 
 - spec:
 
-  `(function)` A single stabilizer or coercion function, such as a
+  `(function)` A single stabilizer or conversion function, such as a
   `to_*` function
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), a `stabilize_*` function
@@ -216,18 +216,18 @@ to make them easier to import and to find.
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
 
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - to_class:
 
-  (`character(1)`) The name of the class to coerce to.
+  (`character(1)`) The name of the class to convert to.
 
 - to_cls_args:
 
@@ -235,7 +235,7 @@ to make them easier to import and to find.
 
 - to_cls_fn:
 
-  `(function)` The `to_*()` function to use for coercion.
+  `(function)` The `to_*()` function to use for conversion.
 
 - to_cls_scalar_args:
 
@@ -244,7 +244,7 @@ to make them easier to import and to find.
 
 - to_cls_scalar_fn:
 
-  `(function)` The `to_*_scalar()` function to use for coercion.
+  `(function)` The `to_*_scalar()` function to use for conversion.
 
 - to_na:
 
@@ -285,5 +285,5 @@ to make them easier to import and to find.
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.

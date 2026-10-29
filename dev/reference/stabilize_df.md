@@ -152,7 +152,7 @@ stabilise_data_frame(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -163,8 +163,8 @@ The validated data frame, or an error condition with classes
 
 - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 
-- `<stbl-error-coerce-data.frame>` when `.x` cannot be coerced to a data
-  frame.
+- `<stbl-error-coerce-data.frame>` when `.x` cannot be converted to a
+  data frame.
 
 - `<stbl-error-jagged>` when list input has incompatible element lengths
   for conversion to a data frame.
@@ -325,7 +325,7 @@ stabilize_df(NULL)
 try(stabilize_df(NULL, .allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 
-# Coercible inputs such as named lists are accepted
+# Convertible inputs such as named lists are accepted
 stabilize_df(
   list(name = "Alice", age = 30L),
   name = specify_chr_scalar(),
@@ -334,10 +334,10 @@ stabilize_df(
 #>    name age
 #> 1 Alice  30
 
-# Non-coercible inputs are rejected
+# Non-convertible inputs are rejected
 try(stabilize_df("not a data frame"))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `"not a data frame"` <character> to <data.frame>.
+#>   Can't convert `"not a data frame"` <character> to <data.frame>.
 
 # Mark a column as optional via .required
 stabilize_df(

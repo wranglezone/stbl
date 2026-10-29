@@ -1,6 +1,6 @@
-# Try to coerce or validate x as one of several types
+# Try to convert or validate x as one of several types
 
-`stabilize_any_of()` attempts to validate and coerce `x` using each
+`stabilize_any_of()` attempts to validate and convert `x` using each
 function in `...` in order. It returns the result of the first function
 that succeeds. If all functions fail, an informative error that combines
 the individual failure messages is thrown. `stabilise_any_of()` is a
@@ -8,7 +8,7 @@ synonym.
 
 `to_any_of()` is analogous to
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
-coerce `x` to each type given in `...` (as a prototype such as
+convert `x` to each type given in `...` (as a prototype such as
 [`integer()`](https://rdrr.io/r/base/integer.html) or
 [`character()`](https://rdrr.io/r/base/character.html)) and returns the
 first successful result.
@@ -49,7 +49,7 @@ to_any_of(
 
 - ...:
 
-  For `stabilize_any_of()`: unnamed stabilizer or coercion functions,
+  For `stabilize_any_of()`: unnamed stabilizer or conversion functions,
   such as `stabilize_*` functions
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), `to_*` functions
@@ -80,12 +80,12 @@ to_any_of(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
 
-`x` coerced or validated by the first successful function or prototype
+`x` converted or validated by the first successful function or prototype
 in `...`, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
@@ -155,7 +155,7 @@ stabilize_any_of(1L, stabilize_int, stabilize_chr)
 stabilize_any_of("a", stabilize_int, stabilize_chr)
 #> [1] "a"
 
-# Coerces via the first matching function ("1" -> 1L)
+# Converts via the first matching function ("1" -> 1L)
 stabilize_any_of("1", stabilize_int, stabilize_chr)
 #> [1] 1
 
@@ -168,9 +168,9 @@ try(stabilize_any_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int)
 #> Error in eval(expr, envir) : 
 #>   `list(1, TRUE, "23", "maybe")` must match at least one of the provided
 #> stabilizers.
-#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <logical>
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be convertible to <logical>
 #>   (Locations: 4)
-#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <integer>
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be convertible to <integer>
 #>   (Locations: 4)
 # to_any_of() uses prototypes instead of functions
 to_any_of(1L, integer(), character())

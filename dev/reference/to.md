@@ -1,6 +1,6 @@
 # Convert a value to a target type
 
-`to()` coerces `x` to the type of `.to`, dispatching on the class of
+`to()` converts `x` to the type of `.to`, dispatching on the class of
 `.to` to the appropriate `to_*()` function.
 
 ## Usage
@@ -211,8 +211,8 @@ to(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -224,7 +224,7 @@ to(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - levels:
@@ -248,7 +248,7 @@ to(
 
 ## Value
 
-`x` coerced to the type of `.to`, or an error condition with classes
+`x` converted to the type of `.to`, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
@@ -260,7 +260,7 @@ to(
 - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
   `to_*()` function and
   [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
-  cannot cast `x` to `.to`.
+  cannot converted `x` to `.to`.
 
 ## Details
 
@@ -377,7 +377,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5f5423cee528>
+#> <bytecode: 0x5cf257b559e8>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

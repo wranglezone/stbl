@@ -1,7 +1,7 @@
 # stbl: Stabilize Objects
 
 A set of consistent, opinionated functions to quickly check objects,
-coerce them to the desired configuration, or deliver informative error
+convert them to the desired configuration, or deliver informative error
 messages when that is not possible.
 
 ## See also

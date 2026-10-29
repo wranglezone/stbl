@@ -1,6 +1,6 @@
-# Coerce to length-1 double
+# Convert to length-1 double
 
-Checks whether a vector can be coerced to a length-1 double vector.
+Checks whether a vector can be converted to a length-1 double vector.
 `to_double_scalar()` is a synonym of `to_dbl_scalar()`.
 
 ## Usage
@@ -57,8 +57,8 @@ to_double_scalar(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -70,7 +70,7 @@ to_double_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -79,7 +79,7 @@ The input as a length-1 double vector, or an error condition with
 classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+- `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 
 - `<stbl-error-incompatible_values-double>` when some values cannot be
   safely converted to double.

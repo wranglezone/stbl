@@ -1,9 +1,9 @@
-# Try to coerce or validate x as all of several specs
+# Try to convert or validate x as all of several specs
 
-`stabilize_all_of()` validates and coerces `x` by applying every
+`stabilize_all_of()` validates and converts `x` by applying every
 function in `...` to `x`, independently. `x` must satisfy every spec,
-and all specs must agree on the coerced result; if any spec fails, or
-specs disagree on the coerced value, an informative error is thrown.
+and all specs must agree on the converted result; if any spec fails, or
+specs disagree on the converted value, an informative error is thrown.
 `stabilise_all_of()` is a synonym.
 
 ## Usage
@@ -62,12 +62,12 @@ stabilise_all_of(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
 
-`x` coerced or validated by every function in `...`, or an error
+`x` converted or validated by every function in `...`, or an error
 condition with classes `<stbl-error>`, `<stbl-condition>`,
 `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 failure mode:
@@ -79,7 +79,7 @@ failure mode:
 - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
 
 - `<stbl-error-inconsistent_all_of>` when every function succeeds, but
-  they don't all produce the same coerced value.
+  they don't all produce the same converted value.
 
 ## See also
 
@@ -144,19 +144,19 @@ stabilize_all_of("ab", specify_chr(regex = "^a"), specify_chr(regex = "b$"))
 try(stabilize_all_of("a", stabilize_int, stabilize_chr))
 #> Error in eval(expr, envir) : 
 #>   `"a"` must match all of the provided stabilizers.
-#> ✖ `"a"` <character> must be coercible to <integer> (Locations: 1)
+#> ✖ `"a"` <character> must be convertible to <integer> (Locations: 1)
 
 # Errors because each spec sees the original "1" (a string); the second
 # spec would succeed on 1L, but doesn't get the chance to see it
 try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 #> Error in eval(expr, envir) : 
 #>   `"1"` must match all of the provided stabilizers.
-#> ✖ Can't coerce `"1"` <character> to <double>.
+#> ✖ Can't convert `"1"` <character> to <double>.
 
-# Errors when specs succeed but disagree on the coerced value
+# Errors when specs succeed but disagree on the converted value
 # (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
 try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
 #> Error in eval(expr, envir) : 
-#>   `1L` must be coerced the same way by every provided stabilizer.
-#> ℹ The provided stabilizers succeeded, but disagreed on the coerced value.
+#>   `1L` must be converted the same way by every provided stabilizer.
+#> ℹ The provided stabilizers succeeded, but disagreed on the converted value.
 ```

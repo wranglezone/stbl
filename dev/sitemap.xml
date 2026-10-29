@@ -27,14 +27,14 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-bad_tz_msgs_local.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-cant_coerce_msg.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-cant_convert_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_factory_args.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_first_pkg_condition.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_allowed_values.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cast_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_consensus.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_conversion_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_cpx_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_dbl_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_df_col_names.html</loc></url>
@@ -69,9 +69,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-chr_from_op_call.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-cli_escape.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-cli_mark.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-coerce_fct_levels.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-coerce_fct_levels_impl.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-coerce_fct_to_na.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-collapse_dash.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_dash.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_condition_classes.html</loc></url>
@@ -80,6 +77,9 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_warning_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_specification_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels_impl.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_to_na.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-date_type_obj.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_format_variants.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_type_obj.html</loc></url>
@@ -138,7 +138,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_warn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_bad_tz.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_coerce.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_convert.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_all_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_each.html</loc></url>

@@ -150,7 +150,7 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
-<dd><p>A vector of permitted values (coerced to the target
+<dd><p>A vector of permitted values (converted to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
@@ -158,8 +158,8 @@ independently of <code>allowed_values</code>, subject to <code>allow_na</code>.<
 <dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
 <dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
 strings to try, in order, when parsing a character <code>x</code>. The first format
-that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
 shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>

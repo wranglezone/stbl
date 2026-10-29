@@ -1,22 +1,22 @@
-# Define the main message for a coercion failure that names both sides
+# Define the main message for a conversion failure that names both sides
 
-Define the main message for a coercion failure that names both sides
+Define the main message for a conversion failure that names both sides
 
 ## Usage
 
 ``` r
-.cant_coerce_msg(from_class, to_class, x_arg, to_arg)
+.cant_convert_msg(from_class, to_class, x_arg, to_arg)
 ```
 
 ## Arguments
 
 - from_class:
 
-  (`character(1)`) The class of the object being coerced.
+  (`character(1)`) The class of the object being converted.
 
 - to_class:
 
-  (`character(1)`) The class being coerced to.
+  (`character(1)`) The class being converted to.
 
 - x_arg:
 
@@ -27,7 +27,8 @@ Define the main message for a coercion failure that names both sides
 
 - to_arg:
 
-  (`character(1)`) The name of the coercion target, already checked with
+  (`character(1)`) The name of the conversion target, already checked
+  with
   [`.check_to_arg()`](https://stbl.wrangle.zone/dev/reference/dot-check_to_arg.md).
 
 ## Value

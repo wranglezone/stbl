@@ -3,7 +3,7 @@
 Base R has no C-level range routines for
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) as it does
 for double, so the comparisons are performed in plain R. `min_value`,
-`max_value`, and `allowed_values` are coerced to
+`max_value`, and `allowed_values` are converted to
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) first so
 that character or numeric bounds are accepted.
 
@@ -38,7 +38,7 @@ that character or numeric bounds are accepted.
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 

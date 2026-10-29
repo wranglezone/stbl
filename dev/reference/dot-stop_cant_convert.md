@@ -1,11 +1,11 @@
-# Abort with a standardized "can't coerce" message
+# Abort with a standardized "can't convert" message
 
-Abort with a standardized "can't coerce" message
+Abort with a standardized "can't convert" message
 
 ## Usage
 
 ``` r
-.stop_cant_coerce(
+.stop_cant_convert(
   from_class,
   to_class,
   x_arg,
@@ -22,11 +22,11 @@ Abort with a standardized "can't coerce" message
 
 - from_class:
 
-  (`character(1)`) The class of the object that failed coercion.
+  (`character(1)`) The class of the object that failed conversion.
 
 - to_class:
 
-  (`character(1)`) The target class for the coercion.
+  (`character(1)`) The target class for the conversion.
 
 - x_arg:
 
@@ -59,8 +59,8 @@ Abort with a standardized "can't coerce" message
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - ...:

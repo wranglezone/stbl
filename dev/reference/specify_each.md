@@ -15,7 +15,7 @@ specify_each(spec)
 
 - spec:
 
-  `(function)` A single stabilizer or coercion function, such as a
+  `(function)` A single stabilizer or conversion function, such as a
   `to_*` function
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), a `stabilize_*` function
@@ -61,6 +61,6 @@ stabilize_ints(list("1", "2", "3"))
 try(stabilize_ints(list("1", "a")))
 #> Error in eval(expr, envir) : 
 #>   `list("1", "a")` <list> must have every element satisfy `spec`.
-#> ✖ Location 2: `list("1", "a")[[2]]` <character> must be coercible to <integer>
-#>   (Locations: 1)
+#> ✖ Location 2: `list("1", "a")[[2]]` <character> must be convertible to
+#>   <integer> (Locations: 1)
 ```

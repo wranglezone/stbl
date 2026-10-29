@@ -1,6 +1,6 @@
-# Coerce to date-time
+# Convert to date-time
 
-Checks whether a vector can be coerced to a
+Checks whether a vector can be converted to a
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) without
 losing information, returning it silently if so. Otherwise an
 informative error message is signaled. `to_datetime()` is a synonym of
@@ -108,8 +108,8 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -121,7 +121,7 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -237,14 +237,14 @@ to_dttm(NULL)
 #> NULL
 try(to_dttm("2024-01-01 12:00:00"))
 #> Error in eval(expr, envir) : 
-#>   `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
+#>   `"2024-01-01 12:00:00"` <character> must be convertible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 1
 #> • Values: "2024-01-01 12:00:00"
 try(to_dttm(c("2024-01-01T12:00:00Z", "not-a-datetime")))
 #> Error in eval(expr, envir) : 
 #>   `c("2024-01-01T12:00:00Z", "not-a-datetime")` <character> must be
-#> coercible to <datetime>
+#> convertible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 2
 #> • Values: "not-a-datetime"

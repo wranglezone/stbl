@@ -1,6 +1,6 @@
-# Coerce to length-1 factor with additional checks
+# Convert to length-1 factor with additional checks
 
-Checks whether a vector can be coerced to a length-1 factor.
+Checks whether a vector can be converted to a length-1 factor.
 `stabilize_fct_scalar()` is optimized to check for length-1 factors
 (compared to
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md)
@@ -119,7 +119,7 @@ stabilise_factor_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -128,7 +128,7 @@ The input as a length-1 factor, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+- `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 

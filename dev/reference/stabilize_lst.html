@@ -137,8 +137,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or functions produced by <code>specify_*()</code> functions
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to an element in <code>.x</code>, and
 the function is used to validate that element when present. Whether the
-element is required (its absence is an error) is controlled by
-<code>.required</code>.</p></dd>
+element is required (its absence is an error) is controlled by <code>.required</code>.</p></dd>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
@@ -146,9 +145,8 @@ element is required (its absence is an error) is controlled by
 listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra named elements cause an error.</p></li>
 <li><p><code>TRUE</code>: extra named elements are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
-(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
-function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra named
-element.</p></li>
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra named element.</p></li>
 </ul></dd>
 
 
@@ -156,20 +154,20 @@ element.</p></li>
 <dd><p>Controls how unnamed elements of <code>.x</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any unnamed elements cause an error.</p></li>
 <li><p><code>TRUE</code>: unnamed elements are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
-(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
-function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every unnamed element.</p></li>
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every unnamed element.</p></li>
 </ul></dd>
 
 
 <dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should <code>.x</code> be allowed to
-have duplicate names? If <code>FALSE</code> (default), an error is thrown when any
-named element of <code>.x</code> shares a name with another.</p></dd>
+<dd><p>(<code>logical(1)</code>) Should <code>.x</code> be allowed to have
+duplicate names? If <code>FALSE</code> (default), an error is thrown when any named
+element of <code>.x</code> shares a name with another.</p></dd>
 
 
 <dt id="arg--unique">.unique<a class="anchor" aria-label="anchor" href="#arg--unique"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should all elements in <code>.x</code> be distinct?
-If <code>TRUE</code>, duplicated elements are rejected.</p></dd>
+<dd><p>(<code>logical(1)</code>) Should all elements in <code>.x</code> be distinct? If
+<code>TRUE</code>, duplicated elements are rejected.</p></dd>
 
 
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
@@ -193,11 +191,10 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
 <dd><p><code>(character)</code> Names (from <code>...</code>) of elements that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
-required unless you opt it out. Named specs <em>not</em> listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
-A zero-length <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when
-<code>.allow_zero_length = TRUE</code>.</p></dd>
+required unless you opt it out. Named specs <em>not</em> listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+<code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A zero-length
+<code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>.</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
@@ -215,7 +212,7 @@ source of error messages.</p></dd>
 <dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
 <dd><p>(<code>character(1)</code>) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.</p></dd>
 
 </dl></div>
@@ -224,7 +221,7 @@ the original class.</p></dd>
     <p>The validated list, or an error condition with classes
 <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be coerced to a list.</p></li>
+<li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be converted to a list.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate

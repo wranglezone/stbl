@@ -1,11 +1,11 @@
-# Check for coercion failures and stop if any are found
+# Check for conversion failures and stop if any are found
 
-Check for coercion failures and stop if any are found
+Check for conversion failures and stop if any are found
 
 ## Usage
 
 ``` r
-.check_cast_failures(
+.check_conversion_failures(
   x,
   failures,
   x_class,
@@ -25,19 +25,19 @@ Check for coercion failures and stop if any are found
 
 - failures:
 
-  `(logical)` A logical vector where `TRUE` indicates a coercion
+  `(logical)` A logical vector where `TRUE` indicates a conversion
   failure.
 
 - x_class:
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
 
 - due_to:
 
@@ -58,8 +58,8 @@ Check for coercion failures and stop if any are found
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 ## Value

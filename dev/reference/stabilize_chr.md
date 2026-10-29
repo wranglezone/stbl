@@ -1,4 +1,4 @@
-# Coerce to character with additional checks
+# Convert to character with additional checks
 
 Compared to
 [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
@@ -136,7 +136,7 @@ stabilise_character(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -156,7 +156,7 @@ stabilise_character(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -165,7 +165,7 @@ The input as a character vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+- `<stbl-error-coerce-character>` when `x` cannot be converted to
   character.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.

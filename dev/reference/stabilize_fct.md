@@ -1,4 +1,4 @@
-# Coerce to factor with additional checks
+# Convert to factor with additional checks
 
 Compared to
 [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
@@ -129,7 +129,7 @@ stabilise_factor(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -138,7 +138,7 @@ The input as a factor, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+- `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 

@@ -1,6 +1,6 @@
-# Coerce an object from a factor to a specific class
+# Convert an object from a factor to a specific class
 
-Coerce an object from a factor to a specific class
+Convert an object from a factor to a specific class
 
 ## Usage
 
@@ -26,7 +26,7 @@ Coerce an object from a factor to a specific class
 
 - to_cls_fn:
 
-  `(function)` The `to_*()` function to use for coercion.
+  `(function)` The `to_*()` function to use for conversion.
 
 - to_cls_args:
 
@@ -34,7 +34,7 @@ Coerce an object from a factor to a specific class
 
 - to_class:
 
-  (`character(1)`) The name of the class to coerce to.
+  (`character(1)`) The name of the class to convert to.
 
 - coerce_factor:
 
@@ -55,8 +55,8 @@ Coerce an object from a factor to a specific class
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -68,9 +68,9 @@ Coerce an object from a factor to a specific class
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
 
-`x` coerced to the target class.
+`x` converted to the target class.

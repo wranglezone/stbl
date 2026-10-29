@@ -143,7 +143,7 @@ types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
-<dd><p>The target object for the coercion.</p></dd>
+<dd><p>The target object for the conversion.</p></dd>
 
 
 <dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
@@ -159,8 +159,8 @@ unexported functions.</p></dd>
 
 <dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
-being coerced to match, for use in error messages. When <code>NULL</code>, error
-messages describe only <code>x</code>. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, conversion failure messages name
 both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
@@ -173,9 +173,9 @@ source of error messages.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>.x_to_y()</code>: A list with two elements: <code>result</code>, the converted
 vector, and <code>valid</code>, a logical vector indicating whether each element was
-successfully coerced without losing information. <code>.x_are_yish()</code>: A logical
-vector indicating whether each element of <code>x</code> can be coerced to the target
-type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
+successfully converted without losing information. <code>.x_are_yish()</code>: A
+logical vector indicating whether each element of <code>x</code> can be converted to
+the target type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
 <code>.check_min_dbl_exclusive()</code>, and <code>.check_max_dbl_exclusive()</code>: <code>NULL</code> if
 all values pass the check, otherwise a vector of failing indices.</p>
     </div>

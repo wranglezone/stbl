@@ -1,4 +1,4 @@
-# Try to coerce or validate x as exactly one of several specifications
+# Try to convert or validate x as exactly one of several specifications
 
 `stabilize_one_of()` evaluates every function in `...` against `x` and
 requires that exactly one of them succeeds. It returns the result of
@@ -10,7 +10,7 @@ synonym.
 
 `to_one_of()` is analogous to
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md): it tries to
-coerce `x` to each type given in `...` (as a prototype such as
+convert `x` to each type given in `...` (as a prototype such as
 [`integer()`](https://rdrr.io/r/base/integer.html) or
 [`character()`](https://rdrr.io/r/base/character.html)) and requires
 that exactly one succeeds.
@@ -51,7 +51,7 @@ to_one_of(
 
 - ...:
 
-  For `stabilize_one_of()`: unnamed stabilizer or coercion functions,
+  For `stabilize_one_of()`: unnamed stabilizer or conversion functions,
   such as `stabilize_*` functions
   ([`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
   etc.), `to_*` functions
@@ -82,13 +82,13 @@ to_one_of(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
 
-`x` coerced or validated by the single successful function or prototype
-in `...`, or an error condition with classes `<stbl-error>`,
+`x` converted or validated by the single successful function or
+prototype in `...`, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
@@ -154,7 +154,7 @@ Other stabilization functions:
 stabilize_one_of("a", stabilize_int, stabilize_chr)
 #> [1] "a"
 
-# Coerces via the single matching function (1.5 can't become an integer)
+# Converts via the single matching function (1.5 can't become an integer)
 stabilize_one_of(1.5, stabilize_int, stabilize_chr)
 #> [1] "1.5"
 
@@ -170,19 +170,19 @@ try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int)
 #> Error in eval(expr, envir) : 
 #>   `list(1, TRUE, "23", "maybe")` must match exactly one of the provided
 #> specifications, but matched none.
-#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <logical>
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be convertible to <logical>
 #>   (Locations: 4)
-#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be coercible to <integer>
+#> ✖ `list(1, TRUE, "23", "maybe")` <list> must be convertible to <integer>
 #>   (Locations: 4)
 # to_one_of() uses prototypes instead of functions
 to_one_of("a", integer(), character())
 #> [1] "a"
 
-# "FALSE" coerces to logical, but not to integer
+# "FALSE" converts to logical, but not to integer
 to_one_of("FALSE", logical(), integer())
 #> [1] FALSE
 
-# Errors as ambiguous: "1" coerces to both integer and double
+# Errors as ambiguous: "1" converts to both integer and double
 try(to_one_of("1", integer(), double()))
 #> Error in eval(expr, envir) : 
 #>   `"1"` must match exactly one of the provided specifications, but matched

@@ -3,7 +3,7 @@
 `specify_all_of()` creates a function that will call
 [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
 with the provided specs. `specify_all_of()`'s function requires that `x`
-satisfy every provided spec, and that all specs agree on the coerced
+satisfy every provided spec, and that all specs agree on the converted
 result.
 
 ## Usage

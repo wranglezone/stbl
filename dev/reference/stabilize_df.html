@@ -140,8 +140,8 @@ is required is controlled by <code>.required</code>.</p></dd>
 listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra columns cause an error.</p></li>
 <li><p><code>TRUE</code>: extra columns are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
-(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code>
-function (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra column.</p></li>
+(<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
+(<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every extra column.</p></li>
 </ul></dd>
 
 
@@ -152,13 +152,13 @@ cause an error. Unlike <code>...</code>, this does not validate the column conte
 
 
 <dt id="arg--min-rows">.min_rows<a class="anchor" aria-label="anchor" href="#arg--min-rows"></a></dt>
-<dd><p>(<code>integer(1)</code>) The minimum number of rows allowed in
-<code>.x</code>. If <code>NULL</code> (default), the row count is not checked.</p></dd>
+<dd><p>(<code>integer(1)</code>) The minimum number of rows allowed in <code>.x</code>.
+If <code>NULL</code> (default), the row count is not checked.</p></dd>
 
 
 <dt id="arg--max-rows">.max_rows<a class="anchor" aria-label="anchor" href="#arg--max-rows"></a></dt>
-<dd><p>(<code>integer(1)</code>) The maximum number of rows allowed in
-<code>.x</code>. If <code>NULL</code> (default), the row count is not checked.</p></dd>
+<dd><p>(<code>integer(1)</code>) The maximum number of rows allowed in <code>.x</code>.
+If <code>NULL</code> (default), the row count is not checked.</p></dd>
 
 
 <dt id="arg--allow-null">.allow_null<a class="anchor" aria-label="anchor" href="#arg--allow-null"></a></dt>
@@ -172,11 +172,10 @@ cause an error. Unlike <code>...</code>, this does not validate the column conte
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
 <dd><p><code>(character)</code> Names (from <code>...</code>) of columns that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
-required unless you opt it out. Named specs <em>not</em> listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
-A <code>.x</code> with zero columns skips this check when
-<code>.allow_zero_length = TRUE</code> (the default).</p></dd>
+required unless you opt it out. Named specs <em>not</em> listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+<code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A <code>.x</code> with zero
+columns skips this check when <code>.allow_zero_length = TRUE</code> (the default).</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
@@ -194,7 +193,7 @@ source of error messages.</p></dd>
 <dt id="arg--x-class">.x_class<a class="anchor" aria-label="anchor" href="#arg--x-class"></a></dt>
 <dd><p>(<code>character(1)</code>) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.</p></dd>
 
 </dl></div>
@@ -203,7 +202,7 @@ the original class.</p></dd>
     <p>The validated data frame, or an error condition with classes
 <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be coerced to a data
+<li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be converted to a data
 frame.</p></li>
 <li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths for
 conversion to a data frame.</p></li>
@@ -216,8 +215,8 @@ absent.</p></li>
 <li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
 unnamed.</p></li>
 <li><p><code>&lt;stbl-error-missing_element&gt;</code>, <code>&lt;stbl-error-bad_named&gt;</code>,
-<code>&lt;stbl-error-bad_unnamed&gt;</code>, or <code>&lt;stbl-error-duplicate_names&gt;</code> when list-like
-column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a></code> fail.</p></li>
+<code>&lt;stbl-error-bad_unnamed&gt;</code>, or <code>&lt;stbl-error-duplicate_names&gt;</code> when
+list-like column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a></code> fail.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -356,7 +355,7 @@ column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_df</span><span class="op">(</span><span class="cn">NULL</span>, .allow_null <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : `NULL` must not be <span style="color: #0000BB;">&lt;NULL&gt;</span>.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Coercible inputs such as named lists are accepted</span></span></span>
+<span class="r-in"><span><span class="co"># Convertible inputs such as named lists are accepted</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, age <span class="op">=</span> <span class="fl">30L</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
@@ -365,10 +364,10 @@ column checks delegated to <code><a href="stabilize_lst.html">stabilize_lst()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name age</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice  30</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Non-coercible inputs are rejected</span></span></span>
+<span class="r-in"><span><span class="co"># Non-convertible inputs are rejected</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_df</span><span class="op">(</span><span class="st">"not a data frame"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't coerce `"not a data frame"` <span style="color: #0000BB;">&lt;character&gt;</span> to <span style="color: #0000BB;">&lt;data.frame&gt;</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't convert `"not a data frame"` <span style="color: #0000BB;">&lt;character&gt;</span> to <span style="color: #0000BB;">&lt;data.frame&gt;</span>.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Mark a column as optional via .required</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>

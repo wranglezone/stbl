@@ -118,13 +118,13 @@ register_user(
   interests = list("R", mean)
 )
 #> Error in `register_user()`:
-#> ! `interests` <list> must be coercible to <character>
+#> ! `interests` <list> must be convertible to <character>
 #> ✖ Can't convert some values due to incompatible element types.
 #> • Locations: 2
 #> • Values: "function (x, ...) UseMethod(\"mean\")"
 ```
 
-## Step 2: Simple Scalar Coercion with `to_*_scalar()`
+## Step 2: Simple Scalar Conversion with `to_*_scalar()`
 
 Next, we’ll add checks for `age` and `is_premium_member`. These
 arguments must each contain a single value. We’ll use the `_scalar`
@@ -162,8 +162,8 @@ When everything follows the rules, `register_user()` works:
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
-  age = "42",                 # Coercible to integer
-  is_premium_member = "True", # Coercible to logical
+  age = "42",                 # Convertible to integer
+  is_premium_member = "True", # Convertible to logical
   interests = c("R", "hiking")
 ) |> str()
 #> List of 5
@@ -175,7 +175,7 @@ register_user(
 ```
 
 The `register_user()` function will fail with clear error messages if
-the input isn’t a single value or can’t be coerced.
+the input isn’t a single value or can’t be converted.
 
 For example, when age is not a single value, `register_user()` throws an
 error:
@@ -200,12 +200,12 @@ converted to an integer:
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
-  age = "forty-two",          # Not coercible to integer
+  age = "forty-two",          # Not convertible to integer
   is_premium_member = TRUE, 
   interests = c("R", "hiking")
 )
 #> Error in `register_user()`:
-#> ! `age` <character> must be coercible to <integer>
+#> ! `age` <character> must be convertible to <integer>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "forty-two"
@@ -214,10 +214,10 @@ register_user(
 ## Step 3: Complex Validation with `stabilize_*()`
 
 Finally, let’s add more complex validation for `username` and
-`email_address`. For these, simple type coercion isn’t enough; we need
+`email_address`. For these, simple type conversion isn’t enough; we need
 to check their content and structure using
 [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md).
-This function first coerces the input to character, then applies a list
+This function first converts the input to character, then applies a list
 of validation rules supplied via the `regex` argument (see the
 [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md)
 documentation for details). If speed matters, you should prefer the

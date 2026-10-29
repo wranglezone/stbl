@@ -56,8 +56,8 @@ make them easier to import and to find.</p>
 <dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
 <dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
 strings to try, in order, when parsing a character <code>x</code>. The first format
-that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
 shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>
@@ -74,7 +74,7 @@ error class list. Useful for the <code>class</code> argument of
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
-<dd><p>A vector of permitted values (coerced to the target
+<dd><p>A vector of permitted values (converted to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
@@ -96,13 +96,13 @@ independently of <code>allowed_values</code>, subject to <code>allow_na</code>.<
 source of error messages.</p></dd>
 
 
-<dt id="arg-cast-fn">cast_fn<a class="anchor" aria-label="anchor" href="#arg-cast-fn"></a></dt>
-<dd><p><code>(function)</code> The <code>as.*()</code> function to use for coercion.</p></dd>
+<dt id="arg-convert-fn">convert_fn<a class="anchor" aria-label="anchor" href="#arg-convert-fn"></a></dt>
+<dd><p><code>(function)</code> The <code>as.*()</code> function to use for conversion.</p></dd>
 
 
 <dt id="arg-check-cls-value-fn">check_cls_value_fn<a class="anchor" aria-label="anchor" href="#arg-check-cls-value-fn"></a></dt>
 <dd><p><code>(function)</code> A function to check the values of <code>x</code>
-after coercion.</p></dd>
+after conversion.</p></dd>
 
 
 <dt id="arg-check-cls-value-fn-args">check_cls_value_fn_args<a class="anchor" aria-label="anchor" href="#arg-check-cls-value-fn-args"></a></dt>
@@ -123,7 +123,7 @@ the integer index of the factor.</p></dd>
 
 
 <dt id="arg-coerce-function">coerce_function<a class="anchor" aria-label="anchor" href="#arg-coerce-function"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should functions be coerced?</p></dd>
+<dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
 
 
 <dt id="arg-depth">depth<a class="anchor" aria-label="anchor" href="#arg-depth"></a></dt>
@@ -237,31 +237,31 @@ throws an error, try installing the stringi package.</p></dd>
 
 
 <dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
 
 
 <dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
-<dd><p><code>(function)</code> A single stabilizer or coercion function, such as
+<dd><p><code>(function)</code> A single stabilizer or conversion function, such as
 a <code>to_*</code> function (<code><a href="to_chr.html">to_chr()</a></code>, etc.), a <code>stabilize_*</code> function
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), or a function produced by a <code>specify_*()</code> call
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc.). Applied independently to each element of <code>x</code>.</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
-<dd><p>The target object for the coercion.</p></dd>
+<dd><p>The target object for the conversion.</p></dd>
 
 
 <dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
-being coerced to match, for use in error messages. When <code>NULL</code>, error
-messages describe only <code>x</code>. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, conversion failure messages name
 both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
 <dt id="arg-to-class">to_class<a class="anchor" aria-label="anchor" href="#arg-to-class"></a></dt>
-<dd><p>(<code>character(1)</code>) The name of the class to coerce to.</p></dd>
+<dd><p>(<code>character(1)</code>) The name of the class to convert to.</p></dd>
 
 
 <dt id="arg-to-cls-args">to_cls_args<a class="anchor" aria-label="anchor" href="#arg-to-cls-args"></a></dt>
@@ -270,7 +270,7 @@ both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 
 <dt id="arg-to-cls-fn">to_cls_fn<a class="anchor" aria-label="anchor" href="#arg-to-cls-fn"></a></dt>
-<dd><p><code>(function)</code> The <code>to_*()</code> function to use for coercion.</p></dd>
+<dd><p><code>(function)</code> The <code>to_*()</code> function to use for conversion.</p></dd>
 
 
 <dt id="arg-to-cls-scalar-args">to_cls_scalar_args<a class="anchor" aria-label="anchor" href="#arg-to-cls-scalar-args"></a></dt>
@@ -280,7 +280,7 @@ both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
 
 <dt id="arg-to-cls-scalar-fn">to_cls_scalar_fn<a class="anchor" aria-label="anchor" href="#arg-to-cls-scalar-fn"></a></dt>
 <dd><p><code>(function)</code> The <code>to_*_scalar()</code> function to use for
-coercion.</p></dd>
+conversion.</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>
@@ -318,7 +318,7 @@ unexported functions.</p></dd>
 <dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
 <dd><p>(<code>character(1)</code>) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.</p></dd>
 
 </dl></div>

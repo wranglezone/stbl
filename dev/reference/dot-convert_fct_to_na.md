@@ -1,11 +1,11 @@
-# Coerce specified values to NA
+# Convert specified values to NA
 
-Coerce specified values to NA
+Convert specified values to NA
 
 ## Usage
 
 ``` r
-.coerce_fct_to_na(x, to_na = character(), call = caller_env())
+.convert_fct_to_na(x, to_na = character(), call = caller_env())
 ```
 
 ## Arguments

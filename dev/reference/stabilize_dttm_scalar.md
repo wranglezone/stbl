@@ -1,6 +1,6 @@
-# Coerce to length-1 date-time with additional checks
+# Convert to length-1 date-time with additional checks
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) vector.
 `stabilize_dttm_scalar()` is optimized to check for length-1 date-time
 vectors (compared to
@@ -121,7 +121,7 @@ stabilise_datetime_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -154,7 +154,7 @@ stabilise_datetime_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -165,7 +165,8 @@ an error condition with classes `<stbl-error>`, `<stbl-condition>`,
 `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 failure mode:
 
-- `<stbl-error-coerce-datetime>` when `x` cannot be coerced to datetime.
+- `<stbl-error-coerce-datetime>` when `x` cannot be converted to
+  datetime.
 
 - `<stbl-error-incompatible_values-datetime>` when some values cannot be
   safely converted to datetime.

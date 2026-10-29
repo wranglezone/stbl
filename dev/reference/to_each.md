@@ -1,4 +1,4 @@
-# Coerce each element of x with a single spec
+# Convert each element of x with a single spec
 
 `to_each()` applies `spec` (a `to_*` function, `stabilize_*` function,
 or `specify_*()` result) to every element of `x`, and stops at the first
@@ -25,7 +25,7 @@ to_each(
 
 - spec:
 
-  `(function)` A single stabilizer or coercion function, such as a
+  `(function)` A single stabilizer or conversion function, such as a
   `to_*` function
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), a `stabilize_*` function
@@ -58,9 +58,9 @@ to_each(
 
 ## Value
 
-`x` with every element coerced by `spec`, simplified to an atomic vector
-when `simplify = TRUE` and possible, otherwise a list. Errors with
-whatever condition `spec` throws for the first failing element.
+`x` with every element converted by `spec`, simplified to an atomic
+vector when `simplify = TRUE` and possible, otherwise a list. Errors
+with whatever condition `spec` throws for the first failing element.
 
 ## See also
 
@@ -87,7 +87,7 @@ to_each(list(1L, "a"), specify_any_of(specify_int(), specify_chr()))
 # Stops at the first element that fails
 try(to_each(list("1", "a"), to_int))
 #> Error in eval(expr, envir) : 
-#>   `list("1", "a")[[2]]` <character> must be coercible to <integer>
+#>   `list("1", "a")[[2]]` <character> must be convertible to <integer>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "a"

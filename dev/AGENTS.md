@@ -5,7 +5,7 @@
 **stbl** — Stabilize Objects
 
 A set of consistent, opinionated functions to quickly check objects,
-coerce them to the desired configuration, or deliver informative error
+convert them to the desired configuration, or deliver informative error
 messages when that is not possible.
 
 <https://stbl.wrangle.zone/>, <https://github.com/wranglezone/stbl>
@@ -14,20 +14,20 @@ messages when that is not possible.
 
 stbl follows [Postel’s
 Law](https://en.wikipedia.org/wiki/Robustness_principle): be liberal in
-what you accept (coerce when safe), conservative in what you return
+what you accept (convert when safe), conservative in what you return
 (ensure inputs have the expected classes and features). The goal is to
 fail fast with clear error messages before expensive operations, and to
-intelligently coerce compatible types (e.g., `"1"` to `1L`).
+intelligently convert compatible types (e.g., `"1"` to `1L`).
 
 ### Function families
 
-| Family          | Purpose                             | Speed  | Example                                     |
-|-----------------|-------------------------------------|--------|---------------------------------------------|
-| `to_*()`        | Fast type coercion                  | Fast   | `to_int("1")` → `1L`                        |
-| `is_*_ish()`    | Check if coercible (single logical) | Fast   | `is_int_ish(1.0)` → `TRUE`                  |
-| `are_*_ish()`   | Check if coercible (element-wise)   | Fast   | `are_int_ish(c(1, 1.5))` → `c(TRUE, FALSE)` |
-| `stabilize_*()` | Comprehensive validation            | Slower | `stabilize_int(x, min_value = 0)`           |
-| `specify_*()`   | Create pre-configured validators    | N/A    | `specify_int(min_value = 0)`                |
+| Family          | Purpose                               | Speed  | Example                                     |
+|-----------------|---------------------------------------|--------|---------------------------------------------|
+| `to_*()`        | Fast type conversion                  | Fast   | `to_int("1")` → `1L`                        |
+| `is_*_ish()`    | Check if convertible (single logical) | Fast   | `is_int_ish(1.0)` → `TRUE`                  |
+| `are_*_ish()`   | Check if convertible (element-wise)   | Fast   | `are_int_ish(c(1, 1.5))` → `c(TRUE, FALSE)` |
+| `stabilize_*()` | Comprehensive validation              | Slower | `stabilize_int(x, min_value = 0)`           |
+| `specify_*()`   | Create pre-configured validators      | N/A    | `specify_int(min_value = 0)`                |
 
 **Supported types (but future development may add more):**
 `chr`/`character`, `dbl`/`double`, `int`/`integer`, `lgl`/`logical`,
@@ -42,7 +42,7 @@ The project follows standard R package conventions with these key
 directories:
 
 stbl/ ├── R/ \# R source code │ ├── aaa-conditions.R \# Error helpers
-(.stbl_abort, .stop_cant_coerce, etc.) │ ├── aaa-shared_params.R \#
+(.stbl_abort, .stop_cant_convert, etc.) │ ├── aaa-shared_params.R \#
 Shared roxygen parameter definitions │ ├── stbl-package.R \#
 Auto-generated package docs │ └── \*.R \# Function definitions, 1 file
 ~= 1 exported function ├── .github/ │ ├── ISSUE_TEMPLATE/ \# GitHub

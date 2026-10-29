@@ -1,6 +1,6 @@
-# Coerce to factor
+# Convert to factor
 
-Checks whether a vector can be coerced to a factor without losing
+Checks whether a vector can be converted to a factor without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. `to_factor` is a synonym of `to_fct()`.
 
@@ -75,8 +75,8 @@ to_fct(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -88,7 +88,7 @@ to_fct(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -101,7 +101,7 @@ The input as a factor, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+- `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 
 - `<stbl-error-incompatible_values-factor>` when some elements of a list
   cannot be converted to factor.
@@ -116,7 +116,7 @@ This function has important differences from
 [`base::as.factor()`](https://rdrr.io/r/base/factor.html) and
 [`base::factor()`](https://rdrr.io/r/base/factor.html):
 
-- Values are never silently coerced to `NA` unless they are explicitly
+- Values are never silently converted to `NA` unless they are explicitly
   supplied in the `to_na` argument.
 
 - `NULL` values can be rejected as part of the call to this function

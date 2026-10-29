@@ -1,11 +1,11 @@
-# Check if an object can be safely coerced to a function
+# Check if an object can be safely converted to a function
 
 `are_fn_ish()` is a vectorized predicate function that checks whether
-each element of its input can be safely coerced to a function.
+each element of its input can be safely converted to a function.
 `are_function_ish()` is a synonym of `are_fn_ish()`.
 
 `is_fn_ish()` is a scalar predicate that checks whether its input can be
-safely coerced to a function by
+safely converted to a function by
 [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md).
 `is_function_ish()` is a synonym of `is_fn_ish()`.
 
@@ -42,7 +42,7 @@ input. `is_fn_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`).
 
 - Functions (including lambda functions created with `~` or `\()`)
 
-- Formulas (one-sided or two-sided, coercible via
+- Formulas (one-sided or two-sided, convertible via
   [`rlang::as_function()`](https://rlang.r-lib.org/reference/as_function.html))
 
 - Character strings that are syntactically valid function names: either
@@ -51,8 +51,9 @@ input. `is_fn_ish()` returns a `length-1 logical` (`TRUE` or `FALSE`).
   environment.
 
 `is_fn_ish()` returns `TRUE` for objects that
-[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) can coerce
-without error (assuming a matching function exists in the search path):
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) can
+convert without error (assuming a matching function exists in the search
+path):
 
 - Functions (including lambda functions created with `~` or `\()`)
 

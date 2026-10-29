@@ -1,11 +1,11 @@
-# Check if an object can be safely coerced to a factor
+# Check if an object can be safely converted to a factor
 
 `are_fct_ish()` is a vectorized predicate function that checks whether
-each element of its input can be safely coerced to a factor.
+each element of its input can be safely converted to a factor.
 `are_factor_ish()` is a synonym of `are_fct_ish()`.
 
 `is_fct_ish()` is a scalar predicate function that checks if all
-elements of its input can be safely coerced to a factor.
+elements of its input can be safely converted to a factor.
 `is_factor_ish()` is a synonym of `is_fct_ish()`.
 
 ## Usage

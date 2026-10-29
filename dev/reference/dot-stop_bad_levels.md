@@ -5,7 +5,7 @@ Stop for bad factor levels
 ## Usage
 
 ``` r
-.stop_bad_levels(x, bad_casts, levels, to_na, x_arg, call)
+.stop_bad_levels(x, bad_conversions, levels, to_na, x_arg, call)
 ```
 
 ## Arguments
@@ -14,7 +14,7 @@ Stop for bad factor levels
 
   The object to stabilize.
 
-- bad_casts:
+- bad_conversions:
 
   `(logical)` A logical vector indicating which elements of `x` are not
   in the allowed levels.

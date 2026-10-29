@@ -1,11 +1,11 @@
-# Coerce to factor with specified levels
+# Core implementation for applying factor levels
 
-Coerce to factor with specified levels
+Core implementation for applying factor levels
 
 ## Usage
 
 ``` r
-.coerce_fct_levels(
+.convert_fct_levels_impl(
   x,
   levels = NULL,
   ordered = is.ordered(x),
@@ -49,4 +49,4 @@ Coerce to factor with specified levels
 
 ## Value
 
-`x` as a factor with specified levels and NAs.
+`x` as a factor with the specified levels.

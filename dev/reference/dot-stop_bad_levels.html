@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.stop_bad_levels</span><span class="op">(</span><span class="va">x</span>, <span class="va">bad_casts</span>, <span class="va">levels</span>, <span class="va">to_na</span>, <span class="va">x_arg</span>, <span class="va">call</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.stop_bad_levels</span><span class="op">(</span><span class="va">x</span>, <span class="va">bad_conversions</span>, <span class="va">levels</span>, <span class="va">to_na</span>, <span class="va">x_arg</span>, <span class="va">call</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -54,9 +54,9 @@
 <dd><p>The object to stabilize.</p></dd>
 
 
-<dt id="arg-bad-casts">bad_casts<a class="anchor" aria-label="anchor" href="#arg-bad-casts"></a></dt>
-<dd><p><code>(logical)</code> A logical vector indicating which elements of
-<code>x</code> are not in the allowed levels.</p></dd>
+<dt id="arg-bad-conversions">bad_conversions<a class="anchor" aria-label="anchor" href="#arg-bad-conversions"></a></dt>
+<dd><p><code>(logical)</code> A logical vector indicating which elements
+of <code>x</code> are not in the allowed levels.</p></dd>
 
 
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>

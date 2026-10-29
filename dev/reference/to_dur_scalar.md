@@ -1,6 +1,6 @@
-# Coerce to length-1 duration
+# Convert to length-1 duration
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
 vector.
 
@@ -47,8 +47,8 @@ to_dur_scalar(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -60,7 +60,7 @@ to_dur_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value

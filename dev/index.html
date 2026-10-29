@@ -16,8 +16,8 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Stabilize Objects">
-<meta name="description" content="A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
-<meta property="og:description" content="A set of consistent, opinionated functions to quickly check objects, coerce them to the desired configuration, or deliver informative error messages when that is not possible.">
+<meta name="description" content="A set of consistent, opinionated functions to quickly check objects, convert them to the desired configuration, or deliver informative error messages when that is not possible.">
+<meta property="og:description" content="A set of consistent, opinionated functions to quickly check objects, convert them to the desired configuration, or deliver informative error messages when that is not possible.">
 <meta property="og:image" content="https://stbl.wrangle.zone/logo.svg">
 <meta name="robots" content="noindex">
 </head>
@@ -73,7 +73,7 @@
 <blockquote>
 <p>“Be conservative in what you send. Be liberal in what you accept from others.”</p>
 </blockquote>
-<p>stbl is liberal about what it accepts (by coercing when safe) and conservative about what it returns (by ensuring that inputs have the classes and other features that are expected).</p>
+<p>stbl is liberal about what it accepts (by converting when safe) and conservative about what it returns (by ensuring that inputs have the classes and other features that are expected).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -119,7 +119,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">my_fun</span><span class="op">(</span><span class="st">"1.1"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in `my_fun()`:</span></span>
-<span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be coercible to &lt;integer&gt;</span></span>
+<span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be convertible to &lt;integer&gt;</span></span>
 <span><span class="co">#&gt; ✖ Can't convert some values due to loss of precision.</span></span>
 <span><span class="co">#&gt; • Locations: 1</span></span>
 <span><span class="co">#&gt; • Values: "1.1"</span></span></code></pre></div>
@@ -127,7 +127,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">my_fun</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3.1"</span>, <span class="st">"4"</span>, <span class="st">"5.2"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in `my_fun()`:</span></span>
-<span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be coercible to &lt;integer&gt;</span></span>
+<span><span class="co">#&gt; ! `my_arg_name` &lt;character&gt; must be convertible to &lt;integer&gt;</span></span>
 <span><span class="co">#&gt; ✖ Can't convert some values due to loss of precision.</span></span>
 <span><span class="co">#&gt; • Locations: 3 and 5</span></span>
 <span><span class="co">#&gt; • Values: "3.1" and "5.2"</span></span></code></pre></div>
@@ -142,7 +142,7 @@
 <li>
 <strong><a href="https://mllg.github.io/checkmate/" class="external-link">{checkmate}</a> and related assertion packages:</strong> stbl’s <code>to_*()</code> and <code>stabilize_*()</code> functions are similar to the <code>assert*ish()</code> functions from {checkmate} with <code>coerce = TRUE</code>. stbl is usually faster, and provided classed error messages to allow you to handle different failure modes differently.</li>
 <li>
-<strong><a href="https://vctrs.r-lib.org/" class="external-link">{vctrs}</a>:</strong> {vctrs} provides strict, low-level tools for coercion and type consistency, especially useful in package internals and base-type enforcement. stbl is more tolerant and higher-level, optimized for use in functions that accept flexible user inputs (e.g. letting a version number 1.1 be passed in as numeric or character and handling both gracefully).</li>
+<strong><a href="https://vctrs.r-lib.org/" class="external-link">{vctrs}</a>:</strong> {vctrs} provides strict, low-level tools for conversion and type consistency, especially useful in package internals and base-type enforcement. stbl is more tolerant and higher-level, optimized for use in functions that accept flexible user inputs (e.g. letting a version number 1.1 be passed in as numeric or character and handling both gracefully).</li>
 </ul>
 </div>
 <div class="section level2">

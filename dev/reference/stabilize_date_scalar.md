@@ -1,6 +1,6 @@
-# Coerce to length-1 date with additional checks
+# Convert to length-1 date with additional checks
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [base::Date](https://rdrr.io/r/base/Dates.html) vector.
 `stabilize_date_scalar()` is optimized to check for length-1 date
 vectors (compared to
@@ -76,7 +76,7 @@ stabilise_date_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -109,7 +109,7 @@ stabilise_date_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -119,7 +119,7 @@ vector, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
-- `<stbl-error-coerce-date>` when `x` cannot be coerced to date.
+- `<stbl-error-coerce-date>` when `x` cannot be converted to date.
 
 - `<stbl-error-incompatible_values-date>` when some values cannot be
   safely converted to date.

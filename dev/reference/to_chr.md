@@ -1,6 +1,6 @@
-# Coerce to character
+# Convert to character
 
-Checks whether a vector can be coerced to character without losing
+Checks whether a vector can be converted to character without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. `to_character` is a synonym of `to_chr()`.
 
@@ -46,8 +46,8 @@ to_character(
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:
@@ -59,7 +59,7 @@ to_character(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -68,7 +68,7 @@ The input as a character vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+- `<stbl-error-coerce-character>` when `x` cannot be converted to
   character (for example a `data.frame`, or an anonymous function).
 
 - `<stbl-error-incompatible_values-character>` when some elements of a
@@ -81,8 +81,8 @@ The input as a character vector, or an error condition with classes
 This function has two important differences from
 [`base::as.character()`](https://rdrr.io/r/base/character.html):
 
-- `list`s and `data.frame`s are *not* coerced to character. In base R,
-  such objects are coerced to character representations of their
+- `list`s and `data.frame`s are *not* converted to character. In base R,
+  such objects are converted to character representations of their
   elements. For example, `as.character(list(1:3))` returns "1:3". In the
   unlikely event that this is the expected behavior, use
   [`as.character()`](https://rdrr.io/r/base/character.html) instead.
@@ -90,14 +90,14 @@ This function has two important differences from
 - `NULL` values can be rejected as part of the call to this function
   (with `allow_null = FALSE`).
 
-Named functions are converted to their string name. If the function
-comes from a package namespace, the result is a `"pkg::fn"` string. For
-example, `to_chr(mean)` returns `"base::mean"`. Anonymous functions
-produce an error.
+  Named functions are converted to their string name. If the function
+  comes from a package namespace, the result is a `"pkg::fn"` string.
+  For example, `to_chr(mean)` returns `"base::mean"`. Anonymous
+  functions produce an error.
 
-To preserve the original call-site symbol when `to_chr()` is called
-inside a wrapper function, use the embrace operator `{{ }}`. For
-example:
+  To preserve the original call-site symbol when `to_chr()` is called
+  inside a wrapper function, use the embrace operator `{{ }}`. For
+  example:
 
     my_wrapper <- function(fn) {
       to_chr({{ fn }})
@@ -184,6 +184,6 @@ to_chr(base::mean)
 #> [1] "base::mean"
 try(to_chr(function(x) x))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `function(x) x` <function> to <character>.
+#>   Can't convert `function(x) x` <function> to <character>.
 #> ℹ Anonymous functions can't be converted to a string name.
 ```

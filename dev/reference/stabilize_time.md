@@ -1,4 +1,4 @@
-# Coerce to time-of-day with additional checks
+# Convert to time-of-day with additional checks
 
 Compared to
 [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
@@ -87,7 +87,7 @@ stabilise_time(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -107,7 +107,7 @@ stabilise_time(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -118,7 +118,7 @@ an error condition with classes `<stbl-error>`, `<stbl-condition>`,
 `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 failure mode:
 
-- `<stbl-error-coerce-time>` when `x` cannot be coerced to a time of
+- `<stbl-error-coerce-time>` when `x` cannot be converted to a time of
   day.
 
 - `<stbl-error-incompatible_values-time>` when some values cannot be
@@ -214,7 +214,7 @@ try(stabilize_time(c("13:20:00Z", NA), allow_na = FALSE))
 #> • NA locations: 2
 try(stabilize_time("13:20:00"))
 #> Error in eval(expr, envir) : 
-#>   `"13:20:00"` <character> must be coercible to <time>
+#>   `"13:20:00"` <character> must be convertible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 1
 #> • Values: "13:20:00"

@@ -1,11 +1,11 @@
-# Check if an object can be safely coerced to double
+# Check if an object can be safely converted to double
 
 `are_dbl_ish()` is a vectorized predicate function that checks whether
-each element of its input can be safely coerced to a double vector.
+each element of its input can be safely converted to a double vector.
 `are_double_ish()` is a synonym of `are_dbl_ish()`.
 
 `is_dbl_ish()` is a scalar predicate function that checks if all
-elements of its input can be safely coerced to a double vector.
+elements of its input can be safely converted to a double vector.
 `is_double_ish()` is a synonym of `is_dbl_ish()`.
 
 ## Usage

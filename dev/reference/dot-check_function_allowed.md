@@ -22,7 +22,7 @@ Check whether functions are allowed
 
 - coerce_function:
 
-  (`logical(1)`) Should functions be coerced?
+  (`logical(1)`) Should functions be converted?
 
 - x_arg:
 
@@ -34,8 +34,8 @@ Check whether functions are allowed
 - to_arg:
 
   (`character(1)` or `NULL`) The name of the object that `x` is being
-  coerced to match, for use in error messages. When `NULL`, error
-  messages describe only `x`. When supplied, coercion failure messages
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
   name both `x_arg` and `to_arg`.
 
 - call:

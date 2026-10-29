@@ -1,4 +1,4 @@
-# Coerce to logical with additional checks
+# Convert to logical with additional checks
 
 Compared to
 [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
@@ -94,7 +94,7 @@ stabilise_logical(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -114,7 +114,7 @@ stabilise_logical(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -123,7 +123,7 @@ The input as a logical vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+- `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
@@ -210,7 +210,7 @@ try(stabilize_lgl(c(TRUE, NA), allow_na = FALSE))
 #> • NA locations: 2
 try(stabilize_lgl(letters))
 #> Error in eval(expr, envir) : 
-#>   `letters` <character> must be coercible to <logical>
+#>   `letters` <character> must be convertible to <logical>
 #> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
 #>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,

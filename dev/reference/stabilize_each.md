@@ -39,7 +39,7 @@ stabilise_each(
 
 - spec:
 
-  `(function)` A single stabilizer or coercion function, such as a
+  `(function)` A single stabilizer or conversion function, such as a
   `to_*` function
   ([`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   etc.), a `stabilize_*` function
@@ -74,17 +74,17 @@ stabilise_each(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
 
-`x` with every element coerced by `spec`, simplified to an atomic vector
-when `simplify = TRUE` and possible, otherwise a list. Errors with
-classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-`<condition>`, and `<stbl-error-cant_stabilize_each>` when any element
-fails `spec`; the condition's `locations` element gives the positions
-that failed.
+`x` with every element converted by `spec`, simplified to an atomic
+vector when `simplify = TRUE` and possible, otherwise a list. Errors
+with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
+`<error>`, `<condition>`, and `<stbl-error-cant_stabilize_each>` when
+any element fails `spec`; the condition's `locations` element gives the
+positions that failed.
 
 ## See also
 
@@ -112,8 +112,8 @@ stabilize_each(list(1L, "a"), specify_any_of(specify_int(), specify_chr()))
 try(stabilize_each(list("1", "a", "b"), stabilize_int))
 #> Error in eval(expr, envir) : 
 #>   `list("1", "a", "b")` <list> must have every element satisfy `spec`.
-#> ✖ Location 2: `list("1", "a", "b")[[2]]` <character> must be coercible to
+#> ✖ Location 2: `list("1", "a", "b")[[2]]` <character> must be convertible to
 #>   <integer> (Locations: 1)
-#> ✖ Location 3: `list("1", "a", "b")[[3]]` <character> must be coercible to
+#> ✖ Location 3: `list("1", "a", "b")[[3]]` <character> must be convertible to
 #>   <integer> (Locations: 1)
 ```

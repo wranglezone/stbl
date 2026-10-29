@@ -174,13 +174,14 @@ character vector, it fails with a helpful error message:</p>
 <span>  interests <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `interests` <span style="color: #0000BB;">&lt;list&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;character&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `interests` <span style="color: #0000BB;">&lt;list&gt;</span> must be convertible to <span style="color: #0000BB;">&lt;character&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert some values due to incompatible element types.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 2</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Values: <span style="color: #0000BB;">"function (x, ...) UseMethod(\"mean\")"</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="step-2-simple-scalar-coercion-with-to__scalar">Step 2: Simple Scalar Coercion with <code>to_*_scalar()</code><a class="anchor" aria-label="anchor" href="#step-2-simple-scalar-coercion-with-to__scalar"></a>
+<h2 id="step-2-simple-scalar-conversion-with-to__scalar">Step 2: Simple Scalar Conversion with
+<code>to_*_scalar()</code><a class="anchor" aria-label="anchor" href="#step-2-simple-scalar-conversion-with-to__scalar"></a>
 </h2>
 <p>Next, we’ll add checks for <code>age</code> and
 <code>is_premium_member</code>. These arguments must each contain a
@@ -214,8 +215,8 @@ works:</p>
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
 <span>  email_address <span class="op">=</span> <span class="st">"test@example.com"</span>, </span>
-<span>  age <span class="op">=</span> <span class="st">"42"</span>,                 <span class="co"># Coercible to integer</span></span>
-<span>  is_premium_member <span class="op">=</span> <span class="st">"True"</span>, <span class="co"># Coercible to logical</span></span>
+<span>  age <span class="op">=</span> <span class="st">"42"</span>,                 <span class="co"># Convertible to integer</span></span>
+<span>  is_premium_member <span class="op">=</span> <span class="st">"True"</span>, <span class="co"># Convertible to logical</span></span>
 <span>  interests <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"hiking"</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
@@ -225,7 +226,7 @@ works:</p>
 <span><span class="co">#&gt;  $ is_premium_member: logi TRUE</span></span>
 <span><span class="co">#&gt;  $ interests        : chr [1:2] "R" "hiking"</span></span></code></pre></div>
 <p>The <code>register_user()</code> function will fail with clear error
-messages if the input isn’t a single value or can’t be coerced.</p>
+messages if the input isn’t a single value or can’t be converted.</p>
 <p>For example, when age is not a single value,
 <code>register_user()</code> throws an error:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -245,12 +246,12 @@ converted to an integer:</p>
 <code class="sourceCode R"><span><span class="fu">register_user</span><span class="op">(</span></span>
 <span>  username <span class="op">=</span> <span class="st">"test_user"</span>, </span>
 <span>  email_address <span class="op">=</span> <span class="st">"test@example.com"</span>, </span>
-<span>  age <span class="op">=</span> <span class="st">"forty-two"</span>,          <span class="co"># Not coercible to integer</span></span>
+<span>  age <span class="op">=</span> <span class="st">"forty-two"</span>,          <span class="co"># Not convertible to integer</span></span>
 <span>  is_premium_member <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>  interests <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"hiking"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `register_user()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `age` <span style="color: #0000BB;">&lt;character&gt;</span> must be coercible to <span style="color: #0000BB;">&lt;integer&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `age` <span style="color: #0000BB;">&lt;character&gt;</span> must be convertible to <span style="color: #0000BB;">&lt;integer&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert some values due to non-numeric strings.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Values: <span style="color: #0000BB;">"forty-two"</span></span></span></code></pre></div>
@@ -259,9 +260,9 @@ converted to an integer:</p>
 <h2 id="step-3-complex-validation-with-stabilize_">Step 3: Complex Validation with <code>stabilize_*()</code><a class="anchor" aria-label="anchor" href="#step-3-complex-validation-with-stabilize_"></a>
 </h2>
 <p>Finally, let’s add more complex validation for <code>username</code>
-and <code>email_address</code>. For these, simple type coercion isn’t
+and <code>email_address</code>. For these, simple type conversion isn’t
 enough; we need to check their content and structure using
-<code><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar()</a></code>. This function first coerces the
+<code><a href="../reference/stabilize_chr_scalar.html">stabilize_chr_scalar()</a></code>. This function first converts the
 input to character, then applies a list of validation rules supplied via
 the <code>regex</code> argument (see the <code><a href="../reference/stabilize_chr.html">stabilize_chr()</a></code>
 documentation for details). If speed matters, you should prefer the
