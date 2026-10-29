@@ -13,8 +13,7 @@
 
 \item{direction}{\code{(character)} One of \code{"low"} or \code{"high"}.}
 
-\item{target_value}{\code{(Period)} The value against which \code{x} is being
-compared.}
+\item{target_value}{\code{(Period)} The value against which \code{x} is being compared.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

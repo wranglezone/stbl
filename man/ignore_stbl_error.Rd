@@ -9,16 +9,16 @@ ignore_stbl_error(expr, subclass = character())
 \arguments{
 \item{expr}{An expression to evaluate.}
 
-\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to
-ignore or replace. Combined with \code{"stbl-error"} to form the class name to
+\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to ignore
+or replace. Combined with \code{"stbl-error"} to form the class name to
 intercept. For example, \code{c("coerce", "character")} catches errors of class
-\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), \code{c("coerce")}
-catches any \code{stbl-error-coerce} error, and \code{character()} (the default)
-catches any \code{stbl} error.}
+\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), \code{c("coerce")} catches
+any \code{stbl-error-coerce} error, and \code{character()} (the default) catches any
+\code{stbl} error.}
 }
 \value{
-The result of \code{expr} if no matching error is thrown, or \code{NULL}
-if a matching \code{stbl} error is caught.
+The result of \code{expr} if no matching error is thrown, or \code{NULL} if a
+matching \code{stbl} error is caught.
 }
 \description{
 Silences a \code{stbl} error with the specified \code{subclass}. Other errors

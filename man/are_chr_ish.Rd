@@ -6,7 +6,7 @@
 \alias{are_character_ish}
 \alias{is_character_ish}
 \alias{are_chr_ish.default}
-\title{Check if an object can be safely coerced to character}
+\title{Check if an object can be safely converted to character}
 \usage{
 are_chr_ish(x, ...)
 
@@ -33,11 +33,11 @@ the entire vector.
 }
 \description{
 \code{are_chr_ish()} is a vectorized predicate function that checks
-whether each element of its input can be safely coerced to a character
+whether each element of its input can be safely converted to a character
 vector. \code{are_character_ish()} is a synonym of \code{are_chr_ish()}.
 
 \code{is_chr_ish()} is a scalar predicate function that checks if all elements
-of its input can be safely coerced to a character vector.
+of its input can be safely converted to a character vector.
 \code{is_character_ish()} is a synonym of \code{is_chr_ish()}.
 }
 \examples{

@@ -1,4 +1,4 @@
-test_that("stabilize_dur() coerces and returns durations (#295)", {
+test_that("stabilize_dur() converts and returns durations (#295)", {
   given <- c("P1D", "P2D")
   expect_identical(stabilize_dur(given), to_dur(given))
 })
@@ -125,7 +125,7 @@ test_that("stabilize_dur() checks allowed_values (#295)", {
   )
 })
 
-test_that("stabilize_dur() rejects a bare P (#295)", {
+test_that("stabilize_dur() rejects a bare P (#295, #377)", {
   expect_pkg_error_snapshot(
     stabilize_dur("P"),
     "stbl",

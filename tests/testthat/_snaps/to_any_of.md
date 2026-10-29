@@ -1,12 +1,12 @@
-# to_any_of() errors with a combined message when all prototypes fail (#215, #285)
+# to_any_of() errors with a combined message when all prototypes fail (#215, #285, #377)
 
     Code
       to_any_of(new.env(), integer(), character())
     Condition <stbl-error-cant_stabilize_any_of>
       Error:
       ! `new.env()` must match at least one of the provided stabilizers.
-      x Can't coerce `new.env()` <environment> to <integer>.
-      x Can't coerce `new.env()` <environment> to <character>.
+      x Can't convert `new.env()` <environment> to <integer>.
+      x Can't convert `new.env()` <environment> to <character>.
 
 ---
 
@@ -15,8 +15,8 @@
     Condition <stbl-error-cant_stabilize_any_of>
       Error in `wrapped_to_any_of()`:
       ! `val` must match at least one of the provided stabilizers.
-      x Can't coerce `val` <environment> to <integer>.
-      x Can't coerce `val` <environment> to <character>.
+      x Can't convert `val` <environment> to <integer>.
+      x Can't convert `val` <environment> to <character>.
 
 # to_any_of() errors when ... is empty (#215, #285)
 

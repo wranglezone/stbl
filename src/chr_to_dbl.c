@@ -13,7 +13,7 @@
  *
  * Recognises any string parseable as a finite or infinite double via R_strtod.
  * NaN is rejected: R treats NaN as NA (is.na(NaN) == TRUE), so "NaN" is not
- * a valid double for coercion purposes.  NA strings pass through as NA_REAL.
+ * a valid double for conversion purposes.  NA strings pass through as NA_REAL.
  */
 static void chr_to_dbl_core(SEXP x, R_xlen_t n, double* p_result, int* p_valid) {
   for (R_xlen_t i = 0; i < n; i++) {
@@ -36,7 +36,7 @@ static void chr_to_dbl_core(SEXP x, R_xlen_t n, double* p_result, int* p_valid) 
       continue;
     }
 
-    /* Skip trailing whitespace: R's coercion accepts it.
+    /* Skip trailing whitespace: R's conversion accepts it.
        The loop is safe because s is null-terminated and '\0' is not whitespace,
        so the loop always terminates. */
     while (isspace((unsigned char)*endptr)) endptr++;
@@ -81,7 +81,7 @@ SEXP stbl_chr_to_dbl(SEXP x) {
  * stbl_chr_are_dblish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements that can
- * be coerced to double, FALSE otherwise.
+ * be converted to double, FALSE otherwise.
  */
 SEXP stbl_chr_are_dblish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

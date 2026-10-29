@@ -14,13 +14,13 @@
       Error in `wrapped_to_time()`:
       ! `val` must not be <NULL>.
 
-# to_time() rejects times without an offset (#294)
+# to_time() rejects times without an offset (#294, #377)
 
     Code
       to_time("13:20:00")
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `"13:20:00"` <character> must be coercible to <time>
+      ! `"13:20:00"` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
       * Values: "13:20:00"
@@ -31,29 +31,29 @@
       wrapped_to_time("13:20:00")
     Condition <stbl-error-incompatible_values-time>
       Error in `wrapped_to_time()`:
-      ! `val` <character> must be coercible to <time>
+      ! `val` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
       * Values: "13:20:00"
 
-# to_time() rejects unparseable time strings (#294)
+# to_time() rejects unparseable time strings (#294, #377)
 
     Code
       to_time(given)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `given` <character> must be coercible to <time>
+      ! `given` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 2
       * Values: "not-a-time"
 
-# to_time() rejects impossible times (#294)
+# to_time() rejects impossible times (#294, #377)
 
     Code
       to_time("25:00:00Z")
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `"25:00:00Z"` <character> must be coercible to <time>
+      ! `"25:00:00Z"` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
       * Values: "25:00:00Z"
@@ -64,29 +64,29 @@
       to_time("13:60:00Z")
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `"13:60:00Z"` <character> must be coercible to <time>
+      ! `"13:60:00Z"` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
       * Values: "13:60:00Z"
 
-# to_time() errors informatively for bad factors (#294)
+# to_time() errors informatively for bad factors (#294, #377)
 
     Code
       to_time(given)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `given` <factor> must be coercible to <time>
+      ! `given` <factor> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 2
       * Values: "nope"
 
-# to_time() rejects out-of-range numerics (#294)
+# to_time() rejects out-of-range numerics (#294, #377)
 
     Code
       to_time(-1)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `-1` <double> must be coercible to <time>
+      ! `-1` <double> must be convertible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
       * Values: "-1"
@@ -97,29 +97,29 @@
       to_time(86400)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `86400` <double> must be coercible to <time>
+      ! `86400` <double> must be convertible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
       * Values: "86400"
 
-# to_time() rejects out-of-range difftime values (#294)
+# to_time() rejects out-of-range difftime values (#294, #377)
 
     Code
       to_time(given)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `given` <difftime> must be coercible to <time>
+      ! `given` <difftime> must be convertible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
       * Values: "90000"
 
-# to_time() rejects out-of-range hms values (#294)
+# to_time() rejects out-of-range hms values (#294, #377)
 
     Code
       to_time(given)
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `given` <hms> must be coercible to <time>
+      ! `given` <hms> must be convertible to <time>
       x Can't convert some values due to not a valid number of seconds since midnight (must be at least 0 and less than 86400).
       * Locations: 1
       * Values: "90000"

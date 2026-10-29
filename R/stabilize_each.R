@@ -1,18 +1,18 @@
 #' Ensure every element of x satisfies a single spec
 #'
-#' `stabilize_each()` applies `spec` (a `to_*` function, `stabilize_*`
-#' function, or `specify_*()` result) to every element of `x` independently,
-#' collecting *every* failing location before erroring, rather than stopping
-#' at the first failure like [to_each()]. `stabilise_each()` is a synonym.
+#' `stabilize_each()` applies `spec` (a `to_*` function, `stabilize_*` function,
+#' or `specify_*()` result) to every element of `x` independently, collecting
+#' *every* failing location before erroring, rather than stopping at the first
+#' failure like [to_each()]. `stabilise_each()` is a synonym.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns `x` with every element coerced by `spec`, simplified to an atomic
+#' @returns `x` with every element converted by `spec`, simplified to an atomic
 #'   vector when `simplify = TRUE` and possible, otherwise a list. Errors with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and `<stbl-error-cant_stabilize_each>` when any element
-#'   fails `spec`; the condition's `locations` element gives the positions
-#'   that failed.
+#'   fails `spec`; the condition's `locations` element gives the positions that
+#'   failed.
 #' @family multiple type functions
 #' @export
 #'

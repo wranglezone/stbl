@@ -7,8 +7,7 @@
 .construct_stabilizer_symbol(stabilizer, scalar = FALSE)
 }
 \arguments{
-\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to
-call.}
+\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to call.}
 
 \item{scalar}{(\code{logical(1)}) Whether to call the scalar version of the
 stabilizer.}

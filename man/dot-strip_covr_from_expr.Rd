@@ -14,8 +14,8 @@ The expression with all covr counter blocks removed.
 }
 \description{
 covr instruments code for coverage by wrapping expressions in
-\code{if (TRUE) { covr:::count(key); original }} blocks. This function
-recursively removes those wrappers so that snapshotted code remains stable
-across normal and coverage runs.
+\code{if (TRUE) { covr:::count(key); original }} blocks. This function recursively
+removes those wrappers so that snapshotted code remains stable across normal
+and coverage runs.
 }
 \keyword{internal}

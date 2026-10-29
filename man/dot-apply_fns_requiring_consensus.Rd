@@ -23,7 +23,7 @@ source of error messages.}
 The common result of applying every function in \code{fns} to \code{x}.
 }
 \description{
-Applies each function in \code{fns} to the original \code{x}, independently. Errors
-if any function fails, or if the successful results disagree.
+Applies each function in \code{fns} to the original \code{x}, independently. Errors if
+any function fails, or if the successful results disagree.
 }
 \keyword{internal}

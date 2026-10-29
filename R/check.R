@@ -193,8 +193,8 @@
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
-#' @returns (`logical(1)`) `TRUE` if `x` is `NULL` and `allow_null` is
-#'   `TRUE`, else `FALSE`.
+#' @returns (`logical(1)`) `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`,
+#'   else `FALSE`.
 #' @keywords internal
 .is_allowed_null <- function(x, allow_null = TRUE, call = caller_env()) {
   allow_null <- to_lgl_scalar(allow_null, call = call)
@@ -231,14 +231,14 @@
   }
 }
 
-#' Check for coercion failures and stop if any are found
+#' Check for conversion failures and stop if any are found
 #'
 #' @param failures `(logical)` A logical vector where `TRUE` indicates a
-#'   coercion failure.
+#'   conversion failure.
 #' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.check_cast_failures <- function(
+.check_conversion_failures <- function(
   x,
   failures,
   x_class,
@@ -264,7 +264,7 @@
 
 #' Check that all elements are members of an allowed set of values
 #'
-#' @param allowed_values A vector of permitted values, already coerced to the
+#' @param allowed_values A vector of permitted values, already converted to the
 #'   same type as `x`. `NULL` or zero-length skips the check.
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
@@ -409,7 +409,7 @@
   short_lens <- lens[short_mask]
   short_pairs <- paste(paste0(short_nms, " = ", short_lens), collapse = ", ")
   main_msg <- .glue2(
-    "Can't coerce {.arg [x_arg]} {.cls [x_class]} to {.cls data.frame}."
+    "Can't convert {.arg [x_arg]} {.cls [x_class]} to {.cls data.frame}."
   )
   .stbl_abort(
     message = c(

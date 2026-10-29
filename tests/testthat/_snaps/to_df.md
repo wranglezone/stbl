@@ -34,13 +34,13 @@
       x Problematic argument:
       * new_arg = "red"
 
-# to_df() errors for a list with incompatible column lengths (#201)
+# to_df() errors for a list with incompatible column lengths (#201, #377)
 
     Code
       to_df(list(a = 1:3, b = 1:2))
     Condition <stbl-error-jagged>
       Error:
-      ! Can't coerce `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
+      ! Can't convert `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
       i All list elements must have length 3 or 1.
       x Short elements: b = 2.
 
@@ -50,7 +50,7 @@
       wrapped_to_df(list(a = 1:3, b = 1:2))
     Condition <stbl-error-jagged>
       Error in `wrapped_to_df()`:
-      ! Can't coerce `val` <list> to <data.frame>.
+      ! Can't convert `val` <list> to <data.frame>.
       i All list elements must have length 3 or 1.
       x Short elements: b = 2.
 
@@ -62,19 +62,19 @@
       Error:
       ! `list(1, 2)` must have all elements named.
 
-# to_df() errors for non-coercible types (#201)
+# to_df() errors for non-convertible types (#201, #377)
 
     Code
       to_df("not a data frame")
     Condition <stbl-error-coerce-data.frame>
       Error:
-      ! Can't coerce `"not a data frame"` <character> to <data.frame>.
+      ! Can't convert `"not a data frame"` <character> to <data.frame>.
 
-# to_df.default() errors for non-coercible types (#201)
+# to_df.default() errors for non-convertible types (#201, #377)
 
     Code
       to_df(as.Date("2024-01-01"))
     Condition <stbl-error-coerce-data.frame>
       Error:
-      ! Can't coerce `as.Date("2024-01-01")` <Date> to <data.frame>.
+      ! Can't convert `as.Date("2024-01-01")` <Date> to <data.frame>.
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cls_unexported.R
 \name{.to_cls_scalar}
 \alias{.to_cls_scalar}
-\title{Coerce an object to a specific scalar class}
+\title{Convert an object to a specific scalar class}
 \usage{
 .to_cls_scalar(
   x,
@@ -23,7 +23,7 @@
 \item{is_rlang_cls_scalar}{\verb{(function)} An \verb{is_scalar_*()} function from
 rlang, used for a fast path if \code{x} is already the right type.}
 
-\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for coercion.}
+\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for conversion.}
 
 \item{to_cls_args}{\code{(list)} A list of additional arguments to pass to
 \code{to_cls_fn()}.}
@@ -38,8 +38,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -47,13 +47,13 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
 \code{x} as a scalar of the target class.
 }
 \description{
-Coerce an object to a specific scalar class
+Convert an object to a specific scalar class
 }
 \keyword{internal}

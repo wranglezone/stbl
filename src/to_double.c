@@ -8,11 +8,11 @@ SEXP stbl_lgl_to_dbl(SEXP x);
 SEXP stbl_lst_to_dbl(SEXP x);
 
 /**
- * @brief Coerce any supported vector to double.
+ * @brief Convert any supported vector to double.
  *
  * Accepted source types and their behaviour:
  *   - double:   returned unchanged.
- *   - integer:  cast to double.  Always succeeds.
+ *   - integer:  converted to double.  Always succeeds.
  *   - factor:   level strings are parsed as double.  Fails (via to_fail()) for
  *               any non-numeric level string.
  *   - logical:  FALSE -> 0.0, TRUE -> 1.0, NA -> NA_real_.  Always succeeds.

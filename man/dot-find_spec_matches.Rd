@@ -10,7 +10,7 @@ element}
 \arguments{
 \item{x}{The object to test.}
 
-\item{fn}{A stabilizer or coercion function, applied to each element of
+\item{fn}{A stabilizer or conversion function, applied to each element of
 \code{x} independently.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use

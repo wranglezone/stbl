@@ -2,7 +2,7 @@
 % Please edit documentation in R/stabilize_dttm.R
 \name{.to_dttm_locale_scalar}
 \alias{.to_dttm_locale_scalar}
-\title{Coerce to length-1 date-time, trying \code{accepted_datetime_formats}}
+\title{Convert to length-1 date-time, trying \code{accepted_datetime_formats}}
 \usage{
 .to_dttm_locale_scalar(
   x,
@@ -30,8 +30,8 @@ time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
 
 \item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
 strings to try, in order, when parsing a character \code{x}. The first format
-that parses every non-\code{NA} element of \code{x} is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-\code{NA} element of \code{x} is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
@@ -50,7 +50,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{

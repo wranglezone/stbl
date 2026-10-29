@@ -17,15 +17,15 @@
       ! `val` must match at least one of the provided stabilizers.
       x `val` must not be <NULL>.
 
-# stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, #310)
+# stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, #310, #377)
 
     Code
       stabilize_any_of(x, stabilize_lgl, stabilize_int)
     Condition <stbl-error-cant_stabilize_any_of>
       Error:
       ! `x` must match at least one of the provided stabilizers.
-      x `x` <character> must be coercible to <logical> (Locations: 1)
-      x `x` <character> must be coercible to <integer> (Locations: 1 and 3)
+      x `x` <character> must be convertible to <logical> (Locations: 1)
+      x `x` <character> must be convertible to <integer> (Locations: 1 and 3)
 
 ---
 
@@ -34,8 +34,8 @@
     Condition <stbl-error-cant_stabilize_any_of>
       Error in `wrapped_stabilize_any_of()`:
       ! `val` must match at least one of the provided stabilizers.
-      x `val` <character> must be coercible to <logical> (Locations: 1)
-      x `val` <character> must be coercible to <integer> (Locations: 1 and 3)
+      x `val` <character> must be convertible to <logical> (Locations: 1)
+      x `val` <character> must be convertible to <integer> (Locations: 1 and 3)
 
 # stabilize_any_of() errors when ... is empty (#215, #285)
 

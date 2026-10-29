@@ -1,8 +1,8 @@
 # target class: POSIXct
 
-#' Coerce to date-time
+#' Convert to date-time
 #'
-#' Checks whether a vector can be coerced to a [base::POSIXct] without losing
+#' Checks whether a vector can be converted to a [base::POSIXct] without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_datetime()` is a synonym of `to_dttm()`.
 #'
@@ -105,7 +105,7 @@ to_dttm.character <- function(
     parsed[to_parse] <- .parse_dttm_parts(matches[to_parse])
   }
   failures <- not_na & (!well_shaped | is.na(parsed))
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -133,9 +133,9 @@ to_dttm.character <- function(
   parts <- do.call(rbind, matches)
   frac_chr <- parts[, 8]
   frac_seconds <- ifelse(frac_chr == "", 0, as.numeric(paste0("0", frac_chr)))
-  # ISOdatetime() (unlike as.POSIXct(format = ...)) returns NA for
-  # out-of-range components instead of rolling over, so it doubles as the
-  # calendar validity check.
+  # ISOdatetime() (unlike as.POSIXct(format = ...)) returns NA for out-of-range
+  # components instead of rolling over, so it doubles as the calendar validity
+  # check.
   naive_utc <- ISOdatetime(
     year = as.integer(parts[, 2]),
     month = as.integer(parts[, 3]),
@@ -230,7 +230,7 @@ to_dttm.default <- function(
   try_fetch(
     vctrs::vec_cast(x, .datetime_type_obj(), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "datetime",
         x_arg = x_arg,
@@ -241,9 +241,9 @@ to_dttm.default <- function(
   )
 }
 
-#' Coerce to length-1 date-time
+#' Convert to length-1 date-time
 #'
-#' Checks whether a vector can be coerced to a length-1 [base::POSIXct] vector.
+#' Checks whether a vector can be converted to a length-1 [base::POSIXct] vector.
 #' `to_datetime_scalar()` is a synonym of `to_dttm_scalar()`.
 #'
 #' @inheritParams .shared-params
@@ -312,9 +312,9 @@ to_datetime_scalar <- to_dttm_scalar
 #' An empty date-time object for error messages
 #'
 #' [object_type()] renders a [base::POSIXct] as `"POSIXct"`, but the datetime
-#' family uses `"datetime"` in its coercion classes and messages, to match the
-#' `to_dttm()`/`stabilize_dttm()` function names. This returns an empty
-#' object that renders as `"datetime"` so error subclasses read
+#' family uses `"datetime"` in its conversion classes and messages, to match the
+#' `to_dttm()`/`stabilize_dttm()` function names. This returns an empty object
+#' that renders as `"datetime"` so error subclasses read
 #' `<stbl-error-incompatible_values-datetime>`.
 #'
 #' @returns A zero-length object whose [object_type()] is `"datetime"`.

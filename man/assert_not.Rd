@@ -31,14 +31,14 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x}, unchanged, if \code{x} does not match \code{spec}, or an error
-condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and
-\verb{<stbl-error-matched_spec>} when \code{x} matches \code{spec}.
+\code{x}, unchanged, if \code{x} does not match \code{spec}, or an error condition
+with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
+\verb{<error>}, \verb{<condition>}, and \verb{<stbl-error-matched_spec>} when \code{x} matches
+\code{spec}.
 }
 \description{
 \code{assert_not()} is the inverse of a single specification: it errors when \code{x}

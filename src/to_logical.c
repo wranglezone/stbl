@@ -6,7 +6,7 @@ SEXP stbl_fct_to_lgl(SEXP x);
 SEXP stbl_lst_to_lgl(SEXP x);
 
 /**
- * @brief Coerce any supported vector to logical.
+ * @brief Convert any supported vector to logical.
  *
  * Accepted source types and their behaviour:
  *   - logical:  returned unchanged.

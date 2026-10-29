@@ -14,13 +14,13 @@ specify_one_of(...)
 A function of class \code{"stbl_specified_fn"} that calls
 \code{\link[=stabilize_one_of]{stabilize_one_of()}} with the provided specs. The generated function will
 also accept \code{...} for additional unnamed specs to pass to
-\code{\link[=stabilize_one_of]{stabilize_one_of()}}. You can copy/paste the body of the resulting
-function if you want to provide additional context or functionality.
+\code{\link[=stabilize_one_of]{stabilize_one_of()}}. You can copy/paste the body of the resulting function
+if you want to provide additional context or functionality.
 }
 \description{
 \code{specify_one_of()} creates a function that will call \code{\link[=stabilize_one_of]{stabilize_one_of()}}
-with the provided specs. \code{specify_one_of()}'s function requires that
-exactly one of the provided specs succeeds.
+with the provided specs. \code{specify_one_of()}'s function requires that exactly
+one of the provided specs succeeds.
 }
 \examples{
 stabilize_int_xor_chr <- specify_one_of(stabilize_int, stabilize_chr)

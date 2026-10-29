@@ -1,4 +1,4 @@
-test_that("stabilize_each() coerces each element with spec and simplifies (#287)", {
+test_that("stabilize_each() converts each element with spec and simplifies (#287)", {
   expect_identical(
     stabilize_each(list("1", "2", "3"), stabilize_int),
     c(1L, 2L, 3L)
@@ -41,7 +41,7 @@ test_that("stabilize_each() reports every failing location at once (#287)", {
   expect_identical(cnd$locations, c(2L, 3L))
 })
 
-test_that("stabilize_each() errors with a combined message for all failures (#287)", {
+test_that("stabilize_each() errors with a combined message for all failures (#287, #377)", {
   expect_pkg_error_snapshot(
     stabilize_each(list("1", "a", "b"), stabilize_int),
     "stbl",

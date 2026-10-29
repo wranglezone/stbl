@@ -82,19 +82,19 @@ listed in \code{...} are handled. One of:
 \item \code{NULL} or \code{FALSE} (default): any extra columns cause an error.
 \item \code{TRUE}: extra columns are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
 }}
 
 \item{.col_names}{\code{(character)} A character vector of column names that must
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
 cause an error. Unlike \code{...}, this does not validate the column contents.}
 
-\item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in
-\code{.x}. If \code{NULL} (default), the row count is not checked.}
+\item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in \code{.x}.
+If \code{NULL} (default), the row count is not checked.}
 
-\item{.max_rows}{(\code{integer(1)}) The maximum number of rows allowed in
-\code{.x}. If \code{NULL} (default), the row count is not checked.}
+\item{.max_rows}{(\code{integer(1)}) The maximum number of rows allowed in \code{.x}.
+If \code{NULL} (default), the row count is not checked.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
@@ -102,11 +102,10 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 
 \item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
-A \code{.x} with zero columns skips this check when
-\code{.allow_zero_length = TRUE} (the default).}
+required unless you opt it out. Named specs \emph{not} listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+\code{NULL} or \code{character()} to make every named spec optional. A \code{.x} with zero
+columns skips this check when \code{.allow_zero_length = TRUE} (the default).}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -118,7 +117,7 @@ source of error messages.}
 
 \item{.x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -127,7 +126,7 @@ The validated data frame, or an error condition with classes
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-data.frame>} when \code{.x} cannot be coerced to a data
+\item \verb{<stbl-error-coerce-data.frame>} when \code{.x} cannot be converted to a data
 frame.
 \item \verb{<stbl-error-jagged>} when list input has incompatible element lengths for
 conversion to a data frame.
@@ -140,8 +139,8 @@ absent.
 \item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
 unnamed.
 \item \verb{<stbl-error-missing_element>}, \verb{<stbl-error-bad_named>},
-\verb{<stbl-error-bad_unnamed>}, or \verb{<stbl-error-duplicate_names>} when list-like
-column checks delegated to \code{\link[=stabilize_lst]{stabilize_lst()}} fail.
+\verb{<stbl-error-bad_unnamed>}, or \verb{<stbl-error-duplicate_names>} when
+list-like column checks delegated to \code{\link[=stabilize_lst]{stabilize_lst()}} fail.
 }
 }
 \description{
@@ -191,14 +190,14 @@ try(
 stabilize_df(NULL)
 try(stabilize_df(NULL, .allow_null = FALSE))
 
-# Coercible inputs such as named lists are accepted
+# Convertible inputs such as named lists are accepted
 stabilize_df(
   list(name = "Alice", age = 30L),
   name = specify_chr_scalar(),
   age = specify_int_scalar()
 )
 
-# Non-coercible inputs are rejected
+# Non-convertible inputs are rejected
 try(stabilize_df("not a data frame"))
 
 # Mark a column as optional via .required

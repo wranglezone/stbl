@@ -14,13 +14,13 @@
       Error in `wrapped_to_int()`:
       ! `val` must not be <NULL>.
 
-# to_int() errors for dbls that would lose precision (#2, #217, #310)
+# to_int() errors for dbls that would lose precision (#2, #217, #310, #377)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <double> must be coercible to <integer>
+      ! `given` <double> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.1"
@@ -31,7 +31,7 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <double> must be coercible to <integer>
+      ! `val` <double> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.1"
@@ -42,7 +42,7 @@
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <double> must be coercible to <integer>
+      ! `given` <double> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "Inf"
@@ -53,18 +53,18 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <double> must be coercible to <integer>
+      ! `val` <double> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "Inf"
 
-# to_int() respects coerce_character (#14)
+# to_int() respects coerce_character (#14, #377)
 
     Code
       to_int(given, coerce_character = FALSE)
     Condition <stbl-error-coerce-integer>
       Error:
-      ! Can't coerce `given` <character> to <integer>.
+      ! Can't convert `given` <character> to <integer>.
 
 ---
 
@@ -72,15 +72,15 @@
       wrapped_to_int(given, coerce_character = FALSE)
     Condition <stbl-error-coerce-integer>
       Error in `wrapped_to_int()`:
-      ! Can't coerce `val` <character> to <integer>.
+      ! Can't convert `val` <character> to <integer>.
 
-# to_int() errors informatively for bad chrs (#2, #310, #335)
+# to_int() errors informatively for bad chrs (#2, #310, #335, #377)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <character> must be coercible to <integer>
+      ! `given` <character> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.1"
@@ -91,7 +91,7 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <character> must be coercible to <integer>
+      ! `val` <character> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.1"
@@ -102,7 +102,7 @@
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <character> must be coercible to <integer>
+      ! `given` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 4
       * Values: "a"
@@ -113,18 +113,18 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <character> must be coercible to <integer>
+      ! `val` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 4
       * Values: "a"
 
-# to_int() errors informatively for bad complexes (#2, #310)
+# to_int() errors informatively for bad complexes (#2, #310, #377)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <complex> must be coercible to <integer>
+      ! `given` <complex> must be convertible to <integer>
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
       * Values: "1+1i"
@@ -135,18 +135,18 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <complex> must be coercible to <integer>
+      ! `val` <complex> must be convertible to <integer>
       x Can't convert some values due to non-zero complex components.
       * Locations: 4
       * Values: "1+1i"
 
-# to_int() errors for complexes that would lose precision (#noissue, #310)
+# to_int() errors for complexes that would lose precision (#noissue, #310, #377)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <complex> must be coercible to <integer>
+      ! `given` <complex> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.5+0i"
@@ -157,7 +157,7 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <complex> must be coercible to <integer>
+      ! `val` <complex> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "1.5+0i"
@@ -168,7 +168,7 @@
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <complex> must be coercible to <integer>
+      ! `given` <complex> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "Inf+0i"
@@ -179,18 +179,18 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <complex> must be coercible to <integer>
+      ! `val` <complex> must be convertible to <integer>
       x Can't convert some values due to loss of precision.
       * Locations: 4
       * Values: "Inf+0i"
 
-# to_int() respects coerce_factor (#14)
+# to_int() respects coerce_factor (#14, #377)
 
     Code
       to_int(given, coerce_factor = FALSE)
     Condition <stbl-error-coerce-integer>
       Error:
-      ! Can't coerce `given` <factor> to <integer>.
+      ! Can't convert `given` <factor> to <integer>.
 
 ---
 
@@ -198,15 +198,15 @@
       wrapped_to_int(given, coerce_factor = FALSE)
     Condition <stbl-error-coerce-integer>
       Error in `wrapped_to_int()`:
-      ! Can't coerce `val` <factor> to <integer>.
+      ! Can't convert `val` <factor> to <integer>.
 
-# to_int() errors informatively for bad factors (#4, #310, #335)
+# to_int() errors informatively for bad factors (#4, #310, #335, #377)
 
     Code
       to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `given` <factor> must be coercible to <integer>
+      ! `given` <factor> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
@@ -217,18 +217,18 @@
       wrapped_to_int(given)
     Condition <stbl-error-incompatible_values-integer>
       Error in `wrapped_to_int()`:
-      ! `val` <factor> must be coercible to <integer>
+      ! `val` <factor> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ..., 25, and 26
       * Values: "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", ..., "y", and "z"
 
-# to_int() works for lists (#2, #273, #310)
+# to_int() works for lists (#2, #273, #310, #377)
 
     Code
       to_int(list(1L, 1:5))
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `list(1L, 1:5)` <list> must be coercible to <integer>
+      ! `list(1L, 1:5)` <list> must be convertible to <integer>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "1:5"
@@ -276,24 +276,24 @@
       ! `given` must be a single <integer (non-empty)>.
       x `given` has no values.
 
-# to_*() functions name both sides when to_arg is supplied (#371)
+# to_*() functions name both sides when to_arg is supplied (#371, #377)
 
     Code
       to_int("a", x_arg = "x", to_arg = "y")
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! Can't coerce `x` <character> to match `y` <integer>.
+      ! Can't convert `x` <character> to match `y` <integer>.
       x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "a"
 
-# to_*() messages are unchanged when to_arg is NULL (#371)
+# to_*() messages are unchanged when to_arg is NULL (#371, #377)
 
     Code
       to_int("a", x_arg = "x")
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `x` <character> must be coercible to <integer>
+      ! `x` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "a"

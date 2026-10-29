@@ -1,20 +1,19 @@
 #' Require that x contains a number of elements matching a specification
 #'
-#' `assert_contains()` applies `spec` to each element of `x` independently
-#' and counts how many elements match. It returns `x` unchanged if that count
-#' falls between `min_matches` and `max_matches` (inclusive), and errors
-#' otherwise.
+#' `assert_contains()` applies `spec` to each element of `x` independently and
+#' counts how many elements match. It returns `x` unchanged if that count falls
+#' between `min_matches` and `max_matches` (inclusive), and errors otherwise.
 #'
-#' @param min_matches (`integer(1)`) The minimum number of elements of `x`
-#'   that must match `spec`. Must be `>= 0`. Set to `0` (with non-`NULL`
+#' @param min_matches (`integer(1)`) The minimum number of elements of `x` that
+#'   must match `spec`. Must be `>= 0`. Set to `0` (with non-`NULL`
 #'   `max_matches`) to check only an upper bound on the number of matches.
-#' @param max_matches (`integer(1)` or `NULL`) The maximum number of elements
-#'   of `x` that may match `spec`. Must be `>= min_matches`. `NULL` (default)
-#'   skips the upper-bound check.
+#' @param max_matches (`integer(1)` or `NULL`) The maximum number of elements of
+#'   `x` that may match `spec`. Must be `>= min_matches`. `NULL` (default) skips
+#'   the upper-bound check.
 #' @inheritParams .shared-params
-#' @returns `x`, unchanged, if the number of elements of `x` matching `spec`
-#'   is between `min_matches` and `max_matches`, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#' @returns `x`, unchanged, if the number of elements of `x` matching `spec` is
+#'   between `min_matches` and `max_matches`, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-too_few_matches>` when fewer than `min_matches` elements
 #'   match `spec`.
@@ -109,7 +108,7 @@ assert_contains <- function(
 #' element
 #'
 #' @param x The object to test.
-#' @param fn A stabilizer or coercion function, applied to each element of
+#' @param fn A stabilizer or conversion function, applied to each element of
 #'   `x` independently.
 #' @inheritParams stabilize_lst
 #' @returns An integer vector of positions in `x` that match `fn`.

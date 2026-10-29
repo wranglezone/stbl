@@ -5,7 +5,7 @@
 \alias{stabilize_character}
 \alias{stabilise_chr}
 \alias{stabilise_character}
-\title{Coerce to character with additional checks}
+\title{Convert to character with additional checks}
 \usage{
 stabilize_chr(
   x,
@@ -109,7 +109,7 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -123,7 +123,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -131,7 +131,7 @@ The input as a character vector, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be coerced to character.
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.

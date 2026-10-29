@@ -39,7 +39,7 @@ test_that("to_dbl() works for chrs (#23)", {
   expect_identical(to_dbl(given), expected)
 })
 
-test_that("to_dbl() respects coerce_character (#23)", {
+test_that("to_dbl() respects coerce_character (#23, #377)", {
   expected <- c(1.1, 2.2)
   given <- as.character(expected)
   expect_pkg_error_snapshot(
@@ -56,7 +56,7 @@ test_that("to_dbl() respects coerce_character (#23)", {
   )
 })
 
-test_that("to_dbl() errors informatively for bad chrs (#23, #310, #335)", {
+test_that("to_dbl() errors informatively for bad chrs (#23, #310, #335, #377)", {
   given <- c("1.1", "a")
   expect_pkg_error_snapshot(
     to_dbl(given),
@@ -78,7 +78,7 @@ test_that("to_dbl() works for complexes (#23)", {
   expect_identical(to_dbl(given), expected)
 })
 
-test_that("to_dbl() errors informatively for bad complexes (#23, #310)", {
+test_that("to_dbl() errors informatively for bad complexes (#23, #310, #377)", {
   given <- as.complex(c(1.1, 2.2))
   given[[1]] <- 1.1 + 1i
   expect_pkg_error_snapshot(
@@ -101,7 +101,7 @@ test_that("to_dbl() works for factors (#23)", {
   expect_identical(to_dbl(given), expected)
 })
 
-test_that("to_dbl() respects coerce_factor (#23)", {
+test_that("to_dbl() respects coerce_factor (#23, #377)", {
   expected <- c(1.1, 3.3)
   given <- factor(expected)
   expect_pkg_error_snapshot(
@@ -118,7 +118,7 @@ test_that("to_dbl() respects coerce_factor (#23)", {
   )
 })
 
-test_that("to_dbl() errors informatively for bad factors (#23, #310, #335)", {
+test_that("to_dbl() errors informatively for bad factors (#23, #310, #335, #377)", {
   given <- factor(letters)
   expect_pkg_error_snapshot(
     to_dbl(given),
@@ -134,7 +134,7 @@ test_that("to_dbl() errors informatively for bad factors (#23, #310, #335)", {
   )
 })
 
-test_that("to_dbl() works for lists (#128, #273, #310)", {
+test_that("to_dbl() works for lists (#128, #273, #310, #377)", {
   expect_identical(to_dbl(list(1.1, 2L, "3.3")), c(1.1, 2.0, 3.3))
   expect_identical(to_dbl(list(list(1.1), 2L)), c(1.1, 2.0))
   expect_pkg_error_snapshot(

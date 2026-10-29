@@ -1,8 +1,8 @@
 # target class: Date
 
-#' Coerce to date
+#' Convert to date
 #'
-#' Checks whether a vector can be coerced to a [base::Date] without losing
+#' Checks whether a vector can be converted to a [base::Date] without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled.
 #'
@@ -81,7 +81,7 @@ to_date.character <- function(
   well_shaped <- grepl("^\\d{4}-\\d{2}-\\d{2}$", x)
   parsed <- as.Date(x, format = "%Y-%m-%d")
   failures <- not_na & (!well_shaped | is.na(parsed))
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -153,7 +153,7 @@ to_date.default <- function(
   try_fetch(
     vctrs::vec_cast(x, as.Date("2026-01-01"), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "date",
         x_arg = x_arg,
@@ -164,16 +164,15 @@ to_date.default <- function(
   )
 }
 
-#' Coerce to length-1 date
+#' Convert to length-1 date
 #'
-#' Checks whether a vector can be coerced to a length-1 [base::Date] vector.
+#' Checks whether a vector can be converted to a length-1 [base::Date] vector.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a length-1 [base::Date] vector, or an error
-#'   condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-#'   failure mode:
+#' @returns The input as a length-1 [base::Date] vector, or an error condition
+#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
+#'   `<error>`, `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-incompatible_values-date>` when some values cannot be
 #'   safely converted to date.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -223,8 +222,8 @@ to_date_scalar <- function(
 #' An empty date object for error messages
 #'
 #' [object_type()] renders a [base::Date] as `"Date"`, but the date family uses
-#' the lowercase `"date"` in its coercion classes and messages. This returns an
-#' empty object that renders as `"date"` so error subclasses read
+#' the lowercase `"date"` in its conversion classes and messages. This returns
+#' an empty object that renders as `"date"` so error subclasses read
 #' `<stbl-error-incompatible_values-date>`.
 #'
 #' @returns A zero-length object whose [object_type()] is `"date"`.

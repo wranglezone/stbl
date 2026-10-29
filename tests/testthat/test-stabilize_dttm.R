@@ -1,4 +1,4 @@
-test_that("stabilize_dttm() coerces and returns date-times (#105)", {
+test_that("stabilize_dttm() converts and returns date-times (#105)", {
   given <- c("2024-01-01T12:00:00Z", "2024-06-15T00:00:00Z")
   expect_identical(stabilize_dttm(given), to_dttm(given))
 })

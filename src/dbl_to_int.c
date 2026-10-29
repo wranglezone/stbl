@@ -74,7 +74,7 @@ SEXP stbl_dbl_to_int(SEXP x) {
  * stbl_dbl_are_intish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements that can
- * be coerced to integer without loss (including NA/NaN), FALSE otherwise.
+ * be converted to integer without loss (including NA/NaN), FALSE otherwise.
  */
 SEXP stbl_dbl_are_intish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

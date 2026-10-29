@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_time.R
 \name{to_time_scalar}
 \alias{to_time_scalar}
-\title{Coerce to length-1 time-of-day}
+\title{Convert to length-1 time-of-day}
 \usage{
 to_time_scalar(
   x,
@@ -30,8 +30,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -39,7 +39,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -57,7 +57,7 @@ safely converted to a time of day.
 }
 }
 \description{
-Checks whether a vector can be coerced to a length-1 \code{\link[hms:hms]{hms::hms()}} vector.
+Checks whether a vector can be converted to a length-1 \code{\link[hms:hms]{hms::hms()}} vector.
 }
 \examples{
 to_time_scalar("13:20:00Z")

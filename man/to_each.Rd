@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_each.R
 \name{to_each}
 \alias{to_each}
-\title{Coerce each element of x with a single spec}
+\title{Convert each element of x with a single spec}
 \usage{
 to_each(
   x,
@@ -16,16 +16,16 @@ to_each(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+\item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
 
 \item{...}{Arguments passed to methods.}
 
-\item{simplify}{(\code{logical(1)}) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If \code{FALSE}, a list is always returned.}
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -36,14 +36,14 @@ unexported functions.}
 source of error messages.}
 }
 \value{
-\code{x} with every element coerced by \code{spec}, simplified to an atomic
+\code{x} with every element converted by \code{spec}, simplified to an atomic
 vector when \code{simplify = TRUE} and possible, otherwise a list. Errors with
 whatever condition \code{spec} throws for the first failing element.
 }
 \description{
 \code{to_each()} applies \code{spec} (a \verb{to_*} function, \verb{stabilize_*} function, or
-\verb{specify_*()} result) to every element of \code{x}, and stops at the first
-element that fails.
+\verb{specify_*()} result) to every element of \code{x}, and stops at the first element
+that fails.
 }
 \examples{
 to_each(list("1", "2", "3"), to_int)

@@ -14,13 +14,13 @@
       Error in `wrapped_to_dttm()`:
       ! `val` must not be <NULL>.
 
-# to_dttm() rejects date-times without an offset (#105)
+# to_dttm() rejects date-times without an offset (#105, #377)
 
     Code
       to_dttm("2024-01-01 12:00:00")
     Condition <stbl-error-incompatible_values-datetime>
       Error:
-      ! `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
+      ! `"2024-01-01 12:00:00"` <character> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
       * Values: "2024-01-01 12:00:00"
@@ -31,29 +31,29 @@
       wrapped_to_dttm("2024-01-01 12:00:00")
     Condition <stbl-error-incompatible_values-datetime>
       Error in `wrapped_to_dttm()`:
-      ! `val` <character> must be coercible to <datetime>
+      ! `val` <character> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
       * Values: "2024-01-01 12:00:00"
 
-# to_dttm() rejects unparseable date-time strings (#105)
+# to_dttm() rejects unparseable date-time strings (#105, #377)
 
     Code
       to_dttm(given)
     Condition <stbl-error-incompatible_values-datetime>
       Error:
-      ! `given` <character> must be coercible to <datetime>
+      ! `given` <character> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 2
       * Values: "not-a-datetime"
 
-# to_dttm() rejects impossible date-times (#105)
+# to_dttm() rejects impossible date-times (#105, #377)
 
     Code
       to_dttm("2024-02-30T12:00:00Z")
     Condition <stbl-error-incompatible_values-datetime>
       Error:
-      ! `"2024-02-30T12:00:00Z"` <character> must be coercible to <datetime>
+      ! `"2024-02-30T12:00:00Z"` <character> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
       * Values: "2024-02-30T12:00:00Z"
@@ -64,7 +64,7 @@
       to_dttm("2024-01-01T25:00:00Z")
     Condition <stbl-error-incompatible_values-datetime>
       Error:
-      ! `"2024-01-01T25:00:00Z"` <character> must be coercible to <datetime>
+      ! `"2024-01-01T25:00:00Z"` <character> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 1
       * Values: "2024-01-01T25:00:00Z"
@@ -78,13 +78,13 @@
       ! `tz` must be "" or a value from `OlsonNames()`.
       x "Bogus/Zone" is not a recognized time zone.
 
-# to_dttm() errors informatively for bad factors (#105)
+# to_dttm() errors informatively for bad factors (#105, #377)
 
     Code
       to_dttm(given)
     Condition <stbl-error-incompatible_values-datetime>
       Error:
-      ! `given` <factor> must be coercible to <datetime>
+      ! `given` <factor> must be convertible to <datetime>
       x Can't convert some values due to invalid or ambiguous date-time format.
       * Locations: 2
       * Values: "nope"

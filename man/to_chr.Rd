@@ -3,7 +3,7 @@
 \name{to_chr}
 \alias{to_chr}
 \alias{to_character}
-\title{Coerce to character}
+\title{Convert to character}
 \usage{
 to_chr(
   x,
@@ -34,8 +34,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -43,15 +43,15 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-The input as a character vector, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+The input as a character vector, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be coerced to character
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character
 (for example a \code{data.frame}, or an anonymous function).
 \item \verb{<stbl-error-incompatible_values-character>} when some elements of a
 list cannot be converted to character.
@@ -59,7 +59,7 @@ list cannot be converted to character.
 }
 }
 \description{
-Checks whether a vector can be coerced to character without losing
+Checks whether a vector can be converted to character without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_character} is a synonym of \code{to_chr()}.
 }
@@ -67,20 +67,21 @@ message is signaled. \code{to_character} is a synonym of \code{to_chr()}.
 This function has two important differences from
 \code{\link[base:as.character]{base::as.character()}}:
 \itemize{
-\item \code{list}s and \code{data.frame}s are \emph{not} coerced to character. In base R, such
-objects are coerced to character representations of their elements. For
+\item \code{list}s and \code{data.frame}s are \emph{not} converted to character. In base R, such
+objects are converted to character representations of their elements. For
 example, \code{as.character(list(1:3))} returns "1:3". In the unlikely event
 that this is the expected behavior, use \code{as.character()} instead.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).
-}
 
 Named functions are converted to their string name. If the function comes
 from a package namespace, the result is a \code{"pkg::fn"} string. For example,
-\code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an error.
+\code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an
+error.
 
 To preserve the original call-site symbol when \code{to_chr()} is called inside
 a wrapper function, use the embrace operator \code{{{ }}}. For example:
+}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{my_wrapper <- function(fn) \{
   to_chr(\{\{ fn \}\})

@@ -59,7 +59,7 @@ test_that("to_dur() keeps NA character elements as NA (#295)", {
   expect_identical(is.na(result), c(FALSE, TRUE))
 })
 
-test_that("to_dur() rejects a bare P or PT (#295)", {
+test_that("to_dur() rejects a bare P or PT (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("P"),
     "stbl",
@@ -74,7 +74,7 @@ test_that("to_dur() rejects a bare P or PT (#295)", {
   )
 })
 
-test_that("to_dur() rejects mixing the week form with other units (#295)", {
+test_that("to_dur() rejects mixing the week form with other units (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("P1W2D"),
     "stbl",
@@ -83,7 +83,7 @@ test_that("to_dur() rejects mixing the week form with other units (#295)", {
   )
 })
 
-test_that("to_dur() rejects fractional components (#295)", {
+test_that("to_dur() rejects fractional components (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("P1.5D"),
     "stbl",
@@ -92,7 +92,7 @@ test_that("to_dur() rejects fractional components (#295)", {
   )
 })
 
-test_that("to_dur() rejects a negative sign (#295)", {
+test_that("to_dur() rejects a negative sign (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("-P1D"),
     "stbl",
@@ -101,7 +101,7 @@ test_that("to_dur() rejects a negative sign (#295)", {
   )
 })
 
-test_that("to_dur() rejects out-of-order components (#295)", {
+test_that("to_dur() rejects out-of-order components (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("P1D1Y"),
     "stbl",
@@ -110,7 +110,7 @@ test_that("to_dur() rejects out-of-order components (#295)", {
   )
 })
 
-test_that("to_dur() rejects lowercase durations (#295)", {
+test_that("to_dur() rejects lowercase durations (#295, #377)", {
   expect_pkg_error_snapshot(
     to_dur("p1y2m"),
     "stbl",
@@ -119,7 +119,7 @@ test_that("to_dur() rejects lowercase durations (#295)", {
   )
 })
 
-test_that("to_dur() rejects unparseable duration strings (#295)", {
+test_that("to_dur() rejects unparseable duration strings (#295, #377)", {
   given <- c("P1D", "not-a-duration")
   expect_pkg_error_snapshot(
     to_dur(given),
@@ -135,13 +135,13 @@ test_that("to_dur() rejects unparseable duration strings (#295)", {
   )
 })
 
-test_that("to_dur() coerces factors via the character path (#295)", {
+test_that("to_dur() converts factors via the character path (#295)", {
   given <- factor(c("P1D", "P2D"))
   expected <- to_dur(as.character(given))
   expect_identical(to_dur(given), expected)
 })
 
-test_that("to_dur() errors informatively for bad factors (#295)", {
+test_that("to_dur() errors informatively for bad factors (#295, #377)", {
   given <- factor(c("P1D", "nope"))
   expect_pkg_error_snapshot(
     to_dur(given),
@@ -182,7 +182,7 @@ test_that("to_dur_scalar() allows length-1 durations through (#295)", {
   expect_identical(to_dur_scalar(given), given)
 })
 
-test_that("to_dur_scalar() coerces length-1 input (#295)", {
+test_that("to_dur_scalar() converts length-1 input (#295)", {
   expect_identical(to_dur_scalar("P1D"), to_dur("P1D"))
 })
 

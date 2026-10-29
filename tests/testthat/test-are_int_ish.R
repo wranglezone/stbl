@@ -15,7 +15,7 @@ test_that("are_int_ish() works for doubles (#93, #217)", {
   expect_identical(are_int_ish(c(1.1, Inf, -Inf)), c(FALSE, FALSE, FALSE))
   # NaN is treated as NA
   expect_true(are_int_ish(NaN))
-  # Out-of-range doubles cannot be coerced to integer
+  # Out-of-range doubles cannot be converted to integer
   expect_false(are_int_ish(2147483648))
 })
 

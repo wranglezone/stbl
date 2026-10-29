@@ -1,4 +1,4 @@
-test_that("to_each() coerces each element with spec and simplifies (#287)", {
+test_that("to_each() converts each element with spec and simplifies (#287)", {
   expect_identical(to_each(list("1", "2", "3"), to_int), c(1L, 2L, 3L))
   expect_identical(to_each(list(1L, 2L, 3L), to_chr), c("1", "2", "3"))
 })
@@ -45,7 +45,7 @@ test_that("to_each() returns x unchanged for zero-length or NULL x (#287)", {
   expect_identical(to_each(character(), to_int), character())
 })
 
-test_that("to_each() stops at the first failing element (#287)", {
+test_that("to_each() stops at the first failing element (#287, #377)", {
   expect_pkg_error_snapshot(
     to_each(list("1", "a", "b"), to_int),
     "stbl",

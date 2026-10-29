@@ -48,7 +48,7 @@ test_that("stabilize_lst() errors when required named element is missing (#110)"
   )
 })
 
-test_that("stabilize_lst() errors informatively when element fails validation (#110, #310, #335)", {
+test_that("stabilize_lst() errors informatively when element fails validation (#110, #310, #335, #377)", {
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(count = "not-an-int"),
@@ -100,7 +100,7 @@ test_that("stabilize_lst() treats .named = FALSE like the default (forbid) (#281
   )
 })
 
-test_that("stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335)", {
+test_that("stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335, #377)", {
   expect_pkg_error_snapshot(
     stabilize_lst(list(a = 1L, b = 2L), .named = "yes"),
     "stbl",
@@ -145,7 +145,7 @@ test_that("stabilize_lst() treats .unnamed = FALSE like the default (forbid) (#2
   )
 })
 
-test_that("stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335)", {
+test_that("stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335, #377)", {
   expect_pkg_error_snapshot(
     stabilize_lst(list(1L, 2L), .unnamed = "yes"),
     "stbl",
@@ -218,7 +218,7 @@ test_that("stabilize_lst() reports duplicate locations for .unique failures (#28
   expect_identical(cnd$locations, 3L)
 })
 
-test_that("stabilize_lst() checks .unique after coercion (#280)", {
+test_that("stabilize_lst() checks .unique after conversion (#280)", {
   cnd <- rlang::catch_cnd(
     stabilize_lst(
       list("1", 1.0),
@@ -230,14 +230,14 @@ test_that("stabilize_lst() checks .unique after coercion (#280)", {
   expect_identical(cnd$locations, 2L)
 })
 
-test_that("stabilize_lst() validates nested lists (#110)", {
+test_that("stabilize_lst() validates nested lists (#110, #377)", {
   spec_aes <- specify_lst(x = specify_chr_scalar(), y = specify_chr_scalar())
   given <- list(aes = list(x = "mpg", y = "hp"))
   expect_identical(
     stabilize_lst(given, aes = spec_aes),
     given
   )
-  # data.frame can't be coerced to chr_scalar
+  # data.frame can't be converted to chr_scalar
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(aes = list(x = mtcars, y = "hp")),

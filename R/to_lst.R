@@ -2,14 +2,14 @@
 
 #' Ensure a list meets expectations
 #'
-#' `to_lst()` checks whether an object can be coerced to a list without losing
+#' `to_lst()` checks whether an object can be converted to a list without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_list()` is a synonym of `to_lst()`.
 #'
 #' @details This function has important distinctions from [base::as.list()]:
 #' - Functions can be rejected as part of the call to this function (with
 #'   `coerce_function = FALSE`, the default). If they are allowed, they'll be
-#'   coerced to a list concatenating their formals and body (as with
+#'   converted to a list concatenating their formals and body (as with
 #'   [base::as.list()].
 #' - Primitive functions (such as [base::is.na()] or [base::is.list()]) always
 #'   throw an error, rather than returning `list(NULL)`.
@@ -62,7 +62,7 @@ to_lst.default <- function(
   try_fetch(
     as.list(x, ...),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "list",
         x_arg = x_arg,
@@ -149,7 +149,7 @@ to_lst.function <- function(
   call = caller_env()
 ) {
   if (is.primitive(x)) {
-    .stop_cant_coerce(
+    .stop_cant_convert(
       "primitive function",
       "list",
       x_arg = x_arg,

@@ -1,4 +1,4 @@
-#' Coerce to date-time with additional checks
+#' Convert to date-time with additional checks
 #'
 #' Compared to [to_dttm()], `stabilize_dttm()` checks more details, but is
 #' slower. `stabilise_dttm()`, `stabilize_datetime()`, `stabilise_dttm()`,
@@ -11,7 +11,7 @@
 #' @returns The input as a [base::POSIXct] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-datetime>` when `x` cannot be coerced to datetime.
+#'   - `<stbl-error-coerce-datetime>` when `x` cannot be converted to datetime.
 #'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
 #'   safely converted to datetime.
 #'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
@@ -103,11 +103,11 @@ stabilize_datetime <- stabilize_dttm
 #' @rdname stabilize_dttm
 stabilise_datetime <- stabilize_dttm
 
-#' Coerce to length-1 date-time with additional checks
+#' Convert to length-1 date-time with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 [base::POSIXct] vector.
-#' `stabilize_dttm_scalar()` is optimized to check for length-1 date-time
-#' vectors (compared to [stabilize_dttm()] with `max_size = 1`).
+#' Checks whether a vector can be converted to a length-1 [base::POSIXct]
+#' vector. `stabilize_dttm_scalar()` is optimized to check for length-1
+#' date-time vectors (compared to [stabilize_dttm()] with `max_size = 1`).
 #' `stabilise_dttm_scalar` are synonyms of `stabilize_dttm_scalar()`.
 #'
 #' @inheritParams .shared-params
@@ -116,7 +116,7 @@ stabilise_datetime <- stabilize_dttm
 #' @returns The input as a length-1 [base::POSIXct] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-datetime>` when `x` cannot be coerced to datetime.
+#'   - `<stbl-error-coerce-datetime>` when `x` cannot be converted to datetime.
 #'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
 #'   safely converted to datetime.
 #'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
@@ -193,13 +193,13 @@ stabilize_datetime_scalar <- stabilize_dttm_scalar
 #' @rdname stabilize_dttm_scalar
 stabilise_datetime_scalar <- stabilize_dttm_scalar
 
-#' Coerce to date-time, trying `accepted_datetime_formats` for character input
+#' Convert to date-time, trying `accepted_datetime_formats` for character input
 #'
 #' Used by [stabilize_dttm()] in place of [to_dttm()], so that character input
-#' can be tried against a list of `accepted_datetime_formats` (with an
-#' optional UTC offset) rather than only the strict RFC 3339 shape that
-#' [to_dttm()] enforces. Non-character input (and factors, once converted to
-#' character) is delegated to [to_dttm()] unchanged.
+#' can be tried against a list of `accepted_datetime_formats` (with an optional
+#' UTC offset) rather than only the strict RFC 3339 shape that [to_dttm()]
+#' enforces. Non-character input (and factors, once converted to character) is
+#' delegated to [to_dttm()] unchanged.
 #'
 #' @inheritParams .shared-params
 #' @inheritParams to_dttm
@@ -236,7 +236,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
     ))
   }
   result <- .try_dttm_formats(x, accepted_datetime_formats, tz = tz)
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     result$failures,
     x_class,
@@ -249,7 +249,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
   return(result$parsed)
 }
 
-#' Coerce to length-1 date-time, trying `accepted_datetime_formats`
+#' Convert to length-1 date-time, trying `accepted_datetime_formats`
 #'
 #' The scalar counterpart of [.to_dttm_locale()], used by
 #' [stabilize_dttm_scalar()] in place of [to_dttm_scalar()].
@@ -289,7 +289,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
 #'
 #' Base R has no C-level range routines for [base::POSIXct] as it does for
 #' double, so the comparisons are performed in plain R. `min_value`,
-#' `max_value`, and `allowed_values` are coerced to [base::POSIXct] first so
+#' `max_value`, and `allowed_values` are converted to [base::POSIXct] first so
 #' that character or numeric bounds are accepted.
 #'
 #' @inheritParams .shared-params
@@ -406,8 +406,8 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
 #' @returns A list with:
 #'   - `regex`: the unanchored regex body (not yet wrapped in `^`/`$`).
 #'   - `fields`: a character vector naming the calendar field (one of `"Y"`,
-#'   `"m"`, `"d"`, `"H"`, `"M"`, or `"S"`) captured by each group, in the
-#'   order the groups appear in `regex`.
+#'   `"m"`, `"d"`, `"H"`, `"M"`, or `"S"`) captured by each group, in the order
+#'   the groups appear in `regex`.
 #' @keywords internal
 .format_to_capture_regex <- function(fmt) {
   tokens <- regmatches(fmt, gregexpr("%[YmdHMS]|[^%]+", fmt))[[1]]
@@ -429,9 +429,9 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
 #' Try candidate date-time formats against a character vector
 #'
 #' Like [.try_date_formats()], but for date-time strings, with an optional
-#' trailing UTC offset (`"Z"` or a numeric offset such as `"+05:00"`).
-#' Elements with an offset are converted using that offset; elements without
-#' one are treated as wall-clock time in `tz`.
+#' trailing UTC offset (`"Z"` or a numeric offset such as `"+05:00"`). Elements
+#' with an offset are converted using that offset; elements without one are
+#' treated as wall-clock time in `tz`.
 #'
 #' @inheritParams .try_date_formats
 #' @param tz `(character(1))` The time zone to assume for date-times with no
@@ -471,17 +471,17 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
 
 #' Parse capture-group matches from `.try_dttm_formats()` into instants
 #'
-#' @param matches `(list)` Regex captures from [regmatches()]: the full
-#'   match, one group per calendar field named in `fields`, and a trailing
-#'   UTC-offset group (possibly `""` when absent).
-#' @param fields `(character)` Which calendar field (`"Y"`, `"m"`, `"d"`,
-#'   `"H"`, `"M"`, or `"S"`) each non-offset capture group corresponds to, in
-#'   the order the groups appear.
+#' @param matches `(list)` Regex captures from [regmatches()]: the full match,
+#'   one group per calendar field named in `fields`, and a trailing UTC-offset
+#'   group (possibly `""` when absent).
+#' @param fields `(character)` Which calendar field (`"Y"`, `"m"`, `"d"`, `"H"`,
+#'   `"M"`, or `"S"`) each non-offset capture group corresponds to, in the order
+#'   the groups appear.
 #' @param tz `(character(1))` The time zone to assume for elements with no
 #'   explicit offset.
 #' @returns A [base::POSIXct] vector (in `tz`), the same length as `matches`,
-#'   with `NA` at any position that describes an impossible date-time (such
-#'   as `"2024-02-30"`).
+#'   with `NA` at any position that describes an impossible date-time (such as
+#'   `"2024-02-30"`).
 #' @keywords internal
 .parse_dttm_matches <- function(matches, fields, tz) {
   parts <- do.call(rbind, matches)
@@ -493,9 +493,9 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
     }
     as.integer(parts[, idx + 1L])
   }
-  # ISOdatetime() (unlike as.POSIXct(format = ...)) returns NA for
-  # out-of-range components instead of rolling over, so it doubles as the
-  # calendar validity check.
+  # ISOdatetime() (unlike as.POSIXct(format = ...)) returns NA for out-of-range
+  # components instead of rolling over, so it doubles as the calendar validity
+  # check.
   naive <- ISOdatetime(
     year = get_field("Y", 1970L),
     month = get_field("m", 1L),

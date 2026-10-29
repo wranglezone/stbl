@@ -5,7 +5,7 @@
 /*
  * stbl_int_to_fct: public API entry point.
  *
- * Coerces an integer vector to a factor.  When `levels` is R_NilValue the
+ * Converts an integer vector to a factor.  When `levels` is R_NilValue the
  * unique non-NA integers are collected and sorted *numerically* (via
  * R_orderVector1 on an INTSXP), then converted to character level labels.
  * This matches the ordering produced by R's factor(integer_vector) and is

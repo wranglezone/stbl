@@ -1,15 +1,14 @@
-#' Coerce to date with additional checks
+#' Convert to date with additional checks
 #'
 #' Compared to [to_date()], `stabilize_date()` checks more details, but is
-#' slower. `stabilise_date()` is a synonym of
-#' `stabilize_date()`.
+#' slower. `stabilise_date()` is a synonym of `stabilize_date()`.
 #'
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a [base::Date] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-date>` when `x` cannot be coerced to date.
+#'   - `<stbl-error-coerce-date>` when `x` cannot be converted to date.
 #'   - `<stbl-error-incompatible_values-date>` when some values cannot be safely
 #'   converted to date.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -83,9 +82,9 @@ stabilize_date <- function(
 #' @rdname stabilize_date
 stabilise_date <- stabilize_date
 
-#' Coerce to length-1 date with additional checks
+#' Convert to length-1 date with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 [base::Date] vector.
+#' Checks whether a vector can be converted to a length-1 [base::Date] vector.
 #' `stabilize_date_scalar()` is optimized to check for length-1 date vectors
 #' (compared to [stabilize_date()] with `max_size = 1`). `stabilise_date_scalar`
 #' is a synonym of `stabilize_date_scalar()`.
@@ -95,7 +94,7 @@ stabilise_date <- stabilize_date
 #' @returns The input as a length-1 [base::Date] vector, or an error condition
 #'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-date>` when `x` cannot be coerced to date.
+#'   - `<stbl-error-coerce-date>` when `x` cannot be converted to date.
 #'   - `<stbl-error-incompatible_values-date>` when some values cannot be safely
 #'   converted to date.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -156,13 +155,12 @@ stabilize_date_scalar <- function(
 #' @rdname stabilize_date_scalar
 stabilise_date_scalar <- stabilize_date_scalar
 
-#' Coerce to date, trying `accepted_datetime_formats` for character input
+#' Convert to date, trying `accepted_datetime_formats` for character input
 #'
 #' Used by [stabilize_date()] in place of [to_date()], so that character input
 #' can be tried against a list of `accepted_datetime_formats` rather than only
-#' the strict RFC 3339 shape that [to_date()] enforces. Non-character input
-#' (and factors, once converted to character) is delegated to [to_date()]
-#' unchanged.
+#' the strict RFC 3339 shape that [to_date()] enforces. Non-character input (and
+#' factors, once converted to character) is delegated to [to_date()] unchanged.
 #'
 #' @inheritParams .shared-params
 #' @returns The input as a [base::Date] vector.
@@ -188,7 +186,7 @@ stabilise_date_scalar <- stabilize_date_scalar
     return(to_date(x, ..., x_arg = x_arg, call = call, x_class = x_class))
   }
   result <- .try_date_formats(x, accepted_datetime_formats)
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     result$failures,
     x_class,
@@ -200,7 +198,7 @@ stabilise_date_scalar <- stabilize_date_scalar
   return(result$parsed)
 }
 
-#' Coerce to length-1 date, trying `accepted_datetime_formats`
+#' Convert to length-1 date, trying `accepted_datetime_formats`
 #'
 #' The scalar counterpart of [.to_date_locale()], used by
 #' [stabilize_date_scalar()] in place of [to_date_scalar()].
@@ -333,20 +331,20 @@ stabilise_date_scalar <- stabilize_date_scalar
 
 #' Convert a strptime()-style format string to a shape-checking regex
 #'
-#' Used to verify that a character vector's *shape* matches a candidate
-#' format before handing it to [as.Date()], since that function silently
-#' ignores unmatched trailing characters rather than failing.
+#' Used to verify that a character vector's *shape* matches a candidate format
+#' before handing it to [as.Date()], since that function silently ignores
+#' unmatched trailing characters rather than failing.
 #'
 #' @param fmt (`character(1)`) A `strptime()`-style format string built from
 #'   `%Y`, `%m`, `%d`, `%H`, `%M`, and `%S` specifiers and literal separators.
-#' @returns A `character(1)` regular expression, anchored with `^` and `$`,
-#'   that matches strings shaped like `fmt`.
+#' @returns A `character(1)` regular expression, anchored with `^` and `$`, that
+#'   matches strings shaped like `fmt`.
 #' @keywords internal
 .format_to_regex <- function(fmt) {
   pattern <- gsub("%Y", "\\d{4}", fmt, fixed = TRUE)
-  # Each specifier is substituted separately with fixed = TRUE; a single
-  # gsub() with a specifier-matching regex would need the replacement to go
-  # through non-fixed backslash processing, which mangles "\\d".
+  # Each specifier is substituted separately with fixed = TRUE; a single gsub()
+  # with a specifier-matching regex would need the replacement to go through
+  # non-fixed backslash processing, which mangles "\\d".
   for (specifier in c("%m", "%d", "%H", "%M", "%S")) {
     pattern <- gsub(specifier, "\\d{2}", pattern, fixed = TRUE)
   }
@@ -358,8 +356,8 @@ stabilise_date_scalar <- stabilize_date_scalar
 #' Tries each format in `formats`, in order, and returns the first one that
 #' parses every non-`NA` element of `x` without failure. If none succeed for
 #' every element, returns the result of the first format tried, so that error
-#' messages describe a concrete (if incomplete) failure rather than an
-#' arbitrary one.
+#' messages describe a concrete (if incomplete) failure rather than an arbitrary
+#' one.
 #'
 #' @param x `(character)` The vector to parse.
 #' @param formats `(character)` Candidate `strptime()`-style format strings,

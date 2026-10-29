@@ -5,7 +5,7 @@
 \alias{stabilise_dur}
 \alias{stabilize_duration}
 \alias{stabilise_duration}
-\title{Coerce to duration with additional checks}
+\title{Convert to duration with additional checks}
 \usage{
 stabilize_dur(
   x,
@@ -94,7 +94,7 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -108,7 +108,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -116,7 +116,7 @@ The input as a \link[lubridate:Period-class]{lubridate::Period} vector, or an er
 condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
 \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be coerced to a
+\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a
 duration.
 \item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
 safely converted to a duration.

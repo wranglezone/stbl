@@ -16,14 +16,14 @@ test_that(".to_null() errors when NULL isn't allowed (#129)", {
   )
 })
 
-test_that(".to_null() coerces anything to NULL (#129)", {
+test_that(".to_null() converts anything to NULL (#129)", {
   expect_null(.to_null(1L))
   expect_null(.to_null(mean))
   expect_null(.to_null(TRUE))
   expect_null(.to_null(letters))
 })
 
-test_that(".to_null() errors for bad allow_null (#129, #310, #335)", {
+test_that(".to_null() errors for bad allow_null (#129, #310, #335, #377)", {
   expect_pkg_error_snapshot(
     .to_null(NULL, allow_null = NULL),
     "stbl",

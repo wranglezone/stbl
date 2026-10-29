@@ -113,11 +113,11 @@ test_that("replace_stbl_error() catches broad subclass (#178)", {
     replace_stbl_error(
       to_chr(x),
       subclass = c("coerce"),
-      message = "Custom coerce message."
+      message = "Custom convert message."
     )
   }
   err <- rlang::catch_cnd(my_fn(data.frame()), "error")
-  expect_equal(conditionMessage(err), "Custom coerce message.")
+  expect_equal(conditionMessage(err), "Custom convert message.")
 })
 
 test_that("replace_stbl_error() formats message with cli markup (#178)", {

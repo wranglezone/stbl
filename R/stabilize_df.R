@@ -17,29 +17,28 @@
 #'   - `NULL` or `FALSE` (default): any extra columns cause an error.
 #'   - `TRUE`: extra columns are allowed, unchecked.
 #'   - A single stabilizer function, such as a `stabilize_*` function
-#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
-#'   function ([specify_chr()], etc), used to validate every extra column.
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
+#'   ([specify_chr()], etc), used to validate every extra column.
 #' @param .col_names `(character)` A character vector of column names that must
 #'   be present in `.x`. Any columns listed here that are absent from `.x` will
 #'   cause an error. Unlike `...`, this does not validate the column contents.
-#' @param .min_rows (`integer(1)`) The minimum number of rows allowed in
-#'   `.x`. If `NULL` (default), the row count is not checked.
-#' @param .max_rows (`integer(1)`) The maximum number of rows allowed in
-#'   `.x`. If `NULL` (default), the row count is not checked.
+#' @param .min_rows (`integer(1)`) The minimum number of rows allowed in `.x`.
+#'   If `NULL` (default), the row count is not checked.
+#' @param .max_rows (`integer(1)`) The maximum number of rows allowed in `.x`.
+#'   If `NULL` (default), the row count is not checked.
 #' @param .required `(character)` Names (from `...`) of columns that must be
 #'   present in `.x`. Defaults to all names in `...`, so every named spec is
-#'   required unless you opt it out. Named specs *not* listed here are
-#'   optional: if absent, no error is raised; if present, they're validated
-#'   normally. Pass `NULL` or `character()` to make every named spec optional.
-#'   A `.x` with zero columns skips this check when
-#'   `.allow_zero_length = TRUE` (the default).
+#'   required unless you opt it out. Named specs *not* listed here are optional:
+#'   if absent, no error is raised; if present, they're validated normally. Pass
+#'   `NULL` or `character()` to make every named spec optional. A `.x` with zero
+#'   columns skips this check when `.allow_zero_length = TRUE` (the default).
 #' @inheritParams .shared-params
 #'
 #' @returns The validated data frame, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-coerce-data.frame>` when `.x` cannot be coerced to a data
+#'   - `<stbl-error-coerce-data.frame>` when `.x` cannot be converted to a data
 #'   frame.
 #'   - `<stbl-error-jagged>` when list input has incompatible element lengths for
 #'   conversion to a data frame.
@@ -52,8 +51,8 @@
 #'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
 #'   unnamed.
 #'   - `<stbl-error-missing_element>`, `<stbl-error-bad_named>`,
-#'   `<stbl-error-bad_unnamed>`, or `<stbl-error-duplicate_names>` when list-like
-#'   column checks delegated to [stabilize_lst()] fail.
+#'   `<stbl-error-bad_unnamed>`, or `<stbl-error-duplicate_names>` when
+#'   list-like column checks delegated to [stabilize_lst()] fail.
 #' @family data frame functions
 #' @family stabilization functions
 #' @export
@@ -97,14 +96,14 @@
 #' stabilize_df(NULL)
 #' try(stabilize_df(NULL, .allow_null = FALSE))
 #'
-#' # Coercible inputs such as named lists are accepted
+#' # Convertible inputs such as named lists are accepted
 #' stabilize_df(
 #'   list(name = "Alice", age = 30L),
 #'   name = specify_chr_scalar(),
 #'   age = specify_int_scalar()
 #' )
 #'
-#' # Non-coercible inputs are rejected
+#' # Non-convertible inputs are rejected
 #' try(stabilize_df("not a data frame"))
 #'
 #' # Mark a column as optional via .required
@@ -183,10 +182,10 @@ stabilise_data_frame <- stabilize_df
 #' Check that a data frame has an acceptable number of rows
 #'
 #' @param .x `(data.frame)` The data frame being validated.
-#' @param min_rows (`integer(1)`) Minimum number of rows allowed, or
-#'   `NULL` to skip this check.
-#' @param max_rows (`integer(1)`) Maximum number of rows allowed, or
-#'   `NULL` to skip this check.
+#' @param min_rows (`integer(1)`) Minimum number of rows allowed, or `NULL` to
+#'   skip this check.
+#' @param max_rows (`integer(1)`) Maximum number of rows allowed, or `NULL` to
+#'   skip this check.
 #' @inheritParams .shared-params
 #' @returns `NULL`, invisibly, if the check passes.
 #' @keywords internal

@@ -7,10 +7,10 @@
 #' # to_one_of() uses prototypes instead of functions
 #' to_one_of("a", integer(), character())
 #'
-#' # "FALSE" coerces to logical, but not to integer
+#' # "FALSE" converts to logical, but not to integer
 #' to_one_of("FALSE", logical(), integer())
 #'
-#' # Errors as ambiguous: "1" coerces to both integer and double
+#' # Errors as ambiguous: "1" converts to both integer and double
 #' try(to_one_of("1", integer(), double()))
 to_one_of <- function(
   x,

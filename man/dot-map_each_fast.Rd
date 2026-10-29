@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{spec}{A single stabilizer/coercion function applied to each element.}
+\item{spec}{A single stabilizer/conversion function applied to each element.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

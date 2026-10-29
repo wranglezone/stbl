@@ -11,9 +11,9 @@ A zero-length object whose \code{\link[=object_type]{object_type()}} is \code{"d
 }
 \description{
 \code{\link[=object_type]{object_type()}} renders a \link[lubridate:Period-class]{lubridate::Period} as \code{"Period"}, but the
-duration family uses \code{"duration"} in its coercion classes and messages, to
-match the \code{to_dur()}/\code{stabilize_dur()} function names. This
-returns an empty object that renders as \code{"duration"} so error subclasses
-read \verb{<stbl-error-incompatible_values-duration>}.
+duration family uses \code{"duration"} in its conversion classes and messages, to
+match the \code{to_dur()}/\code{stabilize_dur()} function names. This returns an empty
+object that renders as \code{"duration"} so error subclasses read
+\verb{<stbl-error-incompatible_values-duration>}.
 }
 \keyword{internal}

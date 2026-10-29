@@ -6,8 +6,8 @@
 #' @param ... Arguments passed to methods.
 #' @param accepted_datetime_formats (`character`) `strptime()`-style format
 #'   strings to try, in order, when parsing a character `x`. The first format
-#'   that parses every non-`NA` element of `x` is used; if none do, the
-#'   result (and any error) is based on the first format tried. Defaults to
+#'   that parses every non-`NA` element of `x` is used; if none do, the result
+#'   (and any error) is based on the first format tried. Defaults to
 #'   [locale_datetime_formats()], which starts with the unambiguous RFC 3339
 #'   shape (`"%Y-%m-%d"`, optionally with a time-of-day component) before
 #'   falling back to the current locale's conventional date order.
@@ -15,7 +15,7 @@
 #'   error class list. Useful for the `class` argument of
 #'   [testthat::expect_error()].
 #' @param allow_na (`logical(1)`) Are NA values ok?
-#' @param allowed_values A vector of permitted values (coerced to the target
+#' @param allowed_values A vector of permitted values (converted to the target
 #'   type). `NULL` (default) skips the check. `NA` values in `x` are permitted
 #'   independently of `allowed_values`, subject to `allow_na`.
 #' @param allow_null (`logical(1)`) Is NULL an acceptable value?
@@ -23,9 +23,9 @@
 #' @param are_cls_ish_fn The `are_*_ish` function to apply to each element.
 #' @param call `(environment)` The execution environment to mention as the
 #'   source of error messages.
-#' @param cast_fn `(function)` The `as.*()` function to use for coercion.
+#' @param convert_fn `(function)` The `as.*()` function to use for conversion.
 #' @param check_cls_value_fn `(function)` A function to check the values of `x`
-#'   after coercion.
+#'   after conversion.
 #' @param check_cls_value_fn_args `(list)` A list of additional arguments to
 #'   pass to `check_cls_value_fn()`.
 #' @param coerce_character (`logical(1)`) Should character vectors such as "1"
@@ -34,7 +34,7 @@
 #'   and "2.0" be considered numeric-ish? Note that this package uses the
 #'   character value from the factor, while [as.integer()] and [as.double()] use
 #'   the integer index of the factor.
-#' @param coerce_function (`logical(1)`) Should functions be coerced?
+#' @param coerce_function (`logical(1)`) Should functions be converted?
 #' @param depth (`integer(1)`) Current recursion depth. Do not manually set this
 #'   parameter.
 #' @param due_to (`character(1)`) A string describing the reason for the
@@ -85,26 +85,26 @@
 #'   message that should be displayed. To check that a pattern is *not* matched,
 #'   attach a `negate` attribute set to `TRUE`. If a complex regex pattern
 #'   throws an error, try installing the stringi package.
-#' @param simplify (`logical(1)`) Should per-element results be combined into
-#'   a single atomic vector when possible (every result has size 1 and shares
-#'   a common type)? If `FALSE`, a list is always returned.
-#' @param spec `(function)` A single stabilizer or coercion function, such as
+#' @param simplify (`logical(1)`) Should per-element results be combined into a
+#'   single atomic vector when possible (every result has size 1 and shares a
+#'   common type)? If `FALSE`, a list is always returned.
+#' @param spec `(function)` A single stabilizer or conversion function, such as
 #'   a `to_*` function ([to_chr()], etc.), a `stabilize_*` function
 #'   ([stabilize_chr()], etc.), or a function produced by a `specify_*()` call
 #'   ([specify_chr()], etc.). Applied independently to each element of `x`.
-#' @param to The target object for the coercion.
+#' @param to The target object for the conversion.
 #' @param to_arg (`character(1)` or `NULL`) The name of the object that `x` is
-#'   being coerced to match, for use in error messages. When `NULL`, error
-#'   messages describe only `x`. When supplied, coercion failure messages name
+#'   being converted to match, for use in error messages. When `NULL`, error
+#'   messages describe only `x`. When supplied, conversion failure messages name
 #'   both `x_arg` and `to_arg`.
-#' @param to_class (`character(1)`) The name of the class to coerce to.
+#' @param to_class (`character(1)`) The name of the class to convert to.
 #' @param to_cls_args `(list)` A list of additional arguments to pass to
 #'   `to_cls_fn()`.
-#' @param to_cls_fn `(function)` The `to_*()` function to use for coercion.
+#' @param to_cls_fn `(function)` The `to_*()` function to use for conversion.
 #' @param to_cls_scalar_args `(list)` A list of additional arguments to pass to
 #'   `to_cls_scalar_fn()`.
 #' @param to_cls_scalar_fn `(function)` The `to_*_scalar()` function to use for
-#'   coercion.
+#'   conversion.
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
 #' @param tz (`character(1)`) The time zone to normalize `x` to. Must be a value
@@ -121,7 +121,7 @@
 #'   unexported functions.
 #' @param x_class (`character(1)`) The class name of the object being stabilized
 #'   to use in error messages. Use this if you remove a special class from the
-#'   object before checking its coercion, but want the error message to match
+#'   object before checking its conversion, but want the error message to match
 #'   the original class.
 #'
 #' @name .shared-params

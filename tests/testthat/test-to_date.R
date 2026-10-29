@@ -34,7 +34,7 @@ test_that("to_date() keeps NA character elements as NA (#104)", {
   expect_identical(to_date(given), expected)
 })
 
-test_that("to_date() rejects ambiguous date formats (#104)", {
+test_that("to_date() rejects ambiguous date formats (#104, #377)", {
   expect_pkg_error_snapshot(
     to_date("11/13/2018"),
     "stbl",
@@ -49,7 +49,7 @@ test_that("to_date() rejects ambiguous date formats (#104)", {
   )
 })
 
-test_that("to_date() rejects unparseable date strings (#104)", {
+test_that("to_date() rejects unparseable date strings (#104, #377)", {
   given <- c("2024-01-01", "not-a-date")
   expect_pkg_error_snapshot(
     to_date(given),
@@ -59,7 +59,7 @@ test_that("to_date() rejects unparseable date strings (#104)", {
   )
 })
 
-test_that("to_date() rejects impossible dates (#104)", {
+test_that("to_date() rejects impossible dates (#104, #377)", {
   expect_pkg_error_snapshot(
     to_date("2024-02-30"),
     "stbl",
@@ -68,13 +68,13 @@ test_that("to_date() rejects impossible dates (#104)", {
   )
 })
 
-test_that("to_date() coerces factors via the character path (#104)", {
+test_that("to_date() converts factors via the character path (#104)", {
   given <- factor(c("2024-01-01", "2024-06-15"))
   expected <- as.Date(c("2024-01-01", "2024-06-15"))
   expect_identical(to_date(given), expected)
 })
 
-test_that("to_date() errors informatively for bad factors (#104)", {
+test_that("to_date() errors informatively for bad factors (#104, #377)", {
   given <- factor(c("2024-01-01", "nope"))
   expect_pkg_error_snapshot(
     to_date(given),
@@ -110,7 +110,7 @@ test_that("to_date_scalar() allows length-1 dates through (#104)", {
   expect_identical(to_date_scalar(given), given)
 })
 
-test_that("to_date_scalar() coerces length-1 input (#104)", {
+test_that("to_date_scalar() converts length-1 input (#104)", {
   expect_identical(to_date_scalar("2024-01-01"), as.Date("2024-01-01"))
 })
 

@@ -5,7 +5,7 @@
 \alias{stabilize_logical_scalar}
 \alias{stabilise_lgl_scalar}
 \alias{stabilise_logical_scalar}
-\title{Coerce to length-1 logical with additional checks}
+\title{Convert to length-1 logical with additional checks}
 \usage{
 stabilize_lgl_scalar(
   x,
@@ -66,7 +66,7 @@ stabilise_logical_scalar(
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -80,7 +80,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -88,7 +88,7 @@ The input as a length-1 logical vector, or an error condition with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-logical>} when \code{x} cannot be coerced to logical.
+\item \verb{<stbl-error-coerce-logical>} when \code{x} cannot be converted to logical.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
@@ -99,7 +99,7 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 }
 }
 \description{
-Checks whether a vector can be coerced to a length-1 logical vector.
+Checks whether a vector can be converted to a length-1 logical vector.
 \code{stabilize_lgl_scalar()} is optimized to check for length-1 logical vectors
 (compared to \code{\link[=stabilize_lgl]{stabilize_lgl()}} with \code{max_size = 1}). \code{stabilise_lgl_scalar},
 \code{stabilize_logical_scalar()}, and \code{stabilise_logical_scalar} are synonyms of

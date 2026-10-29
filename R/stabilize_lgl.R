@@ -1,15 +1,15 @@
-#' Coerce to logical with additional checks
+#' Convert to logical with additional checks
 #'
-#' Compared to [to_lgl()], `stabilize_lgl()` checks more details, but is
-#' slower. `stabilise_lgl()`, `stabilize_logical()`, and `stabilise_logical()`
-#' are synonyms of `stabilize_lgl()`.
+#' Compared to [to_lgl()], `stabilize_lgl()` checks more details, but is slower.
+#' `stabilise_lgl()`, `stabilize_logical()`, and `stabilise_logical()` are
+#' synonyms of `stabilize_lgl()`.
 #'
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a logical vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
@@ -71,9 +71,9 @@ stabilise_lgl <- stabilize_lgl
 #' @rdname stabilize_lgl
 stabilise_logical <- stabilize_lgl
 
-#' Coerce to length-1 logical with additional checks
+#' Convert to length-1 logical with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 logical vector.
+#' Checks whether a vector can be converted to a length-1 logical vector.
 #' `stabilize_lgl_scalar()` is optimized to check for length-1 logical vectors
 #' (compared to [stabilize_lgl()] with `max_size = 1`). `stabilise_lgl_scalar`,
 #' `stabilize_logical_scalar()`, and `stabilise_logical_scalar` are synonyms of
@@ -84,7 +84,7 @@ stabilise_logical <- stabilize_lgl
 #' @returns The input as a length-1 logical vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.

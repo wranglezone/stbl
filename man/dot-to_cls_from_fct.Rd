@@ -2,7 +2,7 @@
 % Please edit documentation in R/cls_unexported.R
 \name{.to_cls_from_fct}
 \alias{.to_cls_from_fct}
-\title{Coerce an object from a factor to a specific class}
+\title{Convert an object from a factor to a specific class}
 \usage{
 .to_cls_from_fct(
   x,
@@ -19,12 +19,12 @@
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for coercion.}
+\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for conversion.}
 
 \item{to_cls_args}{\code{(list)} A list of additional arguments to pass to
 \code{to_cls_fn()}.}
 
-\item{to_class}{(\code{character(1)}) The name of the class to coerce to.}
+\item{to_class}{(\code{character(1)}) The name of the class to convert to.}
 
 \item{coerce_factor}{(\code{logical(1)}) Should factors with values such as "1"
 and "2.0" be considered numeric-ish? Note that this package uses the
@@ -37,8 +37,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -46,13 +46,13 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced to the target class.
+\code{x} converted to the target class.
 }
 \description{
-Coerce an object from a factor to a specific class
+Convert an object from a factor to a specific class
 }
 \keyword{internal}

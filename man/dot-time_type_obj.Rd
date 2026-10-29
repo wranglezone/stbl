@@ -11,7 +11,7 @@ A zero-length object whose \code{\link[=object_type]{object_type()}} is \code{"t
 }
 \description{
 \code{\link[=object_type]{object_type()}} renders an \code{\link[hms:hms]{hms::hms()}} as \code{"hms"}, but the time family uses
-\code{"time"} in its coercion classes and messages, to match the
+\code{"time"} in its conversion classes and messages, to match the
 \code{to_time()}/\code{stabilize_time()} function names. This returns an empty object
 that renders as \code{"time"} so error subclasses read
 \verb{<stbl-error-incompatible_values-time>}.

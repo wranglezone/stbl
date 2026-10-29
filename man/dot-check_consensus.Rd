@@ -9,7 +9,7 @@
 \arguments{
 \item{result}{The value obtained from the specs applied so far.}
 
-\item{fn}{A stabilizer or coercion function to apply to \code{x}.}
+\item{fn}{A stabilizer or conversion function to apply to \code{x}.}
 
 \item{x}{The value to test.}
 

@@ -1,9 +1,9 @@
 # target class: hms
 
-#' Coerce to time-of-day
+#' Convert to time-of-day
 #'
-#' Checks whether a vector can be coerced to an [hms::hms()] time-of-day vector
-#' without losing information, returning it silently if so. Otherwise an
+#' Checks whether a vector can be converted to an [hms::hms()] time-of-day
+#' vector without losing information, returning it silently if so. Otherwise an
 #' informative error message is signaled.
 #'
 #' Character vectors must use the [RFC
@@ -21,10 +21,10 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as an [hms::hms()] vector, always expressed in UTC, or
-#'   an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-#'   failure mode:
+#' @returns The input as an [hms::hms()] vector, always expressed in UTC, or an
+#'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
+#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
+#'   mode:
 #'   - `<stbl-error-incompatible_values-time>` when some values cannot be
 #'   safely converted to a time of day.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -92,7 +92,7 @@ to_time.character <- function(
     utc_seconds[to_parse] <- .parse_time_parts(matches[to_parse])
   }
   failures <- not_na & (!well_shaped | is.na(utc_seconds))
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -188,7 +188,7 @@ to_time.numeric <- function(
   # Numeric values are seconds since midnight; anything outside a single day
   # doesn't unambiguously resolve to a time of day.
   failures <- !is.na(x) & (x < 0 | x >= 86400)
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -259,7 +259,7 @@ to_time.default <- function(
   try_fetch(
     vctrs::vec_cast(x, .time_type_obj(), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "time",
         x_arg = x_arg,
@@ -270,9 +270,9 @@ to_time.default <- function(
   )
 }
 
-#' Coerce to length-1 time-of-day
+#' Convert to length-1 time-of-day
 #'
-#' Checks whether a vector can be coerced to a length-1 [hms::hms()] vector.
+#' Checks whether a vector can be converted to a length-1 [hms::hms()] vector.
 #'
 #' @inheritParams .shared-params
 #' @inheritParams to_time
@@ -330,7 +330,7 @@ to_time_scalar <- function(
 #' An empty time object for error messages
 #'
 #' [object_type()] renders an [hms::hms()] as `"hms"`, but the time family uses
-#' `"time"` in its coercion classes and messages, to match the
+#' `"time"` in its conversion classes and messages, to match the
 #' `to_time()`/`stabilize_time()` function names. This returns an empty object
 #' that renders as `"time"` so error subclasses read
 #' `<stbl-error-incompatible_values-time>`.

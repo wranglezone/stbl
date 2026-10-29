@@ -14,13 +14,13 @@
       Error in `wrapped_stabilize_df()`:
       ! `val` must not be <NULL>.
 
-# stabilize_df() errors for non-coercible input (#142)
+# stabilize_df() errors for non-convertible input (#142, #377)
 
     Code
       stabilize_df("not a data frame")
     Condition <stbl-error-coerce-data.frame>
       Error:
-      ! Can't coerce `"not a data frame"` <character> to <data.frame>.
+      ! Can't convert `"not a data frame"` <character> to <data.frame>.
 
 ---
 
@@ -28,7 +28,7 @@
       wrapped_stabilize_df("not a data frame")
     Condition <stbl-error-coerce-data.frame>
       Error in `wrapped_stabilize_df()`:
-      ! Can't coerce `val` <character> to <data.frame>.
+      ! Can't convert `val` <character> to <data.frame>.
 
 # stabilize_df() errors when required column is missing (#142)
 
@@ -46,13 +46,13 @@
       Error:
       ! `data.frame()` must contain element "name".
 
-# stabilize_df() errors informatively when column fails validation (#142, #310, #335)
+# stabilize_df() errors informatively when column fails validation (#142, #310, #335, #377)
 
     Code
       stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar())
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `data.frame(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
+      ! `data.frame(count = "not-an-int")[["count"]]` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-an-int"
@@ -66,14 +66,14 @@
       ! `data.frame(a = 1L, b = 2L)` must not contain extra named elements.
       x Extra element: "b"
 
-# stabilize_df() validates extra columns with .extra_cols (#142, #310, #335)
+# stabilize_df() validates extra columns with .extra_cols (#142, #310, #335, #377)
 
     Code
       stabilize_df(data.frame(a = 1L, b = "not-int"), a = specify_int_scalar(),
       .extra_cols = specify_int_scalar())
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `data.frame(a = 1L, b = "not-int")[["b"]]` <character> must be coercible to <integer>
+      ! `data.frame(a = 1L, b = "not-int")[["b"]]` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-int"

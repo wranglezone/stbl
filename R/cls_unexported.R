@@ -1,4 +1,4 @@
-#' Coerce an object to a specific scalar class
+#' Convert an object to a specific scalar class
 #'
 #' @inheritParams .shared-params
 #' @returns `x` as a scalar of the target class.
@@ -166,10 +166,10 @@
   )
 }
 
-#' Coerce an object from a factor to a specific class
+#' Convert an object from a factor to a specific class
 #'
 #' @inheritParams .shared-params
-#' @returns `x` coerced to the target class.
+#' @returns `x` converted to the target class.
 #' @keywords internal
 .to_cls_from_fct <- function(
   x,
@@ -197,7 +197,7 @@
       )
     )
   }
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = to_class,
     x_arg = x_arg,
@@ -206,24 +206,24 @@
   )
 }
 
-#' Coerce an object from a complex to a numeric class
+#' Convert an object from a complex to a numeric class
 #'
 #' @inheritParams .shared-params
-#' @returns `x` coerced to the target class.
+#' @returns `x` converted to the target class.
 #' @keywords internal
 .to_num_from_complex <- function(
   x,
-  cast_fn,
+  convert_fn,
   to_type_obj,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  cast <- suppressWarnings(cast_fn(x))
+  converted <- suppressWarnings(convert_fn(x))
   x_na <- is.na(x)
-  failures <- (cast != x & !x_na) | xor(x_na, is.na(cast))
-  .check_cast_failures(
+  failures <- (converted != x & !x_na) | xor(x_na, is.na(converted))
+  .check_conversion_failures(
     x = x,
     failures = failures,
     x_class = x_class,
@@ -233,14 +233,15 @@
     call = call,
     to_arg = to_arg
   )
-  return(cast)
+  return(converted)
 }
 
 
-#' Check list coercion failures and error if any element could not be converted
+#' Check list conversion failures and error if any element could not be
+#' converted
 #'
-#' @param valid `(logical)` The `valid` vector returned by a `stbl_lst_to_*`
-#'   C routine.
+#' @param valid `(logical)` The `valid` vector returned by a `stbl_lst_to_*` C
+#'   routine.
 #' @inheritParams .stop_incompatible
 #' @inherit .shared-return-conditions return
 #' @keywords internal
@@ -253,7 +254,7 @@
   call,
   to_arg = NULL
 ) {
-  .check_cast_failures(
+  .check_conversion_failures(
     x = x,
     failures = !valid,
     x_class = x_class,

@@ -8,7 +8,7 @@ SEXP stbl_lgl_to_chr(SEXP x);
 SEXP stbl_lst_to_fct(SEXP x);
 
 /**
- * @brief Coerce any supported vector to factor, using @p to as a template.
+ * @brief Convert any supported vector to factor, using @p to as a template.
  *
  * Levels and ordered-ness are read from @p to:
  *   - If @p to has a non-empty levels attribute those levels are enforced;

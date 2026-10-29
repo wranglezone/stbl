@@ -36,24 +36,24 @@
       Error in `wrapped_to_fct()`:
       ! `val` must not be <NULL>.
 
-# to_fct() works for lists (#64, #273, #310)
+# to_fct() works for lists (#64, #273, #310, #377)
 
     Code
       to_fct(list("a", 1:5))
     Condition <stbl-error-incompatible_values-factor>
       Error:
-      ! `list("a", 1:5)` <list> must be coercible to <factor>
+      ! `list("a", 1:5)` <list> must be convertible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "1:5"
 
-# to_fct() errors for things that can't be coerced (#62, #273, #310)
+# to_fct() errors for things that can't be converted (#62, #273, #310, #377)
 
     Code
       to_fct(given)
     Condition <stbl-error-coerce-factor>
       Error:
-      ! Can't coerce `given` <function> to <factor>.
+      ! Can't convert `given` <function> to <factor>.
 
 ---
 
@@ -61,7 +61,7 @@
       wrapped_to_fct(given)
     Condition <stbl-error-coerce-factor>
       Error in `wrapped_to_fct()`:
-      ! Can't coerce `val` <function> to <factor>.
+      ! Can't convert `val` <function> to <factor>.
 
 ---
 
@@ -69,7 +69,7 @@
       to_fct(given)
     Condition <stbl-error-coerce-factor>
       Error:
-      ! Can't coerce `given` <data.frame> to <factor>.
+      ! Can't convert `given` <data.frame> to <factor>.
 
 ---
 
@@ -77,7 +77,7 @@
       wrapped_to_fct(given)
     Condition <stbl-error-coerce-factor>
       Error in `wrapped_to_fct()`:
-      ! Can't coerce `val` <data.frame> to <factor>.
+      ! Can't convert `val` <data.frame> to <factor>.
 
 ---
 
@@ -85,7 +85,7 @@
       to_fct(given)
     Condition <stbl-error-incompatible_values-factor>
       Error:
-      ! `given` <list> must be coercible to <factor>
+      ! `given` <list> must be convertible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 1 and 2
       * Values: "1" and "1:5"
@@ -96,7 +96,7 @@
       wrapped_to_fct(given)
     Condition <stbl-error-incompatible_values-factor>
       Error in `wrapped_to_fct()`:
-      ! `val` <list> must be coercible to <factor>
+      ! `val` <list> must be convertible to <factor>
       x Can't convert some values due to incompatible element types.
       * Locations: 1 and 2
       * Values: "1" and "1:5"

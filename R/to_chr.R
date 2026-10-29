@@ -1,27 +1,28 @@
 # target class: character
 
-#' Coerce to character
+#' Convert to character
 #'
-#' Checks whether a vector can be coerced to character without losing
+#' Checks whether a vector can be converted to character without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_character` is a synonym of `to_chr()`.
 #'
 #' @details This function has two important differences from
 #'   [base::as.character()]:
 #'
-#' - `list`s and `data.frame`s are *not* coerced to character. In base R, such
-#'   objects are coerced to character representations of their elements. For
+#' - `list`s and `data.frame`s are *not* converted to character. In base R, such
+#'   objects are converted to character representations of their elements. For
 #'   example, `as.character(list(1:3))` returns "1:3". In the unlikely event
 #'   that this is the expected behavior, use `as.character()` instead.
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
 #'
-#' Named functions are converted to their string name. If the function comes
-#' from a package namespace, the result is a `"pkg::fn"` string. For example,
-#' `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an error.
+#'   Named functions are converted to their string name. If the function comes
+#'   from a package namespace, the result is a `"pkg::fn"` string. For example,
+#'   `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an
+#'   error.
 #'
-#' To preserve the original call-site symbol when `to_chr()` is called inside
-#' a wrapper function, use the embrace operator `{{ }}`. For example:
+#'   To preserve the original call-site symbol when `to_chr()` is called inside
+#'   a wrapper function, use the embrace operator `{{ }}`. For example:
 #'
 #' ```r
 #' my_wrapper <- function(fn) {
@@ -32,10 +33,10 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a character vector, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#' @returns The input as a character vector, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-character>` when `x` cannot be coerced to character
+#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
 #'   (for example a `data.frame`, or an anonymous function).
 #'   - `<stbl-error-incompatible_values-character>` when some elements of a
 #'   list cannot be converted to character.
@@ -86,7 +87,7 @@ to_character <- to_chr
 #' Internal S3 implementation of to_chr
 #'
 #' @inheritParams .shared-params
-#' @returns The object coerced to character.
+#' @returns The object converted to character.
 #' @keywords internal
 .to_chr_impl <- function(
   x,
@@ -167,7 +168,7 @@ to_character <- to_chr
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "character",
     x_arg = x_arg,
@@ -242,7 +243,7 @@ to_character <- to_chr
 #' @keywords internal
 .stop_if_anon_fn <- function(x_expr, x_class, x_arg, call, to_arg = NULL) {
   if (!rlang::is_symbol(x_expr)) {
-    .stop_cant_coerce(
+    .stop_cant_convert(
       from_class = x_class,
       to_class = "character",
       x_arg = x_arg,
@@ -316,7 +317,7 @@ to_character <- to_chr
   try_fetch(
     as.character(x),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "character",
         x_arg = x_arg,
@@ -327,17 +328,17 @@ to_character <- to_chr
   )
 }
 
-#' Coerce to length-1 character
+#' Convert to length-1 character
 #'
-#' Checks whether a vector can be coerced to a length-1 character vector.
+#' Checks whether a vector can be converted to a length-1 character vector.
 #' `to_character_scalar()` is a synonym of `to_chr_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a length-1 character vector, or an error condition
-#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-#'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-character>` when `x` cannot be coerced to character
+#' @returns The input as a length-1 character vector, or an error condition with
+#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
 #'   (for example a `data.frame`, or an anonymous function).
 #'   - `<stbl-error-incompatible_values-character>` when some elements of a
 #'   list cannot be converted to character.

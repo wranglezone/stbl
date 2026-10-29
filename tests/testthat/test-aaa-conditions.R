@@ -28,18 +28,18 @@ test_that(".stbl_inform() throws the expected message (#213)", {
   )
 })
 
-test_that(".stop_cant_coerce() throws the expected error (#95)", {
+test_that(".stop_cant_convert() throws the expected error (#95, #377)", {
   expect_pkg_error_snapshot(
-    .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env()),
+    .stop_cant_convert("character", "integer", "my_arg", rlang::current_env()),
     "stbl",
     "coerce",
     "integer"
   )
 })
 
-test_that(".stop_cant_coerce() uses additional_msg when provided (#95)", {
+test_that(".stop_cant_convert() uses additional_msg when provided (#95, #377)", {
   expect_snapshot(
-    .stop_cant_coerce(
+    .stop_cant_convert(
       "character",
       "integer",
       "my_arg",
@@ -108,7 +108,7 @@ test_that(".stop_null() passes dots (#95)", {
   # about the messaging.
 })
 
-test_that(".stop_incompatible() throws the expected error (#95, #310, #332)", {
+test_that(".stop_incompatible() throws the expected error (#95, #310, #332, #377)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       c("a", "b", "c", "d"),
@@ -125,7 +125,7 @@ test_that(".stop_incompatible() throws the expected error (#95, #310, #332)", {
   )
 })
 
-test_that(".stop_incompatible() passes dots (#95, #310, #332)", {
+test_that(".stop_incompatible() passes dots (#95, #310, #332, #377)", {
   expect_pkg_error_snapshot(
     .stop_incompatible(
       c("a", "b", "c", "d"),

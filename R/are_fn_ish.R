@@ -1,23 +1,22 @@
-#' Check if an object can be safely coerced to a function
+#' Check if an object can be safely converted to a function
 #'
 #' @description `are_fn_ish()` is a vectorized predicate function that checks
-#'   whether each element of its input can be safely coerced to a function.
+#'   whether each element of its input can be safely converted to a function.
 #'   `are_function_ish()` is a synonym of `are_fn_ish()`.
 #'
 #'   `is_fn_ish()` is a scalar predicate that checks whether its input can be
-#'   safely coerced to a function by [to_fn()]. `is_function_ish()` is a
+#'   safely converted to a function by [to_fn()]. `is_function_ish()` is a
 #'   synonym of `is_fn_ish()`.
 #'
-#' @details
-#' `are_fn_ish()` returns `TRUE` for:
+#' @details `are_fn_ish()` returns `TRUE` for:
 #' - Functions (including lambda functions created with `~` or `\()`)
-#' - Formulas (one-sided or two-sided, coercible via [rlang::as_function()])
+#' - Formulas (one-sided or two-sided, convertible via [rlang::as_function()])
 #' - Character strings that are syntactically valid function names: either a
-#'   bare name (`"mean"`) or a namespaced name (`"pkg::fn"`). The check is
-#'   syntactic; it does not verify that the named function exists in any
-#'   environment.
+#' bare name (`"mean"`) or a namespaced name (`"pkg::fn"`). The check is
+#' syntactic; it does not verify that the named function exists in any
+#' environment.
 #'
-#' `is_fn_ish()` returns `TRUE` for objects that [to_fn()] can coerce without
+#' `is_fn_ish()` returns `TRUE` for objects that [to_fn()] can convert without
 #' error (assuming a matching function exists in the search path):
 #' - Functions (including lambda functions created with `~` or `\()`)
 #' - One-sided or two-sided formulas

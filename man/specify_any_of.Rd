@@ -14,8 +14,8 @@ specify_any_of(...)
 A function of class \code{"stbl_specified_fn"} that calls
 \code{\link[=stabilize_any_of]{stabilize_any_of()}} with the provided specs. The generated function will
 also accept \code{...} for additional unnamed specs to pass to
-\code{\link[=stabilize_any_of]{stabilize_any_of()}}. You can copy/paste the body of the resulting
-function if you want to provide additional context or functionality.
+\code{\link[=stabilize_any_of]{stabilize_any_of()}}. You can copy/paste the body of the resulting function
+if you want to provide additional context or functionality.
 }
 \description{
 \code{specify_any_of()} creates a function that will call \code{\link[=stabilize_any_of]{stabilize_any_of()}}

@@ -1,17 +1,17 @@
 # target class: double
 
-#' Coerce to double
+#' Convert to double
 #'
-#' Checks whether a vector can be coerced to double without losing information,
-#' returning it silently if so. Otherwise an informative error message is
-#' signaled. `to_double` is a synonym of `to_dbl()`.
+#' Checks whether a vector can be converted to double without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_double` is a synonym of `to_dbl()`.
 #'
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a double vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -100,7 +100,7 @@ to_dbl.character <- function(
   )
   if (coerce_character) {
     res <- .Call(stbl_chr_to_dbl, x)
-    .check_cast_failures(
+    .check_conversion_failures(
       x,
       !res[["valid"]],
       x_class,
@@ -112,7 +112,7 @@ to_dbl.character <- function(
     )
     return(res[["result"]])
   }
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "double",
     x_arg = x_arg,
@@ -135,7 +135,7 @@ to_dbl.factor <- function(
   coerce_factor <- to_lgl_scalar(coerce_factor, call = call)
   if (coerce_factor) {
     res <- .Call(stbl_fct_to_dbl, x)
-    .check_cast_failures(
+    .check_conversion_failures(
       x,
       !res[["valid"]],
       x_class,
@@ -147,7 +147,7 @@ to_dbl.factor <- function(
     )
     return(res[["result"]])
   }
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "double",
     x_arg = x_arg,
@@ -166,7 +166,7 @@ to_dbl.complex <- function(
   x_class = object_type(x)
 ) {
   res <- .Call(stbl_cpx_to_dbl, x)
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     !res[["valid"]],
     x_class,
@@ -191,7 +191,7 @@ to_dbl.default <- function(
   try_fetch(
     vctrs::vec_cast(x, double(), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "double",
         x_arg = x_arg,
@@ -202,9 +202,9 @@ to_dbl.default <- function(
   )
 }
 
-#' Coerce to length-1 double
+#' Convert to length-1 double
 #'
-#' Checks whether a vector can be coerced to a length-1 double vector.
+#' Checks whether a vector can be converted to a length-1 double vector.
 #' `to_double_scalar()` is a synonym of `to_dbl_scalar()`.
 #'
 #' @inheritParams .shared-params
@@ -212,7 +212,7 @@ to_dbl.default <- function(
 #' @returns The input as a length-1 double vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.

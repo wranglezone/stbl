@@ -2,21 +2,22 @@
 % Please edit documentation in R/cls_unexported.R
 \name{.check_lst_failures}
 \alias{.check_lst_failures}
-\title{Check list coercion failures and error if any element could not be converted}
+\title{Check list conversion failures and error if any element could not be
+converted}
 \usage{
 .check_lst_failures(x, valid, to, x_class, x_arg, call, to_arg = NULL)
 }
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{valid}{\code{(logical)} The \code{valid} vector returned by a \verb{stbl_lst_to_*}
-C routine.}
+\item{valid}{\code{(logical)} The \code{valid} vector returned by a \verb{stbl_lst_to_*} C
+routine.}
 
-\item{to}{The target object for the coercion.}
+\item{to}{The target object for the conversion.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
@@ -28,14 +29,15 @@ unexported functions.}
 source of error messages.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 }
 \value{
 \code{NULL} invisibly (called for side effects).
 }
 \description{
-Check list coercion failures and error if any element could not be converted
+Check list conversion failures and error if any element could not be
+converted
 }
 \keyword{internal}

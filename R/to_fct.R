@@ -1,15 +1,15 @@
 # target class: factor
 
-#' Coerce to factor
+#' Convert to factor
 #'
-#' Checks whether a vector can be coerced to a factor without losing
+#' Checks whether a vector can be converted to a factor without losing
 #' information, returning it silently if so. Otherwise an informative error
 #' message is signaled. `to_factor` is a synonym of `to_fct()`.
 #'
-#' @details This function has important differences from [base::as.factor()]
-#'   and [base::factor()]:
+#' @details This function has important differences from [base::as.factor()] and
+#'   [base::factor()]:
 #'
-#' - Values are never silently coerced to `NA` unless they are explicitly
+#' - Values are never silently converted to `NA` unless they are explicitly
 #'   supplied in the `to_na` argument.
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
@@ -21,7 +21,7 @@
 #' @returns The input as a factor, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
 #'   cannot be converted to factor.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
@@ -64,7 +64,7 @@ to_fct.factor <- function(
   call = caller_env()
 ) {
   levels <- levels %||% levels(x)
-  return(.coerce_fct_levels(x, levels, ordered, to_na, x_arg, call))
+  return(.convert_fct_levels(x, levels, ordered, to_na, x_arg, call))
 }
 
 #' @export
@@ -77,7 +77,7 @@ to_fct.character <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  return(.coerce_fct_levels(
+  return(.convert_fct_levels(
     x,
     levels = levels,
     ordered = ordered,
@@ -99,10 +99,10 @@ to_fct.integer <- function(
 ) {
   if (is.null(levels)) {
     # Use stbl_int_to_fct for numerically-ordered levels, then pass those
-    # levels explicitly to .coerce_fct_levels so to_na and error handling
+    # levels explicitly to .convert_fct_levels so to_na and error handling
     # work correctly without re-sorting as strings.
     fct <- .Call(stbl_int_to_fct, x, NULL, ordered)
-    return(.coerce_fct_levels(
+    return(.convert_fct_levels(
       fct[["result"]],
       levels = levels(fct[["result"]]),
       ordered = ordered,
@@ -112,7 +112,7 @@ to_fct.integer <- function(
     ))
   }
   x <- .Call(stbl_int_to_chr, x)[["result"]]
-  return(.coerce_fct_levels(
+  return(.convert_fct_levels(
     x,
     levels = levels,
     ordered = ordered,
@@ -121,6 +121,7 @@ to_fct.integer <- function(
     call = call
   ))
 }
+
 #' @export
 #' @rdname to_fct
 to_fct.NULL <- function(
@@ -148,7 +149,7 @@ to_fct.list <- function(
 ) {
   res <- .Call(stbl_lst_to_fct, x)
   .check_lst_failures(x, res[["valid"]], factor(), x_class, x_arg, call, to_arg)
-  .coerce_fct_levels(
+  .convert_fct_levels(
     res[["result"]],
     levels = levels,
     ordered = ordered,
@@ -175,7 +176,7 @@ to_fct.default <- function(
       x <- as.factor(x)
     },
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "factor",
         x_arg = x_arg,
@@ -184,7 +185,7 @@ to_fct.default <- function(
       )
     }
   )
-  return(.coerce_fct_levels(
+  return(.convert_fct_levels(
     x,
     levels = levels,
     ordered = ordered,
@@ -194,12 +195,12 @@ to_fct.default <- function(
   ))
 }
 
-#' Coerce to factor with specified levels
+#' Convert to factor with specified levels
 #'
 #' @inheritParams .shared-params
 #' @returns `x` as a factor with specified levels and NAs.
 #' @keywords internal
-.coerce_fct_levels <- function(
+.convert_fct_levels <- function(
   x,
   levels = NULL,
   ordered = is.ordered(x),
@@ -207,8 +208,8 @@ to_fct.default <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  x <- .coerce_fct_to_na(x, to_na, call)
-  x <- .coerce_fct_levels_impl(
+  x <- .convert_fct_to_na(x, to_na, call)
+  x <- .convert_fct_levels_impl(
     x,
     levels = levels,
     ordered = ordered,
@@ -219,12 +220,12 @@ to_fct.default <- function(
   return(x)
 }
 
-#' Coerce specified values to NA
+#' Convert specified values to NA
 #'
 #' @inheritParams .shared-params
 #' @returns `x` with specified values converted to `NA`.
 #' @keywords internal
-.coerce_fct_to_na <- function(x, to_na = character(), call = caller_env()) {
+.convert_fct_to_na <- function(x, to_na = character(), call = caller_env()) {
   to_na <- to_chr(to_na, call = call)
   if (length(to_na)) {
     x[x %in% to_na] <- NA
@@ -237,7 +238,7 @@ to_fct.default <- function(
 #' @inheritParams .shared-params
 #' @returns `x` as a factor with the specified levels.
 #' @keywords internal
-.coerce_fct_levels_impl <- function(
+.convert_fct_levels_impl <- function(
   x,
   levels = NULL,
   ordered = is.ordered(x),
@@ -249,9 +250,9 @@ to_fct.default <- function(
   ordered <- to_lgl_scalar(ordered, call = call)
   if (length(levels)) {
     # Don't send to_na because it has already been applied
-    bad_casts <- .are_not_fct_ish_chr(x, levels)
-    if (any(bad_casts)) {
-      .stop_bad_levels(x, bad_casts, levels, to_na, x_arg, call)
+    bad_conversions <- .are_not_fct_ish_chr(x, levels)
+    if (any(bad_conversions)) {
+      .stop_bad_levels(x, bad_conversions, levels, to_na, x_arg, call)
     }
     return(factor(as.character(x), levels = levels, ordered = ordered))
   }
@@ -264,14 +265,14 @@ to_fct.default <- function(
 
 #' Stop for bad factor levels
 #'
-#' @param bad_casts `(logical)` A logical vector indicating which elements of
-#'   `x` are not in the allowed levels.
+#' @param bad_conversions `(logical)` A logical vector indicating which elements
+#'   of `x` are not in the allowed levels.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.stop_bad_levels <- function(x, bad_casts, levels, to_na, x_arg, call) {
-  locations <- which(bad_casts)
-  bad_values <- unique(x[bad_casts])
+.stop_bad_levels <- function(x, bad_conversions, levels, to_na, x_arg, call) {
+  locations <- which(bad_conversions)
+  bad_values <- unique(x[bad_conversions])
   msg <- c(
     "Each value of {.arg {x_arg}} must be in the expected levels.",
     "i" = "Allowed levels: {.str {levels}}."
@@ -295,9 +296,9 @@ to_fct.default <- function(
   )
 }
 
-#' Coerce to length-1 factor
+#' Convert to length-1 factor
 #'
-#' Checks whether a vector can be coerced to a length-1 factor.
+#' Checks whether a vector can be converted to a length-1 factor.
 #' `to_fct_scalar()` is optimized to check for length-1 factors (compared to
 #' [stabilize_fct()] with `max_size = 1`). `to_factor_scalar()` is a synonym
 #' of `to_fct_scalar()`.
@@ -309,7 +310,7 @@ to_fct.default <- function(
 #' @returns The input as a length-1 factor, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
 #'   cannot be converted to factor.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.

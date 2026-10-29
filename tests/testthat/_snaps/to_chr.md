@@ -14,22 +14,22 @@
       Error in `wrapped_to_chr()`:
       ! `val` must not be <NULL>.
 
-# to_chr() errors for anonymous functions (#251)
+# to_chr() errors for anonymous functions (#251, #377)
 
     Code
       to_chr(function(x) x)
     Condition <stbl-error-coerce-character>
       Error:
-      ! Can't coerce `function(x) x` <function> to <character>.
+      ! Can't convert `function(x) x` <function> to <character>.
       i Anonymous functions can't be converted to a string name.
 
-# to_chr() fails gracefully for weird cases (#22, #273, #310)
+# to_chr() fails gracefully for weird cases (#22, #273, #310, #377)
 
     Code
       to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error:
-      ! `given` <list> must be coercible to <character>
+      ! `given` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
       * Values: "function (x, ...) UseMethod(\"mean\")"
@@ -40,7 +40,7 @@
       wrapped_to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
-      ! `val` <list> must be coercible to <character>
+      ! `val` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
       * Values: "function (x, ...) UseMethod(\"mean\")"
@@ -51,7 +51,7 @@
       to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error:
-      ! `given` <list> must be coercible to <character>
+      ! `given` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "function (x, ...) UseMethod(\"mean\")"
@@ -62,7 +62,7 @@
       wrapped_to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
-      ! `val` <list> must be coercible to <character>
+      ! `val` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "function (x, ...) UseMethod(\"mean\")"
@@ -73,7 +73,7 @@
       to_chr(given)
     Condition <stbl-error-coerce-character>
       Error:
-      ! Can't coerce `given` <data.frame> to <character>.
+      ! Can't convert `given` <data.frame> to <character>.
 
 ---
 
@@ -81,7 +81,7 @@
       wrapped_to_chr(given)
     Condition <stbl-error-coerce-character>
       Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <data.frame> to <character>.
+      ! Can't convert `val` <data.frame> to <character>.
 
 ---
 
@@ -89,7 +89,7 @@
       to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error:
-      ! `given` <list> must be coercible to <character>
+      ! `given` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "1:5"
@@ -100,7 +100,7 @@
       wrapped_to_chr(given)
     Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr()`:
-      ! `val` <list> must be coercible to <character>
+      ! `val` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 2
       * Values: "1:5"
@@ -123,13 +123,13 @@
       ! `val` must be a single <character>.
       x `val` has 26 values.
 
-# to_chr_scalar() errors for uncoerceable types (#22, #273, #310)
+# to_chr_scalar() errors for unconvertible types (#22, #273, #310, #377)
 
     Code
       to_chr_scalar(given)
     Condition <stbl-error-incompatible_values-character>
       Error:
-      ! `given` <list> must be coercible to <character>
+      ! `given` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
       * Values: "1:10"
@@ -140,7 +140,7 @@
       wrapped_to_chr_scalar(given)
     Condition <stbl-error-incompatible_values-character>
       Error in `wrapped_to_chr_scalar()`:
-      ! `val` <list> must be coercible to <character>
+      ! `val` <list> must be convertible to <character>
       x Can't convert some values due to incompatible element types.
       * Locations: 1
       * Values: "1:10"
@@ -170,7 +170,7 @@
       ! `given` must be a single <character (non-empty)>.
       x `given` has no values.
 
-# to_chr() formats conditions with full class hierarchy (#258)
+# to_chr() formats conditions with full class hierarchy (#258, #377)
 
     Code
       cat(to_chr(stbl_abort_cnd), "\n", sep = "")
@@ -178,23 +178,23 @@
       <stbl-error-a_subclass/stbl-error/stbl-condition/rlang_error/error/condition>
       A message.
     Code
-      cat(to_chr(cant_coerce_cnd), "\n", sep = "")
+      cat(to_chr(cant_convert_cnd), "\n", sep = "")
     Output
       <stbl-error-coerce-integer/stbl-error-coerce/stbl-error/stbl-condition/rlang_error/error/condition>
-      Can't coerce `x` <character> to <integer>.
+      Can't convert `x` <character> to <integer>.
     Code
       cat(to_chr(warning_cnd), "\n", sep = "")
     Output
       <simpleWarning/warning/condition>
       heads up
 
-# to_chr() errors for types that can't be coerced (#noissue)
+# to_chr() errors for types that can't be converted (#377)
 
     Code
       to_chr(given)
     Condition <stbl-error-coerce-character>
       Error:
-      ! Can't coerce `given` <environment> to <character>.
+      ! Can't convert `given` <environment> to <character>.
 
 ---
 
@@ -202,5 +202,5 @@
       wrapped_to_chr(given)
     Condition <stbl-error-coerce-character>
       Error in `wrapped_to_chr()`:
-      ! Can't coerce `val` <environment> to <character>.
+      ! Can't convert `val` <environment> to <character>.
 

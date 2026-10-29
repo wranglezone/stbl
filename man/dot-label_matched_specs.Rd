@@ -9,8 +9,8 @@
 \arguments{
 \item{matched}{\code{(character)} Labels of the specifications that succeeded.}
 
-\item{matched_at}{\code{(integer)} Positions in \code{...} of the specifications
-that succeeded, parallel to \code{matched}.}
+\item{matched_at}{\code{(integer)} Positions in \code{...} of the specifications that
+succeeded, parallel to \code{matched}.}
 }
 \value{
 A character vector, pre-quoted with position suffixes if \code{matched}
@@ -18,8 +18,8 @@ contains duplicates, or \code{matched} itself otherwise.
 }
 \description{
 When two or more matched labels are identical (e.g. the same function or
-prototype passed more than once via \code{...}), appends each label's position
-in \code{...} so the matches can be told apart; otherwise returns \code{matched}
+prototype passed more than once via \code{...}), appends each label's position in
+\code{...} so the matches can be told apart; otherwise returns \code{matched}
 unchanged, letting the caller quote it with \verb{\{.val \{matched\}\}}.
 }
 \keyword{internal}

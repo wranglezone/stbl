@@ -2,7 +2,7 @@ test_that("to_any_of() returns x unchanged when first prototype matches (#215, #
   expect_identical(to_any_of(1L, integer(), character()), 1L)
 })
 
-test_that("to_any_of() coerces via the first matching prototype (#215, #285)", {
+test_that("to_any_of() converts via the first matching prototype (#215, #285)", {
   expect_identical(to_any_of("1", integer(), character()), 1L)
 })
 
@@ -15,7 +15,7 @@ test_that("to_any_of() falls through to the next prototype when first fails (#21
   )
 })
 
-test_that("to_any_of() errors with a combined message when all prototypes fail (#215, #285)", {
+test_that("to_any_of() errors with a combined message when all prototypes fail (#215, #285, #377)", {
   # Environments have no to_int or to_chr method, so both fail
   expect_pkg_error_snapshot(
     to_any_of(new.env(), integer(), character()),

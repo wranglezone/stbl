@@ -2,17 +2,17 @@
 #'
 #' Returns an ordered set of `strptime()`-style format strings, used as the
 #' default value of `accepted_datetime_formats` in [stabilize_date()],
-#' [stabilize_dttm()], and their siblings. Character input is tried against
-#' each format in turn, in order, until one of them parses every element (see
-#' those functions for details).
+#' [stabilize_dttm()], and their siblings. Character input is tried against each
+#' format in turn, in order, until one of them parses every element (see those
+#' functions for details).
 #'
 #' @param locale_time (`character(1)`) `LC_TIME` locale, as returned by
 #'   `Sys.getlocale("LC_TIME")`. Used to guess whether the locale's conventional
 #'   date order is month-first (as in the United States) or day-first (most
 #'   other locales); this is a coarse heuristic based on the locale string, not
 #'   a full locale-aware calendar implementation.
-#' @returns A `character()` vector of `strptime()`-style format strings,
-#'   always starting with `"%Y-%m-%dT%H:%M:%S"`, `"%Y-%m-%d %H:%M:%S"`, and
+#' @returns A `character()` vector of `strptime()`-style format strings, always
+#'   starting with `"%Y-%m-%dT%H:%M:%S"`, `"%Y-%m-%d %H:%M:%S"`, and
 #'   `"%Y-%m-%d"` (in that order), followed by the locale's conventional
 #'   day/month order with `"/"` and then `"-"` separators (each listed with,
 #'   then without, a `" %H:%M:%S"` suffix).
@@ -37,8 +37,8 @@ locale_datetime_formats <- function(locale_time = Sys.getlocale("LC_TIME")) {
 #'
 #' @param date_format (`character(1)`) A `strptime()`-style date format.
 #' @returns A `character()` vector: `date_format` with a `"T%H:%M:%S"` suffix
-#'   (only when `date_format` is `"%Y-%m-%d"`), with a `" %H:%M:%S"` suffix,
-#'   and bare, in that order.
+#'   (only when `date_format` is `"%Y-%m-%d"`), with a `" %H:%M:%S"` suffix, and
+#'   bare, in that order.
 #' @keywords internal
 .datetime_format_variants <- function(date_format) {
   variants <- character(0)
@@ -51,8 +51,8 @@ locale_datetime_formats <- function(locale_time = Sys.getlocale("LC_TIME")) {
 #' Guess a locale's conventional day/month order
 #'
 #' @inheritParams locale_datetime_formats
-#' @returns A length-2 character vector, either `c("m", "d")` (month before
-#'   day) or `c("d", "m")` (day before month).
+#' @returns A length-2 character vector, either `c("m", "d")` (month before day)
+#'   or `c("d", "m")` (day before month).
 #' @keywords internal
 .locale_date_order <- function(locale_time) {
   # A coarse heuristic: month-first order is largely a United States

@@ -69,7 +69,7 @@ test_that("to_lst() works for functions with coerce_function = TRUE (#157)", {
   )
 })
 
-test_that("to_lst() errors informatively for primitives (#157)", {
+test_that("to_lst() errors informatively for primitives (#157, #377)", {
   given <- is.na
   expect_pkg_error_snapshot(
     to_lst(given, coerce_function = TRUE),
@@ -85,7 +85,7 @@ test_that("to_lst() errors informatively for primitives (#157)", {
   )
 })
 
-test_that("to_lst() coerces language objects like as.list() (#366)", {
+test_that("to_lst() converts language objects like as.list() (#366)", {
   given <- quote(a + b)
   expect_identical(to_lst(given), as.list(given))
 

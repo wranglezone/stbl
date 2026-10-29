@@ -30,13 +30,13 @@
       Error in `wrapped_stabilize_lst()`:
       ! `val` must contain element "name".
 
-# stabilize_lst() errors informatively when element fails validation (#110, #310, #335)
+# stabilize_lst() errors informatively when element fails validation (#110, #310, #335, #377)
 
     Code
       stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar())
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `list(count = "not-an-int")[["count"]]` <character> must be coercible to <integer>
+      ! `list(count = "not-an-int")[["count"]]` <character> must be convertible to <integer>
       x Can't convert some values due to non-numeric strings.
       * Locations: 1
       * Values: "not-an-int"
@@ -68,13 +68,13 @@
       ! `list(a = 1L, b = 2L)` must not contain extra named elements.
       x Extra elements: "a" and "b"
 
-# stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335)
+# stabilize_lst() errors informatively when .named isn't NULL/logical/function (#281, #335, #377)
 
     Code
       stabilize_lst(list(a = 1L, b = 2L), .named = "yes")
     Condition <stbl-error-incompatible_values-logical>
       Error:
-      ! `.named` <character> must be coercible to <logical>
+      ! `.named` <character> must be convertible to <logical>
       x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "yes"
@@ -106,13 +106,13 @@
       ! `list(1L, 2L)` must not contain unnamed elements.
       x Unnamed positions: 1 and 2
 
-# stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335)
+# stabilize_lst() errors informatively when .unnamed isn't NULL/logical/function (#281, #335, #377)
 
     Code
       stabilize_lst(list(1L, 2L), .unnamed = "yes")
     Condition <stbl-error-incompatible_values-logical>
       Error:
-      ! `.unnamed` <character> must be coercible to <logical>
+      ! `.unnamed` <character> must be convertible to <logical>
       x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "yes"
@@ -126,13 +126,13 @@
       ! `list(a = 1L)` must have size >= 2.
       x 1 is too small.
 
-# stabilize_lst() validates nested lists (#110)
+# stabilize_lst() validates nested lists (#110, #377)
 
     Code
       stabilize_lst(list(aes = list(x = mtcars, y = "hp")), aes = spec_aes)
     Condition <stbl-error-coerce-character>
       Error:
-      ! Can't coerce `list(aes = list(x = mtcars, y = "hp"))[["aes"]][["x"]]` <data.frame> to <character>.
+      ! Can't convert `list(aes = list(x = mtcars, y = "hp"))[["aes"]][["x"]]` <data.frame> to <character>.
 
 # stabilize_lst() requires all named specs by default (#279)
 

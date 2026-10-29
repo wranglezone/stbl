@@ -5,7 +5,7 @@
 \alias{stabilise_dur_scalar}
 \alias{stabilize_duration_scalar}
 \alias{stabilise_duration_scalar}
-\title{Coerce to length-1 duration with additional checks}
+\title{Convert to length-1 duration with additional checks}
 \usage{
 stabilize_dur_scalar(
   x,
@@ -80,7 +80,7 @@ stabilise_duration_scalar(
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -94,7 +94,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -103,7 +103,7 @@ error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
 \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
 mode:
 \itemize{
-\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be coerced to a
+\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a
 duration.
 \item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
 safely converted to a duration.
@@ -119,7 +119,7 @@ safely converted to a duration.
 }
 }
 \description{
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 \link[lubridate:Period-class]{lubridate::Period} vector. \code{stabilize_dur_scalar()} is optimized to
 check for length-1 duration vectors (compared to \code{\link[=stabilize_dur]{stabilize_dur()}} with
 \code{max_size = 1}). \code{stabilise_dur_scalar}, \code{stabilize_duration_scalar}, and

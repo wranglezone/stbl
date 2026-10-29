@@ -22,7 +22,7 @@
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -38,7 +38,7 @@ source of error messages.}
 \code{NULL}, invisibly, if \code{x} passes all checks.
 }
 \description{
-\code{min_value}, \code{max_value}, and \code{allowed_values} are coerced to
+\code{min_value}, \code{max_value}, and \code{allowed_values} are converted to
 \link[lubridate:Period-class]{lubridate::Period} first so that character or numeric bounds are
 accepted.
 }

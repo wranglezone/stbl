@@ -7,7 +7,7 @@ SEXP stbl_lgl_to_chr(SEXP x);
 SEXP stbl_lst_to_chr(SEXP x);
 
 /**
- * @brief Coerce any supported vector to character.
+ * @brief Convert any supported vector to character.
  *
  * Accepted source types and their behaviour:
  *   - character: returned unchanged.

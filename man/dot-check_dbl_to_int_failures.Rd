@@ -2,19 +2,19 @@
 % Please edit documentation in R/to_int.R
 \name{.check_dbl_to_int_failures}
 \alias{.check_dbl_to_int_failures}
-\title{Check for double to integer coercion failures}
+\title{Check for double to integer conversion failures}
 \usage{
 .check_dbl_to_int_failures(x, res, x_class, x_arg, call, to_arg = NULL)
 }
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{res}{A list returned by \code{stbl_dbl_to_int}, with elements
-\code{result} and \code{bad_precision}.}
+\item{res}{A list returned by \code{stbl_dbl_to_int}, with elements \code{result} and
+\code{bad_precision}.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
@@ -26,14 +26,14 @@ unexported functions.}
 source of error messages.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 }
 \value{
 \code{NULL} invisibly (called for side effects).
 }
 \description{
-Check for double to integer coercion failures
+Check for double to integer conversion failures
 }
 \keyword{internal}

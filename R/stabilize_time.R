@@ -1,4 +1,4 @@
-#' Coerce to time-of-day with additional checks
+#' Convert to time-of-day with additional checks
 #'
 #' Compared to [to_time()], `stabilize_time()` checks more details, but is
 #' slower. `stabilise_time()` is a synonym of `stabilize_time()`.
@@ -9,7 +9,7 @@
 #' @returns The input as an [hms::hms()] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-time>` when `x` cannot be coerced to a time of
+#'   - `<stbl-error-coerce-time>` when `x` cannot be converted to a time of
 #'   day.
 #'   - `<stbl-error-incompatible_values-time>` when some values cannot be
 #'   safely converted to a time of day.
@@ -77,9 +77,9 @@ stabilize_time <- function(
 #' @rdname stabilize_time
 stabilise_time <- stabilize_time
 
-#' Coerce to length-1 time-of-day with additional checks
+#' Convert to length-1 time-of-day with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 [hms::hms()] vector.
+#' Checks whether a vector can be converted to a length-1 [hms::hms()] vector.
 #' `stabilize_time_scalar()` is optimized to check for length-1 time-of-day
 #' vectors (compared to [stabilize_time()] with `max_size = 1`).
 #' `stabilise_time_scalar` is a synonym of `stabilize_time_scalar()`.
@@ -90,7 +90,7 @@ stabilise_time <- stabilize_time
 #' @returns The input as a length-1 [hms::hms()] vector, or an error condition
 #'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-time>` when `x` cannot be coerced to a time of
+#'   - `<stbl-error-coerce-time>` when `x` cannot be converted to a time of
 #'   day.
 #'   - `<stbl-error-incompatible_values-time>` when some values cannot be
 #'   safely converted to a time of day.
@@ -151,7 +151,7 @@ stabilise_time_scalar <- stabilize_time_scalar
 
 #' Check time-of-day values against min, max, and allowed values
 #'
-#' `min_value`, `max_value`, and `allowed_values` are coerced to [hms::hms()]
+#' `min_value`, `max_value`, and `allowed_values` are converted to [hms::hms()]
 #' first so that character or numeric bounds are accepted.
 #'
 #' @inheritParams .shared-params

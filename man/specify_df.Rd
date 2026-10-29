@@ -40,19 +40,19 @@ listed in \code{...} are handled. One of:
 \item \code{NULL} or \code{FALSE} (default): any extra columns cause an error.
 \item \code{TRUE}: extra columns are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
 }}
 
 \item{.col_names}{\code{(character)} A character vector of column names that must
 be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
 cause an error. Unlike \code{...}, this does not validate the column contents.}
 
-\item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in
-\code{.x}. If \code{NULL} (default), the row count is not checked.}
+\item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in \code{.x}.
+If \code{NULL} (default), the row count is not checked.}
 
-\item{.max_rows}{(\code{integer(1)}) The maximum number of rows allowed in
-\code{.x}. If \code{NULL} (default), the row count is not checked.}
+\item{.max_rows}{(\code{integer(1)}) The maximum number of rows allowed in \code{.x}.
+If \code{NULL} (default), the row count is not checked.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
@@ -60,11 +60,10 @@ cause an error. Unlike \code{...}, this does not validate the column contents.}
 
 \item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
-A \code{.x} with zero columns skips this check when
-\code{.allow_zero_length = TRUE} (the default).}
+required unless you opt it out. Named specs \emph{not} listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+\code{NULL} or \code{character()} to make every named spec optional. A \code{.x} with zero
+columns skips this check when \code{.allow_zero_length = TRUE} (the default).}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

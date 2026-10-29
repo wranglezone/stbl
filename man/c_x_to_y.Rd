@@ -133,7 +133,7 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
-\item{to}{The target object for the coercion.}
+\item{to}{The target object for the conversion.}
 
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
@@ -143,8 +143,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -153,9 +153,9 @@ source of error messages.}
 \value{
 \code{.x_to_y()}: A list with two elements: \code{result}, the converted
 vector, and \code{valid}, a logical vector indicating whether each element was
-successfully coerced without losing information. \code{.x_are_yish()}: A logical
-vector indicating whether each element of \code{x} can be coerced to the target
-type. \code{.check_min_dbl()}, \code{.check_max_dbl()},
+successfully converted without losing information. \code{.x_are_yish()}: A
+logical vector indicating whether each element of \code{x} can be converted to
+the target type. \code{.check_min_dbl()}, \code{.check_max_dbl()},
 \code{.check_min_dbl_exclusive()}, and \code{.check_max_dbl_exclusive()}: \code{NULL} if
 all values pass the check, otherwise a vector of failing indices.
 }

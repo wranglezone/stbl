@@ -1,9 +1,9 @@
 #' Require a value to be non-NULL
 #'
-#' `assert_present()` validates that a value is not `NULL`. Any non-`NULL`
-#' value passes through unchanged. This is useful as an element specification
-#' in [stabilize_lst()] when you need to require a named element without
-#' imposing any type constraints on its value.
+#' `assert_present()` validates that a value is not `NULL`. Any non-`NULL` value
+#' passes through unchanged. This is useful as an element specification in
+#' [stabilize_lst()] when you need to require a named element without imposing
+#' any type constraints on its value.
 #'
 #' @inheritParams .shared-params
 #' @returns The value, unchanged.

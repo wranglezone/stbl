@@ -11,8 +11,8 @@
 }
 \value{
 A \code{character()} vector: \code{date_format} with a \code{"T\%H:\%M:\%S"} suffix
-(only when \code{date_format} is \code{"\%Y-\%m-\%d"}), with a \code{" \%H:\%M:\%S"} suffix,
-and bare, in that order.
+(only when \code{date_format} is \code{"\%Y-\%m-\%d"}), with a \code{" \%H:\%M:\%S"} suffix, and
+bare, in that order.
 }
 \description{
 Expand a date format into date and date-time variants

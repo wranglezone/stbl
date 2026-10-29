@@ -4,7 +4,7 @@
 \alias{to_fct}
 \alias{to_factor}
 \alias{to_fct.NULL}
-\title{Coerce to factor}
+\title{Convert to factor}
 \usage{
 to_fct(
   x,
@@ -57,8 +57,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -66,7 +66,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
@@ -76,7 +76,7 @@ The input as a factor, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be coerced to factor.
+\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be converted to factor.
 \item \verb{<stbl-error-incompatible_values-factor>} when some elements of a list
 cannot be converted to factor.
 \item \verb{<stbl-error-fct_levels>} when values are not present in \code{levels}.
@@ -84,15 +84,15 @@ cannot be converted to factor.
 }
 }
 \description{
-Checks whether a vector can be coerced to a factor without losing
+Checks whether a vector can be converted to a factor without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_factor} is a synonym of \code{to_fct()}.
 }
 \details{
-This function has important differences from \code{\link[base:as.factor]{base::as.factor()}}
-and \code{\link[base:factor]{base::factor()}}:
+This function has important differences from \code{\link[base:as.factor]{base::as.factor()}} and
+\code{\link[base:factor]{base::factor()}}:
 \itemize{
-\item Values are never silently coerced to \code{NA} unless they are explicitly
+\item Values are never silently converted to \code{NA} unless they are explicitly
 supplied in the \code{to_na} argument.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).

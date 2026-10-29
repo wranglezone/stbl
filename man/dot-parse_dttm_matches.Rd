@@ -7,21 +7,21 @@
 .parse_dttm_matches(matches, fields, tz)
 }
 \arguments{
-\item{matches}{\code{(list)} Regex captures from \code{\link[=regmatches]{regmatches()}}: the full
-match, one group per calendar field named in \code{fields}, and a trailing
-UTC-offset group (possibly \code{""} when absent).}
+\item{matches}{\code{(list)} Regex captures from \code{\link[=regmatches]{regmatches()}}: the full match,
+one group per calendar field named in \code{fields}, and a trailing UTC-offset
+group (possibly \code{""} when absent).}
 
-\item{fields}{\code{(character)} Which calendar field (\code{"Y"}, \code{"m"}, \code{"d"},
-\code{"H"}, \code{"M"}, or \code{"S"}) each non-offset capture group corresponds to, in
-the order the groups appear.}
+\item{fields}{\code{(character)} Which calendar field (\code{"Y"}, \code{"m"}, \code{"d"}, \code{"H"},
+\code{"M"}, or \code{"S"}) each non-offset capture group corresponds to, in the order
+the groups appear.}
 
 \item{tz}{\code{(character(1))} The time zone to assume for elements with no
 explicit offset.}
 }
 \value{
 A \link[base:POSIXct]{base::POSIXct} vector (in \code{tz}), the same length as \code{matches},
-with \code{NA} at any position that describes an impossible date-time (such
-as \code{"2024-02-30"}).
+with \code{NA} at any position that describes an impossible date-time (such as
+\code{"2024-02-30"}).
 }
 \description{
 Parse capture-group matches from \code{.try_dttm_formats()} into instants

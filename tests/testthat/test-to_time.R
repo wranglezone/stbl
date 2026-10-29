@@ -52,7 +52,7 @@ test_that("to_time() keeps NA character elements as NA (#294)", {
   expect_identical(is.na(result), c(FALSE, TRUE))
 })
 
-test_that("to_time() rejects times without an offset (#294)", {
+test_that("to_time() rejects times without an offset (#294, #377)", {
   expect_pkg_error_snapshot(
     to_time("13:20:00"),
     "stbl",
@@ -67,7 +67,7 @@ test_that("to_time() rejects times without an offset (#294)", {
   )
 })
 
-test_that("to_time() rejects unparseable time strings (#294)", {
+test_that("to_time() rejects unparseable time strings (#294, #377)", {
   given <- c("13:20:00Z", "not-a-time")
   expect_pkg_error_snapshot(
     to_time(given),
@@ -77,7 +77,7 @@ test_that("to_time() rejects unparseable time strings (#294)", {
   )
 })
 
-test_that("to_time() rejects impossible times (#294)", {
+test_that("to_time() rejects impossible times (#294, #377)", {
   expect_pkg_error_snapshot(
     to_time("25:00:00Z"),
     "stbl",
@@ -92,13 +92,13 @@ test_that("to_time() rejects impossible times (#294)", {
   )
 })
 
-test_that("to_time() coerces factors via the character path (#294)", {
+test_that("to_time() converts factors via the character path (#294)", {
   given <- factor(c("13:20:00Z", "14:20:00Z"))
   expected <- to_time(as.character(given))
   expect_identical(to_time(given), expected)
 })
 
-test_that("to_time() errors informatively for bad factors (#294)", {
+test_that("to_time() errors informatively for bad factors (#294, #377)", {
   given <- factor(c("13:20:00Z", "nope"))
   expect_pkg_error_snapshot(
     to_time(given),
@@ -126,7 +126,7 @@ test_that("to_time() treats numerics as seconds since midnight (#294)", {
   expect_identical(to_time(3600L), hms::as_hms("01:00:00"))
 })
 
-test_that("to_time() rejects out-of-range numerics (#294)", {
+test_that("to_time() rejects out-of-range numerics (#294, #377)", {
   expect_pkg_error_snapshot(to_time(-1), "stbl", "incompatible_values", "time")
   expect_pkg_error_snapshot(
     to_time(86400),
@@ -141,7 +141,7 @@ test_that("to_time() converts difftime values (#294)", {
   expect_identical(to_time(given), hms::as_hms("01:30:00"))
 })
 
-test_that("to_time() rejects out-of-range difftime values (#294)", {
+test_that("to_time() rejects out-of-range difftime values (#294, #377)", {
   given <- as.difftime(25, units = "hours")
   expect_pkg_error_snapshot(
     to_time(given),
@@ -151,7 +151,7 @@ test_that("to_time() rejects out-of-range difftime values (#294)", {
   )
 })
 
-test_that("to_time() rejects out-of-range hms values (#294)", {
+test_that("to_time() rejects out-of-range hms values (#294, #377)", {
   given <- hms::as_hms(90000)
   expect_pkg_error_snapshot(
     to_time(given),
@@ -171,7 +171,7 @@ test_that("to_time_scalar() allows length-1 times through (#294)", {
   expect_identical(to_time_scalar(given), given)
 })
 
-test_that("to_time_scalar() coerces length-1 input (#294)", {
+test_that("to_time_scalar() converts length-1 input (#294)", {
   expect_identical(to_time_scalar("13:20:00Z"), hms::as_hms("13:20:00"))
 })
 

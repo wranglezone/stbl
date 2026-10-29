@@ -69,7 +69,7 @@ SEXP stbl_fct_to_dbl(SEXP x) {
  * stbl_fct_are_dblish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements whose
- * level string can be coerced to double (and for NA elements).
+ * level string can be converted to double (and for NA elements).
  */
 SEXP stbl_fct_are_dblish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

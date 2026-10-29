@@ -5,7 +5,7 @@
 \alias{stabilize_logical}
 \alias{stabilise_lgl}
 \alias{stabilise_logical}
-\title{Coerce to logical with additional checks}
+\title{Convert to logical with additional checks}
 \usage{
 stabilize_lgl(
   x,
@@ -74,7 +74,7 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -88,7 +88,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -96,7 +96,7 @@ The input as a logical vector, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-logical>} when \code{x} cannot be coerced to logical.
+\item \verb{<stbl-error-coerce-logical>} when \code{x} cannot be converted to logical.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
@@ -105,9 +105,9 @@ The input as a logical vector, or an error condition with classes
 }
 }
 \description{
-Compared to \code{\link[=to_lgl]{to_lgl()}}, \code{stabilize_lgl()} checks more details, but is
-slower. \code{stabilise_lgl()}, \code{stabilize_logical()}, and \code{stabilise_logical()}
-are synonyms of \code{stabilize_lgl()}.
+Compared to \code{\link[=to_lgl]{to_lgl()}}, \code{stabilize_lgl()} checks more details, but is slower.
+\code{stabilise_lgl()}, \code{stabilize_logical()}, and \code{stabilise_logical()} are
+synonyms of \code{stabilize_lgl()}.
 }
 \examples{
 stabilize_lgl(c(TRUE, FALSE, TRUE))

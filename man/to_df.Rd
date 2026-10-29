@@ -44,8 +44,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -53,7 +53,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
@@ -63,7 +63,7 @@ The object as a data frame, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-data.frame>} when \code{x} cannot be coerced to a data
+\item \verb{<stbl-error-coerce-data.frame>} when \code{x} cannot be converted to a data
 frame.
 \item \verb{<stbl-error-bad_named>} when a list has any unnamed elements.
 \item \verb{<stbl-error-jagged>} when a list has incompatible element lengths.
@@ -71,7 +71,7 @@ frame.
 }
 }
 \description{
-\code{to_df()} checks whether an object can be coerced to a data frame,
+\code{to_df()} checks whether an object can be converted to a data frame,
 returning it silently if so. Otherwise an informative error message is
 signaled. \code{to_data_frame()} is a synonym of \code{to_df()}.
 }

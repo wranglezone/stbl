@@ -1,25 +1,24 @@
 # target class: function
 
-#' Coerce to a function
+#' Convert to a function
 #'
-#' `to_fn()` coerces `x` to a function. `to_function()` is a synonym of
+#' `to_fn()` converts `x` to a function. `to_function()` is a synonym of
 #' `to_fn()`.
 #'
-#' @details
-#' Unlike [rlang::as_function()], `to_fn()` supports namespaced function names
-#' such as `"pkg::fn"` in the character method. When the input is a
-#' length-0 character vector, `to_fn()` returns `NULL` (subject to
+#' @details Unlike [rlang::as_function()], `to_fn()` supports namespaced
+#' function names such as `"pkg::fn"` in the character method. When the input is
+#' a length-0 character vector, `to_fn()` returns `NULL` (subject to
 #' `allow_null`). An input of length > 1 is always an error.
 #'
 #' @param definition_env `(environment)` The environment in which to look up
-#'   function name. Defaults to [rlang::global_env()]. This argument is
-#'   ignored when the input is a namespaced string of the form `"pkg::fn"`, in
-#'   which case the package namespace is used instead.
+#'   function name. Defaults to [rlang::global_env()]. This argument is ignored
+#'   when the input is a namespaced string of the form `"pkg::fn"`, in which
+#'   case the package namespace is used instead.
 #' @inheritParams .shared-params
 #' @returns A function, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
-#'   - `<stbl-error-coerce-function>` when `x` cannot be coerced to a
+#'   - `<stbl-error-coerce-function>` when `x` cannot be converted to a
 #'   function.
 #'   - `<stbl-error-invalid_function_name>` when `x` is not a syntactically
 #'   valid function name.
@@ -133,7 +132,7 @@ to_fn.default <- function(
   try_fetch(
     rlang::as_function(x, env = definition_env, arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "function",
         x_arg = x_arg,

@@ -14,13 +14,13 @@
       Error in `wrapped_to_date()`:
       ! `val` must not be <NULL>.
 
-# to_date() rejects ambiguous date formats (#104)
+# to_date() rejects ambiguous date formats (#104, #377)
 
     Code
       to_date("11/13/2018")
     Condition <stbl-error-incompatible_values-date>
       Error:
-      ! `"11/13/2018"` <character> must be coercible to <date>
+      ! `"11/13/2018"` <character> must be convertible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
       * Values: "11/13/2018"
@@ -31,40 +31,40 @@
       wrapped_to_date("11/13/2018")
     Condition <stbl-error-incompatible_values-date>
       Error in `wrapped_to_date()`:
-      ! `val` <character> must be coercible to <date>
+      ! `val` <character> must be convertible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
       * Values: "11/13/2018"
 
-# to_date() rejects unparseable date strings (#104)
+# to_date() rejects unparseable date strings (#104, #377)
 
     Code
       to_date(given)
     Condition <stbl-error-incompatible_values-date>
       Error:
-      ! `given` <character> must be coercible to <date>
+      ! `given` <character> must be convertible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 2
       * Values: "not-a-date"
 
-# to_date() rejects impossible dates (#104)
+# to_date() rejects impossible dates (#104, #377)
 
     Code
       to_date("2024-02-30")
     Condition <stbl-error-incompatible_values-date>
       Error:
-      ! `"2024-02-30"` <character> must be coercible to <date>
+      ! `"2024-02-30"` <character> must be convertible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 1
       * Values: "2024-02-30"
 
-# to_date() errors informatively for bad factors (#104)
+# to_date() errors informatively for bad factors (#104, #377)
 
     Code
       to_date(given)
     Condition <stbl-error-incompatible_values-date>
       Error:
-      ! `given` <factor> must be coercible to <date>
+      ! `given` <factor> must be convertible to <date>
       x Can't convert some values due to invalid or ambiguous date format.
       * Locations: 2
       * Values: "nope"

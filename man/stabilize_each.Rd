@@ -28,16 +28,16 @@ stabilise_each(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+\item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
 
 \item{...}{Arguments passed to methods.}
 
-\item{simplify}{(\code{logical(1)}) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If \code{FALSE}, a list is always returned.}
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -49,22 +49,22 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} with every element coerced by \code{spec}, simplified to an atomic
+\code{x} with every element converted by \code{spec}, simplified to an atomic
 vector when \code{simplify = TRUE} and possible, otherwise a list. Errors with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and \verb{<stbl-error-cant_stabilize_each>} when any element
-fails \code{spec}; the condition's \code{locations} element gives the positions
-that failed.
+fails \code{spec}; the condition's \code{locations} element gives the positions that
+failed.
 }
 \description{
-\code{stabilize_each()} applies \code{spec} (a \verb{to_*} function, \verb{stabilize_*}
-function, or \verb{specify_*()} result) to every element of \code{x} independently,
-collecting \emph{every} failing location before erroring, rather than stopping
-at the first failure like \code{\link[=to_each]{to_each()}}. \code{stabilise_each()} is a synonym.
+\code{stabilize_each()} applies \code{spec} (a \verb{to_*} function, \verb{stabilize_*} function,
+or \verb{specify_*()} result) to every element of \code{x} independently, collecting
+\emph{every} failing location before erroring, rather than stopping at the first
+failure like \code{\link[=to_each]{to_each()}}. \code{stabilise_each()} is a synonym.
 }
 \examples{
 stabilize_each(list("1", "2", "3"), stabilize_int)

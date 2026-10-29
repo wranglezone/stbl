@@ -1,7 +1,7 @@
 #include "to.h"
 
 /*
- * stbl_to: coerce x to the type of to.
+ * stbl_to: convert x to the type of to.
  *
  * Dispatches on typeof(to) and typeof(x), calling the appropriate C
  * conversion routine for unclassed logical, integer, double, and character

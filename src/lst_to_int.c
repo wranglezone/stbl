@@ -13,16 +13,16 @@
  * Two input shapes are accepted:
  *
  *   1. A flat list of scalars (any length).  Each element must be a
- *      length-1 atomic value coercible to integer (or a singly-nested
+ *      length-1 atomic value convertible to integer (or a singly-nested
  *      list that unwraps to one); elements that are not produce
  *      NA_integer_ / valid = FALSE.
  *
- *   2. A one-element list whose single element is a coercible atomic
+ *   2. A one-element list whose single element is a convertible atomic
  *      vector of any length.  The vector is unpacked and each of its
  *      elements is processed individually, yielding an output of the
  *      same length as the vector.
  *
- * Coercion rules (per element, same as stbl_y_to_int):
+ * Conversion rules (per element, same as stbl_y_to_int):
  *   integer   -> direct (always valid)
  *   logical   -> lgl_to_int (always valid)
  *   double    -> dbl_to_int (valid if whole number in R's integer range)
@@ -103,23 +103,23 @@ static void lst_to_int_fill_vec(SEXP elem, R_xlen_t m, int* p_r, int* p_v) {
       }
       break;
     }
-    /* default: caller already checked is_coercible; unreachable. */
+    /* default: caller already checked is_convertible; unreachable. */
   }
 }
 
 SEXP stbl_lst_to_int(SEXP x) {
   R_xlen_t n = XLENGTH(x);
 
-  /* Single-vector unpack: one-element list whose element is a coercible
+  /* Single-vector unpack: one-element list whose element is a convertible
    * atomic vector of length != 1. */
   if (n == 1) {
     SEXP elem = VECTOR_ELT(x, 0);
     R_xlen_t m = Rf_isVectorAtomic(elem) ? XLENGTH(elem) : 0;
     if (m != 1) {
       SEXPTYPE t = TYPEOF(elem);
-      int coercible = (t == INTSXP || t == LGLSXP || t == REALSXP ||
+      int convertible = (t == INTSXP || t == LGLSXP || t == REALSXP ||
                        t == STRSXP || t == CPLXSXP);
-      if (coercible) {
+      if (convertible) {
         SEXP result = PROTECT(Rf_allocVector(INTSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         lst_to_int_fill_vec(elem, m, INTEGER(result), LOGICAL(valid));

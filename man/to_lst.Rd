@@ -53,8 +53,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -62,12 +62,12 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
-\item{coerce_function}{(\code{logical(1)}) Should functions be coerced?}
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 }
 \value{
 The object as a list, or an error condition with classes
@@ -81,7 +81,7 @@ The object as a list, or an error condition with classes
 }
 }
 \description{
-\code{to_lst()} checks whether an object can be coerced to a list without losing
+\code{to_lst()} checks whether an object can be converted to a list without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. \code{to_list()} is a synonym of \code{to_lst()}.
 }
@@ -90,7 +90,7 @@ This function has important distinctions from \code{\link[base:as.list]{base::as
 \itemize{
 \item Functions can be rejected as part of the call to this function (with
 \code{coerce_function = FALSE}, the default). If they are allowed, they'll be
-coerced to a list concatenating their formals and body (as with
+converted to a list concatenating their formals and body (as with
 \code{\link[base:as.list]{base::as.list()}}.
 \item Primitive functions (such as \code{\link[base:is.na]{base::is.na()}} or \code{\link[base:is.list]{base::is.list()}}) always
 throw an error, rather than returning \code{list(NULL)}.

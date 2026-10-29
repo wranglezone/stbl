@@ -35,7 +35,7 @@ test_that("stabilize_all_of() works with specify_* functions (#278)", {
   )
 })
 
-test_that("stabilize_all_of() errors when any function fails (#278)", {
+test_that("stabilize_all_of() errors when any function fails (#278, #377)", {
   # "a" can't become integer, so the whole spec set fails
   expect_pkg_error_snapshot(
     stabilize_all_of("a", stabilize_int, stabilize_chr),
@@ -58,7 +58,7 @@ test_that("stabilize_all_of() errors when a later spec rejects a value an earlie
   )
 })
 
-test_that("stabilize_all_of() applies every spec to the original x, not to previous results (#278)", {
+test_that("stabilize_all_of() applies every spec to the original x, not to previous results (#278, #377)", {
   # stabilize_int("1") would succeed and yield 1L; if that result were fed
   # forward, specify_dbl(coerce_character = FALSE) would then see an integer
   # and succeed too. Since each spec instead sees the original "1"
@@ -70,7 +70,7 @@ test_that("stabilize_all_of() applies every spec to the original x, not to previ
   )
 })
 
-test_that("stabilize_all_of() errors when specs succeed but disagree on the coerced value (#278)", {
+test_that("stabilize_all_of() errors when specs succeed but disagree on the converted value (#278, #377)", {
   # stabilize_int(1L) -> 1L, but specify_dbl() -> 1 (double); both succeed but
   # disagree on the resulting type
   expect_pkg_error_snapshot(
@@ -80,7 +80,7 @@ test_that("stabilize_all_of() errors when specs succeed but disagree on the coer
   )
 })
 
-test_that("stabilize_all_of() includes Locations from incompatible_values errors (#278)", {
+test_that("stabilize_all_of() includes Locations from incompatible_values errors (#278, #377)", {
   x <- c("1", "a", "3")
   expect_pkg_error_snapshot(
     stabilize_all_of(x, stabilize_int, stabilize_chr),

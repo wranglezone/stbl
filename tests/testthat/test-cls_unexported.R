@@ -305,7 +305,7 @@ test_that(".to_num_from_complex() works (#23, #310)", {
   expect_equal(
     .to_num_from_complex(
       x = as.complex(1:3),
-      cast_fn = as.integer,
+      convert_fn = as.integer,
       to_type_obj = integer()
     ),
     1:3
@@ -315,7 +315,7 @@ test_that(".to_num_from_complex() works (#23, #310)", {
   expect_pkg_error_classes(
     .to_num_from_complex(
       x = c(1 + 1i, 2),
-      cast_fn = as.integer,
+      convert_fn = as.integer,
       to_type_obj = integer()
     ),
     "stbl",

@@ -113,7 +113,7 @@ test_that("to_fn() errors informatively for bad namespaced names (#250)", {
   )
 })
 
-test_that("to_fn() errors informatively for non-coercible types (#250)", {
+test_that("to_fn() errors informatively for non-convertible types (#250, #377)", {
   expect_pkg_error_snapshot(
     to_fn(1L),
     "stbl",

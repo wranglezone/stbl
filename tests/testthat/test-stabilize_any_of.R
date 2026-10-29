@@ -2,8 +2,8 @@ test_that("stabilize_any_of() returns x unchanged when first function succeeds (
   expect_identical(stabilize_any_of(1L, stabilize_int, stabilize_chr), 1L)
 })
 
-test_that("stabilize_any_of() coerces via the first matching function (#215, #285)", {
-  # "1" coerces to integer successfully
+test_that("stabilize_any_of() converts via the first matching function (#215, #285)", {
+  # "1" converts to integer successfully
   expect_identical(stabilize_any_of("1", stabilize_int, stabilize_chr), 1L)
 })
 
@@ -46,7 +46,7 @@ test_that("stabilize_any_of() errors with a combined message when all functions 
   )
 })
 
-test_that("stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, #310)", {
+test_that("stabilize_any_of() includes Locations from incompatible_values errors (#215, #285, #310, #377)", {
   # "a" fails lgl at position 1; "a" and "2" fail int at positions 1 and 3
   x <- c("a", "2", "TRUE")
   expect_pkg_error_snapshot(

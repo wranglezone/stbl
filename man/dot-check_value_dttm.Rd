@@ -22,7 +22,7 @@
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -40,7 +40,7 @@ source of error messages.}
 \description{
 Base R has no C-level range routines for \link[base:POSIXct]{base::POSIXct} as it does for
 double, so the comparisons are performed in plain R. \code{min_value},
-\code{max_value}, and \code{allowed_values} are coerced to \link[base:POSIXct]{base::POSIXct} first so
+\code{max_value}, and \code{allowed_values} are converted to \link[base:POSIXct]{base::POSIXct} first so
 that character or numeric bounds are accepted.
 }
 \keyword{internal}

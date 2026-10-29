@@ -1,14 +1,14 @@
 # target class: NA
 
-#' Coerce each element of x with a single spec
+#' Convert each element of x with a single spec
 #'
 #' `to_each()` applies `spec` (a `to_*` function, `stabilize_*` function, or
-#' `specify_*()` result) to every element of `x`, and stops at the first
-#' element that fails.
+#' `specify_*()` result) to every element of `x`, and stops at the first element
+#' that fails.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns `x` with every element coerced by `spec`, simplified to an atomic
+#' @returns `x` with every element converted by `spec`, simplified to an atomic
 #'   vector when `simplify = TRUE` and possible, otherwise a list. Errors with
 #'   whatever condition `spec` throws for the first failing element.
 #' @family multiple type functions
@@ -44,7 +44,7 @@ to_each <- function(
 
 #' Apply a spec to each element of x, failing on the first error
 #'
-#' @param spec A single stabilizer/coercion function applied to each element.
+#' @param spec A single stabilizer/conversion function applied to each element.
 #' @inheritParams stabilize_each
 #' @returns A list of per-element results, the same length as `x`.
 #' @keywords internal

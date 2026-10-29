@@ -73,14 +73,15 @@
       * `2` = 2
       * `1` = 1
 
-# .check_cast_failures() works (#310, #332)
+# .check_conversion_failures() works (#310, #332, #377)
 
     Code
-      .check_cast_failures(x = c("a", "b", "c", "d"), failures = failures, x_class = "character",
-      to = logical(), due_to = "incompatible values", x_arg = "test_arg", call = rlang::current_env())
+      .check_conversion_failures(x = c("a", "b", "c", "d"), failures = failures,
+      x_class = "character", to = logical(), due_to = "incompatible values", x_arg = "test_arg",
+      call = rlang::current_env())
     Condition <stbl-error-incompatible_values-logical>
       Error:
-      ! `test_arg` <character> must be coercible to <logical>
+      ! `test_arg` <character> must be convertible to <logical>
       x Can't convert some values due to incompatible values.
       * Locations: 2 and 4
       * Values: "b" and "d"
@@ -93,13 +94,13 @@
       Error:
       ! `list(1, 2)` must have all elements named.
 
-# .check_not_jagged() works (#203)
+# .check_not_jagged() works (#203, #377)
 
     Code
       .check_not_jagged(list(a = 1:3, b = 1:2))
     Condition <stbl-error-jagged>
       Error:
-      ! Can't coerce `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
+      ! Can't convert `list(a = 1:3, b = 1:2)` <list> to <data.frame>.
       i All list elements must have length 3 or 1.
       x Short elements: b = 2.
 

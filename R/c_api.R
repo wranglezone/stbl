@@ -22,9 +22,9 @@
 #'
 #' @returns `.x_to_y()`: A list with two elements: `result`, the converted
 #'   vector, and `valid`, a logical vector indicating whether each element was
-#'   successfully coerced without losing information. `.x_are_yish()`: A logical
-#'   vector indicating whether each element of `x` can be coerced to the target
-#'   type. `.check_min_dbl()`, `.check_max_dbl()`,
+#'   successfully converted without losing information. `.x_are_yish()`: A
+#'   logical vector indicating whether each element of `x` can be converted to
+#'   the target type. `.check_min_dbl()`, `.check_max_dbl()`,
 #'   `.check_min_dbl_exclusive()`, and `.check_max_dbl_exclusive()`: `NULL` if
 #'   all values pass the check, otherwise a vector of failing indices.
 #' @keywords internal

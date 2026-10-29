@@ -4,7 +4,7 @@
 \alias{stabilize_one_of}
 \alias{stabilise_one_of}
 \alias{to_one_of}
-\title{Try to coerce or validate x as exactly one of several specifications}
+\title{Try to convert or validate x as exactly one of several specifications}
 \usage{
 stabilize_one_of(
   x,
@@ -33,14 +33,13 @@ to_one_of(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{...}{For \code{stabilize_one_of()}: unnamed stabilizer or coercion
+\item{...}{For \code{stabilize_one_of()}: unnamed stabilizer or conversion
 functions, such as \verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.),
 \verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), functions produced by \verb{specify_*()}
 calls (\code{\link[=specify_chr]{specify_chr()}}, etc.), or \verb{assert_*()} functions (such as
 \code{\link[=assert_not]{assert_not()}}) that return their input unchanged. For \code{to_one_of()}:
-prototype objects (e.g.
-\code{integer()}, \code{character()}) that determine the target types to try, passed
-as the \code{.to} argument of \code{\link[=to]{to()}}.}
+prototype objects (e.g. \code{integer()}, \code{character()}) that determine the
+target types to try, passed as the \code{.to} argument of \code{\link[=to]{to()}}.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -52,11 +51,11 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced or validated by the single successful function or
+\code{x} converted or validated by the single successful function or
 prototype in \code{...}, or an error condition with classes \verb{<stbl-error>},
 \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
 specific class by failure mode:
@@ -68,15 +67,14 @@ provided functions succeed.
 }
 }
 \description{
-\code{stabilize_one_of()} evaluates every function in \code{...}
-against \code{x} and requires that exactly one of them succeeds. It returns
-the result of that single successful function. If zero functions
-succeed, an informative error that combines the individual failure
-messages is thrown; if two or more functions succeed, an error naming
-the specifications that matched is thrown. \code{stabilise_one_of()} is a
-synonym.
+\code{stabilize_one_of()} evaluates every function in \code{...} against
+\code{x} and requires that exactly one of them succeeds. It returns the result
+of that single successful function. If zero functions succeed, an
+informative error that combines the individual failure messages is thrown;
+if two or more functions succeed, an error naming the specifications that
+matched is thrown. \code{stabilise_one_of()} is a synonym.
 
-\code{to_one_of()} is analogous to \code{\link[=to]{to()}}: it tries to coerce \code{x} to each type
+\code{to_one_of()} is analogous to \code{\link[=to]{to()}}: it tries to convert \code{x} to each type
 given in \code{...} (as a prototype such as \code{integer()} or \code{character()}) and
 requires that exactly one succeeds.
 }
@@ -84,7 +82,7 @@ requires that exactly one succeeds.
 # Returns x unchanged when exactly one function succeeds
 stabilize_one_of("a", stabilize_int, stabilize_chr)
 
-# Coerces via the single matching function (1.5 can't become an integer)
+# Converts via the single matching function (1.5 can't become an integer)
 stabilize_one_of(1.5, stabilize_int, stabilize_chr)
 
 # Errors as ambiguous: "1" is both int-ish and dbl-ish
@@ -95,10 +93,10 @@ try(stabilize_one_of(list(1, TRUE, "23", "maybe"), stabilize_lgl, stabilize_int)
 # to_one_of() uses prototypes instead of functions
 to_one_of("a", integer(), character())
 
-# "FALSE" coerces to logical, but not to integer
+# "FALSE" converts to logical, but not to integer
 to_one_of("FALSE", logical(), integer())
 
-# Errors as ambiguous: "1" coerces to both integer and double
+# Errors as ambiguous: "1" converts to both integer and double
 try(to_one_of("1", integer(), double()))
 }
 \seealso{

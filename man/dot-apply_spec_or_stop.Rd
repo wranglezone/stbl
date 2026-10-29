@@ -7,7 +7,7 @@
 .apply_spec_or_stop(fn, x, x_arg, call)
 }
 \arguments{
-\item{fn}{A stabilizer or coercion function to apply to \code{x}.}
+\item{fn}{A stabilizer or conversion function to apply to \code{x}.}
 
 \item{x}{The value to test.}
 
