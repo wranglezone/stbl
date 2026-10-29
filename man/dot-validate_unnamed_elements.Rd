@@ -14,8 +14,8 @@
 \item \code{NULL} or \code{FALSE} (default): any unnamed elements cause an error.
 \item \code{TRUE}: unnamed elements are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
 }}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use

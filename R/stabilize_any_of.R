@@ -1,26 +1,25 @@
-#' Try to coerce or validate x as one of several types
+#' Try to convert or validate x as one of several types
 #'
-#' @description `stabilize_any_of()` attempts to validate and coerce `x` using
+#' @description `stabilize_any_of()` attempts to validate and convert `x` using
 #'   each function in `...` in order. It returns the result of the first
 #'   function that succeeds. If all functions fail, an informative error that
 #'   combines the individual failure messages is thrown. `stabilise_any_of()` is
 #'   a synonym.
 #'
-#'   `to_any_of()` is analogous to [to()]: it tries to coerce `x` to each type
+#'   `to_any_of()` is analogous to [to()]: it tries to convert `x` to each type
 #'   given in `...` (as a prototype such as `integer()` or `character()`) and
 #'   returns the first successful result.
 #'
-#' @param ... For `stabilize_any_of()`: unnamed stabilizer or coercion
+#' @param ... For `stabilize_any_of()`: unnamed stabilizer or conversion
 #'   functions, such as `stabilize_*` functions ([stabilize_chr()], etc.),
 #'   `to_*` functions ([to_chr()], etc.), functions produced by `specify_*()`
 #'   calls ([specify_chr()], etc.), or `assert_*()` functions (such as
 #'   [assert_not()]) that return their input unchanged. For `to_any_of()`:
-#'   prototype objects (e.g.
-#'   `integer()`, `character()`) that determine the target types to try, passed
-#'   as the `.to` argument of [to()].
+#'   prototype objects (e.g. `integer()`, `character()`) that determine the
+#'   target types to try, passed as the `.to` argument of [to()].
 #' @inheritParams .shared-params
 #'
-#' @returns `x` coerced or validated by the first successful function or
+#' @returns `x` converted or validated by the first successful function or
 #'   prototype in `...`, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
@@ -37,7 +36,7 @@
 #' # Falls through to stabilize_chr when stabilize_int fails
 #' stabilize_any_of("a", stabilize_int, stabilize_chr)
 #'
-#' # Coerces via the first matching function ("1" -> 1L)
+#' # Converts via the first matching function ("1" -> 1L)
 #' stabilize_any_of("1", stabilize_int, stabilize_chr)
 #'
 #' # A mixed list falls through to stabilize_chr because "a" can't be integer
@@ -112,7 +111,7 @@ stabilise_any_of <- stabilize_any_of
 #' Try each function in sequence, returning the first success
 #'
 #' @param x The value to test.
-#' @param fns `(list)` The list of stabilizer or coercion functions to try.
+#' @param fns `(list)` The list of stabilizer or conversion functions to try.
 #' @inheritParams stabilize_lst
 #' @returns The result of the first function that does not throw an error.
 #' @keywords internal

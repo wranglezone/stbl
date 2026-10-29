@@ -1,18 +1,17 @@
 #' Replace a stbl error with a custom message
 #'
-#' Catches a `stbl` error with the specified `subclass` and replaces its
-#' message with a new one. Use this to provide more context-specific error
-#' messages when calling `stbl` functions inside your own functions. See
-#' the documentation of each `stabilize_*()` or `to_*()` function for the types
-#' of errors it throws.
+#' Catches a `stbl` error with the specified `subclass` and replaces its message
+#' with a new one. Use this to provide more context-specific error messages when
+#' calling `stbl` functions inside your own functions. See the documentation of
+#' each `stabilize_*()` or `to_*()` function for the types of errors it throws.
 #'
 #' @param message (`character`) The replacement error message. Formatted with
 #'   [cli::cli_bullets()].
 #' @inheritParams ignore_stbl_error
 #' @inheritParams .shared-params
 #'
-#' @returns The result of `expr`, or an error with the replacement message if
-#'   a matching `{stbl}` error is thrown.
+#' @returns The result of `expr`, or an error with the replacement message if a
+#'   matching `{stbl}` error is thrown.
 #' @export
 #'
 #' @examples

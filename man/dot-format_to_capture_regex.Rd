@@ -15,8 +15,8 @@ A list with:
 \itemize{
 \item \code{regex}: the unanchored regex body (not yet wrapped in \code{^}/\code{$}).
 \item \code{fields}: a character vector naming the calendar field (one of \code{"Y"},
-\code{"m"}, \code{"d"}, \code{"H"}, \code{"M"}, or \code{"S"}) captured by each group, in the
-order the groups appear in \code{regex}.
+\code{"m"}, \code{"d"}, \code{"H"}, \code{"M"}, or \code{"S"}) captured by each group, in the order
+the groups appear in \code{regex}.
 }
 }
 \description{

@@ -24,17 +24,17 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
 The value, unchanged.
 }
 \description{
-\code{assert_present()} validates that a value is not \code{NULL}. Any non-\code{NULL}
-value passes through unchanged. This is useful as an element specification
-in \code{\link[=stabilize_lst]{stabilize_lst()}} when you need to require a named element without
-imposing any type constraints on its value.
+\code{assert_present()} validates that a value is not \code{NULL}. Any non-\code{NULL} value
+passes through unchanged. This is useful as an element specification in
+\code{\link[=stabilize_lst]{stabilize_lst()}} when you need to require a named element without imposing
+any type constraints on its value.
 }
 \examples{
 assert_present("any value")

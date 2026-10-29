@@ -11,7 +11,7 @@
  * Two input shapes are accepted:
  *
  *   1. A flat list of scalars (any length).  Each element must be a
- *      length-1 atomic value coercible to character (or a singly-nested
+ *      length-1 atomic value convertible to character (or a singly-nested
  *      list that unwraps to one); elements that are not produce
  *      NA_character_ / valid = FALSE.
  *
@@ -19,7 +19,7 @@
  *      any length.  The vector is passed through directly with all
  *      valid = TRUE.
  *
- * Coercion rules (per element, same as to_chr for non-list types):
+ * Conversion rules (per element, same as to_chr for non-list types):
  *   character -> direct
  *   logical   -> "TRUE" / "FALSE" / NA_character_
  *   integer   -> decimal string representation
@@ -31,7 +31,7 @@
  */
 
 /* Return the CHARSXP for a length-1 atomic element.
- * Sets *valid = 1 for coercible types (including NA), 0 otherwise. */
+ * Sets *valid = 1 for convertible types (including NA), 0 otherwise. */
 static SEXP lst_to_chr_elem_to_charsxp(SEXP elem, int *valid) {
   /* Factor: resolve integer code to level label */
   if (Rf_isFactor(elem)) {

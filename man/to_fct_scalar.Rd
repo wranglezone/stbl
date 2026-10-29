@@ -3,7 +3,7 @@
 \name{to_fct_scalar}
 \alias{to_fct_scalar}
 \alias{to_factor_scalar}
-\title{Coerce to length-1 factor}
+\title{Convert to length-1 factor}
 \usage{
 to_fct_scalar(
   x,
@@ -55,8 +55,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -64,7 +64,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -72,7 +72,7 @@ The input as a length-1 factor, or an error condition with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be coerced to factor.
+\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be converted to factor.
 \item \verb{<stbl-error-incompatible_values-factor>} when some elements of a list
 cannot be converted to factor.
 \item \verb{<stbl-error-fct_levels>} when values are not present in \code{levels}.
@@ -83,7 +83,7 @@ cannot be converted to factor.
 }
 }
 \description{
-Checks whether a vector can be coerced to a length-1 factor.
+Checks whether a vector can be converted to a length-1 factor.
 \code{to_fct_scalar()} is optimized to check for length-1 factors (compared to
 \code{\link[=stabilize_fct]{stabilize_fct()}} with \code{max_size = 1}). \code{to_factor_scalar()} is a synonym
 of \code{to_fct_scalar()}.

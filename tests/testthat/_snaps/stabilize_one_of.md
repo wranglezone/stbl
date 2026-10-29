@@ -35,15 +35,15 @@
       ! `val` must match exactly one of the provided specifications, but matched none.
       x `val` must not be <NULL>.
 
-# stabilize_one_of() includes Locations from incompatible_values errors (#286)
+# stabilize_one_of() includes Locations from incompatible_values errors (#286, #377)
 
     Code
       stabilize_one_of(x, stabilize_lgl, stabilize_int)
     Condition <stbl-error-cant_stabilize_one_of>
       Error:
       ! `x` must match exactly one of the provided specifications, but matched none.
-      x `x` <character> must be coercible to <logical> (Locations: 1)
-      x `x` <character> must be coercible to <integer> (Locations: 1 and 3)
+      x `x` <character> must be convertible to <logical> (Locations: 1)
+      x `x` <character> must be convertible to <integer> (Locations: 1 and 3)
 
 ---
 
@@ -52,8 +52,8 @@
     Condition <stbl-error-cant_stabilize_one_of>
       Error in `wrapped_stabilize_one_of()`:
       ! `val` must match exactly one of the provided specifications, but matched none.
-      x `val` <character> must be coercible to <logical> (Locations: 1)
-      x `val` <character> must be coercible to <integer> (Locations: 1 and 3)
+      x `val` <character> must be convertible to <logical> (Locations: 1)
+      x `val` <character> must be convertible to <integer> (Locations: 1 and 3)
 
 # stabilize_one_of() names the matched specs when more than one succeeds (#286)
 

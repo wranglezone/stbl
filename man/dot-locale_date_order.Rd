@@ -14,8 +14,8 @@ other locales); this is a coarse heuristic based on the locale string, not
 a full locale-aware calendar implementation.}
 }
 \value{
-A length-2 character vector, either \code{c("m", "d")} (month before
-day) or \code{c("d", "m")} (day before month).
+A length-2 character vector, either \code{c("m", "d")} (month before day)
+or \code{c("d", "m")} (day before month).
 }
 \description{
 Guess a locale's conventional day/month order

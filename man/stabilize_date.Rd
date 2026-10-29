@@ -3,7 +3,7 @@
 \name{stabilize_date}
 \alias{stabilize_date}
 \alias{stabilise_date}
-\title{Coerce to date with additional checks}
+\title{Convert to date with additional checks}
 \usage{
 stabilize_date(
   x,
@@ -62,14 +62,14 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{max_value}{(\code{numeric(1)}) The highest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
 \item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
 strings to try, in order, when parsing a character \code{x}. The first format
-that parses every non-\code{NA} element of \code{x} is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-\code{NA} element of \code{x} is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
@@ -84,7 +84,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -92,7 +92,7 @@ The input as a \link[base:Date]{base::Date} vector, or an error condition with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be coerced to date.
+\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be converted to date.
 \item \verb{<stbl-error-incompatible_values-date>} when some values cannot be safely
 converted to date.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
@@ -108,8 +108,7 @@ present.
 }
 \description{
 Compared to \code{\link[=to_date]{to_date()}}, \code{stabilize_date()} checks more details, but is
-slower. \code{stabilise_date()} is a synonym of
-\code{stabilize_date()}.
+slower. \code{stabilise_date()} is a synonym of \code{stabilize_date()}.
 }
 \examples{
 stabilize_date(as.Date("2024-01-01"))

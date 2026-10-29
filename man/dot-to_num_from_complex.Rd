@@ -2,11 +2,11 @@
 % Please edit documentation in R/cls_unexported.R
 \name{.to_num_from_complex}
 \alias{.to_num_from_complex}
-\title{Coerce an object from a complex to a numeric class}
+\title{Convert an object from a complex to a numeric class}
 \usage{
 .to_num_from_complex(
   x,
-  cast_fn,
+  convert_fn,
   to_type_obj,
   x_arg = caller_arg(x),
   to_arg = NULL,
@@ -17,7 +17,7 @@
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{cast_fn}{\verb{(function)} The \verb{as.*()} function to use for coercion.}
+\item{convert_fn}{\verb{(function)} The \verb{as.*()} function to use for conversion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
@@ -27,8 +27,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -36,13 +36,13 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced to the target class.
+\code{x} converted to the target class.
 }
 \description{
-Coerce an object from a complex to a numeric class
+Convert an object from a complex to a numeric class
 }
 \keyword{internal}

@@ -8,8 +8,8 @@
 }
 \arguments{
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the

@@ -5,7 +5,7 @@
 \alias{are_function_ish}
 \alias{is_fn_ish}
 \alias{is_function_ish}
-\title{Check if an object can be safely coerced to a function}
+\title{Check if an object can be safely converted to a function}
 \usage{
 are_fn_ish(x, ...)
 
@@ -26,25 +26,25 @@ input. \code{is_fn_ish()} returns a \verb{length-1 logical} (\code{TRUE} or \cod
 }
 \description{
 \code{are_fn_ish()} is a vectorized predicate function that checks
-whether each element of its input can be safely coerced to a function.
+whether each element of its input can be safely converted to a function.
 \code{are_function_ish()} is a synonym of \code{are_fn_ish()}.
 
 \code{is_fn_ish()} is a scalar predicate that checks whether its input can be
-safely coerced to a function by \code{\link[=to_fn]{to_fn()}}. \code{is_function_ish()} is a
+safely converted to a function by \code{\link[=to_fn]{to_fn()}}. \code{is_function_ish()} is a
 synonym of \code{is_fn_ish()}.
 }
 \details{
 \code{are_fn_ish()} returns \code{TRUE} for:
 \itemize{
 \item Functions (including lambda functions created with \code{~} or \verb{\\()})
-\item Formulas (one-sided or two-sided, coercible via \code{\link[rlang:as_function]{rlang::as_function()}})
+\item Formulas (one-sided or two-sided, convertible via \code{\link[rlang:as_function]{rlang::as_function()}})
 \item Character strings that are syntactically valid function names: either a
 bare name (\code{"mean"}) or a namespaced name (\code{"pkg::fn"}). The check is
 syntactic; it does not verify that the named function exists in any
 environment.
 }
 
-\code{is_fn_ish()} returns \code{TRUE} for objects that \code{\link[=to_fn]{to_fn()}} can coerce without
+\code{is_fn_ish()} returns \code{TRUE} for objects that \code{\link[=to_fn]{to_fn()}} can convert without
 error (assuming a matching function exists in the search path):
 \itemize{
 \item Functions (including lambda functions created with \code{~} or \verb{\\()})

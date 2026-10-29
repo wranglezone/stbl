@@ -2,7 +2,7 @@
 
 #' Ensure a data frame meets expectations
 #'
-#' `to_df()` checks whether an object can be coerced to a data frame,
+#' `to_df()` checks whether an object can be converted to a data frame,
 #' returning it silently if so. Otherwise an informative error message is
 #' signaled. `to_data_frame()` is a synonym of `to_df()`.
 #'
@@ -12,7 +12,7 @@
 #' @returns The object as a data frame, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-data.frame>` when `x` cannot be coerced to a data
+#'   - `<stbl-error-coerce-data.frame>` when `x` cannot be converted to a data
 #'   frame.
 #'   - `<stbl-error-bad_named>` when a list has any unnamed elements.
 #'   - `<stbl-error-jagged>` when a list has incompatible element lengths.
@@ -91,7 +91,7 @@ to_df.default <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "data.frame",
     x_arg = x_arg,
@@ -100,7 +100,7 @@ to_df.default <- function(
   )
 }
 
-#' Coerce a vector to a one-column data frame
+#' Convert a vector to a one-column data frame
 #'
 #' @param x_expr `(language)` The unevaluated expression for `x`, captured via
 #'   `substitute(x)` in the calling method.
@@ -109,7 +109,7 @@ to_df.default <- function(
 #' @keywords internal
 .to_df_vector <- function(x, x_expr, x_arg, to_arg, call, x_class, ...) {
   if (!is.symbol(x_expr)) {
-    .stop_cant_coerce(
+    .stop_cant_convert(
       from_class = x_class,
       to_class = "data.frame",
       x_arg = x_arg,

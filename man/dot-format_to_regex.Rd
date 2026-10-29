@@ -11,12 +11,12 @@
 \verb{\%Y}, \verb{\%m}, \verb{\%d}, \verb{\%H}, \verb{\%M}, and \verb{\%S} specifiers and literal separators.}
 }
 \value{
-A \code{character(1)} regular expression, anchored with \code{^} and \code{$},
-that matches strings shaped like \code{fmt}.
+A \code{character(1)} regular expression, anchored with \code{^} and \code{$}, that
+matches strings shaped like \code{fmt}.
 }
 \description{
-Used to verify that a character vector's \emph{shape} matches a candidate
-format before handing it to \code{\link[=as.Date]{as.Date()}}, since that function silently
-ignores unmatched trailing characters rather than failing.
+Used to verify that a character vector's \emph{shape} matches a candidate format
+before handing it to \code{\link[=as.Date]{as.Date()}}, since that function silently ignores
+unmatched trailing characters rather than failing.
 }
 \keyword{internal}

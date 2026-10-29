@@ -18,7 +18,7 @@ unexported functions.}
 source of error messages.}
 }
 \value{
-\code{tz}, coerced to a scalar character, if it is valid and in
+\code{tz}, converted to a scalar character, if it is valid and in
 \code{\link[=OlsonNames]{OlsonNames()}}. The name of the local time zone if \code{tz} is \code{""}.
 }
 \description{

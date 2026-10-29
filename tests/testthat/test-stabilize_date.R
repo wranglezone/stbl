@@ -1,4 +1,4 @@
-test_that("stabilize_date() coerces and returns dates (#104)", {
+test_that("stabilize_date() converts and returns dates (#104)", {
   given <- c("2024-01-01", "2024-06-15")
   expect_identical(stabilize_date(given), as.Date(given))
 })

@@ -1,6 +1,6 @@
 #' Convert a value to a target type
 #'
-#' `to()` coerces `x` to the type of `.to`, dispatching on the class of `.to`
+#' `to()` converts `x` to the type of `.to`, dispatching on the class of `.to`
 #' to the appropriate `to_*()` function.
 #'
 #' @param .to A prototype that determines the target type (e.g., `integer()`,
@@ -12,13 +12,13 @@
 #'   `.to` doesn't name one (see [resolve_tz()]).
 #' @inheritParams .shared-params
 #'
-#' @returns `x` coerced to the type of `.to`, or an error condition with
+#' @returns `x` converted to the type of `.to`, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - The failure classes documented for the `to_*()` function corresponding
 #'   to the class of `.to` (for example [to_int()] for `.to = integer()`).
 #'   - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-#'   `to_*()` function and [vctrs::vec_cast()] cannot cast `x` to `.to`.
+#'   `to_*()` function and [vctrs::vec_cast()] cannot converted `x` to `.to`.
 #'
 #' @details
 #' When the class of `.to` does not have a corresponding `to_*()` function,
@@ -357,7 +357,7 @@ to.default <- function(
       call = call
     ),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = object_type(.to),
         x_arg = x_arg,

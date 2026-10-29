@@ -7,13 +7,13 @@
 .capture_factory_args()
 }
 \value{
-A named list of the values of arguments that weren't left missing
-in the function that called \code{.capture_factory_args()}.
+A named list of the values of arguments that weren't left missing in
+the function that called \code{.capture_factory_args()}.
 }
 \description{
 Used inside \verb{specify_*()} functions to build the \code{factory_args} list passed
 to \code{\link[=.specify_cls]{.specify_cls()}}, keeping only the arguments that the caller of the
-\verb{specify_*()} function actually supplied (as opposed to those left at
-their default value).
+\verb{specify_*()} function actually supplied (as opposed to those left at their
+default value).
 }
 \keyword{internal}

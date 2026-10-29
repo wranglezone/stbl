@@ -107,11 +107,11 @@
       ! `"nonexistent_pkg::mean"` must be the name of a known function.
       x Can't find function `nonexistent_pkg::mean()`.
 
-# to_fn() errors informatively for non-coercible types (#250)
+# to_fn() errors informatively for non-convertible types (#250, #377)
 
     Code
       to_fn(1L)
     Condition <stbl-error-coerce-function>
       Error:
-      ! Can't coerce `1L` <integer> to <function>.
+      ! Can't convert `1L` <integer> to <function>.
 

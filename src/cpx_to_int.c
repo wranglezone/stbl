@@ -100,7 +100,7 @@ SEXP stbl_cpx_to_int(SEXP x) {
  * stbl_cpx_are_intish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements that can
- * be coerced to integer (NA, or Im==0 and Re is a whole number in range).
+ * be converted to integer (NA, or Im==0 and Re is a whole number in range).
  */
 SEXP stbl_cpx_are_intish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

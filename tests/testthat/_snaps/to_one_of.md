@@ -16,15 +16,15 @@
       ! `val` must match exactly one of the provided specifications, but matched 2.
       i Matched specifications: "integer" and "double"
 
-# to_one_of() errors with a combined message when no prototype matches (#286)
+# to_one_of() errors with a combined message when no prototype matches (#286, #377)
 
     Code
       to_one_of(new.env(), integer(), character())
     Condition <stbl-error-cant_stabilize_one_of>
       Error:
       ! `new.env()` must match exactly one of the provided specifications, but matched none.
-      x Can't coerce `new.env()` <environment> to <integer>.
-      x Can't coerce `new.env()` <environment> to <character>.
+      x Can't convert `new.env()` <environment> to <integer>.
+      x Can't convert `new.env()` <environment> to <character>.
 
 ---
 
@@ -33,8 +33,8 @@
     Condition <stbl-error-cant_stabilize_one_of>
       Error in `wrapped_to_one_of()`:
       ! `val` must match exactly one of the provided specifications, but matched none.
-      x Can't coerce `val` <environment> to <integer>.
-      x Can't coerce `val` <environment> to <character>.
+      x Can't convert `val` <environment> to <integer>.
+      x Can't convert `val` <environment> to <character>.
 
 # to_one_of() disambiguates identical matched labels by position (#286)
 

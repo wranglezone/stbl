@@ -24,7 +24,7 @@ condition with classes \verb{<stbl-error-deprecated>}, \verb{<stbl-error>},
 }
 \description{
 \code{stabilize_present()} was renamed to \code{\link[=assert_present]{assert_present()}} because it doesn't
-stabilize (coerce) \code{x} in any way; it only asserts that \code{x} is not \code{NULL}.
+stabilize (convert) \code{x} in any way; it only asserts that \code{x} is not \code{NULL}.
 Calling \code{stabilize_present()} now throws an error directing you to
 \code{\link[=assert_present]{assert_present()}} instead.
 }

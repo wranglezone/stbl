@@ -134,10 +134,10 @@ summarize_data <- function(x) {
 
 ## Input validation
 
-Use `to_*()` and `stabilize_*()` to validate parameters. These functions coerce when safe and fail with clear error messages when not.
+Use `to_*()` and `stabilize_*()` to validate parameters. These functions convert when safe and fail with clear error messages when not.
 
-- **`to_*()`** — simple type coercion. Use when you need to ensure a parameter is the right type but don't need additional constraints.
-- **`stabilize_*()`** — coercion plus content validation (regex, ranges, etc.). Use when simple type coercion isn't enough.
+- **`to_*()`** — simple type conversion. Use when you need to ensure a parameter is the right type but don't need additional constraints.
+- **`stabilize_*()`** — conversion plus content validation (regex, ranges, etc.). Use when simple type conversion isn't enough.
 
 **Validate in the function that uses the parameter**, not in a caller that passes it through. This preserves R's lazy evaluation — if a parameter is never used on a code path, it is never evaluated or validated.
 

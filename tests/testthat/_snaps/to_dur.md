@@ -14,13 +14,13 @@
       Error in `wrapped_to_dur()`:
       ! `val` must not be <NULL>.
 
-# to_dur() rejects a bare P or PT (#295)
+# to_dur() rejects a bare P or PT (#295, #377)
 
     Code
       to_dur("P")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"P"` <character> must be coercible to <duration>
+      ! `"P"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "P"
@@ -31,73 +31,73 @@
       to_dur("PT")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"PT"` <character> must be coercible to <duration>
+      ! `"PT"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "PT"
 
-# to_dur() rejects mixing the week form with other units (#295)
+# to_dur() rejects mixing the week form with other units (#295, #377)
 
     Code
       to_dur("P1W2D")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"P1W2D"` <character> must be coercible to <duration>
+      ! `"P1W2D"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "P1W2D"
 
-# to_dur() rejects fractional components (#295)
+# to_dur() rejects fractional components (#295, #377)
 
     Code
       to_dur("P1.5D")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"P1.5D"` <character> must be coercible to <duration>
+      ! `"P1.5D"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "P1.5D"
 
-# to_dur() rejects a negative sign (#295)
+# to_dur() rejects a negative sign (#295, #377)
 
     Code
       to_dur("-P1D")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"-P1D"` <character> must be coercible to <duration>
+      ! `"-P1D"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "-P1D"
 
-# to_dur() rejects out-of-order components (#295)
+# to_dur() rejects out-of-order components (#295, #377)
 
     Code
       to_dur("P1D1Y")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"P1D1Y"` <character> must be coercible to <duration>
+      ! `"P1D1Y"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "P1D1Y"
 
-# to_dur() rejects lowercase durations (#295)
+# to_dur() rejects lowercase durations (#295, #377)
 
     Code
       to_dur("p1y2m")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"p1y2m"` <character> must be coercible to <duration>
+      ! `"p1y2m"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "p1y2m"
 
-# to_dur() rejects unparseable duration strings (#295)
+# to_dur() rejects unparseable duration strings (#295, #377)
 
     Code
       to_dur(given)
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `given` <character> must be coercible to <duration>
+      ! `given` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
       * Values: "not-a-duration"
@@ -108,18 +108,18 @@
       wrapped_to_dur(given)
     Condition <stbl-error-incompatible_values-duration>
       Error in `wrapped_to_dur()`:
-      ! `val` <character> must be coercible to <duration>
+      ! `val` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
       * Values: "not-a-duration"
 
-# to_dur() errors informatively for bad factors (#295)
+# to_dur() errors informatively for bad factors (#295, #377)
 
     Code
       to_dur(given)
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `given` <factor> must be coercible to <duration>
+      ! `given` <factor> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 2
       * Values: "nope"

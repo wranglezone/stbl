@@ -56,7 +56,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
@@ -77,10 +77,10 @@ specific class by failure mode:
 }
 }
 \description{
-\code{stabilize_arg()} is used by other functions such as \code{\link[=stabilize_int]{stabilize_int()}}. Use
-\code{stabilize_arg()} if the type-specific functions will not work for your use
-case, but you would still like to check things like size or whether the
-object is NULL.
+\code{stabilize_arg()} is used by other functions such as
+\code{\link[=stabilize_int]{stabilize_int()}}. Use \code{stabilize_arg()} if the type-specific functions will
+not work for your use case, but you would still like to check things like
+size or whether the object is NULL.
 
 \code{stabilize_arg_scalar()} is optimized to check for length-1 vectors.
 }

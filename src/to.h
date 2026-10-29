@@ -49,7 +49,7 @@ static inline SEXP check_precision(SEXP res, SEXP x, SEXP to, SEXP x_arg, SEXP t
  * Check `non_number` (index 1) and `bad_precision` (index 2) of a
  * chr/fct-to-int result list.
  */
-static inline SEXP check_int_cast(SEXP res, SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
+static inline SEXP check_int_conversion(SEXP res, SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   SEXP non_number    = VECTOR_ELT(res, 1);
   SEXP bad_precision = VECTOR_ELT(res, 2);
   R_xlen_t n = XLENGTH(non_number);

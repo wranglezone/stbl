@@ -2,8 +2,8 @@ test_that("to_one_of() returns x unchanged when exactly one prototype matches (#
   expect_identical(to_one_of("a", integer(), character()), "a")
 })
 
-test_that("to_one_of() coerces via the single matching prototype (#286)", {
-  # "FALSE" coerces to logical, but not to integer
+test_that("to_one_of() converts via the single matching prototype (#286)", {
+  # "FALSE" converts to logical, but not to integer
   expect_identical(to_one_of("FALSE", logical(), integer()), FALSE)
 })
 
@@ -21,7 +21,7 @@ test_that("to_one_of() errors when prototypes overlap and more than one matches 
   )
 })
 
-test_that("to_one_of() errors with a combined message when no prototype matches (#286)", {
+test_that("to_one_of() errors with a combined message when no prototype matches (#286, #377)", {
   # Environments have no to_int or to_chr method, so both fail
   expect_pkg_error_snapshot(
     to_one_of(new.env(), integer(), character()),

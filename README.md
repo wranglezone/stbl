@@ -28,7 +28,7 @@ Law](https://en.wikipedia.org/wiki/Robustness_principle):
 > “Be conservative in what you send. Be liberal in what you accept from
 > others.”
 
-stbl is liberal about what it accepts (by coercing when safe) and
+stbl is liberal about what it accepts (by converting when safe) and
 conservative about what it returns (by ensuring that inputs have the
 classes and other features that are expected).
 
@@ -95,7 +95,7 @@ Failures are reported with helpful messages.
 ``` r
 my_fun("1.1")
 #> Error in `my_fun()`:
-#> ! `my_arg_name` <character> must be coercible to <integer>
+#> ! `my_arg_name` <character> must be convertible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 1
 #> • Values: "1.1"
@@ -106,7 +106,7 @@ The errors help locate issues within vectors.
 ``` r
 my_fun(c("1", "2", "3.1", "4", "5.2"))
 #> Error in `my_fun()`:
-#> ! `my_arg_name` <character> must be coercible to <integer>
+#> ! `my_arg_name` <character> must be convertible to <integer>
 #> ✖ Can't convert some values due to loss of precision.
 #> • Locations: 3 and 5
 #> • Values: "3.1" and "5.2"
@@ -126,7 +126,7 @@ approaches:
   `coerce = TRUE`. stbl is usually faster, and provided classed error
   messages to allow you to handle different failure modes differently.
 - **[{vctrs}](https://vctrs.r-lib.org/):** {vctrs} provides strict,
-  low-level tools for coercion and type consistency, especially useful
+  low-level tools for conversion and type consistency, especially useful
   in package internals and base-type enforcement. stbl is more tolerant
   and higher-level, optimized for use in functions that accept flexible
   user inputs (e.g. letting a version number 1.1 be passed in as numeric

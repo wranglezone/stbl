@@ -18,20 +18,20 @@ assert_contains(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+\item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
 
 \item{...}{Arguments passed to methods.}
 
-\item{min_matches}{(\code{integer(1)}) The minimum number of elements of \code{x}
-that must match \code{spec}. Must be \verb{>= 0}. Set to \code{0} (with non-\code{NULL}
+\item{min_matches}{(\code{integer(1)}) The minimum number of elements of \code{x} that
+must match \code{spec}. Must be \verb{>= 0}. Set to \code{0} (with non-\code{NULL}
 \code{max_matches}) to check only an upper bound on the number of matches.}
 
-\item{max_matches}{(\code{integer(1)} or \code{NULL}) The maximum number of elements
-of \code{x} that may match \code{spec}. Must be \verb{>= min_matches}. \code{NULL} (default)
-skips the upper-bound check.}
+\item{max_matches}{(\code{integer(1)} or \code{NULL}) The maximum number of elements of
+\code{x} that may match \code{spec}. Must be \verb{>= min_matches}. \code{NULL} (default) skips
+the upper-bound check.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -43,13 +43,13 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x}, unchanged, if the number of elements of \code{x} matching \code{spec}
-is between \code{min_matches} and \code{max_matches}, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
+\code{x}, unchanged, if the number of elements of \code{x} matching \code{spec} is
+between \code{min_matches} and \code{max_matches}, or an error condition with classes
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-too_few_matches>} when fewer than \code{min_matches} elements
@@ -59,10 +59,9 @@ match \code{spec}.
 }
 }
 \description{
-\code{assert_contains()} applies \code{spec} to each element of \code{x} independently
-and counts how many elements match. It returns \code{x} unchanged if that count
-falls between \code{min_matches} and \code{max_matches} (inclusive), and errors
-otherwise.
+\code{assert_contains()} applies \code{spec} to each element of \code{x} independently and
+counts how many elements match. It returns \code{x} unchanged if that count falls
+between \code{min_matches} and \code{max_matches} (inclusive), and errors otherwise.
 }
 \examples{
 # By default, at least 1 element must match spec

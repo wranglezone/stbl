@@ -99,10 +99,10 @@ test_that(".check_x_no_more_than_y() works (#95)", {
   )
 })
 
-test_that(".check_cast_failures() works (#310, #332)", {
+test_that(".check_conversion_failures() works (#310, #332, #377)", {
   # Happy path
   expect_null(
-    .check_cast_failures(
+    .check_conversion_failures(
       x = c("a", "b"),
       failures = c(FALSE, FALSE),
       x_class = "character",
@@ -116,7 +116,7 @@ test_that(".check_cast_failures() works (#310, #332)", {
   # Failure path
   failures <- c(FALSE, TRUE, FALSE, TRUE)
   expect_pkg_error_snapshot(
-    .check_cast_failures(
+    .check_conversion_failures(
       x = c("a", "b", "c", "d"),
       failures = failures,
       x_class = "character",
@@ -131,9 +131,9 @@ test_that(".check_cast_failures() works (#310, #332)", {
   )
 })
 
-test_that(".check_cast_failures() attaches failing locations and values (#274, #332)", {
+test_that(".check_conversion_failures() attaches failing locations and values (#274, #332)", {
   cnd <- rlang::catch_cnd(
-    .check_cast_failures(
+    .check_conversion_failures(
       x = c("a", "b", "c", "d"),
       failures = c(FALSE, TRUE, FALSE, TRUE),
       x_class = "character",
@@ -152,7 +152,7 @@ test_that(".check_all_named() works (#203)", {
   expect_pkg_error_snapshot(.check_all_named(list(1, 2)), "stbl", "bad_named")
 })
 
-test_that(".check_not_jagged() works (#203)", {
+test_that(".check_not_jagged() works (#203, #377)", {
   expect_null(.check_not_jagged(list()))
   expect_null(.check_not_jagged(list(a = 1, b = 2)))
   expect_null(.check_not_jagged(list(a = 1:3, b = 1:3)))

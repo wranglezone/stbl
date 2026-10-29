@@ -298,7 +298,7 @@ test_that("to() converts formula to function (#250)", {
   expect_identical(to(~ . + 1, mean), rlang::as_function(~ . + 1))
 })
 
-test_that("to() errors for non-coercible types to function (#250)", {
+test_that("to() errors for non-convertible types to function (#250, #377)", {
   expect_snapshot(to(1L, mean), error = TRUE)
 })
 
@@ -391,7 +391,7 @@ test_that("to() errors for incompatible character -> Period (#366)", {
 # vctrs fallback ---------------------------------------------------------------
 
 test_that("to() falls back to vctrs::vec_cast for unknown prototypes (#367)", {
-  # vctrs supports rational-class casts that stbl does not dispatch on.
+  # vctrs supports rational-class conversions that stbl does not dispatch on.
   proto <- vctrs::new_rcrd(
     list(a = integer(), b = integer()),
     class = "vctrs_rational"
@@ -458,23 +458,23 @@ test_that("to() errors for unsupported target types (#182, #367)", {
 
 # to_arg -----------------------------------------------------------------------
 
-test_that("to() names both sides of a stbl-handled conversion (#371)", {
+test_that("to() names both sides of a stbl-handled conversion (#371, #377)", {
   ptype <- integer()
   to("a", ptype, x_arg = "x") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
 })
 
-test_that("to() uses a supplied to_arg (#371)", {
+test_that("to() uses a supplied to_arg (#371, #377)", {
   to("a", integer(), x_arg = "x", to_arg = "my_ptype") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
 })
 
-test_that("to() shows a literal .to as to_arg (#371)", {
+test_that("to() shows a literal .to as to_arg (#371, #377)", {
   to("a", integer(), x_arg = "x") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
 })
 
-test_that("to() names both sides when falling through to vctrs (#371)", {
+test_that("to() names both sides when falling through to vctrs (#371, #377)", {
   proto <- as.raw(1L)
   to(1L, proto, x_arg = "x") |>
     expect_pkg_error_snapshot("stbl", "coerce", "raw")

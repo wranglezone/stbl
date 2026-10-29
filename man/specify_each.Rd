@@ -7,7 +7,7 @@
 specify_each(spec)
 }
 \arguments{
-\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+\item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
@@ -21,8 +21,8 @@ additional context or functionality.
 }
 \description{
 \code{specify_each()} creates a function that will call \code{\link[=stabilize_each]{stabilize_each()}} with
-the provided \code{spec}, letting an element-wise spec be reused and nested
-inside other \verb{specify_*()}/\verb{stabilize_*()} calls.
+the provided \code{spec}, letting an element-wise spec be reused and nested inside
+other \verb{specify_*()}/\verb{stabilize_*()} calls.
 }
 \examples{
 stabilize_ints <- specify_each(stabilize_int)

@@ -21,7 +21,7 @@ be parsed with the chosen format).
 Tries each format in \code{formats}, in order, and returns the first one that
 parses every non-\code{NA} element of \code{x} without failure. If none succeed for
 every element, returns the result of the first format tried, so that error
-messages describe a concrete (if incomplete) failure rather than an
-arbitrary one.
+messages describe a concrete (if incomplete) failure rather than an arbitrary
+one.
 }
 \keyword{internal}

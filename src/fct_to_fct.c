@@ -4,7 +4,7 @@
 /*
  * stbl_fct_are_fctish: public API entry point.
  *
- * Checks whether each element of the factor `x` can be coerced to a factor
+ * Checks whether each element of the factor `x` can be converted to a factor
  * with the given `levels` and `to_na` arguments.
  *
  *   x:      factor to check

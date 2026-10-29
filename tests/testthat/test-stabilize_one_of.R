@@ -10,7 +10,7 @@ test_that("stabilize_one_of() returns x unchanged when exactly one function succ
   )
 })
 
-test_that("stabilize_one_of() coerces via the single matching function (#286)", {
+test_that("stabilize_one_of() converts via the single matching function (#286)", {
   # "a" fails stabilize_int but succeeds stabilize_chr
   expect_identical(stabilize_one_of("a", stabilize_int, stabilize_chr), "a")
 })
@@ -58,7 +58,7 @@ test_that("stabilize_one_of() errors with a combined message when no function su
   )
 })
 
-test_that("stabilize_one_of() includes Locations from incompatible_values errors (#286)", {
+test_that("stabilize_one_of() includes Locations from incompatible_values errors (#286, #377)", {
   # "a" fails lgl at position 1; "a" and "2" fail int at positions 1 and 3, so
   # neither matches and both messages should surface
   x <- c("a", "2", "TRUE")

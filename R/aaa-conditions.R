@@ -96,18 +96,18 @@ rlang::caller_env
   )
 }
 
-#' Abort with a standardized "can't coerce" message
+#' Abort with a standardized "can't convert" message
 #'
 #' @param from_class (`character(1)`) The class of the object that failed
-#'   coercion.
-#' @param to_class (`character(1)`) The target class for the coercion.
-#' @param additional_msg (`character(1)`) Optional, additional
-#'   cli-formatted messages.
+#'   conversion.
+#' @param to_class (`character(1)`) The target class for the conversion.
+#' @param additional_msg (`character(1)`) Optional, additional cli-formatted
+#'   messages.
 #' @inheritParams .stbl_abort
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
-.stop_cant_coerce <- function(
+.stop_cant_convert <- function(
   from_class,
   to_class,
   x_arg,
@@ -121,10 +121,10 @@ rlang::caller_env
   to_arg <- .check_to_arg(to_arg, call)
   main_msg <- if (is.null(to_arg)) {
     .glue2(
-      "Can't coerce {.arg [x_arg]} {.cls [from_class]} to {.cls [to_class]}."
+      "Can't convert {.arg [x_arg]} {.cls [from_class]} to {.cls [to_class]}."
     )
   } else {
-    .cant_coerce_msg(from_class, to_class, x_arg, to_arg)
+    .cant_convert_msg(from_class, to_class, x_arg, to_arg)
   }
   .stbl_abort(
     message = c(main_msg, additional_msg),
@@ -219,10 +219,10 @@ rlang::caller_env
   main_msg <- if (is.null(to_arg)) {
     .define_main_msg(
       x_arg,
-      "{.cls {x_class}} must be coercible to {.cls {to_class}}"
+      "{.cls {x_class}} must be convertible to {.cls {to_class}}"
     )
   } else {
-    .cant_coerce_msg(x_class, to_class, x_arg, to_arg)
+    .cant_convert_msg(x_class, to_class, x_arg, to_arg)
   }
   .stbl_abort(
     message = c(
@@ -241,18 +241,18 @@ rlang::caller_env
   )
 }
 
-#' Define the main message for a coercion failure that names both sides
+#' Define the main message for a conversion failure that names both sides
 #'
-#' @param from_class (`character(1)`) The class of the object being coerced.
-#' @param to_class (`character(1)`) The class being coerced to.
-#' @param to_arg (`character(1)`) The name of the coercion target, already
+#' @param from_class (`character(1)`) The class of the object being converted.
+#' @param to_class (`character(1)`) The class being converted to.
+#' @param to_arg (`character(1)`) The name of the conversion target, already
 #'   checked with `.check_to_arg()`.
 #' @inheritParams .shared-params
 #' @returns A character string.
 #' @keywords internal
-.cant_coerce_msg <- function(from_class, to_class, x_arg, to_arg) {
+.cant_convert_msg <- function(from_class, to_class, x_arg, to_arg) {
   .glue2(
-    "Can't coerce {.arg [x_arg]} {.cls [from_class]} to match {.arg [to_arg]} {.cls [to_class]}."
+    "Can't convert {.arg [x_arg]} {.cls [from_class]} to match {.arg [to_arg]} {.cls [to_class]}."
   )
 }
 

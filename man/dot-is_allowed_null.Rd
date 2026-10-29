@@ -15,8 +15,8 @@
 source of error messages.}
 }
 \value{
-(\code{logical(1)}) \code{TRUE} if \code{x} is \code{NULL} and \code{allow_null} is
-\code{TRUE}, else \code{FALSE}.
+(\code{logical(1)}) \code{TRUE} if \code{x} is \code{NULL} and \code{allow_null} is \code{TRUE},
+else \code{FALSE}.
 }
 \description{
 Check if a value is NULL and NULLs are allowed

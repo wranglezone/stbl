@@ -15,7 +15,7 @@ test_that("stabilize_df() respects .allow_null (#142)", {
   )
 })
 
-test_that("stabilize_df() errors for non-coercible input (#142)", {
+test_that("stabilize_df() errors for non-convertible input (#142, #377)", {
   expect_pkg_error_snapshot(
     stabilize_df("not a data frame"),
     "stbl",
@@ -30,7 +30,7 @@ test_that("stabilize_df() errors for non-coercible input (#142)", {
   )
 })
 
-test_that("stabilize_df() coerces a named list to a data frame (#142)", {
+test_that("stabilize_df() converts a named list to a data frame (#142)", {
   given_list <- list(name = "Alice", age = 30L)
   result <- stabilize_df(
     given_list,
@@ -53,7 +53,7 @@ test_that("stabilize_df() returns a valid data frame unchanged (#142)", {
   expect_s3_class(result, "data.frame")
 })
 
-test_that("stabilize_df() coerces compatible column types (#142)", {
+test_that("stabilize_df() converts compatible column types (#142)", {
   given <- data.frame(age = "30")
   result <- stabilize_df(given, age = specify_int_scalar())
   expect_identical(result$age, 30L)
@@ -110,7 +110,7 @@ test_that("stabilize_df() still validates an optional column when present (#279)
   )
 })
 
-test_that("stabilize_df() errors informatively when column fails validation (#142, #310, #335)", {
+test_that("stabilize_df() errors informatively when column fails validation (#142, #310, #335, #377)", {
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(count = "not-an-int"),
@@ -140,7 +140,7 @@ test_that("stabilize_df() allows extra columns with .extra_cols (#142)", {
   expect_identical(result, given)
 })
 
-test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310, #335)", {
+test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310, #335, #377)", {
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L, b = "not-int"),
@@ -260,7 +260,7 @@ test_that("stabilize_df() allows .col_names alongside ... specs (#142)", {
   expect_identical(result, given)
 })
 
-test_that("stabilize_df() preserves data frame class after column coercion (#142)", {
+test_that("stabilize_df() preserves data frame class after column conversion (#142)", {
   df <- data.frame(x = c("1", "2", "3"), y = 1:3)
   result <- stabilize_df(
     df,

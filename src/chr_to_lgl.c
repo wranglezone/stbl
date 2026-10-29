@@ -74,7 +74,7 @@ static void chr_to_lgl_core(SEXP x, R_xlen_t n, int* p_result, int* p_valid) {
       p_valid[i]  = 0;
       continue;
     }
-    /* Skip trailing whitespace: R's coercion to double accepts it.
+    /* Skip trailing whitespace: R's conversion to double accepts it.
        The loop is safe because s is a null-terminated C string and '\0' is
        not a whitespace character, so the loop always terminates. */
     while (isspace((unsigned char)*endptr)) endptr++;
@@ -116,7 +116,7 @@ SEXP stbl_chr_to_lgl(SEXP x) {
  * stbl_chr_are_lglish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements that can
- * be coerced to logical, FALSE otherwise.
+ * be converted to logical, FALSE otherwise.
  */
 SEXP stbl_chr_are_lglish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

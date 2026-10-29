@@ -44,7 +44,7 @@ resolve_tz <- function(
 #'
 #' @param tz (`character(1)`) The time zone to validate.
 #' @inheritParams .shared-params
-#' @returns `tz`, coerced to a scalar character, if it is valid and in
+#' @returns `tz`, converted to a scalar character, if it is valid and in
 #'   [OlsonNames()]. The name of the local time zone if `tz` is `""`.
 #' @keywords internal
 .check_tz <- function(tz, x_arg = "tz", call = caller_env()) {

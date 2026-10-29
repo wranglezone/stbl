@@ -4,13 +4,13 @@
 \alias{.stop_bad_levels}
 \title{Stop for bad factor levels}
 \usage{
-.stop_bad_levels(x, bad_casts, levels, to_na, x_arg, call)
+.stop_bad_levels(x, bad_conversions, levels, to_na, x_arg, call)
 }
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{bad_casts}{\code{(logical)} A logical vector indicating which elements of
-\code{x} are not in the allowed levels.}
+\item{bad_conversions}{\code{(logical)} A logical vector indicating which elements
+of \code{x} are not in the allowed levels.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
 vector's \code{levels} play the same role that \code{allowed_values} plays for other

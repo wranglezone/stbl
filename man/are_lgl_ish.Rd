@@ -6,7 +6,7 @@
 \alias{are_logical_ish}
 \alias{is_logical_ish}
 \alias{are_lgl_ish.default}
-\title{Check if an object can be safely coerced to logical}
+\title{Check if an object can be safely converted to logical}
 \usage{
 are_lgl_ish(x, ...)
 
@@ -33,12 +33,12 @@ the entire vector.
 }
 \description{
 \code{are_lgl_ish()} is a vectorized predicate function that checks
-whether each element of its input can be safely coerced to a logical vector.
-\code{are_logical_ish()} is a synonym of \code{are_lgl_ish()}.
+whether each element of its input can be safely converted to a logical
+vector. \code{are_logical_ish()} is a synonym of \code{are_lgl_ish()}.
 
-\code{is_lgl_ish()} is a scalar predicate function that checks if all elements of
-its input can be safely coerced to a logical vector. \code{is_logical_ish()} is a
-synonym of \code{is_lgl_ish()}.
+\code{is_lgl_ish()} is a scalar predicate function that checks if all elements
+of its input can be safely converted to a logical vector.
+\code{is_logical_ish()} is a synonym of \code{is_lgl_ish()}.
 }
 \examples{
 are_lgl_ish(c(TRUE, FALSE, NA))

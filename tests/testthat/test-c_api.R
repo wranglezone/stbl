@@ -471,7 +471,7 @@ test_that(".lst_to_dbl() unpacks a one-element list with a character vector (#23
   expect_identical(res[["valid"]], c(TRUE, TRUE))
 })
 
-test_that(".lst_to_dbl() marks non-coercible single-element as not valid (#237)", {
+test_that(".lst_to_dbl() marks non-convertible single-element as not valid (#237)", {
   res <- .lst_to_dbl(list(list(1.0, 2.0)))
   expect_identical(res[["result"]], NA_real_)
   expect_identical(res[["valid"]], FALSE)
@@ -580,7 +580,7 @@ test_that(".lst_to_int() unpacks a one-element list with a double vector (#237)"
   expect_identical(res[["valid"]], c(TRUE, TRUE))
 })
 
-test_that(".lst_to_int() marks non-coercible single-element as not valid (#226, #237)", {
+test_that(".lst_to_int() marks non-convertible single-element as not valid (#226, #237)", {
   res <- .lst_to_int(list(list(1L, 2L)))
   expect_identical(res[["result"]], NA_integer_)
   expect_identical(res[["valid"]], FALSE)
@@ -653,7 +653,7 @@ test_that(".lst_to_lgl() unpacks a one-element list with a character vector (#23
   expect_identical(res[["valid"]], c(TRUE, TRUE, TRUE))
 })
 
-test_that(".lst_to_lgl() marks non-coercible single-element as not valid (#226, #237)", {
+test_that(".lst_to_lgl() marks non-convertible single-element as not valid (#226, #237)", {
   res <- .lst_to_lgl(list(c(1 + 2i, 3 + 4i)))
   expect_identical(res[["result"]], NA)
   expect_identical(res[["valid"]], FALSE)
@@ -845,7 +845,7 @@ test_that(".stbl_to() converts chr to lgl", {
   )
 })
 
-test_that(".stbl_to() errors on non-coercible chr to lgl (#369)", {
+test_that(".stbl_to() errors on non-convertible chr to lgl (#369)", {
   expect_pkg_error_classes(
     .stbl_to("a", TRUE),
     "stbl",
@@ -1154,7 +1154,7 @@ test_that(".stbl_to() matches to() for cpx source -> fct target (#369)", {
 })
 
 test_that(".stbl_to() errors on raw target (#367)", {
-  expect_error(.stbl_to(1L, as.raw(0)), "Can't coerce")
+  expect_error(.stbl_to(1L, as.raw(0)), "Can't convert")
 })
 
 # range checks -----------------------------------------------------------------
@@ -1501,17 +1501,17 @@ test_that(".lst_to_chr() marks raw scalar elements as not valid (#noissue)", {
   expect_identical(res[["valid"]], FALSE)
 })
 
-test_that(".stbl_to() uses x_arg and call when supplied (#369)", {
+test_that(".stbl_to() uses x_arg and call when supplied (#369, #377)", {
   .stbl_to("a", logical(), x_arg = "my_arg", call = quote(my_fn())) |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
 })
 
-test_that(".stbl_to() uses to_arg when supplied (#371)", {
+test_that(".stbl_to() uses to_arg when supplied (#371, #377)", {
   .stbl_to("a", logical(), x_arg = "my_arg", to_arg = "my_to") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
 })
 
-test_that(".stbl_to() doesn't derive a to_arg when it is NULL (#371)", {
+test_that(".stbl_to() doesn't derive a to_arg when it is NULL (#371, #377)", {
   .stbl_to("a", logical(), x_arg = "my_arg") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
 })

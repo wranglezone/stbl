@@ -8,8 +8,8 @@
 
 \item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
 strings to try, in order, when parsing a character \code{x}. The first format
-that parses every non-\code{NA} element of \code{x} is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-\code{NA} element of \code{x} is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
@@ -20,7 +20,7 @@ error class list. Useful for the \code{class} argument of
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -33,10 +33,10 @@ independently of \code{allowed_values}, subject to \code{allow_na}.}
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
 
-\item{cast_fn}{\verb{(function)} The \verb{as.*()} function to use for coercion.}
+\item{convert_fn}{\verb{(function)} The \verb{as.*()} function to use for conversion.}
 
 \item{check_cls_value_fn}{\verb{(function)} A function to check the values of \code{x}
-after coercion.}
+after conversion.}
 
 \item{check_cls_value_fn_args}{\code{(list)} A list of additional arguments to
 pass to \code{check_cls_value_fn()}.}
@@ -49,7 +49,7 @@ and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
 
-\item{coerce_function}{(\code{logical(1)}) Should functions be coerced?}
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{depth}{(\code{integer(1)}) Current recursion depth. Do not manually set this
 parameter.}
@@ -121,34 +121,34 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{simplify}{(\code{logical(1)}) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If \code{FALSE}, a list is always returned.}
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 
-\item{spec}{\verb{(function)} A single stabilizer or coercion function, such as
+\item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
 
-\item{to}{The target object for the coercion.}
+\item{to}{The target object for the conversion.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
-\item{to_class}{(\code{character(1)}) The name of the class to coerce to.}
+\item{to_class}{(\code{character(1)}) The name of the class to convert to.}
 
 \item{to_cls_args}{\code{(list)} A list of additional arguments to pass to
 \code{to_cls_fn()}.}
 
-\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for coercion.}
+\item{to_cls_fn}{\verb{(function)} The \verb{to_*()} function to use for conversion.}
 
 \item{to_cls_scalar_args}{\code{(list)} A list of additional arguments to pass to
 \code{to_cls_scalar_fn()}.}
 
 \item{to_cls_scalar_fn}{\verb{(function)} The \verb{to_*_scalar()} function to use for
-coercion.}
+conversion.}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
 
@@ -172,7 +172,7 @@ unexported functions.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \description{

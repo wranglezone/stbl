@@ -110,7 +110,7 @@ test_that("to_chr() converts named functions (#251)", {
   expect_identical(wrapper_embrace(abs), "base::abs")
 })
 
-test_that("to_chr() errors for anonymous functions (#251)", {
+test_that("to_chr() errors for anonymous functions (#251, #377)", {
   expect_pkg_error_snapshot(
     to_chr(function(x) x),
     "stbl",
@@ -122,7 +122,7 @@ test_that("to_chr() errors for anonymous functions (#251)", {
   expect_identical(wrapped_to_chr(function(x) x), "val")
 })
 
-test_that("to_chr() fails gracefully for weird cases (#22, #273, #310)", {
+test_that("to_chr() fails gracefully for weird cases (#22, #273, #310, #377)", {
   given <- list(mean)
   expect_pkg_error_snapshot(
     to_chr(given),
@@ -202,7 +202,7 @@ test_that("to_chr_scalar() errors for non-scalars (#22)", {
   )
 })
 
-test_that("to_chr_scalar() errors for uncoerceable types (#22, #273, #310)", {
+test_that("to_chr_scalar() errors for unconvertible types (#22, #273, #310, #377)", {
   given <- list(a = 1:10)
   expect_pkg_error_snapshot(
     to_chr_scalar(given),
@@ -286,7 +286,7 @@ test_that("to_chr() converts formulas to readable strings (#259)", {
   expect_identical(to_chr(~ y + x), "~ y + x")
 })
 
-test_that("to_chr() formats conditions with full class hierarchy (#258)", {
+test_that("to_chr() formats conditions with full class hierarchy (#258, #377)", {
   stbl_abort_cnd <- rlang::catch_cnd(
     .stbl_abort("A message.", "a_subclass"),
     classes = "error"
@@ -302,20 +302,20 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
   )
   expect_false(endsWith(to_chr(stbl_abort_cnd), "\n"))
 
-  cant_coerce_cnd <- rlang::catch_cnd(
-    .stop_cant_coerce("character", "integer", "x", rlang::current_env()),
+  cant_convert_cnd <- rlang::catch_cnd(
+    .stop_cant_convert("character", "integer", "x", rlang::current_env()),
     classes = "error"
   )
   expect_identical(
-    to_chr(cant_coerce_cnd),
+    to_chr(cant_convert_cnd),
     paste0(
       "<",
-      paste(class(cant_coerce_cnd), collapse = "/"),
+      paste(class(cant_convert_cnd), collapse = "/"),
       ">\n",
-      conditionMessage(cant_coerce_cnd)
+      conditionMessage(cant_convert_cnd)
     )
   )
-  expect_false(endsWith(to_chr(cant_coerce_cnd), "\n"))
+  expect_false(endsWith(to_chr(cant_convert_cnd), "\n"))
 
   warning_cnd <- rlang::catch_cnd(
     warning("heads up"),
@@ -334,7 +334,7 @@ test_that("to_chr() formats conditions with full class hierarchy (#258)", {
 
   expect_snapshot({
     cat(to_chr(stbl_abort_cnd), "\n", sep = "")
-    cat(to_chr(cant_coerce_cnd), "\n", sep = "")
+    cat(to_chr(cant_convert_cnd), "\n", sep = "")
     cat(to_chr(warning_cnd), "\n", sep = "")
   })
 })
@@ -357,7 +357,7 @@ test_that("to_chr() falls back to as.character() for other types (#noissue)", {
   expect_identical(to_chr(as.raw(c(0x0a, 0xff))), c("0a", "ff"))
 })
 
-test_that("to_chr() errors for types that can't be coerced (#noissue)", {
+test_that("to_chr() errors for types that can't be converted (#377)", {
   given <- new.env()
   expect_pkg_error_snapshot(
     to_chr(given),

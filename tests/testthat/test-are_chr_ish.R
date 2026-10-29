@@ -33,7 +33,7 @@ test_that("are_chr_ish() returns FALSE for non-vectors (#93)", {
   expect_false(are_chr_ish(mean))
 })
 
-test_that("is_chr_ish() returns a single TRUE for coercible objects (#93)", {
+test_that("is_chr_ish() returns a single TRUE for convertible objects (#93)", {
   expect_true(is_chr_ish("a"))
   expect_true(is_chr_ish(1:10))
   expect_true(is_chr_ish(NULL))
@@ -44,7 +44,7 @@ test_that("is_chr_ish() works for NULL (#93)", {
   expect_true(is_chr_ish(NULL))
 })
 
-test_that("is_chr_ish() returns FALSE for uncoercibles (#93)", {
+test_that("is_chr_ish() returns FALSE for unconvertibles (#93)", {
   expect_false(is_chr_ish(mean))
   expect_false(is_chr_ish(list("a", NULL, "b")))
   expect_false(is_chr_ish(list(a = 1, b = 1:5)))

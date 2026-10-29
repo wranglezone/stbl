@@ -21,8 +21,8 @@ A list with \code{parsed} (a \link[base:POSIXct]{base::POSIXct} vector, in \code
 }
 \description{
 Like \code{\link[=.try_date_formats]{.try_date_formats()}}, but for date-time strings, with an optional
-trailing UTC offset (\code{"Z"} or a numeric offset such as \code{"+05:00"}).
-Elements with an offset are converted using that offset; elements without
-one are treated as wall-clock time in \code{tz}.
+trailing UTC offset (\code{"Z"} or a numeric offset such as \code{"+05:00"}). Elements
+with an offset are converted using that offset; elements without one are
+treated as wall-clock time in \code{tz}.
 }
 \keyword{internal}

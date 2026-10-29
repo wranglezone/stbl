@@ -1,8 +1,8 @@
-#' Coerce to factor with additional checks
+#' Convert to factor with additional checks
 #'
-#' Compared to [to_fct()], `stabilize_fct()` checks more details, but is
-#' slower. `stabilise_fct()`, `stabilize_factor()`, and `stabilise_factor()`
-#' are synonyms of `stabilize_fct()`.
+#' Compared to [to_fct()], `stabilize_fct()` checks more details, but is slower.
+#' `stabilise_fct()`, `stabilize_factor()`, and `stabilise_factor()` are
+#' synonyms of `stabilize_fct()`.
 #'
 #' @inheritParams .shared-params
 #' @param levels `(character)` Expected levels. If `NULL` (default), the levels
@@ -11,7 +11,7 @@
 #' @returns The input as a factor, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
@@ -68,11 +68,11 @@ stabilise_fct <- stabilize_fct
 #' @rdname stabilize_fct
 stabilise_factor <- stabilize_fct
 
-#' Coerce to length-1 factor with additional checks
+#' Convert to length-1 factor with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 factor.
-#' `stabilize_fct_scalar()` is optimized to check for length-1 factors
-#' (compared to [stabilize_fct()] with `max_size = 1`). `stabilise_fct_scalar`,
+#' Checks whether a vector can be converted to a length-1 factor.
+#' `stabilize_fct_scalar()` is optimized to check for length-1 factors (compared
+#' to [stabilize_fct()] with `max_size = 1`). `stabilise_fct_scalar`,
 #' `stabilize_factor_scalar()`, and `stabilise_factor_scalar` are synonyms of
 #' `stabilize_fct_scalar()`.
 #'
@@ -83,7 +83,7 @@ stabilise_factor <- stabilize_fct
 #' @returns The input as a length-1 factor, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.

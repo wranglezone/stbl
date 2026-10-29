@@ -18,12 +18,12 @@ replace_stbl_error(
 \item{message}{(\code{character}) The replacement error message. Formatted with
 \code{\link[cli:cli_bullets]{cli::cli_bullets()}}.}
 
-\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to
-ignore or replace. Combined with \code{"stbl-error"} to form the class name to
+\item{subclass}{(\code{character}) The subclass(es) of the \code{stbl} error to ignore
+or replace. Combined with \code{"stbl-error"} to form the class name to
 intercept. For example, \code{c("coerce", "character")} catches errors of class
-\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), \code{c("coerce")}
-catches any \code{stbl-error-coerce} error, and \code{character()} (the default)
-catches any \code{stbl} error.}
+\code{stbl-error-coerce-character} (\code{\link[=stabilize_chr]{stabilize_chr()}}), \code{c("coerce")} catches
+any \code{stbl-error-coerce} error, and \code{character()} (the default) catches any
+\code{stbl} error.}
 
 \item{additional_class}{(\code{character}) Additional classes to prepend to the
 error class list. Useful for the \code{class} argument of
@@ -33,15 +33,14 @@ error class list. Useful for the \code{class} argument of
 evaluate variables in error messages.}
 }
 \value{
-The result of \code{expr}, or an error with the replacement message if
-a matching \code{{stbl}} error is thrown.
+The result of \code{expr}, or an error with the replacement message if a
+matching \code{{stbl}} error is thrown.
 }
 \description{
-Catches a \code{stbl} error with the specified \code{subclass} and replaces its
-message with a new one. Use this to provide more context-specific error
-messages when calling \code{stbl} functions inside your own functions. See
-the documentation of each \verb{stabilize_*()} or \verb{to_*()} function for the types
-of errors it throws.
+Catches a \code{stbl} error with the specified \code{subclass} and replaces its message
+with a new one. Use this to provide more context-specific error messages when
+calling \code{stbl} functions inside your own functions. See the documentation of
+each \verb{stabilize_*()} or \verb{to_*()} function for the types of errors it throws.
 }
 \examples{
 my_fn <- function(x) {

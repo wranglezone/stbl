@@ -1,17 +1,17 @@
 # target class: logical
 
-#' Coerce to logical
+#' Convert to logical
 #'
-#' Checks whether a vector can be coerced to logical without losing information,
-#' returning it silently if so. Otherwise an informative error message is
-#' signaled. `to_logical` is a synonym of `to_lgl()`.
+#' Checks whether a vector can be converted to logical without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_logical` is a synonym of `to_lgl()`.
 #'
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a logical vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 #'   - `<stbl-error-incompatible_values-logical>` when some values cannot be
 #'   safely converted to logical.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -76,7 +76,7 @@ to_lgl.character <- function(
 ) {
   res <- .Call(stbl_chr_to_lgl, x)
   failures <- !res[["valid"]]
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -101,7 +101,7 @@ to_lgl.factor <- function(
 ) {
   res <- .Call(stbl_fct_to_lgl, x)
   failures <- !res[["valid"]]
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -145,7 +145,7 @@ to_lgl.default <- function(
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "logical",
     x_arg = x_arg,
@@ -154,17 +154,17 @@ to_lgl.default <- function(
   )
 }
 
-#' Coerce to length-1 logical
+#' Convert to length-1 logical
 #'
-#' Checks whether a vector can be coerced to a length-1 logical vector.
+#' Checks whether a vector can be converted to a length-1 logical vector.
 #' `to_logical_scalar()` is a synonym of `to_lgl_scalar()`.
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The input as a length-1 logical vector, or an error condition
-#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-#'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+#' @returns The input as a length-1 logical vector, or an error condition with
+#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 #'   - `<stbl-error-incompatible_values-logical>` when some values cannot be
 #'   safely converted to logical.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.

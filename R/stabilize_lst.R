@@ -10,41 +10,38 @@
 #'   ([stabilize_chr()], etc) or functions produced by `specify_*()` functions
 #'   ([specify_chr()], etc). Each name corresponds to an element in `.x`, and
 #'   the function is used to validate that element when present. Whether the
-#'   element is required (its absence is an error) is controlled by
-#'   `.required`.
+#'   element is required (its absence is an error) is controlled by `.required`.
 #' @param .named Controls how named elements of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
 #'   - `NULL` or `FALSE` (default): any extra named elements cause an error.
 #'   - `TRUE`: extra named elements are allowed, unchecked.
 #'   - A single stabilizer function, such as a `stabilize_*` function
-#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
-#'   function ([specify_chr()], etc), used to validate every extra named
-#'   element.
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
+#'   ([specify_chr()], etc), used to validate every extra named element.
 #' @param .unnamed Controls how unnamed elements of `.x` are handled. One of:
 #'   - `NULL` or `FALSE` (default): any unnamed elements cause an error.
 #'   - `TRUE`: unnamed elements are allowed, unchecked.
 #'   - A single stabilizer function, such as a `stabilize_*` function
-#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()`
-#'   function ([specify_chr()], etc), used to validate every unnamed element.
-#' @param .allow_duplicate_names (`logical(1)`) Should `.x` be allowed to
-#'   have duplicate names? If `FALSE` (default), an error is thrown when any
-#'   named element of `.x` shares a name with another.
-#' @param .unique (`logical(1)`) Should all elements in `.x` be distinct?
-#'   If `TRUE`, duplicated elements are rejected.
+#'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
+#'   ([specify_chr()], etc), used to validate every unnamed element.
+#' @param .allow_duplicate_names (`logical(1)`) Should `.x` be allowed to have
+#'   duplicate names? If `FALSE` (default), an error is thrown when any named
+#'   element of `.x` shares a name with another.
+#' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
+#'   `TRUE`, duplicated elements are rejected.
 #' @param .required `(character)` Names (from `...`) of elements that must be
 #'   present in `.x`. Defaults to all names in `...`, so every named spec is
-#'   required unless you opt it out. Named specs *not* listed here are
-#'   optional: if absent, no error is raised; if present, they're validated
-#'   normally. Pass `NULL` or `character()` to make every named spec optional.
-#'   A zero-length `.x` (such as `list()`) skips this check when
-#'   `.allow_zero_length = TRUE`.
+#'   required unless you opt it out. Named specs *not* listed here are optional:
+#'   if absent, no error is raised; if present, they're validated normally. Pass
+#'   `NULL` or `character()` to make every named spec optional. A zero-length
+#'   `.x` (such as `list()`) skips this check when `.allow_zero_length = TRUE`.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-coerce-list>` when `.x` cannot be coerced to a list.
+#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
 #'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
 #'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
@@ -169,7 +166,7 @@ stabilize_lst <- function(
     .x_arg = .x_arg,
     .call = .call
   )
-  # Run after validation so coerced values (e.g. "1" and 1L both becoming
+  # Run after validation so converted values (e.g. "1" and 1L both becoming
   # 1L) are compared, not the original inputs.
   .check_unique(
     .x,
@@ -201,10 +198,9 @@ stabilise_list <- stabilize_lst
 #'
 #' @param element_specs `(list)` Named list of stabilizer functions, such as
 #'   `stabilize_*` functions ([stabilize_chr()], etc) or functions produced by
-#'   `specify_*()` functions ([specify_chr()], etc). Each name corresponds to
-#'   an element in `.x`, and the function is used to validate that element
-#'   when present. Whether the element is required is controlled by
-#'   `.required`.
+#'   `specify_*()` functions ([specify_chr()], etc). Each name corresponds to an
+#'   element in `.x`, and the function is used to validate that element when
+#'   present. Whether the element is required is controlled by `.required`.
 #' @param is_extra_named `(logical)` Element-wise indicator of extra named
 #'   positions.
 #' @param named_spec A single stabilizer function, such as a `stabilize_*`
@@ -227,8 +223,8 @@ NULL
 #' stabilizer function (validate).
 #'
 #' @param control `NULL`, `TRUE`, `FALSE`, or a stabilizer function.
-#' @param control_arg (`character(1)`) Name of the argument being resolved,
-#'   used in error messages if `control` can't be coerced to logical.
+#' @param control_arg (`character(1)`) Name of the argument being resolved, used
+#'   in error messages if `control` can't be converted to logical.
 #' @inheritParams .shared-params
 #' @returns `NULL`, `TRUE`, or a stabilizer function.
 #' @keywords internal

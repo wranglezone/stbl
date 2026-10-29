@@ -1,9 +1,9 @@
-#' Try to coerce or validate x as all of several specs
+#' Try to convert or validate x as all of several specs
 #'
-#' `stabilize_all_of()` validates and coerces `x` by applying every function in
+#' `stabilize_all_of()` validates and converts `x` by applying every function in
 #' `...` to `x`, independently. `x` must satisfy every spec, and all specs must
-#' agree on the coerced result; if any spec fails, or specs disagree on the
-#' coerced value, an informative error is thrown. `stabilise_all_of()` is a
+#' agree on the converted result; if any spec fails, or specs disagree on the
+#' converted value, an informative error is thrown. `stabilise_all_of()` is a
 #' synonym.
 #'
 #' @param ... Unnamed stabilizer functions, such as `stabilize_*` functions
@@ -14,14 +14,14 @@
 #'   must all return the same value.
 #' @inheritParams .shared-params
 #'
-#' @returns `x` coerced or validated by every function in `...`, or an error
+#' @returns `x` converted or validated by every function in `...`, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
 #'   - `<stbl-error-named_spec>` when any element of `...` is named.
 #'   - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
 #'   - `<stbl-error-inconsistent_all_of>` when every function succeeds, but
-#'   they don't all produce the same coerced value.
+#'   they don't all produce the same converted value.
 #' @family stabilization functions
 #' @export
 #'
@@ -39,7 +39,7 @@
 #' # spec would succeed on 1L, but doesn't get the chance to see it
 #' try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 #'
-#' # Errors when specs succeed but disagree on the coerced value
+#' # Errors when specs succeed but disagree on the converted value
 #' # (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
 #' try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
 stabilize_all_of <- function(
@@ -67,8 +67,8 @@ stabilise_all_of <- stabilize_all_of
 
 #' Apply every function to x independently, requiring identical results
 #'
-#' Applies each function in `fns` to the original `x`, independently. Errors
-#' if any function fails, or if the successful results disagree.
+#' Applies each function in `fns` to the original `x`, independently. Errors if
+#' any function fails, or if the successful results disagree.
 #'
 #' @param x The value to test.
 #' @param fns `(list)` The list of stabilizer functions to apply.
@@ -86,7 +86,7 @@ stabilise_all_of <- stabilize_all_of
 #' Apply a spec and check that it agrees with the running result
 #'
 #' @param result The value obtained from the specs applied so far.
-#' @param fn A stabilizer or coercion function to apply to `x`.
+#' @param fn A stabilizer or conversion function to apply to `x`.
 #' @param x The value to test.
 #' @inheritParams stabilize_lst
 #' @returns `fn`'s result, if it agrees with `result`; otherwise, throws an
@@ -102,7 +102,7 @@ stabilise_all_of <- stabilize_all_of
 
 #' Apply a single spec to x, stopping if it errors
 #'
-#' @param fn A stabilizer or coercion function to apply to `x`.
+#' @param fn A stabilizer or conversion function to apply to `x`.
 #' @param x The value to test.
 #' @inheritParams stabilize_lst
 #' @returns The result of applying `fn` to `x`.
@@ -141,10 +141,10 @@ stabilise_all_of <- stabilize_all_of
 #' @keywords internal
 .stop_inconsistent_all_of <- function(x_arg, call) {
   .stop_must(
-    "must be coerced the same way by every provided stabilizer.",
+    "must be converted the same way by every provided stabilizer.",
     x_arg = x_arg,
     additional_msg = c(
-      i = "The provided stabilizers succeeded, but disagreed on the coerced value."
+      i = "The provided stabilizers succeeded, but disagreed on the converted value."
     ),
     call = call,
     subclass = "inconsistent_all_of",

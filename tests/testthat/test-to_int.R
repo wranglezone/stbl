@@ -34,7 +34,7 @@ test_that("to_int() works for dbls (#2)", {
   expect_identical(to_int(given), expected)
 })
 
-test_that("to_int() errors for dbls that would lose precision (#2, #217, #310)", {
+test_that("to_int() errors for dbls that would lose precision (#2, #217, #310, #377)", {
   given <- as.double(1:10)
   given[[4]] <- 1.1
   expect_pkg_error_snapshot(
@@ -71,7 +71,7 @@ test_that("to_int() works for chrs (#2)", {
   expect_identical(to_int(given), expected)
 })
 
-test_that("to_int() respects coerce_character (#14)", {
+test_that("to_int() respects coerce_character (#14, #377)", {
   expected <- 1:10
   given <- as.character(expected)
   expect_pkg_error_snapshot(
@@ -88,7 +88,7 @@ test_that("to_int() respects coerce_character (#14)", {
   )
 })
 
-test_that("to_int() errors informatively for bad chrs (#2, #310, #335)", {
+test_that("to_int() errors informatively for bad chrs (#2, #310, #335, #377)", {
   given <- as.character(1:10)
   given[[4]] <- "1.1"
   expect_pkg_error_snapshot(
@@ -125,7 +125,7 @@ test_that("to_int() works for complexes (#2)", {
   expect_identical(to_int(given), expected)
 })
 
-test_that("to_int() errors informatively for bad complexes (#2, #310)", {
+test_that("to_int() errors informatively for bad complexes (#2, #310, #377)", {
   given <- as.complex(1:10)
   given[[4]] <- 1 + 1i
   expect_pkg_error_snapshot(
@@ -142,7 +142,7 @@ test_that("to_int() errors informatively for bad complexes (#2, #310)", {
   )
 })
 
-test_that("to_int() errors for complexes that would lose precision (#noissue, #310)", {
+test_that("to_int() errors for complexes that would lose precision (#noissue, #310, #377)", {
   given <- as.complex(1:10)
   given[[4]] <- 1.5 + 0i
   expect_pkg_error_snapshot(
@@ -179,7 +179,7 @@ test_that("to_int() works for factors (#4)", {
   expect_identical(to_int(given), expected)
 })
 
-test_that("to_int() respects coerce_factor (#14)", {
+test_that("to_int() respects coerce_factor (#14, #377)", {
   expected <- c(1L, 3L, 5L, 7L)
   given <- factor(expected)
   expect_pkg_error_snapshot(
@@ -196,7 +196,7 @@ test_that("to_int() respects coerce_factor (#14)", {
   )
 })
 
-test_that("to_int() errors informatively for bad factors (#4, #310, #335)", {
+test_that("to_int() errors informatively for bad factors (#4, #310, #335, #377)", {
   given <- factor(letters)
   expect_pkg_error_snapshot(
     to_int(given),
@@ -212,7 +212,7 @@ test_that("to_int() errors informatively for bad factors (#4, #310, #335)", {
   )
 })
 
-test_that("to_int() works for lists (#2, #273, #310)", {
+test_that("to_int() works for lists (#2, #273, #310, #377)", {
   expect_identical(to_int(list(1L, 2.0, "3")), c(1L, 2L, 3L))
   expect_identical(to_int(list(list(1L), 2L)), c(1L, 2L))
   expect_pkg_error_snapshot(
@@ -259,12 +259,12 @@ test_that("to_integer_scalar() exists (#164)", {
   expect_no_error(to_integer_scalar(1))
 })
 
-test_that("to_*() functions name both sides when to_arg is supplied (#371)", {
+test_that("to_*() functions name both sides when to_arg is supplied (#371, #377)", {
   to_int("a", x_arg = "x", to_arg = "y") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
 })
 
-test_that("to_*() messages are unchanged when to_arg is NULL (#371)", {
+test_that("to_*() messages are unchanged when to_arg is NULL (#371, #377)", {
   to_int("a", x_arg = "x") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "integer")
 })

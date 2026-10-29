@@ -5,7 +5,7 @@
 \alias{stabilize_factor}
 \alias{stabilise_fct}
 \alias{stabilise_factor}
-\title{Coerce to factor with additional checks}
+\title{Convert to factor with additional checks}
 \usage{
 stabilize_fct(
   x,
@@ -99,7 +99,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -107,7 +107,7 @@ The input as a factor, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be coerced to factor.
+\item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be converted to factor.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
@@ -116,9 +116,9 @@ The input as a factor, or an error condition with classes
 }
 }
 \description{
-Compared to \code{\link[=to_fct]{to_fct()}}, \code{stabilize_fct()} checks more details, but is
-slower. \code{stabilise_fct()}, \code{stabilize_factor()}, and \code{stabilise_factor()}
-are synonyms of \code{stabilize_fct()}.
+Compared to \code{\link[=to_fct]{to_fct()}}, \code{stabilize_fct()} checks more details, but is slower.
+\code{stabilise_fct()}, \code{stabilize_factor()}, and \code{stabilise_factor()} are
+synonyms of \code{stabilize_fct()}.
 }
 \examples{
 stabilize_fct(letters)

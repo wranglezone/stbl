@@ -1,4 +1,4 @@
-test_that("stabilize_time() coerces and returns times (#294)", {
+test_that("stabilize_time() converts and returns times (#294)", {
   given <- c("13:20:00Z", "14:20:00Z")
   expect_identical(stabilize_time(given), to_time(given))
 })
@@ -115,7 +115,7 @@ test_that("stabilize_time() checks allowed_values (#294)", {
   )
 })
 
-test_that("stabilize_time() rejects times without an offset (#294)", {
+test_that("stabilize_time() rejects times without an offset (#294, #377)", {
   expect_pkg_error_snapshot(
     stabilize_time("13:20:00"),
     "stbl",

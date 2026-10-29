@@ -1,7 +1,6 @@
 #' Create a specified stabilizer function
 #'
-#' @param stabilizer (`character(1)`) Name of the stabilizer function to
-#'   call.
+#' @param stabilizer (`character(1)`) Name of the stabilizer function to call.
 #' @param factory_args `(list)` Arguments to include in the call to the
 #'   stabilizer function.
 #' @param scalar (`logical(1)`) Whether to call the scalar version of the
@@ -146,11 +145,11 @@
 #'
 #' Used inside `specify_*()` functions to build the `factory_args` list passed
 #' to [.specify_cls()], keeping only the arguments that the caller of the
-#' `specify_*()` function actually supplied (as opposed to those left at
-#' their default value).
+#' `specify_*()` function actually supplied (as opposed to those left at their
+#' default value).
 #'
-#' @returns A named list of the values of arguments that weren't left missing
-#'   in the function that called `.capture_factory_args()`.
+#' @returns A named list of the values of arguments that weren't left missing in
+#'   the function that called `.capture_factory_args()`.
 #' @keywords internal
 .capture_factory_args <- function() {
   env <- parent.frame()

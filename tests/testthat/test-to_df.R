@@ -38,7 +38,7 @@ test_that("to_df() rejects unused dots for methods that ignore them (#200)", {
   )
 })
 
-test_that("to_df() coerces a named list to a data frame (#201)", {
+test_that("to_df() converts a named list to a data frame (#201)", {
   given <- list(name = "Alice", age = 30L)
   result <- to_df(given)
   expect_s3_class(result, "data.frame")
@@ -46,7 +46,7 @@ test_that("to_df() coerces a named list to a data frame (#201)", {
   expect_identical(result$age, 30L)
 })
 
-test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)", {
+test_that("to_df() converts a list of equal-length vectors to a data frame (#201)", {
   given <- list(x = 1:3, y = letters[1:3])
   result <- to_df(given)
   expect_s3_class(result, "data.frame")
@@ -55,7 +55,7 @@ test_that("to_df() coerces a list of equal-length vectors to a data frame (#201)
   expect_identical(result$y, letters[1:3])
 })
 
-test_that("to_df() errors for a list with incompatible column lengths (#201)", {
+test_that("to_df() errors for a list with incompatible column lengths (#201, #377)", {
   expect_pkg_error_snapshot(to_df(list(a = 1:3, b = 1:2)), "stbl", "jagged")
   expect_pkg_error_snapshot(
     wrapped_to_df(list(a = 1:3, b = 1:2)),
@@ -68,7 +68,7 @@ test_that("to_df() errors for an unnamed list (#203)", {
   expect_pkg_error_snapshot(to_df(list(1, 2)), "stbl", "bad_named")
 })
 
-test_that("to_df() errors for non-coercible types (#201)", {
+test_that("to_df() errors for non-convertible types (#201, #377)", {
   expect_pkg_error_snapshot(
     to_df("not a data frame"),
     "stbl",
@@ -77,7 +77,7 @@ test_that("to_df() errors for non-coercible types (#201)", {
   )
 })
 
-test_that("to_df() coerces named vector types to a data frame (#203)", {
+test_that("to_df() converts named vector types to a data frame (#203)", {
   expect_identical(to_df(letters), data.frame(letters = letters))
 
   my_int <- 1:5
@@ -109,7 +109,7 @@ test_that("to_df() errors for inline vector expressions (#203)", {
   expect_pkg_error_classes(to_df(c(1.5, 2.5)), "stbl", "coerce", "data.frame")
 })
 
-test_that("to_df.default() errors for non-coercible types (#201)", {
+test_that("to_df.default() errors for non-convertible types (#201, #377)", {
   expect_pkg_error_snapshot(
     to_df(as.Date("2024-01-01")),
     "stbl",

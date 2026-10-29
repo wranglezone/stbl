@@ -108,13 +108,13 @@
       x Unexpected location: 2
       x Unexpected value: "14:00:00".
 
-# stabilize_time() rejects times without an offset (#294)
+# stabilize_time() rejects times without an offset (#294, #377)
 
     Code
       stabilize_time("13:20:00")
     Condition <stbl-error-incompatible_values-time>
       Error:
-      ! `"13:20:00"` <character> must be coercible to <time>
+      ! `"13:20:00"` <character> must be convertible to <time>
       x Can't convert some values due to invalid or ambiguous time format.
       * Locations: 1
       * Values: "13:20:00"

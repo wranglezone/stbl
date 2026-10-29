@@ -3,7 +3,7 @@
 \name{stabilize_all_of}
 \alias{stabilize_all_of}
 \alias{stabilise_all_of}
-\title{Try to coerce or validate x as all of several specs}
+\title{Try to convert or validate x as all of several specs}
 \usage{
 stabilize_all_of(
   x,
@@ -41,11 +41,11 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced or validated by every function in \code{...}, or an error
+\code{x} converted or validated by every function in \code{...}, or an error
 condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
 \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
@@ -53,14 +53,14 @@ condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlan
 \item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 \item \verb{<stbl-error-cant_stabilize_all_of>} when any provided function fails.
 \item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but
-they don't all produce the same coerced value.
+they don't all produce the same converted value.
 }
 }
 \description{
-\code{stabilize_all_of()} validates and coerces \code{x} by applying every function in
+\code{stabilize_all_of()} validates and converts \code{x} by applying every function in
 \code{...} to \code{x}, independently. \code{x} must satisfy every spec, and all specs must
-agree on the coerced result; if any spec fails, or specs disagree on the
-coerced value, an informative error is thrown. \code{stabilise_all_of()} is a
+agree on the converted result; if any spec fails, or specs disagree on the
+converted value, an informative error is thrown. \code{stabilise_all_of()} is a
 synonym.
 }
 \examples{
@@ -77,7 +77,7 @@ try(stabilize_all_of("a", stabilize_int, stabilize_chr))
 # spec would succeed on 1L, but doesn't get the chance to see it
 try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 
-# Errors when specs succeed but disagree on the coerced value
+# Errors when specs succeed but disagree on the converted value
 # (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
 try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
 }

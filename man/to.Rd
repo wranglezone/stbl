@@ -196,8 +196,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -205,7 +205,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
@@ -220,18 +220,18 @@ time zone). Defaults to the time zone of \code{.to}, or your local time zone if
 \code{.to} doesn't name one (see \code{\link[=resolve_tz]{resolve_tz()}}).}
 }
 \value{
-\code{x} coerced to the type of \code{.to}, or an error condition with
+\code{x} converted to the type of \code{.to}, or an error condition with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item The failure classes documented for the \verb{to_*()} function corresponding
 to the class of \code{.to} (for example \code{\link[=to_int]{to_int()}} for \code{.to = integer()}).
 \item \verb{<stbl-error-coerce-*>} when the class of \code{.to} has no corresponding
-\verb{to_*()} function and \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} cannot cast \code{x} to \code{.to}.
+\verb{to_*()} function and \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} cannot converted \code{x} to \code{.to}.
 }
 }
 \description{
-\code{to()} coerces \code{x} to the type of \code{.to}, dispatching on the class of \code{.to}
+\code{to()} converts \code{x} to the type of \code{.to}, dispatching on the class of \code{.to}
 to the appropriate \verb{to_*()} function.
 }
 \details{

@@ -5,7 +5,7 @@
 \alias{stabilize_character_scalar}
 \alias{stabilise_chr_scalar}
 \alias{stabilise_character_scalar}
-\title{Coerce to length-1 character with additional checks}
+\title{Convert to length-1 character with additional checks}
 \usage{
 stabilize_chr_scalar(
   x,
@@ -95,7 +95,7 @@ message that should be displayed. To check that a pattern is \emph{not} matched,
 attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
 throws an error, try installing the stringi package.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
@@ -109,7 +109,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -117,7 +117,7 @@ The input as a length-1 character vector, or an error condition with
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be coerced to character.
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
@@ -133,7 +133,7 @@ than \code{max_characters}.
 }
 }
 \description{
-Checks whether a vector can be coerced to a length-1 character vector.
+Checks whether a vector can be converted to a length-1 character vector.
 \code{stabilize_chr_scalar()} is optimized to check for length-1 character vectors
 (compared to \code{\link[=stabilize_chr]{stabilize_chr()}} with \code{max_size = 1}). \code{stabilise_chr_scalar},
 \code{stabilize_character_scalar()}, and \code{stabilise_character_scalar} are synonyms

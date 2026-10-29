@@ -1,4 +1,4 @@
-#' Coerce to duration with additional checks
+#' Convert to duration with additional checks
 #'
 #' Compared to [to_dur()], `stabilize_dur()` checks more details, but is slower.
 #' `stabilise_dur()`, `stabilize_duration()`, and `stabilise_duration()` are
@@ -14,7 +14,7 @@
 #' @returns The input as a [lubridate::Period-class] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-duration>` when `x` cannot be coerced to a
+#'   - `<stbl-error-coerce-duration>` when `x` cannot be converted to a
 #'   duration.
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
@@ -90,9 +90,9 @@ stabilize_duration <- stabilize_dur
 #' @rdname stabilize_dur
 stabilise_duration <- stabilize_dur
 
-#' Coerce to length-1 duration with additional checks
+#' Convert to length-1 duration with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1
+#' Checks whether a vector can be converted to a length-1
 #' [lubridate::Period-class] vector. `stabilize_dur_scalar()` is optimized to
 #' check for length-1 duration vectors (compared to [stabilize_dur()] with
 #' `max_size = 1`). `stabilise_dur_scalar`, `stabilize_duration_scalar`, and
@@ -105,7 +105,7 @@ stabilise_duration <- stabilize_dur
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
 #'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
 #'   mode:
-#'   - `<stbl-error-coerce-duration>` when `x` cannot be coerced to a
+#'   - `<stbl-error-coerce-duration>` when `x` cannot be converted to a
 #'   duration.
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
@@ -174,7 +174,7 @@ stabilise_duration_scalar <- stabilize_dur_scalar
 
 #' Check duration values against min, max, and allowed values
 #'
-#' `min_value`, `max_value`, and `allowed_values` are coerced to
+#' `min_value`, `max_value`, and `allowed_values` are converted to
 #' [lubridate::Period-class] first so that character or numeric bounds are
 #' accepted.
 #'
@@ -243,8 +243,7 @@ stabilise_duration_scalar <- stabilize_dur_scalar
 #' @param x `(Period)` The vector being checked.
 #' @param failures `(logical)` Which elements failed the check.
 #' @param direction `(character)` One of `"low"` or `"high"`.
-#' @param target_value `(Period)` The value against which `x` is being
-#'   compared.
+#' @param target_value `(Period)` The value against which `x` is being compared.
 #' @inheritParams .shared-params
 #' @returns A named character vector for [.stbl_abort()], or `NULL`.
 #' @keywords internal

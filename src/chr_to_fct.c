@@ -6,7 +6,7 @@
 /*
  * stbl_chr_to_fct: public API entry point.
  *
- * Coerces a character vector to a factor.
+ * Converts a character vector to a factor.
  *
  *   value:   character vector to convert
  *   levels:  character vector of target levels, or R_NilValue (infer from
@@ -99,7 +99,7 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
 /*
  * stbl_chr_are_fctish: public API entry point.
  *
- * Checks whether each element of the character vector `x` can be coerced to a
+ * Checks whether each element of the character vector `x` can be converted to a
  * factor with the given `levels` and `to_na` arguments.
  *
  *   x:      character vector to check

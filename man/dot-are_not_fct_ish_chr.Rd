@@ -2,7 +2,7 @@
 % Please edit documentation in R/are_fct_ish.R
 \name{.are_not_fct_ish_chr}
 \alias{.are_not_fct_ish_chr}
-\title{Check for values that would be lost during factor coercion}
+\title{Check for values that would be lost during factor conversion}
 \usage{
 .are_not_fct_ish_chr(x, levels, to_na = character())
 }
@@ -19,6 +19,6 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 A logical vector where \code{TRUE} indicates a failure.
 }
 \description{
-Check for values that would be lost during factor coercion
+Check for values that would be lost during factor conversion
 }
 \keyword{internal}

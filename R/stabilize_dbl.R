@@ -1,4 +1,4 @@
-#' Coerce to double with additional checks
+#' Convert to double with additional checks
 #'
 #' Compared to [to_dbl()], `stabilize_dbl()` checks more details, but is slower.
 #' `stabilise_dbl()`, `stabilize_double()`, and `stabilise_double()` are
@@ -9,7 +9,7 @@
 #' @returns The input as a double vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -104,9 +104,9 @@ stabilise_dbl <- stabilize_dbl
 #' @rdname stabilize_dbl
 stabilise_double <- stabilize_dbl
 
-#' Coerce to length-1 double with additional checks
+#' Convert to length-1 double with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 double vector.
+#' Checks whether a vector can be converted to a length-1 double vector.
 #' `stabilize_dbl_scalar()` is optimized to check for length-1 double vectors
 #' (compared to [stabilize_dbl()] with `max_size = 1`). `stabilise_dbl_scalar`,
 #' `stabilize_double_scalar()`, and `stabilise_double_scalar` are synonyms of
@@ -117,7 +117,7 @@ stabilise_double <- stabilize_dbl
 #' @returns The input as a length-1 double vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+#'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.

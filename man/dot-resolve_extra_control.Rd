@@ -9,8 +9,8 @@
 \arguments{
 \item{control}{\code{NULL}, \code{TRUE}, \code{FALSE}, or a stabilizer function.}
 
-\item{control_arg}{(\code{character(1)}) Name of the argument being resolved,
-used in error messages if \code{control} can't be coerced to logical.}
+\item{control_arg}{(\code{character(1)}) Name of the argument being resolved, used
+in error messages if \code{control} can't be converted to logical.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}

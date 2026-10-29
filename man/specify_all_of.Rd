@@ -7,20 +7,19 @@
 specify_all_of(...)
 }
 \arguments{
-\item{...}{Unnamed stabilizer functions, forwarded to
-\code{\link[=stabilize_all_of]{stabilize_all_of()}}.}
+\item{...}{Unnamed stabilizer functions, forwarded to \code{\link[=stabilize_all_of]{stabilize_all_of()}}.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
 \code{\link[=stabilize_all_of]{stabilize_all_of()}} with the provided specs. The generated function will
 also accept \code{...} for additional unnamed specs to pass to
-\code{\link[=stabilize_all_of]{stabilize_all_of()}}. You can copy/paste the body of the resulting
-function if you want to provide additional context or functionality.
+\code{\link[=stabilize_all_of]{stabilize_all_of()}}. You can copy/paste the body of the resulting function
+if you want to provide additional context or functionality.
 }
 \description{
 \code{specify_all_of()} creates a function that will call \code{\link[=stabilize_all_of]{stabilize_all_of()}}
 with the provided specs. \code{specify_all_of()}'s function requires that \code{x}
-satisfy every provided spec, and that all specs agree on the coerced
+satisfy every provided spec, and that all specs agree on the converted
 result.
 }
 \examples{

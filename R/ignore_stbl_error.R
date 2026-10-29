@@ -6,15 +6,15 @@
 #' of errors it throws.
 #'
 #' @param expr An expression to evaluate.
-#' @param subclass (`character`) The subclass(es) of the `stbl` error to
-#'   ignore or replace. Combined with `"stbl-error"` to form the class name to
+#' @param subclass (`character`) The subclass(es) of the `stbl` error to ignore
+#'   or replace. Combined with `"stbl-error"` to form the class name to
 #'   intercept. For example, `c("coerce", "character")` catches errors of class
-#'   `stbl-error-coerce-character` ([stabilize_chr()]), `c("coerce")`
-#'   catches any `stbl-error-coerce` error, and `character()` (the default)
-#'   catches any `stbl` error.
+#'   `stbl-error-coerce-character` ([stabilize_chr()]), `c("coerce")` catches
+#'   any `stbl-error-coerce` error, and `character()` (the default) catches any
+#'   `stbl` error.
 #'
-#' @returns The result of `expr` if no matching error is thrown, or `NULL`
-#'   if a matching `stbl` error is caught.
+#' @returns The result of `expr` if no matching error is thrown, or `NULL` if a
+#'   matching `stbl` error is caught.
 #' @export
 #'
 #' @examples

@@ -31,7 +31,7 @@ This approach aligns with [Postel's Law](https://en.wikipedia.org/wiki/Robustnes
 
 > "Be conservative in what you send. Be liberal in what you accept from others."
 
-stbl is liberal about what it accepts (by coercing when safe) and conservative about what it returns (by ensuring that inputs have the classes and other features that are expected).
+stbl is liberal about what it accepts (by converting when safe) and conservative about what it returns (by ensuring that inputs have the classes and other features that are expected).
 
 ## Installation
 
@@ -98,7 +98,7 @@ See `vignette("stbl")` to learn more about how to use stbl, and when to "upgrade
 Other packages perform functions similar to stbl, but with different approaches:
 
 - **[{checkmate}](https://mllg.github.io/checkmate/) and related assertion packages:** stbl's `to_*()` and `stabilize_*()` functions are similar to the `assert*ish()` functions from {checkmate} with `coerce = TRUE`. stbl is usually faster, and provided classed error messages to allow you to handle different failure modes differently.
-- **[{vctrs}](https://vctrs.r-lib.org/):** {vctrs} provides strict, low-level tools for coercion and type consistency, especially useful in package internals and base-type enforcement. stbl is more tolerant and higher-level, optimized for use in functions that accept flexible user inputs (e.g. letting a version number 1.1 be passed in as numeric or character and handling both gracefully).
+- **[{vctrs}](https://vctrs.r-lib.org/):** {vctrs} provides strict, low-level tools for conversion and type consistency, especially useful in package internals and base-type enforcement. stbl is more tolerant and higher-level, optimized for use in functions that accept flexible user inputs (e.g. letting a version number 1.1 be passed in as numeric or character and handling both gracefully).
 
 ## Code of Conduct
 

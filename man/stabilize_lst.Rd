@@ -82,8 +82,7 @@ stabilise_list(
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by \verb{specify_*()} functions
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an element in \code{.x}, and
 the function is used to validate that element when present. Whether the
-element is required (its absence is an error) is controlled by
-\code{.required}.}
+element is required (its absence is an error) is controlled by \code{.required}.}
 
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -91,9 +90,8 @@ listed in \code{...} are handled. One of:
 \item \code{NULL} or \code{FALSE} (default): any extra named elements cause an error.
 \item \code{TRUE}: extra named elements are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra named
-element.
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra named element.
 }}
 
 \item{.unnamed}{Controls how unnamed elements of \code{.x} are handled. One of:
@@ -101,16 +99,16 @@ element.
 \item \code{NULL} or \code{FALSE} (default): any unnamed elements cause an error.
 \item \code{TRUE}: unnamed elements are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
-(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()}
-function (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
+(\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
+(\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
 }}
 
-\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to
-have duplicate names? If \code{FALSE} (default), an error is thrown when any
-named element of \code{.x} shares a name with another.}
+\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to have
+duplicate names? If \code{FALSE} (default), an error is thrown when any named
+element of \code{.x} shares a name with another.}
 
-\item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct?
-If \code{TRUE}, duplicated elements are rejected.}
+\item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct? If
+\code{TRUE}, duplicated elements are rejected.}
 
 \item{.allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
@@ -124,11 +122,10 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
 \item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
-A zero-length \code{.x} (such as \code{list()}) skips this check when
-\code{.allow_zero_length = TRUE}.}
+required unless you opt it out. Named specs \emph{not} listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+\code{NULL} or \code{character()} to make every named spec optional. A zero-length
+\code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -140,7 +137,7 @@ source of error messages.}
 
 \item{.x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -149,7 +146,7 @@ The validated list, or an error condition with classes
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be coerced to a list.
+\item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
 \item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
 \item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
 \item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate

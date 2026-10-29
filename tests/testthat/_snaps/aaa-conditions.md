@@ -21,22 +21,22 @@
     Message
       A message.
 
-# .stop_cant_coerce() throws the expected error (#95)
+# .stop_cant_convert() throws the expected error (#95, #377)
 
     Code
-      .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env())
+      .stop_cant_convert("character", "integer", "my_arg", rlang::current_env())
     Condition <stbl-error-coerce-integer>
       Error:
-      ! Can't coerce `my_arg` <character> to <integer>.
+      ! Can't convert `my_arg` <character> to <integer>.
 
-# .stop_cant_coerce() uses additional_msg when provided (#95)
+# .stop_cant_convert() uses additional_msg when provided (#95, #377)
 
     Code
-      .stop_cant_coerce("character", "integer", "my_arg", rlang::current_env(),
+      .stop_cant_convert("character", "integer", "my_arg", rlang::current_env(),
       additional_msg = c(x = "An extra message."))
     Condition
       Error:
-      ! Can't coerce `my_arg` <character> to <integer>.
+      ! Can't convert `my_arg` <character> to <integer>.
       x An extra message.
 
 # .stop_must() throws the expected error (#95)
@@ -73,26 +73,26 @@
       Error:
       ! `my_arg` must not be <NULL>.
 
-# .stop_incompatible() throws the expected error (#95, #310, #332)
+# .stop_incompatible() throws the expected error (#95, #310, #332, #377)
 
     Code
       .stop_incompatible(c("a", "b", "c", "d"), "character", integer(), c(FALSE, TRUE,
         FALSE, TRUE), "some reason", "my_arg", rlang::current_env())
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `my_arg` <character> must be coercible to <integer>
+      ! `my_arg` <character> must be convertible to <integer>
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
       * Values: "b" and "d"
 
-# .stop_incompatible() passes dots (#95, #310, #332)
+# .stop_incompatible() passes dots (#95, #310, #332, #377)
 
     Code
       .stop_incompatible(c("a", "b", "c", "d"), "character", integer(), c(FALSE, TRUE,
         FALSE, TRUE), "some reason", "my_arg", rlang::current_env(), .internal = TRUE)
     Condition <stbl-error-incompatible_values-integer>
       Error:
-      ! `my_arg` <character> must be coercible to <integer>
+      ! `my_arg` <character> must be convertible to <integer>
       x Can't convert some values due to some reason.
       * Locations: 2 and 4
       * Values: "b" and "d"

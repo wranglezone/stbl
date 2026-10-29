@@ -13,8 +13,6 @@
 \code{TRUE} if \code{expr} is a covr counter call, \code{FALSE} otherwise.
 }
 \description{
-covr instruments code by wrapping expressions in
-\code{if (TRUE) { covr:::count(key); original }} blocks. This checks whether
-\code{expr} is the \code{covr:::count(key)} part.
+Check if an expression is a covr counter call
 }
 \keyword{internal}

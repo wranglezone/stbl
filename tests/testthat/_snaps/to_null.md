@@ -14,7 +14,7 @@
       Error in `wrapped_to_null()`:
       ! `val` must not be <NULL>.
 
-# .to_null() errors for bad allow_null (#129, #310, #335)
+# .to_null() errors for bad allow_null (#129, #310, #335, #377)
 
     Code
       .to_null(NULL, allow_null = NULL)
@@ -28,7 +28,7 @@
       .to_null(NULL, allow_null = "fish")
     Condition <stbl-error-incompatible_values-logical>
       Error:
-      ! `allow_null` <character> must be coercible to <logical>
+      ! `allow_null` <character> must be convertible to <logical>
       x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "fish"
@@ -39,7 +39,7 @@
       wrapped_to_null(NULL, allow_null = "fish")
     Condition <stbl-error-incompatible_values-logical>
       Error in `wrapped_to_null()`:
-      ! `allow_null` <character> must be coercible to <logical>
+      ! `allow_null` <character> must be convertible to <logical>
       x Can't convert some values due to unexpected strings (should be 'TRUE', 'FALSE', 'T', 'F', or an integer).
       * Locations: 1
       * Values: "fish"

@@ -108,13 +108,13 @@
       x Unexpected location: 2
       x Unexpected value: "2d 0H 0M 0S".
 
-# stabilize_dur() rejects a bare P (#295)
+# stabilize_dur() rejects a bare P (#295, #377)
 
     Code
       stabilize_dur("P")
     Condition <stbl-error-incompatible_values-duration>
       Error:
-      ! `"P"` <character> must be coercible to <duration>
+      ! `"P"` <character> must be convertible to <duration>
       x Can't convert some values due to invalid or ambiguous duration format.
       * Locations: 1
       * Values: "P"

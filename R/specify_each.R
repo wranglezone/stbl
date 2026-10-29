@@ -1,8 +1,8 @@
 #' Create a specified each stabilizer function
 #'
 #' `specify_each()` creates a function that will call [stabilize_each()] with
-#' the provided `spec`, letting an element-wise spec be reused and nested
-#' inside other `specify_*()`/`stabilize_*()` calls.
+#' the provided `spec`, letting an element-wise spec be reused and nested inside
+#' other `specify_*()`/`stabilize_*()` calls.
 #'
 #' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls

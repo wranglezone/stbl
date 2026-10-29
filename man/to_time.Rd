@@ -10,7 +10,7 @@
 \alias{to_time.numeric}
 \alias{to_time.integer}
 \alias{to_time.difftime}
-\title{Coerce to time-of-day}
+\title{Convert to time-of-day}
 \usage{
 to_time(
   x,
@@ -90,8 +90,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -99,16 +99,16 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 }
 \value{
-The input as an \code{\link[hms:hms]{hms::hms()}} vector, always expressed in UTC, or
-an error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
-failure mode:
+The input as an \code{\link[hms:hms]{hms::hms()}} vector, always expressed in UTC, or an
+error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
+mode:
 \itemize{
 \item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
 safely converted to a time of day.
@@ -116,8 +116,8 @@ safely converted to a time of day.
 }
 }
 \description{
-Checks whether a vector can be coerced to an \code{\link[hms:hms]{hms::hms()}} time-of-day vector
-without losing information, returning it silently if so. Otherwise an
+Checks whether a vector can be converted to an \code{\link[hms:hms]{hms::hms()}} time-of-day
+vector without losing information, returning it silently if so. Otherwise an
 informative error message is signaled.
 }
 \details{

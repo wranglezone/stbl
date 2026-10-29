@@ -6,7 +6,7 @@
 \alias{are_factor_ish}
 \alias{is_factor_ish}
 \alias{are_fct_ish.default}
-\title{Check if an object can be safely coerced to a factor}
+\title{Check if an object can be safely converted to a factor}
 \usage{
 are_fct_ish(x, ..., levels = NULL, to_na = character())
 
@@ -42,11 +42,11 @@ the entire vector.
 }
 \description{
 \code{are_fct_ish()} is a vectorized predicate function that checks
-whether each element of its input can be safely coerced to a factor.
+whether each element of its input can be safely converted to a factor.
 \code{are_factor_ish()} is a synonym of \code{are_fct_ish()}.
 
 \code{is_fct_ish()} is a scalar predicate function that checks if all elements
-of its input can be safely coerced to a factor. \code{is_factor_ish()} is a
+of its input can be safely converted to a factor. \code{is_factor_ish()} is a
 synonym of \code{is_fct_ish()}.
 }
 \examples{

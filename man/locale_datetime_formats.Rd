@@ -14,8 +14,8 @@ other locales); this is a coarse heuristic based on the locale string, not
 a full locale-aware calendar implementation.}
 }
 \value{
-A \code{character()} vector of \code{strptime()}-style format strings,
-always starting with \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}, \code{"\%Y-\%m-\%d \%H:\%M:\%S"}, and
+A \code{character()} vector of \code{strptime()}-style format strings, always
+starting with \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}, \code{"\%Y-\%m-\%d \%H:\%M:\%S"}, and
 \code{"\%Y-\%m-\%d"} (in that order), followed by the locale's conventional
 day/month order with \code{"/"} and then \code{"-"} separators (each listed with,
 then without, a \code{" \%H:\%M:\%S"} suffix).
@@ -23,9 +23,9 @@ then without, a \code{" \%H:\%M:\%S"} suffix).
 \description{
 Returns an ordered set of \code{strptime()}-style format strings, used as the
 default value of \code{accepted_datetime_formats} in \code{\link[=stabilize_date]{stabilize_date()}},
-\code{\link[=stabilize_dttm]{stabilize_dttm()}}, and their siblings. Character input is tried against
-each format in turn, in order, until one of them parses every element (see
-those functions for details).
+\code{\link[=stabilize_dttm]{stabilize_dttm()}}, and their siblings. Character input is tried against each
+format in turn, in order, until one of them parses every element (see those
+functions for details).
 }
 \examples{
 locale_datetime_formats("en_US.UTF-8")

@@ -1,11 +1,11 @@
-#' Check if an object can be safely coerced to a factor
+#' Check if an object can be safely converted to a factor
 #'
 #' @description `are_fct_ish()` is a vectorized predicate function that checks
-#'   whether each element of its input can be safely coerced to a factor.
+#'   whether each element of its input can be safely converted to a factor.
 #'   `are_factor_ish()` is a synonym of `are_fct_ish()`.
 #'
 #'   `is_fct_ish()` is a scalar predicate function that checks if all elements
-#'   of its input can be safely coerced to a factor. `is_factor_ish()` is a
+#'   of its input can be safely converted to a factor. `is_factor_ish()` is a
 #'   synonym of `is_fct_ish()`.
 #'
 #' @inheritParams .shared-params-check
@@ -76,7 +76,7 @@ are_fct_ish.character <- function(x, ..., levels = NULL, to_na = character()) {
   !.are_not_fct_ish_chr(x, levels, to_na)
 }
 
-#' Check for values that would be lost during factor coercion
+#' Check for values that would be lost during factor conversion
 #'
 #' @inheritParams .shared-params-check
 #' @inheritParams .shared-params
@@ -90,8 +90,8 @@ are_fct_ish.character <- function(x, ..., levels = NULL, to_na = character()) {
     x[x %in% to_na] <- NA
   }
   was_na <- is.na(x)
-  cast <- factor(x, levels = levels)
-  xor(is.na(cast), was_na)
+  converted <- factor(x, levels = levels)
+  xor(is.na(converted), was_na)
 }
 
 #' @export

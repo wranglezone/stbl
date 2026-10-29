@@ -6,7 +6,7 @@
 \alias{to_dbl.NULL}
 \alias{to_dbl.character}
 \alias{to_dbl.factor}
-\title{Coerce to double}
+\title{Convert to double}
 \usage{
 to_dbl(
   x,
@@ -66,8 +66,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -75,7 +75,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
@@ -93,16 +93,16 @@ The input as a double vector, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-double>} when \code{x} cannot be coerced to double.
+\item \verb{<stbl-error-coerce-double>} when \code{x} cannot be converted to double.
 \item \verb{<stbl-error-incompatible_values-double>} when some values cannot be
 safely converted to double.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 }
 }
 \description{
-Checks whether a vector can be coerced to double without losing information,
-returning it silently if so. Otherwise an informative error message is
-signaled. \code{to_double} is a synonym of \code{to_dbl()}.
+Checks whether a vector can be converted to double without losing
+information, returning it silently if so. Otherwise an informative error
+message is signaled. \code{to_double} is a synonym of \code{to_dbl()}.
 }
 \examples{
 to_dbl(1:10)

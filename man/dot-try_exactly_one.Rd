@@ -9,8 +9,8 @@
 \arguments{
 \item{items}{\code{(list)} The specifications to try (functions or prototypes).}
 
-\item{run_one}{\verb{(function)} A function taking a single item from \code{items}
-and returning its result for \code{x}, throwing an error on failure.}
+\item{run_one}{\verb{(function)} A function taking a single item from \code{items} and
+returning its result for \code{x}, throwing an error on failure.}
 
 \item{labels}{\code{(character)} A label for each item in \code{items}, used to
 identify matched specifications in the "more than one" error message.}

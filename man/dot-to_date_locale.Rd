@@ -2,7 +2,7 @@
 % Please edit documentation in R/stabilize_date.R
 \name{.to_date_locale}
 \alias{.to_date_locale}
-\title{Coerce to date, trying \code{accepted_datetime_formats} for character input}
+\title{Convert to date, trying \code{accepted_datetime_formats} for character input}
 \usage{
 .to_date_locale(
   x,
@@ -20,8 +20,8 @@
 
 \item{accepted_datetime_formats}{(\code{character}) \code{strptime()}-style format
 strings to try, in order, when parsing a character \code{x}. The first format
-that parses every non-\code{NA} element of \code{x} is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-\code{NA} element of \code{x} is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
@@ -36,7 +36,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
@@ -45,8 +45,7 @@ The input as a \link[base:Date]{base::Date} vector.
 \description{
 Used by \code{\link[=stabilize_date]{stabilize_date()}} in place of \code{\link[=to_date]{to_date()}}, so that character input
 can be tried against a list of \code{accepted_datetime_formats} rather than only
-the strict RFC 3339 shape that \code{\link[=to_date]{to_date()}} enforces. Non-character input
-(and factors, once converted to character) is delegated to \code{\link[=to_date]{to_date()}}
-unchanged.
+the strict RFC 3339 shape that \code{\link[=to_date]{to_date()}} enforces. Non-character input (and
+factors, once converted to character) is delegated to \code{\link[=to_date]{to_date()}} unchanged.
 }
 \keyword{internal}

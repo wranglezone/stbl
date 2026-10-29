@@ -10,9 +10,9 @@
 \item{out}{\code{(list)} Per-element results, such as produced by
 \code{\link[=.map_each_fast]{.map_each_fast()}} or the \code{out} element of \code{\link[=.map_each_safe]{.map_each_safe()}}'s result.}
 
-\item{simplify}{(\code{logical(1)}) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If \code{FALSE}, a list is always returned.}
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 }
 \value{
 \code{out}, simplified to an atomic vector when possible.

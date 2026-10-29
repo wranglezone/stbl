@@ -4,7 +4,7 @@
 \alias{stabilize_any_of}
 \alias{stabilise_any_of}
 \alias{to_any_of}
-\title{Try to coerce or validate x as one of several types}
+\title{Try to convert or validate x as one of several types}
 \usage{
 stabilize_any_of(
   x,
@@ -33,14 +33,13 @@ to_any_of(
 \arguments{
 \item{x}{The object to stabilize.}
 
-\item{...}{For \code{stabilize_any_of()}: unnamed stabilizer or coercion
+\item{...}{For \code{stabilize_any_of()}: unnamed stabilizer or conversion
 functions, such as \verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.),
 \verb{to_*} functions (\code{\link[=to_chr]{to_chr()}}, etc.), functions produced by \verb{specify_*()}
 calls (\code{\link[=specify_chr]{specify_chr()}}, etc.), or \verb{assert_*()} functions (such as
 \code{\link[=assert_not]{assert_not()}}) that return their input unchanged. For \code{to_any_of()}:
-prototype objects (e.g.
-\code{integer()}, \code{character()}) that determine the target types to try, passed
-as the \code{.to} argument of \code{\link[=to]{to()}}.}
+prototype objects (e.g. \code{integer()}, \code{character()}) that determine the
+target types to try, passed as the \code{.to} argument of \code{\link[=to]{to()}}.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -52,11 +51,11 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-\code{x} coerced or validated by the first successful function or
+\code{x} converted or validated by the first successful function or
 prototype in \code{...}, or an error condition with classes \verb{<stbl-error>},
 \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
 specific class by failure mode:
@@ -67,13 +66,13 @@ specific class by failure mode:
 }
 }
 \description{
-\code{stabilize_any_of()} attempts to validate and coerce \code{x} using
+\code{stabilize_any_of()} attempts to validate and convert \code{x} using
 each function in \code{...} in order. It returns the result of the first
 function that succeeds. If all functions fail, an informative error that
 combines the individual failure messages is thrown. \code{stabilise_any_of()} is
 a synonym.
 
-\code{to_any_of()} is analogous to \code{\link[=to]{to()}}: it tries to coerce \code{x} to each type
+\code{to_any_of()} is analogous to \code{\link[=to]{to()}}: it tries to convert \code{x} to each type
 given in \code{...} (as a prototype such as \code{integer()} or \code{character()}) and
 returns the first successful result.
 }
@@ -84,7 +83,7 @@ stabilize_any_of(1L, stabilize_int, stabilize_chr)
 # Falls through to stabilize_chr when stabilize_int fails
 stabilize_any_of("a", stabilize_int, stabilize_chr)
 
-# Coerces via the first matching function ("1" -> 1L)
+# Converts via the first matching function ("1" -> 1L)
 stabilize_any_of("1", stabilize_int, stabilize_chr)
 
 # A mixed list falls through to stabilize_chr because "a" can't be integer

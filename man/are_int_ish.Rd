@@ -8,7 +8,7 @@
 \alias{are_int_ish.character}
 \alias{are_int_ish.factor}
 \alias{are_int_ish.default}
-\title{Check if an object can be safely coerced to integer}
+\title{Check if an object can be safely converted to integer}
 \usage{
 are_int_ish(x, ...)
 
@@ -47,12 +47,12 @@ the entire vector.
 }
 \description{
 \code{are_int_ish()} is a vectorized predicate function that checks
-whether each element of its input can be safely coerced to an integer
+whether each element of its input can be safely converted to an integer
 vector. \code{are_integer_ish()} is a synonym of \code{are_int_ish()}.
 
 \code{is_int_ish()} is a scalar predicate function that checks if all elements
-of its input can be safely coerced to an integer vector. \code{is_integer_ish()}
-is a synonym of \code{is_int_ish()}.
+of its input can be safely converted to an integer vector.
+\code{is_integer_ish()} is a synonym of \code{is_int_ish()}.
 }
 \examples{
 are_int_ish(1:4)

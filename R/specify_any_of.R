@@ -9,8 +9,8 @@
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_any_of()] with the provided specs. The generated function will
 #'   also accept `...` for additional unnamed specs to pass to
-#'   [stabilize_any_of()]. You can copy/paste the body of the resulting
-#'   function if you want to provide additional context or functionality.
+#'   [stabilize_any_of()]. You can copy/paste the body of the resulting function
+#'   if you want to provide additional context or functionality.
 #' @family specification functions
 #' @export
 #'

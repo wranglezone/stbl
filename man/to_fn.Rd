@@ -6,7 +6,7 @@
 \alias{to_fn.NULL}
 \alias{to_fn.character}
 \alias{to_fn.default}
-\title{Coerce to a function}
+\title{Convert to a function}
 \usage{
 to_fn(
   x,
@@ -67,8 +67,8 @@ through from higher-level functions to make error messages clearer in
 unexported functions.}
 
 \item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
-being coerced to match, for use in error messages. When \code{NULL}, error
-messages describe only \code{x}. When supplied, coercion failure messages name
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
 both \code{x_arg} and \code{to_arg}.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
@@ -76,22 +76,22 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{definition_env}{\code{(environment)} The environment in which to look up
-function name. Defaults to \code{\link[rlang:global_env]{rlang::global_env()}}. This argument is
-ignored when the input is a namespaced string of the form \code{"pkg::fn"}, in
-which case the package namespace is used instead.}
+function name. Defaults to \code{\link[rlang:global_env]{rlang::global_env()}}. This argument is ignored
+when the input is a namespaced string of the form \code{"pkg::fn"}, in which
+case the package namespace is used instead.}
 }
 \value{
 A function, or an error condition with classes \verb{<stbl-error>},
 \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
 specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-function>} when \code{x} cannot be coerced to a
+\item \verb{<stbl-error-coerce-function>} when \code{x} cannot be converted to a
 function.
 \item \verb{<stbl-error-invalid_function_name>} when \code{x} is not a syntactically
 valid function name.
@@ -102,13 +102,13 @@ that doesn't resolve to a known function.
 }
 }
 \description{
-\code{to_fn()} coerces \code{x} to a function. \code{to_function()} is a synonym of
+\code{to_fn()} converts \code{x} to a function. \code{to_function()} is a synonym of
 \code{to_fn()}.
 }
 \details{
-Unlike \code{\link[rlang:as_function]{rlang::as_function()}}, \code{to_fn()} supports namespaced function names
-such as \code{"pkg::fn"} in the character method. When the input is a
-length-0 character vector, \code{to_fn()} returns \code{NULL} (subject to
+Unlike \code{\link[rlang:as_function]{rlang::as_function()}}, \code{to_fn()} supports namespaced
+function names such as \code{"pkg::fn"} in the character method. When the input is
+a length-0 character vector, \code{to_fn()} returns \code{NULL} (subject to
 \code{allow_null}). An input of length > 1 is always an error.
 }
 \examples{

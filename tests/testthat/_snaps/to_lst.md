@@ -50,13 +50,13 @@
       Error in `wrapped_to_lst()`:
       ! `val` must not be a <function>.
 
-# to_lst() errors informatively for primitives (#157)
+# to_lst() errors informatively for primitives (#157, #377)
 
     Code
       to_lst(given, coerce_function = TRUE)
     Condition <stbl-error-coerce-list>
       Error:
-      ! Can't coerce `given` <primitive function> to <list>.
+      ! Can't convert `given` <primitive function> to <list>.
 
 ---
 
@@ -64,5 +64,5 @@
       wrapped_to_lst(given, coerce_function = TRUE)
     Condition <stbl-error-coerce-list>
       Error in `wrapped_to_lst()`:
-      ! Can't coerce `val` <primitive function> to <list>.
+      ! Can't convert `val` <primitive function> to <list>.
 

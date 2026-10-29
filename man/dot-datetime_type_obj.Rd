@@ -11,9 +11,9 @@ A zero-length object whose \code{\link[=object_type]{object_type()}} is \code{"d
 }
 \description{
 \code{\link[=object_type]{object_type()}} renders a \link[base:POSIXct]{base::POSIXct} as \code{"POSIXct"}, but the datetime
-family uses \code{"datetime"} in its coercion classes and messages, to match the
-\code{to_dttm()}/\code{stabilize_dttm()} function names. This returns an empty
-object that renders as \code{"datetime"} so error subclasses read
+family uses \code{"datetime"} in its conversion classes and messages, to match the
+\code{to_dttm()}/\code{stabilize_dttm()} function names. This returns an empty object
+that renders as \code{"datetime"} so error subclasses read
 \verb{<stbl-error-incompatible_values-datetime>}.
 }
 \keyword{internal}

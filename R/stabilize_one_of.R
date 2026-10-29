@@ -1,28 +1,26 @@
-#' Try to coerce or validate x as exactly one of several specifications
+#' Try to convert or validate x as exactly one of several specifications
 #'
-#' @description `stabilize_one_of()` evaluates every function in `...`
-#'   against `x` and requires that exactly one of them succeeds. It returns
-#'   the result of that single successful function. If zero functions
-#'   succeed, an informative error that combines the individual failure
-#'   messages is thrown; if two or more functions succeed, an error naming
-#'   the specifications that matched is thrown. `stabilise_one_of()` is a
-#'   synonym.
+#' @description `stabilize_one_of()` evaluates every function in `...` against
+#'   `x` and requires that exactly one of them succeeds. It returns the result
+#'   of that single successful function. If zero functions succeed, an
+#'   informative error that combines the individual failure messages is thrown;
+#'   if two or more functions succeed, an error naming the specifications that
+#'   matched is thrown. `stabilise_one_of()` is a synonym.
 #'
-#'   `to_one_of()` is analogous to [to()]: it tries to coerce `x` to each type
+#'   `to_one_of()` is analogous to [to()]: it tries to convert `x` to each type
 #'   given in `...` (as a prototype such as `integer()` or `character()`) and
 #'   requires that exactly one succeeds.
 #'
-#' @param ... For `stabilize_one_of()`: unnamed stabilizer or coercion
+#' @param ... For `stabilize_one_of()`: unnamed stabilizer or conversion
 #'   functions, such as `stabilize_*` functions ([stabilize_chr()], etc.),
 #'   `to_*` functions ([to_chr()], etc.), functions produced by `specify_*()`
 #'   calls ([specify_chr()], etc.), or `assert_*()` functions (such as
 #'   [assert_not()]) that return their input unchanged. For `to_one_of()`:
-#'   prototype objects (e.g.
-#'   `integer()`, `character()`) that determine the target types to try, passed
-#'   as the `.to` argument of [to()].
+#'   prototype objects (e.g. `integer()`, `character()`) that determine the
+#'   target types to try, passed as the `.to` argument of [to()].
 #' @inheritParams .shared-params
 #'
-#' @returns `x` coerced or validated by the single successful function or
+#' @returns `x` converted or validated by the single successful function or
 #'   prototype in `...`, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
@@ -37,7 +35,7 @@
 #' # Returns x unchanged when exactly one function succeeds
 #' stabilize_one_of("a", stabilize_int, stabilize_chr)
 #'
-#' # Coerces via the single matching function (1.5 can't become an integer)
+#' # Converts via the single matching function (1.5 can't become an integer)
 #' stabilize_one_of(1.5, stabilize_int, stabilize_chr)
 #'
 #' # Errors as ambiguous: "1" is both int-ish and dbl-ish
@@ -82,8 +80,8 @@ stabilise_one_of <- stabilize_one_of
 #' Try every item, requiring exactly one to succeed
 #'
 #' @param items `(list)` The specifications to try (functions or prototypes).
-#' @param run_one `(function)` A function taking a single item from `items`
-#'   and returning its result for `x`, throwing an error on failure.
+#' @param run_one `(function)` A function taking a single item from `items` and
+#'   returning its result for `x`, throwing an error on failure.
 #' @param labels `(character)` A label for each item in `items`, used to
 #'   identify matched specifications in the "more than one" error message.
 #' @inheritParams stabilize_lst
@@ -121,13 +119,13 @@ stabilise_one_of <- stabilize_one_of
 #' Format matched specification labels for an error message
 #'
 #' When two or more matched labels are identical (e.g. the same function or
-#' prototype passed more than once via `...`), appends each label's position
-#' in `...` so the matches can be told apart; otherwise returns `matched`
+#' prototype passed more than once via `...`), appends each label's position in
+#' `...` so the matches can be told apart; otherwise returns `matched`
 #' unchanged, letting the caller quote it with `{.val {matched}}`.
 #'
 #' @param matched `(character)` Labels of the specifications that succeeded.
-#' @param matched_at `(integer)` Positions in `...` of the specifications
-#'   that succeeded, parallel to `matched`.
+#' @param matched_at `(integer)` Positions in `...` of the specifications that
+#'   succeeded, parallel to `matched`.
 #' @returns A character vector, pre-quoted with position suffixes if `matched`
 #'   contains duplicates, or `matched` itself otherwise.
 #' @keywords internal

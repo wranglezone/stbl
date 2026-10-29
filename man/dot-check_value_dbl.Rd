@@ -33,7 +33,7 @@ values are not checked.}
 must be strictly less than this value (\code{<}, not \code{<=}). \code{NULL} (default)
 values are not checked.}
 
-\item{allowed_values}{A vector of permitted values (coerced to the target
+\item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 

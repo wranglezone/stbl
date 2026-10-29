@@ -1,17 +1,17 @@
 # target class: integer
 
-#' Coerce to integer
+#' Convert to integer
 #'
-#' Checks whether a vector can be coerced to integer without losing information,
-#' returning it silently if so. Otherwise an informative error message is
-#' signaled. `to_integer` is a synonym of `to_int()`.
+#' Checks whether a vector can be converted to integer without losing
+#' information, returning it silently if so. Otherwise an informative error
+#' message is signaled. `to_integer` is a synonym of `to_int()`.
 #'
 #' @inheritParams .shared-params
 #'
 #' @returns The input as an integer vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
 #'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
 #'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -121,7 +121,7 @@ to_int.character <- function(
     .check_chr_to_int_failures(x, res, x_class, x_arg, call, to_arg)
     return(res[["result"]])
   }
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "integer",
     x_arg = x_arg,
@@ -147,7 +147,7 @@ to_int.factor <- function(
     .check_chr_to_int_failures(x, res, x_class, x_arg, call, to_arg)
     return(res[["result"]])
   }
-  .stop_cant_coerce(
+  .stop_cant_convert(
     from_class = x_class,
     to_class = "integer",
     x_arg = x_arg,
@@ -182,7 +182,7 @@ to_int.default <- function(
   try_fetch(
     vctrs::vec_cast(x, integer(), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "integer",
         x_arg = x_arg,
@@ -193,9 +193,9 @@ to_int.default <- function(
   )
 }
 
-#' Coerce to length-1 integer
+#' Convert to length-1 integer
 #'
-#' Checks whether a vector can be coerced to a length-1 integer vector.
+#' Checks whether a vector can be converted to a length-1 integer vector.
 #' `to_integer_scalar()` is a synonym of `to_int_scalar()`.
 #'
 #' @inheritParams .shared-params
@@ -203,7 +203,7 @@ to_int.default <- function(
 #' @returns The input as a length-1 integer vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
 #'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
 #'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -245,10 +245,10 @@ to_int_scalar <- function(
 #' @rdname to_int_scalar
 to_integer_scalar <- to_int_scalar
 
-#' Check for character to integer coercion failures
+#' Check for character to integer conversion failures
 #'
-#' @param res A list returned by `stbl_chr_to_int`, with elements
-#'   `result`, `non_number`, and `bad_precision`.
+#' @param res A list returned by `stbl_chr_to_int`, with elements `result`,
+#'   `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
@@ -265,7 +265,7 @@ to_integer_scalar <- to_int_scalar
   if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
   }
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     non_number,
     x_class,
@@ -287,10 +287,10 @@ to_integer_scalar <- to_int_scalar
   )
 }
 
-#' Check for double to integer coercion failures
+#' Check for double to integer conversion failures
 #'
-#' @param res A list returned by `stbl_dbl_to_int`, with elements
-#'   `result` and `bad_precision`.
+#' @param res A list returned by `stbl_dbl_to_int`, with elements `result` and
+#'   `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
@@ -318,10 +318,10 @@ to_integer_scalar <- to_int_scalar
   )
 }
 
-#' Check for complex to integer coercion failures
+#' Check for complex to integer conversion failures
 #'
-#' @param res A list returned by `stbl_cpx_to_int`, with elements
-#'   `result`, `non_number`, and `bad_precision`.
+#' @param res A list returned by `stbl_cpx_to_int`, with elements `result`,
+#'   `non_number`, and `bad_precision`.
 #' @inheritParams .shared-params
 #' @inherit .shared-return-conditions return
 #' @keywords internal
@@ -338,7 +338,7 @@ to_integer_scalar <- to_int_scalar
   if (!any(non_number) && !any(bad_precision)) {
     return(invisible(NULL))
   }
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     non_number,
     x_class,

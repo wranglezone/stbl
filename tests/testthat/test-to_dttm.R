@@ -76,7 +76,7 @@ test_that("to_dttm() keeps NA character elements as NA (#105)", {
   expect_identical(is.na(result), c(FALSE, TRUE))
 })
 
-test_that("to_dttm() rejects date-times without an offset (#105)", {
+test_that("to_dttm() rejects date-times without an offset (#105, #377)", {
   expect_pkg_error_snapshot(
     to_dttm("2024-01-01 12:00:00"),
     "stbl",
@@ -91,7 +91,7 @@ test_that("to_dttm() rejects date-times without an offset (#105)", {
   )
 })
 
-test_that("to_dttm() rejects unparseable date-time strings (#105)", {
+test_that("to_dttm() rejects unparseable date-time strings (#105, #377)", {
   given <- c("2024-01-01T12:00:00Z", "not-a-datetime")
   expect_pkg_error_snapshot(
     to_dttm(given),
@@ -101,7 +101,7 @@ test_that("to_dttm() rejects unparseable date-time strings (#105)", {
   )
 })
 
-test_that("to_dttm() rejects impossible date-times (#105)", {
+test_that("to_dttm() rejects impossible date-times (#105, #377)", {
   expect_pkg_error_snapshot(
     to_dttm("2024-02-30T12:00:00Z"),
     "stbl",
@@ -124,13 +124,13 @@ test_that("to_dttm() rejects an unrecognized tz (#105)", {
   )
 })
 
-test_that("to_dttm() coerces factors via the character path (#105)", {
+test_that("to_dttm() converts factors via the character path (#105)", {
   given <- factor(c("2024-01-01T12:00:00Z", "2024-06-15T00:00:00Z"))
   expected <- to_dttm(as.character(given))
   expect_identical(to_dttm(given), expected)
 })
 
-test_that("to_dttm() errors informatively for bad factors (#105)", {
+test_that("to_dttm() errors informatively for bad factors (#105, #377)", {
   given <- factor(c("2024-01-01T12:00:00Z", "nope"))
   expect_pkg_error_snapshot(
     to_dttm(given),
@@ -171,7 +171,7 @@ test_that("to_dttm_scalar() allows length-1 date-times through (#105)", {
   expect_identical(to_dttm_scalar(given), given)
 })
 
-test_that("to_dttm_scalar() coerces length-1 input (#105)", {
+test_that("to_dttm_scalar() converts length-1 input (#105)", {
   expect_identical(
     to_dttm_scalar("2024-01-01T12:00:00Z"),
     as.POSIXct("2024-01-01 12:00:00", tz = "UTC")

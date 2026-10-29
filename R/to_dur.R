@@ -1,10 +1,10 @@
 # target class: Period
 
-#' Coerce to a duration
+#' Convert to a duration
 #'
-#' Checks whether a vector can be coerced to a [lubridate::Period-class] without
-#' losing information, returning it silently if so. Otherwise an informative
-#' error message is signaled.
+#' Checks whether a vector can be converted to a [lubridate::Period-class]
+#' without losing information, returning it silently if so. Otherwise an
+#' informative error message is signaled.
 #'
 #' `Period` is chosen as the target class because it preserves the calendar
 #' components (years, months, days, hours, minutes, seconds) of an [RFC
@@ -36,9 +36,8 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a [lubridate::Period-class] vector, or an error
-#'   condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-#'   failure mode:
+#'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
+#'   `<error>`, `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -108,9 +107,9 @@ to_dur.character <- function(
   not_na <- !is.na(x)
 
   # RFC 3339 duration grammar: an optional Y/M/D date part followed by an
-  # optional "T"-prefixed H/M/S time part, or a stand-alone week form; the
-  # two forms cannot be mixed, and (unlike full ISO 8601) fractional
-  # components are not permitted.
+  # optional "T"-prefixed H/M/S time part, or a stand-alone week form; the two
+  # forms cannot be mixed, and (unlike full ISO 8601) fractional components are
+  # not permitted.
   date_time_pattern <- paste0(
     "^P(?:([0-9]+)Y)?(?:([0-9]+)M)?(?:([0-9]+)D)?",
     "(T(?:([0-9]+)H)?(?:([0-9]+)M)?(?:([0-9]+)S)?)?$"
@@ -150,7 +149,7 @@ to_dur.character <- function(
   }
 
   failures <- not_na & !well_shaped
-  .check_cast_failures(
+  .check_conversion_failures(
     x,
     failures,
     x_class,
@@ -271,7 +270,7 @@ to_dur.default <- function(
   try_fetch(
     vctrs::vec_cast(x, .duration_type_obj(), x_arg = x_arg, call = call),
     error = function(cnd) {
-      .stop_cant_coerce(
+      .stop_cant_convert(
         from_class = x_class,
         to_class = "duration",
         x_arg = x_arg,
@@ -305,9 +304,9 @@ to_dur.default <- function(
   )
 }
 
-#' Coerce to length-1 duration
+#' Convert to length-1 duration
 #'
-#' Checks whether a vector can be coerced to a length-1
+#' Checks whether a vector can be converted to a length-1
 #' [lubridate::Period-class] vector.
 #'
 #' @inheritParams .shared-params
@@ -315,8 +314,8 @@ to_dur.default <- function(
 #'
 #' @returns The input as a length-1 [lubridate::Period-class] vector, or an
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-#'   failure mode:
+#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
+#'   mode:
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -367,10 +366,10 @@ to_dur_scalar <- function(
 #' An empty duration object for error messages
 #'
 #' [object_type()] renders a [lubridate::Period-class] as `"Period"`, but the
-#' duration family uses `"duration"` in its coercion classes and messages, to
-#' match the `to_dur()`/`stabilize_dur()` function names. This
-#' returns an empty object that renders as `"duration"` so error subclasses
-#' read `<stbl-error-incompatible_values-duration>`.
+#' duration family uses `"duration"` in its conversion classes and messages, to
+#' match the `to_dur()`/`stabilize_dur()` function names. This returns an empty
+#' object that renders as `"duration"` so error subclasses read
+#' `<stbl-error-incompatible_values-duration>`.
 #'
 #' @returns A zero-length object whose [object_type()] is `"duration"`.
 #' @keywords internal

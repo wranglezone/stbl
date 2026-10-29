@@ -107,10 +107,6 @@ expect_pkg_error_classes <- function(
 
 #' Check if an expression is a covr counter call
 #'
-#' covr instruments code by wrapping expressions in
-#' `if (TRUE) { covr:::count(key); original }` blocks. This checks whether
-#' `expr` is the `covr:::count(key)` part.
-#'
 #' @param expr An R expression.
 #' @returns `TRUE` if `expr` is a covr counter call, `FALSE` otherwise.
 #' @keywords internal
@@ -125,9 +121,9 @@ expect_pkg_error_classes <- function(
 #' Strip covr counter wrappers from an expression
 #'
 #' covr instruments code for coverage by wrapping expressions in
-#' `if (TRUE) { covr:::count(key); original }` blocks. This function
-#' recursively removes those wrappers so that snapshotted code remains stable
-#' across normal and coverage runs.
+#' `if (TRUE) { covr:::count(key); original }` blocks. This function recursively
+#' removes those wrappers so that snapshotted code remains stable across normal
+#' and coverage runs.
 #'
 #' @param expr An R expression (e.g. as returned by [rlang::enexpr()]).
 #' @returns The expression with all covr counter blocks removed.
@@ -136,7 +132,6 @@ expect_pkg_error_classes <- function(
   if (is.null(expr) || !is.call(expr)) {
     return(expr)
   }
-  # Detect covr wrapper: if (TRUE) { covr:::count(key); ... }
   if (
     identical(expr[[1L]], as.name("if")) &&
       length(expr) == 3L &&

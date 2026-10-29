@@ -11,8 +11,8 @@ A zero-length object whose \code{\link[=object_type]{object_type()}} is \code{"d
 }
 \description{
 \code{\link[=object_type]{object_type()}} renders a \link[base:Date]{base::Date} as \code{"Date"}, but the date family uses
-the lowercase \code{"date"} in its coercion classes and messages. This returns an
-empty object that renders as \code{"date"} so error subclasses read
+the lowercase \code{"date"} in its conversion classes and messages. This returns
+an empty object that renders as \code{"date"} so error subclasses read
 \verb{<stbl-error-incompatible_values-date>}.
 }
 \keyword{internal}

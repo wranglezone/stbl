@@ -12,8 +12,7 @@
 )
 }
 \arguments{
-\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to
-call.}
+\item{stabilizer}{(\code{character(1)}) Name of the stabilizer function to call.}
 
 \item{factory_args}{\code{(list)} Arguments to include in the call to the
 stabilizer function.}

@@ -7,10 +7,10 @@
 #'   result, or `assert_*` function that `x` must **not** match.
 #' @param ... Reserved for future use; must be empty.
 #' @inheritParams .shared-params
-#' @returns `x`, unchanged, if `x` does not match `spec`, or an error
-#'   condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and
-#'   `<stbl-error-matched_spec>` when `x` matches `spec`.
+#' @returns `x`, unchanged, if `x` does not match `spec`, or an error condition
+#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
+#'   `<error>`, `<condition>`, and `<stbl-error-matched_spec>` when `x` matches
+#'   `spec`.
 #' @family stabilization functions
 #' @export
 #'

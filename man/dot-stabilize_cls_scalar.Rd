@@ -23,7 +23,7 @@
 \item{x}{The object to stabilize.}
 
 \item{to_cls_scalar_fn}{\verb{(function)} The \verb{to_*_scalar()} function to use for
-coercion.}
+conversion.}
 
 \item{...}{Arguments passed to methods.}
 
@@ -31,7 +31,7 @@ coercion.}
 \code{to_cls_scalar_fn()}.}
 
 \item{check_cls_value_fn}{\verb{(function)} A function to check the values of \code{x}
-after coercion.}
+after conversion.}
 
 \item{check_cls_value_fn_args}{\code{(list)} A list of additional arguments to
 pass to \code{check_cls_value_fn()}.}
@@ -52,7 +52,7 @@ source of error messages.}
 
 \item{x_class}{(\code{character(1)}) The class name of the object being stabilized
 to use in error messages. Use this if you remove a special class from the
-object before checking its coercion, but want the error message to match
+object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{

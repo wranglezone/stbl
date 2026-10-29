@@ -14,7 +14,7 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{allowed_values}{A vector of permitted values, already coerced to the
+\item{allowed_values}{A vector of permitted values, already converted to the
 same type as \code{x}. \code{NULL} or zero-length skips the check.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use

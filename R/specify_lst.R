@@ -1,5 +1,3 @@
-# lst ----
-
 #' Create a specified list stabilizer function
 #'
 #' `specify_lst()` creates a function that will call [stabilize_lst()] with the

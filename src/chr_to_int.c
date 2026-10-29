@@ -47,7 +47,7 @@ static void chr_to_int_core(SEXP x, R_xlen_t n,
       continue;
     }
 
-    /* Skip trailing whitespace: R's coercion accepts it.
+    /* Skip trailing whitespace: R's conversion accepts it.
        The loop is safe because s is null-terminated and '\0' is not whitespace,
        so the loop always terminates. */
     while (isspace((unsigned char)*endptr)) endptr++;
@@ -115,7 +115,7 @@ SEXP stbl_chr_to_int(SEXP x) {
  * stbl_chr_are_intish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements that can
- * be coerced to integer without loss, FALSE otherwise.
+ * be converted to integer without loss, FALSE otherwise.
  */
 SEXP stbl_chr_are_intish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

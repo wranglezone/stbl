@@ -1,4 +1,4 @@
-#' Coerce to integer with additional checks
+#' Convert to integer with additional checks
 #'
 #' Compared to [to_int()], `stabilize_int()` checks more details, but is slower.
 #' `stabilise_int()`, `stabilize_integer()`, and `stabilise_integer()` are
@@ -9,7 +9,7 @@
 #' @returns The input as an integer vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
 #'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
 #'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -104,9 +104,9 @@ stabilise_int <- stabilize_int
 #' @rdname stabilize_int
 stabilise_integer <- stabilize_int
 
-#' Coerce to length-1 integer with additional checks
+#' Convert to length-1 integer with additional checks
 #'
-#' Checks whether a vector can be coerced to a length-1 integer vector.
+#' Checks whether a vector can be converted to a length-1 integer vector.
 #' `stabilize_int_scalar()` is optimized to check for length-1 integer vectors
 #' (compared to [stabilize_int()] with `max_size = 1`). `stabilise_int_scalar`,
 #' `stabilize_integer_scalar()`, and `stabilise_integer_scalar` are synonyms of
@@ -117,7 +117,7 @@ stabilise_integer <- stabilize_int
 #' @returns The input as a length-1 integer vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be coerced to integer.
+#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
 #'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
 #'   safely converted to integer.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.

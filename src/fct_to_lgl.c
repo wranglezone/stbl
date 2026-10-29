@@ -62,7 +62,7 @@ SEXP stbl_fct_to_lgl(SEXP x) {
  * stbl_fct_are_lglish: public API entry point.
  *
  * Returns a logical vector of length(x) that is TRUE for elements whose
- * level string can be coerced to logical (and for NA elements).
+ * level string can be converted to logical (and for NA elements).
  */
 SEXP stbl_fct_are_lglish(SEXP x) {
   R_xlen_t n = XLENGTH(x);

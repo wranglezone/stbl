@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{The value to test.}
 
-\item{fns}{\code{(list)} The list of stabilizer or coercion functions to try.}
+\item{fns}{\code{(list)} The list of stabilizer or conversion functions to try.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

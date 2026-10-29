@@ -11,20 +11,18 @@
 
 \item{element_specs}{\code{(list)} Named list of stabilizer functions, such as
 \verb{stabilize_*} functions (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or functions produced by
-\verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to
-an element in \code{.x}, and the function is used to validate that element
-when present. Whether the element is required is controlled by
-\code{.required}.}
+\verb{specify_*()} functions (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an
+element in \code{.x}, and the function is used to validate that element when
+present. Whether the element is required is controlled by \code{.required}.}
 
 \item{nms}{\code{(character)} Result of \code{rlang::names2(.x)}.}
 
 \item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are
-optional: if absent, no error is raised; if present, they're validated
-normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
-A zero-length \code{.x} (such as \code{list()}) skips this check when
-\code{.allow_zero_length = TRUE}.}
+required unless you opt it out. Named specs \emph{not} listed here are optional:
+if absent, no error is raised; if present, they're validated normally. Pass
+\code{NULL} or \code{character()} to make every named spec optional. A zero-length
+\code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

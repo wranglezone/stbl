@@ -8,14 +8,14 @@ SEXP stbl_lgl_to_int(SEXP x);
 SEXP stbl_lst_to_int(SEXP x);
 
 /**
- * @brief Coerce any supported vector to integer.
+ * @brief Convert any supported vector to integer.
  *
  * Accepted source types and their behaviour:
  *   - integer:  returned unchanged (plain); factor level strings are parsed
  *               as integers.  Fails (via to_fail()) for non-numeric or fractional
  *               level strings.
  *   - logical:  FALSE -> 0L, TRUE -> 1L, NA -> NA_integer_.  Always succeeds.
- *   - double:   whole-number values are cast; Fails (via to_fail()) for fractional
+ *   - double:   whole-number values are converted; Fails (via to_fail()) for fractional
  *               values, Inf, or values outside the 32-bit integer range.
  *   - character: parsed as double then truncated to integer.  Calls
  *               Rf_error() for non-numeric strings or fractional values.
@@ -37,7 +37,7 @@ SEXP to_integer(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   if (x_type == INTSXP) {
     if (Rf_inherits(x, "factor")) {
       res = PROTECT(stbl_fct_to_int(x));
-      SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
+      SEXP out = check_int_conversion(res, x, to, x_arg, to_arg, call);
       UNPROTECT(1);
       return out;
     }
@@ -57,13 +57,13 @@ SEXP to_integer(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call) {
   }
   if (x_type == STRSXP) {
     res = PROTECT(stbl_chr_to_int(x));
-    SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
+    SEXP out = check_int_conversion(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
   if (x_type == CPLXSXP) {
     res = PROTECT(stbl_cpx_to_int(x));
-    SEXP out = check_int_cast(res, x, to, x_arg, to_arg, call);
+    SEXP out = check_int_conversion(res, x, to, x_arg, to_arg, call);
     UNPROTECT(1);
     return out;
   }
