@@ -9,15 +9,37 @@
 \alias{to_lst.function}
 \title{Ensure a list meets expectations}
 \usage{
-to_lst(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
-to_list(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
+to_list(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
-\method{to_lst}{list}(x, ..., x_arg = caller_arg(x), call = caller_env())
+\method{to_lst}{list}(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 \method{to_lst}{default}(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -28,6 +50,7 @@ to_list(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
   x,
   ...,
   allow_null = TRUE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env()
@@ -46,6 +69,8 @@ to_list(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to \code{\link[base:as.list]{base::as.list()}} or other methods.}
+
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -66,8 +91,6 @@ object before checking its conversion, but want the error message to match
 the original class.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
-
-\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 }
 \value{
 The object as a list, or an error condition with classes

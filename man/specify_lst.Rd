@@ -14,7 +14,8 @@ specify_lst(
   .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .required = ...names()
+  .required = ...names(),
+  .coerce_function = FALSE
 )
 
 specify_list(
@@ -26,7 +27,8 @@ specify_list(
   .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .required = ...names()
+  .required = ...names(),
+  .coerce_function = FALSE
 )
 }
 \arguments{
@@ -74,6 +76,8 @@ required unless you opt it out. Named specs \emph{not} listed here are optional:
 if absent, no error is raised; if present, they're validated normally. Pass
 \code{NULL} or \code{character()} to make every named spec optional. A zero-length
 \code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
+
+\item{.coerce_function}{(\code{logical(1)}) Should functions be converted?}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

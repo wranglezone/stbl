@@ -31,6 +31,7 @@
 to_lst <- function(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env()
@@ -44,7 +45,14 @@ to_list <- to_lst
 
 #' @export
 #' @rdname to_lst
-to_lst.list <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
+to_lst.list <- function(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+) {
   check_dots_empty0(..., call = call)
   x
 }
@@ -54,6 +62,7 @@ to_lst.list <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
 to_lst.default <- function(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -79,6 +88,7 @@ to_lst.NULL <- function(
   x,
   ...,
   allow_null = TRUE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env()

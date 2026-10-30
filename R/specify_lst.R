@@ -44,7 +44,8 @@ specify_lst <- function(
   .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .required = ...names()
+  .required = ...names(),
+  .coerce_function = FALSE
 ) {
   element_specs <- list(...)
   structure(
@@ -68,6 +69,7 @@ specify_lst <- function(
           .min_size = .min_size,
           .max_size = .max_size,
           .required = .required,
+          .coerce_function = .coerce_function,
           .x_arg = .x_arg,
           .call = .call,
           .x_class = .x_class

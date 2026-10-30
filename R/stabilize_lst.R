@@ -42,6 +42,8 @@
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 #'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
+#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
+#'   FALSE` (the default).
 #'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
 #'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
@@ -122,6 +124,7 @@ stabilize_lst <- function(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -136,7 +139,12 @@ stabilize_lst <- function(
       call = .call
     ))
   }
-  .x <- to_lst(.x, x_arg = .x_arg, call = .call)
+  .x <- to_lst(
+    .x,
+    coerce_function = .coerce_function,
+    x_arg = .x_arg,
+    call = .call
+  )
   .check_size(
     .x,
     min_size = .min_size,
