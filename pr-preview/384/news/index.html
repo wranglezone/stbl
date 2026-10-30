@@ -41,7 +41,7 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>
-<code><a href="../reference/to_lst.html">to_lst()</a></code> now lists <code>coerce_function</code> on the generic, and <code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code> and <code><a href="../reference/specify_lst.html">specify_lst()</a></code> gain a <code>.coerce_function</code> argument, so functions can be converted to lists from the wrappers. Previously <code>stabilize_lst(f, coerce_function = TRUE)</code> treated <code>coerce_function</code> as an element spec (<a href="https://github.com/wranglezone/stbl/issues/380" class="external-link">#380</a>).</li>
+<code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code> and <code><a href="../reference/specify_lst.html">specify_lst()</a></code> gain a <code>.coerce_function</code> argument, so functions can be converted to lists from the wrappers (<a href="https://github.com/wranglezone/stbl/issues/380" class="external-link">#380</a>).</li>
 <li>
 <code><a href="../reference/to_dttm.html">to_dttm()</a></code> (and so <code><a href="../reference/to.html">to()</a></code> with a <code>POSIXct</code> target, <code><a href="../reference/to_dttm_scalar.html">to_dttm_scalar()</a></code>, and related functions) gains a <code>treat_number_as</code> argument to control how numbers are interpreted: <code>"seconds"</code> (the default) or <code>"milliseconds"</code> since the Unix epoch, or <code>"error"</code> to reject numbers (<a href="https://github.com/wranglezone/stbl/issues/372" class="external-link">#372</a>).</li>
 <li>

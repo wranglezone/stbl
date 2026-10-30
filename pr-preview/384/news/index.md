@@ -4,15 +4,11 @@
 
 ### New features
 
-- [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) now
-  lists `coerce_function` on the generic, and
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
   [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
   gain a `.coerce_function` argument, so functions can be converted to
-  lists from the wrappers. Previously
-  `stabilize_lst(f, coerce_function = TRUE)` treated `coerce_function`
-  as an element spec
+  lists from the wrappers
   ([\#380](https://github.com/wranglezone/stbl/issues/380)).
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) (and
   so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a

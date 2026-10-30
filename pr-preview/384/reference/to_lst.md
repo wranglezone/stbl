@@ -83,8 +83,7 @@ to_lst(
 
 - coerce_function:
 
-  (`logical(1)`) Should functions be converted? Ignored for input that
-  is not a function.
+  (`logical(1)`) Should functions be converted?
 
 - x_arg:
 

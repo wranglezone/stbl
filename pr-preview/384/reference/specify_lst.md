@@ -115,9 +115,7 @@ specify_list(
 
 - .coerce_function:
 
-  (`logical(1)`) Should functions be converted to lists (see
-  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md))? If
-  `FALSE` (default), functions are rejected.
+  (`logical(1)`) Should functions be converted?
 
 ## Value
 
