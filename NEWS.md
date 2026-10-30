@@ -2,6 +2,7 @@
 
 ## New features
 
+* `to_lst()` now lists `coerce_function` on the generic, and `stabilize_lst()` and `specify_lst()` gain a `.coerce_function` argument, so functions can be converted to lists from the wrappers. Previously `stabilize_lst(f, coerce_function = TRUE)` treated `coerce_function` as an element spec (#380).
 * `to_dttm()` (and so `to()` with a `POSIXct` target, `to_dttm_scalar()`, and related functions) gains a `treat_number_as` argument to control how numbers are interpreted: `"seconds"` (the default) or `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers (#372).
 * `to()`, all `to_*()` functions, and `stbl_to()` (C API) gain a `to_arg` argument, like `vctrs::vec_cast()`. When supplied, conversion errors name both sides (#371).
 * `to()` now dispatches to `to_date()`, `to_dttm()`, `to_time()`, and `to_dur()` for `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and falls back to `vctrs::vec_cast()` for other prototype classes (#366, #367).

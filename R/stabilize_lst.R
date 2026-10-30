@@ -29,6 +29,8 @@
 #'   element of `.x` shares a name with another.
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
 #'   `TRUE`, duplicated elements are rejected.
+#' @param .coerce_function (`logical(1)`) Should functions be converted to
+#'   lists (see [to_lst()])? If `FALSE` (default), functions are rejected.
 #' @param .required `(character)` Names (from `...`) of elements that must be
 #'   present in `.x`. Defaults to all names in `...`, so every named spec is
 #'   required unless you opt it out. Named specs *not* listed here are optional:
@@ -42,6 +44,8 @@
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 #'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
+#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
+#'   FALSE` (the default).
 #'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
 #'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
@@ -122,6 +126,7 @@ stabilize_lst <- function(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -136,7 +141,12 @@ stabilize_lst <- function(
       call = .call
     ))
   }
-  .x <- to_lst(.x, x_arg = .x_arg, call = .call)
+  .x <- to_lst(
+    .x,
+    coerce_function = .coerce_function,
+    x_arg = .x_arg,
+    call = .call
+  )
   .check_size(
     .x,
     min_size = .min_size,

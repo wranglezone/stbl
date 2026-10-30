@@ -19,6 +19,7 @@ stabilize_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -36,6 +37,7 @@ stabilize_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -53,6 +55,7 @@ stabilise_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -70,6 +73,7 @@ stabilise_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -127,6 +131,9 @@ if absent, no error is raised; if present, they're validated normally. Pass
 \code{NULL} or \code{character()} to make every named spec optional. A zero-length
 \code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
+\item{.coerce_function}{(\code{logical(1)}) Should functions be converted to
+lists (see \code{\link[=to_lst]{to_lst()}})? If \code{FALSE} (default), functions are rejected.}
+
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -147,6 +154,7 @@ The validated list, or an error condition with classes
 \itemize{
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
 \item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
+\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function =   FALSE} (the default).
 \item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
 \item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
 \item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate

@@ -106,3 +106,9 @@ test_that("to_lst() rethrows as.list() errors as stbl errors (#369)", {
   given <- structure(1, class = "stbl_bad_list")
   expect_pkg_error_classes(to_lst(given), "stbl", "coerce", "list")
 })
+
+test_that("to_lst() ignores coerce_function for non-function input (#380)", {
+  expect_identical(to_lst(list(a = 1L), coerce_function = TRUE), list(a = 1L))
+  expect_null(to_lst(NULL, coerce_function = TRUE))
+  expect_identical(to_lst(1:2, coerce_function = TRUE), list(1L, 2L))
+})
