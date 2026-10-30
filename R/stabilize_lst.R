@@ -29,8 +29,6 @@
 #'   element of `.x` shares a name with another.
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
 #'   `TRUE`, duplicated elements are rejected.
-#' @param .coerce_function (`logical(1)`) Should functions be converted to
-#'   lists (see [to_lst()])? If `FALSE` (default), functions are rejected.
 #' @param .required `(character)` Names (from `...`) of elements that must be
 #'   present in `.x`. Defaults to all names in `...`, so every named spec is
 #'   required unless you opt it out. Named specs *not* listed here are optional:

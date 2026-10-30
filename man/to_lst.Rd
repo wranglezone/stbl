@@ -70,8 +70,7 @@ to_list(
 
 \item{...}{Arguments passed to \code{\link[base:as.list]{base::as.list()}} or other methods.}
 
-\item{coerce_function}{(\code{logical(1)}) Should functions be converted? Ignored
-for input that is not a function.}
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

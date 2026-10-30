@@ -17,8 +17,6 @@
 #'   `allow_null = FALSE`).
 #'
 #' @param ... Arguments passed to [base::as.list()] or other methods.
-#' @param coerce_function (`logical(1)`) Should functions be converted? Ignored
-#'   for input that is not a function.
 #' @inheritParams .shared-params
 #'
 #' @returns The object as a list, or an error condition with classes

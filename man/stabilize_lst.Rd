@@ -131,8 +131,7 @@ if absent, no error is raised; if present, they're validated normally. Pass
 \code{NULL} or \code{character()} to make every named spec optional. A zero-length
 \code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
-\item{.coerce_function}{(\code{logical(1)}) Should functions be converted to
-lists (see \code{\link[=to_lst]{to_lst()}})? If \code{FALSE} (default), functions are rejected.}
+\item{.coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
