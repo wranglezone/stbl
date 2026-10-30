@@ -4,6 +4,12 @@
 
 ### New features
 
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  gain a `.coerce_function` argument, so functions can be converted to
+  lists from the wrappers
+  ([\#380](https://github.com/wranglezone/stbl/issues/380)).
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) (and
   so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
   `POSIXct` target,

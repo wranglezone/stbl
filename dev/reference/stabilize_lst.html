@@ -67,6 +67,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -84,6 +85,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -101,6 +103,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -118,6 +121,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -197,6 +201,10 @@ if absent, no error is raised; if present, they're validated normally. Pass
 <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>.</p></dd>
 
 
+<dt id="arg--coerce-function">.coerce_function<a class="anchor" aria-label="anchor" href="#arg--coerce-function"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
+
+
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -222,6 +230,7 @@ the original class.</p></dd>
 <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be converted to a list.</p></li>
+<li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>.coerce_function =   FALSE</code> (the default).</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate

@@ -55,7 +55,8 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_list</span><span class="op">(</span></span>
@@ -67,7 +68,8 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -132,6 +134,10 @@ required unless you opt it out. Named specs <em>not</em> listed here are optiona
 if absent, no error is raised; if present, they're validated normally. Pass
 <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A zero-length
 <code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>.</p></dd>
+
+
+<dt id="arg--coerce-function">.coerce_function<a class="anchor" aria-label="anchor" href="#arg--coerce-function"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
 
 </dl></div>
     <div class="section level2">

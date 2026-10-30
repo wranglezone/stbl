@@ -21,6 +21,7 @@ stabilize_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -38,6 +39,7 @@ stabilize_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -55,6 +57,7 @@ stabilise_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -72,6 +75,7 @@ stabilise_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
+  .coerce_function = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -166,6 +170,10 @@ stabilise_list(
   [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
   `.allow_zero_length = TRUE`.
 
+- .coerce_function:
+
+  (`logical(1)`) Should functions be converted?
+
 - .x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -194,6 +202,9 @@ specific class by failure mode:
 - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 
 - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
+
+- `<stbl-error-bad_function>` for functions when
+  `.coerce_function = FALSE` (the default).
 
 - `<stbl-error-size_too_small>` when the list is shorter than
   `.min_size`.

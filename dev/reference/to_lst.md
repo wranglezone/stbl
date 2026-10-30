@@ -8,17 +8,39 @@ informative error message is signaled. `to_list()` is a synonym of
 ## Usage
 
 ``` r
-to_lst(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
-to_list(x, ..., x_arg = caller_arg(x), to_arg = NULL, call = caller_env())
+to_list(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'list'
-to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # Default S3 method
 to_lst(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -30,6 +52,7 @@ to_lst(
   x,
   ...,
   allow_null = TRUE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env()
@@ -57,6 +80,10 @@ to_lst(
   Arguments passed to
   [`base::as.list()`](https://rdrr.io/r/base/list.html) or other
   methods.
+
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
 
 - x_arg:
 
@@ -87,10 +114,6 @@ to_lst(
 - allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
-
-- coerce_function:
-
-  (`logical(1)`) Should functions be converted?
 
 ## Value
 

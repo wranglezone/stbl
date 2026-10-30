@@ -49,17 +49,39 @@ message is signaled. <code>to_list()</code> is a synonym of <code>to_lst()</code
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, to_arg <span class="op">=</span> <span class="cn">NULL</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">to_lst</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">to_list</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, to_arg <span class="op">=</span> <span class="cn">NULL</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">to_list</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'list'</span></span>
-<span><span class="fu">to_lst</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">to_lst</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
 <span><span class="fu">to_lst</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -71,6 +93,7 @@ message is signaled. <code>to_list()</code> is a synonym of <code>to_lst()</code
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -97,6 +120,10 @@ message is signaled. <code>to_list()</code> is a synonym of <code>to_lst()</code
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::as.list()</a></code> or other methods.</p></dd>
+
+
+<dt id="arg-coerce-function">coerce_function<a class="anchor" aria-label="anchor" href="#arg-coerce-function"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -127,10 +154,6 @@ the original class.</p></dd>
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
-
-
-<dt id="arg-coerce-function">coerce_function<a class="anchor" aria-label="anchor" href="#arg-coerce-function"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
 
 </dl></div>
     <div class="section level2">
