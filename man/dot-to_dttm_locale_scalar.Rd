@@ -9,6 +9,7 @@
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -35,6 +36,10 @@ that parses every non-\code{NA} element of \code{x} is used; if none do, the res
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
+reject numbers.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

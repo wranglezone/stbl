@@ -23,6 +23,7 @@
 #' try(stabilize_recent("1999-12-31T00:00:00Z"))
 specify_dttm <- function(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -41,6 +42,7 @@ specify_dttm <- function(
 #' @rdname specify_dttm
 specify_dttm_scalar <- function(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,

@@ -112,3 +112,20 @@ test_that("specify_dttm_scalar() creates a working scalar stabilizer (#105, #325
     "non_scalar"
   )
 })
+
+test_that("specify_dttm() can set treat_number_as (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  checker <- specify_dttm(treat_number_as = "milliseconds")
+  expect_identical(checker(1704110400000), expected)
+  strict <- specify_dttm(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "datetime")
+  expect_identical(strict("2024-01-01T12:00:00Z"), expected)
+})
+
+test_that("specify_dttm_scalar() can set treat_number_as (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  checker <- specify_dttm_scalar(treat_number_as = "milliseconds")
+  expect_identical(checker(1704110400000), expected)
+  strict <- specify_dttm_scalar(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "datetime")
+})

@@ -392,3 +392,57 @@ test_that("specify_dttm() resolves an empty tz to the local time zone (#370)", {
   result <- specify_dttm(tz = "")("2024-01-01T12:00:00Z")
   expect_identical(attr(result, "tzone"), "Asia/Tokyo")
 })
+
+test_that("stabilize_dttm() respects treat_number_as (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(
+    stabilize_dttm(1704110400000, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_identical(stabilize_dttm(1704110400), expected)
+  expect_identical(
+    stabilize_dttm(1704110400L, treat_number_as = "seconds"),
+    expected
+  )
+  expect_pkg_error_classes(
+    stabilize_dttm(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+  expect_error(
+    stabilize_dttm(1, treat_number_as = "days"),
+    class = "rlang_error"
+  )
+})
+
+test_that("stabilize_dttm() ignores treat_number_as for non-numbers (#372)", {
+  expect_identical(
+    stabilize_dttm("2024-01-01T12:00:00Z", treat_number_as = "error"),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+  expect_identical(
+    stabilize_dttm(
+      factor("2024-01-01T12:00:00Z"),
+      treat_number_as = "error"
+    ),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+})
+
+test_that("stabilize_dttm_scalar() respects treat_number_as (#372)", {
+  expect_identical(
+    stabilize_dttm_scalar(1704110400000, treat_number_as = "milliseconds"),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+  expect_pkg_error_classes(
+    stabilize_dttm_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+  expect_identical(
+    stabilize_dttm_scalar("2024-01-01T12:00:00Z", treat_number_as = "error"),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+})

@@ -10,13 +10,13 @@
 \alias{to_dttm.POSIXlt}
 \alias{to_dttm.Date}
 \alias{to_dttm.numeric}
-\alias{to_dttm.integer}
 \title{Convert to date-time}
 \usage{
 to_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -27,6 +27,7 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -68,9 +69,16 @@ to_datetime(
 
 \method{to_dttm}{Date}(x, ..., tz = "UTC", call = caller_env())
 
-\method{to_dttm}{numeric}(x, ..., tz = "UTC", call = caller_env())
-
-\method{to_dttm}{integer}(x, ..., tz = "UTC", call = caller_env())
+\method{to_dttm}{numeric}(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 }
 \arguments{
 \item{x}{The object to stabilize.}
@@ -83,6 +91,10 @@ time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that t
 its time zone. To use the time zone of an existing object, or your local
 time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
 \code{\link[=resolve_tz]{resolve_tz()}}).}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
+reject numbers.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -128,8 +140,18 @@ either \code{"Z"} or a numeric offset such as \code{"+05:00"}); any other shape 
 rejected (but see \code{\link[=stabilize_dttm]{stabilize_dttm()}}). A space may be used instead of \code{"T"}
 to separate the date and time. All values are normalized to the time zone
 named by \code{tz} (\code{"UTC"} by default); the underlying instant in time is
-preserved, only its display time zone changes. Numeric and integer values are
-treated as the number of seconds since the Unix epoch (\code{"1970-01-01 00:00:00 UTC"}). \link[base:Date]{base::Date} values are treated as midnight UTC on that date.
+preserved, only its display time zone changes.
+
+Numeric and integer values are interpreted according to \code{treat_number_as}, by
+default as the number of seconds since the Unix epoch (\code{"1970-01-01 00:00:00 UTC"}). Milliseconds are converted to seconds by dividing by 1000, which
+preserves whole milliseconds for realistic dates. Doubles can't represent
+whole milliseconds beyond roughly the year 287,000, so values that large have
+already lost precision before conversion. Note that \code{\link[=format]{format()}} truncates
+rather than rounds fractional seconds, so a value such as \code{12:00:00.1228} may
+display as \code{12:00:00.122}; the stored value is not affected.
+\code{treat_number_as} is ignored for other types of input.
+
+\link[base:Date]{base::Date} values are treated as midnight UTC on that date.
 }
 \examples{
 to_dttm(as.POSIXct("2024-01-01 12:00:00", tz = "UTC"))
@@ -137,6 +159,8 @@ to_dttm("2024-01-01T12:00:00Z")
 to_dttm("2024-01-01T12:00:00-05:00")
 to_dttm(c("2024-01-01T12:00:00Z", NA))
 to_dttm(0L)
+to_dttm(1704110400000, treat_number_as = "milliseconds")
+try(to_dttm(0, treat_number_as = "error"))
 to_dttm(as.Date("2024-01-01"))
 to_dttm(NULL)
 try(to_dttm("2024-01-01 12:00:00"))

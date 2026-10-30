@@ -154,6 +154,10 @@ conversion.}
 
 \item{to_type_obj}{An empty object of the target type (e.g., \code{integer()}).}
 
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
+reject numbers.}
+
 \item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
 from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
 time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names

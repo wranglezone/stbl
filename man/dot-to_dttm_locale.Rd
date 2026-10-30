@@ -2,6 +2,9 @@
 % Please edit documentation in R/stabilize_dttm.R
 \name{.to_dttm_locale}
 \alias{.to_dttm_locale}
+\alias{.to_dttm_locale.factor}
+\alias{.to_dttm_locale.character}
+\alias{.to_dttm_locale.default}
 \title{Convert to date-time, trying \code{accepted_datetime_formats} for character input}
 \usage{
 .to_dttm_locale(
@@ -9,6 +12,38 @@
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{.to_dttm_locale}{factor}(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{.to_dttm_locale}{character}(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+\method{.to_dttm_locale}{default}(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  treat_number_as = "seconds",
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -33,6 +68,10 @@ that parses every non-\code{NA} element of \code{x} is used; if none do, the res
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
+reject numbers.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

@@ -161,6 +161,81 @@ test_that("to_dttm() treats numerics as seconds since the epoch (#105)", {
   expect_identical(to_dttm(0L), as.POSIXct("1970-01-01 00:00:00", tz = "UTC"))
 })
 
+test_that("to_dttm() treat_number_as = 'milliseconds' divides by 1000 (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(
+    to_dttm(1704110400000, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_identical(
+    to_dttm(c(0L, NA), treat_number_as = "milliseconds"),
+    as.POSIXct(c("1970-01-01 00:00:00", NA), tz = "UTC")
+  )
+  expect_identical(
+    as.numeric(to_dttm(1500.5, treat_number_as = "milliseconds")),
+    1.5005
+  )
+})
+
+test_that("to_dttm() treat_number_as = 'seconds' is the default (#372)", {
+  expect_identical(
+    to_dttm(1.5, treat_number_as = "seconds"),
+    to_dttm(1.5)
+  )
+  expect_identical(as.numeric(to_dttm(1.5)), 1.5)
+  expect_identical(
+    to_dttm(c(1L, NA)),
+    as.POSIXct(c("1970-01-01 00:00:01", NA), tz = "UTC")
+  )
+  expect_identical(
+    to_dttm(1704110400),
+    as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  )
+})
+
+test_that("to_dttm() treat_number_as = 'error' rejects numbers (#372)", {
+  expect_pkg_error_classes(
+    to_dttm(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+  expect_pkg_error_classes(
+    to_dttm(1L, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+  expect_pkg_error_classes(
+    to_dttm(NA_real_, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+})
+
+test_that("to_dttm() validates treat_number_as (#372)", {
+  expect_error(to_dttm(1, treat_number_as = "days"), class = "rlang_error")
+})
+
+test_that("treat_number_as passes through to_dttm_scalar() and to() (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(
+    to_dttm_scalar(1704110400000, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_identical(
+    to(1704110400000, expected, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_pkg_error_classes(
+    to(1, expected, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "datetime"
+  )
+})
+
 test_that("to_dttm() errors properly for other types (#105, #369)", {
   given <- as.raw(1:10)
   expect_pkg_error_classes(to_dttm(given), "stbl", "coerce", "datetime")
