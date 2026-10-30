@@ -11,6 +11,7 @@ stabilize_dttm_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -27,6 +28,7 @@ stabilise_dttm_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -43,6 +45,7 @@ stabilize_datetime_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -59,6 +62,7 @@ stabilise_datetime_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -82,6 +86,10 @@ time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that t
 its time zone. To use the time zone of an existing object, or your local
 time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
 \code{\link[=resolve_tz]{resolve_tz()}}).}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
+reject numbers.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

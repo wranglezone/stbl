@@ -6,7 +6,6 @@
 #' `stabilize_dttm()`.
 #'
 #' @inheritParams .shared-params
-#' @inheritParams to_dttm
 #'
 #' @returns The input as a [base::POSIXct] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
@@ -53,6 +52,7 @@ stabilize_dttm <- function(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -71,6 +71,7 @@ stabilize_dttm <- function(
     to_cls_fn = .to_dttm_locale,
     to_cls_args = list(
       tz = tz,
+      treat_number_as = treat_number_as,
       accepted_datetime_formats = accepted_datetime_formats
     ),
     check_cls_value_fn = .check_value_dttm,
@@ -147,6 +148,7 @@ stabilize_dttm_scalar <- function(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -163,6 +165,7 @@ stabilize_dttm_scalar <- function(
     to_cls_scalar_fn = .to_dttm_locale_scalar,
     to_cls_scalar_args = list(
       tz = tz,
+      treat_number_as = treat_number_as,
       accepted_datetime_formats = accepted_datetime_formats
     ),
     check_cls_value_fn = .check_value_dttm,
@@ -210,31 +213,47 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  UseMethod(".to_dttm_locale")
+}
+
+#' @export
+#' @rdname dot-to_dttm_locale
+.to_dttm_locale.factor <- function(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  .to_dttm_locale(
+    as.character(x),
+    tz = tz,
+    accepted_datetime_formats = accepted_datetime_formats,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
+#' @rdname dot-to_dttm_locale
+.to_dttm_locale.character <- function(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   tz <- .check_tz(tz, call = call)
-  if (inherits(x, "factor")) {
-    return(.to_dttm_locale(
-      as.character(x),
-      tz = tz,
-      accepted_datetime_formats = accepted_datetime_formats,
-      x_arg = x_arg,
-      call = call,
-      x_class = x_class
-    ))
-  }
-  if (!is.character(x)) {
-    return(to_dttm(
-      x,
-      ...,
-      tz = tz,
-      x_arg = x_arg,
-      call = call,
-      x_class = x_class
-    ))
-  }
   result <- .try_dttm_formats(x, accepted_datetime_formats, tz = tz)
   .check_conversion_failures(
     x,
@@ -247,6 +266,29 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
   )
   attr(result$parsed, "tzone") <- tz
   return(result$parsed)
+}
+
+#' @export
+#' @rdname dot-to_dttm_locale
+.to_dttm_locale.default <- function(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  treat_number_as = "seconds",
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  to_dttm(
+    x,
+    ...,
+    tz = tz,
+    treat_number_as = treat_number_as,
+    x_arg = x_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' Convert to length-1 date-time, trying `accepted_datetime_formats`
@@ -263,6 +305,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -275,6 +318,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
     to_cls_fn = .to_dttm_locale,
     to_cls_args = list(
       tz = tz,
+      treat_number_as = treat_number_as,
       accepted_datetime_formats = accepted_datetime_formats
     ),
     allow_null = allow_null,

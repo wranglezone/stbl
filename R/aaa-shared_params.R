@@ -107,6 +107,9 @@
 #'   conversion.
 #' @param to_na `(character)` Values to convert to `NA`.
 #' @param to_type_obj An empty object of the target type (e.g., `integer()`).
+#' @param treat_number_as (`character(1)`) How to interpret numeric input:
+#'   `"seconds"` or `"milliseconds"` since the Unix epoch, or `"error"` to
+#'   reject numbers.
 #' @param tz (`character(1)`) The time zone to normalize `x` to. Must be a value
 #'   from [OlsonNames()] or `""`, which is replaced by the name of your local
 #'   time zone (as reported by [Sys.timezone()]) so that the result always names

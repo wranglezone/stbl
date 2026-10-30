@@ -13,9 +13,19 @@
 #' rejected (but see [stabilize_dttm()]). A space may be used instead of `"T"`
 #' to separate the date and time. All values are normalized to the time zone
 #' named by `tz` (`"UTC"` by default); the underlying instant in time is
-#' preserved, only its display time zone changes. Numeric and integer values are
-#' treated as the number of seconds since the Unix epoch (`"1970-01-01 00:00:00
-#' UTC"`). [base::Date] values are treated as midnight UTC on that date.
+#' preserved, only its display time zone changes.
+#'
+#' Numeric and integer values are interpreted according to `treat_number_as`, by
+#' default as the number of seconds since the Unix epoch (`"1970-01-01 00:00:00
+#' UTC"`). Milliseconds are converted to seconds by dividing by 1000, which
+#' preserves whole milliseconds for realistic dates. Doubles can't represent
+#' whole milliseconds beyond roughly the year 287,000, so values that large have
+#' already lost precision before conversion. Note that [format()] truncates
+#' rather than rounds fractional seconds, so a value such as `12:00:00.1228` may
+#' display as `12:00:00.122`; the stored value is not affected.
+#' `treat_number_as` is ignored for other types of input.
+#'
+#' [base::Date] values are treated as midnight UTC on that date.
 #'
 #' @inheritParams .shared-params
 #'
@@ -37,6 +47,8 @@
 #' to_dttm("2024-01-01T12:00:00-05:00")
 #' to_dttm(c("2024-01-01T12:00:00Z", NA))
 #' to_dttm(0L)
+#' to_dttm(1704110400000, treat_number_as = "milliseconds")
+#' try(to_dttm(0, treat_number_as = "error"))
 #' to_dttm(as.Date("2024-01-01"))
 #' to_dttm(NULL)
 #' try(to_dttm("2024-01-01 12:00:00"))
@@ -45,6 +57,7 @@ to_dttm <- function(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -206,16 +219,31 @@ to_dttm.Date <- function(x, ..., tz = "UTC", call = caller_env()) {
 
 #' @export
 #' @rdname to_dttm
-to_dttm.numeric <- function(x, ..., tz = "UTC", call = caller_env()) {
+to_dttm.numeric <- function(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  treat_number_as <- rlang::arg_match(treat_number_as, error_call = call)
+  if (treat_number_as == "error") {
+    .stop_cant_convert(
+      from_class = x_class,
+      to_class = "datetime",
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call
+    )
+  }
   tz <- .check_tz(tz, call = call)
-  # Numeric values are seconds since the Unix epoch.
+  if (treat_number_as == "milliseconds") {
+    x <- x / 1000
+  }
   return(as.POSIXct(x, origin = "1970-01-01", tz = tz))
-}
-
-#' @export
-#' @rdname to_dttm
-to_dttm.integer <- function(x, ..., tz = "UTC", call = caller_env()) {
-  to_dttm.numeric(x, tz = tz, call = call)
 }
 
 #' @export
@@ -275,6 +303,7 @@ to_dttm_scalar <- function(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -286,7 +315,10 @@ to_dttm_scalar <- function(
     x,
     is_rlang_cls_scalar = .is_scalar_dttm,
     to_cls_fn = to_dttm,
-    to_cls_args = c(list(tz = tz), list(...)),
+    to_cls_args = c(
+      list(tz = tz, treat_number_as = treat_number_as),
+      list(...)
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
