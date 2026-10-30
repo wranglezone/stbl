@@ -291,6 +291,12 @@ conversion.</p></dd>
 <dd><p>An empty object of the target type (e.g., <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code>).</p></dd>
 
 
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, or <code>"error"</code> to
+reject numbers.</p></dd>
+
+
 <dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
 <dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
 from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local

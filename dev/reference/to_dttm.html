@@ -53,6 +53,7 @@ message is signaled. <code>to_datetime()</code> is a synonym of <code>to_dttm()<
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -63,6 +64,7 @@ message is signaled. <code>to_datetime()</code> is a synonym of <code>to_dttm()<
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -111,10 +113,16 @@ message is signaled. <code>to_datetime()</code> is a synonym of <code>to_dttm()<
 <span><span class="fu">to_dttm</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, tz <span class="op">=</span> <span class="st">"UTC"</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'numeric'</span></span>
-<span><span class="fu">to_dttm</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, tz <span class="op">=</span> <span class="st">"UTC"</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'integer'</span></span>
-<span><span class="fu">to_dttm</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, tz <span class="op">=</span> <span class="st">"UTC"</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">to_dttm</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -136,6 +144,12 @@ time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" 
 its time zone. To use the time zone of an existing object, or your local
 time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
 <code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
+
+
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, or <code>"error"</code> to
+reject numbers.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -186,8 +200,16 @@ either <code>"Z"</code> or a numeric offset such as <code>"+05:00"</code>); any 
 rejected (but see <code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>). A space may be used instead of <code>"T"</code>
 to separate the date and time. All values are normalized to the time zone
 named by <code>tz</code> (<code>"UTC"</code> by default); the underlying instant in time is
-preserved, only its display time zone changes. Numeric and integer values are
-treated as the number of seconds since the Unix epoch (<code>"1970-01-01 00:00:00 UTC"</code>). <a href="https://rdrr.io/r/base/Dates.html" class="external-link">base::Date</a> values are treated as midnight UTC on that date.</p>
+preserved, only its display time zone changes.</p>
+<p>Numeric and integer values are interpreted according to <code>treat_number_as</code>, by
+default as the number of seconds since the Unix epoch (<code>"1970-01-01 00:00:00 UTC"</code>). Milliseconds are converted to seconds by dividing by 1000, which
+preserves whole milliseconds for realistic dates. Doubles can't represent
+whole milliseconds beyond roughly the year 287,000, so values that large have
+already lost precision before conversion. Note that <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> truncates
+rather than rounds fractional seconds, so a value such as <code>12:00:00.1228</code> may
+display as <code>12:00:00.122</code>; the stored value is not affected.
+<code>treat_number_as</code> is ignored for other types of input.</p>
+<p><a href="https://rdrr.io/r/base/Dates.html" class="external-link">base::Date</a> values are treated as midnight UTC on that date.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -258,6 +280,11 @@ treated as the number of seconds since the Unix epoch (<code>"1970-01-01 00:00:0
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01 12:00:00 UTC" NA                       </span>
 <span class="r-in"><span><span class="fu">to_dttm</span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1970-01-01 UTC"</span>
+<span class="r-in"><span><span class="fu">to_dttm</span><span class="op">(</span><span class="fl">1704110400000</span>, treat_number_as <span class="op">=</span> <span class="st">"milliseconds"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01 12:00:00 UTC"</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_dttm</span><span class="op">(</span><span class="fl">0</span>, treat_number_as <span class="op">=</span> <span class="st">"error"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't convert `0` <span style="color: #0000BB;">&lt;double&gt;</span> to <span style="color: #0000BB;">&lt;datetime&gt;</span>.</span>
 <span class="r-in"><span><span class="fu">to_dttm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2024-01-01"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-01-01 UTC"</span>
 <span class="r-in"><span><span class="fu">to_dttm</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></span>

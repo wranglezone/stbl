@@ -11,6 +11,7 @@ to_dttm_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -23,6 +24,7 @@ to_datetime_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -52,6 +54,11 @@ to_datetime_scalar(
   object, or your local time zone if it doesn't have one, use
   `tz = resolve_tz(x)` (see
   [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - allow_null:
 

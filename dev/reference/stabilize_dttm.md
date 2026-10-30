@@ -14,6 +14,7 @@ stabilize_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -32,6 +33,7 @@ stabilise_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -50,6 +52,7 @@ stabilize_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -68,6 +71,7 @@ stabilise_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -103,6 +107,11 @@ stabilise_datetime(
   object, or your local time zone if it doesn't have one, use
   `tz = resolve_tz(x)` (see
   [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - allow_null:
 

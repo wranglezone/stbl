@@ -14,6 +14,7 @@ with the provided arguments. `specify_datetime()` is a synonym of
 ``` r
 specify_dttm(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -27,6 +28,7 @@ specify_dttm(
 
 specify_dttm_scalar(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -38,6 +40,7 @@ specify_dttm_scalar(
 
 specify_datetime(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -51,6 +54,7 @@ specify_datetime(
 
 specify_datetime_scalar(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -73,6 +77,11 @@ specify_datetime_scalar(
   object, or your local time zone if it doesn't have one, use
   `tz = resolve_tz(x)` (see
   [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - allow_null:
 

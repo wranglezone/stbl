@@ -15,6 +15,7 @@ in place of
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -56,6 +57,11 @@ in place of
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - allow_null:
 

@@ -121,9 +121,6 @@
   value to a target type
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
   Convert to date
-- [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
-  [`to_datetime()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md)
-  : Convert to date-time
 - [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
   [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
   Convert to a duration

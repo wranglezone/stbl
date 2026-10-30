@@ -255,6 +255,11 @@ to make them easier to import and to find.
   An empty object of the target type (e.g.,
   [`integer()`](https://rdrr.io/r/base/integer.html)).
 
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
+
 - tz:
 
   (`character(1)`) The time zone to normalize `x` to. Must be a value

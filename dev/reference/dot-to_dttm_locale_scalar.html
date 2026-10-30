@@ -51,6 +51,7 @@ stabilize_dttm_scalar() in place of to_dttm_scalar()."><meta property="og:image"
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">tz</span>,</span>
 <span>  <span class="va">accepted_datetime_formats</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="st">"seconds"</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -88,6 +89,12 @@ that parses every non-<code>NA</code> element of <code>x</code> is used; if none
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
 shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>
+
+
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, or <code>"error"</code> to
+reject numbers.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>

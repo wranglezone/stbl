@@ -4,6 +4,14 @@
 
 ### New features
 
+- [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) (and
+  so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
+  `POSIXct` target,
+  [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
+  and related functions) gains a `treat_number_as` argument to control
+  how numbers are interpreted: `"seconds"` (the default) or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers
+  ([\#372](https://github.com/wranglezone/stbl/issues/372)).
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md), all `to_*()`
   functions, and `stbl_to()` (C API) gain a `to_arg` argument, like
   [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).

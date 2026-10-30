@@ -13,6 +13,7 @@ to_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -23,6 +24,7 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -71,10 +73,16 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 to_dttm(x, ..., tz = "UTC", call = caller_env())
 
 # S3 method for class 'numeric'
-to_dttm(x, ..., tz = "UTC", call = caller_env())
-
-# S3 method for class 'integer'
-to_dttm(x, ..., tz = "UTC", call = caller_env())
+to_dttm(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
@@ -97,6 +105,11 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
   object, or your local time zone if it doesn't have one, use
   `tz = resolve_tz(x)` (see
   [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - x_arg:
 
@@ -156,8 +169,20 @@ rejected (but see
 A space may be used instead of `"T"` to separate the date and time. All
 values are normalized to the time zone named by `tz` (`"UTC"` by
 default); the underlying instant in time is preserved, only its display
-time zone changes. Numeric and integer values are treated as the number
-of seconds since the Unix epoch (`"1970-01-01 00:00:00 UTC"`).
+time zone changes.
+
+Numeric and integer values are interpreted according to
+`treat_number_as`, by default as the number of seconds since the Unix
+epoch (`"1970-01-01 00:00:00 UTC"`). Milliseconds are converted to
+seconds by dividing by 1000, which preserves whole milliseconds for
+realistic dates. Doubles can't represent whole milliseconds beyond
+roughly the year 287,000, so values that large have already lost
+precision before conversion. Note that
+[`format()`](https://rdrr.io/r/base/format.html) truncates rather than
+rounds fractional seconds, so a value such as `12:00:00.1228` may
+display as `12:00:00.122`; the stored value is not affected.
+`treat_number_as` is ignored for other types of input.
+
 [base::Date](https://rdrr.io/r/base/Dates.html) values are treated as
 midnight UTC on that date.
 
@@ -231,6 +256,11 @@ to_dttm(c("2024-01-01T12:00:00Z", NA))
 #> [1] "2024-01-01 12:00:00 UTC" NA                       
 to_dttm(0L)
 #> [1] "1970-01-01 UTC"
+to_dttm(1704110400000, treat_number_as = "milliseconds")
+#> [1] "2024-01-01 12:00:00 UTC"
+try(to_dttm(0, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `0` <double> to <datetime>.
 to_dttm(as.Date("2024-01-01"))
 #> [1] "2024-01-01 UTC"
 to_dttm(NULL)

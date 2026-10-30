@@ -21,6 +21,41 @@ unchanged.
   ...,
   tz,
   accepted_datetime_formats,
+  treat_number_as = "seconds",
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'factor'
+.to_dttm_locale(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'character'
+.to_dttm_locale(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  x_arg = caller_arg(x),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# Default S3 method
+.to_dttm_locale(
+  x,
+  ...,
+  tz,
+  accepted_datetime_formats,
+  treat_number_as = "seconds",
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -60,6 +95,11 @@ unchanged.
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
 
 - x_arg:
 
