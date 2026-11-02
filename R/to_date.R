@@ -11,8 +11,12 @@
 #' (`"YYYY-MM-DD"`); any other shape (such as `"11/13/2018"`) is rejected (but
 #' see [stabilize_date()]). `POSIXct` and `POSIXlt` values are truncated to
 #' their date component, discarding the time-of-day and timezone offset. Numeric
-#' and integer values are treated as the number of days since the Unix epoch
-#' (`"1970-01-01"`).
+#' and integer values are interpreted according to `treat_number_as`, by default
+#' as the number of days since the Unix epoch (`"1970-01-01"`). Seconds and
+#' milliseconds since the epoch are converted to the date in the time zone named
+#' by `tz` (`"UTC"` by default), rounding down. `POSIXct` values are likewise
+#' converted to `tz` before truncating. `tz` is ignored for other types of
+#' input, and `treat_number_as` is ignored for non-numeric input.
 #'
 #' @inheritParams .shared-params
 #'
@@ -31,6 +35,8 @@
 #' to_date("2024-01-01")
 #' to_date(c("2024-01-01", NA))
 #' to_date(0L)
+#' to_date(1704110400, treat_number_as = "seconds")
+#' try(to_date(0, treat_number_as = "error"))
 #' to_date(as.POSIXct("2024-01-01 23:00:00", tz = "UTC"))
 #' to_date(NULL)
 #' try(to_date("11/13/2018"))
@@ -38,6 +44,8 @@
 to_date <- function(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -116,10 +124,11 @@ to_date.factor <- function(
 
 #' @export
 #' @rdname to_date
-to_date.POSIXct <- function(x, ...) {
-  # Base R's Date method for POSIXct respects the tzone attribute, discarding
-  # time-of-day and timezone offset.
-  return(as.Date(x))
+to_date.POSIXct <- function(x, ..., tz = "UTC", call = caller_env()) {
+  # Convert to `tz` first, because as.Date.POSIXct() would otherwise use UTC
+  # regardless of the tzone attribute.
+  x <- to_dttm(x, tz = tz, call = call)
+  return(as.Date(x, tz = attr(x, "tzone")))
 }
 
 #' @export
@@ -130,15 +139,76 @@ to_date.POSIXlt <- function(x, ...) {
 
 #' @export
 #' @rdname to_date
-to_date.numeric <- function(x, ...) {
-  # Numeric values are days since the Unix epoch.
-  return(as.Date(x, origin = "1970-01-01"))
+to_date.numeric <- function(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  treat_number_as <- rlang::arg_match(treat_number_as, error_call = call)
+  switch(
+    treat_number_as,
+    days = .days_to_date(x),
+    seconds = ,
+    milliseconds = .epoch_to_date(
+      x,
+      tz = tz,
+      treat_number_as = treat_number_as,
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call,
+      x_class = x_class
+    ),
+    error = .stop_cant_convert(
+      from_class = x_class,
+      to_class = "date",
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call
+    )
+  )
 }
 
-#' @export
-#' @rdname to_date
-to_date.integer <- function(x, ...) {
-  return(as.Date(x, origin = "1970-01-01"))
+#' Convert days since the Unix epoch to dates
+#'
+#' @inheritParams .shared-params
+#' @returns A [base::Date] vector.
+#' @keywords internal
+.days_to_date <- function(x) {
+  as.Date(x, origin = "1970-01-01")
+}
+
+#' Convert seconds or milliseconds since the Unix epoch to dates
+#'
+#' Goes through [to_dttm()] and then truncates to the UTC date, so calendar
+#' details are handled by base R rather than by our own arithmetic.
+#'
+#' @inheritParams .shared-params
+#' @returns A [base::Date] vector.
+#' @keywords internal
+.epoch_to_date <- function(
+  x,
+  tz,
+  treat_number_as,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  dttm <- to_dttm(
+    x,
+    tz = tz,
+    treat_number_as = treat_number_as,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
+  return(to_date(dttm, tz = tz, call = call))
 }
 
 #' @export
@@ -169,6 +239,7 @@ to_date.default <- function(
 #' Checks whether a vector can be converted to a length-1 [base::Date] vector.
 #'
 #' @inheritParams .shared-params
+#' @inheritParams to_date
 #'
 #' @returns The input as a length-1 [base::Date] vector, or an error condition
 #'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
@@ -189,6 +260,8 @@ to_date.default <- function(
 to_date_scalar <- function(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -200,7 +273,10 @@ to_date_scalar <- function(
     x,
     is_rlang_cls_scalar = .is_scalar_date,
     to_cls_fn = to_date,
-    to_cls_args = list(...),
+    to_cls_args = c(
+      list(tz = tz, treat_number_as = treat_number_as),
+      list(...)
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,

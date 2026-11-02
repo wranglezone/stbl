@@ -276,3 +276,68 @@ test_that(".try_date_formats() skips NA elements (#326)", {
   expect_true(all(is.na(result$parsed)))
   expect_equal(result$failures, c(FALSE, FALSE))
 })
+
+test_that("stabilize_date() respects treat_number_as (#381)", {
+  expected <- as.Date("2024-01-01")
+  expect_identical(stabilize_date(19723), expected)
+  expect_identical(
+    stabilize_date(1704110400, treat_number_as = "seconds"),
+    expected
+  )
+  expect_identical(
+    stabilize_date(1704110400000, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_pkg_error_classes(
+    stabilize_date(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "date"
+  )
+  expect_error(
+    stabilize_date(1, treat_number_as = "bogus"),
+    class = "rlang_error"
+  )
+  expect_identical(
+    stabilize_date("2024-01-01", treat_number_as = "error"),
+    expected
+  )
+})
+
+test_that("stabilize_date_scalar() respects treat_number_as (#381)", {
+  expected <- as.Date("2024-01-01")
+  expect_identical(
+    stabilize_date_scalar(1704110400000, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_pkg_error_classes(
+    stabilize_date_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "date"
+  )
+  expect_identical(
+    stabilize_date_scalar("2024-01-01", treat_number_as = "error"),
+    expected
+  )
+})
+
+test_that("stabilize_date*() respect tz for epoch numbers (#381)", {
+  expected <- as.Date("2023-12-31")
+  expect_identical(
+    stabilize_date(
+      1704067200,
+      tz = "America/Los_Angeles",
+      treat_number_as = "seconds"
+    ),
+    expected
+  )
+  expect_identical(
+    stabilize_date_scalar(
+      1704067200,
+      tz = "America/Los_Angeles",
+      treat_number_as = "seconds"
+    ),
+    expected
+  )
+})

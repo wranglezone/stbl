@@ -20,6 +20,8 @@
 #' stabilize_recent("2024-01-01")
 #' try(stabilize_recent("1999-12-31"))
 specify_date <- function(
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -37,6 +39,8 @@ specify_date <- function(
 #' @export
 #' @rdname specify_date
 specify_date_scalar <- function(
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,

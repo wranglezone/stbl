@@ -23,7 +23,8 @@
 #' already lost precision before conversion. Note that [format()] truncates
 #' rather than rounds fractional seconds, so a value such as `12:00:00.1228` may
 #' display as `12:00:00.122`; the stored value is not affected.
-#' `treat_number_as` is ignored for other types of input.
+#' With `treat_number_as = "days"`, numbers are days since the epoch, giving
+#' midnight UTC. `treat_number_as` is ignored for other types of input.
 #'
 #' [base::Date] values are treated as midnight UTC on that date.
 #'
@@ -57,7 +58,7 @@ to_dttm <- function(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -223,7 +224,7 @@ to_dttm.numeric <- function(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -240,6 +241,21 @@ to_dttm.numeric <- function(
     )
   }
   tz <- .check_tz(tz, call = call)
+  if (treat_number_as == "days") {
+    return(to_dttm(
+      to_date(
+        x,
+        tz = tz,
+        treat_number_as = "days",
+        x_arg = x_arg,
+        to_arg = to_arg,
+        call = call,
+        x_class = x_class
+      ),
+      tz = tz,
+      call = call
+    ))
+  }
   if (treat_number_as == "milliseconds") {
     x <- x / 1000
   }
@@ -303,7 +319,7 @@ to_dttm_scalar <- function(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),

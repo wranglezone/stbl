@@ -16,7 +16,7 @@ to_dttm(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -27,7 +27,7 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -73,7 +73,7 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -93,8 +93,8 @@ time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
 \code{\link[=resolve_tz]{resolve_tz()}}).}
 
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
-\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
-reject numbers.}
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -149,7 +149,8 @@ whole milliseconds beyond roughly the year 287,000, so values that large have
 already lost precision before conversion. Note that \code{\link[=format]{format()}} truncates
 rather than rounds fractional seconds, so a value such as \code{12:00:00.1228} may
 display as \code{12:00:00.122}; the stored value is not affected.
-\code{treat_number_as} is ignored for other types of input.
+With \code{treat_number_as = "days"}, numbers are days since the epoch, giving
+midnight UTC. \code{treat_number_as} is ignored for other types of input.
 
 \link[base:Date]{base::Date} values are treated as midnight UTC on that date.
 }

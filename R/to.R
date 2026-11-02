@@ -7,9 +7,9 @@
 #'   `factor(levels = c("a", "b"))`).
 #' @param ... Arguments passed to methods and on to `to_*()` functions.
 #' @param tz (`character(1)`) The time zone to use when `.to` is a
-#'   [base::POSIXct]. Must be a value from [OlsonNames()] or `""` (your local
-#'   time zone). Defaults to the time zone of `.to`, or your local time zone if
-#'   `.to` doesn't name one (see [resolve_tz()]).
+#'   [base::POSIXct] or [base::Date]. Must be a value from [OlsonNames()] or
+#'   `""` (your local time zone). Defaults to the time zone of `.to`, or your
+#'   local time zone if `.to` doesn't name one (see [resolve_tz()]).
 #' @inheritParams .shared-params
 #'
 #' @returns `x` converted to the type of `.to`, or an error condition with
@@ -101,6 +101,7 @@ to.Date <- function(
   x,
   .to,
   ...,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -109,6 +110,7 @@ to.Date <- function(
   to_date(
     x,
     ...,
+    tz = tz,
     x_arg = x_arg,
     to_arg = to_arg,
     call = call,

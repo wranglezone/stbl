@@ -43,6 +43,8 @@
 stabilize_date <- function(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -59,7 +61,11 @@ stabilize_date <- function(
   .stabilize_cls(
     x,
     to_cls_fn = .to_date_locale,
-    to_cls_args = list(accepted_datetime_formats = accepted_datetime_formats),
+    to_cls_args = list(
+      tz = tz,
+      treat_number_as = treat_number_as,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     check_cls_value_fn = .check_value_date,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -118,6 +124,8 @@ stabilise_date <- stabilize_date
 stabilize_date_scalar <- function(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -133,6 +141,8 @@ stabilize_date_scalar <- function(
     x,
     to_cls_scalar_fn = .to_date_locale_scalar,
     to_cls_scalar_args = list(
+      tz = tz,
+      treat_number_as = treat_number_as,
       accepted_datetime_formats = accepted_datetime_formats
     ),
     check_cls_value_fn = .check_value_date,
@@ -169,6 +179,8 @@ stabilise_date_scalar <- stabilize_date_scalar
   x,
   ...,
   accepted_datetime_formats,
+  tz = "UTC",
+  treat_number_as = "days",
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -183,7 +195,15 @@ stabilise_date_scalar <- stabilize_date_scalar
     ))
   }
   if (!is.character(x)) {
-    return(to_date(x, ..., x_arg = x_arg, call = call, x_class = x_class))
+    return(to_date(
+      x,
+      ...,
+      tz = tz,
+      treat_number_as = treat_number_as,
+      x_arg = x_arg,
+      call = call,
+      x_class = x_class
+    ))
   }
   result <- .try_date_formats(x, accepted_datetime_formats)
   .check_conversion_failures(
@@ -210,6 +230,8 @@ stabilise_date_scalar <- stabilize_date_scalar
   x,
   ...,
   accepted_datetime_formats,
+  tz = "UTC",
+  treat_number_as = "days",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -220,7 +242,11 @@ stabilise_date_scalar <- stabilize_date_scalar
     x,
     is_rlang_cls_scalar = .is_scalar_date,
     to_cls_fn = .to_date_locale,
-    to_cls_args = list(accepted_datetime_formats = accepted_datetime_formats),
+    to_cls_args = list(
+      tz = tz,
+      treat_number_as = treat_number_as,
+      accepted_datetime_formats = accepted_datetime_formats
+    ),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,

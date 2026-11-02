@@ -9,7 +9,7 @@ to_dttm_scalar(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -22,7 +22,7 @@ to_datetime_scalar(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -44,8 +44,8 @@ time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
 \code{\link[=resolve_tz]{resolve_tz()}}).}
 
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
-\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
-reject numbers.}
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

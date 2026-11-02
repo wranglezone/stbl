@@ -70,8 +70,8 @@ shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
 
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
-\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, or \code{"error"} to
-reject numbers.}
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
