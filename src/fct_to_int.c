@@ -57,6 +57,7 @@ SEXP stbl_fct_to_int(SEXP x) {
                   LOGICAL(bad_precision));
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 3));
+  copy_names(x, result);
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, non_number);
   SET_VECTOR_ELT(out, 2, bad_precision);

@@ -12,6 +12,9 @@
 #'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
@@ -50,6 +53,7 @@ stabilize_chr <- function(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -71,6 +75,7 @@ stabilize_chr <- function(
     ),
     allow_null = allow_null,
     allow_na = allow_na,
+    named = named,
     min_size = min_size,
     max_size = max_size,
     unique = unique,
@@ -112,6 +117,9 @@ stabilise_character <- stabilize_chr
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-n_characters-too_few>` when the element has fewer characters
 #'   than `min_characters`.
 #'   - `<stbl-error-n_characters-too_many>` when the element has more characters
@@ -138,6 +146,7 @@ stabilize_chr_scalar <- function(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -161,6 +170,7 @@ stabilize_chr_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,
+    named = named,
     x_arg = x_arg,
     call = call,
     x_class = x_class,

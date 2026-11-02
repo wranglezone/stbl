@@ -115,7 +115,7 @@ to_time.character <- function(
     call,
     to_arg
   )
-  return(hms::as_hms(utc_seconds))
+  return(.copy_names(hms::as_hms(utc_seconds), x))
 }
 
 #' Parse the regex captures from `to_time.character()` into seconds
@@ -156,7 +156,7 @@ to_time.factor <- function(
   x_class = object_type(x)
 ) {
   to_time(
-    as.character(x),
+    .as_chr_named(x),
     ...,
     x_arg = x_arg,
     to_arg = to_arg,
@@ -175,13 +175,13 @@ to_time.POSIXct <- function(x, ..., call = caller_env()) {
   # Normalize to UTC before extracting the time-of-day so the result does not
   # depend on the instant's display time zone.
   attr(x, "tzone") <- "UTC"
-  return(hms::as_hms(x))
+  return(.copy_names(hms::as_hms(x), x))
 }
 
 #' @export
 #' @rdname to_time
 to_time.POSIXlt <- function(x, ..., call = caller_env()) {
-  to_time.POSIXct(as.POSIXct(x), call = call)
+  .copy_names(to_time.POSIXct(as.POSIXct(x), call = call), x)
 }
 
 #' @export
@@ -234,7 +234,7 @@ to_time.numeric <- function(
     call,
     to_arg
   )
-  return(hms::as_hms(seconds))
+  return(.copy_names(hms::as_hms(seconds), x))
 }
 
 #' @export
@@ -256,13 +256,16 @@ to_time.difftime <- function(
   # of day round-trip through this path unchanged.
   seconds <- as.numeric(x, units = "secs")
   # difftime carries its own unit, so treat_number_as doesn't apply.
-  to_time.numeric(
-    seconds,
-    treat_number_as = "seconds",
-    x_arg = x_arg,
-    to_arg = to_arg,
-    call = call,
-    x_class = x_class
+  .copy_names(
+    to_time.numeric(
+      seconds,
+      treat_number_as = "seconds",
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call,
+      x_class = x_class
+    ),
+    x
   )
 }
 

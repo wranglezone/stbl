@@ -172,7 +172,7 @@ to_dur.character <- function(
     to_arg
   )
 
-  .new_period_vec(year, month, day, hour, minute, second)
+  .copy_names(.new_period_vec(year, month, day, hour, minute, second), x)
 }
 
 #' Parse the regex captures from `to_dur.character()`'s date/time form
@@ -228,7 +228,7 @@ to_dur.factor <- function(
   x_class = object_type(x)
 ) {
   to_dur(
-    as.character(x),
+    .as_chr_named(x),
     ...,
     x_arg = x_arg,
     to_arg = to_arg,
@@ -247,7 +247,7 @@ to_dur.difftime <- function(x, ..., call = caller_env()) {
   # A difftime carries a single fixed unit (secs, mins, hours, days, or
   # weeks); as.period() maps that unit onto the matching Period component,
   # which is lossless (unlike collapsing everything to seconds).
-  return(lubridate::as.period(x))
+  return(.copy_names(lubridate::as.period(x), x))
 }
 
 #' @export
@@ -275,12 +275,13 @@ to_dur.numeric <- function(
     "lubridate",
     reason = "to convert numeric values to a duration"
   )
-  switch(
+  result <- switch(
     treat_number_as,
     seconds = lubridate::seconds_to_period(x),
     milliseconds = lubridate::seconds_to_period(x / 1000),
     days = .days_to_dur(x)
   )
+  .copy_names(result, x)
 }
 
 #' Convert days to durations

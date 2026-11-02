@@ -213,3 +213,76 @@ test_that("object-level checks do not attach locations (#274)", {
   expect_null(rlang::catch_cnd(.check_all_named(list(1, 2)))$locations)
   expect_null(rlang::catch_cnd(.check_x_no_more_than_y(2, 1))$locations)
 })
+
+test_that(".check_named() skips the check for NULL, NA, and empty input (#8)", {
+  given <- c(a = 1, 2)
+  expect_null(.check_named(given))
+  expect_null(.check_named(given, NULL))
+  expect_null(.check_named(given, NA))
+  expect_null(.check_named(given, NA_character_))
+  expect_null(.check_named(given, character()))
+})
+
+test_that(".check_named() handles TRUE and FALSE (#8)", {
+  expect_null(.check_named(c(a = 1, b = 2), TRUE))
+  expect_null(.check_named(integer(), TRUE))
+  expect_null(.check_named(1:2, FALSE))
+  expect_null(.check_named(setNames(1:2, c("", "")), FALSE))
+  expect_pkg_error_snapshot(
+    .check_named(1:2, TRUE),
+    "stbl",
+    "bad_named"
+  )
+  expect_pkg_error_snapshot(
+    .check_named(c(a = 1, 2), TRUE),
+    "stbl",
+    "bad_named"
+  )
+  expect_pkg_error_snapshot(
+    .check_named(c(a = 1, 2), FALSE),
+    "stbl",
+    "bad_named"
+  )
+})
+
+test_that(".check_named() checks names against a character vector (#8)", {
+  expect_null(.check_named(c(a = 1), c("a", "b")))
+  expect_null(.check_named(c(a = 1), factor(c("a", "b"))))
+  expect_pkg_error_snapshot(
+    .check_named(c(a = 1, c = 2), c("a", "b")),
+    "stbl",
+    "allowed_names"
+  )
+  expect_pkg_error_snapshot(
+    .check_named(1:2, c("a", "b")),
+    "stbl",
+    "bad_named"
+  )
+  cnd <- rlang::catch_cnd(.check_named(c(a = 1, c = 2), c("a", "b")))
+  expect_identical(cnd$locations, 2L)
+})
+
+test_that(".check_named() applies a spec to the names (#8)", {
+  spec <- specify_chr(regex = "^[a-z]+$")
+  expect_null(.check_named(c(a = 1, b = 2), spec))
+  expect_null(.check_named(integer(), spec))
+  expect_null(.check_named(c(a = 1), to_chr))
+  expect_pkg_error_snapshot(
+    .check_named(c(a = 1, B = 2), spec),
+    "stbl",
+    "regex_mismatch"
+  )
+  expect_pkg_error_snapshot(
+    .check_named(1:2, spec),
+    "stbl",
+    "bad_named"
+  )
+})
+
+test_that(".check_named() errors for invalid `named` (#8)", {
+  expect_pkg_error_classes(
+    .check_named(c(a = 1), c(TRUE, FALSE)),
+    "stbl",
+    "non_scalar"
+  )
+})

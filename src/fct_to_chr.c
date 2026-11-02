@@ -1,5 +1,6 @@
 #include <R.h>
 #include <Rinternals.h>
+#include "stbl_names.h"
 
 /*
  * stbl_fct_to_chr: public API entry point.
@@ -37,6 +38,7 @@ SEXP stbl_fct_to_chr(SEXP x) {
   }
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  copy_names(x, result);
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, valid);
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));

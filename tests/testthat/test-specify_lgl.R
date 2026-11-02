@@ -49,3 +49,12 @@ test_that("specify_lgl can enforce allowed_values (#282, #325)", {
   expect_identical(checker(TRUE), TRUE)
   expect_pkg_error_classes(checker(FALSE), "stbl", "allowed_values")
 })
+
+test_that("specify_lgl() and specify_lgl_scalar() can enforce named (#8)", {
+  checker <- specify_lgl(named = TRUE)
+  expect_true(checker(c(a = TRUE)))
+  expect_pkg_error_classes(checker(TRUE), "stbl", "bad_named")
+  scalar_checker <- specify_lgl_scalar(named = FALSE)
+  expect_identical(scalar_checker(TRUE), TRUE)
+  expect_pkg_error_classes(scalar_checker(c(a = TRUE)), "stbl", "bad_named")
+})

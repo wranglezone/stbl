@@ -10,6 +10,7 @@
 specify_fct(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
@@ -21,6 +22,7 @@ specify_fct_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
   ordered = FALSE,
   to_na = character()
@@ -29,6 +31,7 @@ specify_fct_scalar(
 specify_factor(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
@@ -40,6 +43,7 @@ specify_factor_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
   ordered = FALSE,
   to_na = character()
@@ -49,6 +53,14 @@ specify_factor_scalar(
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
+
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}

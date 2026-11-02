@@ -13,6 +13,9 @@
 #'   converted to date.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
 #'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
@@ -54,6 +57,7 @@ stabilize_date <- function(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -74,6 +78,7 @@ stabilize_date <- function(
     ),
     allow_null = allow_null,
     allow_na = allow_na,
+    named = named,
     min_size = min_size,
     max_size = max_size,
     unique = unique,
@@ -108,6 +113,9 @@ stabilise_date <- stabilize_date
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-outside_range>` when values fall outside `min_value` or
 #'   `max_value`.
 #'   - `<stbl-error-allowed_values>` when the value is not in `allowed_values`.
@@ -133,6 +141,7 @@ stabilize_date_scalar <- function(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -154,6 +163,7 @@ stabilize_date_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,
+    named = named,
     x_arg = x_arg,
     call = call,
     x_class = x_class,
@@ -187,7 +197,7 @@ stabilise_date_scalar <- stabilize_date_scalar
 ) {
   if (inherits(x, "factor")) {
     return(.to_date_locale(
-      as.character(x),
+      .as_chr_named(x),
       accepted_datetime_formats = accepted_datetime_formats,
       x_arg = x_arg,
       call = call,
@@ -215,7 +225,7 @@ stabilise_date_scalar <- stabilize_date_scalar
     x_arg,
     call
   )
-  return(result$parsed)
+  return(.copy_names(result$parsed, x))
 }
 
 #' Convert to length-1 date, trying `accepted_datetime_formats`

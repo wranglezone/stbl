@@ -1,5 +1,6 @@
 #include <R.h>
 #include <Rinternals.h>
+#include "stbl_names.h"
 #include <R_ext/Arith.h>
 #include <math.h>
 
@@ -60,6 +61,7 @@ SEXP stbl_dbl_to_int(SEXP x) {
   dbl_to_int_core(x, n, INTEGER(result), LOGICAL(bad_precision));
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  copy_names(x, result);
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, bad_precision);
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));

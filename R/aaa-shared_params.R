@@ -72,6 +72,13 @@
 #'   of this value. `NULL` (default) skips the check. For doubles, a small
 #'   relative tolerance is applied to avoid floating-point false negatives.
 #' @param package (`character(1)`) The name of the package to use in classes.
+#' @param named Controls the names of `x`. `NULL` (default), `NA`, or
+#'   `character(0)` skip the check. `TRUE` requires every element to have a
+#'   non-empty name; `FALSE` requires that no elements are named. A character
+#'   vector (or factor) requires `x` to be named, with every name in the vector.
+#'   A single stabilizer or conversion function (such as [stabilize_chr()], a
+#'   `to_*` function, or the result of [specify_chr()]) requires `x` to be named
+#'   and is applied to `names(x)`, so every name must satisfy it.
 #' @param ordered (`logical(1)`) Should the result be an ordered factor?
 #' @param parent A parent condition, as you might create during a
 #'   [rlang::try_fetch()]. See [rlang::abort()] for additional information.

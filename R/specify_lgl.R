@@ -23,6 +23,7 @@
 specify_lgl <- function(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL
@@ -37,6 +38,7 @@ specify_lgl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   allowed_values = NULL
 ) {
   factory_args <- .capture_factory_args()

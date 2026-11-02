@@ -12,6 +12,7 @@ specify_int(
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -27,6 +28,7 @@ specify_int_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
@@ -42,6 +44,7 @@ specify_integer(
   allow_na = TRUE,
   coerce_character = TRUE,
   coerce_factor = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -57,6 +60,7 @@ specify_integer_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   coerce_character = TRUE,
   coerce_factor = TRUE,
   min_value = NULL,
@@ -79,6 +83,14 @@ and "2.0" be considered numeric-ish?}
 and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while \code{\link[=as.integer]{as.integer()}} and \code{\link[=as.double]{as.double()}} use
 the integer index of the factor.}
+
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}

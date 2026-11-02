@@ -94,7 +94,7 @@ SEXP stbl_lst_to_lgl(SEXP x) {
         SEXP result = PROTECT(Rf_allocVector(LGLSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         lst_to_lgl_fill_vec(elem, m, LOGICAL(result), LOGICAL(valid));
-        SEXP out = lst_build_out(result, valid);
+        SEXP out = lst_build_out(x, result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -161,7 +161,7 @@ SEXP stbl_lst_to_lgl(SEXP x) {
     }
   }
 
-  SEXP out = lst_build_out(result, valid);
+  SEXP out = lst_build_out(x, result, valid);
   UNPROTECT(2);
   return out;
 }

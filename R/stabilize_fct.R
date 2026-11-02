@@ -14,6 +14,9 @@
 #'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
@@ -37,6 +40,7 @@ stabilize_fct <- function(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -47,6 +51,7 @@ stabilize_fct <- function(
     to_cls_args = list(levels = levels, ordered = ordered, to_na = to_na),
     allow_null = allow_null,
     allow_na = allow_na,
+    named = named,
     min_size = min_size,
     max_size = max_size,
     x_arg = x_arg,
@@ -89,6 +94,9 @@ stabilise_factor <- stabilize_fct
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
 #' @family factor functions
 #' @family stabilization functions
@@ -107,6 +115,7 @@ stabilize_fct_scalar <- function(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -122,6 +131,7 @@ stabilize_fct_scalar <- function(
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     allow_na = allow_na,
+    named = named,
     x_arg = x_arg,
     call = call,
     x_class = x_class,

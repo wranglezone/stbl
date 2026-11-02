@@ -26,6 +26,7 @@ specify_dur <- function(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -44,6 +45,7 @@ specify_dur_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL

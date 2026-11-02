@@ -105,6 +105,14 @@ relative tolerance is applied to avoid floating-point false negatives.}
 
 \item{package}{(\code{character(1)}) The name of the package to use in classes.}
 
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
+
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
 \item{parent}{A parent condition, as you might create during a

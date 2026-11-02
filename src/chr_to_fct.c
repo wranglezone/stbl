@@ -86,6 +86,7 @@ SEXP stbl_chr_to_fct(SEXP value, SEXP levels, SEXP ordered) {
   set_factor_attribs (codes, lev, is_ordered);
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  copy_names(value, codes);
   SET_VECTOR_ELT(out, 0, codes);
   SET_VECTOR_ELT(out, 1, valid);
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));

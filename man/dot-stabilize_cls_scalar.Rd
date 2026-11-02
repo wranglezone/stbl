@@ -14,6 +14,7 @@
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -41,6 +42,14 @@ pass to \code{check_cls_value_fn()}.}
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
+
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

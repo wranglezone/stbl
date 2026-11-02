@@ -366,6 +366,129 @@
   )
 }
 
+#' Check the names of an object
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_named <- function(
+  x,
+  named = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (is.null(named)) {
+    return(invisible(NULL))
+  }
+  if (is.function(named)) {
+    return(.check_names_spec(x, named, x_arg = x_arg, call = call))
+  }
+  if (is.logical(named)) {
+    named <- to_lgl_scalar(
+      named,
+      allow_null = TRUE,
+      x_arg = "named",
+      call = call
+    )
+    if (is.na(named)) {
+      return(invisible(NULL))
+    }
+    return(.check_named_presence(x, named, x_arg = x_arg, call = call))
+  }
+  allowed_names <- to_chr(named, x_arg = "named", call = call)
+  allowed_names <- allowed_names[!is.na(allowed_names)]
+  if (!length(allowed_names)) {
+    return(invisible(NULL))
+  }
+  .check_named_presence(x, TRUE, x_arg = x_arg, call = call)
+  .check_allowed_names(x, allowed_names, x_arg = x_arg, call = call)
+}
+
+#' Check that an object is (or is not) named
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @param named `(logical(1))` Should `x` be named?
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_named_presence <- function(x, named, x_arg, call) {
+  if (named) {
+    if (rlang::is_named2(x)) {
+      return(invisible(NULL))
+    }
+    .stop_must(
+      "must be named.",
+      x_arg = x_arg,
+      additional_msg = c(x = "Every element must have a non-empty name."),
+      call = call,
+      subclass = "bad_named"
+    )
+  }
+  if (!any(nzchar(rlang::names2(x)))) {
+    return(invisible(NULL))
+  }
+  .stop_must(
+    "must not be named.",
+    x_arg = x_arg,
+    call = call,
+    subclass = "bad_named"
+  )
+}
+
+#' Check that all names are in a set of allowed names
+#'
+#' @inheritParams .shared-params-check
+#' @param allowed_names `(character)` The permitted names.
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_allowed_names <- function(x, allowed_names, x_arg, call) {
+  x_names <- names(x)
+  failures <- !(x_names %in% allowed_names)
+  if (!any(failures)) {
+    return(invisible(NULL))
+  }
+  locations <- which(failures)
+  location_chrs <- as.character(locations)
+  bad_name_chrs <- unique(x_names[failures])
+  .stop_must(
+    "must have names from the allowed set.",
+    x_arg = x_arg,
+    additional_msg = c(
+      "i" = "Allowed name{?s}: {.val {allowed_names}}.",
+      "x" = "Unexpected location{?s}: {location_chrs}",
+      "x" = "Unexpected name{?s}: {.val {bad_name_chrs}}."
+    ),
+    call = call,
+    subclass = "allowed_names",
+    message_env = rlang::current_env(),
+    locations = locations
+  )
+}
+
+#' Check that an object is named and every name satisfies a spec
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @param spec `(function)` A stabilizer or conversion function to apply to
+#'   `names(x)`.
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_names_spec <- function(x, spec, x_arg, call) {
+  .check_named_presence(x, TRUE, x_arg = x_arg, call = call)
+  if (!length(x)) {
+    return(invisible(NULL))
+  }
+  .call_specified_fn(
+    spec,
+    names(x),
+    .x_arg = paste0("names(", x_arg, ")"),
+    .call = call
+  )
+  invisible(NULL)
+}
+
 #' Check that all list elements are named
 #'
 #' @inheritParams .shared-params

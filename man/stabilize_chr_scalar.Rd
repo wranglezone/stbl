@@ -17,6 +17,7 @@ stabilize_chr_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -32,6 +33,7 @@ stabilize_character_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -47,6 +49,7 @@ stabilise_chr_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -62,6 +65,7 @@ stabilise_character_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -99,6 +103,14 @@ throws an error, try installing the stringi package.}
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
 
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
+
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -123,6 +135,9 @@ classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \ver
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
+\code{named}.
+\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-n_characters-too_few>} when the element has fewer characters
 than \code{min_characters}.
 \item \verb{<stbl-error-n_characters-too_many>} when the element has more characters

@@ -48,6 +48,7 @@ SEXP stbl_fct_to_lgl(SEXP x) {
   fct_to_lgl_core(x, n, LOGICAL(result), LOGICAL(valid));
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  copy_names(x, result);
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, valid);
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));

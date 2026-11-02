@@ -113,7 +113,7 @@ to_date.factor <- function(
   x_class = object_type(x)
 ) {
   to_date(
-    as.character(x),
+    .as_chr_named(x),
     ...,
     x_arg = x_arg,
     to_arg = to_arg,
