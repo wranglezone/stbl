@@ -22,6 +22,7 @@
 #' stabilize_short("PT12H")
 #' try(stabilize_short("P2D"))
 specify_dur <- function(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -38,6 +39,7 @@ specify_dur <- function(
 #' @export
 #' @rdname specify_dur
 specify_dur_scalar <- function(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,

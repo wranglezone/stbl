@@ -8,6 +8,7 @@
 \title{Create a specified duration stabilizer function}
 \usage{
 specify_dur(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -19,6 +20,7 @@ specify_dur(
 )
 
 specify_dur_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -28,6 +30,7 @@ specify_dur_scalar(
 )
 
 specify_duration(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -39,6 +42,7 @@ specify_duration(
 )
 
 specify_duration_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -48,6 +52,10 @@ specify_duration_scalar(
 )
 }
 \arguments{
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}

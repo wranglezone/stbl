@@ -10,6 +10,7 @@
 stabilize_dur_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -24,6 +25,7 @@ stabilize_dur_scalar(
 stabilise_dur_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -38,6 +40,7 @@ stabilise_dur_scalar(
 stabilize_duration_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -52,6 +55,7 @@ stabilize_duration_scalar(
 stabilise_duration_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -67,6 +71,10 @@ stabilise_duration_scalar(
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

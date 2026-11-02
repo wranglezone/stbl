@@ -9,12 +9,12 @@
 \alias{to_dur.factor}
 \alias{to_dur.difftime}
 \alias{to_dur.numeric}
-\alias{to_dur.integer}
 \title{Convert to a duration}
 \usage{
 to_dur(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -24,6 +24,7 @@ to_dur(
 to_duration(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -61,14 +62,24 @@ to_duration(
 
 \method{to_dur}{difftime}(x, ..., call = caller_env())
 
-\method{to_dur}{numeric}(x, ..., call = caller_env())
-
-\method{to_dur}{integer}(x, ..., call = caller_env())
+\method{to_dur}{numeric}(
+  x,
+  ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 }
 \arguments{
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -95,6 +106,8 @@ The input as a \link[lubridate:Period-class]{lubridate::Period} vector, or an er
 condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
 \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
+\item \verb{<stbl-error-coerce-duration>} when numbers are rejected by
+\code{treat_number_as = "error"}.
 \item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
 safely converted to a duration.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
@@ -123,10 +136,13 @@ or a stand-alone week form (\code{"P4W"}). The date/time form and the week form
 cannot be mixed, fractional components are not permitted, and \code{"P"} or \code{"PT"}
 alone (with no components) are not valid durations. \link[base:difftime]{base::difftime} values
 (including \code{\link[hms:hms]{hms::hms()}}) are converted directly, preserving their unit.
-Numeric and integer values are treated as a (fractional) number of seconds
-and broken into day/hour/minute/second components, with no year or month
+Numeric and integer values are interpreted according to \code{treat_number_as}, by
+default as a (fractional) number of seconds. Seconds and milliseconds are
+broken into day/hour/minute/second components, with no year or month
 component, since a number of seconds cannot unambiguously imply a calendar
-length.
+length. Days go into the day component, with any fractional part broken into
+hours, minutes, and seconds (so \code{0.5} days is 12 hours). \code{treat_number_as} is
+ignored for non-numeric input.
 
 \code{to_dur()} requires the \pkg{lubridate} package.
 }
@@ -137,6 +153,9 @@ to_dur("PT1M")
 to_dur("P4W")
 to_dur(c("P1D", NA))
 to_dur(3661)
+to_dur(86400000, treat_number_as = "milliseconds")
+to_dur(1.5, treat_number_as = "days")
+try(to_dur(3661, treat_number_as = "error"))
 to_dur(as.difftime(90, units = "mins"))
 to_dur(NULL)
 try(to_dur("P"))

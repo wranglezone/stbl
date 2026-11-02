@@ -69,3 +69,18 @@ test_that("specify_dur_scalar() creates a working scalar stabilizer (#295, #325)
     "non_scalar"
   )
 })
+
+test_that("specify_dur() can set treat_number_as (#382)", {
+  checker <- specify_dur(treat_number_as = "milliseconds")
+  expect_identical(checker(1000), lubridate::seconds_to_period(1))
+  strict <- specify_dur(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "duration")
+  expect_identical(strict("P1D"), lubridate::period(day = 1))
+})
+
+test_that("specify_dur_scalar() can set treat_number_as (#382)", {
+  checker <- specify_dur_scalar(treat_number_as = "days")
+  expect_identical(checker(1), lubridate::period(day = 1))
+  strict <- specify_dur_scalar(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "duration")
+})
