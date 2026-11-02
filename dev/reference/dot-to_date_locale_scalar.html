@@ -9,7 +9,7 @@ stabilize_date_scalar() in place of to_date_scalar()."><meta property="og:image"
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,8 @@ stabilize_date_scalar() in place of to_date_scalar()."><meta property="og:image"
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">accepted_datetime_formats</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="st">"days"</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -78,6 +80,21 @@ that parses every non-<code>NA</code> element of <code>x</code> is used; if none
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
 shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>
+
+
+<dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
+from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local
+time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
+<code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
+
+
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, <code>"days"</code> since the
+Unix epoch, or <code>"error"</code> to reject numbers. Ignored for non-numeric input.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>

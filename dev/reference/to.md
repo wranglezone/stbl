@@ -43,6 +43,7 @@ to(
   x,
   .to,
   ...,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -227,6 +228,16 @@ to(
   object before checking its conversion, but want the error message to
   match the original class.
 
+- tz:
+
+  (`character(1)`) The time zone to use when `.to` is a
+  [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) or
+  [base::Date](https://rdrr.io/r/base/Dates.html). Must be a value from
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""` (your
+  local time zone). Defaults to the time zone of `.to`, or your local
+  time zone if `.to` doesn't name one (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
 - levels:
 
   `(character)` The desired factor levels. For factors, a vector's
@@ -236,15 +247,6 @@ to(
 - ordered:
 
   (`logical(1)`) Should the result be an ordered factor?
-
-- tz:
-
-  (`character(1)`) The time zone to use when `.to` is a
-  [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html). Must be
-  a value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html)
-  or `""` (your local time zone). Defaults to the time zone of `.to`, or
-  your local time zone if `.to` doesn't name one (see
-  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
 
 ## Value
 
@@ -377,7 +379,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5fbf3d1e9e78>
+#> <bytecode: 0x5fb23d4149e8>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

@@ -11,7 +11,7 @@ to_dttm_scalar(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -24,7 +24,7 @@ to_datetime_scalar(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -58,7 +58,8 @@ to_datetime_scalar(
 - treat_number_as:
 
   (`character(1)`) How to interpret numeric input: `"seconds"` or
-  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 

@@ -14,7 +14,7 @@ stabilize_dttm(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -33,7 +33,7 @@ stabilise_dttm(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -52,7 +52,7 @@ stabilize_datetime(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -71,7 +71,7 @@ stabilise_datetime(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -111,7 +111,8 @@ stabilise_datetime(
 - treat_number_as:
 
   (`character(1)`) How to interpret numeric input: `"seconds"` or
-  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 

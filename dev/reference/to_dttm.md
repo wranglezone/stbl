@@ -13,7 +13,7 @@ to_dttm(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -24,7 +24,7 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -77,7 +77,7 @@ to_dttm(
   x,
   ...,
   tz = "UTC",
-  treat_number_as = c("seconds", "milliseconds", "error"),
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -109,7 +109,8 @@ to_dttm(
 - treat_number_as:
 
   (`character(1)`) How to interpret numeric input: `"seconds"` or
-  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - x_arg:
 
@@ -180,8 +181,9 @@ roughly the year 287,000, so values that large have already lost
 precision before conversion. Note that
 [`format()`](https://rdrr.io/r/base/format.html) truncates rather than
 rounds fractional seconds, so a value such as `12:00:00.1228` may
-display as `12:00:00.122`; the stored value is not affected.
-`treat_number_as` is ignored for other types of input.
+display as `12:00:00.122`; the stored value is not affected. With
+`treat_number_as = "days"`, numbers are days since the epoch, giving
+midnight UTC. `treat_number_as` is ignored for other types of input.
 
 [base::Date](https://rdrr.io/r/base/Dates.html) values are treated as
 midnight UTC on that date.

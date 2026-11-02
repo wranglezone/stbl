@@ -11,6 +11,8 @@ Compared to
 stabilize_date(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -28,6 +30,8 @@ stabilize_date(
 stabilise_date(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -52,6 +56,23 @@ stabilise_date(
 - ...:
 
   Arguments passed to methods.
+
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/dev/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 

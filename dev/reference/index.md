@@ -119,8 +119,6 @@
   : Convert to length-1 integer with additional checks
 - [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) : Convert a
   value to a target type
-- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) :
-  Convert to date
 - [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md)
   [`to_duration()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) :
   Convert to a duration

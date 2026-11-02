@@ -10,6 +10,21 @@
   gain a `.coerce_function` argument, so functions can be converted to
   lists from the wrappers
   ([\#380](https://github.com/wranglezone/stbl/issues/380)).
+- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) (and
+  so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
+  `Date` target,
+  [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+  [`specify_date()`](https://stbl.wrangle.zone/dev/reference/specify_date.md),
+  and related functions) gains a `treat_number_as` argument to control
+  how numbers are interpreted: `"days"` (the default), `"seconds"`, or
+  `"milliseconds"` since the Unix epoch, or `"error"` to reject numbers.
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) and
+  its wrappers also accept `treat_number_as = "days"`
+  ([\#381](https://github.com/wranglezone/stbl/issues/381)).
+  [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) now
+  also accepts and respects a `tz` argument for inputs where a timezone
+  makes sense.
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) (and
   so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
   `POSIXct` target,

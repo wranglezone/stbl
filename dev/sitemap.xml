@@ -83,6 +83,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-date_type_obj.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_format_variants.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_type_obj.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-days_to_date.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-define_main_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_date_value.html</loc></url>
@@ -95,6 +96,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-describe_failure_time_value.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-duration_type_obj.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-elements_are_cls_ish.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-epoch_to_date.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-expect_pkg_condition_snapshot.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-extract_stabilizer_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-fast_false.html</loc></url>
