@@ -75,3 +75,18 @@ test_that("specify_time_scalar() creates a working scalar stabilizer (#294, #325
     "non_scalar"
   )
 })
+
+test_that("specify_time() can set treat_number_as (#387)", {
+  checker <- specify_time(treat_number_as = "milliseconds")
+  expect_identical(checker(3600000), hms::hms(3600))
+  strict <- specify_time(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "time")
+  expect_identical(strict("13:20:00Z"), hms::hms(0, 20, 13))
+})
+
+test_that("specify_time_scalar() can set treat_number_as (#387)", {
+  checker <- specify_time_scalar(treat_number_as = "days")
+  expect_identical(checker(0.5), hms::hms(43200))
+  strict <- specify_time_scalar(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "time")
+})

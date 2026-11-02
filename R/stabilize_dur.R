@@ -8,8 +8,8 @@
 #' lubridate's approximate, nominal lengths for years and months (see
 #' [to_dur()]); treat range checks on calendar-aware durations as approximate.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_dur
+#' @inheritParams .shared-params
 #'
 #' @returns The input as a [lubridate::Period-class] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
@@ -100,8 +100,8 @@ stabilise_duration <- stabilize_dur
 #' `max_size = 1`). `stabilise_dur_scalar`, `stabilize_duration_scalar`, and
 #' `stabilise_duration_scalar` are synonyms of `stabilize_dur_scalar()`.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_dur
+#' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 [lubridate::Period-class] vector, or an
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,

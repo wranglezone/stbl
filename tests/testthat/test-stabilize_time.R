@@ -171,3 +171,45 @@ test_that("stabilize_time_scalar() checks allowed_values (#294)", {
 test_that("stabilise_time_scalar() exists (#294)", {
   expect_no_error(stabilise_time_scalar("13:20:00Z"))
 })
+
+test_that("stabilize_time() respects treat_number_as (#387)", {
+  expect_identical(
+    stabilize_time(3600000, treat_number_as = "milliseconds"),
+    hms::hms(3600)
+  )
+  expect_identical(
+    stabilize_time(0.5, treat_number_as = "days"),
+    hms::hms(43200)
+  )
+  expect_pkg_error_classes(
+    stabilize_time(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "time"
+  )
+  expect_error(
+    stabilize_time(1, treat_number_as = "bogus"),
+    class = "rlang_error"
+  )
+  expect_identical(
+    stabilize_time("13:20:00Z", treat_number_as = "error"),
+    hms::hms(0, 20, 13)
+  )
+})
+
+test_that("stabilize_time_scalar() respects treat_number_as (#387)", {
+  expect_identical(
+    stabilize_time_scalar(3600000, treat_number_as = "milliseconds"),
+    hms::hms(3600)
+  )
+  expect_pkg_error_classes(
+    stabilize_time_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "time"
+  )
+  expect_identical(
+    stabilize_time_scalar("13:20:00Z", treat_number_as = "error"),
+    hms::hms(0, 20, 13)
+  )
+})

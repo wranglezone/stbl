@@ -199,3 +199,128 @@ test_that("to_time_scalar() respects allow_zero_length (#294)", {
   given <- hms::as_hms(character())
   expect_pkg_error_snapshot(to_time_scalar(given), "stbl", "bad_empty")
 })
+
+test_that("to_time() treat_number_as = 'seconds' is the default (#387)", {
+  expected <- hms::hms(3600)
+  expect_identical(to_time(3600, treat_number_as = "seconds"), expected)
+  expect_identical(to_time(3600L, treat_number_as = "seconds"), expected)
+  expect_identical(
+    to_time(c(1.5, NA), treat_number_as = "seconds"),
+    hms::as_hms(c(1.5, NA))
+  )
+  expect_pkg_error_classes(
+    to_time(86400, treat_number_as = "seconds"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+})
+
+test_that("to_time() treat_number_as = 'milliseconds' divides by 1000 (#387)", {
+  expect_identical(
+    to_time(3600000, treat_number_as = "milliseconds"),
+    hms::hms(3600)
+  )
+  expect_identical(
+    to_time(c(1500L, NA), treat_number_as = "milliseconds"),
+    hms::as_hms(c(1.5, NA))
+  )
+  expect_identical(
+    to_time(1234.5, treat_number_as = "milliseconds"),
+    hms::as_hms(1.2345)
+  )
+  expect_pkg_error_classes(
+    to_time(86400000, treat_number_as = "milliseconds"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+  expect_pkg_error_classes(
+    to_time(-1L, treat_number_as = "milliseconds"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+})
+
+test_that("to_time() treat_number_as = 'days' uses a fraction of a day (#387)", {
+  expect_identical(
+    to_time(c(0.5, 0, NA), treat_number_as = "days"),
+    hms::as_hms(c(43200, 0, NA))
+  )
+  expect_identical(to_time(0L, treat_number_as = "days"), hms::hms(0))
+  expect_pkg_error_classes(
+    to_time(1, treat_number_as = "days"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+  expect_pkg_error_classes(
+    to_time(-0.1, treat_number_as = "days"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+  expect_pkg_error_classes(
+    to_time(1L, treat_number_as = "days"),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
+})
+
+test_that("to_time() treat_number_as = 'error' rejects numbers (#387)", {
+  for (x in list(1, 1L, NA_real_, NA_integer_)) {
+    expect_pkg_error_classes(
+      to_time(x, treat_number_as = "error"),
+      "stbl",
+      "coerce",
+      "time"
+    )
+  }
+})
+
+test_that("to_time() validates treat_number_as (#387)", {
+  expect_error(to_time(1, treat_number_as = "bogus"), class = "rlang_error")
+})
+
+test_that("to_time() ignores treat_number_as for non-numbers (#387)", {
+  expected <- hms::hms(0, 20, 13)
+  expect_identical(
+    to_time("13:20:00Z", treat_number_as = "error"),
+    expected
+  )
+  expect_identical(
+    to_time(factor("13:20:00Z"), treat_number_as = "error"),
+    expected
+  )
+  expect_identical(to_time(expected, treat_number_as = "error"), expected)
+  expect_identical(
+    to_time(as.difftime(1, units = "hours"), treat_number_as = "milliseconds"),
+    hms::hms(3600)
+  )
+  expect_identical(
+    to_time(
+      as.POSIXct("2020-01-01 13:20:00", tz = "UTC"),
+      treat_number_as = "error"
+    ),
+    expected
+  )
+})
+
+test_that("treat_number_as passes through to_time_scalar() and to() (#387)", {
+  expect_identical(
+    to_time_scalar(3600000, treat_number_as = "milliseconds"),
+    hms::hms(3600)
+  )
+  expect_pkg_error_classes(
+    to_time_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "time"
+  )
+  expect_identical(
+    to(0.5, hms::hms(), treat_number_as = "days"),
+    hms::hms(43200)
+  )
+})

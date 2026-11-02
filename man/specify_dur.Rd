@@ -53,8 +53,8 @@ specify_duration_scalar(
 }
 \arguments{
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
-\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
-Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
+\code{"seconds"} or \code{"milliseconds"} as a length of time, \code{"days"} as a number
+of days, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

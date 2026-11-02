@@ -4,6 +4,7 @@
 #' the provided arguments. `specify_time_scalar()` creates a function that will
 #' call [stabilize_time_scalar()] with the provided arguments.
 #'
+#' @inheritParams to_time
 #' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_time()] or [stabilize_time_scalar()] with the provided
@@ -20,6 +21,7 @@
 #' stabilize_afternoon("13:00:00Z")
 #' try(stabilize_afternoon("06:00:00Z"))
 specify_time <- function(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -36,6 +38,7 @@ specify_time <- function(
 #' @export
 #' @rdname specify_time
 specify_time_scalar <- function(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,

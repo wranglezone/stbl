@@ -3,8 +3,8 @@
 #' Compared to [to_time()], `stabilize_time()` checks more details, but is
 #' slower. `stabilise_time()` is a synonym of `stabilize_time()`.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_time
+#' @inheritParams .shared-params
 #'
 #' @returns The input as an [hms::hms()] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
@@ -40,6 +40,7 @@
 stabilize_time <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -55,6 +56,7 @@ stabilize_time <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_time,
+    to_cls_args = list(treat_number_as = treat_number_as),
     check_cls_value_fn = .check_value_time,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -84,8 +86,8 @@ stabilise_time <- stabilize_time
 #' vectors (compared to [stabilize_time()] with `max_size = 1`).
 #' `stabilise_time_scalar` is a synonym of `stabilize_time_scalar()`.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_time
+#' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 [hms::hms()] vector, or an error condition
 #'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
@@ -116,6 +118,7 @@ stabilise_time <- stabilize_time
 stabilize_time_scalar <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -129,6 +132,7 @@ stabilize_time_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_time_scalar,
+    to_cls_scalar_args = list(treat_number_as = treat_number_as),
     check_cls_value_fn = .check_value_time,
     check_cls_value_fn_args = list(
       min_value = min_value,

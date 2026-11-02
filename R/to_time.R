@@ -13,18 +13,27 @@
 #' shape is rejected. The offset is used only to normalize the value to UTC and
 #' is not retained: `to_time()` always returns the time-of-day expressed in UTC.
 #' [base::POSIXct] and [base::POSIXlt] values are likewise converted to UTC
-#' before their time-of-day component is extracted. Numeric and [base::difftime]
-#' values are treated as (fractional) seconds since midnight and must resolve to
-#' a value in `[0, 86400)`.
+#' before their time-of-day component is extracted. Numeric values are
+#' interpreted according to `treat_number_as`, by default as (fractional)
+#' seconds since midnight, and must resolve to a time within a single day (for
+#' example, `0.5` is 12:00:00 with `treat_number_as = "days"`). [base::difftime]
+#' values carry their own unit and must resolve to a value in `[0, 86400)`
+#' seconds since midnight. `treat_number_as` is ignored for non-numeric input.
 #'
 #' `to_time()` requires the \pkg{hms} package.
 #'
+#' @param treat_number_as (`character(1)`) How to interpret numeric input:
+#'   `"seconds"` or `"milliseconds"` since midnight, `"days"` as a fraction of a
+#'   day (so `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+#'   non-numeric input.
 #' @inheritParams .shared-params
 #'
 #' @returns The input as an [hms::hms()] vector, always expressed in UTC, or an
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
 #'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
 #'   mode:
+#'   - `<stbl-error-coerce-time>` when numbers are rejected by
+#'   `treat_number_as = "error"`.
 #'   - `<stbl-error-incompatible_values-time>` when some values cannot be
 #'   safely converted to a time of day.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -38,6 +47,9 @@
 #' to_time("13:20:00-05:00")
 #' to_time(c("13:20:00Z", NA))
 #' to_time(3600)
+#' to_time(3600000, treat_number_as = "milliseconds")
+#' to_time(0.5, treat_number_as = "days")
+#' try(to_time(3600, treat_number_as = "error"))
 #' to_time(as.POSIXct("2024-01-01 13:20:00", tz = "UTC"))
 #' to_time(NULL)
 #' try(to_time("13:20:00"))
@@ -45,6 +57,7 @@
 to_time <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -176,48 +189,52 @@ to_time.POSIXlt <- function(x, ..., call = caller_env()) {
 to_time.numeric <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  treat_number_as <- rlang::arg_match(treat_number_as, error_call = call)
+  if (treat_number_as == "error") {
+    .stop_cant_convert(
+      from_class = x_class,
+      to_class = "time",
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call
+    )
+  }
   rlang::check_installed(
     "hms",
-    reason = "to convert numeric seconds to a time of day"
+    reason = "to convert numeric values to a time of day"
   )
-  # Numeric values are seconds since midnight; anything outside a single day
-  # doesn't unambiguously resolve to a time of day.
-  failures <- !is.na(x) & (x < 0 | x >= 86400)
+  # Convert to seconds since midnight. Anything outside a single day doesn't
+  # unambiguously resolve to a time of day.
+  seconds <- switch(
+    treat_number_as,
+    seconds = as.numeric(x),
+    milliseconds = as.numeric(x) / 1000,
+    days = as.numeric(x) * 86400
+  )
+  failures <- !is.na(seconds) & (seconds < 0 | seconds >= 86400)
+  problem <- switch(
+    treat_number_as,
+    seconds = "not a valid number of seconds since midnight (must be at least 0 and less than 86400)",
+    milliseconds = "not a valid number of milliseconds since midnight (must be at least 0 and less than 86400000)",
+    days = "not a valid fraction of a day (must be at least 0 and less than 1)"
+  )
   .check_conversion_failures(
     x,
     failures,
     x_class,
     .time_type_obj(),
-    "not a valid number of seconds since midnight (must be at least 0 and less than 86400)",
+    problem,
     x_arg,
     call,
     to_arg
   )
-  return(hms::as_hms(as.numeric(x)))
-}
-
-#' @export
-#' @rdname to_time
-to_time.integer <- function(
-  x,
-  ...,
-  x_arg = caller_arg(x),
-  to_arg = NULL,
-  call = caller_env(),
-  x_class = object_type(x)
-) {
-  to_time.numeric(
-    x,
-    x_arg = x_arg,
-    to_arg = to_arg,
-    call = call,
-    x_class = x_class
-  )
+  return(hms::as_hms(seconds))
 }
 
 #' @export
@@ -238,8 +255,10 @@ to_time.difftime <- function(
   # there is no to_time.hms() method; hms values that are already valid times
   # of day round-trip through this path unchanged.
   seconds <- as.numeric(x, units = "secs")
+  # difftime carries its own unit, so treat_number_as doesn't apply.
   to_time.numeric(
     seconds,
+    treat_number_as = "seconds",
     x_arg = x_arg,
     to_arg = to_arg,
     call = call,
@@ -274,8 +293,8 @@ to_time.default <- function(
 #'
 #' Checks whether a vector can be converted to a length-1 [hms::hms()] vector.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_time
+#' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 [hms::hms()] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`,
@@ -297,6 +316,7 @@ to_time.default <- function(
 to_time_scalar <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -308,7 +328,7 @@ to_time_scalar <- function(
     x,
     is_rlang_cls_scalar = .is_scalar_time,
     to_cls_fn = to_time,
-    to_cls_args = list(...),
+    to_cls_args = c(list(treat_number_as = treat_number_as), list(...)),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,
