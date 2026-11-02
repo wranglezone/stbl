@@ -11,7 +11,7 @@ informative error message is signaled."><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9003</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,7 @@ informative error message is signaled.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">to_dur</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -61,6 +62,7 @@ informative error message is signaled.</p>
 <span><span class="fu">to_duration</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -104,10 +106,15 @@ informative error message is signaled.</p>
 <span><span class="fu">to_dur</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'numeric'</span></span>
-<span><span class="fu">to_dur</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'integer'</span></span>
-<span><span class="fu">to_dur</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">to_dur</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
+<span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  to_arg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -120,6 +127,12 @@ informative error message is signaled.</p>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to methods.</p></dd>
+
+
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, <code>"days"</code> since the
+Unix epoch, or <code>"error"</code> to reject numbers. Ignored for non-numeric input.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -156,7 +169,9 @@ the original class.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input as a <a href="https://lubridate.tidyverse.org/reference/Period-class.html" class="external-link">lubridate::Period</a> vector, or an error
 condition with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>,
-<code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-incompatible_values-duration&gt;</code> when some values cannot be
+<code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-coerce-duration&gt;</code> when numbers are rejected by
+<code>treat_number_as = "error"</code>.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-duration&gt;</code> when some values cannot be
 safely converted to a duration.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
 </ul></div>
@@ -178,10 +193,13 @@ or a stand-alone week form (<code>"P4W"</code>). The date/time form and the week
 cannot be mixed, fractional components are not permitted, and <code>"P"</code> or <code>"PT"</code>
 alone (with no components) are not valid durations. <a href="https://rdrr.io/r/base/difftime.html" class="external-link">base::difftime</a> values
 (including <code><a href="https://hms.tidyverse.org/reference/hms.html" class="external-link">hms::hms()</a></code>) are converted directly, preserving their unit.
-Numeric and integer values are treated as a (fractional) number of seconds
-and broken into day/hour/minute/second components, with no year or month
+Numeric and integer values are interpreted according to <code>treat_number_as</code>, by
+default as a (fractional) number of seconds. Seconds and milliseconds are
+broken into day/hour/minute/second components, with no year or month
 component, since a number of seconds cannot unambiguously imply a calendar
-length.</p>
+length. Days go into the day component, with any fractional part broken into
+hours, minutes, and seconds (so <code>0.5</code> days is 12 hours). <code>treat_number_as</code> is
+ignored for non-numeric input.</p>
 <p><code>to_dur()</code> requires the <span class="pkg">lubridate</span> package.</p>
     </div>
     <div class="section level2">
@@ -253,6 +271,13 @@ length.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1d 0H 0M 0S" NA           </span>
 <span class="r-in"><span><span class="fu">to_dur</span><span class="op">(</span><span class="fl">3661</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1H 1M 1S"</span>
+<span class="r-in"><span><span class="fu">to_dur</span><span class="op">(</span><span class="fl">86400000</span>, treat_number_as <span class="op">=</span> <span class="st">"milliseconds"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1d 0H 0M 0S"</span>
+<span class="r-in"><span><span class="fu">to_dur</span><span class="op">(</span><span class="fl">1.5</span>, treat_number_as <span class="op">=</span> <span class="st">"days"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1d 12H 0M 0S"</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">to_dur</span><span class="op">(</span><span class="fl">3661</span>, treat_number_as <span class="op">=</span> <span class="st">"error"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Can't convert `3661` <span style="color: #0000BB;">&lt;double&gt;</span> to <span style="color: #0000BB;">&lt;duration&gt;</span>.</span>
 <span class="r-in"><span><span class="fu">to_dur</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html" class="external-link">as.difftime</a></span><span class="op">(</span><span class="fl">90</span>, units <span class="op">=</span> <span class="st">"mins"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1H 30M 0S"</span>
 <span class="r-in"><span><span class="fu">to_dur</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></span>

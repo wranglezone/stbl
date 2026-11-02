@@ -11,6 +11,7 @@ informative error message is signaled.
 to_dur(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -20,6 +21,7 @@ to_dur(
 to_duration(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -63,10 +65,15 @@ to_dur(
 to_dur(x, ..., call = caller_env())
 
 # S3 method for class 'numeric'
-to_dur(x, ..., call = caller_env())
-
-# S3 method for class 'integer'
-to_dur(x, ..., call = caller_env())
+to_dur(
+  x,
+  ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
@@ -78,6 +85,12 @@ to_dur(x, ..., call = caller_env())
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - x_arg:
 
@@ -117,6 +130,9 @@ vector, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
+- `<stbl-error-coerce-duration>` when numbers are rejected by
+  `treat_number_as = "error"`.
+
 - `<stbl-error-incompatible_values-duration>` when some values cannot be
   safely converted to a duration.
 
@@ -148,9 +164,13 @@ not valid durations.
 [base::difftime](https://rdrr.io/r/base/difftime.html) values (including
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html)) are
 converted directly, preserving their unit. Numeric and integer values
-are treated as a (fractional) number of seconds and broken into
+are interpreted according to `treat_number_as`, by default as a
+(fractional) number of seconds. Seconds and milliseconds are broken into
 day/hour/minute/second components, with no year or month component,
 since a number of seconds cannot unambiguously imply a calendar length.
+Days go into the day component, with any fractional part broken into
+hours, minutes, and seconds (so `0.5` days is 12 hours).
+`treat_number_as` is ignored for non-numeric input.
 
 `to_dur()` requires the lubridate package.
 
@@ -224,6 +244,13 @@ to_dur(c("P1D", NA))
 #> [1] "1d 0H 0M 0S" NA           
 to_dur(3661)
 #> [1] "1H 1M 1S"
+to_dur(86400000, treat_number_as = "milliseconds")
+#> [1] "1d 0H 0M 0S"
+to_dur(1.5, treat_number_as = "days")
+#> [1] "1d 12H 0M 0S"
+try(to_dur(3661, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `3661` <double> to <duration>.
 to_dur(as.difftime(90, units = "mins"))
 #> [1] "1H 30M 0S"
 to_dur(NULL)

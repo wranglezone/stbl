@@ -13,6 +13,7 @@ with the provided arguments. `specify_duration()` is a synonym of
 
 ``` r
 specify_dur(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -24,6 +25,7 @@ specify_dur(
 )
 
 specify_dur_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -33,6 +35,7 @@ specify_dur_scalar(
 )
 
 specify_duration(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -44,6 +47,7 @@ specify_duration(
 )
 
 specify_duration_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -54,6 +58,12 @@ specify_duration_scalar(
 ```
 
 ## Arguments
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 

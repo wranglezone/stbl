@@ -25,6 +25,16 @@
   [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md) now
   also accepts and respects a `tz` argument for inputs where a timezone
   makes sense.
+- [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md) (and
+  so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
+  `Period` target,
+  [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
+  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+  [`specify_dur()`](https://stbl.wrangle.zone/dev/reference/specify_dur.md),
+  and related functions) gains a `treat_number_as` argument to control
+  how numbers are interpreted: `"seconds"` (the default),
+  `"milliseconds"`, or `"days"`, or `"error"` to reject numbers
+  ([\#382](https://github.com/wranglezone/stbl/issues/382)).
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md) (and
   so [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
   `POSIXct` target,

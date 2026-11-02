@@ -15,6 +15,7 @@ synonyms of `stabilize_dur_scalar()`.
 stabilize_dur_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -29,6 +30,7 @@ stabilize_dur_scalar(
 stabilise_dur_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -43,6 +45,7 @@ stabilise_dur_scalar(
 stabilize_duration_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -57,6 +60,7 @@ stabilize_duration_scalar(
 stabilise_duration_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -78,6 +82,12 @@ stabilise_duration_scalar(
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
