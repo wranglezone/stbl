@@ -411,7 +411,7 @@ test_that("stabilize_dttm() respects treat_number_as (#372)", {
     "datetime"
   )
   expect_error(
-    stabilize_dttm(1, treat_number_as = "days"),
+    stabilize_dttm(1, treat_number_as = "bogus"),
     class = "rlang_error"
   )
 })

@@ -8,12 +8,13 @@
 \alias{to_date.POSIXct}
 \alias{to_date.POSIXlt}
 \alias{to_date.numeric}
-\alias{to_date.integer}
 \title{Convert to date}
 \usage{
 to_date(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -47,18 +48,36 @@ to_date(
   x_class = object_type(x)
 )
 
-\method{to_date}{POSIXct}(x, ...)
+\method{to_date}{POSIXct}(x, ..., tz = "UTC", call = caller_env())
 
 \method{to_date}{POSIXlt}(x, ...)
 
-\method{to_date}{numeric}(x, ...)
-
-\method{to_date}{integer}(x, ...)
+\method{to_date}{numeric}(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 }
 \arguments{
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
+from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
+time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
+\code{\link[=resolve_tz]{resolve_tz()}}).}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -100,14 +119,20 @@ Character vectors must use the \href{https://datatracker.ietf.org/doc/html/rfc33
 (\code{"YYYY-MM-DD"}); any other shape (such as \code{"11/13/2018"}) is rejected (but
 see \code{\link[=stabilize_date]{stabilize_date()}}). \code{POSIXct} and \code{POSIXlt} values are truncated to
 their date component, discarding the time-of-day and timezone offset. Numeric
-and integer values are treated as the number of days since the Unix epoch
-(\code{"1970-01-01"}).
+and integer values are interpreted according to \code{treat_number_as}, by default
+as the number of days since the Unix epoch (\code{"1970-01-01"}). Seconds and
+milliseconds since the epoch are converted to the date in the time zone named
+by \code{tz} (\code{"UTC"} by default), rounding down. \code{POSIXct} values are likewise
+converted to \code{tz} before truncating. \code{tz} is ignored for other types of
+input, and \code{treat_number_as} is ignored for non-numeric input.
 }
 \examples{
 to_date(as.Date("2024-01-01"))
 to_date("2024-01-01")
 to_date(c("2024-01-01", NA))
 to_date(0L)
+to_date(1704110400, treat_number_as = "seconds")
+try(to_date(0, treat_number_as = "error"))
 to_date(as.POSIXct("2024-01-01 23:00:00", tz = "UTC"))
 to_date(NULL)
 try(to_date("11/13/2018"))

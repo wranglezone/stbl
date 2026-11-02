@@ -53,6 +53,7 @@ to(
   x,
   .to,
   ...,
+  tz = resolve_tz(.to),
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -208,16 +209,16 @@ to use in error messages. Use this if you remove a special class from the
 object before checking its conversion, but want the error message to match
 the original class.}
 
+\item{tz}{(\code{character(1)}) The time zone to use when \code{.to} is a
+\link[base:POSIXct]{base::POSIXct} or \link[base:Date]{base::Date}. Must be a value from \code{\link[=OlsonNames]{OlsonNames()}} or
+\code{""} (your local time zone). Defaults to the time zone of \code{.to}, or your
+local time zone if \code{.to} doesn't name one (see \code{\link[=resolve_tz]{resolve_tz()}}).}
+
 \item{levels}{\code{(character)} The desired factor levels. For factors, a
 vector's \code{levels} play the same role that \code{allowed_values} plays for other
 types: they restrict \code{x} to a fixed set of permitted values.}
 
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
-
-\item{tz}{(\code{character(1)}) The time zone to use when \code{.to} is a
-\link[base:POSIXct]{base::POSIXct}. Must be a value from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""} (your local
-time zone). Defaults to the time zone of \code{.to}, or your local time zone if
-\code{.to} doesn't name one (see \code{\link[=resolve_tz]{resolve_tz()}}).}
 }
 \value{
 \code{x} converted to the type of \code{.to}, or an error condition with

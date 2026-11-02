@@ -215,7 +215,7 @@ test_that("to_dttm() treat_number_as = 'error' rejects numbers (#372)", {
 })
 
 test_that("to_dttm() validates treat_number_as (#372)", {
-  expect_error(to_dttm(1, treat_number_as = "days"), class = "rlang_error")
+  expect_error(to_dttm(1, treat_number_as = "bogus"), class = "rlang_error")
 })
 
 test_that("treat_number_as passes through to_dttm_scalar() and to() (#372)", {
@@ -321,4 +321,29 @@ test_that("to_dttm_scalar() resolves an empty tz (#370)", {
   withr::local_timezone("Asia/Tokyo")
   result <- to_dttm_scalar("2024-01-01T12:00:00Z", tz = "")
   expect_identical(attr(result, "tzone"), "Asia/Tokyo")
+})
+
+test_that("to_dttm() treat_number_as = 'days' gives midnight UTC (#381)", {
+  expected <- as.POSIXct("2024-01-01", tz = "UTC")
+  expect_identical(to_dttm(19723, treat_number_as = "days"), expected)
+  expect_identical(to_dttm(19723L, treat_number_as = "days"), expected)
+  expect_identical(
+    to_dttm(c(0, NA), treat_number_as = "days"),
+    as.POSIXct(c("1970-01-01", NA), tz = "UTC")
+  )
+  expect_identical(
+    as.numeric(to_dttm(1.5, treat_number_as = "days")),
+    129600
+  )
+})
+
+test_that("to_dttm() treat_number_as = 'days' respects tz (#381)", {
+  result <- to_dttm(19723, tz = "America/New_York", treat_number_as = "days")
+  expect_identical(attr(result, "tzone"), "America/New_York")
+  expect_identical(as.numeric(result), 1704067200)
+  expect_pkg_error_classes(
+    to_dttm(1, tz = "not/a_tz", treat_number_as = "days"),
+    "stbl",
+    "bad_tz"
+  )
 })

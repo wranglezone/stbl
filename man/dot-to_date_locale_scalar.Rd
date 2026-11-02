@@ -8,6 +8,8 @@
   x,
   ...,
   accepted_datetime_formats,
+  tz = "UTC",
+  treat_number_as = "days",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -27,6 +29,17 @@ that parses every non-\code{NA} element of \code{x} is used; if none do, the res
 \code{\link[=locale_datetime_formats]{locale_datetime_formats()}}, which starts with the unambiguous RFC 3339
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
+
+\item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
+from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
+time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use \code{tz = resolve_tz(x)} (see
+\code{\link[=resolve_tz]{resolve_tz()}}).}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since the Unix epoch, \code{"days"} since the
+Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

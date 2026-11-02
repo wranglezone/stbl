@@ -80,3 +80,34 @@ test_that("specify_date_scalar() creates a working scalar stabilizer (#104, #325
     "non_scalar"
   )
 })
+
+test_that("specify_date() can set treat_number_as (#381)", {
+  expected <- as.Date("2024-01-01")
+  checker <- specify_date(treat_number_as = "seconds")
+  expect_identical(checker(1704110400), expected)
+  strict <- specify_date(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "date")
+  expect_identical(strict("2024-01-01"), expected)
+})
+
+test_that("specify_date_scalar() can set treat_number_as (#381)", {
+  expected <- as.Date("2024-01-01")
+  checker <- specify_date_scalar(treat_number_as = "milliseconds")
+  expect_identical(checker(1704110400000), expected)
+  strict <- specify_date_scalar(treat_number_as = "error")
+  expect_pkg_error_classes(strict(1), "stbl", "coerce", "date")
+})
+
+test_that("specify_date*() can set tz (#381)", {
+  expected <- as.Date("2023-12-31")
+  checker <- specify_date(
+    tz = "America/Los_Angeles",
+    treat_number_as = "seconds"
+  )
+  expect_identical(checker(1704067200), expected)
+  checker_scalar <- specify_date_scalar(
+    tz = "America/Los_Angeles",
+    treat_number_as = "seconds"
+  )
+  expect_identical(checker_scalar(1704067200), expected)
+})
