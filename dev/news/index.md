@@ -4,6 +4,22 @@
 
 ### New features
 
+- [`stabilize_arg()`](https://stbl.wrangle.zone/dev/reference/stabilize_arg.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_date()`](https://stbl.wrangle.zone/dev/reference/stabilize_date.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/dev/reference/stabilize_dbl.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
+  [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
+  [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
+  [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
+  [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
+  [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
+  their `*_scalar()` variants, and the corresponding `specify_*()`
+  functions gain a `named` argument to require that an object is named
+  (`TRUE`), is not named (`FALSE`), has names drawn from a character
+  vector, or has names that all satisfy a spec such as
+  `specify_chr(regex = "^[a-z_]+$")`
+  ([\#8](https://github.com/wranglezone/stbl/issues/8)).
 - [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
   [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
@@ -54,6 +70,10 @@
 
 ### Bug fixes
 
+- The `to_*()` functions (and so the `stabilize_*()` and `specify_*()`
+  functions, [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
+  and the C API) no longer drop the names of their input during
+  conversion ([\#8](https://github.com/wranglezone/stbl/issues/8)).
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
   [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
   [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),

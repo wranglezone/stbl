@@ -25,6 +25,7 @@ stabilize_dbl_scalar(
   exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -44,6 +45,7 @@ stabilize_double_scalar(
   exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -63,6 +65,7 @@ stabilise_dbl_scalar(
   exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -82,6 +85,7 @@ stabilise_double_scalar(
   exclusive_max_value = NULL,
   allowed_values = NULL,
   multiple_of = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -158,6 +162,19 @@ stabilise_double_scalar(
   value. `NULL` (default) skips the check. For doubles, a small relative
   tolerance is applied to avoid floating-point false negatives.
 
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -196,6 +213,11 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 - `<stbl-error-non_scalar>` for non-scalar vectors.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-outside_range>` when values fall outside `min_value`,
   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.

@@ -25,12 +25,14 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_regex_rule.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-apply_spec_or_stop.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-as_chr_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-bad_tz_msgs_local.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-cant_convert_msg.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_factory_args.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-capture_first_pkg_condition.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_all_named.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_allowed_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_allowed_values.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_chr_to_int_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_consensus.html</loc></url>
@@ -46,6 +48,9 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_match_count.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_multiple_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_named.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_named_presence.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_names_spec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_not_jagged.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_size.html</loc></url>
@@ -80,6 +85,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels_impl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_to_na.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-copy_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-date_type_obj.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_format_variants.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-datetime_type_obj.html</loc></url>

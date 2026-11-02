@@ -65,6 +65,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -86,6 +87,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -107,6 +109,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -128,6 +131,7 @@ synonyms of <code>stabilize_int()</code>.</p>
 <span>  exclusive_max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multiple_of <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -214,6 +218,16 @@ of this value. <code>NULL</code> (default) skips the check. For doubles, a small
 relative tolerance is applied to avoid floating-point false negatives.</p></dd>
 
 
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
+
+
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -242,6 +256,9 @@ the original class.</p></dd>
 safely converted to integer.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match
+<code>named</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>unique = TRUE</code> and duplicates are

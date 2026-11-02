@@ -19,6 +19,7 @@ stabilize_arg(
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -30,6 +31,7 @@ stabilize_arg_scalar(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -70,6 +72,19 @@ stabilize_arg_scalar(
 
   (`logical(1)`) Should all elements in `x` be distinct?
 
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -108,6 +123,11 @@ specific class by failure mode:
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-bad_empty>` for empty vectors when
   `allow_zero_length = FALSE` in `stabilize_arg_scalar()`.
