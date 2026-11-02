@@ -6,6 +6,7 @@
 #' a synonym of `specify_dur()`, and `specify_duration_scalar()` is a synonym of
 #' `specify_dur_scalar()`.
 #'
+#' @inheritParams to_dur
 #' @inheritParams .shared-params
 #' @returns A function of class `"stbl_specified_fn"` that calls
 #'   [stabilize_dur()] or [stabilize_dur_scalar()] with the provided arguments.

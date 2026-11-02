@@ -8,13 +8,13 @@
 \alias{to_time.POSIXct}
 \alias{to_time.POSIXlt}
 \alias{to_time.numeric}
-\alias{to_time.integer}
 \alias{to_time.difftime}
 \title{Convert to time-of-day}
 \usage{
 to_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -55,15 +55,7 @@ to_time(
 \method{to_time}{numeric}(
   x,
   ...,
-  x_arg = caller_arg(x),
-  to_arg = NULL,
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-\method{to_time}{integer}(
-  x,
-  ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -83,6 +75,11 @@ to_time(
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since midnight, \code{"days"} as a fraction of a
+day (so \code{0.5} is 12:00:00), or \code{"error"} to reject numbers. Ignored for
+non-numeric input.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -110,6 +107,8 @@ error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
 \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
 mode:
 \itemize{
+\item \verb{<stbl-error-coerce-time>} when numbers are rejected by
+\code{treat_number_as = "error"}.
 \item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
 safely converted to a time of day.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
@@ -127,9 +126,12 @@ offset of either \code{"Z"} or a numeric offset such as \code{"+05:00"}); any ot
 shape is rejected. The offset is used only to normalize the value to UTC and
 is not retained: \code{to_time()} always returns the time-of-day expressed in UTC.
 \link[base:POSIXct]{base::POSIXct} and \link[base:POSIXlt]{base::POSIXlt} values are likewise converted to UTC
-before their time-of-day component is extracted. Numeric and \link[base:difftime]{base::difftime}
-values are treated as (fractional) seconds since midnight and must resolve to
-a value in \verb{[0, 86400)}.
+before their time-of-day component is extracted. Numeric values are
+interpreted according to \code{treat_number_as}, by default as (fractional)
+seconds since midnight, and must resolve to a time within a single day (for
+example, \code{0.5} is 12:00:00 with \code{treat_number_as = "days"}). \link[base:difftime]{base::difftime}
+values carry their own unit and must resolve to a value in \verb{[0, 86400)}
+seconds since midnight. \code{treat_number_as} is ignored for non-numeric input.
 
 \code{to_time()} requires the \pkg{hms} package.
 }
@@ -139,6 +141,9 @@ to_time("13:20:00Z")
 to_time("13:20:00-05:00")
 to_time(c("13:20:00Z", NA))
 to_time(3600)
+to_time(3600000, treat_number_as = "milliseconds")
+to_time(0.5, treat_number_as = "days")
+try(to_time(3600, treat_number_as = "error"))
 to_time(as.POSIXct("2024-01-01 13:20:00", tz = "UTC"))
 to_time(NULL)
 try(to_time("13:20:00"))

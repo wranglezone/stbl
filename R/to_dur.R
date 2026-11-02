@@ -36,6 +36,9 @@
 #'
 #' `to_dur()` requires the \pkg{lubridate} package.
 #'
+#' @param treat_number_as (`character(1)`) How to interpret numeric input:
+#'   `"seconds"` or `"milliseconds"` as a length of time, `"days"` as a number
+#'   of days, or `"error"` to reject numbers. Ignored for non-numeric input.
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a [lubridate::Period-class] vector, or an error
@@ -352,8 +355,8 @@ to_dur.default <- function(
 #' Checks whether a vector can be converted to a length-1
 #' [lubridate::Period-class] vector.
 #'
-#' @inheritParams .shared-params
 #' @inheritParams to_dur
+#' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 [lubridate::Period-class] vector, or an
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,

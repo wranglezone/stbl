@@ -8,6 +8,7 @@
 stabilize_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -24,6 +25,7 @@ stabilize_time(
 stabilise_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -41,6 +43,11 @@ stabilise_time(
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since midnight, \code{"days"} as a fraction of a
+day (so \code{0.5} is 12:00:00), or \code{"error"} to reject numbers. Ignored for
+non-numeric input.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

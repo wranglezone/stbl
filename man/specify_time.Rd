@@ -6,6 +6,7 @@
 \title{Create a specified time-of-day stabilizer function}
 \usage{
 specify_time(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -17,6 +18,7 @@ specify_time(
 )
 
 specify_time_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -26,6 +28,11 @@ specify_time_scalar(
 )
 }
 \arguments{
+\item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
+\code{"seconds"} or \code{"milliseconds"} since midnight, \code{"days"} as a fraction of a
+day (so \code{0.5} is 12:00:00), or \code{"error"} to reject numbers. Ignored for
+non-numeric input.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
