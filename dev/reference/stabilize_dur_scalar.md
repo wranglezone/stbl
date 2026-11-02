@@ -86,8 +86,8 @@ stabilise_duration_scalar(
 - treat_number_as:
 
   (`character(1)`) How to interpret numeric input: `"seconds"` or
-  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
-  or `"error"` to reject numbers. Ignored for non-numeric input.
+  `"milliseconds"` as a length of time, `"days"` as a number of days, or
+  `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 

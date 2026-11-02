@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/wranglezone/stbl/blob/main/DESCRIPTION)
 
 Harmon J (2026). *stbl: Stabilize Objects*. R package version
-0.5.0.9004, <https://stbl.wrangle.zone/>.
+0.5.0.9005, <https://stbl.wrangle.zone/>.
 
     @Manual{,
       title = {stbl: Stabilize Objects},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.5.0.9004},
+      note = {R package version 0.5.0.9005},
       url = {https://stbl.wrangle.zone/},
     }

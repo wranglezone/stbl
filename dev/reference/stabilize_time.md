@@ -11,6 +11,7 @@ Compared to
 stabilize_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -27,6 +28,7 @@ stabilize_time(
 stabilise_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -50,6 +52,13 @@ stabilise_time(
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
 
 - allow_null:
 

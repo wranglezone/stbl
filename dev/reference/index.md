@@ -125,8 +125,6 @@
 - [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   [`to_integer_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md)
   : Convert to length-1 integer
-- [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md) :
-  Convert to time-of-day
 
 ## logical vectors
 

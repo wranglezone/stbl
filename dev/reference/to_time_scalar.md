@@ -9,6 +9,7 @@ Checks whether a vector can be converted to a length-1
 to_time_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -27,6 +28,13 @@ to_time_scalar(
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
 
 - allow_null:
 

@@ -11,6 +11,7 @@ with the provided arguments.
 
 ``` r
 specify_time(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -22,6 +23,7 @@ specify_time(
 )
 
 specify_time_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -32,6 +34,13 @@ specify_time_scalar(
 ```
 
 ## Arguments
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
 
 - allow_null:
 
