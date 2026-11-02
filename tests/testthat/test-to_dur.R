@@ -172,6 +172,104 @@ test_that("to_dur() treats numerics as seconds (#295)", {
   expect_identical(to_dur(3661L), lubridate::seconds_to_period(3661))
 })
 
+test_that("to_dur() treat_number_as = 'seconds' is the default (#382)", {
+  expected <- lubridate::seconds_to_period(3661)
+  expect_identical(to_dur(3661, treat_number_as = "seconds"), expected)
+  expect_identical(to_dur(3661L, treat_number_as = "seconds"), expected)
+})
+
+test_that("to_dur() treat_number_as = 'milliseconds' divides by 1000 (#382)", {
+  expect_identical(
+    to_dur(86400000, treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(86400)
+  )
+  expect_identical(
+    to_dur(c(1500L, NA), treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(c(1.5, NA))
+  )
+  expect_identical(
+    to_dur(1234.5, treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(1.2345)
+  )
+})
+
+test_that("to_dur() treat_number_as = 'days' fills the day component (#382)", {
+  expect_identical(
+    to_dur(2, treat_number_as = "days"),
+    lubridate::period(day = 2)
+  )
+  expect_identical(
+    to_dur(400L, treat_number_as = "days"),
+    lubridate::period(day = 400)
+  )
+  expect_identical(
+    to_dur(c(0.5, -1.25, NA), treat_number_as = "days"),
+    lubridate::period(
+      day = c(0, -1, NA),
+      hour = c(12, -6, NA)
+    )
+  )
+})
+
+test_that("to_dur() treat_number_as = 'error' rejects numbers (#382)", {
+  expect_pkg_error_classes(
+    to_dur(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+  expect_pkg_error_classes(
+    to_dur(1L, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+  expect_pkg_error_classes(
+    to_dur(NA_real_, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+})
+
+test_that("to_dur() validates treat_number_as (#382)", {
+  expect_error(to_dur(1, treat_number_as = "bogus"), class = "rlang_error")
+})
+
+test_that("to_dur() ignores treat_number_as for non-numbers (#382)", {
+  expect_identical(
+    to_dur("P1D", treat_number_as = "error"),
+    lubridate::period(day = 1)
+  )
+  expect_identical(
+    to_dur(factor("P1D"), treat_number_as = "error"),
+    lubridate::period(day = 1)
+  )
+  expect_identical(
+    to_dur(as.difftime(90, units = "mins"), treat_number_as = "error"),
+    lubridate::as.period(as.difftime(90, units = "mins"))
+  )
+  given <- lubridate::period(day = 1)
+  expect_identical(to_dur(given, treat_number_as = "error"), given)
+})
+
+test_that("treat_number_as passes through to_dur_scalar() and to() (#382)", {
+  expect_identical(
+    to_dur_scalar(1000, treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(1)
+  )
+  expect_pkg_error_classes(
+    to_dur_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+  expect_identical(
+    to(1, lubridate::period(), treat_number_as = "days"),
+    lubridate::period(day = 1)
+  )
+})
+
 test_that("to_dur() errors properly for other types (#295, #369)", {
   given <- as.raw(1:10)
   expect_pkg_error_classes(to_dur(given), "stbl", "coerce", "duration")

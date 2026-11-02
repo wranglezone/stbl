@@ -197,3 +197,45 @@ test_that("stabilize_duration_scalar() exists (#295)", {
 test_that("stabilise_duration_scalar() exists (#295)", {
   expect_no_error(stabilise_duration_scalar("P1D"))
 })
+
+test_that("stabilize_dur() respects treat_number_as (#382)", {
+  expect_identical(
+    stabilize_dur(1000, treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(1)
+  )
+  expect_identical(
+    stabilize_dur(1, treat_number_as = "days"),
+    lubridate::period(day = 1)
+  )
+  expect_pkg_error_classes(
+    stabilize_dur(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+  expect_error(
+    stabilize_dur(1, treat_number_as = "bogus"),
+    class = "rlang_error"
+  )
+  expect_identical(
+    stabilize_dur("P1D", treat_number_as = "error"),
+    lubridate::period(day = 1)
+  )
+})
+
+test_that("stabilize_dur_scalar() respects treat_number_as (#382)", {
+  expect_identical(
+    stabilize_dur_scalar(1000, treat_number_as = "milliseconds"),
+    lubridate::seconds_to_period(1)
+  )
+  expect_pkg_error_classes(
+    stabilize_dur_scalar(1, treat_number_as = "error"),
+    "stbl",
+    "coerce",
+    "duration"
+  )
+  expect_identical(
+    stabilize_dur_scalar("P1D", treat_number_as = "error"),
+    lubridate::period(day = 1)
+  )
+})

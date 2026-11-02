@@ -26,10 +26,13 @@
 #' cannot be mixed, fractional components are not permitted, and `"P"` or `"PT"`
 #' alone (with no components) are not valid durations. [base::difftime] values
 #' (including [hms::hms()]) are converted directly, preserving their unit.
-#' Numeric and integer values are treated as a (fractional) number of seconds
-#' and broken into day/hour/minute/second components, with no year or month
+#' Numeric and integer values are interpreted according to `treat_number_as`, by
+#' default as a (fractional) number of seconds. Seconds and milliseconds are
+#' broken into day/hour/minute/second components, with no year or month
 #' component, since a number of seconds cannot unambiguously imply a calendar
-#' length.
+#' length. Days go into the day component, with any fractional part broken into
+#' hours, minutes, and seconds (so `0.5` days is 12 hours). `treat_number_as` is
+#' ignored for non-numeric input.
 #'
 #' `to_dur()` requires the \pkg{lubridate} package.
 #'
@@ -38,6 +41,8 @@
 #' @returns The input as a [lubridate::Period-class] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-coerce-duration>` when numbers are rejected by
+#'   `treat_number_as = "error"`.
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -52,6 +57,9 @@
 #' to_dur("P4W")
 #' to_dur(c("P1D", NA))
 #' to_dur(3661)
+#' to_dur(86400000, treat_number_as = "milliseconds")
+#' to_dur(1.5, treat_number_as = "days")
+#' try(to_dur(3661, treat_number_as = "error"))
 #' to_dur(as.difftime(90, units = "mins"))
 #' to_dur(NULL)
 #' try(to_dur("P"))
@@ -59,6 +67,7 @@
 to_dur <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -240,22 +249,56 @@ to_dur.difftime <- function(x, ..., call = caller_env()) {
 
 #' @export
 #' @rdname to_dur
-to_dur.numeric <- function(x, ..., call = caller_env()) {
+to_dur.numeric <- function(
+  x,
+  ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  treat_number_as <- rlang::arg_match(treat_number_as, error_call = call)
+  if (treat_number_as == "error") {
+    .stop_cant_convert(
+      from_class = x_class,
+      to_class = "duration",
+      x_arg = x_arg,
+      to_arg = to_arg,
+      call = call
+    )
+  }
   rlang::check_installed(
     "lubridate",
-    reason = "to convert numeric seconds to a duration"
+    reason = "to convert numeric values to a duration"
   )
-  # Numeric values are treated as (fractional) seconds; lubridate breaks
-  # these into day/hour/minute/second components, with no year or month
-  # component, since a number of seconds can't unambiguously imply a
-  # calendar length.
-  return(lubridate::seconds_to_period(x))
+  switch(
+    treat_number_as,
+    seconds = lubridate::seconds_to_period(x),
+    milliseconds = lubridate::seconds_to_period(x / 1000),
+    days = .days_to_dur(x)
+  )
 }
 
-#' @export
-#' @rdname to_dur
-to_dur.integer <- function(x, ..., call = caller_env()) {
-  to_dur.numeric(x, call = call)
+#' Convert days to durations
+#'
+#' Whole days go into the day component. Lubridate breaks any fractional day
+#' into hours, minutes, and seconds, so `0.5` days is 12 hours.
+#'
+#' @param x `(numeric)` Days.
+#' @returns A [lubridate::Period-class] vector.
+#' @keywords internal
+.days_to_dur <- function(x) {
+  whole_days <- trunc(x)
+  remainder <- lubridate::seconds_to_period((x - whole_days) * 86400)
+  .new_period_vec(
+    year = 0,
+    month = 0,
+    day = whole_days,
+    hour = remainder@hour,
+    minute = remainder@minute,
+    second = remainder@.Data
+  )
 }
 
 #' @export
@@ -332,6 +375,7 @@ to_dur.default <- function(
 to_dur_scalar <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -343,7 +387,7 @@ to_dur_scalar <- function(
     x,
     is_rlang_cls_scalar = .is_scalar_dur,
     to_cls_fn = to_dur,
-    to_cls_args = list(...),
+    to_cls_args = c(list(treat_number_as = treat_number_as), list(...)),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,

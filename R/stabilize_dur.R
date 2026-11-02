@@ -45,6 +45,7 @@
 stabilize_dur <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -60,6 +61,7 @@ stabilize_dur <- function(
   .stabilize_cls(
     x,
     to_cls_fn = to_dur,
+    to_cls_args = list(treat_number_as = treat_number_as),
     check_cls_value_fn = .check_value_dur,
     check_cls_value_fn_args = list(
       min_value = min_value,
@@ -131,6 +133,7 @@ stabilise_duration <- stabilize_dur
 stabilize_dur_scalar <- function(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -144,6 +147,7 @@ stabilize_dur_scalar <- function(
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_dur_scalar,
+    to_cls_scalar_args = list(treat_number_as = treat_number_as),
     check_cls_value_fn = .check_value_dur,
     check_cls_value_fn_args = list(
       min_value = min_value,
