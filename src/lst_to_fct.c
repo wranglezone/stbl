@@ -39,7 +39,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         int* p_v = LOGICAL(valid);
         for (R_xlen_t j = 0; j < m; j++) p_v[j] = 1;
-        SEXP out = lst_build_out(result, valid);
+        SEXP out = lst_build_out(x, result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -55,7 +55,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
             codes[j] == NA_INTEGER ? NA_STRING : STRING_ELT(levels, codes[j] - 1));
           p_v[j] = 1;
         }
-        SEXP out = lst_build_out(result, valid);
+        SEXP out = lst_build_out(x, result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -93,7 +93,7 @@ SEXP stbl_lst_to_fct(SEXP x) {
     }
   }
 
-  SEXP out = lst_build_out(result, valid);
+  SEXP out = lst_build_out(x, result, valid);
   UNPROTECT(2);
   return out;
 }

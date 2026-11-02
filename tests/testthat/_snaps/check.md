@@ -132,3 +132,69 @@
       ! `multiple_of` must be positive.
       x `multiple_of` = -2.
 
+# .check_named() handles TRUE and FALSE (#8)
+
+    Code
+      .check_named(1:2, TRUE)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `1:2` must be named.
+      x Every element must have a non-empty name.
+
+---
+
+    Code
+      .check_named(c(a = 1, 2), TRUE)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `c(a = 1, 2)` must be named.
+      x Every element must have a non-empty name.
+
+---
+
+    Code
+      .check_named(c(a = 1, 2), FALSE)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `c(a = 1, 2)` must not be named.
+
+# .check_named() checks names against a character vector (#8)
+
+    Code
+      .check_named(c(a = 1, c = 2), c("a", "b"))
+    Condition <stbl-error-allowed_names>
+      Error:
+      ! `c(a = 1, c = 2)` must have names from the allowed set.
+      i Allowed names: "a" and "b".
+      x Unexpected location: 2
+      x Unexpected name: "c".
+
+---
+
+    Code
+      .check_named(1:2, c("a", "b"))
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `1:2` must be named.
+      x Every element must have a non-empty name.
+
+# .check_named() applies a spec to the names (#8)
+
+    Code
+      .check_named(c(a = 1, B = 2), spec)
+    Condition <stbl-error-regex_mismatch>
+      Error:
+      ! `names(c(a = 1, B = 2))` must match the regex pattern "^[a-z]+$"
+      x Some values fail the check.
+      x Location: 2
+      x Value: B
+
+---
+
+    Code
+      .check_named(1:2, spec)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `1:2` must be named.
+      x Every element must have a non-empty name.
+

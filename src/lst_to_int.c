@@ -123,7 +123,7 @@ SEXP stbl_lst_to_int(SEXP x) {
         SEXP result = PROTECT(Rf_allocVector(INTSXP, m));
         SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
         lst_to_int_fill_vec(elem, m, INTEGER(result), LOGICAL(valid));
-        SEXP out = lst_build_out(result, valid);
+        SEXP out = lst_build_out(x, result, valid);
         UNPROTECT(2);
         return out;
       }
@@ -224,7 +224,7 @@ SEXP stbl_lst_to_int(SEXP x) {
     }
   }
 
-  SEXP out = lst_build_out(result, valid);
+  SEXP out = lst_build_out(x, result, valid);
   UNPROTECT(2);
   return out;
 }

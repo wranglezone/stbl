@@ -68,3 +68,30 @@
 
   return(NULL)
 }
+
+#' Copy names onto a converted object
+#'
+#' Many base conversions drop names. Names are copied from `from` only when `x`
+#' has none and the lengths match.
+#'
+#' @param x The converted object.
+#' @param from The object as supplied by the user.
+#' @returns `x`, with the names of `from` if they apply.
+#' @keywords internal
+.copy_names <- function(x, from) {
+  nms <- names(from)
+  if (is.null(nms) || !is.null(names(x)) || length(x) != length(from)) {
+    return(x)
+  }
+  names(x) <- nms
+  x
+}
+
+#' Convert to character, keeping names
+#'
+#' @param x The object (usually a factor) to convert.
+#' @returns `as.character(x)`, with the names of `x`.
+#' @keywords internal
+.as_chr_named <- function(x) {
+  .copy_names(as.character(x), x)
+}

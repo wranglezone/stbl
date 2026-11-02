@@ -486,3 +486,67 @@ test_that("to() rejects a non-scalar to_arg (#371)", {
   to("a", integer(), to_arg = c("a", "b")) |>
     expect_pkg_error_snapshot("stbl", "non_scalar")
 })
+
+test_that("to_*() functions keep names (#8)", {
+  date <- as.Date("2020-01-01")
+  dttm <- as.POSIXct("2020-01-01 10:00:00", tz = "UTC")
+  difftime_x <- as.difftime(c(a = 1), units = "mins")
+  hms_x <- hms::hms(3600)
+  names(hms_x) <- "a"
+  cases <- list(
+    to_lgl(c(a = TRUE)),
+    to_lgl(c(a = 1)),
+    to_lgl(c(a = "T")),
+    to_lgl(factor(c(a = "T"))),
+    to_lgl(list(a = TRUE)),
+    to_int(c(a = TRUE)),
+    to_int(c(a = 1)),
+    to_int(c(a = "1")),
+    to_int(factor(c(a = "1"))),
+    to_int(c(a = 1 + 0i)),
+    to_int(list(a = 1L)),
+    to_dbl(c(a = TRUE)),
+    to_dbl(c(a = 1L)),
+    to_dbl(c(a = "1")),
+    to_dbl(factor(c(a = "1"))),
+    to_dbl(c(a = 1 + 0i)),
+    to_dbl(list(a = 1)),
+    to_chr(c(a = TRUE)),
+    to_chr(c(a = 1L)),
+    to_chr(c(a = 1)),
+    to_chr(factor(c(a = "x"))),
+    to_chr(c(a = 1 + 0i)),
+    to_chr(c(a = date)),
+    to_chr(list(a = "x")),
+    to_fct(c(a = "x")),
+    to_fct(c(a = "x"), levels = "x"),
+    to_fct(c(a = 1L)),
+    to_fct(c(a = 1L), levels = "1"),
+    to_fct(factor(c(a = "x"))),
+    to_fct(list(a = "x")),
+    to_date(c(a = "2020-01-01")),
+    to_date(factor(c(a = "2020-01-01"))),
+    to_date(c(a = date)),
+    to_date(c(a = dttm)),
+    to_date(c(a = 1)),
+    to_dttm(c(a = "2020-01-01T10:00:00Z")),
+    to_dttm(factor(c(a = "2020-01-01T10:00:00Z"))),
+    to_dttm(c(a = dttm)),
+    to_dttm(c(a = date)),
+    to_dttm(c(a = 1)),
+    to_time(c(a = "10:00:00Z")),
+    to_time(factor(c(a = "10:00:00Z"))),
+    to_time(c(a = dttm)),
+    to_time(c(a = 1)),
+    to_time(difftime_x),
+    to_time(hms_x),
+    to_dur(c(a = "P1D")),
+    to_dur(factor(c(a = "P1D"))),
+    to_dur(c(a = 1)),
+    to_dur(c(a = 1), treat_number_as = "days"),
+    to_dur(difftime_x)
+  )
+  for (i in seq_along(cases)) {
+    expect_named(cases[[i]], "a")
+  }
+})

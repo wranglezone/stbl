@@ -17,6 +17,7 @@ stabilize_date_scalar(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilise_date_scalar(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -79,6 +81,14 @@ that parses every non-\code{NA} element of \code{x} is used; if none do, the res
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
 
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
+
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -105,6 +115,9 @@ converted to date.
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
+\code{named}.
+\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
 \item \verb{<stbl-error-allowed_values>} when the value is not in \code{allowed_values}.

@@ -315,7 +315,7 @@ to_character <- to_chr
   x_class = object_type(x)
 ) {
   try_fetch(
-    as.character(x),
+    .copy_names(as.character(x), x),
     error = function(cnd) {
       .stop_cant_convert(
         from_class = x_class,

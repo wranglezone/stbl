@@ -60,12 +60,14 @@
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
   force(x_arg)
   force(call)
+  x_orig <- x
   x <- inject(
     to_cls_fn(
       x,
@@ -79,6 +81,7 @@
   if (is.null(x)) {
     return(x)
   }
+  .check_named(x_orig, named = named, x_arg = x_arg, call = call)
   if (!is.null(check_cls_value_fn)) {
     inject(
       check_cls_value_fn(
@@ -118,6 +121,7 @@
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -126,6 +130,7 @@
   force(x_arg)
   force(call)
 
+  x_orig <- x
   x <- inject(
     to_cls_scalar_fn(
       x,
@@ -137,6 +142,7 @@
       x_class = x_class
     )
   )
+  .check_named(x_orig, named = named, x_arg = x_arg, call = call)
   if (!is.null(check_cls_value_fn)) {
     inject(
       check_cls_value_fn(
@@ -150,6 +156,7 @@
   .check_na(x, allow_na = allow_na, x_arg = x_arg, call = call)
   return(x)
 }
+
 
 #' Check if all elements of a list-like object are ish
 #'

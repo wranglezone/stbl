@@ -16,6 +16,7 @@ stabilize_fct_scalar(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -30,6 +31,7 @@ stabilize_factor_scalar(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -44,6 +46,7 @@ stabilise_fct_scalar(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -58,6 +61,7 @@ stabilise_factor_scalar(
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -80,6 +84,14 @@ will be computed by \code{\link[base:factor]{base::factor()}}.}
 \item{ordered}{(\code{logical(1)}) Should the result be an ordered factor?}
 
 \item{to_na}{\code{(character)} Values to convert to \code{NA}.}
+
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -105,6 +117,9 @@ The input as a length-1 factor, or an error condition with classes
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
+\code{named}.
+\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-fct_levels>} when values are not present in \code{levels}.
 }
 }

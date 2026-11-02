@@ -16,6 +16,9 @@
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE` in [stabilize_arg_scalar()].
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors in
@@ -45,6 +48,7 @@ stabilize_arg <- function(
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +70,7 @@ stabilize_arg <- function(
     call = call
   )
   .check_unique(x, unique = unique, x_arg = x_arg, call = call)
+  .check_named(x, named = named, x_arg = x_arg, call = call)
   return(x)
 }
 
@@ -77,6 +82,7 @@ stabilize_arg_scalar <- function(
   allow_null = TRUE,
   allow_zero_length = TRUE,
   allow_na = TRUE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -91,5 +97,6 @@ stabilize_arg_scalar <- function(
     x_class = x_class
   )
   .check_na(x, allow_na = allow_na, x_arg = x_arg, call = call)
+  .check_named(x, named = named, x_arg = x_arg, call = call)
   return(x)
 }

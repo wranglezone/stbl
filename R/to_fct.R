@@ -208,6 +208,7 @@ to_fct.default <- function(
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
+  x_orig <- x
   x <- .convert_fct_to_na(x, to_na, call)
   x <- .convert_fct_levels_impl(
     x,
@@ -217,7 +218,7 @@ to_fct.default <- function(
     x_arg = x_arg,
     call = call
   )
-  return(x)
+  return(.copy_names(x, x_orig))
 }
 
 #' Convert specified values to NA

@@ -138,3 +138,66 @@ test_that("stabilize_arg_scalar() errors on weird internal arg values (#12, #58)
     "non_scalar"
   )
 })
+
+test_that("stabilize_arg() checks named (#8)", {
+  expect_identical(stabilize_arg(c(a = 1), named = TRUE), c(a = 1))
+  expect_identical(stabilize_arg(1, named = FALSE), 1)
+  expect_pkg_error_classes(
+    stabilize_arg(1, named = TRUE),
+    "stbl",
+    "bad_named"
+  )
+  expect_pkg_error_classes(
+    stabilize_arg(c(a = 1), named = "b"),
+    "stbl",
+    "allowed_names"
+  )
+  expect_identical(stabilize_arg_scalar(c(a = 1), named = "a"), c(a = 1))
+  expect_pkg_error_classes(
+    stabilize_arg_scalar(c(a = 1), named = FALSE),
+    "stbl",
+    "bad_named"
+  )
+})
+
+test_that("stabilize_*() functions check named (#8)", {
+  given <- list(
+    lgl = c(a = TRUE),
+    int = c(a = 1L),
+    dbl = c(a = 1),
+    chr = c(a = "x"),
+    fct = c(a = "x"),
+    date = c(a = "2020-01-01"),
+    dttm = c(a = "2020-01-01 10:00:00"),
+    time = hms::hms(3600) |> rlang::set_names("a"),
+    dur = c(a = "P1D")
+  )
+  for (type in names(given)) {
+    x <- given[[type]]
+    unnamed <- unname(x)
+    for (suffix in c("", "_scalar")) {
+      fn <- get(paste0("stabilize_", type, suffix))
+      expect_named(fn(x), "a")
+      expect_named(fn(x, named = TRUE), "a")
+      expect_named(fn(x, named = "a"), "a")
+      expect_null(names(fn(unnamed)))
+      expect_no_error(fn(x, named = TRUE))
+      expect_no_error(fn(x, named = "a"))
+      expect_no_error(fn(unnamed, named = FALSE))
+      expect_pkg_error_classes(fn(unnamed, named = TRUE), "stbl", "bad_named")
+      expect_pkg_error_classes(fn(x, named = FALSE), "stbl", "bad_named")
+      expect_pkg_error_classes(fn(x, named = "b"), "stbl", "allowed_names")
+    }
+    expect_null(get(paste0("stabilize_", type))(NULL, named = TRUE))
+  }
+})
+
+test_that("stabilize_*() applies a spec to names (#8)", {
+  spec <- specify_chr(regex = "^[a-z]+$")
+  expect_no_error(stabilize_int(c(a = 1L), named = spec))
+  expect_pkg_error_classes(
+    stabilize_int(c(A = 1L), named = spec),
+    "stbl",
+    "regex_mismatch"
+  )
+})

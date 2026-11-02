@@ -69,7 +69,7 @@ SEXP stbl_lst_to_chr(SEXP x) {
       SEXP valid  = PROTECT(Rf_allocVector(LGLSXP, m));
       int* p_v = LOGICAL(valid);
       for (R_xlen_t j = 0; j < m; j++) p_v[j] = 1;
-      SEXP out = lst_build_out(result, valid);
+      SEXP out = lst_build_out(x, result, valid);
       UNPROTECT(2);
       return out;
     }
@@ -92,7 +92,7 @@ SEXP stbl_lst_to_chr(SEXP x) {
     p_v[i] = valid_elem;
   }
 
-  SEXP out = lst_build_out(result, valid);
+  SEXP out = lst_build_out(x, result, valid);
   UNPROTECT(2);
   return out;
 }

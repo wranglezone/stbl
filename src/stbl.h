@@ -7,6 +7,7 @@
 #include <R_ext/Utils.h>
 #include <ctype.h>
 #include <math.h>
+#include "stbl_names.h"
 
 /* Valid R integer range.
  * NA_INTEGER == INT_MIN (-2147483648), so the representable range is
@@ -207,10 +208,11 @@ static inline SEXP lst_unwrap_elem(SEXP x) {
 
 /*
  * Build the standard list(result = ..., valid = ...) return value used by
- * all stbl_lst_to_* routines. Caller must have already PROTECTed both
- * result and valid.
+ * all stbl_lst_to_* routines. Names of `x`, the incoming list, are copied onto
+ * result. Caller must have already PROTECTed both result and valid.
  */
-static inline SEXP lst_build_out(SEXP result, SEXP valid) {
+static inline SEXP lst_build_out(SEXP x, SEXP result, SEXP valid) {
+  copy_names(x, result);
   SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
   SET_VECTOR_ELT(out, 0, result);

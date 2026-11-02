@@ -25,6 +25,7 @@
 specify_fct <- function(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
@@ -41,6 +42,7 @@ specify_fct_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
   ordered = FALSE,
   to_na = character()

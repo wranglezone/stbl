@@ -2,6 +2,7 @@
 
 ## New features
 
+* `stabilize_arg()`, `stabilize_chr()`, `stabilize_date()`, `stabilize_dbl()`, `stabilize_dttm()`, `stabilize_dur()`, `stabilize_fct()`, `stabilize_int()`, `stabilize_lgl()`, `stabilize_time()`, their `*_scalar()` variants, and the corresponding `specify_*()` functions gain a `named` argument to require that an object is named (`TRUE`), is not named (`FALSE`), has names drawn from a character vector, or has names that all satisfy a spec such as `specify_chr(regex = "^[a-z_]+$")` (#8).
 * `stabilize_lst()` and `specify_lst()` gain a `.coerce_function` argument, so functions can be converted to lists from the wrappers (#380).
 * `to_date()`, `to_dttm()`, `to_time()`, and `to_dur()` (and so `to()` with `Date`, `POSIXct`, `hms`, and `Period` targets, their `*_scalar()` variants, and the corresponding `stabilize_*()` and `specify_*()` functions) gain a `treat_number_as` argument to control how numbers are interpreted. `to_date()` now also accepts and respects a `tz` argument for inputs where a timezone makes sense (#372, #381, #382, #387).
 * `to()`, all `to_*()` functions, and `stbl_to()` (C API) gain a `to_arg` argument, like `vctrs::vec_cast()`. When supplied, conversion errors name both sides (#371).
@@ -10,6 +11,7 @@
 
 ## Bug fixes
 
+* The `to_*()` functions (and so the `stabilize_*()` and `specify_*()` functions, `to()`, and the C API) no longer drop the names of their input during conversion (#8).
 * `to_dttm()`, `stabilize_dttm()`, `specify_dttm()`, and their scalar and `datetime` variants now convert `tz = ""` to the name of your local time zone (such as `"America/Chicago"`) instead of returning a date-time with an empty `tzone`. The instant in time is unchanged. Similarly, `to()` with a `POSIXct` target whose time zone is `""` or missing (such as `Sys.time()`) now returns a date-time in your local time zone, named explicitly, instead of UTC (#370).
 * `stbl_to()` (C API) failures now have the same classes, messages, and fields as `to()` errors. `stbl_to()` gains `x_arg` and `call` arguments for error context; pass `R_NilValue` to use the defaults (#369).
 * `to_date()`, `to_dbl()`, `to_dttm()`, `to_dur()`, `to_int()`, `to_lst()`, and `to_time()` now raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors when the default method cannot coerce `x` (such as raw vectors) (#369).

@@ -1,5 +1,6 @@
 #include <R.h>
 #include <Rinternals.h>
+#include "stbl_names.h"
 
 /*
  * stbl_lgl_to_chr: public API entry point.
@@ -18,6 +19,7 @@ SEXP stbl_lgl_to_chr(SEXP x) {
   for (R_xlen_t i = 0; i < n; i++) p[i] = 1;
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  copy_names(x, result);
   SET_VECTOR_ELT(out, 0, result);
   SET_VECTOR_ELT(out, 1, valid);
   SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));

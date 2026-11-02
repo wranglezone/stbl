@@ -130,7 +130,7 @@ to_dttm.character <- function(
     to_arg
   )
   attr(parsed, "tzone") <- tz
-  return(parsed)
+  return(.copy_names(parsed, x))
 }
 
 #' Parse the regex captures from `to_dttm.character()` into instants
@@ -192,7 +192,7 @@ to_dttm.factor <- function(
   x_class = object_type(x)
 ) {
   to_dttm(
-    as.character(x),
+    .as_chr_named(x),
     ...,
     tz = tz,
     x_arg = x_arg,
