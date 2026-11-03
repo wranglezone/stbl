@@ -1,6 +1,6 @@
-# Coerce to time-of-day
+# Convert to time-of-day
 
-Checks whether a vector can be coerced to an
+Checks whether a vector can be converted to an
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) time-of-day
 vector without losing information, returning it silently if so.
 Otherwise an informative error message is signaled.
@@ -11,19 +11,29 @@ Otherwise an informative error message is signaled.
 to_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_time(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_time(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'character'
 to_time(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -33,6 +43,7 @@ to_time(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -47,16 +58,9 @@ to_time(x, ..., call = caller_env())
 to_time(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
-  call = caller_env(),
-  x_class = object_type(x)
-)
-
-# S3 method for class 'integer'
-to_time(
-  x,
-  ...,
-  x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -66,6 +70,7 @@ to_time(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -81,12 +86,26 @@ to_time(
 
   Arguments passed to methods.
 
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 
@@ -97,7 +116,7 @@ to_time(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -111,6 +130,9 @@ The input as an
 always expressed in UTC, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-coerce-time>` when numbers are rejected by
+  `treat_number_as = "error"`.
 
 - `<stbl-error-incompatible_values-time>` when some values cannot be
   safely converted to a time of day.
@@ -129,10 +151,13 @@ expressed in UTC.
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) and
 [base::POSIXlt](https://rdrr.io/r/base/DateTimeClasses.html) values are
 likewise converted to UTC before their time-of-day component is
-extracted. Numeric and
-[base::difftime](https://rdrr.io/r/base/difftime.html) values are
-treated as (fractional) seconds since midnight and must resolve to a
-value in `[0, 86400)`.
+extracted. Numeric values are interpreted according to
+`treat_number_as`, by default as (fractional) seconds since midnight,
+and must resolve to a time within a single day (for example, `0.5` is
+12:00:00 with `treat_number_as = "days"`).
+[base::difftime](https://rdrr.io/r/base/difftime.html) values carry
+their own unit and must resolve to a value in `[0, 86400)` seconds since
+midnight. `treat_number_as` is ignored for non-numeric input.
 
 `to_time()` requires the hms package.
 
@@ -142,6 +167,7 @@ Other time functions:
 [`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 
 Other stabilization functions:
@@ -204,19 +230,26 @@ to_time(c("13:20:00Z", NA))
 #>       NA
 to_time(3600)
 #> 01:00:00
+to_time(3600000, treat_number_as = "milliseconds")
+#> 01:00:00
+to_time(0.5, treat_number_as = "days")
+#> 12:00:00
+try(to_time(3600, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `3600` <double> to <time>.
 to_time(as.POSIXct("2024-01-01 13:20:00", tz = "UTC"))
 #> 13:20:00
 to_time(NULL)
 #> NULL
 try(to_time("13:20:00"))
 #> Error in eval(expr, envir) : 
-#>   `"13:20:00"` <character> must be coercible to <time>
+#>   `"13:20:00"` <character> must be convertible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 1
 #> • Values: "13:20:00"
 try(to_time(c("13:20:00Z", "not-a-time")))
 #> Error in eval(expr, envir) : 
-#>   `c("13:20:00Z", "not-a-time")` <character> must be coercible to <time>
+#>   `c("13:20:00Z", "not-a-time")` <character> must be convertible to <time>
 #> ✖ Can't convert some values due to invalid or ambiguous time format.
 #> • Locations: 2
 #> • Values: "not-a-time"

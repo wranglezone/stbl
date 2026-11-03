@@ -1,6 +1,6 @@
-# Coerce to length-1 logical
+# Convert to length-1 logical
 
-Checks whether a vector can be coerced to a length-1 logical vector.
+Checks whether a vector can be converted to a length-1 logical vector.
 `to_logical_scalar()` is a synonym of `to_lgl_scalar()`.
 
 ## Usage
@@ -12,6 +12,7 @@ to_lgl_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -22,6 +23,7 @@ to_logical_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -52,6 +54,13 @@ to_logical_scalar(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -61,7 +70,7 @@ to_logical_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -70,7 +79,7 @@ The input as a length-1 logical vector, or an error condition with
 classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+- `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 
 - `<stbl-error-incompatible_values-logical>` when some values cannot be
   safely converted to logical.

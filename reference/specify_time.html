@@ -11,7 +11,7 @@ call stabilize_time_scalar() with the provided arguments."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@ call stabilize_time_scalar() with the provided arguments."><meta property="og:im
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create a specified time-of-day stabilizer function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/specify_time.R" class="external-link"><code>R/specify_time.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/specify_time.R" class="external-link"><code>R/specify_time.R</code></a></small>
       <div class="d-none name"><code>specify_time.Rd</code></div>
     </div>
 
@@ -50,8 +50,10 @@ call <code><a href="stabilize_time_scalar.html">stabilize_time_scalar()</a></cod
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_time</span><span class="op">(</span></span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -61,9 +63,11 @@ call <code><a href="stabilize_time_scalar.html">stabilize_time_scalar()</a></cod
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_time_scalar</span><span class="op">(</span></span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -74,12 +78,29 @@ call <code><a href="stabilize_time_scalar.html">stabilize_time_scalar()</a></cod
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
+<dl><dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since midnight, <code>"days"</code> as a fraction of a
+day (so <code>0.5</code> is 12:00:00), or <code>"error"</code> to reject numbers. Ignored for
+non-numeric input.</p></dd>
+
+
+<dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
 <dd><p>(<code>logical(1)</code>) Is NULL an acceptable value?</p></dd>
 
 
 <dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
+
+
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
 
 
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
@@ -107,7 +128,7 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
-<dd><p>A vector of permitted values (coerced to the target
+<dd><p>A vector of permitted values (converted to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
@@ -130,6 +151,7 @@ additional context or functionality.</p>
     <div class="dont-index"><p>Other time functions:
 <code><a href="stabilize_time.html">stabilize_time()</a></code>,
 <code><a href="stabilize_time_scalar.html">stabilize_time_scalar()</a></code>,
+<code><a href="to.html">to()</a></code>,
 <code><a href="to_time.html">to_time()</a></code>,
 <code><a href="to_time_scalar.html">to_time_scalar()</a></code></p>
 <p>Other specification functions:

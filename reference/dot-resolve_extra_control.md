@@ -20,7 +20,7 @@ the stabilizer function (validate).
 - control_arg:
 
   (`character(1)`) Name of the argument being resolved, used in error
-  messages if `control` can't be coerced to logical.
+  messages if `control` can't be converted to logical.
 
 - call:
 

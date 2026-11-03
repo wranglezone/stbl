@@ -1,6 +1,6 @@
 # Check time-of-day values against min, max, and allowed values
 
-`min_value`, `max_value`, and `allowed_values` are coerced to
+`min_value`, `max_value`, and `allowed_values` are converted to
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) first so
 that character or numeric bounds are accepted.
 
@@ -35,7 +35,7 @@ that character or numeric bounds are accepted.
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 

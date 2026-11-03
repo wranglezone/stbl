@@ -1,6 +1,6 @@
-# Check for values that would be lost during factor coercion
+# Check for values that would be lost during factor conversion
 
-Check for values that would be lost during factor coercion
+Check for values that would be lost during factor conversion
 
 ## Usage
 

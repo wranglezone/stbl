@@ -34,7 +34,7 @@ to make them easier to import and to find.
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -55,13 +55,13 @@ to make them easier to import and to find.
   `(environment)` The execution environment to mention as the source of
   error messages.
 
-- cast_fn:
+- convert_fn:
 
-  `(function)` The `as.*()` function to use for coercion.
+  `(function)` The `as.*()` function to use for conversion.
 
 - check_cls_value_fn:
 
-  `(function)` A function to check the values of `x` after coercion.
+  `(function)` A function to check the values of `x` after conversion.
 
 - check_cls_value_fn_args:
 
@@ -84,7 +84,7 @@ to make them easier to import and to find.
 
 - coerce_function:
 
-  (`logical(1)`) Should functions be coerced?
+  (`logical(1)`) Should functions be converted?
 
 - depth:
 
@@ -172,6 +172,23 @@ to make them easier to import and to find.
 
   (`character(1)`) The name of the package to use in classes.
 
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 - parent:
 
   A parent condition, as you might create during a
@@ -201,7 +218,7 @@ to make them easier to import and to find.
 
 - spec:
 
-  `(function)` A single stabilizer or coercion function, such as a
+  `(function)` A single stabilizer or conversion function, such as a
   `to_*` function
   ([`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md), etc.), a
   `stabilize_*` function
@@ -212,11 +229,18 @@ to make them easier to import and to find.
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - to_class:
 
-  (`character(1)`) The name of the class to coerce to.
+  (`character(1)`) The name of the class to convert to.
 
 - to_cls_args:
 
@@ -224,7 +248,7 @@ to make them easier to import and to find.
 
 - to_cls_fn:
 
-  `(function)` The `to_*()` function to use for coercion.
+  `(function)` The `to_*()` function to use for conversion.
 
 - to_cls_scalar_args:
 
@@ -233,7 +257,7 @@ to make them easier to import and to find.
 
 - to_cls_scalar_fn:
 
-  `(function)` The `to_*_scalar()` function to use for coercion.
+  `(function)` The `to_*_scalar()` function to use for conversion.
 
 - to_na:
 
@@ -244,11 +268,22 @@ to make them easier to import and to find.
   An empty object of the target type (e.g.,
   [`integer()`](https://rdrr.io/r/base/integer.html)).
 
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
+
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
 
 - unique:
 
@@ -269,5 +304,5 @@ to make them easier to import and to find.
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.

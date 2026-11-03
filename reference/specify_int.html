@@ -15,7 +15,7 @@ specify_int_scalar()."><meta property="og:image" content="https://stbl.wrangle.z
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ specify_int_scalar()."><meta property="og:image" content="https://stbl.wrangle.z
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create a specified integer stabilizer function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/specify_int.R" class="external-link"><code>R/specify_int.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/specify_int.R" class="external-link"><code>R/specify_int.R</code></a></small>
       <div class="d-none name"><code>specify_int.Rd</code></div>
     </div>
 
@@ -60,6 +60,7 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -75,6 +76,7 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -90,6 +92,7 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -105,6 +108,7 @@ a synonym of <code>specify_int()</code>, and <code>specify_integer_scalar()</cod
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  coerce_character <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  coerce_factor <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -138,6 +142,16 @@ and "2.0" be considered numeric-ish?</p></dd>
 and "2.0" be considered numeric-ish? Note that this package uses the
 character value from the factor, while <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code> and <code><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double()</a></code> use
 the integer index of the factor.</p></dd>
+
+
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
 
 
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
@@ -177,7 +191,7 @@ values are not checked.</p></dd>
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
-<dd><p>A vector of permitted values (coerced to the target
+<dd><p>A vector of permitted values (converted to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 

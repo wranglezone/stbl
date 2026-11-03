@@ -1,4 +1,4 @@
-# Coerce to length-1 date, trying `accepted_datetime_formats`
+# Convert to length-1 date, trying `accepted_datetime_formats`
 
 The scalar counterpart of
 [`.to_date_locale()`](https://stbl.wrangle.zone/reference/dot-to_date_locale.md),
@@ -14,6 +14,8 @@ in place of
   x,
   ...,
   accepted_datetime_formats,
+  tz = "UTC",
+  treat_number_as = "days",
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
@@ -45,6 +47,23 @@ in place of
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
 
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
+
 - allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
@@ -69,7 +88,7 @@ in place of
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value

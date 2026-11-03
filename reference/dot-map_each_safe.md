@@ -16,7 +16,7 @@ Apply a spec to each element of x, collecting every failure
 
 - spec:
 
-  A single stabilizer/coercion function applied to each element.
+  A single stabilizer/conversion function applied to each element.
 
 - x_arg:
 

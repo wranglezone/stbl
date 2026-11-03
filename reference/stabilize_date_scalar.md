@@ -1,6 +1,6 @@
-# Coerce to length-1 date with additional checks
+# Convert to length-1 date with additional checks
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [base::Date](https://rdrr.io/r/base/Dates.html) vector.
 `stabilize_date_scalar()` is optimized to check for length-1 date
 vectors (compared to
@@ -14,6 +14,8 @@ with `max_size = 1`). `stabilise_date_scalar` is a synonym of
 stabilize_date_scalar(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -21,6 +23,7 @@ stabilize_date_scalar(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -29,6 +32,8 @@ stabilize_date_scalar(
 stabilise_date_scalar(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -36,6 +41,7 @@ stabilise_date_scalar(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,6 +57,23 @@ stabilise_date_scalar(
 - ...:
 
   Arguments passed to methods.
+
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
@@ -76,7 +99,7 @@ stabilise_date_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -92,6 +115,19 @@ stabilise_date_scalar(
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - x_arg:
 
@@ -109,7 +145,7 @@ stabilise_date_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -119,7 +155,7 @@ vector, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
-- `<stbl-error-coerce-date>` when `x` cannot be coerced to date.
+- `<stbl-error-coerce-date>` when `x` cannot be converted to date.
 
 - `<stbl-error-incompatible_values-date>` when some values cannot be
   safely converted to date.
@@ -133,6 +169,11 @@ specific class by failure mode:
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
+
 - `<stbl-error-outside_range>` when values fall outside `min_value` or
   `max_value`.
 
@@ -145,6 +186,7 @@ Other date functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
 [`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
 [`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
 

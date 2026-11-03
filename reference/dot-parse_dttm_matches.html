@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Parse capture-group matches from <code>.try_dttm_formats()</code> into instants</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/utils-datetime_formats.R" class="external-link"><code>R/utils-datetime_formats.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/stabilize_dttm.R" class="external-link"><code>R/stabilize_dttm.R</code></a></small>
       <div class="d-none name"><code>dot-parse_dttm_matches.Rd</code></div>
     </div>
 
@@ -51,15 +51,15 @@
 
 
 <dl><dt id="arg-matches">matches<a class="anchor" aria-label="anchor" href="#arg-matches"></a></dt>
-<dd><p><code>(list)</code> Regex captures from <code><a href="https://rdrr.io/r/base/regmatches.html" class="external-link">regmatches()</a></code>: the full
-match, one group per calendar field named in <code>fields</code>, and a trailing
-UTC-offset group (possibly <code>""</code> when absent).</p></dd>
+<dd><p><code>(list)</code> Regex captures from <code><a href="https://rdrr.io/r/base/regmatches.html" class="external-link">regmatches()</a></code>: the full match,
+one group per calendar field named in <code>fields</code>, and a trailing UTC-offset
+group (possibly <code>""</code> when absent).</p></dd>
 
 
 <dt id="arg-fields">fields<a class="anchor" aria-label="anchor" href="#arg-fields"></a></dt>
-<dd><p><code>(character)</code> Which calendar field (<code>"Y"</code>, <code>"m"</code>, <code>"d"</code>,
-<code>"H"</code>, <code>"M"</code>, or <code>"S"</code>) each non-offset capture group corresponds to, in
-the order the groups appear.</p></dd>
+<dd><p><code>(character)</code> Which calendar field (<code>"Y"</code>, <code>"m"</code>, <code>"d"</code>, <code>"H"</code>,
+<code>"M"</code>, or <code>"S"</code>) each non-offset capture group corresponds to, in the order
+the groups appear.</p></dd>
 
 
 <dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
@@ -70,8 +70,8 @@ explicit offset.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">base::POSIXct</a> vector (in <code>tz</code>), the same length as <code>matches</code>,
-with <code>NA</code> at any position that describes an impossible date-time (such
-as <code>"2024-02-30"</code>).</p>
+with <code>NA</code> at any position that describes an impossible date-time (such as
+<code>"2024-02-30"</code>).</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

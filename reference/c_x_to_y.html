@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Call the C routine to convert a vector to another type</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/c_api.R" class="external-link"><code>R/c_api.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/c_api.R" class="external-link"><code>R/c_api.R</code></a></small>
       <div class="d-none name"><code>c_x_to_y.Rd</code></div>
     </div>
 
@@ -113,7 +113,7 @@
 <span></span>
 <span><span class="fu">.lst_to_fct</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">.stbl_to</span><span class="op">(</span><span class="va">x</span>, <span class="va">to</span><span class="op">)</span></span>
+<span><span class="fu">.stbl_to</span><span class="op">(</span><span class="va">x</span>, <span class="va">to</span>, x_arg <span class="op">=</span> <span class="cn">NULL</span>, to_arg <span class="op">=</span> <span class="cn">NULL</span>, call <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">.check_min_dbl</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_val</span><span class="op">)</span></span>
 <span></span>
@@ -143,16 +143,39 @@ types: they restrict <code>x</code> to a fixed set of permitted values.</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
-<dd><p>The target object for the coercion.</p></dd>
+<dd><p>The target object for the conversion.</p></dd>
+
+
+<dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should the result be an ordered factor?</p></dd>
+
+
+<dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
+<dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
+in error messages. The automatic value will work in most cases, or pass it
+through from higher-level functions to make error messages clearer in
+unexported functions.</p></dd>
+
+
+<dt id="arg-to-arg">to_arg<a class="anchor" aria-label="anchor" href="#arg-to-arg"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>NULL</code>) The name of the object that <code>x</code> is
+being converted to match, for use in error messages. When <code>NULL</code>, error
+messages describe only <code>x</code>. When supplied, conversion failure messages name
+both <code>x_arg</code> and <code>to_arg</code>.</p></dd>
+
+
+<dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
+<dd><p><code>(environment)</code> The execution environment to mention as the
+source of error messages.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>.x_to_y()</code>: A list with two elements: <code>result</code>, the converted
 vector, and <code>valid</code>, a logical vector indicating whether each element was
-successfully coerced without losing information. <code>.x_are_yish()</code>: A logical
-vector indicating whether each element of <code>x</code> can be coerced to the target
-type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
+successfully converted without losing information. <code>.x_are_yish()</code>: A
+logical vector indicating whether each element of <code>x</code> can be converted to
+the target type. <code>.check_min_dbl()</code>, <code>.check_max_dbl()</code>,
 <code>.check_min_dbl_exclusive()</code>, and <code>.check_max_dbl_exclusive()</code>: <code>NULL</code> if
 all values pass the check, otherwise a vector of failing indices.</p>
     </div>

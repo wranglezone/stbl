@@ -1,6 +1,6 @@
 # Convert a value to a target type
 
-`to()` coerces `x` to the type of `.to`, dispatching on the class of
+`to()` converts `x` to the type of `.to`, dispatching on the class of
 `.to` to the appropriate `to_*()` function.
 
 ## Usage
@@ -11,6 +11,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -21,6 +22,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -31,6 +33,19 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'Date'
+to(
+  x,
+  .to,
+  ...,
+  tz = resolve_tz(.to),
+  x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -41,6 +56,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -51,7 +67,9 @@ to(
   .to,
   ...,
   levels = NULL,
+  ordered = is.ordered(x) || is.ordered(.to),
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -62,6 +80,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -72,6 +91,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -82,6 +102,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -92,6 +113,18 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'array'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -102,6 +135,41 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'hms'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'Period'
+to(
+  x,
+  .to,
+  ...,
+  x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
+  call = caller_env(),
+  x_class = object_type(x)
+)
+
+# S3 method for class 'POSIXct'
+to(
+  x,
+  .to,
+  ...,
+  tz = resolve_tz(.to),
+  x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -112,6 +180,7 @@ to(
   .to,
   ...,
   x_arg = caller_arg(x),
+  to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -140,6 +209,13 @@ to(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -149,8 +225,18 @@ to(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
+
+- tz:
+
+  (`character(1)`) The time zone to use when `.to` is a
+  [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) or
+  [base::Date](https://rdrr.io/r/base/Dates.html). Must be a value from
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""` (your
+  local time zone). Defaults to the time zone of `.to`, or your local
+  time zone if `.to` doesn't name one (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
 
 - levels:
 
@@ -158,9 +244,13 @@ to(
   `levels` play the same role that `allowed_values` plays for other
   types: they restrict `x` to a fixed set of permitted values.
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 ## Value
 
-`x` coerced to the type of `.to`, or an error condition with classes
+`x` converted to the type of `.to`, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
@@ -170,7 +260,19 @@ to(
   `.to = integer()`).
 
 - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-  `to_*()` function.
+  `to_*()` function and
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+  cannot converted `x` to `.to`.
+
+## Details
+
+When the class of `.to` does not have a corresponding `to_*()` function,
+`to()` falls back to
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
+Arguments in `...` are passed to `to_*()` functions but are ignored by
+the
+[`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+fallback.
 
 ## See also
 
@@ -229,6 +331,37 @@ Other data frame functions:
 [`stabilize_df()`](https://stbl.wrangle.zone/reference/stabilize_df.md),
 [`to_df()`](https://stbl.wrangle.zone/reference/to_df.md)
 
+Other date functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
+[`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+[`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
+[`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+[`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
+
+Other datetime functions:
+[`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
+[`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+[`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+[`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+[`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
+
+Other time functions:
+[`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md),
+[`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+[`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
+[`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
+
+Other duration functions:
+[`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
+[`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+[`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
+[`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+[`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md)
+
 ## Examples
 
 ``` r
@@ -246,6 +379,10 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x000001de3d856ce8>
+#> <bytecode: 0x563dbf4e2e78>
 #> <environment: namespace:base>
+to("2024-01-01", as.Date("2024-01-01"))
+#> [1] "2024-01-01"
+to("2024-01-01T12:00:00Z", as.POSIXct("2024-01-01", tz = "UTC"))
+#> [1] "2024-01-01 12:00:00 UTC"
 ```

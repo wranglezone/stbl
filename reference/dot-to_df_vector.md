@@ -1,11 +1,11 @@
-# Coerce a vector to a one-column data frame
+# Convert a vector to a one-column data frame
 
-Coerce a vector to a one-column data frame
+Convert a vector to a one-column data frame
 
 ## Usage
 
 ``` r
-.to_df_vector(x, x_expr, x_arg, call, x_class, ...)
+.to_df_vector(x, x_expr, x_arg, to_arg, call, x_class, ...)
 ```
 
 ## Arguments
@@ -26,6 +26,13 @@ Coerce a vector to a one-column data frame
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -35,7 +42,7 @@ Coerce a vector to a one-column data frame
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - ...:

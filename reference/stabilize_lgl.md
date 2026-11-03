@@ -1,4 +1,4 @@
-# Coerce to logical with additional checks
+# Convert to logical with additional checks
 
 Compared to [`to_lgl()`](https://stbl.wrangle.zone/reference/to_lgl.md),
 `stabilize_lgl()` checks more details, but is slower. `stabilise_lgl()`,
@@ -16,6 +16,7 @@ stabilize_lgl(
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -29,6 +30,7 @@ stabilize_logical(
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -42,6 +44,7 @@ stabilise_lgl(
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -55,6 +58,7 @@ stabilise_logical(
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -93,9 +97,22 @@ stabilise_logical(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - x_arg:
 
@@ -113,7 +130,7 @@ stabilise_logical(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -122,11 +139,16 @@ The input as a logical vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+- `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-size_too_small>` when the vector is shorter than
   `min_size`.
@@ -209,7 +231,7 @@ try(stabilize_lgl(c(TRUE, NA), allow_na = FALSE))
 #> • NA locations: 2
 try(stabilize_lgl(letters))
 #> Error in eval(expr, envir) : 
-#>   `letters` <character> must be coercible to <logical>
+#>   `letters` <character> must be convertible to <logical>
 #> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
 #>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,

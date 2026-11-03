@@ -15,7 +15,7 @@ specify_datetime_scalar() is a synonym of specify_dttm_scalar()."><meta property
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ specify_datetime_scalar() is a synonym of specify_dttm_scalar()."><meta property
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create a specified datetime stabilizer function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/specify_dttm.R" class="external-link"><code>R/specify_dttm.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/specify_dttm.R" class="external-link"><code>R/specify_dttm.R</code></a></small>
       <div class="d-none name"><code>specify_dttm.Rd</code></div>
     </div>
 
@@ -57,8 +57,10 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_dttm</span><span class="op">(</span></span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -70,9 +72,11 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 <span></span>
 <span><span class="fu">specify_dttm_scalar</span><span class="op">(</span></span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -81,8 +85,10 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 <span></span>
 <span><span class="fu">specify_datetime</span><span class="op">(</span></span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -94,9 +100,11 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 <span></span>
 <span><span class="fu">specify_datetime_scalar</span><span class="op">(</span></span>
 <span>  tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"days"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -109,8 +117,18 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 
 
 <dl><dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
-<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be
-<code>""</code> or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>. Defaults to <code>"UTC"</code>.</p></dd>
+<dd><p>(<code>character(1)</code>) The time zone to normalize <code>x</code> to. Must be a value
+from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> or <code>""</code>, which is replaced by the name of your local
+time zone (as reported by <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>) so that the result always names
+its time zone. To use the time zone of an existing object, or your local
+time zone if it doesn't have one, use <code>tz = resolve_tz(x)</code> (see
+<code><a href="resolve_tz.html">resolve_tz()</a></code>).</p></dd>
+
+
+<dt id="arg-treat-number-as">treat_number_as<a class="anchor" aria-label="anchor" href="#arg-treat-number-as"></a></dt>
+<dd><p>(<code>character(1)</code>) How to interpret numeric input:
+<code>"seconds"</code> or <code>"milliseconds"</code> since the Unix epoch, <code>"days"</code> since the
+Unix epoch, or <code>"error"</code> to reject numbers. Ignored for non-numeric input.</p></dd>
 
 
 <dt id="arg-allow-null">allow_null<a class="anchor" aria-label="anchor" href="#arg-allow-null"></a></dt>
@@ -119,6 +137,16 @@ call <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></cod
 
 <dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
+
+
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
 
 
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
@@ -146,7 +174,7 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 
 
 <dt id="arg-allowed-values">allowed_values<a class="anchor" aria-label="anchor" href="#arg-allowed-values"></a></dt>
-<dd><p>A vector of permitted values (coerced to the target
+<dd><p>A vector of permitted values (converted to the target
 type). <code>NULL</code> (default) skips the check. <code>NA</code> values in <code>x</code> are permitted
 independently of <code>allowed_values</code>, subject to <code>allow_na</code>.</p></dd>
 
@@ -154,8 +182,8 @@ independently of <code>allowed_values</code>, subject to <code>allow_na</code>.<
 <dt id="arg-accepted-datetime-formats">accepted_datetime_formats<a class="anchor" aria-label="anchor" href="#arg-accepted-datetime-formats"></a></dt>
 <dd><p>(<code>character</code>) <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>-style format
 strings to try, in order, when parsing a character <code>x</code>. The first format
-that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the
-result (and any error) is based on the first format tried. Defaults to
+that parses every non-<code>NA</code> element of <code>x</code> is used; if none do, the result
+(and any error) is based on the first format tried. Defaults to
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>, which starts with the unambiguous RFC 3339
 shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>
@@ -178,8 +206,10 @@ additional context or functionality.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other datetime functions:
 <code><a href="locale_datetime_formats.html">locale_datetime_formats()</a></code>,
+<code><a href="resolve_tz.html">resolve_tz()</a></code>,
 <code><a href="stabilize_dttm.html">stabilize_dttm()</a></code>,
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
+<code><a href="to.html">to()</a></code>,
 <code><a href="to_dttm.html">to_dttm()</a></code>,
 <code><a href="to_dttm_scalar.html">to_dttm_scalar()</a></code></p>
 <p>Other specification functions:

@@ -1,11 +1,11 @@
-# Check if an object can be safely coerced to integer
+# Check if an object can be safely converted to integer
 
 `are_int_ish()` is a vectorized predicate function that checks whether
-each element of its input can be safely coerced to an integer vector.
+each element of its input can be safely converted to an integer vector.
 `are_integer_ish()` is a synonym of `are_int_ish()`.
 
 `is_int_ish()` is a scalar predicate function that checks if all
-elements of its input can be safely coerced to an integer vector.
+elements of its input can be safely converted to an integer vector.
 `is_integer_ish()` is a synonym of `is_int_ish()`.
 
 ## Usage

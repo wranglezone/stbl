@@ -1,6 +1,6 @@
-# Coerce to logical
+# Convert to logical
 
-Checks whether a vector can be coerced to logical without losing
+Checks whether a vector can be converted to logical without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. `to_logical` is a synonym of `to_lgl()`.
 
@@ -11,6 +11,7 @@ to_lgl(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -19,12 +20,20 @@ to_logical(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_lgl(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 ```
 
 ## Arguments
@@ -44,6 +53,13 @@ to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -53,7 +69,7 @@ to_lgl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -66,7 +82,7 @@ The input as a logical vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-logical>` when `x` cannot be coerced to logical.
+- `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
 
 - `<stbl-error-incompatible_values-logical>` when some values cannot be
   safely converted to logical.
@@ -144,7 +160,7 @@ try(to_lgl(NULL, allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 try(to_lgl(letters))
 #> Error in eval(expr, envir) : 
-#>   `letters` <character> must be coercible to <logical>
+#>   `letters` <character> must be convertible to <logical>
 #> ✖ Can't convert some values due to unexpected strings (should be 'TRUE',
 #>   'FALSE', 'T', 'F', or an integer).
 #> • Locations: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, …,

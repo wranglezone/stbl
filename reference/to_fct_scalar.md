@@ -1,6 +1,6 @@
-# Coerce to length-1 factor
+# Convert to length-1 factor
 
-Checks whether a vector can be coerced to a length-1 factor.
+Checks whether a vector can be converted to a length-1 factor.
 `to_fct_scalar()` is optimized to check for length-1 factors (compared
 to
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
@@ -16,8 +16,10 @@ to_fct_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -28,8 +30,10 @@ to_factor_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -58,6 +62,10 @@ to_factor_scalar(
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 - to_na:
 
   `(character)` Values to convert to `NA`.
@@ -69,6 +77,13 @@ to_factor_scalar(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -78,7 +93,7 @@ to_factor_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -87,7 +102,7 @@ The input as a length-1 factor, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+- `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 
 - `<stbl-error-incompatible_values-factor>` when some elements of a list
   cannot be converted to factor.

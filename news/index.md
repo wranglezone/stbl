@@ -1,6 +1,116 @@
 # Changelog
 
+## stbl 0.6.0
+
+### New features
+
+- [`stabilize_arg()`](https://stbl.wrangle.zone/reference/stabilize_arg.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
+  [`stabilize_dbl()`](https://stbl.wrangle.zone/reference/stabilize_dbl.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+  [`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
+  [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md),
+  [`stabilize_int()`](https://stbl.wrangle.zone/reference/stabilize_int.md),
+  [`stabilize_lgl()`](https://stbl.wrangle.zone/reference/stabilize_lgl.md),
+  [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
+  their `*_scalar()` variants, and the corresponding `specify_*()`
+  functions gain a `named` argument to require that an object is named
+  (`TRUE`), is not named (`FALSE`), has names drawn from a character
+  vector, or has names that all satisfy a spec such as
+  `specify_chr(regex = "^[a-z_]+$")`
+  ([\#8](https://github.com/wranglezone/stbl/issues/8)).
+- [`stabilize_lst()`](https://stbl.wrangle.zone/reference/stabilize_lst.md)
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/reference/specify_lst.md)
+  gain a `.coerce_function` argument, so functions can be converted to
+  lists from the wrappers
+  ([\#380](https://github.com/wranglezone/stbl/issues/380)).
+- [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+  [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md), and
+  [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md) (and so
+  [`to()`](https://stbl.wrangle.zone/reference/to.md) with `Date`,
+  `POSIXct`, `hms`, and `Period` targets, their `*_scalar()` variants,
+  and the corresponding `stabilize_*()` and `specify_*()` functions)
+  gain a `treat_number_as` argument to control how numbers are
+  interpreted.
+  [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md) now also
+  accepts and respects a `tz` argument for inputs where a timezone makes
+  sense ([\#372](https://github.com/wranglezone/stbl/issues/372),
+  [\#381](https://github.com/wranglezone/stbl/issues/381),
+  [\#382](https://github.com/wranglezone/stbl/issues/382),
+  [\#387](https://github.com/wranglezone/stbl/issues/387)).
+- [`to()`](https://stbl.wrangle.zone/reference/to.md), all `to_*()`
+  functions, and `stbl_to()` (C API) gain a `to_arg` argument, like
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html).
+  When supplied, conversion errors name both sides
+  ([\#371](https://github.com/wranglezone/stbl/issues/371)).
+- [`to()`](https://stbl.wrangle.zone/reference/to.md) now dispatches to
+  [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+  [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md), and
+  [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md) for
+  `Date`, `POSIXct`, `hms`, and `Period` prototypes, respectively, and
+  falls back to
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+  for other prototype classes
+  ([\#366](https://github.com/wranglezone/stbl/issues/366),
+  [\#367](https://github.com/wranglezone/stbl/issues/367)).
+- New
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)
+  returns the name of the time zone an object is displayed in, using
+  your local time zone if the object doesn’t name one. Use it as the
+  `tz` argument of
+  [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+  and related functions to keep an object’s time zone instead of
+  converting to UTC
+  ([\#370](https://github.com/wranglezone/stbl/issues/370)).
+
+### Bug fixes
+
+- The `to_*()` functions (and so the `stabilize_*()` and `specify_*()`
+  functions, [`to()`](https://stbl.wrangle.zone/reference/to.md), and
+  the C API) no longer drop the names of their input during conversion.
+- [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+  [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
+  [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
+  and their scalar and `datetime` variants now convert `tz = ""` to the
+  name of your local time zone (such as `"America/Chicago"`) instead of
+  returning a date-time with an empty `tzone`. The instant in time is
+  unchanged. Similarly,
+  [`to()`](https://stbl.wrangle.zone/reference/to.md) with a `POSIXct`
+  target whose time zone is `""` or missing (such as
+  [`Sys.time()`](https://rdrr.io/r/base/Sys.time.html)) now returns a
+  date-time in your local time zone, named explicitly, instead of UTC
+  ([\#370](https://github.com/wranglezone/stbl/issues/370)).
+- `stbl_to()` (C API) failures now have the same classes, messages, and
+  fields as [`to()`](https://stbl.wrangle.zone/reference/to.md) errors.
+  `stbl_to()` gains `x_arg` and `call` arguments for error context; pass
+  `R_NilValue` to use the defaults
+  ([\#369](https://github.com/wranglezone/stbl/issues/369)).
+- [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
+  [`to_dbl()`](https://stbl.wrangle.zone/reference/to_dbl.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
+  [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md),
+  [`to_int()`](https://stbl.wrangle.zone/reference/to_int.md),
+  [`to_lst()`](https://stbl.wrangle.zone/reference/to_lst.md), and
+  [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md) now
+  raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors
+  when the default method cannot coerce `x` (such as raw vectors)
+  ([\#369](https://github.com/wranglezone/stbl/issues/369)).
+- [`to_chr()`](https://stbl.wrangle.zone/reference/to_chr.md) now has a
+  dedicated condition method that returns a single string including the
+  full condition class hierarchy and message in snapshot-style
+  formatting ([\#258](https://github.com/wranglezone/stbl/issues/258)).
+  It also now converts formulas to a single readable string (for
+  example, `"x ~ y"`)
+  ([\#259](https://github.com/wranglezone/stbl/issues/259)).
+
 ## stbl 0.5.0
+
+CRAN release: 2026-09-13
 
 ### Breaking changes
 
@@ -144,6 +254,11 @@
   converted, instead of a generic “can’t coerce” error
   ([\#273](https://github.com/wranglezone/stbl/issues/273),
   [\#335](https://github.com/wranglezone/stbl/issues/335)).
+- [`to_fct()`](https://stbl.wrangle.zone/reference/to_fct.md) and
+  related factor helpers now support an `ordered` argument, preserving
+  ordered factors by default and allowing `to(..., factor(...))` to
+  inherit orderedness from either `x` or `.to`
+  ([\#246](https://github.com/wranglezone/stbl/issues/246)).
 - `stabilize_*(NULL, allow_null = TRUE)` always returns `NULL`, without
   checking other `stabilize_*()` rules. For example,
   `stabilize_int(NULL, min_value = 1)` now returns `NULL`, rather than

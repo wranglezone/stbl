@@ -17,7 +17,7 @@ element
 
 - fn:
 
-  A stabilizer or coercion function, applied to each element of `x`
+  A stabilizer or conversion function, applied to each element of `x`
   independently.
 
 - x_arg:

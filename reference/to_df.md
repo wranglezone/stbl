@@ -1,6 +1,6 @@
 # Ensure a data frame meets expectations
 
-`to_df()` checks whether an object can be coerced to a data frame,
+`to_df()` checks whether an object can be converted to a data frame,
 returning it silently if so. Otherwise an informative error message is
 signaled. `to_data_frame()` is a synonym of `to_df()`.
 
@@ -11,6 +11,7 @@ to_df(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -19,12 +20,20 @@ to_data_frame(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_df(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 ```
 
 ## Arguments
@@ -46,6 +55,13 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -55,7 +71,7 @@ to_df(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -68,8 +84,8 @@ The object as a data frame, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-data.frame>` when `x` cannot be coerced to a data
-  frame.
+- `<stbl-error-coerce-data.frame>` when `x` cannot be converted to a
+  data frame.
 
 - `<stbl-error-bad_named>` when a list has any unnamed elements.
 
@@ -130,7 +146,7 @@ try(to_df(NULL, allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 try(to_df(c("a", "b", "c")))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `c("a", "b", "c")` <character> to <data.frame>.
+#>   Can't convert `c("a", "b", "c")` <character> to <data.frame>.
 to_df(letters)
 #>    letters
 #> 1        a

@@ -40,13 +40,16 @@ Other date functions:
 [`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
 [`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_date()`](https://stbl.wrangle.zone/reference/to_date.md),
 [`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
 
 Other datetime functions:
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
 

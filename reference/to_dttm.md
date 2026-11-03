@@ -1,6 +1,6 @@
-# Coerce to date-time
+# Convert to date-time
 
-Checks whether a vector can be coerced to a
+Checks whether a vector can be converted to a
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) without
 losing information, returning it silently if so. Otherwise an
 informative error message is signaled. `to_datetime()` is a synonym of
@@ -13,7 +13,9 @@ to_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -22,7 +24,9 @@ to_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -31,7 +35,14 @@ to_datetime(
 to_dttm(x, ..., tz = "UTC", call = caller_env())
 
 # S3 method for class '`NULL`'
-to_dttm(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_dttm(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'character'
 to_dttm(
@@ -39,6 +50,7 @@ to_dttm(
   ...,
   tz = "UTC",
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -49,6 +61,7 @@ to_dttm(
   ...,
   tz = "UTC",
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -60,10 +73,16 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 to_dttm(x, ..., tz = "UTC", call = caller_env())
 
 # S3 method for class 'numeric'
-to_dttm(x, ..., tz = "UTC", call = caller_env())
-
-# S3 method for class 'integer'
-to_dttm(x, ..., tz = "UTC", call = caller_env())
+to_dttm(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
@@ -78,9 +97,20 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - x_arg:
 
@@ -88,6 +118,13 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 
@@ -98,7 +135,7 @@ to_dttm(x, ..., tz = "UTC", call = caller_env())
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -117,7 +154,8 @@ failure mode:
   safely converted to datetime.
 
 - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
+  and your local time zone can't be determined.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
@@ -132,8 +170,21 @@ rejected (but see
 A space may be used instead of `"T"` to separate the date and time. All
 values are normalized to the time zone named by `tz` (`"UTC"` by
 default); the underlying instant in time is preserved, only its display
-time zone changes. Numeric and integer values are treated as the number
-of seconds since the Unix epoch (`"1970-01-01 00:00:00 UTC"`).
+time zone changes.
+
+Numeric and integer values are interpreted according to
+`treat_number_as`, by default as the number of seconds since the Unix
+epoch (`"1970-01-01 00:00:00 UTC"`). Milliseconds are converted to
+seconds by dividing by 1000, which preserves whole milliseconds for
+realistic dates. Doubles can't represent whole milliseconds beyond
+roughly the year 287,000, so values that large have already lost
+precision before conversion. Note that
+[`format()`](https://rdrr.io/r/base/format.html) truncates rather than
+rounds fractional seconds, so a value such as `12:00:00.1228` may
+display as `12:00:00.122`; the stored value is not affected. With
+`treat_number_as = "days"`, numbers are days since the epoch, giving
+midnight UTC. `treat_number_as` is ignored for other types of input.
+
 [base::Date](https://rdrr.io/r/base/Dates.html) values are treated as
 midnight UTC on that date.
 
@@ -141,9 +192,11 @@ midnight UTC on that date.
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
 
 Other stabilization functions:
@@ -205,20 +258,25 @@ to_dttm(c("2024-01-01T12:00:00Z", NA))
 #> [1] "2024-01-01 12:00:00 UTC" NA                       
 to_dttm(0L)
 #> [1] "1970-01-01 UTC"
+to_dttm(1704110400000, treat_number_as = "milliseconds")
+#> [1] "2024-01-01 12:00:00 UTC"
+try(to_dttm(0, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `0` <double> to <datetime>.
 to_dttm(as.Date("2024-01-01"))
 #> [1] "2024-01-01 UTC"
 to_dttm(NULL)
 #> NULL
 try(to_dttm("2024-01-01 12:00:00"))
 #> Error in eval(expr, envir) : 
-#>   `"2024-01-01 12:00:00"` <character> must be coercible to <datetime>
+#>   `"2024-01-01 12:00:00"` <character> must be convertible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 1
 #> • Values: "2024-01-01 12:00:00"
 try(to_dttm(c("2024-01-01T12:00:00Z", "not-a-datetime")))
 #> Error in eval(expr, envir) : 
 #>   `c("2024-01-01T12:00:00Z", "not-a-datetime")` <character> must be
-#> coercible to <datetime>
+#> convertible to <datetime>
 #> ✖ Can't convert some values due to invalid or ambiguous date-time format.
 #> • Locations: 2
 #> • Values: "not-a-datetime"

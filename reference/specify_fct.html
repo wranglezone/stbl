@@ -15,7 +15,7 @@ specify_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle.z
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ specify_fct_scalar()."><meta property="og:image" content="https://stbl.wrangle.z
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create a specified factor stabilizer function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/specify_fct.R" class="external-link"><code>R/specify_fct.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/specify_fct.R" class="external-link"><code>R/specify_fct.R</code></a></small>
       <div class="d-none name"><code>specify_fct.Rd</code></div>
     </div>
 
@@ -58,9 +58,11 @@ synonym of <code>specify_fct()</code>, and <code>specify_factor_scalar()</code> 
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_fct</span><span class="op">(</span></span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -68,16 +70,20 @@ synonym of <code>specify_fct()</code>, and <code>specify_factor_scalar()</code> 
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">specify_factor</span><span class="op">(</span></span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -85,7 +91,9 @@ synonym of <code>specify_fct()</code>, and <code>specify_factor_scalar()</code> 
 <span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_zero_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  to_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -102,6 +110,16 @@ synonym of <code>specify_fct()</code>, and <code>specify_factor_scalar()</code> 
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
 
 
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
+
+
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
 <dd><p>(<code>integer(1)</code>) The minimum size of the object. Object size
 will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code>.</p></dd>
@@ -115,6 +133,10 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 <dt id="arg-levels">levels<a class="anchor" aria-label="anchor" href="#arg-levels"></a></dt>
 <dd><p><code>(character)</code> Expected levels. If <code>NULL</code> (default), the levels
 will be computed by <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code>.</p></dd>
+
+
+<dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should the result be an ordered factor?</p></dd>
 
 
 <dt id="arg-to-na">to_na<a class="anchor" aria-label="anchor" href="#arg-to-na"></a></dt>

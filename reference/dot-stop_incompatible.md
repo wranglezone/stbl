@@ -13,6 +13,7 @@ Abort with an "incompatible type" message
   due_to,
   x_arg,
   call,
+  to_arg = NULL,
   parent = NULL,
   ...
 )
@@ -28,12 +29,12 @@ Abort with an "incompatible type" message
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
 
 - failures:
 
@@ -54,6 +55,13 @@ Abort with an "incompatible type" message
 
   `(environment)` The execution environment to mention as the source of
   error messages.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - parent:
 

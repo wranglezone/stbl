@@ -1,6 +1,6 @@
 # Ensure a list meets expectations
 
-`to_lst()` checks whether an object can be coerced to a list without
+`to_lst()` checks whether an object can be converted to a list without
 losing information, returning it silently if so. Otherwise an
 informative error message is signaled. `to_list()` is a synonym of
 `to_lst()`.
@@ -8,18 +8,55 @@ informative error message is signaled. `to_list()` is a synonym of
 ## Usage
 
 ``` r
-to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
-to_list(x, ..., x_arg = caller_arg(x), call = caller_env())
+to_list(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'list'
-to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # Default S3 method
-to_lst(x, ..., x_arg = caller_arg(x), call = caller_env())
+to_lst(
+  x,
+  ...,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 
 # S3 method for class '`NULL`'
-to_lst(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_lst(
+  x,
+  ...,
+  allow_null = TRUE,
+  coerce_function = FALSE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class '`function`'
 to_lst(
@@ -27,6 +64,7 @@ to_lst(
   ...,
   coerce_function = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env()
 )
 ```
@@ -43,6 +81,10 @@ to_lst(
   [`base::as.list()`](https://rdrr.io/r/base/list.html) or other
   methods.
 
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -50,18 +92,28 @@ to_lst(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
   error messages.
 
+- x_class:
+
+  (`character(1)`) The class name of the object being stabilized to use
+  in error messages. Use this if you remove a special class from the
+  object before checking its conversion, but want the error message to
+  match the original class.
+
 - allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
-
-- coerce_function:
-
-  (`logical(1)`) Should functions be coerced?
 
 ## Value
 
@@ -83,7 +135,7 @@ This function has important distinctions from
 
 - Functions can be rejected as part of the call to this function (with
   `coerce_function = FALSE`, the default). If they are allowed, they'll
-  be coerced to a list concatenating their formals and body (as with
+  be converted to a list concatenating their formals and body (as with
   [`base::as.list()`](https://rdrr.io/r/base/list.html).
 
 - Primitive functions (such as

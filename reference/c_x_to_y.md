@@ -75,7 +75,7 @@ Call the C routine to convert a vector to another type
 
 .lst_to_fct(x)
 
-.stbl_to(x, to)
+.stbl_to(x, to, x_arg = NULL, to_arg = NULL, call = NULL)
 
 .check_min_dbl(x, min_val)
 
@@ -104,14 +104,37 @@ Call the C routine to convert a vector to another type
 
 - to:
 
-  The target object for the coercion.
+  The target object for the conversion.
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
+- x_arg:
+
+  (`character(1)`) The name of the object being stabilized to use in
+  error messages. The automatic value will work in most cases, or pass
+  it through from higher-level functions to make error messages clearer
+  in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
+- call:
+
+  `(environment)` The execution environment to mention as the source of
+  error messages.
 
 ## Value
 
 `.x_to_y()`: A list with two elements: `result`, the converted vector,
 and `valid`, a logical vector indicating whether each element was
-successfully coerced without losing information. `.x_are_yish()`: A
-logical vector indicating whether each element of `x` can be coerced to
-the target type. `.check_min_dbl()`, `.check_max_dbl()`,
+successfully converted without losing information. `.x_are_yish()`: A
+logical vector indicating whether each element of `x` can be converted
+to the target type. `.check_min_dbl()`, `.check_max_dbl()`,
 `.check_min_dbl_exclusive()`, and `.check_max_dbl_exclusive()`: `NULL`
 if all values pass the check, otherwise a vector of failing indices.

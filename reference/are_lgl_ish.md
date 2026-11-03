@@ -1,11 +1,11 @@
-# Check if an object can be safely coerced to logical
+# Check if an object can be safely converted to logical
 
 `are_lgl_ish()` is a vectorized predicate function that checks whether
-each element of its input can be safely coerced to a logical vector.
+each element of its input can be safely converted to a logical vector.
 `are_logical_ish()` is a synonym of `are_lgl_ish()`.
 
 `is_lgl_ish()` is a scalar predicate function that checks if all
-elements of its input can be safely coerced to a logical vector.
+elements of its input can be safely converted to a logical vector.
 `is_logical_ish()` is a synonym of `is_lgl_ish()`.
 
 ## Usage

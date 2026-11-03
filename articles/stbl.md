@@ -1,7 +1,6 @@
 # Getting started with stbl
 
 ``` r
-
 library(stbl)
 ```
 
@@ -22,7 +21,6 @@ vulnerable to bad inputs that could cause cryptic errors later on or
 send corrupt data to our external service.
 
 ``` r
-
 register_user <- function(username,
                           email_address,
                           age,
@@ -49,7 +47,6 @@ inputs that are character-like (like factors or a simple list of
 strings) into a proper character vector.
 
 ``` r
-
 register_user <- function(username,
                           email_address,
                           age,
@@ -71,7 +68,6 @@ The function still returns the list when `interests` is a character
 vector:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -93,7 +89,6 @@ register_user(
 It also works when `interests` is a list of strings:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -114,7 +109,6 @@ If the input is something that cannot be reasonably flattened to a
 character vector, it fails with a helpful error message:
 
 ``` r
-
 # Fails because the list contains a function, which is not character-like.
 register_user(
   username = "test_user", 
@@ -124,13 +118,13 @@ register_user(
   interests = list("R", mean)
 )
 #> Error in `register_user()`:
-#> ! `interests` <list> must be coercible to <character>
+#> ! `interests` <list> must be convertible to <character>
 #> ✖ Can't convert some values due to incompatible element types.
 #> • Locations: 2
 #> • Values: "function (x, ...) UseMethod(\"mean\")"
 ```
 
-## Step 2: Simple Scalar Coercion with `to_*_scalar()`
+## Step 2: Simple Scalar Conversion with `to_*_scalar()`
 
 Next, we’ll add checks for `age` and `is_premium_member`. These
 arguments must each contain a single value. We’ll use the `_scalar`
@@ -143,7 +137,6 @@ These functions are liberal in what they accept. For example,
 understands that `1`, `"T"`, and `"True"` all mean `TRUE`.
 
 ``` r
-
 register_user <- function(username,
                           email_address,
                           age,
@@ -166,12 +159,11 @@ register_user <- function(username,
 When everything follows the rules, `register_user()` works:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
-  age = "42",                 # Coercible to integer
-  is_premium_member = "True", # Coercible to logical
+  age = "42",                 # Convertible to integer
+  is_premium_member = "True", # Convertible to logical
   interests = c("R", "hiking")
 ) |> str()
 #> List of 5
@@ -183,13 +175,12 @@ register_user(
 ```
 
 The `register_user()` function will fail with clear error messages if
-the input isn’t a single value or can’t be coerced.
+the input isn’t a single value or can’t be converted.
 
 For example, when age is not a single value, `register_user()` throws an
 error:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -206,16 +197,15 @@ Likewise, this next example fails because “forty-two” cannot be
 converted to an integer:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
-  age = "forty-two",          # Not coercible to integer
+  age = "forty-two",          # Not convertible to integer
   is_premium_member = TRUE, 
   interests = c("R", "hiking")
 )
 #> Error in `register_user()`:
-#> ! `age` <character> must be coercible to <integer>
+#> ! `age` <character> must be convertible to <integer>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "forty-two"
@@ -224,10 +214,10 @@ register_user(
 ## Step 3: Complex Validation with `stabilize_*()`
 
 Finally, let’s add more complex validation for `username` and
-`email_address`. For these, simple type coercion isn’t enough; we need
+`email_address`. For these, simple type conversion isn’t enough; we need
 to check their content and structure using
 [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/reference/stabilize_chr_scalar.md).
-This function first coerces the input to character, then applies a list
+This function first converts the input to character, then applies a list
 of validation rules supplied via the `regex` argument (see the
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
 documentation for details). If speed matters, you should prefer the
@@ -237,7 +227,6 @@ need these additional checks.
 This is our final, fully stabilized function:
 
 ``` r
-
 register_user <- function(username,
                           email_address,
                           age,
@@ -281,7 +270,6 @@ register_user <- function(username,
 When all of the inputs follow the expectations, the call succeeds:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "test@example.com", 
@@ -303,7 +291,6 @@ When the username has a space, `register_user()` fails with an
 informative error message:
 
 ``` r
-
 register_user(
   username = "test user", 
   email_address = "test@example.com", 
@@ -319,7 +306,6 @@ register_user(
 This example fails because the email address is invalid:
 
 ``` r
-
 register_user(
   username = "test_user", 
   email_address = "not-a-valid-email", 

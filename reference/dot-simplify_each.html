@@ -9,7 +9,7 @@ common type can be found; otherwise out is returned unchanged."><meta property="
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ common type can be found; otherwise out is returned unchanged."><meta property="
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Simplify a list of per-element results into a common-type vector</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/each_unexported.R" class="external-link"><code>R/each_unexported.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/stabilize_each.R" class="external-link"><code>R/stabilize_each.R</code></a></small>
       <div class="d-none name"><code>dot-simplify_each.Rd</code></div>
     </div>
 
@@ -59,9 +59,9 @@ common type can be found; otherwise <code>out</code> is returned unchanged.</p>
 
 
 <dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
-<dd><p>(<code>logical(1)</code>) Should per-element results be combined into
-a single atomic vector when possible (every result has size 1 and shares
-a common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
 
 </dl></div>
     <div class="section level2">

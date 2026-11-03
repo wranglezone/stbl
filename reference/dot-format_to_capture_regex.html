@@ -13,7 +13,7 @@ regardless of the order in which the format places them (for example
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@ regardless of the order in which the format places them (for example
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Convert a strptime()-style format string to a field-capturing regex</h1>
-      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/HEAD/R/utils-datetime_formats.R" class="external-link"><code>R/utils-datetime_formats.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wranglezone/stbl/blob/v0.6.0/R/stabilize_dttm.R" class="external-link"><code>R/stabilize_dttm.R</code></a></small>
       <div class="d-none name"><code>dot-format_to_capture_regex.Rd</code></div>
     </div>
 
@@ -68,8 +68,8 @@ regardless of the order in which the format places them (for example
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with:</p><ul><li><p><code>regex</code>: the unanchored regex body (not yet wrapped in <code>^</code>/<code>$</code>).</p></li>
 <li><p><code>fields</code>: a character vector naming the calendar field (one of <code>"Y"</code>,
-<code>"m"</code>, <code>"d"</code>, <code>"H"</code>, <code>"M"</code>, or <code>"S"</code>) captured by each group, in the
-order the groups appear in <code>regex</code>.</p></li>
+<code>"m"</code>, <code>"d"</code>, <code>"H"</code>, <code>"M"</code>, or <code>"S"</code>) captured by each group, in the order
+the groups appear in <code>regex</code>.</p></li>
 </ul></div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

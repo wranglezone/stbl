@@ -1,6 +1,6 @@
-# Coerce to length-1 time-of-day
+# Convert to length-1 time-of-day
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) vector.
 
 ## Usage
@@ -9,9 +9,11 @@ Checks whether a vector can be coerced to a length-1
 to_time_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -26,6 +28,13 @@ to_time_scalar(
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
 
 - allow_null:
 
@@ -42,6 +51,13 @@ to_time_scalar(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -51,7 +67,7 @@ to_time_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -78,6 +94,7 @@ Other time functions:
 [`specify_time()`](https://stbl.wrangle.zone/reference/specify_time.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md)
 
 Other stabilization functions:

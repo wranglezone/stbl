@@ -16,7 +16,7 @@ Apply a spec and check that it agrees with the running result
 
 - fn:
 
-  A stabilizer or coercion function to apply to `x`.
+  A stabilizer or conversion function to apply to `x`.
 
 - x:
 

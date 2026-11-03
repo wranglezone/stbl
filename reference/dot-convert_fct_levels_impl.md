@@ -1,13 +1,14 @@
-# Coerce to factor with specified levels
+# Core implementation for applying factor levels
 
-Coerce to factor with specified levels
+Core implementation for applying factor levels
 
 ## Usage
 
 ``` r
-.coerce_fct_levels(
+.convert_fct_levels_impl(
   x,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
   x_arg = caller_arg(x),
   call = caller_env()
@@ -25,6 +26,10 @@ Coerce to factor with specified levels
   `(character)` The desired factor levels. For factors, a vector's
   `levels` play the same role that `allowed_values` plays for other
   types: they restrict `x` to a fixed set of permitted values.
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
 
 - to_na:
 
@@ -44,4 +49,4 @@ Coerce to factor with specified levels
 
 ## Value
 
-`x` as a factor with specified levels and NAs.
+`x` as a factor with the specified levels.

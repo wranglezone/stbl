@@ -21,8 +21,8 @@ Check that all elements are members of an allowed set of values
 
 - allowed_values:
 
-  A vector of permitted values, already coerced to the same type as `x`.
-  `NULL` or zero-length skips the check.
+  A vector of permitted values, already converted to the same type as
+  `x`. `NULL` or zero-length skips the check.
 
 - x_arg:
 

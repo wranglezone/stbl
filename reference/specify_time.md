@@ -11,8 +11,10 @@ with the provided arguments.
 
 ``` r
 specify_time(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -22,9 +24,11 @@ specify_time(
 )
 
 specify_time_scalar(
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL
@@ -33,6 +37,13 @@ specify_time_scalar(
 
 ## Arguments
 
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since midnight, `"days"` as a fraction of a day (so
+  `0.5` is 12:00:00), or `"error"` to reject numbers. Ignored for
+  non-numeric input.
+
 - allow_null:
 
   (`logical(1)`) Is NULL an acceptable value?
@@ -40,6 +51,19 @@ specify_time_scalar(
 - allow_na:
 
   (`logical(1)`) Are NA values ok?
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - min_size:
 
@@ -69,7 +93,7 @@ specify_time_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -96,6 +120,7 @@ provide additional context or functionality.
 Other time functions:
 [`stabilize_time()`](https://stbl.wrangle.zone/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/reference/stabilize_time_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_time()`](https://stbl.wrangle.zone/reference/to_time.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/reference/to_time_scalar.md)
 

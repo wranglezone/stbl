@@ -14,8 +14,10 @@ with the provided arguments. `specify_datetime()` is a synonym of
 ``` r
 specify_dttm(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -27,9 +29,11 @@ specify_dttm(
 
 specify_dttm_scalar(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
@@ -38,8 +42,10 @@ specify_dttm_scalar(
 
 specify_datetime(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -51,9 +57,11 @@ specify_datetime(
 
 specify_datetime_scalar(
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
@@ -65,9 +73,20 @@ specify_datetime_scalar(
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
@@ -76,6 +95,19 @@ specify_datetime_scalar(
 - allow_na:
 
   (`logical(1)`) Are NA values ok?
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - min_size:
 
@@ -105,7 +137,7 @@ specify_datetime_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -144,8 +176,10 @@ provide additional context or functionality.
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
 

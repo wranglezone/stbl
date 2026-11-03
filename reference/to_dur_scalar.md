@@ -1,6 +1,6 @@
-# Coerce to length-1 duration
+# Convert to length-1 duration
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
 vector.
 
@@ -10,9 +10,11 @@ vector.
 to_dur_scalar(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -27,6 +29,12 @@ to_dur_scalar(
 - ...:
 
   Arguments passed to methods.
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` as a length of time, `"days"` as a number of days, or
+  `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
@@ -43,6 +51,13 @@ to_dur_scalar(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -52,7 +67,7 @@ to_dur_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -79,6 +94,7 @@ Other duration functions:
 [`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dur()`](https://stbl.wrangle.zone/reference/to_dur.md)
 
 Other stabilization functions:

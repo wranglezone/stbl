@@ -1,6 +1,6 @@
-# Coerce to date
+# Convert to date
 
-Checks whether a vector can be coerced to a
+Checks whether a vector can be converted to a
 [base::Date](https://rdrr.io/r/base/Dates.html) without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled.
@@ -11,19 +11,30 @@ message is signaled.
 to_date(
   x,
   ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_date(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_date(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'character'
 to_date(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -33,21 +44,28 @@ to_date(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class 'POSIXct'
-to_date(x, ...)
+to_date(x, ..., tz = "UTC", call = caller_env())
 
 # S3 method for class 'POSIXlt'
 to_date(x, ...)
 
 # S3 method for class 'numeric'
-to_date(x, ...)
-
-# S3 method for class 'integer'
-to_date(x, ...)
+to_date(
+  x,
+  ...,
+  tz = "UTC",
+  treat_number_as = c("days", "seconds", "milliseconds", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
@@ -60,12 +78,36 @@ to_date(x, ...)
 
   Arguments passed to methods.
 
+- tz:
+
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 
@@ -76,7 +118,7 @@ to_date(x, ...)
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -104,8 +146,12 @@ Character vectors must use the [RFC
 [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md)).
 `POSIXct` and `POSIXlt` values are truncated to their date component,
 discarding the time-of-day and timezone offset. Numeric and integer
-values are treated as the number of days since the Unix epoch
-(`"1970-01-01"`).
+values are interpreted according to `treat_number_as`, by default as the
+number of days since the Unix epoch (`"1970-01-01"`). Seconds and
+milliseconds since the epoch are converted to the date in the time zone
+named by `tz` (`"UTC"` by default), rounding down. `POSIXct` values are
+likewise converted to `tz` before truncating. `tz` is ignored for other
+types of input, and `treat_number_as` is ignored for non-numeric input.
 
 ## See also
 
@@ -114,6 +160,7 @@ Other date functions:
 [`specify_date()`](https://stbl.wrangle.zone/reference/specify_date.md),
 [`stabilize_date()`](https://stbl.wrangle.zone/reference/stabilize_date.md),
 [`stabilize_date_scalar()`](https://stbl.wrangle.zone/reference/stabilize_date_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_date_scalar()`](https://stbl.wrangle.zone/reference/to_date_scalar.md)
 
 Other stabilization functions:
@@ -173,19 +220,25 @@ to_date(c("2024-01-01", NA))
 #> [1] "2024-01-01" NA          
 to_date(0L)
 #> [1] "1970-01-01"
+to_date(1704110400, treat_number_as = "seconds")
+#> [1] "2024-01-01"
+try(to_date(0, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `0` <double> to <date>.
 to_date(as.POSIXct("2024-01-01 23:00:00", tz = "UTC"))
 #> [1] "2024-01-01"
 to_date(NULL)
 #> NULL
 try(to_date("11/13/2018"))
 #> Error in eval(expr, envir) : 
-#>   `"11/13/2018"` <character> must be coercible to <date>
+#>   `"11/13/2018"` <character> must be convertible to <date>
 #> ✖ Can't convert some values due to invalid or ambiguous date format.
 #> • Locations: 1
 #> • Values: "11/13/2018"
 try(to_date(c("2024-01-01", "not-a-date")))
 #> Error in eval(expr, envir) : 
-#>   `c("2024-01-01", "not-a-date")` <character> must be coercible to <date>
+#>   `c("2024-01-01", "not-a-date")` <character> must be convertible to
+#> <date>
 #> ✖ Can't convert some values due to invalid or ambiguous date format.
 #> • Locations: 2
 #> • Values: "not-a-date"

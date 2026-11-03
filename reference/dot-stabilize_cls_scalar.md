@@ -15,6 +15,7 @@ Stabilize a scalar object of a specific class
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -29,7 +30,7 @@ Stabilize a scalar object of a specific class
 
 - to_cls_scalar_fn:
 
-  `(function)` The `to_*_scalar()` function to use for coercion.
+  `(function)` The `to_*_scalar()` function to use for conversion.
 
 - ...:
 
@@ -42,7 +43,7 @@ Stabilize a scalar object of a specific class
 
 - check_cls_value_fn:
 
-  `(function)` A function to check the values of `x` after coercion.
+  `(function)` A function to check the values of `x` after conversion.
 
 - check_cls_value_fn_args:
 
@@ -61,6 +62,19 @@ Stabilize a scalar object of a specific class
 
   (`logical(1)`) Are NA values ok?
 
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -77,7 +91,7 @@ Stabilize a scalar object of a specific class
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value

@@ -1,6 +1,6 @@
-# Coerce to a duration
+# Convert to a duration
 
-Checks whether a vector can be coerced to a
+Checks whether a vector can be converted to a
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
 without losing information, returning it silently if so. Otherwise an
 informative error message is signaled.
@@ -11,7 +11,9 @@ informative error message is signaled.
 to_dur(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -19,13 +21,22 @@ to_dur(
 to_duration(
   x,
   ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_dur(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_dur(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'Period'
 to_dur(x, ...)
@@ -35,6 +46,7 @@ to_dur(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -44,6 +56,7 @@ to_dur(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -52,10 +65,15 @@ to_dur(
 to_dur(x, ..., call = caller_env())
 
 # S3 method for class 'numeric'
-to_dur(x, ..., call = caller_env())
-
-# S3 method for class 'integer'
-to_dur(x, ..., call = caller_env())
+to_dur(
+  x,
+  ...,
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+)
 ```
 
 ## Arguments
@@ -68,12 +86,25 @@ to_dur(x, ..., call = caller_env())
 
   Arguments passed to methods.
 
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` as a length of time, `"days"` as a number of days, or
+  `"error"` to reject numbers. Ignored for non-numeric input.
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
   error messages. The automatic value will work in most cases, or pass
   it through from higher-level functions to make error messages clearer
   in unexported functions.
+
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
 
 - call:
 
@@ -84,7 +115,7 @@ to_dur(x, ..., call = caller_env())
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -98,6 +129,9 @@ The input as a
 vector, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
+
+- `<stbl-error-coerce-duration>` when numbers are rejected by
+  `treat_number_as = "error"`.
 
 - `<stbl-error-incompatible_values-duration>` when some values cannot be
   safely converted to a duration.
@@ -130,9 +164,13 @@ not valid durations.
 [base::difftime](https://rdrr.io/r/base/difftime.html) values (including
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html)) are
 converted directly, preserving their unit. Numeric and integer values
-are treated as a (fractional) number of seconds and broken into
+are interpreted according to `treat_number_as`, by default as a
+(fractional) number of seconds. Seconds and milliseconds are broken into
 day/hour/minute/second components, with no year or month component,
 since a number of seconds cannot unambiguously imply a calendar length.
+Days go into the day component, with any fractional part broken into
+hours, minutes, and seconds (so `0.5` days is 12 hours).
+`treat_number_as` is ignored for non-numeric input.
 
 `to_dur()` requires the lubridate package.
 
@@ -142,6 +180,7 @@ Other duration functions:
 [`specify_dur()`](https://stbl.wrangle.zone/reference/specify_dur.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/reference/stabilize_dur.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dur_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/reference/to_dur_scalar.md)
 
 Other stabilization functions:
@@ -205,19 +244,27 @@ to_dur(c("P1D", NA))
 #> [1] "1d 0H 0M 0S" NA           
 to_dur(3661)
 #> [1] "1H 1M 1S"
+to_dur(86400000, treat_number_as = "milliseconds")
+#> [1] "1d 0H 0M 0S"
+to_dur(1.5, treat_number_as = "days")
+#> [1] "1d 12H 0M 0S"
+try(to_dur(3661, treat_number_as = "error"))
+#> Error in eval(expr, envir) : 
+#>   Can't convert `3661` <double> to <duration>.
 to_dur(as.difftime(90, units = "mins"))
 #> [1] "1H 30M 0S"
 to_dur(NULL)
 #> NULL
 try(to_dur("P"))
 #> Error in eval(expr, envir) : 
-#>   `"P"` <character> must be coercible to <duration>
+#>   `"P"` <character> must be convertible to <duration>
 #> ✖ Can't convert some values due to invalid or ambiguous duration format.
 #> • Locations: 1
 #> • Values: "P"
 try(to_dur(c("P1D", "not-a-duration")))
 #> Error in eval(expr, envir) : 
-#>   `c("P1D", "not-a-duration")` <character> must be coercible to <duration>
+#>   `c("P1D", "not-a-duration")` <character> must be convertible to
+#> <duration>
 #> ✖ Can't convert some values due to invalid or ambiguous duration format.
 #> • Locations: 2
 #> • Values: "not-a-duration"

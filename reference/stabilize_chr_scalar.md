@@ -1,6 +1,6 @@
-# Coerce to length-1 character with additional checks
+# Convert to length-1 character with additional checks
 
-Checks whether a vector can be coerced to a length-1 character vector.
+Checks whether a vector can be converted to a length-1 character vector.
 `stabilize_chr_scalar()` is optimized to check for length-1 character
 vectors (compared to
 [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md)
@@ -21,6 +21,7 @@ stabilize_chr_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -36,6 +37,7 @@ stabilize_character_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,6 +53,7 @@ stabilise_chr_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +69,7 @@ stabilise_character_scalar(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -118,9 +122,22 @@ stabilise_character_scalar(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - x_arg:
 
@@ -138,7 +155,7 @@ stabilise_character_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -147,7 +164,7 @@ The input as a length-1 character vector, or an error condition with
 classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-character>` when `x` cannot be coerced to
+- `<stbl-error-coerce-character>` when `x` cannot be converted to
   character.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
@@ -158,6 +175,11 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 - `<stbl-error-non_scalar>` for non-scalar vectors.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-n_characters-too_few>` when the element has fewer
   characters than `min_characters`.

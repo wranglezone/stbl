@@ -1,6 +1,6 @@
-# Coerce to double
+# Convert to double
 
-Checks whether a vector can be coerced to double without losing
+Checks whether a vector can be converted to double without losing
 information, returning it silently if so. Otherwise an informative error
 message is signaled. `to_double` is a synonym of `to_dbl()`.
 
@@ -11,6 +11,7 @@ to_dbl(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -19,12 +20,20 @@ to_double(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
 
 # S3 method for class '`NULL`'
-to_dbl(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+to_dbl(
+  x,
+  ...,
+  allow_null = TRUE,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env()
+)
 
 # S3 method for class 'character'
 to_dbl(
@@ -32,6 +41,7 @@ to_dbl(
   ...,
   coerce_character = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -42,6 +52,7 @@ to_dbl(
   ...,
   coerce_factor = TRUE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -64,6 +75,13 @@ to_dbl(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -73,7 +91,7 @@ to_dbl(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 - allow_null:
@@ -100,7 +118,7 @@ The input as a double vector, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-double>` when `x` cannot be coerced to double.
+- `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 
 - `<stbl-error-incompatible_values-double>` when some values cannot be
   safely converted to double.
@@ -176,11 +194,11 @@ to_dbl(NULL)
 #> NULL
 try(to_dbl("a"))
 #> Error in eval(expr, envir) : 
-#>   `"a"` <character> must be coercible to <double>
+#>   `"a"` <character> must be convertible to <double>
 #> ✖ Can't convert some values due to non-numeric strings.
 #> • Locations: 1
 #> • Values: "a"
 try(to_dbl("1.1", coerce_character = FALSE))
 #> Error in eval(expr, envir) : 
-#>   Can't coerce `"1.1"` <character> to <double>.
+#>   Can't convert `"1.1"` <character> to <double>.
 ```

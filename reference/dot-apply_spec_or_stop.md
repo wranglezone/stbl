@@ -12,7 +12,7 @@ Apply a single spec to x, stopping if it errors
 
 - fn:
 
-  A stabilizer or coercion function to apply to `x`.
+  A stabilizer or conversion function to apply to `x`.
 
 - x:
 

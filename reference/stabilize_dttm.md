@@ -1,4 +1,4 @@
-# Coerce to date-time with additional checks
+# Convert to date-time with additional checks
 
 Compared to
 [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
@@ -14,6 +14,7 @@ stabilize_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -23,6 +24,7 @@ stabilize_dttm(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -32,6 +34,7 @@ stabilise_dttm(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -41,6 +44,7 @@ stabilise_dttm(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -50,6 +54,7 @@ stabilize_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -59,6 +64,7 @@ stabilize_datetime(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -68,6 +74,7 @@ stabilise_datetime(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
   min_size = NULL,
@@ -77,6 +84,7 @@ stabilise_datetime(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -95,9 +103,20 @@ stabilise_datetime(
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
@@ -135,7 +154,7 @@ stabilise_datetime(
 
 - allowed_values:
 
-  A vector of permitted values (coerced to the target type). `NULL`
+  A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
@@ -151,6 +170,19 @@ stabilise_datetime(
   which starts with the unambiguous RFC 3339 shape (`"%Y-%m-%d"`,
   optionally with a time-of-day component) before falling back to the
   current locale's conventional date order.
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - x_arg:
 
@@ -168,7 +200,7 @@ stabilise_datetime(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -179,17 +211,24 @@ an error condition with classes `<stbl-error>`, `<stbl-condition>`,
 `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 failure mode:
 
-- `<stbl-error-coerce-datetime>` when `x` cannot be coerced to datetime.
+- `<stbl-error-coerce-datetime>` when `x` cannot be converted to
+  datetime.
 
 - `<stbl-error-incompatible_values-datetime>` when some values cannot be
   safely converted to datetime.
 
 - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
+  and your local time zone can't be determined.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-size_too_small>` when the vector is shorter than
   `min_size`.
@@ -209,8 +248,10 @@ failure mode:
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/reference/to_dttm_scalar.md)
 

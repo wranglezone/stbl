@@ -1,6 +1,6 @@
-# Coerce to length-1 date-time
+# Convert to length-1 date-time
 
-Checks whether a vector can be coerced to a length-1
+Checks whether a vector can be converted to a length-1
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) vector.
 `to_datetime_scalar()` is a synonym of `to_dttm_scalar()`.
 
@@ -11,9 +11,11 @@ to_dttm_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -22,9 +24,11 @@ to_datetime_scalar(
   x,
   ...,
   tz = "UTC",
+  treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -42,9 +46,20 @@ to_datetime_scalar(
 
 - tz:
 
-  (`character(1)`) The time zone to normalize `x` to. Must be `""` or a
-  value from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
-  Defaults to `"UTC"`.
+  (`character(1)`) The time zone to normalize `x` to. Must be a value
+  from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) or `""`,
+  which is replaced by the name of your local time zone (as reported by
+  [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html)) so that the
+  result always names its time zone. To use the time zone of an existing
+  object, or your local time zone if it doesn't have one, use
+  `tz = resolve_tz(x)` (see
+  [`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md)).
+
+- treat_number_as:
+
+  (`character(1)`) How to interpret numeric input: `"seconds"` or
+  `"milliseconds"` since the Unix epoch, `"days"` since the Unix epoch,
+  or `"error"` to reject numbers. Ignored for non-numeric input.
 
 - allow_null:
 
@@ -61,6 +76,13 @@ to_datetime_scalar(
   it through from higher-level functions to make error messages clearer
   in unexported functions.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 - call:
 
   `(environment)` The execution environment to mention as the source of
@@ -70,7 +92,7 @@ to_datetime_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -85,7 +107,8 @@ failure mode:
   safely converted to datetime.
 
 - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
+  and your local time zone can't be determined.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
@@ -98,9 +121,11 @@ failure mode:
 
 Other datetime functions:
 [`locale_datetime_formats()`](https://stbl.wrangle.zone/reference/locale_datetime_formats.md),
+[`resolve_tz()`](https://stbl.wrangle.zone/reference/resolve_tz.md),
 [`specify_dttm()`](https://stbl.wrangle.zone/reference/specify_dttm.md),
 [`stabilize_dttm()`](https://stbl.wrangle.zone/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/reference/stabilize_dttm_scalar.md),
+[`to()`](https://stbl.wrangle.zone/reference/to.md),
 [`to_dttm()`](https://stbl.wrangle.zone/reference/to_dttm.md)
 
 Other stabilization functions:

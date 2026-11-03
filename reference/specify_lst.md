@@ -17,7 +17,8 @@ specify_lst(
   .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .required = ...names()
+  .required = ...names(),
+  .coerce_function = FALSE
 )
 
 specify_list(
@@ -29,7 +30,8 @@ specify_list(
   .allow_zero_length = TRUE,
   .min_size = NULL,
   .max_size = NULL,
-  .required = ...names()
+  .required = ...names(),
+  .coerce_function = FALSE
 )
 ```
 
@@ -110,6 +112,10 @@ specify_list(
   to make every named spec optional. A zero-length `.x` (such as
   [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
   `.allow_zero_length = TRUE`.
+
+- .coerce_function:
+
+  (`logical(1)`) Should functions be converted?
 
 ## Value
 

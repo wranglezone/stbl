@@ -15,9 +15,11 @@ with the provided arguments. `specify_factor()` is a synonym of
 specify_fct(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
@@ -25,16 +27,20 @@ specify_fct_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
 specify_factor(
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 
@@ -42,7 +48,9 @@ specify_factor_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
+  ordered = FALSE,
   to_na = character()
 )
 ```
@@ -56,6 +64,19 @@ specify_factor_scalar(
 - allow_na:
 
   (`logical(1)`) Are NA values ok?
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - min_size:
 
@@ -73,6 +94,10 @@ specify_factor_scalar(
 
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
+
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
 
 - to_na:
 

@@ -1,6 +1,6 @@
-# Coerce to length-1 factor with additional checks
+# Convert to length-1 factor with additional checks
 
-Checks whether a vector can be coerced to a length-1 factor.
+Checks whether a vector can be converted to a length-1 factor.
 `stabilize_fct_scalar()` is optimized to check for length-1 factors
 (compared to
 [`stabilize_fct()`](https://stbl.wrangle.zone/reference/stabilize_fct.md)
@@ -18,7 +18,9 @@ stabilize_fct_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -31,7 +33,9 @@ stabilize_factor_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -44,7 +48,9 @@ stabilise_fct_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -57,7 +63,9 @@ stabilise_factor_scalar(
   allow_zero_length = FALSE,
   allow_na = TRUE,
   levels = NULL,
+  ordered = is.ordered(x),
   to_na = character(),
+  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -91,9 +99,26 @@ stabilise_factor_scalar(
   `(character)` Expected levels. If `NULL` (default), the levels will be
   computed by [`base::factor()`](https://rdrr.io/r/base/factor.html).
 
+- ordered:
+
+  (`logical(1)`) Should the result be an ordered factor?
+
 - to_na:
 
   `(character)` Values to convert to `NA`.
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - x_arg:
 
@@ -111,7 +136,7 @@ stabilise_factor_scalar(
 
   (`character(1)`) The class name of the object being stabilized to use
   in error messages. Use this if you remove a special class from the
-  object before checking its coercion, but want the error message to
+  object before checking its conversion, but want the error message to
   match the original class.
 
 ## Value
@@ -120,7 +145,7 @@ The input as a length-1 factor, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
-- `<stbl-error-coerce-factor>` when `x` cannot be coerced to factor.
+- `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
@@ -130,6 +155,11 @@ The input as a length-1 factor, or an error condition with classes
 - `<stbl-error-non_scalar>` for non-scalar vectors.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+
+- `<stbl-error-bad_named>` when the presence of names doesn't match
+  `named`.
+
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
 - `<stbl-error-fct_levels>` when values are not present in `levels`.
 
