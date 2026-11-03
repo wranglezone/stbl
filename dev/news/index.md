@@ -1,5 +1,7 @@
 # Changelog
 
+## stbl (development version)
+
 ## stbl 0.6.0
 
 ### New features
