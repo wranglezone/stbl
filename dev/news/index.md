@@ -1,6 +1,6 @@
 # Changelog
 
-## stbl (development version)
+## stbl 0.6.0
 
 ### New features
 
@@ -73,7 +73,7 @@
 - The `to_*()` functions (and so the `stabilize_*()` and `specify_*()`
   functions, [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
   and the C API) no longer drop the names of their input during
-  conversion ([\#8](https://github.com/wranglezone/stbl/issues/8)).
+  conversion.
 - [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
   [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
   [`specify_dttm()`](https://stbl.wrangle.zone/dev/reference/specify_dttm.md),

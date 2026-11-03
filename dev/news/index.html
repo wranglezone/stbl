@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9005</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,9 +37,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="stbl-development-version">stbl (development version)<a class="anchor" aria-label="anchor" href="#stbl-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.6.0" id="stbl-060">stbl 0.6.0<a class="anchor" aria-label="anchor" href="#stbl-060"></a></h2>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-6-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
 <ul><li>
 <code><a href="../reference/stabilize_arg.html">stabilize_arg()</a></code>, <code><a href="../reference/stabilize_chr.html">stabilize_chr()</a></code>, <code><a href="../reference/stabilize_date.html">stabilize_date()</a></code>, <code><a href="../reference/stabilize_dbl.html">stabilize_dbl()</a></code>, <code><a href="../reference/stabilize_dttm.html">stabilize_dttm()</a></code>, <code><a href="../reference/stabilize_dur.html">stabilize_dur()</a></code>, <code><a href="../reference/stabilize_fct.html">stabilize_fct()</a></code>, <code><a href="../reference/stabilize_int.html">stabilize_int()</a></code>, <code><a href="../reference/stabilize_lgl.html">stabilize_lgl()</a></code>, <code><a href="../reference/stabilize_time.html">stabilize_time()</a></code>, their <code>*_scalar()</code> variants, and the corresponding <code>specify_*()</code> functions gain a <code>named</code> argument to require that an object is named (<code>TRUE</code>), is not named (<code>FALSE</code>), has names drawn from a character vector, or has names that all satisfy a spec such as <code>specify_chr(regex = "^[a-z_]+$")</code> (<a href="https://github.com/wranglezone/stbl/issues/8" class="external-link">#8</a>).</li>
 <li>
@@ -53,8 +53,8 @@
 <li>New <code><a href="../reference/resolve_tz.html">resolve_tz()</a></code> returns the name of the time zone an object is displayed in, using your local time zone if the object doesn’t name one. Use it as the <code>tz</code> argument of <code><a href="../reference/to_dttm.html">to_dttm()</a></code>, <code><a href="../reference/stabilize_dttm.html">stabilize_dttm()</a></code>, and related functions to keep an object’s time zone instead of converting to UTC (<a href="https://github.com/wranglezone/stbl/issues/370" class="external-link">#370</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>The <code>to_*()</code> functions (and so the <code>stabilize_*()</code> and <code>specify_*()</code> functions, <code><a href="../reference/to.html">to()</a></code>, and the C API) no longer drop the names of their input during conversion (<a href="https://github.com/wranglezone/stbl/issues/8" class="external-link">#8</a>).</li>
+<h3 id="bug-fixes-0-6-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-0"></a></h3>
+<ul><li>The <code>to_*()</code> functions (and so the <code>stabilize_*()</code> and <code>specify_*()</code> functions, <code><a href="../reference/to.html">to()</a></code>, and the C API) no longer drop the names of their input during conversion.</li>
 <li>
 <code><a href="../reference/to_dttm.html">to_dttm()</a></code>, <code><a href="../reference/stabilize_dttm.html">stabilize_dttm()</a></code>, <code><a href="../reference/specify_dttm.html">specify_dttm()</a></code>, and their scalar and <code>datetime</code> variants now convert <code>tz = ""</code> to the name of your local time zone (such as <code>"America/Chicago"</code>) instead of returning a date-time with an empty <code>tzone</code>. The instant in time is unchanged. Similarly, <code><a href="../reference/to.html">to()</a></code> with a <code>POSIXct</code> target whose time zone is <code>""</code> or missing (such as <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time()</a></code>) now returns a date-time in your local time zone, named explicitly, instead of UTC (<a href="https://github.com/wranglezone/stbl/issues/370" class="external-link">#370</a>).</li>
 <li>
