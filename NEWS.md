@@ -1,4 +1,4 @@
-# stbl (development version)
+# stbl 0.6.0
 
 ## New features
 
@@ -11,7 +11,7 @@
 
 ## Bug fixes
 
-* The `to_*()` functions (and so the `stabilize_*()` and `specify_*()` functions, `to()`, and the C API) no longer drop the names of their input during conversion (#8).
+* The `to_*()` functions (and so the `stabilize_*()` and `specify_*()` functions, `to()`, and the C API) no longer drop the names of their input during conversion.
 * `to_dttm()`, `stabilize_dttm()`, `specify_dttm()`, and their scalar and `datetime` variants now convert `tz = ""` to the name of your local time zone (such as `"America/Chicago"`) instead of returning a date-time with an empty `tzone`. The instant in time is unchanged. Similarly, `to()` with a `POSIXct` target whose time zone is `""` or missing (such as `Sys.time()`) now returns a date-time in your local time zone, named explicitly, instead of UTC (#370).
 * `stbl_to()` (C API) failures now have the same classes, messages, and fields as `to()` errors. `stbl_to()` gains `x_arg` and `call` arguments for error context; pass `R_NilValue` to use the defaults (#369).
 * `to_date()`, `to_dbl()`, `to_dttm()`, `to_dur()`, `to_int()`, `to_lst()`, and `to_time()` now raise `<stbl-error-coerce-*>` errors instead of vctrs or base errors when the default method cannot coerce `x` (such as raw vectors) (#369).
