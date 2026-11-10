@@ -70,7 +70,12 @@ test_that("specify_chr returns function names when coerce_function = TRUE (#394)
   expect_identical(checker(mean), "base::mean")
   expect_identical(checker(base::mean), "base::mean")
   expect_identical(checker("a"), "a")
-  expect_pkg_error_classes(checker(function(x) x), "stbl", "coerce", "character")
+  expect_pkg_error_classes(
+    checker(function(x) x),
+    "stbl",
+    "coerce",
+    "character"
+  )
 })
 
 test_that("specify_chr_scalar returns function names when coerce_function = TRUE (#394)", {
