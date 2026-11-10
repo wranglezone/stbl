@@ -9,6 +9,7 @@ Create a specified stabilizer function
   stabilizer,
   factory_args = list(),
   scalar = FALSE,
+  prep_exprs = list(),
   call = rlang::caller_env()
 )
 ```
@@ -26,6 +27,11 @@ Create a specified stabilizer function
 - scalar:
 
   (`logical(1)`) Whether to call the scalar version of the stabilizer.
+
+- prep_exprs:
+
+  `(list)` Expressions to run in the generated function before calling
+  the stabilizer.
 
 - call:
 

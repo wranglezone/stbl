@@ -17,6 +17,16 @@
   `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior
   ([\#393](https://github.com/wranglezone/stbl/issues/393)).
 
+### Bug fixes
+
+- [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  and
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  (and their synonyms) now return the function’s name instead of `"x"`
+  when `coerce_function = TRUE`, e.g.,
+  `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`
+  ([\#394](https://github.com/wranglezone/stbl/issues/394)).
+
 ## stbl 0.6.0
 
 CRAN release: 2026-11-03
