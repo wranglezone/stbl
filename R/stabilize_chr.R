@@ -25,6 +25,8 @@
 #'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -54,6 +56,7 @@ stabilize_chr <- function(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -61,6 +64,7 @@ stabilize_chr <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
+    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .stabilize_cls(
@@ -127,6 +131,8 @@ stabilise_character <- stabilize_chr
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
 #'   - `<stbl-error-allowed_values>` when the value is not in
 #'   `allowed_values`.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -147,6 +153,7 @@ stabilize_chr_scalar <- function(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -155,6 +162,7 @@ stabilize_chr_scalar <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
+    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .stabilize_cls_scalar(

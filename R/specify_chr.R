@@ -31,7 +31,8 @@ specify_chr <- function(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("chr", factory_args)
@@ -47,7 +48,8 @@ specify_chr_scalar <- function(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 ) {
   factory_args <- .capture_factory_args()
   .specify_cls("chr", factory_args, scalar = TRUE)

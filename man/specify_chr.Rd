@@ -17,7 +17,8 @@ specify_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_chr_scalar(
@@ -28,7 +29,8 @@ specify_chr_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_character(
@@ -41,7 +43,8 @@ specify_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_character_scalar(
@@ -52,7 +55,8 @@ specify_character_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 }
 \arguments{
@@ -96,6 +100,8 @@ throws an error, try installing the stringi package.}
 \item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
+
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }

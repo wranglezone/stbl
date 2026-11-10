@@ -18,6 +18,7 @@ stabilize_chr_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +35,7 @@ stabilize_character_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -50,6 +52,7 @@ stabilise_chr_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -66,6 +69,7 @@ stabilise_character_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -111,6 +115,8 @@ A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{
 \verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
 and is applied to \code{names(x)}, so every name must satisfy it.}
 
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
+
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -145,6 +151,8 @@ than \code{max_characters}.
 \item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 \item \verb{<stbl-error-allowed_values>} when the value is not in
 \code{allowed_values}.
+\item \verb{<stbl-error-bad_function>} for functions when
+\code{coerce_function = FALSE} (the default).
 }
 }
 \description{
