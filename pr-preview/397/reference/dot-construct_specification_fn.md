@@ -10,8 +10,8 @@ Construct a specified stabilizer function
   stabilizer,
   factory_args,
   ...,
-  call = rlang::caller_env(),
-  prep_exprs = list()
+  prep_exprs = list(),
+  call = rlang::caller_env()
 )
 ```
 
@@ -36,15 +36,15 @@ Construct a specified stabilizer function
 
   Not used. Included to avoid confusion in R CMD check.
 
-- call:
-
-  `(environment)` The environment to use as the parent of the generated
-  function. Defaults to the caller's environment.
-
 - prep_exprs:
 
   `(list)` Expressions to run in the generated function before calling
   the stabilizer.
+
+- call:
+
+  `(environment)` The environment to use as the parent of the generated
+  function. Defaults to the caller's environment.
 
 ## Value
 
