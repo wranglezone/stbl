@@ -5,6 +5,8 @@
 #'   stabilizer function.
 #' @param scalar (`logical(1)`) Whether to call the scalar version of the
 #'   stabilizer.
+#' @param prep_exprs `(list)` Expressions to run in the generated function
+#'   before calling the stabilizer.
 #' @param call `(environment)` The environment to use as the parent of the
 #'   generated function. Defaults to the caller's environment.
 #' @returns A function of class `"stbl_specified_fn"` that calls the specified
@@ -17,6 +19,7 @@
   stabilizer,
   factory_args = list(),
   scalar = FALSE,
+  prep_exprs = list(),
   call = rlang::caller_env()
 ) {
   check_dupes <- .maybe_check_dupes(factory_args)
@@ -25,6 +28,7 @@
     check_dupes = check_dupes,
     stabilizer = stabilizer,
     factory_args = factory_args,
+    prep_exprs = prep_exprs,
     call = call
   )
 }
@@ -84,6 +88,7 @@
   stabilizer,
   factory_args,
   ...,
+  prep_exprs = list(),
   call = rlang::caller_env()
 ) {
   # Function created with the help of factory::build_factory(). See
@@ -100,6 +105,7 @@
   fn_body <- .strip_covr_from_expr(rlang::expr({
     # nocov start
     !!!check_dupes
+    !!!prep_exprs
     stbl::`!!`(stabilizer)(
       x,
       !!!factory_args,
