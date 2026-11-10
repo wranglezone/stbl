@@ -8,8 +8,8 @@
   stabilizer,
   factory_args = list(),
   scalar = FALSE,
-  call = rlang::caller_env(),
-  prep_exprs = list()
+  prep_exprs = list(),
+  call = rlang::caller_env()
 )
 }
 \arguments{
@@ -21,11 +21,11 @@ stabilizer function.}
 \item{scalar}{(\code{logical(1)}) Whether to call the scalar version of the
 stabilizer.}
 
-\item{call}{\code{(environment)} The environment to use as the parent of the
-generated function. Defaults to the caller's environment.}
-
 \item{prep_exprs}{\code{(list)} Expressions to run in the generated function
 before calling the stabilizer.}
+
+\item{call}{\code{(environment)} The environment to use as the parent of the
+generated function. Defaults to the caller's environment.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls the specified

@@ -9,8 +9,8 @@
   stabilizer,
   factory_args,
   ...,
-  call = rlang::caller_env(),
-  prep_exprs = list()
+  prep_exprs = list(),
+  call = rlang::caller_env()
 )
 }
 \arguments{
@@ -23,11 +23,11 @@ that checks for duplicate arguments.}
 
 \item{...}{Not used. Included to avoid confusion in R CMD check.}
 
-\item{call}{\code{(environment)} The environment to use as the parent of the
-generated function. Defaults to the caller's environment.}
-
 \item{prep_exprs}{\code{(list)} Expressions to run in the generated function
 before calling the stabilizer.}
+
+\item{call}{\code{(environment)} The environment to use as the parent of the
+generated function. Defaults to the caller's environment.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls the specified

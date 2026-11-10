@@ -5,10 +5,10 @@
 #'   stabilizer function.
 #' @param scalar (`logical(1)`) Whether to call the scalar version of the
 #'   stabilizer.
-#' @param call `(environment)` The environment to use as the parent of the
-#'   generated function. Defaults to the caller's environment.
 #' @param prep_exprs `(list)` Expressions to run in the generated function
 #'   before calling the stabilizer.
+#' @param call `(environment)` The environment to use as the parent of the
+#'   generated function. Defaults to the caller's environment.
 #' @returns A function of class `"stbl_specified_fn"` that calls the specified
 #'   stabilizer function with the provided arguments. The generated function
 #'   will also accept `...` for additional arguments to pass to the stabilizer
@@ -19,8 +19,8 @@
   stabilizer,
   factory_args = list(),
   scalar = FALSE,
-  call = rlang::caller_env(),
-  prep_exprs = list()
+  prep_exprs = list(),
+  call = rlang::caller_env()
 ) {
   check_dupes <- .maybe_check_dupes(factory_args)
   stabilizer <- .construct_stabilizer_symbol(stabilizer, scalar = scalar)
@@ -28,8 +28,8 @@
     check_dupes = check_dupes,
     stabilizer = stabilizer,
     factory_args = factory_args,
-    call = call,
-    prep_exprs = prep_exprs
+    prep_exprs = prep_exprs,
+    call = call
   )
 }
 
@@ -88,8 +88,8 @@
   stabilizer,
   factory_args,
   ...,
-  call = rlang::caller_env(),
-  prep_exprs = list()
+  prep_exprs = list(),
+  call = rlang::caller_env()
 ) {
   # Function created with the help of factory::build_factory(). See
   # https://cran.r-project.org/package=factory
