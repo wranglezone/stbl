@@ -10,6 +10,7 @@ to_chr_scalar(
   ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -21,6 +22,7 @@ to_character_scalar(
   ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -35,6 +37,8 @@ to_character_scalar(
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
+
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -67,6 +71,8 @@ list cannot be converted to character.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
+\item \verb{<stbl-error-bad_function>} for functions when
+\code{coerce_function = FALSE} (the default).
 }
 }
 \description{

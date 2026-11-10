@@ -77,49 +77,108 @@ test_that("to_chr() tries to flatten lists (#22)", {
   )
 })
 
-test_that("to_chr() converts named functions (#251)", {
-  expect_identical(to_chr(mean), "base::mean")
-  expect_identical(to_chr(abs), "base::abs") # primitive
-  expect_identical(to_chr(base::mean), "base::mean") # qualified call
+test_that("to_chr() rejects functions by default (#393)", {
+  expect_pkg_error_snapshot(
+    to_chr(mean),
+    "stbl",
+    "bad_function"
+  )
+  expect_pkg_error_snapshot(
+    to_chr_scalar(mean),
+    "stbl",
+    "bad_function"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr(mean),
+    "stbl",
+    "bad_function"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_chr_scalar(mean),
+    "stbl",
+    "bad_function"
+  )
+  expect_pkg_error_snapshot(
+    wrapped_to_chr(mean),
+    "stbl",
+    "bad_function"
+  )
+  expect_pkg_error_snapshot(
+    to_chr(function(x) x),
+    "stbl",
+    "bad_function"
+  )
+})
+
+test_that("specify_chr() passes coerce_function (#393)", {
+  # The specified function is a wrapper, so the name is its parameter name.
+  expect_identical(specify_chr(coerce_function = TRUE)(mean), "x")
+  expect_identical(specify_chr_scalar(coerce_function = TRUE)(mean), "x")
+  expect_pkg_error_snapshot(
+    specify_chr()(mean),
+    "stbl",
+    "bad_function"
+  )
+})
+
+test_that("to_chr() converts named functions with coerce_function = TRUE (#251, #393)", {
+  expect_identical(to_chr(mean, coerce_function = TRUE), "base::mean")
+  expect_identical(to_chr(abs, coerce_function = TRUE), "base::abs") # primitive
+  expect_identical(
+    to_chr(base::mean, coerce_function = TRUE),
+    "base::mean"
+  ) # qualified call
 
   # User-defined function: returns its name
   my_fn <- function(x) x + 1
-  expect_identical(to_chr(my_fn), "my_fn")
+  expect_identical(to_chr(my_fn, coerce_function = TRUE), "my_fn")
 
   # Aliased: function held under a name not in its namespace, returns the name
   given <- mean
-  expect_identical(to_chr(given), "given")
+  expect_identical(to_chr(given, coerce_function = TRUE), "given")
 
   # Aliased: name exists in namespace but body differs
   local({
     abs <- mean
-    expect_identical(to_chr(abs), "abs")
+    expect_identical(to_chr(abs, coerce_function = TRUE), "abs")
   })
 
   # Works through the full chr family
-  expect_identical(to_chr_scalar(mean), "base::mean")
-  expect_identical(stabilize_chr(mean), "base::mean")
-  expect_identical(stabilize_chr_scalar(mean), "base::mean")
+  expect_identical(
+    to_chr_scalar(mean, coerce_function = TRUE),
+    "base::mean"
+  )
+  expect_identical(
+    stabilize_chr(mean, coerce_function = TRUE),
+    "base::mean"
+  )
+  expect_identical(
+    stabilize_chr_scalar(mean, coerce_function = TRUE),
+    "base::mean"
+  )
 
   # Without {{ }}, the wrapper's parameter name is returned
-  expect_identical(wrapped_to_chr(mean), "val")
+  expect_identical(wrapped_to_chr(mean, coerce_function = TRUE), "val")
 
   # With {{ }}, the original call-site symbol is preserved
-  wrapper_embrace <- function(fn) to_chr({{ fn }})
+  wrapper_embrace <- function(fn) to_chr({{ fn }}, coerce_function = TRUE)
   expect_identical(wrapper_embrace(mean), "base::mean")
   expect_identical(wrapper_embrace(abs), "base::abs")
 })
 
-test_that("to_chr() errors for anonymous functions (#251, #377)", {
+test_that("to_chr() errors for anonymous functions (#251, #377, #393)", {
   expect_pkg_error_snapshot(
-    to_chr(function(x) x),
+    to_chr(function(x) x, coerce_function = TRUE),
     "stbl",
     "coerce",
     "character"
   )
 
   # Without {{ }}, the wrapper's parameter name is used, so no error
-  expect_identical(wrapped_to_chr(function(x) x), "val")
+  expect_identical(
+    wrapped_to_chr(function(x) x, coerce_function = TRUE),
+    "val"
+  )
 })
 
 test_that("to_chr() fails gracefully for weird cases (#22, #273, #310, #377)", {

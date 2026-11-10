@@ -14,10 +14,66 @@
       Error in `wrapped_to_chr()`:
       ! `val` must not be <NULL>.
 
-# to_chr() errors for anonymous functions (#251, #377)
+# to_chr() rejects functions by default (#393)
+
+    Code
+      to_chr(mean)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `mean` must not be a <function>.
+
+---
+
+    Code
+      to_chr_scalar(mean)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `mean` must not be a <function>.
+
+---
+
+    Code
+      stabilize_chr(mean)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `mean` must not be a <function>.
+
+---
+
+    Code
+      stabilize_chr_scalar(mean)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `mean` must not be a <function>.
+
+---
+
+    Code
+      wrapped_to_chr(mean)
+    Condition <stbl-error-bad_function>
+      Error in `wrapped_to_chr()`:
+      ! `val` must not be a <function>.
+
+---
 
     Code
       to_chr(function(x) x)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `function(x) x` must not be a <function>.
+
+# specify_chr() passes coerce_function (#393)
+
+    Code
+      specify_chr()(mean)
+    Condition <stbl-error-bad_function>
+      Error:
+      ! `mean` must not be a <function>.
+
+# to_chr() errors for anonymous functions (#251, #377, #393)
+
+    Code
+      to_chr(function(x) x, coerce_function = TRUE)
     Condition <stbl-error-coerce-character>
       Error:
       ! Can't convert `function(x) x` <function> to <character>.

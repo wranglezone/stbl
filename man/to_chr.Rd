@@ -8,6 +8,7 @@
 to_chr(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -17,6 +18,7 @@ to_chr(
 to_character(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -27,6 +29,8 @@ to_character(
 \item{x}{The object to stabilize.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -73,8 +77,8 @@ example, \code{as.character(list(1:3))} returns "1:3". In the unlikely event
 that this is the expected behavior, use \code{as.character()} instead.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).
-
-Named functions are converted to their string name. If the function comes
+\item When \code{coerce_function = TRUE}, named functions are converted to their string
+name. If the function comes
 from a package namespace, the result is a \code{"pkg::fn"} string. For example,
 \code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an
 error.
@@ -97,10 +101,13 @@ to_chr(1 + 0i)
 to_chr(NULL)
 try(to_chr(NULL, allow_null = FALSE))
 
-# Named functions are converted to their string name.
-to_chr(mean)
-to_chr(base::mean)
-try(to_chr(function(x) x))
+# Functions are rejected by default.
+try(to_chr(mean))
+
+# Named functions can be converted to their string name.
+to_chr(mean, coerce_function = TRUE)
+to_chr(base::mean, coerce_function = TRUE)
+try(to_chr(function(x) x, coerce_function = TRUE))
 }
 \seealso{
 Other character functions:

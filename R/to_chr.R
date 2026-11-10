@@ -15,8 +15,8 @@
 #'   that this is the expected behavior, use `as.character()` instead.
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
-#'
-#'   Named functions are converted to their string name. If the function comes
+#' - When `coerce_function = TRUE`, named functions are converted to their string
+#'   name. If the function comes
 #'   from a package namespace, the result is a `"pkg::fn"` string. For example,
 #'   `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an
 #'   error.
@@ -53,13 +53,17 @@
 #' to_chr(NULL)
 #' try(to_chr(NULL, allow_null = FALSE))
 #'
-#' # Named functions are converted to their string name.
-#' to_chr(mean)
-#' to_chr(base::mean)
-#' try(to_chr(function(x) x))
+#' # Functions are rejected by default.
+#' try(to_chr(mean))
+#'
+#' # Named functions can be converted to their string name.
+#' to_chr(mean, coerce_function = TRUE)
+#' to_chr(base::mean, coerce_function = TRUE)
+#' try(to_chr(function(x) x, coerce_function = TRUE))
 to_chr <- function(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -68,6 +72,7 @@ to_chr <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
+    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .to_chr_impl(
@@ -346,6 +351,8 @@ to_character <- to_chr
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -358,6 +365,7 @@ to_chr_scalar <- function(
   ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -366,6 +374,7 @@ to_chr_scalar <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
+    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .to_cls_scalar(
