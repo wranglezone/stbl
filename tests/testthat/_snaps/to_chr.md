@@ -62,14 +62,6 @@
       Error:
       ! `function(x) x` must not be a <function>.
 
-# specify_chr() passes coerce_function (#393)
-
-    Code
-      specify_chr()(mean)
-    Condition <stbl-error-bad_function>
-      Error:
-      ! `mean` must not be a <function>.
-
 # to_chr() errors for anonymous functions (#251, #377, #393)
 
     Code

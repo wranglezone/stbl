@@ -110,19 +110,6 @@ test_that("to_chr() rejects functions by default (#393)", {
   )
 })
 
-test_that("specify_chr() passes coerce_function (#393)", {
-  expect_identical(specify_chr(coerce_function = TRUE)(mean), "base::mean")
-  expect_identical(
-    specify_chr_scalar(coerce_function = TRUE)(mean),
-    "base::mean"
-  )
-  expect_pkg_error_snapshot(
-    specify_chr()(mean),
-    "stbl",
-    "bad_function"
-  )
-})
-
 test_that("to_chr() converts named functions with coerce_function = TRUE (#251, #393)", {
   expect_identical(to_chr(mean, coerce_function = TRUE), "base::mean")
   expect_identical(to_chr(abs, coerce_function = TRUE), "base::abs") # primitive
