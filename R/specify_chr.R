@@ -80,6 +80,7 @@ specify_character_scalar <- specify_chr_scalar
   # Dummy variables to avoid R CMD check undefined global variable notes.
   x_arg <- "x_arg"
   x_class <- "x_class"
+  # nocov start
   rlang::exprs(
     {
       # enquo() must precede is.function(), and the defaults must be forced before
@@ -91,5 +92,5 @@ specify_character_scalar <- specify_chr_scalar
         x <- x_quo
       }
     }
-  )
+  ) # nocov end
 }
