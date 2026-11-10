@@ -2,7 +2,24 @@
 
 ## stbl (development version)
 
+### Breaking changes
+
+- [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
+  [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  [`stabilize_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr_scalar.md),
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
+  and
+  [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
+  (and their synonyms, and so
+  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) with a
+  character target) gain a `coerce_function` argument, defaulting to
+  `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior
+  ([\#393](https://github.com/wranglezone/stbl/issues/393)).
+
 ## stbl 0.6.0
+
+CRAN release: 2026-11-03
 
 ### New features
 

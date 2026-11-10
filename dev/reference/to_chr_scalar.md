@@ -11,6 +11,7 @@ to_chr_scalar(
   ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -22,6 +23,7 @@ to_character_scalar(
   ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -46,6 +48,10 @@ to_character_scalar(
 - allow_zero_length:
 
   (`logical(1)`) Are zero-length vectors acceptable?
+
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
 
 - x_arg:
 
@@ -91,6 +97,9 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
   `allow_zero_length = FALSE`.
 
 - `<stbl-error-non_scalar>` for non-scalar vectors.
+
+- `<stbl-error-bad_function>` for functions when
+  `coerce_function = FALSE` (the default).
 
 ## See also
 

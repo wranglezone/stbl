@@ -10,6 +10,7 @@ message is signaled. `to_character` is a synonym of `to_chr()`.
 to_chr(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -19,6 +20,7 @@ to_chr(
 to_character(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
@@ -35,6 +37,10 @@ to_character(
 - ...:
 
   Arguments passed to methods.
+
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
 
 - x_arg:
 
@@ -90,10 +96,10 @@ This function has two important differences from
 - `NULL` values can be rejected as part of the call to this function
   (with `allow_null = FALSE`).
 
-  Named functions are converted to their string name. If the function
-  comes from a package namespace, the result is a `"pkg::fn"` string.
-  For example, `to_chr(mean)` returns `"base::mean"`. Anonymous
-  functions produce an error.
+- When `coerce_function = TRUE`, named functions are converted to their
+  string name. If the function comes from a package namespace, the
+  result is a `"pkg::fn"` string. For example, `to_chr(mean)` returns
+  `"base::mean"`. Anonymous functions produce an error.
 
   To preserve the original call-site symbol when `to_chr()` is called
   inside a wrapper function, use the embrace operator `{{ }}`. For
@@ -177,12 +183,17 @@ to_chr(NULL)
 try(to_chr(NULL, allow_null = FALSE))
 #> Error in eval(expr, envir) : `NULL` must not be <NULL>.
 
-# Named functions are converted to their string name.
-to_chr(mean)
+# Functions are rejected by default.
+try(to_chr(mean))
+#> Error in eval(expr, envir) : 
+#>   `mean` must not be a <function>.
+
+# Named functions can be converted to their string name.
+to_chr(mean, coerce_function = TRUE)
 #> [1] "base::mean"
-to_chr(base::mean)
+to_chr(base::mean, coerce_function = TRUE)
 #> [1] "base::mean"
-try(to_chr(function(x) x))
+try(to_chr(function(x) x, coerce_function = TRUE))
 #> Error in eval(expr, envir) : 
 #>   Can't convert `function(x) x` <function> to <character>.
 #> ℹ Anonymous functions can't be converted to a string name.

@@ -22,7 +22,8 @@ specify_chr(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_chr_scalar(
@@ -33,7 +34,8 @@ specify_chr_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_character(
@@ -46,7 +48,8 @@ specify_character(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 
 specify_character_scalar(
@@ -57,7 +60,8 @@ specify_character_scalar(
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
-  allowed_values = NULL
+  allowed_values = NULL,
+  coerce_function = FALSE
 )
 ```
 
@@ -125,6 +129,10 @@ specify_character_scalar(
   A vector of permitted values (converted to the target type). `NULL`
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
+
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
 
 - allow_zero_length:
 

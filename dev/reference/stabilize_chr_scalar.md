@@ -22,6 +22,7 @@ stabilize_chr_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -38,6 +39,7 @@ stabilize_character_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -54,6 +56,7 @@ stabilise_chr_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -70,6 +73,7 @@ stabilise_character_scalar(
   regex = NULL,
   allowed_values = NULL,
   named = NULL,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -139,6 +143,10 @@ stabilise_character_scalar(
   requires `x` to be named and is applied to `names(x)`, so every name
   must satisfy it.
 
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -191,6 +199,9 @@ classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 
 - `<stbl-error-allowed_values>` when the value is not in
   `allowed_values`.
+
+- `<stbl-error-bad_function>` for functions when
+  `coerce_function = FALSE` (the default).
 
 ## See also
 
