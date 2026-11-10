@@ -379,7 +379,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x615574c50e90>
+#> <bytecode: 0x631b2733ce90>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"
