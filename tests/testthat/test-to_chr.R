@@ -111,9 +111,8 @@ test_that("to_chr() rejects functions by default (#393)", {
 })
 
 test_that("specify_chr() passes coerce_function (#393)", {
-  # The specified function is a wrapper, so the name is its parameter name.
-  expect_identical(specify_chr(coerce_function = TRUE)(mean), "x")
-  expect_identical(specify_chr_scalar(coerce_function = TRUE)(mean), "x")
+  expect_identical(specify_chr(coerce_function = TRUE)(mean), "base::mean")
+  expect_identical(specify_chr_scalar(coerce_function = TRUE)(mean), "base::mean")
   expect_pkg_error_snapshot(
     specify_chr()(mean),
     "stbl",

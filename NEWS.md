@@ -4,6 +4,10 @@
 
 * `to_chr()`, `to_chr_scalar()`, `stabilize_chr()`, `stabilize_chr_scalar()`, `specify_chr()`, and `specify_chr_scalar()` (and their synonyms, and so `to()` with a character target) gain a `coerce_function` argument, defaulting to `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior (#393).
 
+## Bug fixes
+
+* `specify_chr()` and `specify_chr_scalar()` (and their synonyms) now return the function's name instead of `"x"` when `coerce_function = TRUE`, e.g., `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"` (#394).
+
 # stbl 0.6.0
 
 ## New features

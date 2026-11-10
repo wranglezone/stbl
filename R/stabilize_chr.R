@@ -66,6 +66,14 @@ stabilize_chr <- function(
     force(x_class)
     .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
+  } else if (rlang::is_quosure(x)) {
+    # Quosures come from specify_chr(), which wraps functions to keep their name.
+    .check_function_allowed(
+      rlang::eval_tidy(x),
+      coerce_function,
+      x_arg = x_arg,
+      call = call
+    )
   }
   .stabilize_cls(
     x,
@@ -164,6 +172,14 @@ stabilize_chr_scalar <- function(
     force(x_class)
     .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
+  } else if (rlang::is_quosure(x)) {
+    # Quosures come from specify_chr(), which wraps functions to keep their name.
+    .check_function_allowed(
+      rlang::eval_tidy(x),
+      coerce_function,
+      x_arg = x_arg,
+      call = call
+    )
   }
   .stabilize_cls_scalar(
     x,

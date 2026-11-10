@@ -64,3 +64,23 @@ test_that("specify_chr can enforce allowed_values (#282, #325)", {
   expect_identical(checker("a"), "a")
   expect_pkg_error_classes(checker("z"), "stbl", "allowed_values")
 })
+
+test_that("specify_chr returns function names when coerce_function = TRUE (#394)", {
+  checker <- specify_chr(coerce_function = TRUE)
+  expect_identical(checker(mean), "base::mean")
+  expect_identical(checker(base::mean), "base::mean")
+  expect_identical(checker("a"), "a")
+  expect_pkg_error_classes(checker(function(x) x), "stbl", "coerce", "character")
+})
+
+test_that("specify_chr_scalar returns function names when coerce_function = TRUE (#394)", {
+  checker <- specify_chr_scalar(coerce_function = TRUE)
+  expect_identical(checker(mean), "base::mean")
+  expect_identical(checker(base::mean), "base::mean")
+  expect_identical(checker("a"), "a")
+})
+
+test_that("specify_chr rejects functions by default (#394)", {
+  expect_pkg_error_classes(specify_chr()(mean), "stbl", "bad_function")
+  expect_pkg_error_classes(specify_chr_scalar()(mean), "stbl", "bad_function")
+})
