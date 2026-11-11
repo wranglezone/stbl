@@ -72,12 +72,12 @@ to_chr <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
-    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .to_chr_impl(
     x,
     ...,
+    coerce_function = coerce_function,
     x_arg = x_arg,
     to_arg = to_arg,
     call = call,
@@ -186,11 +186,19 @@ to_character <- to_chr
 .to_chr_impl.quosure <- function(
   x,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  # Quosures wrap functions to preserve their call-site name.
+  .check_function_allowed(
+    rlang::eval_tidy(x),
+    coerce_function,
+    x_arg = x_arg,
+    call = call
+  )
   x_expr <- rlang::quo_get_expr(x)
   if (rlang::is_call(x_expr, c("::", ":::"))) {
     return(.chr_from_op_call(x_expr))
@@ -374,14 +382,13 @@ to_chr_scalar <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
-    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
   }
   .to_cls_scalar(
     x,
     is_rlang_cls_scalar = is_scalar_character,
     to_cls_fn = to_chr,
-    to_cls_args = list(...),
+    to_cls_args = list(..., coerce_function = coerce_function),
     allow_null = allow_null,
     allow_zero_length = allow_zero_length,
     x_arg = x_arg,

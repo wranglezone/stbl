@@ -6,7 +6,7 @@
 
 ## Bug fixes
 
-* `specify_chr()` and `specify_chr_scalar()` (and their synonyms) now return the function's name instead of `"x"` when `coerce_function = TRUE`, e.g., `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"` (#394).
+* `specify_chr()` and `specify_chr_scalar()` (and their synonyms) and `to()` now return the function's name instead of `"x"` when `coerce_function = TRUE`, e.g., `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`, as does `to(mean, "a", coerce_function = TRUE)` (#394, #395).
 
 # stbl 0.6.0
 

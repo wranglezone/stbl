@@ -64,20 +64,12 @@ stabilize_chr <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
-    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
-  } else if (rlang::is_quosure(x)) {
-    # Quosures come from specify_chr(), which wraps functions to keep their name.
-    .check_function_allowed(
-      rlang::eval_tidy(x),
-      coerce_function,
-      x_arg = x_arg,
-      call = call
-    )
   }
   .stabilize_cls(
     x,
     to_cls_fn = to_chr,
+    to_cls_args = list(coerce_function = coerce_function),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(
       regex = regex,
@@ -170,20 +162,12 @@ stabilize_chr_scalar <- function(
   x_quo <- rlang::enquo(x)
   if (is.function(x)) {
     force(x_class)
-    .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
     x <- x_quo
-  } else if (rlang::is_quosure(x)) {
-    # Quosures come from specify_chr(), which wraps functions to keep their name.
-    .check_function_allowed(
-      rlang::eval_tidy(x),
-      coerce_function,
-      x_arg = x_arg,
-      call = call
-    )
   }
   .stabilize_cls_scalar(
     x,
     to_cls_scalar_fn = to_chr_scalar,
+    to_cls_scalar_args = list(coerce_function = coerce_function),
     check_cls_value_fn = .check_value_chr,
     check_cls_value_fn_args = list(
       regex = regex,

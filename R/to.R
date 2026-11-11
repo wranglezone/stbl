@@ -66,12 +66,26 @@ to.character <- function(
   x,
   .to,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  to_chr(x, ..., x_arg = x_arg, to_arg = to_arg, call = call, x_class = x_class)
+  x_quo <- rlang::enquo(x)
+  if (is.function(x)) {
+    force(x_class)
+    x <- x_quo
+  }
+  to_chr(
+    x,
+    ...,
+    coerce_function = coerce_function,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
