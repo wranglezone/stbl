@@ -33,6 +33,7 @@ to(
   x,
   .to,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -208,6 +209,8 @@ source of error messages.}
 to use in error messages. Use this if you remove a special class from the
 object before checking its conversion, but want the error message to match
 the original class.}
+
+\item{coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
 \item{tz}{(\code{character(1)}) The time zone to use when \code{.to} is a
 \link[base:POSIXct]{base::POSIXct} or \link[base:Date]{base::Date}. Must be a value from \code{\link[=OlsonNames]{OlsonNames()}} or

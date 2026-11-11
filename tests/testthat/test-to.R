@@ -283,6 +283,18 @@ test_that("to() respects coerce_character = FALSE for double target (#182)", {
   expect_error(to("1.5", double(), coerce_character = FALSE))
 })
 
+test_that("to() returns function names for character target (#395)", {
+  expect_identical(to(mean, "a", coerce_function = TRUE), "base::mean")
+  expect_identical(to(base::mean, "a", coerce_function = TRUE), "base::mean")
+  expect_pkg_error_classes(to(mean, "a"), "stbl", "bad_function")
+  expect_pkg_error_classes(
+    to(function(x) x, "a", coerce_function = TRUE),
+    "stbl",
+    "coerce",
+    "character"
+  )
+})
+
 # to function ------------------------------------------------------------------
 
 test_that("to() converts character to function (#250)", {
