@@ -22,10 +22,13 @@
 - [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   and
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
-  (and their synonyms) now return the function’s name instead of `"x"`
-  when `coerce_function = TRUE`, e.g.,
-  `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`
-  ([\#394](https://github.com/wranglezone/stbl/issues/394)).
+  (and their synonyms) and
+  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) now return the
+  function’s name instead of `"x"` when `coerce_function = TRUE`, e.g.,
+  `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`, as
+  does `to(mean, "a", coerce_function = TRUE)`
+  ([\#394](https://github.com/wranglezone/stbl/issues/394),
+  [\#395](https://github.com/wranglezone/stbl/issues/395)).
 
 ## stbl 0.6.0
 

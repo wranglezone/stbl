@@ -46,7 +46,7 @@
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
 <ul><li>
-<code><a href="../reference/specify_chr.html">specify_chr()</a></code> and <code><a href="../reference/specify_chr.html">specify_chr_scalar()</a></code> (and their synonyms) now return the function’s name instead of <code>"x"</code> when <code>coerce_function = TRUE</code>, e.g., <code>specify_chr(coerce_function = TRUE)(mean)</code> returns <code>"base::mean"</code> (<a href="https://github.com/wranglezone/stbl/issues/394" class="external-link">#394</a>).</li>
+<code><a href="../reference/specify_chr.html">specify_chr()</a></code> and <code><a href="../reference/specify_chr.html">specify_chr_scalar()</a></code> (and their synonyms) and <code><a href="../reference/to.html">to()</a></code> now return the function’s name instead of <code>"x"</code> when <code>coerce_function = TRUE</code>, e.g., <code>specify_chr(coerce_function = TRUE)(mean)</code> returns <code>"base::mean"</code>, as does <code>to(mean, "a", coerce_function = TRUE)</code> (<a href="https://github.com/wranglezone/stbl/issues/394" class="external-link">#394</a>, <a href="https://github.com/wranglezone/stbl/issues/395" class="external-link">#395</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">

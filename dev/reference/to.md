@@ -21,6 +21,7 @@ to(
   x,
   .to,
   ...,
+  coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -228,6 +229,10 @@ to(
   object before checking its conversion, but want the error message to
   match the original class.
 
+- coerce_function:
+
+  (`logical(1)`) Should functions be converted?
+
 - tz:
 
   (`character(1)`) The time zone to use when `.to` is a
@@ -379,7 +384,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x625f61d7fe30>
+#> <bytecode: 0x5bcc3d98f7b0>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"
