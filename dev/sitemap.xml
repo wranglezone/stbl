@@ -115,6 +115,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-has_regex_pattern.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_allowed_null.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_covr_count_call.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_empty_list.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_date.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dttm.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-is_scalar_dur.html</loc></url>

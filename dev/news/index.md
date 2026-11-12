@@ -19,6 +19,17 @@
 
 ### Bug fixes
 
+- [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
+  [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
+  [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
+  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md), and
+  [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) for those
+  classes now convert an empty list to an empty vector of the target
+  type (or a zero-row, zero-column data frame for
+  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)),
+  consistent with the other `to_*()` functions
+  ([\#392](https://github.com/wranglezone/stbl/issues/392)).
 - [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   and
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
