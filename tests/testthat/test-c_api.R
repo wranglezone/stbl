@@ -1019,7 +1019,12 @@ test_that(".stbl_to() falls back to vctrs for unknown targets (#367)", {
 })
 
 test_that(".stbl_to() errors for unsupported target types (#367)", {
-  expect_error(.stbl_to(1L, as.raw(1L)))
+  expect_pkg_error_classes(
+    .stbl_to(1L, as.raw(1L)),
+    "stbl",
+    "coerce",
+    "raw"
+  )
 })
 
 test_that(".stbl_to() routes matrix targets through R-level to() (#366)", {
@@ -1154,7 +1159,12 @@ test_that(".stbl_to() matches to() for cpx source -> fct target (#369)", {
 })
 
 test_that(".stbl_to() errors on raw target (#367)", {
-  expect_error(.stbl_to(1L, as.raw(0)), "Can't convert")
+  expect_pkg_error_classes(
+    .stbl_to(1L, as.raw(0)),
+    "stbl",
+    "coerce",
+    "raw"
+  )
 })
 
 # range checks -----------------------------------------------------------------

@@ -425,7 +425,7 @@ test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380
     ),
     as.list(given)
   )
-  expect_error(stabilize_lst(given), class = "stbl-error-bad_function")
+  expect_pkg_error_classes(stabilize_lst(given), "stbl", "bad_function")
   expect_identical(
     stabilize_lst(list(a = 1L), .coerce_function = TRUE, a = to_int_scalar),
     list(a = 1L)
