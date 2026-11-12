@@ -107,9 +107,8 @@ listed in \code{...} are handled. One of:
 (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
 }}
 
-\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to have
-duplicate names? If \code{FALSE} (default), an error is thrown when any named
-element of \code{.x} shares a name with another.}
+\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
+duplicate names?}
 
 \item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct? If
 \code{TRUE}, duplicated elements are rejected.}
@@ -259,6 +258,7 @@ Other stabilization functions:
 \code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
 \code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=stabilize_names]{stabilize_names()}},
 \code{\link[=stabilize_one_of]{stabilize_one_of()}},
 \code{\link[=stabilize_time]{stabilize_time()}},
 \code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},

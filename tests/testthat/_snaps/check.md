@@ -198,3 +198,11 @@
       ! `1:2` must be named.
       x Every element must have a non-empty name.
 
+# .check_required_names() checks for required names (#26)
+
+    Code
+      .check_required_names(given, c("a", "c"))
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `given` must contain name "c".
+

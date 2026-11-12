@@ -14,6 +14,8 @@
 #' @param additional_class (`character`) Additional classes to prepend to the
 #'   error class list. Useful for the `class` argument of
 #'   [testthat::expect_error()].
+#' @param allow_duplicate_names (`logical(1)`) Should `x` be allowed to have
+#'   duplicate names?
 #' @param allow_na (`logical(1)`) Are NA values ok?
 #' @param allowed_values A vector of permitted values (converted to the target
 #'   type). `NULL` (default) skips the check. `NA` values in `x` are permitted
@@ -95,6 +97,7 @@
 #' @param simplify (`logical(1)`) Should per-element results be combined into a
 #'   single atomic vector when possible (every result has size 1 and shares a
 #'   common type)? If `FALSE`, a list is always returned.
+#' @param required `(character)` Names that must be present in `x`.
 #' @param spec `(function)` A single stabilizer or conversion function, such as
 #'   a `to_*` function ([to_chr()], etc.), a `stabilize_*` function
 #'   ([stabilize_chr()], etc.), or a function produced by a `specify_*()` call
