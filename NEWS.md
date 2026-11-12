@@ -10,6 +10,7 @@
 
 ## Bug fixes
 
+* `specify_lst()` gains the `.allow_duplicate_names` argument of `stabilize_lst()`, so a specified list stabilizer can allow duplicate names (#400).
 * `to_date()`, `to_dttm()`, `to_dur()`, `to_time()`, `to_df()`, and `to()` for those classes now convert an empty list to an empty vector of the target type (or a zero-row, zero-column data frame for `to_df()`), consistent with the other `to_*()` functions (#392).
 * `specify_chr()` and `specify_chr_scalar()` (and their synonyms) and `to()` now return the function's name instead of `"x"` when `coerce_function = TRUE`, e.g., `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`, as does `to(mean, "a", coerce_function = TRUE)` (#394, #395).
 
