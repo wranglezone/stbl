@@ -31,6 +31,11 @@
 
 ### Bug fixes
 
+- [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  gains the `.allow_duplicate_names` argument of
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  so a specified list stabilizer can allow duplicate names
+  ([\#400](https://github.com/wranglezone/stbl/issues/400)).
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
   [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
   [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),

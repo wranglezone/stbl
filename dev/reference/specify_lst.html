@@ -50,6 +50,7 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -63,6 +64,7 @@ provided arguments. <code>specify_list()</code> is a synonym of <code>specify_ls
 <span>  <span class="va">...</span>,</span>
 <span>  .named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .unnamed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .allow_duplicate_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .allow_zero_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -102,6 +104,11 @@ listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> 
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc), used to validate every unnamed element.</p></li>
 </ul></dd>
+
+
+<dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should <code>x</code> be allowed to have
+duplicate names?</p></dd>
 
 
 <dt id="arg--unique">.unique<a class="anchor" aria-label="anchor" href="#arg--unique"></a></dt>

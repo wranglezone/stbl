@@ -12,6 +12,7 @@ specify_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
   .allow_zero_length = TRUE,
@@ -25,6 +26,7 @@ specify_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
   .allow_zero_length = TRUE,
@@ -76,6 +78,10 @@ specify_list(
     etc) or a function produced by a `specify_*()` function
     ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
     etc), used to validate every unnamed element.
+
+- .allow_duplicate_names:
+
+  (`logical(1)`) Should `x` be allowed to have duplicate names?
 
 - .unique:
 
