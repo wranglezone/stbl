@@ -1,8 +1,8 @@
 #' Ensure the names of an object meet expectations
 #'
-#' Validate and optionally convert only the *names* of an object. The class and 
-#' values of `x` are left alone, so this is useful for objects (such as S3 
-#' classes or factors) that you don't want to convert or check. 
+#' Validate and optionally convert only the *names* of an object. The class and
+#' values of `x` are left alone, so this is useful for objects (such as S3
+#' classes or factors) that you don't want to convert or check.
 #' `stabilise_names()` is a synonym of `stabilize_names()`.
 #'
 #' @param allowed_names `(character)` The permitted names. If supplied, `x` must
