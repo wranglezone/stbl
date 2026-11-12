@@ -84,3 +84,10 @@ test_that("specify_df() accepts columns named 'x_arg', 'call', 'x_class' (#204)"
   given <- data.frame(x_arg = "foo", call = "bar")
   expect_identical(spec(given), given)
 })
+
+test_that("specify_df() args match stabilize_df() args (#400)", {
+  supplied <- c(".x", ".x_arg", ".call", ".x_class")
+  expected <- formals(stabilize_df)
+  expected <- expected[!names(expected) %in% supplied]
+  expect_identical(as.list(formals(specify_df)), as.list(expected))
+})

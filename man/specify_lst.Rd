@@ -9,6 +9,7 @@ specify_lst(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
   .allow_zero_length = TRUE,
@@ -22,6 +23,7 @@ specify_list(
   ...,
   .named = NULL,
   .unnamed = NULL,
+  .allow_duplicate_names = FALSE,
   .unique = FALSE,
   .allow_null = TRUE,
   .allow_zero_length = TRUE,
@@ -56,6 +58,9 @@ listed in \code{...} are handled. One of:
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
 (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every unnamed element.
 }}
+
+\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
+duplicate names?}
 
 \item{.unique}{(\code{logical(1)}) Should all elements in \code{.x} be distinct? If
 \code{TRUE}, duplicated elements are rejected.}

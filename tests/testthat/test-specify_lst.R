@@ -119,3 +119,24 @@ test_that("specify_lst() passes .coerce_function (#380, #401)", {
     as.list(given)
   )
 })
+
+test_that("specify_lst() passes .allow_duplicate_names (#400)", {
+  given <- list(a = 1L, a = 2L)
+  expect_pkg_error_classes(
+    specify_lst(.named = specify_int_scalar())(given),
+    "stbl",
+    "duplicate_names"
+  )
+  spec <- specify_lst(
+    .named = specify_int_scalar(),
+    .allow_duplicate_names = TRUE
+  )
+  expect_identical(spec(given), given)
+})
+
+test_that("specify_lst() args match stabilize_lst() args (#400)", {
+  supplied <- c(".x", ".x_arg", ".call", ".x_class")
+  expected <- formals(stabilize_lst)
+  expected <- expected[!names(expected) %in% supplied]
+  expect_identical(as.list(formals(specify_lst)), as.list(expected))
+})
