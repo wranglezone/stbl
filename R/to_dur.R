@@ -306,6 +306,28 @@ to_dur.numeric <- function(
 }
 
 #' @export
+to_dur.list <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (.is_empty_list(x)) {
+    return(to_dur(character()))
+  }
+  to_dur.default(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
 to_dur.default <- function(
   x,
   ...,

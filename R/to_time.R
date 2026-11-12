@@ -270,6 +270,28 @@ to_time.difftime <- function(
 }
 
 #' @export
+to_time.list <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (.is_empty_list(x)) {
+    return(to_time(character()))
+  }
+  to_time.default(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
 to_time.default <- function(
   x,
   ...,

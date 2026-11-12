@@ -323,3 +323,12 @@ test_that(".to_num_from_complex() works (#23, #310)", {
     "integer"
   )
 })
+
+test_that(".is_empty_list() identifies empty unclassed lists (#392)", {
+  expect_true(.is_empty_list(list()))
+  expect_false(.is_empty_list(list(1)))
+  expect_false(.is_empty_list(NULL))
+  expect_false(.is_empty_list(character()))
+  expect_false(.is_empty_list(data.frame()))
+  expect_false(.is_empty_list(structure(list(), class = "my_class")))
+})

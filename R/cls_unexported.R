@@ -272,3 +272,13 @@
     to_arg = to_arg
   )
 }
+
+#' Test for an empty, unclassed list
+#'
+#' @param x The object to test.
+#' @returns `TRUE` if `x` is a zero-length list without a class attribute, else
+#'   `FALSE`.
+#' @keywords internal
+.is_empty_list <- function(x) {
+  is.list(x) && !is.object(x) && length(x) == 0L
+}

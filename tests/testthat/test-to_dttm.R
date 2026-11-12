@@ -347,3 +347,18 @@ test_that("to_dttm() treat_number_as = 'days' respects tz (#381)", {
     "bad_tz"
   )
 })
+
+test_that("to_dttm() converts an empty list to an empty datetime (#392)", {
+  expect_identical(
+    to_dttm(list()),
+    as.POSIXct(character(), tz = "UTC")
+  )
+  expect_identical(
+    to(list(), vctrs::new_datetime(tzone = "America/Chicago")),
+    as.POSIXct(character(), tz = "America/Chicago")
+  )
+})
+
+test_that("to_dttm() still rejects non-empty lists (#392)", {
+  expect_pkg_error_classes(to_dttm(list(1)), "stbl", "coerce", "datetime")
+})

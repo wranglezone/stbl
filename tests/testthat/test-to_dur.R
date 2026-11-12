@@ -308,3 +308,12 @@ test_that("to_dur_scalar() respects allow_zero_length (#295)", {
   given <- to_dur(character())
   expect_pkg_error_snapshot(to_dur_scalar(given), "stbl", "bad_empty")
 })
+
+test_that("to_dur() converts an empty list to an empty duration (#392)", {
+  expect_identical(to_dur(list()), to_dur(character()))
+  expect_length(to(list(), lubridate::period(1)), 0L)
+})
+
+test_that("to_dur() still rejects non-empty lists (#392)", {
+  expect_pkg_error_classes(to_dur(list(1)), "stbl", "coerce", "duration")
+})
