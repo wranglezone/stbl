@@ -414,7 +414,7 @@ test_that("stabilise_list() exists (#110)", {
   expect_no_error(stabilise_list(NULL))
 })
 
-test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380)", {
+test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380, #401)", {
   given <- function(x, y = 2) x + y
   expect_identical(
     stabilize_lst(

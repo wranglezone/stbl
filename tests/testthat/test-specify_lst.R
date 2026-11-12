@@ -111,7 +111,7 @@ test_that("stabilize_lst() with nested specify_lst() propagates errors correctly
   )
 })
 
-test_that("specify_lst() passes .coerce_function (#380)", {
+test_that("specify_lst() passes .coerce_function (#380, #401)", {
   given <- function(x) x
   expect_pkg_error_classes(specify_lst()(given), "stbl", "bad_function")
   expect_identical(

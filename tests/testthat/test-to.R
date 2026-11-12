@@ -49,7 +49,7 @@ test_that("to() converts character to logical (#182)", {
   expect_identical(to(NA_character_, logical()), NA)
 })
 
-test_that("to() errors for incompatible character -> logical (#182)", {
+test_that("to() errors for incompatible character -> logical (#182, #401)", {
   expect_pkg_error_classes(
     to("xyz", logical()),
     "stbl",
@@ -63,7 +63,7 @@ test_that("to() converts factor to logical (#182)", {
   expect_identical(to(fct, logical()), c(TRUE, FALSE))
 })
 
-test_that("to() errors for incompatible factor -> logical (#182)", {
+test_that("to() errors for incompatible factor -> logical (#182, #401)", {
   fct <- factor(c("a", "b"))
   expect_pkg_error_classes(
     to(fct, logical()),
@@ -90,7 +90,7 @@ test_that("to() converts double to integer (#182)", {
   expect_identical(to(c(1.0, 2.0, NA_real_), integer()), c(1L, 2L, NA_integer_))
 })
 
-test_that("to() errors for double -> integer with precision loss (#182)", {
+test_that("to() errors for double -> integer with precision loss (#182, #401)", {
   expect_pkg_error_classes(
     to(1.5, integer()),
     "stbl",
@@ -104,7 +104,7 @@ test_that("to() converts character to integer (#182)", {
   expect_identical(to(c("1", "2"), integer()), c(1L, 2L))
 })
 
-test_that("to() errors for incompatible character -> integer (#182)", {
+test_that("to() errors for incompatible character -> integer (#182, #401)", {
   expect_pkg_error_classes(
     to("abc", integer()),
     "stbl",
@@ -139,7 +139,7 @@ test_that("to() converts character to double (#182)", {
   expect_identical(to(c("1", "2.5"), double()), c(1.0, 2.5))
 })
 
-test_that("to() errors for incompatible character -> double (#182)", {
+test_that("to() errors for incompatible character -> double (#182, #401)", {
   expect_pkg_error_classes(
     to("xyz", double()),
     "stbl",
@@ -256,7 +256,7 @@ test_that("to() returns NULL by default when x is NULL (#182)", {
   expect_null(to(NULL, list()))
 })
 
-test_that("to() errors when x is NULL and allow_null = FALSE (#182)", {
+test_that("to() errors when x is NULL and allow_null = FALSE (#182, #401)", {
   expect_pkg_error_classes(
     to(NULL, integer(), allow_null = FALSE),
     "stbl",
@@ -318,7 +318,7 @@ test_that("to() returns NULL when .to is NULL (#182)", {
   expect_null(to(c(1, 2, 3), NULL))
 })
 
-test_that("to() errors when .to is NULL and allow_null = FALSE (#182)", {
+test_that("to() errors when .to is NULL and allow_null = FALSE (#182, #401)", {
   expect_pkg_error_classes(
     to(1L, NULL, allow_null = FALSE),
     "stbl",
@@ -328,7 +328,7 @@ test_that("to() errors when .to is NULL and allow_null = FALSE (#182)", {
 
 # coerce_character -------------------------------------------------------------
 
-test_that("to() respects coerce_character = FALSE for integer target (#182)", {
+test_that("to() respects coerce_character = FALSE for integer target (#182, #401)", {
   expect_pkg_error_classes(
     to("1", integer(), coerce_character = FALSE),
     "stbl",
@@ -337,7 +337,7 @@ test_that("to() respects coerce_character = FALSE for integer target (#182)", {
   )
 })
 
-test_that("to() respects coerce_character = FALSE for double target (#182)", {
+test_that("to() respects coerce_character = FALSE for double target (#182, #401)", {
   expect_pkg_error_classes(
     to("1.5", double(), coerce_character = FALSE),
     "stbl",
@@ -396,7 +396,7 @@ test_that("to() converts POSIXct to Date (#366)", {
   expect_identical(to(given, as.Date("2024-01-01")), as.Date("2024-01-01"))
 })
 
-test_that("to() errors for incompatible character -> Date (#366)", {
+test_that("to() errors for incompatible character -> Date (#366, #401)", {
   expect_pkg_error_classes(
     to("not-a-date", as.Date("2024-01-01")),
     "stbl",
@@ -424,7 +424,7 @@ test_that("to() converts Date to POSIXct (#366)", {
   expect_s3_class(result, "POSIXct")
 })
 
-test_that("to() errors for incompatible character -> POSIXct (#366)", {
+test_that("to() errors for incompatible character -> POSIXct (#366, #401)", {
   expect_pkg_error_classes(
     to("not-a-datetime", as.POSIXct("2024-01-01", tz = "UTC")),
     "stbl",
@@ -449,7 +449,7 @@ test_that("to() passes hms through unchanged (#366)", {
   expect_identical(to(given, hms::hms()), given)
 })
 
-test_that("to() errors for incompatible character -> hms (#366)", {
+test_that("to() errors for incompatible character -> hms (#366, #401)", {
   skip_if_not_installed("hms")
   expect_pkg_error_classes(
     to("not-a-time", hms::hms()),
@@ -473,7 +473,7 @@ test_that("to() passes Period through unchanged (#366)", {
   expect_identical(to(given, lubridate::period()), given)
 })
 
-test_that("to() errors for incompatible character -> Period (#366)", {
+test_that("to() errors for incompatible character -> Period (#366, #401)", {
   skip_if_not_installed("lubridate")
   expect_pkg_error_classes(
     to("not-a-duration", lubridate::period()),
