@@ -28,6 +28,10 @@ to make them easier to import and to find.
   Useful for the `class` argument of
   [`testthat::expect_error()`](https://testthat.r-lib.org/reference/expect_error.html).
 
+- allow_duplicate_names:
+
+  (`logical(1)`) Should `x` be allowed to have duplicate names?
+
 - allow_na:
 
   (`logical(1)`) Are NA values ok?
@@ -215,6 +219,10 @@ to make them easier to import and to find.
   (`logical(1)`) Should per-element results be combined into a single
   atomic vector when possible (every result has size 1 and shares a
   common type)? If `FALSE`, a list is always returned.
+
+- required:
+
+  `(character)` Names that must be present in `x`.
 
 - spec:
 

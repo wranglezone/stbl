@@ -130,9 +130,7 @@ stabilise_list(
 
 - .allow_duplicate_names:
 
-  (`logical(1)`) Should `.x` be allowed to have duplicate names? If
-  `FALSE` (default), an error is thrown when any named element of `.x`
-  shares a name with another.
+  (`logical(1)`) Should `x` be allowed to have duplicate names?
 
 - .unique:
 
@@ -262,6 +260,7 @@ Other stabilization functions:
 [`stabilize_int_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_int_scalar.md),
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
 [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
+[`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md),
 [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),
 [`stabilize_time_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_time_scalar.md),

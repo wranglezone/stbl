@@ -1,8 +1,6 @@
 # Test for an empty, unclassed list
 
-Empty lists (such as an empty JSON array parsed by jsonlite) are treated
-as empty vectors by the `to_*()` functions. Classed lists (including
-data frames) are not considered.
+Test for an empty, unclassed list
 
 ## Usage
 

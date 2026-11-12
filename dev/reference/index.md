@@ -201,6 +201,14 @@
 - [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md)
   : Require a value to be non-NULL
 
+## names
+
+- [`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md)
+  : Create a names stabilizer function
+- [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
+  [`stabilise_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
+  : Ensure the names of an object meet expectations
+
 ## dates and times
 
 - [`locale_datetime_formats()`](https://stbl.wrangle.zone/dev/reference/locale_datetime_formats.md)

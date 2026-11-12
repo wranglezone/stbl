@@ -17,6 +17,18 @@
   `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior
   ([\#393](https://github.com/wranglezone/stbl/issues/393)).
 
+### New features
+
+- New
+  [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
+  (and its synonym
+  [`stabilise_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md))
+  and
+  [`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md)
+  validate and optionally convert only the names of an object, leaving
+  its class and values alone
+  ([\#26](https://github.com/wranglezone/stbl/issues/26)).
+
 ### Bug fixes
 
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),

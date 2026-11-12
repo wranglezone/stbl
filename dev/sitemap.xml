@@ -52,6 +52,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_named_presence.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_names_spec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_not_jagged.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_required_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_size.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_specs_named.html</loc></url>
@@ -144,6 +145,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-specify_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_cls_scalar.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stabilize_names_spec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_abort.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_inform.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stbl_warn.html</loc></url>
@@ -213,6 +215,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_time.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_all_of.html</loc></url>
@@ -237,6 +240,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_time.html</loc></url>

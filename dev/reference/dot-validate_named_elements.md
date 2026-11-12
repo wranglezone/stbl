@@ -61,9 +61,7 @@ Validate all named elements (required and extra)
 
 - .allow_duplicate_names:
 
-  (`logical(1)`) Should `.x` be allowed to have duplicate names? If
-  `FALSE` (default), an error is thrown when any named element of `.x`
-  shares a name with another.
+  (`logical(1)`) Should `x` be allowed to have duplicate names?
 
 - .x_arg:
 

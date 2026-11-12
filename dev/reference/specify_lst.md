@@ -148,6 +148,7 @@ Other specification functions:
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+[`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md),
 [`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
 [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)
 
