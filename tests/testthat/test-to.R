@@ -49,8 +49,13 @@ test_that("to() converts character to logical (#182)", {
   expect_identical(to(NA_character_, logical()), NA)
 })
 
-test_that("to() errors for incompatible character -> logical (#182)", {
-  expect_error(to("xyz", logical()))
+test_that("to() errors for incompatible character -> logical (#182, #401)", {
+  expect_pkg_error_classes(
+    to("xyz", logical()),
+    "stbl",
+    "incompatible_values",
+    "logical"
+  )
 })
 
 test_that("to() converts factor to logical (#182)", {
@@ -58,9 +63,14 @@ test_that("to() converts factor to logical (#182)", {
   expect_identical(to(fct, logical()), c(TRUE, FALSE))
 })
 
-test_that("to() errors for incompatible factor -> logical (#182)", {
+test_that("to() errors for incompatible factor -> logical (#182, #401)", {
   fct <- factor(c("a", "b"))
-  expect_error(to(fct, logical()))
+  expect_pkg_error_classes(
+    to(fct, logical()),
+    "stbl",
+    "incompatible_values",
+    "logical"
+  )
 })
 
 test_that("to() converts list to logical (#182)", {
@@ -80,8 +90,13 @@ test_that("to() converts double to integer (#182)", {
   expect_identical(to(c(1.0, 2.0, NA_real_), integer()), c(1L, 2L, NA_integer_))
 })
 
-test_that("to() errors for double -> integer with precision loss (#182)", {
-  expect_error(to(1.5, integer()))
+test_that("to() errors for double -> integer with precision loss (#182, #401)", {
+  expect_pkg_error_classes(
+    to(1.5, integer()),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to() converts character to integer (#182)", {
@@ -89,8 +104,13 @@ test_that("to() converts character to integer (#182)", {
   expect_identical(to(c("1", "2"), integer()), c(1L, 2L))
 })
 
-test_that("to() errors for incompatible character -> integer (#182)", {
-  expect_error(to("abc", integer()))
+test_that("to() errors for incompatible character -> integer (#182, #401)", {
+  expect_pkg_error_classes(
+    to("abc", integer()),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
 })
 
 test_that("to() converts factor to integer (#182)", {
@@ -119,8 +139,13 @@ test_that("to() converts character to double (#182)", {
   expect_identical(to(c("1", "2.5"), double()), c(1.0, 2.5))
 })
 
-test_that("to() errors for incompatible character -> double (#182)", {
-  expect_error(to("xyz", double()))
+test_that("to() errors for incompatible character -> double (#182, #401)", {
+  expect_pkg_error_classes(
+    to("xyz", double()),
+    "stbl",
+    "incompatible_values",
+    "double"
+  )
 })
 
 test_that("to() converts factor to double (#182)", {
@@ -231,13 +256,37 @@ test_that("to() returns NULL by default when x is NULL (#182)", {
   expect_null(to(NULL, list()))
 })
 
-test_that("to() errors when x is NULL and allow_null = FALSE (#182)", {
-  expect_error(to(NULL, integer(), allow_null = FALSE))
-  expect_error(to(NULL, double(), allow_null = FALSE))
-  expect_error(to(NULL, character(), allow_null = FALSE))
-  expect_error(to(NULL, logical(), allow_null = FALSE))
-  expect_error(to(NULL, factor(), allow_null = FALSE))
-  expect_error(to(NULL, list(), allow_null = FALSE))
+test_that("to() errors when x is NULL and allow_null = FALSE (#182, #401)", {
+  expect_pkg_error_classes(
+    to(NULL, integer(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
+  expect_pkg_error_classes(
+    to(NULL, double(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
+  expect_pkg_error_classes(
+    to(NULL, character(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
+  expect_pkg_error_classes(
+    to(NULL, logical(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
+  expect_pkg_error_classes(
+    to(NULL, factor(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
+  expect_pkg_error_classes(
+    to(NULL, list(), allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
 })
 
 # to data frame ----------------------------------------------------------------
@@ -269,18 +318,32 @@ test_that("to() returns NULL when .to is NULL (#182)", {
   expect_null(to(c(1, 2, 3), NULL))
 })
 
-test_that("to() errors when .to is NULL and allow_null = FALSE (#182)", {
-  expect_error(to(1L, NULL, allow_null = FALSE))
+test_that("to() errors when .to is NULL and allow_null = FALSE (#182, #401)", {
+  expect_pkg_error_classes(
+    to(1L, NULL, allow_null = FALSE),
+    "stbl",
+    "bad_null"
+  )
 })
 
 # coerce_character -------------------------------------------------------------
 
-test_that("to() respects coerce_character = FALSE for integer target (#182)", {
-  expect_error(to("1", integer(), coerce_character = FALSE))
+test_that("to() respects coerce_character = FALSE for integer target (#182, #401)", {
+  expect_pkg_error_classes(
+    to("1", integer(), coerce_character = FALSE),
+    "stbl",
+    "coerce",
+    "integer"
+  )
 })
 
-test_that("to() respects coerce_character = FALSE for double target (#182)", {
-  expect_error(to("1.5", double(), coerce_character = FALSE))
+test_that("to() respects coerce_character = FALSE for double target (#182, #401)", {
+  expect_pkg_error_classes(
+    to("1.5", double(), coerce_character = FALSE),
+    "stbl",
+    "coerce",
+    "double"
+  )
 })
 
 test_that("to() returns function names for character target (#395)", {
@@ -333,8 +396,13 @@ test_that("to() converts POSIXct to Date (#366)", {
   expect_identical(to(given, as.Date("2024-01-01")), as.Date("2024-01-01"))
 })
 
-test_that("to() errors for incompatible character -> Date (#366)", {
-  expect_error(to("not-a-date", as.Date("2024-01-01")))
+test_that("to() errors for incompatible character -> Date (#366, #401)", {
+  expect_pkg_error_classes(
+    to("not-a-date", as.Date("2024-01-01")),
+    "stbl",
+    "incompatible_values",
+    "date"
+  )
 })
 
 # to POSIXct -------------------------------------------------------------------
@@ -356,8 +424,13 @@ test_that("to() converts Date to POSIXct (#366)", {
   expect_s3_class(result, "POSIXct")
 })
 
-test_that("to() errors for incompatible character -> POSIXct (#366)", {
-  expect_error(to("not-a-datetime", as.POSIXct("2024-01-01", tz = "UTC")))
+test_that("to() errors for incompatible character -> POSIXct (#366, #401)", {
+  expect_pkg_error_classes(
+    to("not-a-datetime", as.POSIXct("2024-01-01", tz = "UTC")),
+    "stbl",
+    "incompatible_values",
+    "datetime"
+  )
 })
 
 # to hms -----------------------------------------------------------------------
@@ -376,9 +449,14 @@ test_that("to() passes hms through unchanged (#366)", {
   expect_identical(to(given, hms::hms()), given)
 })
 
-test_that("to() errors for incompatible character -> hms (#366)", {
+test_that("to() errors for incompatible character -> hms (#366, #401)", {
   skip_if_not_installed("hms")
-  expect_error(to("not-a-time", hms::hms()))
+  expect_pkg_error_classes(
+    to("not-a-time", hms::hms()),
+    "stbl",
+    "incompatible_values",
+    "time"
+  )
 })
 
 # to Period --------------------------------------------------------------------
@@ -395,9 +473,14 @@ test_that("to() passes Period through unchanged (#366)", {
   expect_identical(to(given, lubridate::period()), given)
 })
 
-test_that("to() errors for incompatible character -> Period (#366)", {
+test_that("to() errors for incompatible character -> Period (#366, #401)", {
   skip_if_not_installed("lubridate")
-  expect_error(to("not-a-duration", lubridate::period()))
+  expect_pkg_error_classes(
+    to("not-a-duration", lubridate::period()),
+    "stbl",
+    "incompatible_values",
+    "duration"
+  )
 })
 
 # vctrs fallback ---------------------------------------------------------------

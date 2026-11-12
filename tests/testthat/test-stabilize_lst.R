@@ -414,7 +414,7 @@ test_that("stabilise_list() exists (#110)", {
   expect_no_error(stabilise_list(NULL))
 })
 
-test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380)", {
+test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380, #401)", {
   given <- function(x, y = 2) x + y
   expect_identical(
     stabilize_lst(
@@ -425,7 +425,7 @@ test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380
     ),
     as.list(given)
   )
-  expect_error(stabilize_lst(given), class = "stbl-error-bad_function")
+  expect_pkg_error_classes(stabilize_lst(given), "stbl", "bad_function")
   expect_identical(
     stabilize_lst(list(a = 1L), .coerce_function = TRUE, a = to_int_scalar),
     list(a = 1L)
