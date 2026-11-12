@@ -263,6 +263,29 @@ to_dttm.numeric <- function(
 }
 
 #' @export
+to_dttm.list <- function(
+  x,
+  ...,
+  tz = "UTC",
+  x_arg = caller_arg(x),
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = object_type(x)
+) {
+  if (.is_empty_list(x)) {
+    return(to_dttm(character(), tz = tz, call = call))
+  }
+  to_dttm.default(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
+}
+
+#' @export
 to_dttm.default <- function(
   x,
   ...,

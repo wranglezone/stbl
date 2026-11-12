@@ -334,3 +334,12 @@ test_that("tz passes through to_date_scalar() and to() (#381)", {
     as.Date("2023-12-31")
   )
 })
+
+test_that("to_date() converts an empty list to an empty date (#392)", {
+  expect_identical(to_date(list()), as.Date(character()))
+  expect_identical(to(list(), Sys.Date()), as.Date(character()))
+})
+
+test_that("to_date() still rejects non-empty lists (#392)", {
+  expect_pkg_error_classes(to_date(list(1)), "stbl", "coerce", "date")
+})

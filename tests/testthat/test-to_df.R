@@ -121,3 +121,12 @@ test_that("to_df.default() errors for non-convertible types (#201, #377)", {
 test_that("to_data_frame() exists (#201)", {
   expect_identical(to_data_frame(mtcars), mtcars)
 })
+
+test_that("to_df() converts an empty list to an empty data frame (#392)", {
+  expect_identical(to_df(list()), data.frame())
+  expect_identical(to(list(), data.frame(a = 1)), data.frame())
+})
+
+test_that("to_df() still rejects unnamed non-empty lists (#392)", {
+  expect_pkg_error_classes(to_df(list(1)), "stbl", "bad_named")
+})
