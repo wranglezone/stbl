@@ -18,6 +18,9 @@ falling back to the current locale's conventional date order.}
 error class list. Useful for the \code{class} argument of
 \code{\link[testthat:expect_error]{testthat::expect_error()}}.}
 
+\item{allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
+duplicate names?}
+
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
 \item{allowed_values}{A vector of permitted values (converted to the target
@@ -132,6 +135,8 @@ throws an error, try installing the stringi package.}
 \item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
 single atomic vector when possible (every result has size 1 and shares a
 common type)? If \code{FALSE}, a list is always returned.}
+
+\item{required}{\code{(character)} Names that must be present in \code{x}.}
 
 \item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function

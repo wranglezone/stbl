@@ -4,6 +4,10 @@
 
 * `to_chr()`, `to_chr_scalar()`, `stabilize_chr()`, `stabilize_chr_scalar()`, `specify_chr()`, and `specify_chr_scalar()` (and their synonyms, and so `to()` with a character target) gain a `coerce_function` argument, defaulting to `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior (#393).
 
+## New features
+
+* New `stabilize_names()` (and its synonym `stabilise_names()`) and `specify_names()` validate and optionally convert only the names of an object, leaving its class and values alone (#26).
+
 ## Bug fixes
 
 * `to_date()`, `to_dttm()`, `to_dur()`, `to_time()`, `to_df()`, and `to()` for those classes now convert an empty list to an empty vector of the target type (or a zero-row, zero-column data frame for `to_df()`), consistent with the other `to_*()` functions (#392).

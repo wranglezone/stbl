@@ -476,17 +476,59 @@
 #' @inherit .shared-return-conditions return
 #' @keywords internal
 .check_names_spec <- function(x, spec, x_arg, call) {
+  .stabilize_names_spec(x, spec, x_arg = x_arg, call = call)
+  invisible(NULL)
+}
+
+#' Apply a spec to the names of a fully named object
+#'
+#' @inheritParams .check_names_spec
+#' @returns `x`, with its names replaced by the result of `spec`.
+#' @keywords internal
+.stabilize_names_spec <- function(x, spec, x_arg, call) {
   .check_named_presence(x, TRUE, x_arg = x_arg, call = call)
   if (!length(x)) {
-    return(invisible(NULL))
+    return(x)
   }
-  .call_specified_fn(
+  names(x) <- .call_specified_fn(
     spec,
     names(x),
     .x_arg = paste0("names(", x_arg, ")"),
     .call = call
   )
-  invisible(NULL)
+  x
+}
+
+#' Check that required names are present
+#'
+#' @inheritParams .shared-params-check
+#' @inheritParams .shared-params
+#' @inherit .shared-return-conditions return
+#' @keywords internal
+.check_required_names <- function(
+  x,
+  required = NULL,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
+  required <- to_chr(
+    required,
+    allow_null = TRUE,
+    x_arg = "required",
+    call = call
+  )
+  required <- unique(required[!is.na(required)])
+  missing_names <- setdiff(required, rlang::names2(x))
+  if (!length(missing_names)) {
+    return(invisible(NULL))
+  }
+  .stop_must(
+    "must contain name{?s} {.val {missing_names}}.",
+    x_arg = x_arg,
+    call = call,
+    subclass = "missing_element",
+    message_env = rlang::current_env()
+  )
 }
 
 #' Check that all list elements are named

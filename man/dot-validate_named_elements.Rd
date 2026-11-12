@@ -40,9 +40,8 @@ if absent, no error is raised; if present, they're validated normally. Pass
 \code{NULL} or \code{character()} to make every named spec optional. A zero-length
 \code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
-\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{.x} be allowed to have
-duplicate names? If \code{FALSE} (default), an error is thrown when any named
-element of \code{.x} shares a name with another.}
+\item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
+duplicate names?}
 
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it

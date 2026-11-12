@@ -286,3 +286,46 @@ test_that(".check_named() errors for invalid `named` (#8)", {
     "non_scalar"
   )
 })
+
+test_that(".check_required_names() checks for required names (#26)", {
+  given <- c(a = 1, b = 2)
+  expect_null(.check_required_names(given))
+  expect_null(.check_required_names(given, character()))
+  expect_null(.check_required_names(given, c("a", NA, "a")))
+  expect_pkg_error_snapshot(
+    .check_required_names(given, c("a", "c")),
+    "stbl",
+    "missing_element"
+  )
+  expect_pkg_error_classes(
+    .check_required_names(1:2, "a"),
+    "stbl",
+    "missing_element"
+  )
+})
+
+test_that(".stabilize_names_spec() converts names (#26)", {
+  expect_identical(
+    .stabilize_names_spec(
+      c(a = 1),
+      toupper,
+      x_arg = "x",
+      call = rlang::current_env()
+    ),
+    c(A = 1)
+  )
+  expect_identical(
+    .stabilize_names_spec(
+      integer(),
+      toupper,
+      x_arg = "x",
+      call = rlang::current_env()
+    ),
+    integer()
+  )
+  expect_pkg_error_classes(
+    .stabilize_names_spec(1, toupper, x_arg = "x", call = rlang::current_env()),
+    "stbl",
+    "bad_named"
+  )
+})

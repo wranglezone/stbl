@@ -24,9 +24,6 @@
 #'   - A single stabilizer function, such as a `stabilize_*` function
 #'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
 #'   ([specify_chr()], etc), used to validate every unnamed element.
-#' @param .allow_duplicate_names (`logical(1)`) Should `.x` be allowed to have
-#'   duplicate names? If `FALSE` (default), an error is thrown when any named
-#'   element of `.x` shares a name with another.
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
 #'   `TRUE`, duplicated elements are rejected.
 #' @param .required `(character)` Names (from `...`) of elements that must be

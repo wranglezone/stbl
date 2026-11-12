@@ -133,6 +133,7 @@ Other specification functions:
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
 \code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_names]{specify_names()}},
 \code{\link[=specify_one_of]{specify_one_of()}},
 \code{\link[=specify_time]{specify_time()}}
 }
