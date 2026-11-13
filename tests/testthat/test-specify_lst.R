@@ -140,3 +140,15 @@ test_that("specify_lst() args match stabilize_lst() args (#400)", {
   expected <- expected[!names(expected) %in% supplied]
   expect_identical(as.list(formals(specify_lst)), as.list(expected))
 })
+
+test_that("specify_lst() passes .simplify through (#407)", {
+  spec <- specify_lst(lon = specify_dbl_scalar(), lat = specify_dbl_scalar())
+  given <- list(lon = 1, lat = 2)
+  expect_identical(spec(given), given)
+  spec_simple <- specify_lst(
+    lon = specify_dbl_scalar(),
+    lat = specify_dbl_scalar(),
+    .simplify = TRUE
+  )
+  expect_identical(spec_simple(given), c(lon = 1, lat = 2))
+})

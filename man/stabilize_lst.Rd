@@ -20,6 +20,7 @@ stabilize_lst(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -38,6 +39,7 @@ stabilize_list(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -56,6 +58,7 @@ stabilise_lst(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -74,6 +77,7 @@ stabilise_list(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -132,6 +136,10 @@ if absent, no error is raised; if present, they're validated normally. Pass
 
 \item{.coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
+\item{.simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
+
 \item{.x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -146,7 +154,8 @@ object before checking its conversion, but want the error message to match
 the original class.}
 }
 \value{
-The validated list, or an error condition with classes
+The validated list (or an atomic vector when \code{.simplify = TRUE} and
+simplification is possible), or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
@@ -225,6 +234,14 @@ stabilize_lst(
 )
 try(
   stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+)
+
+# Simplify a list of scalars to an atomic vector
+stabilize_lst(
+  list(lon = 1.5, lat = 2L),
+  lon = specify_dbl_scalar(),
+  lat = specify_int_scalar(),
+  .simplify = TRUE
 )
 }
 \seealso{

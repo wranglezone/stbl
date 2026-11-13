@@ -431,3 +431,55 @@ test_that("stabilize_lst() converts functions with .coerce_function = TRUE (#380
     list(a = 1L)
   )
 })
+
+# .simplify ----
+
+test_that("stabilize_lst() simplifies scalars when .simplify = TRUE (#407)", {
+  expect_identical(
+    stabilize_lst(list(a = 1L, b = 2L), .named = TRUE, .simplify = TRUE),
+    c(a = 1L, b = 2L)
+  )
+  expect_identical(
+    stabilize_lst(list(flag = TRUE, n = 2L), .named = TRUE, .simplify = TRUE),
+    c(flag = 1L, n = 2L)
+  )
+  expect_identical(
+    stabilize_lst(list(1, 2), .unnamed = TRUE, .simplify = TRUE),
+    c(1, 2)
+  )
+})
+
+test_that("stabilize_lst() simplifies after validation (#407)", {
+  expect_identical(
+    stabilize_lst(
+      list(a = "1", b = 2L),
+      .named = specify_int_scalar(),
+      .simplify = TRUE
+    ),
+    c(a = 1L, b = 2L)
+  )
+})
+
+test_that("stabilize_lst() leaves unsimplifiable lists alone (#407)", {
+  mixed <- list(a = 1, b = "x")
+  expect_identical(
+    stabilize_lst(mixed, .named = TRUE, .simplify = TRUE),
+    mixed
+  )
+  nonscalar <- list(a = 1:2, b = 3L)
+  expect_identical(
+    stabilize_lst(nonscalar, .named = TRUE, .simplify = TRUE),
+    nonscalar
+  )
+  expect_identical(stabilize_lst(list(), .simplify = TRUE), list())
+  expect_null(stabilize_lst(NULL, .simplify = TRUE))
+})
+
+test_that("stabilize_lst() checks .simplify (#407)", {
+  expect_pkg_error_classes(
+    stabilize_lst(list(), .simplify = "nope"),
+    "stbl",
+    "incompatible_values",
+    "logical"
+  )
+})
