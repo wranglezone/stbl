@@ -1,0 +1,53 @@
+# Create a specified stabilizer function
+
+Create a specified stabilizer function
+
+## Usage
+
+``` r
+.specify_cls(
+  stabilizer,
+  factory_args = list(),
+  scalar = FALSE,
+  prep_exprs = list(),
+  include_x_class = TRUE,
+  call = rlang::caller_env()
+)
+```
+
+## Arguments
+
+- stabilizer:
+
+  (`character(1)`) Name of the stabilizer function to call.
+
+- factory_args:
+
+  `(list)` Arguments to include in the call to the stabilizer function.
+
+- scalar:
+
+  (`logical(1)`) Whether to call the scalar version of the stabilizer.
+
+- prep_exprs:
+
+  `(list)` Expressions to run in the generated function before calling
+  the stabilizer.
+
+- include_x_class:
+
+  `(logical(1))` Whether the generated function should accept `x_class`
+  and pass it to the stabilizer.
+
+- call:
+
+  `(environment)` The environment to use as the parent of the generated
+  function. Defaults to the caller's environment.
+
+## Value
+
+A function of class `"stbl_specified_fn"` that calls the specified
+stabilizer function with the provided arguments. The generated function
+will also accept `...` for additional arguments to pass to the
+stabilizer function. You can copy/paste the body of the resulting
+function if you want to provide additional context or functionality.
