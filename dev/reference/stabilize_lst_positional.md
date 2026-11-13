@@ -1,10 +1,7 @@
 # Ensure a list meets positional (tuple) expectations
 
-`stabilize_lst_positional()` validates a list as a tuple: the *i*th spec
-in `...` is applied to the *i*th element of `.x`. Elements after the
-last spec are controlled by `.additional`. This mirrors JSON Schema's
-`prefixItems` (with `.additional` playing the role of `items`). Failures
-at every position are collected and reported together.
+Validate a list as a tuple: the *i*th spec in `...` is applied to the
+*i*th element of `.x`. This mirrors JSON Schema's `prefixItems`.
 `stabilise_lst_positional()`, `stabilize_list_positional()`,
 `stabilise_list_positional()`, `stabilize_tuple()`, and
 `stabilise_tuple()` are synonyms.
