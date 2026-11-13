@@ -22,6 +22,7 @@
 #' stabilize_email("stbl@example.com")
 #' try(stabilize_email("not-an-email-address"))
 specify_chr <- function(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -34,6 +35,7 @@ specify_chr <- function(
   allowed_values = NULL,
   coerce_function = FALSE
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("chr", factory_args, prep_exprs = .quote_fn_exprs())
 }
@@ -41,6 +43,7 @@ specify_chr <- function(
 #' @export
 #' @rdname specify_chr
 specify_chr_scalar <- function(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -51,6 +54,7 @@ specify_chr_scalar <- function(
   allowed_values = NULL,
   coerce_function = FALSE
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls(
     "chr",

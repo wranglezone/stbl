@@ -8,6 +8,7 @@
 \title{Create a specified factor stabilizer function}
 \usage{
 specify_fct(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -19,6 +20,7 @@ specify_fct(
 )
 
 specify_fct_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -29,6 +31,7 @@ specify_fct_scalar(
 )
 
 specify_factor(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -40,6 +43,7 @@ specify_factor(
 )
 
 specify_factor_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -50,6 +54,8 @@ specify_factor_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}

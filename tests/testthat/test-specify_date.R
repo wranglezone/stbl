@@ -111,3 +111,8 @@ test_that("specify_date*() can set tz (#381)", {
   )
   expect_identical(checker_scalar(1704067200), expected)
 })
+
+test_that("specify_date() and specify_date_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_date)
+  expect_dot_errors(specify_date_scalar)
+})

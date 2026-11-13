@@ -84,3 +84,8 @@ test_that("specify_dur_scalar() can set treat_number_as (#382)", {
   strict <- specify_dur_scalar(treat_number_as = "error")
   expect_pkg_error_classes(strict(1), "stbl", "coerce", "duration")
 })
+
+test_that("specify_dur() and specify_dur_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_dur)
+  expect_dot_errors(specify_dur_scalar)
+})

@@ -72,3 +72,8 @@ test_that("specify_dbl can enforce multiple_of (#283)", {
   expect_identical(checker(0.2), 0.2)
   expect_pkg_error_classes(checker(0.25), "stbl", "not_multiple")
 })
+
+test_that("specify_dbl() and specify_dbl_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_dbl)
+  expect_dot_errors(specify_dbl_scalar)
+})

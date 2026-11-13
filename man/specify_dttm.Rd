@@ -8,6 +8,7 @@
 \title{Create a specified datetime stabilizer function}
 \usage{
 specify_dttm(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
@@ -23,6 +24,7 @@ specify_dttm(
 )
 
 specify_dttm_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
@@ -36,6 +38,7 @@ specify_dttm_scalar(
 )
 
 specify_datetime(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
@@ -51,6 +54,7 @@ specify_datetime(
 )
 
 specify_datetime_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
@@ -64,6 +68,8 @@ specify_datetime_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
 from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
 time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names

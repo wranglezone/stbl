@@ -89,3 +89,8 @@ test_that("specify_chr rejects functions by default (#394)", {
   expect_pkg_error_classes(specify_chr()(mean), "stbl", "bad_function")
   expect_pkg_error_classes(specify_chr_scalar()(mean), "stbl", "bad_function")
 })
+
+test_that("specify_chr() and specify_chr_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_chr)
+  expect_dot_errors(specify_chr_scalar)
+})

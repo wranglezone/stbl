@@ -23,6 +23,7 @@
 #' stabilize_short("PT12H")
 #' try(stabilize_short("P2D"))
 specify_dur <- function(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -34,6 +35,7 @@ specify_dur <- function(
   max_value = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("dur", factory_args)
 }
@@ -41,6 +43,7 @@ specify_dur <- function(
 #' @export
 #' @rdname specify_dur
 specify_dur_scalar <- function(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -50,6 +53,7 @@ specify_dur_scalar <- function(
   max_value = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("dur", factory_args, scalar = TRUE)
 }

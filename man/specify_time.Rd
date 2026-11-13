@@ -6,6 +6,7 @@
 \title{Create a specified time-of-day stabilizer function}
 \usage{
 specify_time(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -19,6 +20,7 @@ specify_time(
 )
 
 specify_time_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -30,6 +32,8 @@ specify_time_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
 \code{"seconds"} or \code{"milliseconds"} since midnight, \code{"days"} as a fraction of a
 day (so \code{0.5} is 12:00:00), or \code{"error"} to reject numbers. Ignored for

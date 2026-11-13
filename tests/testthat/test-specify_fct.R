@@ -53,3 +53,8 @@ test_that("specify_factor() exists (#164, #325)", {
 test_that("stabilize_factor_scalar() exists (#164, #325)", {
   expect_no_error(specify_factor_scalar())
 })
+
+test_that("specify_fct() and specify_fct_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_fct)
+  expect_dot_errors(specify_fct_scalar)
+})

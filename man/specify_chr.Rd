@@ -8,6 +8,7 @@
 \title{Create a specified character stabilizer function}
 \usage{
 specify_chr(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -22,6 +23,7 @@ specify_chr(
 )
 
 specify_chr_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -34,6 +36,7 @@ specify_chr_scalar(
 )
 
 specify_character(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -48,6 +51,7 @@ specify_character(
 )
 
 specify_character_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -60,6 +64,8 @@ specify_character_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}

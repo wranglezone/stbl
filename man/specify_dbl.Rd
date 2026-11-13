@@ -8,6 +8,7 @@
 \title{Create a specified double stabilizer function}
 \usage{
 specify_dbl(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -25,6 +26,7 @@ specify_dbl(
 )
 
 specify_dbl_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -40,6 +42,7 @@ specify_dbl_scalar(
 )
 
 specify_double(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -57,6 +60,7 @@ specify_double(
 )
 
 specify_double_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -72,6 +76,8 @@ specify_double_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}

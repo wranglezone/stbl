@@ -21,6 +21,7 @@
 #' stabilize_afternoon("13:00:00Z")
 #' try(stabilize_afternoon("06:00:00Z"))
 specify_time <- function(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -32,6 +33,7 @@ specify_time <- function(
   max_value = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("time", factory_args)
 }
@@ -39,6 +41,7 @@ specify_time <- function(
 #' @export
 #' @rdname specify_time
 specify_time_scalar <- function(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -48,6 +51,7 @@ specify_time_scalar <- function(
   max_value = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("time", factory_args, scalar = TRUE)
 }

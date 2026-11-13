@@ -4,20 +4,26 @@
 \alias{specify_each}
 \title{Create a specified each stabilizer function}
 \usage{
-specify_each(spec)
+specify_each(spec, ..., simplify = TRUE)
 }
 \arguments{
 \item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc.), or a function produced by a \verb{specify_*()} call
 (\code{\link[=specify_chr]{specify_chr()}}, etc.). Applied independently to each element of \code{x}.}
+
+\item{...}{Arguments passed to methods.}
+
+\item{simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
-\code{\link[=stabilize_each]{stabilize_each()}} with the provided \code{spec}. The generated function will
-also accept \code{simplify} and \code{...} to pass to \code{\link[=stabilize_each]{stabilize_each()}}. You can
-copy/paste the body of the resulting function if you want to provide
-additional context or functionality.
+\code{\link[=stabilize_each]{stabilize_each()}} with the provided \code{spec} and \code{simplify}. The generated
+function will also accept \code{...} to pass additional arguments to
+\code{\link[=stabilize_each]{stabilize_each()}}. You can copy/paste the body of the resulting function
+if you want to provide additional context or functionality.
 }
 \description{
 \code{specify_each()} creates a function that will call \code{\link[=stabilize_each]{stabilize_each()}} with
@@ -25,7 +31,7 @@ the provided \code{spec}, letting an element-wise spec be reused and nested insi
 other \verb{specify_*()}/\verb{stabilize_*()} calls.
 }
 \examples{
-stabilize_ints <- specify_each(stabilize_int)
+stabilize_ints <- specify_each(spec = stabilize_int)
 stabilize_ints(list("1", "2", "3"))
 try(stabilize_ints(list("1", "a")))
 }

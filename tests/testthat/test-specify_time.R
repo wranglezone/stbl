@@ -90,3 +90,8 @@ test_that("specify_time_scalar() can set treat_number_as (#387)", {
   strict <- specify_time_scalar(treat_number_as = "error")
   expect_pkg_error_classes(strict(1), "stbl", "coerce", "time")
 })
+
+test_that("specify_time() and specify_time_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_time)
+  expect_dot_errors(specify_time_scalar)
+})

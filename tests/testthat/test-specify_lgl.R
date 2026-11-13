@@ -58,3 +58,8 @@ test_that("specify_lgl() and specify_lgl_scalar() can enforce named (#8)", {
   expect_identical(scalar_checker(TRUE), TRUE)
   expect_pkg_error_classes(scalar_checker(c(a = TRUE)), "stbl", "bad_named")
 })
+
+test_that("specify_lgl() and specify_lgl_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_lgl)
+  expect_dot_errors(specify_lgl_scalar)
+})

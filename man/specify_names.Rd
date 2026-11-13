@@ -5,6 +5,7 @@
 \title{Create a names stabilizer function}
 \usage{
 specify_names(
+  ...,
   allowed_names = NULL,
   spec = NULL,
   required = NULL,
@@ -12,6 +13,8 @@ specify_names(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{allowed_names}{\code{(character)} The permitted names. If supplied, \code{x} must
 be named (every element must have a non-empty name), and every name must be
 in this set. \code{NULL} (default), \code{NA}, or \code{character(0)} skip the check.}
@@ -30,8 +33,8 @@ applying \code{spec}, if any). \code{NULL} (default) or \code{character()} skip 
 duplicate names?}
 }
 \value{
-A function that takes \code{x} (plus \code{x_arg} and \code{call}) and returns \code{x}
-with stabilized names, or throws the errors described in
+A function that takes \code{x} (plus \code{...}, \code{x_arg}, and \code{call}) and
+returns \code{x} with stabilized names, or throws the errors described in
 \code{\link[=stabilize_names]{stabilize_names()}}.
 }
 \description{

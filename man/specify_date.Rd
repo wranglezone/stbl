@@ -6,6 +6,7 @@
 \title{Create a specified date stabilizer function}
 \usage{
 specify_date(
+  ...,
   tz = "UTC",
   treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
@@ -21,6 +22,7 @@ specify_date(
 )
 
 specify_date_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
@@ -34,6 +36,8 @@ specify_date_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{tz}{(\code{character(1)}) The time zone to normalize \code{x} to. Must be a value
 from \code{\link[=OlsonNames]{OlsonNames()}} or \code{""}, which is replaced by the name of your local
 time zone (as reported by \code{\link[=Sys.timezone]{Sys.timezone()}}) so that the result always names
