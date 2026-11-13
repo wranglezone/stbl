@@ -190,13 +190,11 @@ elements are present.
 }
 }
 \description{
-\code{stabilize_lst_positional()} validates a list as a tuple: the \emph{i}th spec in
-\code{...} is applied to the \emph{i}th element of \code{.x}. Elements after the last spec
-are controlled by \code{.additional}. This mirrors JSON Schema's \code{prefixItems}
-(with \code{.additional} playing the role of \code{items}). Failures at every position
-are collected and reported together. \code{stabilise_lst_positional()},
-\code{stabilize_list_positional()}, \code{stabilise_list_positional()},
-\code{stabilize_tuple()}, and \code{stabilise_tuple()} are synonyms.
+Validate a list as a tuple: the \emph{i}th spec in \code{...} is applied to the \emph{i}th
+element of \code{.x}. This mirrors JSON Schema's \code{prefixItems}.
+\code{stabilise_lst_positional()}, \code{stabilize_list_positional()},
+\code{stabilise_list_positional()}, \code{stabilize_tuple()}, and \code{stabilise_tuple()}
+are synonyms.
 }
 \examples{
 # [lon, lat]
