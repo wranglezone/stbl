@@ -126,7 +126,9 @@ stabilize_settings(list(name = "Alice"))
 \seealso{
 Other list functions:
 \code{\link[=assert_present]{assert_present()}},
+\code{\link[=specify_lst_positional]{specify_lst_positional()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
 \code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
@@ -143,6 +145,7 @@ Other specification functions:
 \code{\link[=specify_fct]{specify_fct()}},
 \code{\link[=specify_int]{specify_int()}},
 \code{\link[=specify_lgl]{specify_lgl()}},
+\code{\link[=specify_lst_positional]{specify_lst_positional()}},
 \code{\link[=specify_names]{specify_names()}},
 \code{\link[=specify_one_of]{specify_one_of()}},
 \code{\link[=specify_time]{specify_time()}}

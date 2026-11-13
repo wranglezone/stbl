@@ -47,7 +47,9 @@ stabilize_lst(list(data = mtcars), data = assert_present)
 \seealso{
 Other list functions:
 \code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_lst_positional]{specify_lst_positional()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
 \code{\link[=to]{to()}},
 \code{\link[=to_lst]{to_lst()}}
 
@@ -75,6 +77,7 @@ Other stabilization functions:
 \code{\link[=stabilize_lgl]{stabilize_lgl()}},
 \code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
 \code{\link[=stabilize_names]{stabilize_names()}},
 \code{\link[=stabilize_one_of]{stabilize_one_of()}},
 \code{\link[=stabilize_time]{stabilize_time()}},
