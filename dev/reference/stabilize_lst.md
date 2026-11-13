@@ -22,6 +22,7 @@ stabilize_lst(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -40,6 +41,7 @@ stabilize_list(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -58,6 +60,7 @@ stabilise_lst(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -76,6 +79,7 @@ stabilise_list(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
@@ -172,6 +176,12 @@ stabilise_list(
 
   (`logical(1)`) Should functions be converted?
 
+- .simplify:
+
+  (`logical(1)`) Should per-element results be combined into a single
+  atomic vector when possible (every result has size 1 and shares a
+  common type)? If `FALSE`, a list is always returned.
+
 - .x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -193,9 +203,10 @@ stabilise_list(
 
 ## Value
 
-The validated list, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+The validated list (or an atomic vector when `.simplify = TRUE` and
+simplification is possible), or an error condition with classes
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 
@@ -425,4 +436,14 @@ try(
 )
 #> Error in eval(expr, envir) : 
 #>   `list(a = 1L)` must contain element "b".
+
+# Simplify a list of scalars to an atomic vector
+stabilize_lst(
+  list(lon = 1.5, lat = 2L),
+  lon = specify_dbl_scalar(),
+  lat = specify_int_scalar(),
+  .simplify = TRUE
+)
+#> lon lat 
+#> 1.5 2.0 
 ```

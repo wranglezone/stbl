@@ -19,7 +19,8 @@ specify_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
-  .coerce_function = FALSE
+  .coerce_function = FALSE,
+  .simplify = FALSE
 )
 
 specify_list(
@@ -33,7 +34,8 @@ specify_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
-  .coerce_function = FALSE
+  .coerce_function = FALSE,
+  .simplify = FALSE
 )
 ```
 
@@ -122,6 +124,12 @@ specify_list(
 - .coerce_function:
 
   (`logical(1)`) Should functions be converted?
+
+- .simplify:
+
+  (`logical(1)`) Should per-element results be combined into a single
+  atomic vector when possible (every result has size 1 and shares a
+  common type)? If `FALSE`, a list is always returned.
 
 ## Value
 

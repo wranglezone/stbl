@@ -68,6 +68,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .simplify <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -86,6 +87,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .simplify <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -104,6 +106,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .simplify <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -122,6 +125,7 @@ are synonyms of <code>stabilize_lst()</code>.</p>
 <span>  .max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dots.html" class="external-link">...names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .coerce_function <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .simplify <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
 <span>  .call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
@@ -204,6 +208,12 @@ if absent, no error is raised; if present, they're validated normally. Pass
 <dd><p>(<code>logical(1)</code>) Should functions be converted?</p></dd>
 
 
+<dt id="arg--simplify">.simplify<a class="anchor" aria-label="anchor" href="#arg--simplify"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+
+
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -225,7 +235,8 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The validated list, or an error condition with classes
+    <p>The validated list (or an atomic vector when <code>.simplify = TRUE</code> and
+simplification is possible), or an error condition with classes
 <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be converted to a list.</p></li>
@@ -440,6 +451,16 @@ unnamed.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `list(a = 1L)` must contain element <span style="color: #0000BB;">"b"</span>.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Simplify a list of scalars to an atomic vector</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lon <span class="op">=</span> <span class="fl">1.5</span>, lat <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  lon <span class="op">=</span> <span class="fu"><a href="specify_dbl.html">specify_dbl_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  lat <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .simplify <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lon lat </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.5 2.0 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

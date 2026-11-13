@@ -25,6 +25,12 @@
 
 ### New features
 
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  and
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
+  (and their synonyms) gain a `.simplify` argument (default `FALSE`) to
+  combine a list of scalars with a common type into an atomic vector
+  ([\#407](https://github.com/wranglezone/stbl/issues/407)).
 - New
   [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
   (and its synonym
