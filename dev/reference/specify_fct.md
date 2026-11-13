@@ -13,6 +13,7 @@ with the provided arguments. `specify_factor()` is a synonym of
 
 ``` r
 specify_fct(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -24,6 +25,7 @@ specify_fct(
 )
 
 specify_fct_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -34,6 +36,7 @@ specify_fct_scalar(
 )
 
 specify_factor(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -45,6 +48,7 @@ specify_factor(
 )
 
 specify_factor_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -56,6 +60,10 @@ specify_factor_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 

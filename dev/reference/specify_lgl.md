@@ -13,6 +13,7 @@ with the provided arguments. `specify_logical()` is a synonym of
 
 ``` r
 specify_lgl(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -22,6 +23,7 @@ specify_lgl(
 )
 
 specify_lgl_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -30,6 +32,7 @@ specify_lgl_scalar(
 )
 
 specify_logical(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -39,6 +42,7 @@ specify_logical(
 )
 
 specify_logical_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -48,6 +52,10 @@ specify_logical_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 

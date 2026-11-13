@@ -49,7 +49,7 @@ other <code>specify_*()</code>/<code>stabilize_*()</code> calls.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_each</span><span class="op">(</span><span class="va">spec</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_each</span><span class="op">(</span><span class="va">spec</span>, <span class="va">...</span>, simplify <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -62,14 +62,24 @@ a <code>to_*</code> function (<code><a href="to_chr.html">to_chr()</a></code>, e
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc.), or a function produced by a <code>specify_*()</code> call
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc.). Applied independently to each element of <code>x</code>.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Arguments passed to methods.</p></dd>
+
+
+<dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
+<dd><p>(<code>logical(1)</code>) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If <code>FALSE</code>, a list is always returned.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A function of class <code>"stbl_specified_fn"</code> that calls
-<code><a href="stabilize_each.html">stabilize_each()</a></code> with the provided <code>spec</code>. The generated function will
-also accept <code>simplify</code> and <code>...</code> to pass to <code><a href="stabilize_each.html">stabilize_each()</a></code>. You can
-copy/paste the body of the resulting function if you want to provide
-additional context or functionality.</p>
+<code><a href="stabilize_each.html">stabilize_each()</a></code> with the provided <code>spec</code> and <code>simplify</code>. The generated
+function will also accept <code>...</code> to pass additional arguments to
+<code><a href="stabilize_each.html">stabilize_each()</a></code>. You can copy/paste the body of the resulting function
+if you want to provide additional context or functionality.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -93,7 +103,7 @@ additional context or functionality.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stabilize_ints</span> <span class="op">&lt;-</span> <span class="fu">specify_each</span><span class="op">(</span><span class="va">stabilize_int</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stabilize_ints</span> <span class="op">&lt;-</span> <span class="fu">specify_each</span><span class="op">(</span>spec <span class="op">=</span> <span class="va">stabilize_int</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_ints</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_ints</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"a"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>

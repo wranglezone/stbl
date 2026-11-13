@@ -11,6 +11,7 @@ with the provided arguments.
 
 ``` r
 specify_time(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -24,6 +25,7 @@ specify_time(
 )
 
 specify_time_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -36,6 +38,10 @@ specify_time_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - treat_number_as:
 

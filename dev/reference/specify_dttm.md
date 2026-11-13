@@ -13,6 +13,7 @@ with the provided arguments. `specify_datetime()` is a synonym of
 
 ``` r
 specify_dttm(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
@@ -28,6 +29,7 @@ specify_dttm(
 )
 
 specify_dttm_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
@@ -41,6 +43,7 @@ specify_dttm_scalar(
 )
 
 specify_datetime(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
@@ -56,6 +59,7 @@ specify_datetime(
 )
 
 specify_datetime_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
@@ -70,6 +74,10 @@ specify_datetime_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - tz:
 

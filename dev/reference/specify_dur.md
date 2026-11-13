@@ -13,6 +13,7 @@ with the provided arguments. `specify_duration()` is a synonym of
 
 ``` r
 specify_dur(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -26,6 +27,7 @@ specify_dur(
 )
 
 specify_dur_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -37,6 +39,7 @@ specify_dur_scalar(
 )
 
 specify_duration(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -50,6 +53,7 @@ specify_duration(
 )
 
 specify_duration_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -62,6 +66,10 @@ specify_duration_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - treat_number_as:
 

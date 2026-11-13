@@ -8,6 +8,7 @@ with pre-configured arguments, so the same name checks can be reused.
 
 ``` r
 specify_names(
+  ...,
   allowed_names = NULL,
   spec = NULL,
   required = NULL,
@@ -16,6 +17,10 @@ specify_names(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allowed_names:
 
@@ -49,8 +54,8 @@ specify_names(
 
 ## Value
 
-A function that takes `x` (plus `x_arg` and `call`) and returns `x` with
-stabilized names, or throws the errors described in
+A function that takes `x` (plus `...`, `x_arg`, and `call`) and returns
+`x` with stabilized names, or throws the errors described in
 [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md).
 
 ## See also

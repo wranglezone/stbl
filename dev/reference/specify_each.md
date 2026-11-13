@@ -8,7 +8,7 @@ nested inside other `specify_*()`/`stabilize_*()` calls.
 ## Usage
 
 ``` r
-specify_each(spec)
+specify_each(spec, ..., simplify = TRUE)
 ```
 
 ## Arguments
@@ -24,12 +24,22 @@ specify_each(spec)
   ([`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),
   etc.). Applied independently to each element of `x`.
 
+- ...:
+
+  Arguments passed to methods.
+
+- simplify:
+
+  (`logical(1)`) Should per-element results be combined into a single
+  atomic vector when possible (every result has size 1 and shares a
+  common type)? If `FALSE`, a list is always returned.
+
 ## Value
 
 A function of class `"stbl_specified_fn"` that calls
 [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
-with the provided `spec`. The generated function will also accept
-`simplify` and `...` to pass to
+with the provided `spec` and `simplify`. The generated function will
+also accept `...` to pass additional arguments to
 [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md).
 You can copy/paste the body of the resulting function if you want to
 provide additional context or functionality.
@@ -56,7 +66,7 @@ Other specification functions:
 ## Examples
 
 ``` r
-stabilize_ints <- specify_each(stabilize_int)
+stabilize_ints <- specify_each(spec = stabilize_int)
 stabilize_ints(list("1", "2", "3"))
 #> [1] 1 2 3
 try(stabilize_ints(list("1", "a")))

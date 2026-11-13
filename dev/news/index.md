@@ -4,6 +4,12 @@
 
 ### Breaking changes
 
+- `specify_<vector>()` (and their scalar variants and synonyms),
+  [`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md),
+  and
+  [`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md)
+  (other than the `spec` argument) now require named arguments
+  ([\#402](https://github.com/wranglezone/stbl/issues/402)).
 - [`to_chr()`](https://stbl.wrangle.zone/dev/reference/to_chr.md),
   [`to_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/to_chr_scalar.md),
   [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),

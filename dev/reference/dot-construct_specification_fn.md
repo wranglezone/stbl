@@ -11,6 +11,7 @@ Construct a specified stabilizer function
   factory_args,
   ...,
   prep_exprs = list(),
+  include_x_class = TRUE,
   call = rlang::caller_env()
 )
 ```
@@ -40,6 +41,11 @@ Construct a specified stabilizer function
 
   `(list)` Expressions to run in the generated function before calling
   the stabilizer.
+
+- include_x_class:
+
+  `(logical(1))` Whether the generated function should accept `x_class`
+  and pass it to the stabilizer.
 
 - call:
 

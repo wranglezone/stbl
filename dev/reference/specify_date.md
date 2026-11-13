@@ -11,6 +11,7 @@ with the provided arguments.
 
 ``` r
 specify_date(
+  ...,
   tz = "UTC",
   treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = TRUE,
@@ -26,6 +27,7 @@ specify_date(
 )
 
 specify_date_scalar(
+  ...,
   tz = "UTC",
   treat_number_as = c("days", "seconds", "milliseconds", "error"),
   allow_null = FALSE,
@@ -40,6 +42,10 @@ specify_date_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - tz:
 

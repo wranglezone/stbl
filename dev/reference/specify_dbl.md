@@ -13,6 +13,7 @@ with the provided arguments. `specify_double()` is a synonym of
 
 ``` r
 specify_dbl(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -30,6 +31,7 @@ specify_dbl(
 )
 
 specify_dbl_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -45,6 +47,7 @@ specify_dbl_scalar(
 )
 
 specify_double(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -62,6 +65,7 @@ specify_double(
 )
 
 specify_double_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -78,6 +82,10 @@ specify_double_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 

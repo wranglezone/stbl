@@ -49,6 +49,7 @@
 <span>  <span class="va">factory_args</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  prep_exprs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  include_x_class <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,6 +78,11 @@ that checks for duplicate arguments.</p></dd>
 <dt id="arg-prep-exprs">prep_exprs<a class="anchor" aria-label="anchor" href="#arg-prep-exprs"></a></dt>
 <dd><p><code>(list)</code> Expressions to run in the generated function
 before calling the stabilizer.</p></dd>
+
+
+<dt id="arg-include-x-class">include_x_class<a class="anchor" aria-label="anchor" href="#arg-include-x-class"></a></dt>
+<dd><p><code>(logical(1))</code> Whether the generated function should
+accept <code>x_class</code> and pass it to the stabilizer.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>

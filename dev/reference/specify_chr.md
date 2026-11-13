@@ -13,6 +13,7 @@ with the provided arguments. `specify_character()` is a synonym of
 
 ``` r
 specify_chr(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -27,6 +28,7 @@ specify_chr(
 )
 
 specify_chr_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -39,6 +41,7 @@ specify_chr_scalar(
 )
 
 specify_character(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -53,6 +56,7 @@ specify_character(
 )
 
 specify_character_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -66,6 +70,10 @@ specify_character_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 

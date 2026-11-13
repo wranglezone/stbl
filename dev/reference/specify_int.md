@@ -13,6 +13,7 @@ with the provided arguments. `specify_integer()` is a synonym of
 
 ``` r
 specify_int(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -30,6 +31,7 @@ specify_int(
 )
 
 specify_int_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -45,6 +47,7 @@ specify_int_scalar(
 )
 
 specify_integer(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -62,6 +65,7 @@ specify_integer(
 )
 
 specify_integer_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -78,6 +82,10 @@ specify_integer_scalar(
 ```
 
 ## Arguments
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 
