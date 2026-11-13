@@ -8,6 +8,7 @@
 ## New features
 
 * `stabilize_lst()` and `specify_lst()` (and their synonyms) gain a `.simplify` argument (default `FALSE`) to combine a list of scalars with a common type into an atomic vector (#407).
+* New `stabilize_lst_positional()` (and its synonyms `stabilise_lst_positional()`, `stabilize_list_positional()`, `stabilise_list_positional()`, `stabilize_tuple()`, and `stabilise_tuple()`) and `specify_lst_positional()` (with synonyms `specify_list_positional()` and `specify_tuple()`) validate a list positionally, applying a different spec to each element, like JSON Schema tuple arrays (#284).
 * New `stabilize_names()` (and its synonym `stabilise_names()`) and `specify_names()` validate and optionally convert only the names of an object, leaving its class and values alone (#26).
 
 ## Bug fixes

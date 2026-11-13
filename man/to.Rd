@@ -301,7 +301,9 @@ Other function functions:
 Other list functions:
 \code{\link[=assert_present]{assert_present()}},
 \code{\link[=specify_lst]{specify_lst()}},
+\code{\link[=specify_lst_positional]{specify_lst_positional()}},
 \code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
 \code{\link[=to_lst]{to_lst()}}
 
 Other data frame functions:
