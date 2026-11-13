@@ -16,7 +16,8 @@ specify_lst(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
-  .coerce_function = FALSE
+  .coerce_function = FALSE,
+  .simplify = FALSE
 )
 
 specify_list(
@@ -30,7 +31,8 @@ specify_list(
   .min_size = NULL,
   .max_size = NULL,
   .required = ...names(),
-  .coerce_function = FALSE
+  .coerce_function = FALSE,
+  .simplify = FALSE
 )
 }
 \arguments{
@@ -83,6 +85,10 @@ if absent, no error is raised; if present, they're validated normally. Pass
 \code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
 
 \item{.coerce_function}{(\code{logical(1)}) Should functions be converted?}
+
+\item{.simplify}{(\code{logical(1)}) Should per-element results be combined into a
+single atomic vector when possible (every result has size 1 and shares a
+common type)? If \code{FALSE}, a list is always returned.}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls

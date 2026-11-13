@@ -34,7 +34,8 @@
 #'   `.x` (such as `list()`) skips this check when `.allow_zero_length = TRUE`.
 #' @inheritParams .shared-params
 #'
-#' @returns The validated list, or an error condition with classes
+#' @returns The validated list (or an atomic vector when `.simplify = TRUE` and
+#'   simplification is possible), or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
@@ -109,6 +110,14 @@
 #' try(
 #'   stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
 #' )
+#'
+#' # Simplify a list of scalars to an atomic vector
+#' stabilize_lst(
+#'   list(lon = 1.5, lat = 2L),
+#'   lon = specify_dbl_scalar(),
+#'   lat = specify_int_scalar(),
+#'   .simplify = TRUE
+#' )
 stabilize_lst <- function(
   .x,
   ...,
@@ -122,12 +131,14 @@ stabilize_lst <- function(
   .max_size = NULL,
   .required = ...names(),
   .coerce_function = FALSE,
+  .simplify = FALSE,
   .x_arg = caller_arg(.x),
   .call = caller_env(),
   .x_class = object_type(.x)
 ) {
   force(.x_arg)
   force(.call)
+  .simplify <- to_lgl_scalar(.simplify, x_arg = ".simplify", call = .call)
   if (is.null(.x)) {
     return(.to_null(
       .x,
@@ -180,7 +191,7 @@ stabilize_lst <- function(
     call = .call
   )
 
-  return(.x)
+  .simplify_each(.x, simplify = .simplify)
 }
 
 #' @export
