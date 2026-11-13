@@ -8,6 +8,7 @@
 \title{Create a specified logical stabilizer function}
 \usage{
 specify_lgl(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -17,6 +18,7 @@ specify_lgl(
 )
 
 specify_lgl_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -25,6 +27,7 @@ specify_lgl_scalar(
 )
 
 specify_logical(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -34,6 +37,7 @@ specify_logical(
 )
 
 specify_logical_scalar(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -42,6 +46,8 @@ specify_logical_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}

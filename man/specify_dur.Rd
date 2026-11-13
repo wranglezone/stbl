@@ -8,6 +8,7 @@
 \title{Create a specified duration stabilizer function}
 \usage{
 specify_dur(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -21,6 +22,7 @@ specify_dur(
 )
 
 specify_dur_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -32,6 +34,7 @@ specify_dur_scalar(
 )
 
 specify_duration(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
@@ -45,6 +48,7 @@ specify_duration(
 )
 
 specify_duration_scalar(
+  ...,
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
   allow_zero_length = FALSE,
@@ -56,6 +60,8 @@ specify_duration_scalar(
 )
 }
 \arguments{
+\item{...}{Arguments passed to methods.}
+
 \item{treat_number_as}{(\code{character(1)}) How to interpret numeric input:
 \code{"seconds"} or \code{"milliseconds"} as a length of time, \code{"days"} as a number
 of days, or \code{"error"} to reject numbers. Ignored for non-numeric input.}

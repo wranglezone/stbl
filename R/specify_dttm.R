@@ -22,6 +22,7 @@
 #' stabilize_recent("2024-01-01T00:00:00Z")
 #' try(stabilize_recent("1999-12-31T00:00:00Z"))
 specify_dttm <- function(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
@@ -35,6 +36,7 @@ specify_dttm <- function(
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats()
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("dttm", factory_args)
 }
@@ -42,6 +44,7 @@ specify_dttm <- function(
 #' @export
 #' @rdname specify_dttm
 specify_dttm_scalar <- function(
+  ...,
   tz = "UTC",
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = FALSE,
@@ -53,6 +56,7 @@ specify_dttm_scalar <- function(
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats()
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("datetime", factory_args, scalar = TRUE)
 }

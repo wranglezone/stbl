@@ -7,6 +7,8 @@
 #'   stabilizer.
 #' @param prep_exprs `(list)` Expressions to run in the generated function
 #'   before calling the stabilizer.
+#' @param include_x_class `(logical(1))` Whether the generated function should
+#'   accept `x_class` and pass it to the stabilizer.
 #' @param call `(environment)` The environment to use as the parent of the
 #'   generated function. Defaults to the caller's environment.
 #' @returns A function of class `"stbl_specified_fn"` that calls the specified
@@ -20,6 +22,7 @@
   factory_args = list(),
   scalar = FALSE,
   prep_exprs = list(),
+  include_x_class = TRUE,
   call = rlang::caller_env()
 ) {
   check_dupes <- .maybe_check_dupes(factory_args)
@@ -29,6 +32,7 @@
     stabilizer = stabilizer,
     factory_args = factory_args,
     prep_exprs = prep_exprs,
+    include_x_class = include_x_class,
     call = call
   )
 }
@@ -89,6 +93,7 @@
   factory_args,
   ...,
   prep_exprs = list(),
+  include_x_class = TRUE,
   call = rlang::caller_env()
 ) {
   # Function created with the help of factory::build_factory(). See
@@ -102,28 +107,34 @@
   # expression by coverage instrumentation (covr wraps statements inside
   # rlang::expr() blocks at the source level, causing them to appear in the
   # printed function body and destabilise snapshots).
-  fn_body <- .strip_covr_from_expr(rlang::expr({
-    # nocov start
-    !!!check_dupes
-    !!!prep_exprs
+  stabilizer_call <- rlang::expr(
     stbl::`!!`(stabilizer)(
       x,
       !!!factory_args,
       ...,
       x_arg = x_arg,
-      call = call,
-      x_class = x_class
+      call = call
     )
+  )
+  fn_formals <- alist(
+    x = ,
+    ... = ,
+    x_arg = rlang::caller_arg(x),
+    call = rlang::caller_env()
+  )
+  if (include_x_class) {
+    stabilizer_call$x_class <- quote(x_class)
+    fn_formals$x_class <- quote(stbl::object_type(x))
+  }
+  fn_body <- .strip_covr_from_expr(rlang::expr({
+    # nocov start
+    !!!check_dupes
+    !!!prep_exprs
+    !!stabilizer_call
   })) # nocov end
   structure(
     rlang::new_function(
-      as.pairlist(alist(
-        x = ,
-        ... = ,
-        x_arg = rlang::caller_arg(x),
-        call = rlang::caller_env(),
-        x_class = stbl::object_type(x)
-      )),
+      as.pairlist(fn_formals),
       fn_body,
       env = call
     ),
@@ -161,7 +172,7 @@
   env <- parent.frame()
   fn <- sys.function(sys.parent())
   factory_args <- list()
-  for (arg in names(formals(fn))) {
+  for (arg in setdiff(names(formals(fn)), "...")) {
     if (!eval(call("missing", as.name(arg)), envir = env)) {
       factory_args[[arg]] <- get(arg, envir = env)
     }

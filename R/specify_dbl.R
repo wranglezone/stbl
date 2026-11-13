@@ -22,6 +22,7 @@
 #' stabilize_3_to_5(c(3.3, 4.4, 5))
 #' try(stabilize_3_to_5(c(1:6)))
 specify_dbl <- function(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   coerce_character = TRUE,
@@ -37,6 +38,7 @@ specify_dbl <- function(
   allowed_values = NULL,
   multiple_of = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("dbl", factory_args)
 }
@@ -44,6 +46,7 @@ specify_dbl <- function(
 #' @export
 #' @rdname specify_dbl
 specify_dbl_scalar <- function(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -57,6 +60,7 @@ specify_dbl_scalar <- function(
   allowed_values = NULL,
   multiple_of = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("dbl", factory_args, scalar = TRUE)
 }

@@ -129,3 +129,8 @@ test_that("specify_dttm_scalar() can set treat_number_as (#372)", {
   strict <- specify_dttm_scalar(treat_number_as = "error")
   expect_pkg_error_classes(strict(1), "stbl", "coerce", "datetime")
 })
+
+test_that("specify_dttm() and specify_dttm_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_dttm)
+  expect_dot_errors(specify_dttm_scalar)
+})

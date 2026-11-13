@@ -10,6 +10,7 @@
   factory_args,
   ...,
   prep_exprs = list(),
+  include_x_class = TRUE,
   call = rlang::caller_env()
 )
 }
@@ -25,6 +26,9 @@ that checks for duplicate arguments.}
 
 \item{prep_exprs}{\code{(list)} Expressions to run in the generated function
 before calling the stabilizer.}
+
+\item{include_x_class}{\code{(logical(1))} Whether the generated function should
+accept \code{x_class} and pass it to the stabilizer.}
 
 \item{call}{\code{(environment)} The environment to use as the parent of the
 generated function. Defaults to the caller's environment.}

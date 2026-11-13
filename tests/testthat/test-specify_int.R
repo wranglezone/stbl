@@ -68,3 +68,8 @@ test_that("specify_int can enforce multiple_of (#283)", {
   expect_identical(checker(4L), 4L)
   expect_pkg_error_classes(checker(5L), "stbl", "not_multiple")
 })
+
+test_that("specify_int() and specify_int_scalar() error for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_int)
+  expect_dot_errors(specify_int_scalar)
+})

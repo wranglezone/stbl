@@ -21,6 +21,7 @@
 #' stabilize_few_lgl(c(TRUE, "False", TRUE))
 #' try(stabilize_few_lgl(rep(TRUE, 10)))
 specify_lgl <- function(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -28,6 +29,7 @@ specify_lgl <- function(
   max_size = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("lgl", factory_args)
 }
@@ -35,12 +37,14 @@ specify_lgl <- function(
 #' @export
 #' @rdname specify_lgl
 specify_lgl_scalar <- function(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
   named = NULL,
   allowed_values = NULL
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("lgl", factory_args, scalar = TRUE)
 }

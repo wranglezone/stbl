@@ -2,6 +2,7 @@
 
 ## Breaking changes
 
+* `specify_<vector>()` (and their scalar variants and synonyms), `specify_names()`, and `specify_each()` (other than the `spec` argument) now require named arguments (#402).
 * `to_chr()`, `to_chr_scalar()`, `stabilize_chr()`, `stabilize_chr_scalar()`, `specify_chr()`, and `specify_chr_scalar()` (and their synonyms, and so `to()` with a character target) gain a `coerce_function` argument, defaulting to `FALSE`. Use `coerce_function = TRUE` to restore the previous behavior (#393).
 
 ## New features

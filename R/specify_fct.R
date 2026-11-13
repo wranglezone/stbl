@@ -23,6 +23,7 @@
 #' stabilize_lowercase_letter(c("s", "t", "b", "l"))
 #' try(stabilize_lowercase_letter("A"))
 specify_fct <- function(
+  ...,
   allow_null = TRUE,
   allow_na = TRUE,
   named = NULL,
@@ -32,6 +33,7 @@ specify_fct <- function(
   ordered = FALSE,
   to_na = character()
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("fct", factory_args)
 }
@@ -39,6 +41,7 @@ specify_fct <- function(
 #' @export
 #' @rdname specify_fct
 specify_fct_scalar <- function(
+  ...,
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
@@ -47,6 +50,7 @@ specify_fct_scalar <- function(
   ordered = FALSE,
   to_na = character()
 ) {
+  check_dots_empty0(...)
   factory_args <- .capture_factory_args()
   .specify_cls("fct", factory_args, scalar = TRUE)
 }

@@ -34,3 +34,19 @@ test_that("specify_names() specifiers report x_arg in errors (#26)", {
   my_x <- c(a = 1, a = 2)
   expect_pkg_error_snapshot(specify_names()(my_x), "stbl", "duplicate_names")
 })
+
+test_that("specify_names() errors for unnamed or unknown arguments (#402)", {
+  expect_dot_errors(specify_names)
+})
+
+test_that("specify_names() specifiers accept extra stabilize_names() args (#402)", {
+  expect_pkg_error_classes(
+    specify_names(required = "z")(c(a = 1), required = "a"),
+    "stbl",
+    "duplicate_args"
+  )
+  expect_identical(
+    specify_names(required = "a")(c(a = 1), allowed_names = "a"),
+    c(a = 1)
+  )
+})
