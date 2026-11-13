@@ -47,11 +47,13 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_lst_failures.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_match_count.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_multiple_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_n_required.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_na.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_named_presence.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_names_spec.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_not_jagged.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_positional_shape.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_required_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-check_size.html</loc></url>
@@ -156,6 +158,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_any_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_each.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_one_of.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_cant_stabilize_positional.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_function.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_if_anon_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-stop_incompatible.html</loc></url>
@@ -181,6 +184,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-try_fns.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_extra_named_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_named_elements.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_positional_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_required_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-validate_unnamed_elements.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/expect_pkg_error_classes.html</loc></url>
@@ -215,6 +219,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_int.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/specify_lst_positional.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/specify_time.html</loc></url>
@@ -240,6 +245,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_one_of.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/stabilize_present.html</loc></url>

@@ -151,5 +151,7 @@ This function has important distinctions from
 Other list functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md)

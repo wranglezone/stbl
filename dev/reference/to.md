@@ -328,7 +328,9 @@ Other function functions:
 Other list functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
 Other data frame functions:
@@ -384,7 +386,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5f5fb2cece30>
+#> <bytecode: 0x579fd4e0fe30>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

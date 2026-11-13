@@ -145,7 +145,9 @@ provide additional context or functionality.
 
 Other list functions:
 [`assert_present()`](https://stbl.wrangle.zone/dev/reference/assert_present.md),
+[`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
@@ -162,6 +164,7 @@ Other specification functions:
 [`specify_fct()`](https://stbl.wrangle.zone/dev/reference/specify_fct.md),
 [`specify_int()`](https://stbl.wrangle.zone/dev/reference/specify_int.md),
 [`specify_lgl()`](https://stbl.wrangle.zone/dev/reference/specify_lgl.md),
+[`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md),
 [`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md),
 [`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
 [`specify_time()`](https://stbl.wrangle.zone/dev/reference/specify_time.md)

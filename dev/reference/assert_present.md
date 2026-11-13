@@ -51,7 +51,9 @@ The value, unchanged.
 
 Other list functions:
 [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+[`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
 [`to()`](https://stbl.wrangle.zone/dev/reference/to.md),
 [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
 
@@ -79,6 +81,7 @@ Other stabilization functions:
 [`stabilize_lgl()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl.md),
 [`stabilize_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_lgl_scalar.md),
 [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+[`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
 [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md),
 [`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
 [`stabilize_time()`](https://stbl.wrangle.zone/dev/reference/stabilize_time.md),

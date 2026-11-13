@@ -32,6 +32,24 @@
   combine a list of scalars with a common type into an atomic vector
   ([\#407](https://github.com/wranglezone/stbl/issues/407)).
 - New
+  [`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  (and its synonyms
+  [`stabilise_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
+  [`stabilize_list_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
+  [`stabilise_list_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
+  [`stabilize_tuple()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md),
+  and
+  [`stabilise_tuple()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md))
+  and
+  [`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md)
+  (with synonyms
+  [`specify_list_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md)
+  and
+  [`specify_tuple()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md))
+  validate a list positionally, applying a different spec to each
+  element, like JSON Schema tuple arrays
+  ([\#284](https://github.com/wranglezone/stbl/issues/284)).
+- New
   [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
   (and its synonym
   [`stabilise_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md))

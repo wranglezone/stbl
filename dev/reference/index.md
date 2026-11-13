@@ -190,11 +190,22 @@
 - [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
   [`specify_list()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
   : Create a specified list stabilizer function
+- [`specify_lst_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md)
+  [`specify_list_positional()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md)
+  [`specify_tuple()`](https://stbl.wrangle.zone/dev/reference/specify_lst_positional.md)
+  : Create a specified positional list stabilizer function
 - [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   [`stabilize_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   [`stabilise_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   [`stabilise_list()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   : Ensure a list meets expectations
+- [`stabilize_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  [`stabilise_lst_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  [`stabilize_list_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  [`stabilise_list_positional()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  [`stabilize_tuple()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  [`stabilise_tuple()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst_positional.md)
+  : Ensure a list meets positional (tuple) expectations
 - [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md)
   [`to_list()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) :
   Ensure a list meets expectations
