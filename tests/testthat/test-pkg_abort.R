@@ -178,10 +178,12 @@ test_that(".strip_covr_from_expr() removes covr counter wrappers (#253)", {
   # covr >= 4.0.0 counters
   expect_identical(
     .strip_covr_from_expr(
-      quote(if (TRUE) {
-        .Call(covr:::covr_count, "k4")
-        to_fn(NULL)
-      })
+      quote(
+        if (TRUE) {
+          .Call(covr:::covr_count, "k4")
+          to_fn(NULL)
+        }
+      )
     ),
     quote(to_fn(NULL))
   )
