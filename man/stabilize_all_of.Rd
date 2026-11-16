@@ -29,7 +29,7 @@ stabilise_all_of(
 produced by \verb{specify_*()} calls (\code{\link[=specify_chr]{specify_chr()}}, etc.), or \verb{assert_*()}
 functions (such as \code{\link[=assert_not]{assert_not()}}) that return their input unchanged. Each
 is applied to the original \code{x}; \code{x} must pass every one of them, and they
-must all return the same value.}
+must all return equivalent values (see Details).}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -53,15 +53,23 @@ condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlan
 \item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 \item \verb{<stbl-error-cant_stabilize_all_of>} when any provided function fails.
 \item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but
-they don't all produce the same converted value.
+their results are not all equivalent.
 }
 }
 \description{
 \code{stabilize_all_of()} validates and converts \code{x} by applying every function in
 \code{...} to \code{x}, independently. \code{x} must satisfy every spec, and all specs must
-agree on the converted result; if any spec fails, or specs disagree on the
-converted value, an informative error is thrown. \code{stabilise_all_of()} is a
-synonym.
+agree on the converted result; if any spec fails, or specs produce results
+that aren't equivalent, an informative error is thrown. \code{stabilise_all_of()}
+is a synonym.
+}
+\details{
+The results of the specs are combined with \code{\link[=reconcile]{reconcile()}}, so they don't need
+to have the same type, as long as they are equivalent. For example, \code{1L} and
+\code{1} are equivalent, so \code{stabilize_all_of(1L, stabilize_int, stabilize_dbl)}
+succeeds. The result is the narrowest representation of the results (here,
+\code{1L}), and doesn't depend on the order of the specs. See \code{\link[=reconcile]{reconcile()}} for
+the rules of equivalence and for how types are ranked.
 }
 \examples{
 # Returns x unchanged when all functions succeed
@@ -77,11 +85,22 @@ try(stabilize_all_of("a", stabilize_int, stabilize_chr))
 # spec would succeed on 1L, but doesn't get the chance to see it
 try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 
-# Errors when specs succeed but disagree on the converted value
-# (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
-try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
+# Specs can return equivalent values of different types; the narrowest wins
+stabilize_all_of(1L, stabilize_int, stabilize_dbl)
+
+# Errors when specs succeed but their results are not equivalent (both
+# return the same labels, but in a different order of levels)
+try(
+  stabilize_all_of(
+    c("a", "b"),
+    stabilize_fct,
+    specify_fct(levels = c("b", "a"))
+  )
+)
 }
 \seealso{
+\code{\link[=reconcile]{reconcile()}}
+
 Other stabilization functions:
 \code{\link[=assert_contains]{assert_contains()}},
 \code{\link[=assert_not]{assert_not()}},

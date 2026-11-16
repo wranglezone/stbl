@@ -78,6 +78,7 @@ try(stabilize_each(list("1", "a", "b"), stabilize_int))
 }
 \seealso{
 Other multiple type functions:
+\code{\link[=reconcile]{reconcile()}},
 \code{\link[=to_each]{to_each()}}
 }
 \concept{multiple type functions}

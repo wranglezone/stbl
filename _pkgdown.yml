@@ -63,6 +63,7 @@ reference:
 - contents:
   - assert_contains
   - assert_not
+  - reconcile
   - specify_all_of
   - specify_any_of
   - specify_each

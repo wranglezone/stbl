@@ -57,6 +57,7 @@ try(to_each(list("1", "a"), to_int))
 }
 \seealso{
 Other multiple type functions:
+\code{\link[=reconcile]{reconcile()}},
 \code{\link[=stabilize_each]{stabilize_each()}}
 }
 \concept{multiple type functions}

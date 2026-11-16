@@ -34,14 +34,14 @@
       ! `"1"` must match all of the provided stabilizers.
       x Can't convert `"1"` <character> to <double>.
 
-# stabilize_all_of() errors when specs succeed but disagree on the converted value (#278, #377)
+# stabilize_all_of() errors when specs succeed but their results are not equivalent (#278, #377, #408)
 
     Code
-      stabilize_all_of(1L, stabilize_int, specify_dbl())
+      stabilize_all_of(c("a", "b"), stabilize_fct, specify_fct(levels = c("b", "a")))
     Condition <stbl-error-inconsistent_all_of>
       Error:
-      ! `1L` must be converted the same way by every provided stabilizer.
-      i The provided stabilizers succeeded, but disagreed on the converted value.
+      ! `c("a", "b")` must be converted equivalently by every provided stabilizer.
+      i The provided stabilizers succeeded, but their results are not equivalent.
 
 # stabilize_all_of() includes Locations from incompatible_values errors (#278, #377)
 
