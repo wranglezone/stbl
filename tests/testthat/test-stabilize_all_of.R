@@ -70,11 +70,44 @@ test_that("stabilize_all_of() applies every spec to the original x, not to previ
   )
 })
 
-test_that("stabilize_all_of() errors when specs succeed but disagree on the converted value (#278, #377)", {
-  # stabilize_int(1L) -> 1L, but specify_dbl() -> 1 (double); both succeed but
-  # disagree on the resulting type
+test_that("stabilize_all_of() accepts equivalent results of different types (#408)", {
+  expect_identical(stabilize_all_of(1L, stabilize_int, stabilize_dbl), 1L)
+  expect_identical(stabilize_all_of(1L, stabilize_dbl, stabilize_int), 1L)
+  expect_identical(
+    stabilize_all_of(as.double(1:10), stabilize_int, stabilize_dbl),
+    1:10
+  )
+  expect_identical(stabilize_all_of("1", stabilize_int, stabilize_chr), 1L)
+})
+
+test_that("stabilize_all_of() returns the same result regardless of spec order (#408)", {
+  specs <- list(
+    stabilize_int,
+    stabilize_dbl,
+    stabilize_chr,
+    stabilize_lgl,
+    stabilize_fct,
+    specify_int(min_value = 0)
+  )
+  for (x in list(1L, 1, "1", TRUE)) {
+    for (a in specs) {
+      for (b in specs) {
+        forward <- tryCatch(stabilize_all_of(x, a, b), error = \(cnd) "error")
+        backward <- tryCatch(stabilize_all_of(x, b, a), error = \(cnd) "error")
+        expect_identical(forward, backward)
+      }
+    }
+  }
+})
+
+test_that("stabilize_all_of() errors when specs succeed but their results are not equivalent (#278, #377, #408)", {
+  # Same labels, different level order
   expect_pkg_error_snapshot(
-    stabilize_all_of(1L, stabilize_int, specify_dbl()),
+    stabilize_all_of(
+      c("a", "b"),
+      stabilize_fct,
+      specify_fct(levels = c("b", "a"))
+    ),
     "stbl",
     "inconsistent_all_of"
   )

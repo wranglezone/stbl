@@ -55,3 +55,5 @@ wrapped_to_one_of <- wrap(to_one_of)
 wrapped_stabilize_each <- wrap(stabilize_each)
 wrapped_to_each <- wrap(to_each)
 wrapped_assert_contains <- wrap(assert_contains)
+
+wrapped_reconcile <- wrap(reconcile)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stabilize_all_of.R
 \name{.apply_fns_requiring_consensus}
 \alias{.apply_fns_requiring_consensus}
-\title{Apply every function to x independently, requiring identical results}
+\title{Apply every function to x independently, requiring equivalent results}
 \usage{
 .apply_fns_requiring_consensus(x, fns, x_arg, call)
 }
@@ -20,10 +20,11 @@ unexported functions.}
 source of error messages.}
 }
 \value{
-The common result of applying every function in \code{fns} to \code{x}.
+The narrowest common representation of the results of applying
+every function in \code{fns} to \code{x} (see \code{\link[=reconcile]{reconcile()}}).
 }
 \description{
 Applies each function in \code{fns} to the original \code{x}, independently. Errors if
-any function fails, or if the successful results disagree.
+any function fails, or if the successful results are not equivalent.
 }
 \keyword{internal}
