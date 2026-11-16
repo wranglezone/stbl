@@ -65,6 +65,7 @@ with whatever condition `spec` throws for the first failing element.
 ## See also
 
 Other multiple type functions:
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md),
 [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md)
 
 ## Examples

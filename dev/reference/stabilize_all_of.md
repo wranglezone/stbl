@@ -3,8 +3,8 @@
 `stabilize_all_of()` validates and converts `x` by applying every
 function in `...` to `x`, independently. `x` must satisfy every spec,
 and all specs must agree on the converted result; if any spec fails, or
-specs disagree on the converted value, an informative error is thrown.
-`stabilise_all_of()` is a synonym.
+specs produce results that aren't equivalent, an informative error is
+thrown. `stabilise_all_of()` is a synonym.
 
 ## Usage
 
@@ -43,8 +43,8 @@ stabilise_all_of(
   etc.), or `assert_*()` functions (such as
   [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md))
   that return their input unchanged. Each is applied to the original
-  `x`; `x` must pass every one of them, and they must all return the
-  same value.
+  `x`; `x` must pass every one of them, and they must all return
+  equivalent values (see Details).
 
 - x_arg:
 
@@ -79,9 +79,23 @@ failure mode:
 - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
 
 - `<stbl-error-inconsistent_all_of>` when every function succeeds, but
-  they don't all produce the same converted value.
+  their results are not all equivalent.
+
+## Details
+
+The results of the specs are combined with
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md),
+so they don't need to have the same type, as long as they are
+equivalent. For example, `1L` and `1` are equivalent, so
+`stabilize_all_of(1L, stabilize_int, stabilize_dbl)` succeeds. The
+result is the narrowest representation of the results (here, `1L`), and
+doesn't depend on the order of the specs. See
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)
+for the rules of equivalence and for how types are ranked.
 
 ## See also
+
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)
 
 Other stabilization functions:
 [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md),
@@ -155,10 +169,21 @@ try(stabilize_all_of("1", stabilize_int, specify_dbl(coerce_character = FALSE)))
 #>   `"1"` must match all of the provided stabilizers.
 #> ✖ Can't convert `"1"` <character> to <double>.
 
-# Errors when specs succeed but disagree on the converted value
-# (stabilize_int() keeps 1L an integer; specify_dbl() makes it a double)
-try(stabilize_all_of(1L, stabilize_int, specify_dbl()))
+# Specs can return equivalent values of different types; the narrowest wins
+stabilize_all_of(1L, stabilize_int, stabilize_dbl)
+#> [1] 1
+
+# Errors when specs succeed but their results are not equivalent (both
+# return the same labels, but in a different order of levels)
+try(
+  stabilize_all_of(
+    c("a", "b"),
+    stabilize_fct,
+    specify_fct(levels = c("b", "a"))
+  )
+)
 #> Error in eval(expr, envir) : 
-#>   `1L` must be converted the same way by every provided stabilizer.
-#> ℹ The provided stabilizers succeeded, but disagreed on the converted value.
+#>   `c("a", "b")` must be converted equivalently by every provided
+#> stabilizer.
+#> ℹ The provided stabilizers succeeded, but their results are not equivalent.
 ```

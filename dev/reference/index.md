@@ -301,6 +301,9 @@
   specification
 - [`assert_not()`](https://stbl.wrangle.zone/dev/reference/assert_not.md)
   : Require a value not to match a specification
+- [`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)
+  : Reconcile equivalent values into their narrowest common
+  representation
 - [`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md)
   : Create a specified all-of stabilizer function
 - [`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md)

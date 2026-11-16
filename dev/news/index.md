@@ -35,6 +35,16 @@
 
 ### New features
 
+- New
+  [`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)
+  returns the narrowest common representation of equivalent values, or
+  errors if they are not equivalent
+  ([\#408](https://github.com/wranglezone/stbl/issues/408)).
+- [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
+  now accepts specs whose results are equivalent but differ in type
+  (such as integer and double), and returns the same result regardless
+  of spec order
+  ([\#408](https://github.com/wranglezone/stbl/issues/408)).
 - [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
   [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)

@@ -1,7 +1,8 @@
-# Apply every function to x independently, requiring identical results
+# Apply every function to x independently, requiring equivalent results
 
 Applies each function in `fns` to the original `x`, independently.
-Errors if any function fails, or if the successful results disagree.
+Errors if any function fails, or if the successful results are not
+equivalent.
 
 ## Usage
 
@@ -33,4 +34,6 @@ Errors if any function fails, or if the successful results disagree.
 
 ## Value
 
-The common result of applying every function in `fns` to `x`.
+The narrowest common representation of the results of applying every
+function in `fns` to `x` (see
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)).

@@ -89,6 +89,7 @@ positions that failed.
 ## See also
 
 Other multiple type functions:
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md),
 [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
 
 ## Examples
