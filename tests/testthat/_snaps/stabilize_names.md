@@ -24,3 +24,19 @@
       ! `my_x` must not contain duplicate names.
       x Duplicate name: "a"
 
+# stabilize_names() supports conditional required (#291)
+
+    Code
+      stabilize_names(c(name = 1, card = 2), required = req)
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `c(name = 1, card = 2)` must contain name "address" when "card" is present.
+
+---
+
+    Code
+      stabilize_names(c(card = 2, address = 1), required = req)
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `c(card = 2, address = 1)` must contain name "name".
+

@@ -132,6 +132,9 @@ test_that("expect_pkg_error_classes() tests expressions for classes (#136)", {
 test_that(".is_covr_count_call() identifies covr counter calls (#253)", {
   count_sym <- call(":::", as.symbol("covr"), as.symbol("count"))
   expect_true(.is_covr_count_call(as.call(list(count_sym, "key"))))
+  expect_true(.is_covr_count_call(quote(.Call(covr:::covr_count, "key"))))
+  expect_false(.is_covr_count_call(quote(.Call(other_pkg:::covr_count, "k"))))
+  expect_false(.is_covr_count_call(quote(.Call())))
   expect_false(.is_covr_count_call(quote(some_fn("key"))))
   expect_false(.is_covr_count_call(quote(covr::count("key"))))
   expect_false(.is_covr_count_call(123L))
@@ -171,6 +174,18 @@ test_that(".strip_covr_from_expr() removes covr counter wrappers (#253)", {
     quote({
       to_fn(NULL)
     })
+  )
+  # covr >= 4.0.0 counters
+  expect_identical(
+    .strip_covr_from_expr(
+      quote(
+        if (TRUE) {
+          .Call(covr:::covr_count, "k4")
+          to_fn(NULL)
+        }
+      )
+    ),
+    quote(to_fn(NULL))
   )
   # Non-covr expressions are unchanged
   expect_identical(

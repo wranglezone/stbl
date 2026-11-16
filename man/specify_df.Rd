@@ -8,7 +8,7 @@
 specify_df(
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -19,7 +19,7 @@ specify_df(
 specify_data_frame(
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -37,16 +37,18 @@ is required is controlled by \code{.required}.}
 \item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
 \itemize{
-\item \code{NULL} or \code{FALSE} (default): any extra columns cause an error.
+\item \code{NULL} (default): any extra columns cause an error. Names in \code{.required}
+that have no spec in \code{...} are allowed, unchecked.
+\item \code{FALSE}: any extra columns cause an error, and every name in \code{.required}
+must have a spec in \code{...}.
 \item \code{TRUE}: extra columns are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
 (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra column.
 }}
 
-\item{.col_names}{\code{(character)} A character vector of column names that must
-be present in \code{.x}. Any columns listed here that are absent from \code{.x} will
-cause an error. Unlike \code{...}, this does not validate the column contents.}
+\item{.col_names}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{.required}
+instead.}
 
 \item{.min_rows}{(\code{integer(1)}) The minimum number of rows allowed in \code{.x}.
 If \code{NULL} (default), the row count is not checked.}
@@ -58,12 +60,19 @@ If \code{NULL} (default), the row count is not checked.}
 
 \item{.allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 
-\item{.required}{\code{(character)} Names (from \code{...}) of columns that must be
-present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-\code{NULL} or \code{character()} to make every named spec optional. A \code{.x} with zero
-columns skips this check when \code{.allow_zero_length = TRUE} (the default).}
+\item{.required}{\verb{(character or list)} Names of columns that must be present
+in \code{.x}. Defaults to all names in \code{...}, so every named spec is required
+unless you opt it out. A supplied \code{.required} \emph{replaces} that default, so
+\code{.required = list(card = "address")} makes every other spec optional; list
+the unconditional names explicitly. Specs for names that are not required
+are optional: if absent, no error is raised; if present, they're validated
+normally. Pass \code{NULL} or \code{character()} to make every named spec optional.
+Every name in \code{.required} is enforced, whether or not it has a spec in
+\code{...} (see \code{.extra_cols}). A \code{.x} with zero columns skips this check when
+\code{.allow_zero_length = TRUE} (the default). See \code{required} in
+[stabilize_names)()] for details on expressing conditional requirements.
+
+[stabilize_names)()]: R:stabilize_names)()}
 }
 \value{
 A function of class \code{"stbl_specified_fn"} that calls
@@ -92,6 +101,15 @@ stabilize_person_df2 <- specify_df(
   .required = "name"
 )
 stabilize_person_df2(data.frame(name = "Alice"))
+
+# Require a column only when another is present
+stabilize_person_df3 <- specify_df(
+  name = specify_chr_scalar(allow_na = FALSE),
+  card = specify_int_scalar(),
+  address = specify_chr_scalar(),
+  .required = list("name", card = "address")
+)
+try(stabilize_person_df3(data.frame(name = "Alice", card = 1L)))
 }
 \seealso{
 Other data frame functions:

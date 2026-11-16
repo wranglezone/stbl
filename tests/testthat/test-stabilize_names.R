@@ -110,3 +110,28 @@ test_that("stabilise_names() is a synonym (#26)", {
 test_that("stabilize_names() rejects unused arguments in ... (#26)", {
   expect_error(stabilize_names(c(a = 1), "a"), class = "rlang_error")
 })
+
+test_that("stabilize_names() supports conditional required (#291)", {
+  req <- list("name", card = "address")
+  expect_identical(stabilize_names(c(name = 1), required = req), c(name = 1))
+  expect_pkg_error_snapshot(
+    stabilize_names(c(name = 1, card = 2), required = req),
+    "stbl",
+    "missing_element"
+  )
+  expect_pkg_error_snapshot(
+    stabilize_names(c(card = 2, address = 1), required = req),
+    "stbl",
+    "missing_element"
+  )
+  expect_pkg_error_classes(
+    stabilize_names(c(card = 2), required = c("name", card = "address")),
+    "stbl",
+    "missing_element"
+  )
+  expect_pkg_error_classes(
+    stabilize_names(c(a = 1), required = list(NA_character_)),
+    "stbl",
+    "bad_required"
+  )
+})

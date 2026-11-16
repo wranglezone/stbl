@@ -375,6 +375,7 @@ importFrom(cli,
   qty
 )
 importFrom(glue,glue)
+importFrom(lifecycle,deprecated)
 importFrom(rlang,
   "%||%",
   ":=",

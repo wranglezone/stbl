@@ -39,6 +39,7 @@ test_that("specify_df() passes through .min_rows, .max_rows (#142)", {
 })
 
 test_that("specify_df() passes through .col_names (#142)", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   validator <- specify_df(
     .col_names = c("a", "b"),
     .extra_cols = assert_present

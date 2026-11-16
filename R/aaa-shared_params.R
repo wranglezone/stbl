@@ -97,7 +97,8 @@
 #' @param simplify (`logical(1)`) Should per-element results be combined into a
 #'   single atomic vector when possible (every result has size 1 and shares a
 #'   common type)? If `FALSE`, a list is always returned.
-#' @param required `(character)` Names that must be present in `x`.
+#' @param required `(character or list)` Names that must be present in `x`. A
+#'   list can express conditional requirements (see [stabilize_names()]).
 #' @param spec `(function)` A single stabilizer or conversion function, such as
 #'   a `to_*` function ([to_chr()], etc.), a `stabilize_*` function
 #'   ([stabilize_chr()], etc.), or a function produced by a `specify_*()` call

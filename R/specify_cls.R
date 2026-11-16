@@ -103,10 +103,6 @@
   x <- "x"
   x_arg <- "x_arg"
   x_class <- "x_class"
-  # Strip any covr counter wrappers that may have been injected into the body
-  # expression by coverage instrumentation (covr wraps statements inside
-  # rlang::expr() blocks at the source level, causing them to appear in the
-  # printed function body and destabilise snapshots).
   stabilizer_call <- rlang::expr(
     stbl::`!!`(stabilizer)(
       x,
@@ -126,6 +122,10 @@
     stabilizer_call$x_class <- quote(x_class)
     fn_formals$x_class <- quote(stbl::object_type(x))
   }
+  # Strip any covr counter wrappers that may have been injected into the body
+  # expression by coverage instrumentation (covr wraps statements inside
+  # rlang::expr() blocks at the source level, causing them to appear in the
+  # printed function body and destabilise snapshots).
   fn_body <- .strip_covr_from_expr(rlang::expr({
     # nocov start
     !!!check_dupes

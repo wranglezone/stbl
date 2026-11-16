@@ -291,7 +291,12 @@ test_that(".check_required_names() checks for required names (#26)", {
   given <- c(a = 1, b = 2)
   expect_null(.check_required_names(given))
   expect_null(.check_required_names(given, character()))
-  expect_null(.check_required_names(given, c("a", NA, "a")))
+  expect_null(.check_required_names(given, c("a", "a")))
+  expect_pkg_error_classes(
+    .check_required_names(given, c("a", NA)),
+    "stbl",
+    "bad_required"
+  )
   expect_pkg_error_snapshot(
     .check_required_names(given, c("a", "c")),
     "stbl",

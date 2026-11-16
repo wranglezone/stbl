@@ -43,8 +43,25 @@ a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabiliz
 have a non-empty name), and \code{spec} is applied to \code{names(x)}. The result
 becomes the names of the returned object. \code{NULL} (default) skips the check.}
 
-\item{required}{\code{(character)} Names that must be present in \code{x} (after
-applying \code{spec}, if any). \code{NULL} (default) or \code{character()} skip the check.}
+\item{required}{\verb{(character or list)} Names that must be present in \code{x}
+(after applying \code{spec}, if any). \code{NULL} (default) or \code{character()} skip the
+check.
+
+Use a list (or, for simple dependencies, a character vector) to express
+conditional requirements:
+\itemize{
+\item Unnamed entries are always required. Each may be a character vector.
+\item Named entries are conditional. The name is the trigger, and the value
+lists what is required when the trigger is present. The trigger itself is
+\emph{not} made required; list it as an unnamed entry too if it should be.
+\item The value of a named entry is a non-\code{NA} character vector of dependents,
+or a nested list that is itself a \code{required} specification, applied only
+when the trigger is present. Nesting is scoped: in
+\code{list(a = list(b = "c"))}, \code{"c"} is required only when both \code{"a"} and \code{"b"}
+are present, whereas in \code{list(a = "b", b = "c")}, \code{"c"} is also required
+when \code{"b"} is present on its own.
+\item Duplicate triggers are merged.
+}}
 
 \item{allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
 duplicate names?}
@@ -67,7 +84,9 @@ source of error messages.}
 \item \verb{<stbl-error-allowed_names>} when a name is not in \code{allowed_names}.
 \item \verb{<stbl-error-duplicate_names>} when duplicate names are present and
 \code{allow_duplicate_names = FALSE}.
-\item \verb{<stbl-error-missing_element>} when a name in \code{required} is absent.
+\item \verb{<stbl-error-missing_element>} when a name in \code{required} is absent
+(including conditionally required names whose trigger is present).
+\item \verb{<stbl-error-bad_required>} when \code{required} is invalid.
 \item Errors from \code{spec} when a name does not satisfy it.
 }
 }
@@ -87,6 +106,18 @@ stabilize_names(c(a = 1, a = 2), allow_duplicate_names = TRUE)
 
 # Require specific names
 try(stabilize_names(c(a = 1, b = 2), required = c("a", "c")))
+
+# Require names conditionally
+stabilize_names(
+  c(name = "Alice"),
+  required = list("name", credit_card = "billing_address")
+)
+try(
+  stabilize_names(
+    c(name = "Alice", credit_card = "1234"),
+    required = list("name", credit_card = "billing_address")
+  )
+)
 
 # Restrict names to an allowed set
 try(stabilize_names(c(a = 1, z = 2), allowed_names = c("a", "b")))

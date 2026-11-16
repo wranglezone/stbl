@@ -6,6 +6,7 @@
 #' @importFrom cli no
 #' @importFrom cli qty
 #' @importFrom glue glue
+#' @importFrom lifecycle deprecated
 #' @importFrom rlang %||%
 #' @importFrom rlang :=
 #' @importFrom rlang check_dots_empty0

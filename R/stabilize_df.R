@@ -14,24 +14,31 @@
 #'   is required is controlled by `.required`.
 #' @param .extra_cols Controls how columns of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
-#'   - `NULL` or `FALSE` (default): any extra columns cause an error.
+#'   - `NULL` (default): any extra columns cause an error. Names in `.required`
+#'   that have no spec in `...` are allowed, unchecked.
+#'   - `FALSE`: any extra columns cause an error, and every name in `.required`
+#'   must have a spec in `...`.
 #'   - `TRUE`: extra columns are allowed, unchecked.
 #'   - A single stabilizer function, such as a `stabilize_*` function
 #'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
 #'   ([specify_chr()], etc), used to validate every extra column.
-#' @param .col_names `(character)` A character vector of column names that must
-#'   be present in `.x`. Any columns listed here that are absent from `.x` will
-#'   cause an error. Unlike `...`, this does not validate the column contents.
+#' @param .col_names `r lifecycle::badge("deprecated")` Use `.required`
+#'   instead.
 #' @param .min_rows (`integer(1)`) The minimum number of rows allowed in `.x`.
 #'   If `NULL` (default), the row count is not checked.
 #' @param .max_rows (`integer(1)`) The maximum number of rows allowed in `.x`.
 #'   If `NULL` (default), the row count is not checked.
-#' @param .required `(character)` Names (from `...`) of columns that must be
-#'   present in `.x`. Defaults to all names in `...`, so every named spec is
-#'   required unless you opt it out. Named specs *not* listed here are optional:
-#'   if absent, no error is raised; if present, they're validated normally. Pass
-#'   `NULL` or `character()` to make every named spec optional. A `.x` with zero
-#'   columns skips this check when `.allow_zero_length = TRUE` (the default).
+#' @param .required `(character or list)` Names of columns that must be present
+#'   in `.x`. Defaults to all names in `...`, so every named spec is required
+#'   unless you opt it out. A supplied `.required` *replaces* that default, so
+#'   `.required = list(card = "address")` makes every other spec optional; list
+#'   the unconditional names explicitly. Specs for names that are not required
+#'   are optional: if absent, no error is raised; if present, they're validated
+#'   normally. Pass `NULL` or `character()` to make every named spec optional.
+#'   Every name in `.required` is enforced, whether or not it has a spec in
+#'   `...` (see `.extra_cols`). A `.x` with zero columns skips this check when
+#'   `.allow_zero_length = TRUE` (the default). See `required` in
+#'   [stabilize_names)()] for details on expressing conditional requirements.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated data frame, or an error condition with classes
@@ -40,14 +47,16 @@
 #'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 #'   - `<stbl-error-coerce-data.frame>` when `.x` cannot be converted to a data
 #'   frame.
-#'   - `<stbl-error-jagged>` when list input has incompatible element lengths for
-#'   conversion to a data frame.
+#'   - `<stbl-error-jagged>` when list input has incompatible element lengths
+#'   for conversion to a data frame.
 #'   - `<stbl-error-too_few_rows>` when the data frame has fewer than
 #'   `.min_rows` rows.
 #'   - `<stbl-error-too_many_rows>` when the data frame has more than
 #'   `.max_rows` rows.
 #'   - `<stbl-error-missing_cols>` when required names in `.col_names` are
 #'   absent.
+#'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
+#'   `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.
 #'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
 #'   unnamed.
 #'   - `<stbl-error-missing_element>`, `<stbl-error-bad_named>`,
@@ -83,7 +92,7 @@
 #' # Check required column names without validating contents
 #' stabilize_df(
 #'   mtcars,
-#'   .col_names = c("mpg", "cyl"),
+#'   .required = c("mpg", "cyl"),
 #'   .extra_cols = assert_present
 #' )
 #'
@@ -113,11 +122,23 @@
 #'   age = specify_int_scalar(),
 #'   .required = "name"
 #' )
+#'
+#' # Conditional requirements: when `credit_card` is present, `billing_address`
+#' # is required.
+#' try(
+#'   stabilize_df(
+#'     data.frame(name = "Alice", credit_card = 1234L),
+#'     name = specify_chr_scalar(),
+#'     credit_card = specify_int_scalar(),
+#'     billing_address = specify_chr_scalar(),
+#'     .required = list("name", credit_card = "billing_address")
+#'   )
+#' )
 stabilize_df <- function(
   .x,
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(), # LIFECYCLE-REMOVE(.col_names)
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -129,6 +150,26 @@ stabilize_df <- function(
 ) {
   force(.x_arg)
   force(.call)
+
+  # LIFECYCLE-REMOVE(.col_names)
+  if (lifecycle::is_present(.col_names)) {
+    lifecycle::deprecate_warn(
+      when = "0.7.0",
+      what = "stabilize_df(.col_names)",
+      with = "stabilize_df(.required)"
+    )
+  } else {
+    .col_names <- NULL
+  }
+
+  required <- .normalize_required(.required, ".required", call = .call)
+  .check_required_have_specs(
+    required,
+    spec_names = ...names(),
+    named = .extra_cols,
+    named_arg = ".extra_cols",
+    call = .call
+  )
 
   if (is.null(.x)) {
     return(.to_null(.x, allow_null = .allow_null, x_arg = .x_arg, call = .call))
@@ -144,9 +185,21 @@ stabilize_df <- function(
     call = .call
   )
 
+  # LIFECYCLE-REMOVE(.col_names)
   .check_df_col_names(.x, col_names = .col_names, x_arg = .x_arg, call = .call)
 
   .check_specs_named(..., .call = .call)
+  # Checked here (not only in stabilize_lst()) so that errors say "column".
+  .allow_zero_length <- to_lgl_scalar(.allow_zero_length, call = .call)
+  if (length(.x) || !.allow_zero_length) {
+    .check_required_present(
+      required,
+      present = names(.x),
+      noun = "column",
+      x_arg = .x_arg,
+      call = .call
+    )
+  }
   x_lst <- stabilize_lst(
     .x,
     ...,
@@ -227,6 +280,7 @@ stabilise_data_frame <- stabilize_df
   )
 }
 
+# LIFECYCLE-REMOVE(.col_names)
 #' Check that required column names are present in a data frame
 #'
 #' @param .x `(data.frame)` The data frame being validated.

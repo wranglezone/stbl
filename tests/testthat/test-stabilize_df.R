@@ -218,7 +218,9 @@ test_that("stabilize_df() passes with valid row counts (#142)", {
   )
 })
 
+# LIFECYCLE-REMOVE(.col_names)
 test_that("stabilize_df() enforces .col_names (#142)", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_no_error(
     stabilize_df(
       data.frame(a = 1L, b = 2L),
@@ -237,7 +239,9 @@ test_that("stabilize_df() enforces .col_names (#142)", {
   )
 })
 
+# LIFECYCLE-REMOVE(.col_names)
 test_that("stabilize_df() enforces .col_names (snapshot) (#142)", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L),
@@ -249,7 +253,9 @@ test_that("stabilize_df() enforces .col_names (snapshot) (#142)", {
   )
 })
 
+# LIFECYCLE-REMOVE(.col_names)
 test_that("stabilize_df() allows .col_names alongside ... specs (#142)", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   given <- data.frame(a = 1L, b = "hello", c = TRUE)
   result <- stabilize_df(
     given,
@@ -296,4 +302,55 @@ test_that("stabilize_data_frame() exists (#142)", {
 
 test_that("stabilise_data_frame() exists (#142)", {
   expect_no_error(stabilise_data_frame(NULL))
+})
+
+# LIFECYCLE-REMOVE(.col_names)
+test_that("stabilize_df() deprecates .col_names (#291)", {
+  lifecycle::expect_deprecated(
+    stabilize_df(data.frame(a = 1L), .col_names = "a", .extra_cols = TRUE),
+    ".col_names"
+  )
+})
+
+test_that("stabilize_df() supports conditional .required (#291)", {
+  given <- data.frame(name = "A", card = 1L)
+  expect_pkg_error_snapshot(
+    stabilize_df(
+      given,
+      name = specify_chr_scalar(),
+      card = specify_int_scalar(),
+      address = specify_chr_scalar(),
+      .required = list("name", card = "address")
+    ),
+    "stbl",
+    "missing_element"
+  )
+  expect_identical(
+    stabilize_df(
+      data.frame(name = "A"),
+      name = specify_chr_scalar(),
+      card = specify_int_scalar(),
+      address = specify_chr_scalar(),
+      .required = list("name", card = "address")
+    ),
+    data.frame(name = "A")
+  )
+})
+
+test_that("stabilize_df() requires names in .required without specs (#291)", {
+  given <- data.frame(a = 1L)
+  expect_pkg_error_classes(
+    stabilize_df(given, .required = "b", .extra_cols = assert_present),
+    "stbl",
+    "missing_element"
+  )
+  expect_identical(
+    stabilize_df(data.frame(b = 1L), .required = "b"),
+    data.frame(b = 1L)
+  )
+  expect_pkg_error_classes(
+    stabilize_df(given, .required = "b", .extra_cols = FALSE),
+    "stbl",
+    "bad_required"
+  )
 })

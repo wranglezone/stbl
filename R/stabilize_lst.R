@@ -13,7 +13,10 @@
 #'   element is required (its absence is an error) is controlled by `.required`.
 #' @param .named Controls how named elements of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
-#'   - `NULL` or `FALSE` (default): any extra named elements cause an error.
+#'   - `NULL` (default): any extra named elements cause an error. Names in
+#'   `.required` that have no spec in `...` are allowed, unchecked.
+#'   - `FALSE`: any extra named elements cause an error, and every name in
+#'   `.required` must have a spec in `...`.
 #'   - `TRUE`: extra named elements are allowed, unchecked.
 #'   - A single stabilizer function, such as a `stabilize_*` function
 #'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
@@ -26,12 +29,17 @@
 #'   ([specify_chr()], etc), used to validate every unnamed element.
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
 #'   `TRUE`, duplicated elements are rejected.
-#' @param .required `(character)` Names (from `...`) of elements that must be
+#' @param .required `(character or list)` Names of elements that must be
 #'   present in `.x`. Defaults to all names in `...`, so every named spec is
-#'   required unless you opt it out. Named specs *not* listed here are optional:
-#'   if absent, no error is raised; if present, they're validated normally. Pass
-#'   `NULL` or `character()` to make every named spec optional. A zero-length
-#'   `.x` (such as `list()`) skips this check when `.allow_zero_length = TRUE`.
+#'   required unless you opt it out. A supplied `.required` *replaces* that
+#'   default, so `.required = list(credit_card = "billing_address")` makes every
+#'   other spec optional; list the unconditional names explicitly. Specs for
+#'   names that are not required are optional: if absent, no error is raised; if
+#'   present, they're validated normally. Pass `NULL` or `character()` to make
+#'   every named spec optional. Every name in `.required` is enforced, whether
+#'   or not it has a spec in `...` (see `.named`). A zero-length `.x` (such as
+#'   `list()`) skips this check when `.allow_zero_length = TRUE`. See `required`
+#'   in [stabilize_names)()] for details on expressing conditional requirements.
 #' @inheritParams .shared-params
 #'
 #' @returns The validated list (or an atomic vector when `.simplify = TRUE` and
@@ -48,7 +56,10 @@
 #'   elements are present.
 #'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
 #'   unnamed.
-#'   - `<stbl-error-missing_element>` when a required named element is absent.
+#'   - `<stbl-error-missing_element>` when a required named element is absent
+#'   (including conditionally required elements whose trigger is present).
+#'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
+#'   `.named = FALSE` and a name in `.required` has no spec in `...`.
 #'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
 #'   `.unnamed` is `NULL` or `FALSE`.
 #'   - `<stbl-error-bad_named>` when extra named elements are present but
@@ -111,6 +122,20 @@
 #'   stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
 #' )
 #'
+#' # Conditional requirements: when `credit_card` is present, `billing_address`
+#' # is required.
+#' stabilize_credit_card <- function(x) {
+#'   stabilize_lst(
+#'     x,
+#'     name = specify_chr_scalar(),
+#'     credit_card = specify_int_scalar(),
+#'     billing_address = specify_chr_scalar(),
+#'     .required = list("name", credit_card = "billing_address")
+#'   )
+#' }
+#' stabilize_credit_card(list(name = "Alice"))
+#' try(stabilize_credit_card(list(name = "Alice", credit_card = 1234L)))
+#'
 #' # Simplify a list of scalars to an atomic vector
 #' stabilize_lst(
 #'   list(lon = 1.5, lat = 2L),
@@ -139,6 +164,14 @@ stabilize_lst <- function(
   force(.x_arg)
   force(.call)
   .simplify <- to_lgl_scalar(.simplify, x_arg = ".simplify", call = .call)
+  .required <- .normalize_required(.required, ".required", call = .call)
+  .check_required_have_specs(
+    .required,
+    spec_names = ...names(),
+    named = .named,
+    named_arg = ".named",
+    call = .call
+  )
   if (is.null(.x)) {
     return(.to_null(
       .x,
@@ -166,7 +199,6 @@ stabilize_lst <- function(
     return(.x)
   }
 
-  .required <- to_chr(.required, call = .call)
   .x <- .validate_named_elements(
     .x,
     ...,
@@ -303,12 +335,23 @@ NULL
   )
   element_specs <- list(...)
   nms <- rlang::names2(.x)
+  .check_required_present(
+    .required,
+    present = nms,
+    noun = "element",
+    x_arg = .x_arg,
+    call = .call
+  )
   is_extra_named <- rlang::have_name(.x) & !(nms %in% names(element_specs))
-  .x <- .validate_required_elements(
+  if (is.null(.named) || isFALSE(.named)) {
+    # Required names without specs are known (but unchecked), not extra.
+    is_extra_named <- is_extra_named &
+      !(nms %in% setdiff(.required_names(.required), names(element_specs)))
+  }
+  .x <- .validate_specified_elements(
     .x,
     element_specs,
     nms,
-    .required = .required,
     .x_arg = .x_arg,
     .call = .call
   )
@@ -323,32 +366,22 @@ NULL
   .x
 }
 
-#' Validate required named elements against their spec functions
+#' Validate named elements against their spec functions
 #'
 #' @inheritParams stabilize_lst
 #' @inheritParams .shared-params-lst
 #' @returns The updated list.
 #' @keywords internal
-.validate_required_elements <- function(
+.validate_specified_elements <- function(
   .x,
   element_specs,
   nms,
-  .required,
   .x_arg,
   .call
 ) {
   for (nm in names(element_specs)) {
     positions <- which(nms == nm)
     if (!length(positions)) {
-      if (nm %in% .required) {
-        .stop_must(
-          "must contain element {.val {nm}}.",
-          x_arg = .x_arg,
-          call = .call,
-          subclass = "missing_element",
-          message_env = rlang::current_env()
-        )
-      }
       next
     }
     for (i in positions) {
