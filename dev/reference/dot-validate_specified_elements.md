@@ -1,11 +1,11 @@
-# Validate required named elements against their spec functions
+# Validate named elements against their spec functions
 
-Validate required named elements against their spec functions
+Validate named elements against their spec functions
 
 ## Usage
 
 ``` r
-.validate_required_elements(.x, element_specs, nms, .required, .x_arg, .call)
+.validate_specified_elements(.x, element_specs, nms, .x_arg, .call)
 ```
 
 ## Arguments
@@ -28,17 +28,6 @@ Validate required named elements against their spec functions
 - nms:
 
   `(character)` Result of `rlang::names2(.x)`.
-
-- .required:
-
-  `(character)` Names (from `...`) of elements that must be present in
-  `.x`. Defaults to all names in `...`, so every named spec is required
-  unless you opt it out. Named specs *not* listed here are optional: if
-  absent, no error is raised; if present, they're validated normally.
-  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional. A zero-length `.x` (such as
-  [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
-  `.allow_zero_length = TRUE`.
 
 - .x_arg:
 

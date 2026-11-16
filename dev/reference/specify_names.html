@@ -9,7 +9,7 @@ pre-configured arguments, so the same name checks can be reused."><meta property
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,8 +79,22 @@ becomes the names of the returned object. <code>NULL</code> (default) skips the 
 
 
 <dt id="arg-required">required<a class="anchor" aria-label="anchor" href="#arg-required"></a></dt>
-<dd><p><code>(character)</code> Names that must be present in <code>x</code> (after
-applying <code>spec</code>, if any). <code>NULL</code> (default) or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> skip the check.</p></dd>
+<dd><p><code>(character or list)</code> Names that must be present in <code>x</code>
+(after applying <code>spec</code>, if any). <code>NULL</code> (default) or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> skip the
+check.</p>
+<p>Use a list (or, for simple dependencies, a character vector) to express
+conditional requirements:</p><ul><li><p>Unnamed entries are always required. Each may be a character vector.</p></li>
+<li><p>Named entries are conditional. The name is the trigger, and the value
+lists what is required when the trigger is present. The trigger itself is
+<em>not</em> made required; list it as an unnamed entry too if it should be.</p></li>
+<li><p>The value of a named entry is a non-<code>NA</code> character vector of dependents,
+or a nested list that is itself a <code>required</code> specification, applied only
+when the trigger is present. Nesting is scoped: in
+<code>list(a = list(b = "c"))</code>, <code>"c"</code> is required only when both <code>"a"</code> and <code>"b"</code>
+are present, whereas in <code>list(a = "b", b = "c")</code>, <code>"c"</code> is also required
+when <code>"b"</code> is present on its own.</p></li>
+<li><p>Duplicate triggers are merged.</p></li>
+</ul></dd>
 
 
 <dt id="arg-allow-duplicate-names">allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg-allow-duplicate-names"></a></dt>

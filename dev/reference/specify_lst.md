@@ -56,8 +56,11 @@ specify_list(
   Controls how named elements of `.x` that are *not* explicitly listed
   in `...` are handled. One of:
 
-  - `NULL` or `FALSE` (default): any extra named elements cause an
-    error.
+  - `NULL` (default): any extra named elements cause an error. Names in
+    `.required` that have no spec in `...` are allowed, unchecked.
+
+  - `FALSE`: any extra named elements cause an error, and every name in
+    `.required` must have a spec in `...`.
 
   - `TRUE`: extra named elements are allowed, unchecked.
 
@@ -112,14 +115,21 @@ specify_list(
 
 - .required:
 
-  `(character)` Names (from `...`) of elements that must be present in
-  `.x`. Defaults to all names in `...`, so every named spec is required
-  unless you opt it out. Named specs *not* listed here are optional: if
-  absent, no error is raised; if present, they're validated normally.
-  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional. A zero-length `.x` (such as
+  `(character or list)` Names of elements that must be present in `.x`.
+  Defaults to all names in `...`, so every named spec is required unless
+  you opt it out. A supplied `.required` *replaces* that default, so
+  `.required = list(credit_card = "billing_address")` makes every other
+  spec optional; list the unconditional names explicitly. Specs for
+  names that are not required are optional: if absent, no error is
+  raised; if present, they're validated normally. Pass `NULL` or
+  [`character()`](https://rdrr.io/r/base/character.html) to make every
+  named spec optional. Every name in `.required` is enforced, whether or
+  not it has a spec in `...` (see `.named`). A zero-length `.x` (such as
   [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
-  `.allow_zero_length = TRUE`.
+  `.allow_zero_length = TRUE`. See `required` in \[stabilize_names)()\]
+  for details on expressing conditional requirements.
+
+  \[stabilize_names)()\]: R:stabilize_names)()
 
 - .coerce_function:
 
@@ -212,4 +222,16 @@ stabilize_settings(list(name = "Alice"))
 #> $name
 #> [1] "Alice"
 #> 
+
+# Require an element only when another is present
+stabilize_payment <- specify_lst(
+  name = specify_chr_scalar(),
+  card = specify_int_scalar(),
+  address = specify_chr_scalar(),
+  .required = list("name", card = "address")
+)
+try(stabilize_payment(list(name = "Alice", card = 1L)))
+#> Error in eval(expr, envir) : 
+#>   `list(name = "Alice", card = 1L)` must contain element "address" when
+#> "card" is present.
 ```

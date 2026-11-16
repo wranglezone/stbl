@@ -21,7 +21,9 @@ Check that required names are present
 
 - required:
 
-  `(character)` Names that must be present in `x`.
+  `(character or list)` Names that must be present in `x`. A list can
+  express conditional requirements (see
+  [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)).
 
 - x_arg:
 

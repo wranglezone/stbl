@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,10 @@ element is required (its absence is an error) is controlled by <code>.required</
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
 <dd><p>Controls how named elements of <code>.x</code> that are <em>not</em> explicitly
-listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra named elements cause an error.</p></li>
+listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> (default): any extra named elements cause an error. Names in
+<code>.required</code> that have no spec in <code>...</code> are allowed, unchecked.</p></li>
+<li><p><code>FALSE</code>: any extra named elements cause an error, and every name in
+<code>.required</code> must have a spec in <code>...</code>.</p></li>
 <li><p><code>TRUE</code>: extra named elements are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
@@ -81,12 +84,18 @@ listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> 
 
 
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
-<dd><p><code>(character)</code> Names (from <code>...</code>) of elements that must be
+<dd><p><code>(character or list)</code> Names of elements that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
-required unless you opt it out. Named specs <em>not</em> listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-<code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A zero-length
-<code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>.</p></dd>
+required unless you opt it out. A supplied <code>.required</code> <em>replaces</em> that
+default, so <code>.required = list(credit_card = "billing_address")</code> makes every
+other spec optional; list the unconditional names explicitly. Specs for
+names that are not required are optional: if absent, no error is raised; if
+present, they're validated normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make
+every named spec optional. Every name in <code>.required</code> is enforced, whether
+or not it has a spec in <code>...</code> (see <code>.named</code>). A zero-length <code>.x</code> (such as
+<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>. See <code>required</code>
+in [stabilize_names)()] for details on expressing conditional requirements.</p>
+<p>[stabilize_names)()]: R:stabilize_names)()</p></dd>
 
 
 <dt id="arg--allow-duplicate-names">.allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg--allow-duplicate-names"></a></dt>

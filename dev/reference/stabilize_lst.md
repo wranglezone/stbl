@@ -107,8 +107,11 @@ stabilise_list(
   Controls how named elements of `.x` that are *not* explicitly listed
   in `...` are handled. One of:
 
-  - `NULL` or `FALSE` (default): any extra named elements cause an
-    error.
+  - `NULL` (default): any extra named elements cause an error. Names in
+    `.required` that have no spec in `...` are allowed, unchecked.
+
+  - `FALSE`: any extra named elements cause an error, and every name in
+    `.required` must have a spec in `...`.
 
   - `TRUE`: extra named elements are allowed, unchecked.
 
@@ -163,14 +166,21 @@ stabilise_list(
 
 - .required:
 
-  `(character)` Names (from `...`) of elements that must be present in
-  `.x`. Defaults to all names in `...`, so every named spec is required
-  unless you opt it out. Named specs *not* listed here are optional: if
-  absent, no error is raised; if present, they're validated normally.
-  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional. A zero-length `.x` (such as
+  `(character or list)` Names of elements that must be present in `.x`.
+  Defaults to all names in `...`, so every named spec is required unless
+  you opt it out. A supplied `.required` *replaces* that default, so
+  `.required = list(credit_card = "billing_address")` makes every other
+  spec optional; list the unconditional names explicitly. Specs for
+  names that are not required are optional: if absent, no error is
+  raised; if present, they're validated normally. Pass `NULL` or
+  [`character()`](https://rdrr.io/r/base/character.html) to make every
+  named spec optional. Every name in `.required` is enforced, whether or
+  not it has a spec in `...` (see `.named`). A zero-length `.x` (such as
   [`list()`](https://rdrr.io/r/base/list.html)) skips this check when
-  `.allow_zero_length = TRUE`.
+  `.allow_zero_length = TRUE`. See `required` in \[stabilize_names)()\]
+  for details on expressing conditional requirements.
+
+  \[stabilize_names)()\]: R:stabilize_names)()
 
 - .coerce_function:
 
@@ -227,8 +237,11 @@ simplification is possible), or an error condition with classes
 - `<stbl-error-unnamed_spec>` when any element passed through `...` is
   unnamed.
 
-- `<stbl-error-missing_element>` when a required named element is
-  absent.
+- `<stbl-error-missing_element>` when a required named element is absent
+  (including conditionally required elements whose trigger is present).
+
+- `<stbl-error-bad_required>` when `.required` is invalid, or when
+  `.named = FALSE` and a name in `.required` has no spec in `...`.
 
 - `<stbl-error-bad_unnamed>` when unnamed elements are present but
   `.unnamed` is `NULL` or `FALSE`.
@@ -439,6 +452,26 @@ try(
 )
 #> Error in eval(expr, envir) : 
 #>   `list(a = 1L)` must contain element "b".
+
+# Conditional requirements: when `credit_card` is present, `billing_address`
+# is required.
+stabilize_credit_card <- function(x) {
+  stabilize_lst(
+    x,
+    name = specify_chr_scalar(),
+    credit_card = specify_int_scalar(),
+    billing_address = specify_chr_scalar(),
+    .required = list("name", credit_card = "billing_address")
+  )
+}
+stabilize_credit_card(list(name = "Alice"))
+#> $name
+#> [1] "Alice"
+#> 
+try(stabilize_credit_card(list(name = "Alice", credit_card = 1234L)))
+#> Error in stabilize_credit_card(list(name = "Alice", credit_card = 1234L)) : 
+#>   `x` must contain element "billing_address" when "credit_card" is
+#> present.
 
 # Simplify a list of scalars to an atomic vector
 stabilize_lst(

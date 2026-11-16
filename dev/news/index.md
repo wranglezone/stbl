@@ -4,6 +4,16 @@
 
 ### Breaking changes
 
+- Names on an atomic `.required`
+  ([`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+  and their `specify_*()` versions) are now significant: a named element
+  is a conditional requirement (see “New features” below). If you
+  generate `.required` programmatically in a way that produces names
+  (e.g., with [`sapply()`](https://rdrr.io/r/base/lapply.html) over a
+  character vector), wrap it in
+  [`unname()`](https://rdrr.io/r/base/unname.html)
+  ([\#291](https://github.com/wranglezone/stbl/issues/291)).
 - `specify_<vector>()` (and their scalar variants and synonyms),
   [`specify_names()`](https://stbl.wrangle.zone/dev/reference/specify_names.md),
   and
@@ -49,6 +59,13 @@
   validate a list positionally, applying a different spec to each
   element, like JSON Schema tuple arrays
   ([\#284](https://github.com/wranglezone/stbl/issues/284)).
+- [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md),
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+  and their `specify_*()` versions accept a list for `required` /
+  `.required` to express conditional requirements, similar to JSON
+  Schema `dependentRequired`
+  ([\#291](https://github.com/wranglezone/stbl/issues/291)).
 - New
   [`stabilize_names()`](https://stbl.wrangle.zone/dev/reference/stabilize_names.md)
   (and its synonym
@@ -61,6 +78,14 @@
 
 ### Bug fixes
 
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  and
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md)
+  (and their `specify_*()` versions) now require every name in
+  `.required`, not just names that have a spec in `...`. A call with
+  `.named = FALSE` (or `.extra_cols = FALSE`) and a required name that
+  has no spec now errors early with class `<stbl-error-bad_required>`
+  ([\#291](https://github.com/wranglezone/stbl/issues/291)).
 - [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)
   gains the `.allow_duplicate_names` argument of
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
@@ -87,6 +112,12 @@
   does `to(mean, "a", coerce_function = TRUE)`
   ([\#394](https://github.com/wranglezone/stbl/issues/394),
   [\#395](https://github.com/wranglezone/stbl/issues/395)).
+
+### Deprecations
+
+- `stabilize_df(.col_names)` and `specify_df(.col_names)` are deprecated
+  in favor of `.required`
+  ([\#291](https://github.com/wranglezone/stbl/issues/291)).
 
 ## stbl 0.6.0
 

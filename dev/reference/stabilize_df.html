@@ -17,7 +17,7 @@ stabilize_df()."><meta property="og:image" content="https://stbl.wrangle.zone/lo
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .col_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -77,7 +77,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .col_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -92,7 +92,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .col_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -107,7 +107,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .col_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .max_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -137,7 +137,10 @@ is required is controlled by <code>.required</code>.</p></dd>
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
 <dd><p>Controls how columns of <code>.x</code> that are <em>not</em> explicitly
-listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra columns cause an error.</p></li>
+listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> (default): any extra columns cause an error. Names in <code>.required</code>
+that have no spec in <code>...</code> are allowed, unchecked.</p></li>
+<li><p><code>FALSE</code>: any extra columns cause an error, and every name in <code>.required</code>
+must have a spec in <code>...</code>.</p></li>
 <li><p><code>TRUE</code>: extra columns are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
@@ -146,9 +149,8 @@ listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> 
 
 
 <dt id="arg--col-names">.col_names<a class="anchor" aria-label="anchor" href="#arg--col-names"></a></dt>
-<dd><p><code>(character)</code> A character vector of column names that must
-be present in <code>.x</code>. Any columns listed here that are absent from <code>.x</code> will
-cause an error. Unlike <code>...</code>, this does not validate the column contents.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>.required</code>
+instead.</p></dd>
 
 
 <dt id="arg--min-rows">.min_rows<a class="anchor" aria-label="anchor" href="#arg--min-rows"></a></dt>
@@ -170,12 +172,18 @@ If <code>NULL</code> (default), the row count is not checked.</p></dd>
 
 
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
-<dd><p><code>(character)</code> Names (from <code>...</code>) of columns that must be
-present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
-required unless you opt it out. Named specs <em>not</em> listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-<code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A <code>.x</code> with zero
-columns skips this check when <code>.allow_zero_length = TRUE</code> (the default).</p></dd>
+<dd><p><code>(character or list)</code> Names of columns that must be present
+in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is required
+unless you opt it out. A supplied <code>.required</code> <em>replaces</em> that default, so
+<code>.required = list(card = "address")</code> makes every other spec optional; list
+the unconditional names explicitly. Specs for names that are not required
+are optional: if absent, no error is raised; if present, they're validated
+normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional.
+Every name in <code>.required</code> is enforced, whether or not it has a spec in
+<code>...</code> (see <code>.extra_cols</code>). A <code>.x</code> with zero columns skips this check when
+<code>.allow_zero_length = TRUE</code> (the default). See <code>required</code> in
+[stabilize_names)()] for details on expressing conditional requirements.</p>
+<p>[stabilize_names)()]: R:stabilize_names)()</p></dd>
 
 
 <dt id="arg--x-arg">.x_arg<a class="anchor" aria-label="anchor" href="#arg--x-arg"></a></dt>
@@ -204,14 +212,16 @@ the original class.</p></dd>
 <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be converted to a data
 frame.</p></li>
-<li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths for
-conversion to a data frame.</p></li>
+<li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths
+for conversion to a data frame.</p></li>
 <li><p><code>&lt;stbl-error-too_few_rows&gt;</code> when the data frame has fewer than
 <code>.min_rows</code> rows.</p></li>
 <li><p><code>&lt;stbl-error-too_many_rows&gt;</code> when the data frame has more than
 <code>.max_rows</code> rows.</p></li>
 <li><p><code>&lt;stbl-error-missing_cols&gt;</code> when required names in <code>.col_names</code> are
 absent.</p></li>
+<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when
+<code>.extra_cols = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
 <li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
 unnamed.</p></li>
 <li><p><code>&lt;stbl-error-missing_element&gt;</code>, <code>&lt;stbl-error-bad_named&gt;</code>,
@@ -306,7 +316,7 @@ list-like column checks delegated to <code><a href="stabilize_lst.html">stabiliz
 <span class="r-in"><span><span class="co"># Check required column names without validating contents</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_df</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>  .col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .extra_cols <span class="op">=</span> <span class="va">assert_present</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
@@ -380,6 +390,21 @@ list-like column checks delegated to <code><a href="stabilize_lst.html">stabiliz
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Alice</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Conditional requirements: when `credit_card` is present, `billing_address`</span></span></span>
+<span class="r-in"><span><span class="co"># is required.</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">stabilize_df</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, credit_card <span class="op">=</span> <span class="fl">1234L</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    credit_card <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    billing_address <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"name"</span>, credit_card <span class="op">=</span> <span class="st">"billing_address"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `data.frame(name = "Alice", credit_card = 1234L)` must contain column</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">"billing_address"</span> when <span style="color: #0000BB;">"credit_card"</span> is present.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

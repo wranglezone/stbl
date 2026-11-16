@@ -13,7 +13,7 @@ stabilise_names() is a synonym of stabilize_names()."><meta property="og:image" 
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,8 +103,22 @@ becomes the names of the returned object. <code>NULL</code> (default) skips the 
 
 
 <dt id="arg-required">required<a class="anchor" aria-label="anchor" href="#arg-required"></a></dt>
-<dd><p><code>(character)</code> Names that must be present in <code>x</code> (after
-applying <code>spec</code>, if any). <code>NULL</code> (default) or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> skip the check.</p></dd>
+<dd><p><code>(character or list)</code> Names that must be present in <code>x</code>
+(after applying <code>spec</code>, if any). <code>NULL</code> (default) or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> skip the
+check.</p>
+<p>Use a list (or, for simple dependencies, a character vector) to express
+conditional requirements:</p><ul><li><p>Unnamed entries are always required. Each may be a character vector.</p></li>
+<li><p>Named entries are conditional. The name is the trigger, and the value
+lists what is required when the trigger is present. The trigger itself is
+<em>not</em> made required; list it as an unnamed entry too if it should be.</p></li>
+<li><p>The value of a named entry is a non-<code>NA</code> character vector of dependents,
+or a nested list that is itself a <code>required</code> specification, applied only
+when the trigger is present. Nesting is scoped: in
+<code>list(a = list(b = "c"))</code>, <code>"c"</code> is required only when both <code>"a"</code> and <code>"b"</code>
+are present, whereas in <code>list(a = "b", b = "c")</code>, <code>"c"</code> is also required
+when <code>"b"</code> is present on its own.</p></li>
+<li><p>Duplicate triggers are merged.</p></li>
+</ul></dd>
 
 
 <dt id="arg-allow-duplicate-names">allow_duplicate_names<a class="anchor" aria-label="anchor" href="#arg-allow-duplicate-names"></a></dt>
@@ -133,7 +147,9 @@ source of error messages.</p></dd>
 <li><p><code>&lt;stbl-error-allowed_names&gt;</code> when a name is not in <code>allowed_names</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and
 <code>allow_duplicate_names = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a name in <code>required</code> is absent.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a name in <code>required</code> is absent
+(including conditionally required names whose trigger is present).</p></li>
+<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>required</code> is invalid.</p></li>
 <li><p>Errors from <code>spec</code> when a name does not satisfy it.</p></li>
 </ul></div>
     <div class="section level2">
@@ -209,6 +225,23 @@ source of error messages.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `c(a = 1, b = 2)` must contain name <span style="color: #0000BB;">"c"</span>.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Require names conditionally</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_names</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"name"</span>, credit_card <span class="op">=</span> <span class="st">"billing_address"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "Alice" </span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">stabilize_names</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, credit_card <span class="op">=</span> <span class="st">"1234"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"name"</span>, credit_card <span class="op">=</span> <span class="st">"billing_address"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `c(name = "Alice", credit_card = "1234")` must contain name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">"billing_address"</span> when <span style="color: #0000BB;">"credit_card"</span> is present.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Restrict names to an allowed set</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, allowed_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>

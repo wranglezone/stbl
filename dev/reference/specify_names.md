@@ -44,9 +44,29 @@ specify_names(
 
 - required:
 
-  `(character)` Names that must be present in `x` (after applying
-  `spec`, if any). `NULL` (default) or
+  `(character or list)` Names that must be present in `x` (after
+  applying `spec`, if any). `NULL` (default) or
   [`character()`](https://rdrr.io/r/base/character.html) skip the check.
+
+  Use a list (or, for simple dependencies, a character vector) to
+  express conditional requirements:
+
+  - Unnamed entries are always required. Each may be a character vector.
+
+  - Named entries are conditional. The name is the trigger, and the
+    value lists what is required when the trigger is present. The
+    trigger itself is *not* made required; list it as an unnamed entry
+    too if it should be.
+
+  - The value of a named entry is a non-`NA` character vector of
+    dependents, or a nested list that is itself a `required`
+    specification, applied only when the trigger is present. Nesting is
+    scoped: in `list(a = list(b = "c"))`, `"c"` is required only when
+    both `"a"` and `"b"` are present, whereas in
+    `list(a = "b", b = "c")`, `"c"` is also required when `"b"` is
+    present on its own.
+
+  - Duplicate triggers are merged.
 
 - allow_duplicate_names:
 

@@ -63,9 +63,29 @@ stabilise_names(
 
 - required:
 
-  `(character)` Names that must be present in `x` (after applying
-  `spec`, if any). `NULL` (default) or
+  `(character or list)` Names that must be present in `x` (after
+  applying `spec`, if any). `NULL` (default) or
   [`character()`](https://rdrr.io/r/base/character.html) skip the check.
+
+  Use a list (or, for simple dependencies, a character vector) to
+  express conditional requirements:
+
+  - Unnamed entries are always required. Each may be a character vector.
+
+  - Named entries are conditional. The name is the trigger, and the
+    value lists what is required when the trigger is present. The
+    trigger itself is *not* made required; list it as an unnamed entry
+    too if it should be.
+
+  - The value of a named entry is a non-`NA` character vector of
+    dependents, or a nested list that is itself a `required`
+    specification, applied only when the trigger is present. Nesting is
+    scoped: in `list(a = list(b = "c"))`, `"c"` is required only when
+    both `"a"` and `"b"` are present, whereas in
+    `list(a = "b", b = "c")`, `"c"` is also required when `"b"` is
+    present on its own.
+
+  - Duplicate triggers are merged.
 
 - allow_duplicate_names:
 
@@ -97,7 +117,10 @@ stabilise_names(
 - `<stbl-error-duplicate_names>` when duplicate names are present and
   `allow_duplicate_names = FALSE`.
 
-- `<stbl-error-missing_element>` when a name in `required` is absent.
+- `<stbl-error-missing_element>` when a name in `required` is absent
+  (including conditionally required names whose trigger is present).
+
+- `<stbl-error-bad_required>` when `required` is invalid.
 
 - Errors from `spec` when a name does not satisfy it.
 
@@ -175,6 +198,23 @@ stabilize_names(c(a = 1, a = 2), allow_duplicate_names = TRUE)
 try(stabilize_names(c(a = 1, b = 2), required = c("a", "c")))
 #> Error in eval(expr, envir) : 
 #>   `c(a = 1, b = 2)` must contain name "c".
+
+# Require names conditionally
+stabilize_names(
+  c(name = "Alice"),
+  required = list("name", credit_card = "billing_address")
+)
+#>    name 
+#> "Alice" 
+try(
+  stabilize_names(
+    c(name = "Alice", credit_card = "1234"),
+    required = list("name", credit_card = "billing_address")
+  )
+)
+#> Error in eval(expr, envir) : 
+#>   `c(name = "Alice", credit_card = "1234")` must contain name
+#> "billing_address" when "credit_card" is present.
 
 # Restrict names to an allowed set
 try(stabilize_names(c(a = 1, z = 2), allowed_names = c("a", "b")))

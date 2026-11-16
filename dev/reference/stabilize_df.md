@@ -14,7 +14,7 @@ stabilize_df(
   .x,
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -29,7 +29,7 @@ stabilise_df(
   .x,
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -44,7 +44,7 @@ stabilize_data_frame(
   .x,
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -59,7 +59,7 @@ stabilise_data_frame(
   .x,
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -92,7 +92,11 @@ stabilise_data_frame(
   Controls how columns of `.x` that are *not* explicitly listed in `...`
   are handled. One of:
 
-  - `NULL` or `FALSE` (default): any extra columns cause an error.
+  - `NULL` (default): any extra columns cause an error. Names in
+    `.required` that have no spec in `...` are allowed, unchecked.
+
+  - `FALSE`: any extra columns cause an error, and every name in
+    `.required` must have a spec in `...`.
 
   - `TRUE`: extra columns are allowed, unchecked.
 
@@ -104,9 +108,7 @@ stabilise_data_frame(
 
 - .col_names:
 
-  `(character)` A character vector of column names that must be present
-  in `.x`. Any columns listed here that are absent from `.x` will cause
-  an error. Unlike `...`, this does not validate the column contents.
+  **\[deprecated\]** Use `.required` instead.
 
 - .min_rows:
 
@@ -128,13 +130,21 @@ stabilise_data_frame(
 
 - .required:
 
-  `(character)` Names (from `...`) of columns that must be present in
-  `.x`. Defaults to all names in `...`, so every named spec is required
-  unless you opt it out. Named specs *not* listed here are optional: if
-  absent, no error is raised; if present, they're validated normally.
-  Pass `NULL` or [`character()`](https://rdrr.io/r/base/character.html)
-  to make every named spec optional. A `.x` with zero columns skips this
-  check when `.allow_zero_length = TRUE` (the default).
+  `(character or list)` Names of columns that must be present in `.x`.
+  Defaults to all names in `...`, so every named spec is required unless
+  you opt it out. A supplied `.required` *replaces* that default, so
+  `.required = list(card = "address")` makes every other spec optional;
+  list the unconditional names explicitly. Specs for names that are not
+  required are optional: if absent, no error is raised; if present,
+  they're validated normally. Pass `NULL` or
+  [`character()`](https://rdrr.io/r/base/character.html) to make every
+  named spec optional. Every name in `.required` is enforced, whether or
+  not it has a spec in `...` (see `.extra_cols`). A `.x` with zero
+  columns skips this check when `.allow_zero_length = TRUE` (the
+  default). See `required` in \[stabilize_names)()\] for details on
+  expressing conditional requirements.
+
+  \[stabilize_names)()\]: R:stabilize_names)()
 
 - .x_arg:
 
@@ -177,6 +187,9 @@ The validated data frame, or an error condition with classes
 
 - `<stbl-error-missing_cols>` when required names in `.col_names` are
   absent.
+
+- `<stbl-error-bad_required>` when `.required` is invalid, or when
+  `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.
 
 - `<stbl-error-unnamed_spec>` when any element passed through `...` is
   unnamed.
@@ -276,7 +289,7 @@ stabilize_df(
 # Check required column names without validating contents
 stabilize_df(
   mtcars,
-  .col_names = c("mpg", "cyl"),
+  .required = c("mpg", "cyl"),
   .extra_cols = assert_present
 )
 #>                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
@@ -350,4 +363,19 @@ stabilize_df(
 )
 #>    name
 #> 1 Alice
+
+# Conditional requirements: when `credit_card` is present, `billing_address`
+# is required.
+try(
+  stabilize_df(
+    data.frame(name = "Alice", credit_card = 1234L),
+    name = specify_chr_scalar(),
+    credit_card = specify_int_scalar(),
+    billing_address = specify_chr_scalar(),
+    .required = list("name", credit_card = "billing_address")
+  )
+)
+#> Error in eval(expr, envir) : 
+#>   `data.frame(name = "Alice", credit_card = 1234L)` must contain column
+#> "billing_address" when "credit_card" is present.
 ```

@@ -15,7 +15,7 @@ are synonyms of stabilize_lst()."><meta property="og:image" content="https://stb
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,7 +150,10 @@ element is required (its absence is an error) is controlled by <code>.required</
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>
 <dd><p>Controls how named elements of <code>.x</code> that are <em>not</em> explicitly
-listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> or <code>FALSE</code> (default): any extra named elements cause an error.</p></li>
+listed in <code>...</code> are handled. One of:</p><ul><li><p><code>NULL</code> (default): any extra named elements cause an error. Names in
+<code>.required</code> that have no spec in <code>...</code> are allowed, unchecked.</p></li>
+<li><p><code>FALSE</code>: any extra named elements cause an error, and every name in
+<code>.required</code> must have a spec in <code>...</code>.</p></li>
 <li><p><code>TRUE</code>: extra named elements are allowed, unchecked.</p></li>
 <li><p>A single stabilizer function, such as a <code>stabilize_*</code> function
 (<code><a href="stabilize_chr.html">stabilize_chr()</a></code>, etc) or a function produced by a <code>specify_*()</code> function
@@ -196,12 +199,18 @@ will be tested using <code><a href="https://vctrs.r-lib.org/reference/vec_size.h
 
 
 <dt id="arg--required">.required<a class="anchor" aria-label="anchor" href="#arg--required"></a></dt>
-<dd><p><code>(character)</code> Names (from <code>...</code>) of elements that must be
+<dd><p><code>(character or list)</code> Names of elements that must be
 present in <code>.x</code>. Defaults to all names in <code>...</code>, so every named spec is
-required unless you opt it out. Named specs <em>not</em> listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-<code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make every named spec optional. A zero-length
-<code>.x</code> (such as <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>.</p></dd>
+required unless you opt it out. A supplied <code>.required</code> <em>replaces</em> that
+default, so <code>.required = list(credit_card = "billing_address")</code> makes every
+other spec optional; list the unconditional names explicitly. Specs for
+names that are not required are optional: if absent, no error is raised; if
+present, they're validated normally. Pass <code>NULL</code> or <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> to make
+every named spec optional. Every name in <code>.required</code> is enforced, whether
+or not it has a spec in <code>...</code> (see <code>.named</code>). A zero-length <code>.x</code> (such as
+<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) skips this check when <code>.allow_zero_length = TRUE</code>. See <code>required</code>
+in [stabilize_names)()] for details on expressing conditional requirements.</p>
+<p>[stabilize_names)()]: R:stabilize_names)()</p></dd>
 
 
 <dt id="arg--coerce-function">.coerce_function<a class="anchor" aria-label="anchor" href="#arg--coerce-function"></a></dt>
@@ -247,7 +256,10 @@ simplification is possible), or an error condition with classes
 elements are present.</p></li>
 <li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
 unnamed.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent
+(including conditionally required elements whose trigger is present).</p></li>
+<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when
+<code>.named = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when unnamed elements are present but
 <code>.unnamed</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but
@@ -454,6 +466,26 @@ unnamed.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `list(a = 1L)` must contain element <span style="color: #0000BB;">"b"</span>.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Conditional requirements: when `credit_card` is present, `billing_address`</span></span></span>
+<span class="r-in"><span><span class="co"># is required.</span></span></span>
+<span class="r-in"><span><span class="va">stabilize_credit_card</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">stabilize_lst</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    credit_card <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    billing_address <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"name"</span>, credit_card <span class="op">=</span> <span class="st">"billing_address"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_credit_card</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Alice"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_credit_card</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, credit_card <span class="op">=</span> <span class="fl">1234L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in stabilize_credit_card(list(name = "Alice", credit_card = 1234L)) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `x` must contain element <span style="color: #0000BB;">"billing_address"</span> when <span style="color: #0000BB;">"credit_card"</span> is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> present.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Simplify a list of scalars to an atomic vector</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_lst</span><span class="op">(</span></span></span>
