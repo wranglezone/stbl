@@ -26,19 +26,29 @@ element is required (its absence is an error) is controlled by \code{.required}.
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
 \itemize{
-\item \code{NULL} or \code{FALSE} (default): any extra named elements cause an error.
+\item \code{NULL} (default): any extra named elements cause an error. Names in
+\code{.required} that have no spec in \code{...} are allowed, unchecked.
+\item \code{FALSE}: any extra named elements cause an error, and every name in
+\code{.required} must have a spec in \code{...}.
 \item \code{TRUE}: extra named elements are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
 (\code{\link[=specify_chr]{specify_chr()}}, etc), used to validate every extra named element.
 }}
 
-\item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
+\item{.required}{\verb{(character or list)} Names of elements that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-\code{NULL} or \code{character()} to make every named spec optional. A zero-length
-\code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
+required unless you opt it out. A supplied \code{.required} \emph{replaces} that
+default, so \code{.required = list(credit_card = "billing_address")} makes every
+other spec optional; list the unconditional names explicitly. Specs for
+names that are not required are optional: if absent, no error is raised; if
+present, they're validated normally. Pass \code{NULL} or \code{character()} to make
+every named spec optional. Every name in \code{.required} is enforced, whether
+or not it has a spec in \code{...} (see \code{.named}). A zero-length \code{.x} (such as
+\code{list()}) skips this check when \code{.allow_zero_length = TRUE}. See \code{required}
+in [stabilize_names)()] for details on expressing conditional requirements.
+
+[stabilize_names)()]: R:stabilize_names)()}
 
 \item{.allow_duplicate_names}{(\code{logical(1)}) Should \code{x} be allowed to have
 duplicate names?}

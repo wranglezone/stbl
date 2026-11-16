@@ -483,3 +483,147 @@ test_that("stabilize_lst() checks .simplify (#407)", {
     "logical"
   )
 })
+
+test_that("stabilize_lst() resolves unconditional and conditional .required (#291)", {
+  spec <- function(x, ...) {
+    stabilize_lst(
+      x,
+      name = specify_chr_scalar(),
+      card = specify_int_scalar(),
+      address = specify_chr_scalar(),
+      ...
+    )
+  }
+  req <- list("name", card = "address")
+  expect_identical(spec(list(name = "A"), .required = req), list(name = "A"))
+  expect_identical(
+    spec(list(address = "x"), .required = list(card = "address")),
+    list(address = "x")
+  )
+  expect_pkg_error_snapshot(
+    spec(list(name = "A", card = 1L), .required = req),
+    "stbl",
+    "missing_element"
+  )
+  expect_pkg_error_classes(
+    spec(list(card = 1L), .required = req),
+    "stbl",
+    "missing_element"
+  )
+  # Named atomic vectors behave like lists.
+  expect_pkg_error_classes(
+    spec(list(name = "A", card = 1L), .required = c("name", card = "address")),
+    "stbl",
+    "missing_element"
+  )
+})
+
+test_that("stabilize_lst() scopes nested .required (#291)", {
+  spec <- function(x, req) {
+    stabilize_lst(x, .named = TRUE, .required = req)
+  }
+  nested <- list(card = list(address = c("zip", "city")))
+  flat <- list(card = "address", address = c("zip", "city"))
+  expect_no_error(spec(list(address = 1), nested))
+  expect_pkg_error_classes(
+    spec(list(address = 1), flat),
+    "stbl",
+    "missing_element"
+  )
+  expect_no_error(spec(list(card = 1), nested))
+  expect_pkg_error_classes(
+    spec(list(card = 1, address = 1, zip = 1), nested),
+    "stbl",
+    "missing_element"
+  )
+  expect_no_error(spec(list(card = 1, address = 1, zip = 1, city = 1), nested))
+})
+
+test_that("stabilize_lst() validates .required (#291)", {
+  expect_pkg_error_classes(
+    stabilize_lst(list(a = 1), .named = TRUE, .required = list(a = list(1))),
+    "stbl",
+    "bad_required"
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(a = 1),
+      .named = TRUE,
+      .required = list(a = NA_character_)
+    ),
+    "stbl",
+    "bad_required"
+  )
+})
+
+test_that("stabilize_lst() requires names in .required without specs (#291)", {
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(a = 1L),
+      a = specify_int_scalar(),
+      .required = c("a", "z")
+    ),
+    "stbl",
+    "missing_element"
+  )
+  given <- list(a = 1L, z = "anything")
+  # NULL: known but unchecked.
+  expect_identical(
+    stabilize_lst(given, a = specify_int_scalar(), .required = c("a", "z")),
+    given
+  )
+  # TRUE: ordinary extra element.
+  expect_identical(
+    stabilize_lst(
+      given,
+      a = specify_int_scalar(),
+      .required = c("a", "z"),
+      .named = TRUE
+    ),
+    given
+  )
+  # A function validates it.
+  expect_pkg_error_classes(
+    stabilize_lst(
+      given,
+      a = specify_int_scalar(),
+      .required = c("a", "z"),
+      .named = specify_int_scalar()
+    ),
+    "stbl",
+    "incompatible_values",
+    "integer"
+  )
+})
+
+test_that("stabilize_lst() errors early for unspecced .required with .named = FALSE (#291)", {
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(a = 1L), .required = "a", .named = FALSE),
+    "stbl",
+    "bad_required"
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(NULL, .required = "a", .named = FALSE),
+    "stbl",
+    "bad_required"
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(),
+      .required = list(a = "b"),
+      .named = FALSE,
+      a = specify_int_scalar()
+    ),
+    "stbl",
+    "bad_required"
+  )
+  expect_identical(
+    stabilize_lst(
+      list(a = 1L),
+      a = specify_int_scalar(),
+      .required = "a",
+      .named = FALSE
+    ),
+    list(a = 1L)
+  )
+})

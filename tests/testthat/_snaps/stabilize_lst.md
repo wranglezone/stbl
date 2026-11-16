@@ -203,3 +203,21 @@
       ! `list(a = 1L, b = 2L, a = 3L, b = 4L)` must not contain duplicate names.
       x Duplicate names: "a" and "b"
 
+# stabilize_lst() resolves unconditional and conditional .required (#291)
+
+    Code
+      spec(list(name = "A", card = 1L), .required = req)
+    Condition <stbl-error-missing_element>
+      Error in `spec()`:
+      ! `x` must contain element "address" when "card" is present.
+
+# stabilize_lst() errors early for unspecced .required with .named = FALSE (#291)
+
+    Code
+      stabilize_lst(list(a = 1L), .required = "a", .named = FALSE)
+    Condition <stbl-error-bad_required>
+      Error:
+      ! Every name in the requirements must have a spec in `...` when `.named` is `FALSE`.
+      x Missing spec for: "a"
+      i Use `NULL` to allow required names without specs.
+

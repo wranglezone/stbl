@@ -95,7 +95,10 @@ element is required (its absence is an error) is controlled by \code{.required}.
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
 \itemize{
-\item \code{NULL} or \code{FALSE} (default): any extra named elements cause an error.
+\item \code{NULL} (default): any extra named elements cause an error. Names in
+\code{.required} that have no spec in \code{...} are allowed, unchecked.
+\item \code{FALSE}: any extra named elements cause an error, and every name in
+\code{.required} must have a spec in \code{...}.
 \item \code{TRUE}: extra named elements are allowed, unchecked.
 \item A single stabilizer function, such as a \verb{stabilize_*} function
 (\code{\link[=stabilize_chr]{stabilize_chr()}}, etc) or a function produced by a \verb{specify_*()} function
@@ -127,12 +130,19 @@ will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 \item{.max_size}{(\code{integer(1)}) The maximum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
 
-\item{.required}{\code{(character)} Names (from \code{...}) of elements that must be
+\item{.required}{\verb{(character or list)} Names of elements that must be
 present in \code{.x}. Defaults to all names in \code{...}, so every named spec is
-required unless you opt it out. Named specs \emph{not} listed here are optional:
-if absent, no error is raised; if present, they're validated normally. Pass
-\code{NULL} or \code{character()} to make every named spec optional. A zero-length
-\code{.x} (such as \code{list()}) skips this check when \code{.allow_zero_length = TRUE}.}
+required unless you opt it out. A supplied \code{.required} \emph{replaces} that
+default, so \code{.required = list(credit_card = "billing_address")} makes every
+other spec optional; list the unconditional names explicitly. Specs for
+names that are not required are optional: if absent, no error is raised; if
+present, they're validated normally. Pass \code{NULL} or \code{character()} to make
+every named spec optional. Every name in \code{.required} is enforced, whether
+or not it has a spec in \code{...} (see \code{.named}). A zero-length \code{.x} (such as
+\code{list()}) skips this check when \code{.allow_zero_length = TRUE}. See \code{required}
+in [stabilize_names)()] for details on expressing conditional requirements.
+
+[stabilize_names)()]: R:stabilize_names)()}
 
 \item{.coerce_function}{(\code{logical(1)}) Should functions be converted?}
 
@@ -168,7 +178,10 @@ simplification is possible), or an error condition with classes
 elements are present.
 \item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
 unnamed.
-\item \verb{<stbl-error-missing_element>} when a required named element is absent.
+\item \verb{<stbl-error-missing_element>} when a required named element is absent
+(including conditionally required elements whose trigger is present).
+\item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when
+\code{.named = FALSE} and a name in \code{.required} has no spec in \code{...}.
 \item \verb{<stbl-error-bad_unnamed>} when unnamed elements are present but
 \code{.unnamed} is \code{NULL} or \code{FALSE}.
 \item \verb{<stbl-error-bad_named>} when extra named elements are present but
@@ -235,6 +248,20 @@ stabilize_lst(
 try(
   stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
 )
+
+# Conditional requirements: when `credit_card` is present, `billing_address`
+# is required.
+stabilize_credit_card <- function(x) {
+  stabilize_lst(
+    x,
+    name = specify_chr_scalar(),
+    credit_card = specify_int_scalar(),
+    billing_address = specify_chr_scalar(),
+    .required = list("name", credit_card = "billing_address")
+  )
+}
+stabilize_credit_card(list(name = "Alice"))
+try(stabilize_credit_card(list(name = "Alice", credit_card = 1234L)))
 
 # Simplify a list of scalars to an atomic vector
 stabilize_lst(

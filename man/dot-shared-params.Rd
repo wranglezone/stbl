@@ -136,7 +136,8 @@ throws an error, try installing the stringi package.}
 single atomic vector when possible (every result has size 1 and shares a
 common type)? If \code{FALSE}, a list is always returned.}
 
-\item{required}{\code{(character)} Names that must be present in \code{x}.}
+\item{required}{\verb{(character or list)} Names that must be present in \code{x}. A
+list can express conditional requirements (see \code{\link[=stabilize_names]{stabilize_names()}}).}
 
 \item{spec}{\verb{(function)} A single stabilizer or conversion function, such as
 a \verb{to_*} function (\code{\link[=to_chr]{to_chr()}}, etc.), a \verb{stabilize_*} function

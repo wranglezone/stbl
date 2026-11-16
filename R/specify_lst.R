@@ -35,6 +35,15 @@
 #'   .required = "name"
 #' )
 #' stabilize_settings(list(name = "Alice"))
+#'
+#' # Require an element only when another is present
+#' stabilize_payment <- specify_lst(
+#'   name = specify_chr_scalar(),
+#'   card = specify_int_scalar(),
+#'   address = specify_chr_scalar(),
+#'   .required = list("name", card = "address")
+#' )
+#' try(stabilize_payment(list(name = "Alice", card = 1L)))
 specify_lst <- function(
   ...,
   .named = NULL,

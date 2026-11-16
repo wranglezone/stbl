@@ -4,7 +4,7 @@
       validator(data.frame(name = "Alice"))
     Condition <stbl-error-missing_element>
       Error:
-      ! `data.frame(name = "Alice")` must contain element "age".
+      ! `data.frame(name = "Alice")` must contain column "age".
 
 # specify_df() passes through .min_rows, .max_rows (#142)
 

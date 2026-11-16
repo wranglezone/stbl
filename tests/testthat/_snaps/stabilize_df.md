@@ -36,7 +36,7 @@
       stabilize_df(data.frame(foo = "a"), name = specify_chr_scalar())
     Condition <stbl-error-missing_element>
       Error:
-      ! `data.frame(foo = "a")` must contain element "name".
+      ! `data.frame(foo = "a")` must contain column "name".
 
 # stabilize_df() checks required columns for zero-column .x when .allow_zero_length = FALSE (#344)
 
@@ -44,7 +44,7 @@
       stabilize_df(data.frame(), name = specify_chr_scalar(), .allow_zero_length = FALSE)
     Condition <stbl-error-missing_element>
       Error:
-      ! `data.frame()` must contain element "name".
+      ! `data.frame()` must contain column "name".
 
 # stabilize_df() errors informatively when column fails validation (#142, #310, #335, #377)
 
@@ -112,4 +112,13 @@
       Error:
       ! All elements passed via `...` must be named.
       i Each name corresponds to a required element in the list.
+
+# stabilize_df() supports conditional .required (#291)
+
+    Code
+      stabilize_df(given, name = specify_chr_scalar(), card = specify_int_scalar(),
+      address = specify_chr_scalar(), .required = list("name", card = "address"))
+    Condition <stbl-error-missing_element>
+      Error:
+      ! `given` must contain column "address" when "card" is present.
 

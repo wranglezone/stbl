@@ -511,23 +511,13 @@
   x_arg = caller_arg(x),
   call = caller_env()
 ) {
-  required <- to_chr(
+  required <- .normalize_required(required, "required", call)
+  .check_required_present(
     required,
-    allow_null = TRUE,
-    x_arg = "required",
-    call = call
-  )
-  required <- unique(required[!is.na(required)])
-  missing_names <- setdiff(required, rlang::names2(x))
-  if (!length(missing_names)) {
-    return(invisible(NULL))
-  }
-  .stop_must(
-    "must contain name{?s} {.val {missing_names}}.",
+    present = rlang::names2(x),
+    noun = "name",
     x_arg = x_arg,
-    call = call,
-    subclass = "missing_element",
-    message_env = rlang::current_env()
+    call = call
   )
 }
 

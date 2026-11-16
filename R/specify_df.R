@@ -30,10 +30,19 @@
 #'   .required = "name"
 #' )
 #' stabilize_person_df2(data.frame(name = "Alice"))
+#'
+#' # Require a column only when another is present
+#' stabilize_person_df3 <- specify_df(
+#'   name = specify_chr_scalar(allow_na = FALSE),
+#'   card = specify_int_scalar(),
+#'   address = specify_chr_scalar(),
+#'   .required = list("name", card = "address")
+#' )
+#' try(stabilize_person_df3(data.frame(name = "Alice", card = 1L)))
 specify_df <- function(
   ...,
   .extra_cols = NULL,
-  .col_names = NULL,
+  .col_names = lifecycle::deprecated(), # LIFECYCLE-REMOVE(.col_names)
   .min_rows = NULL,
   .max_rows = NULL,
   .allow_null = TRUE,
@@ -41,6 +50,17 @@ specify_df <- function(
   .required = ...names()
 ) {
   element_specs <- list(...)
+  # LIFECYCLE-REMOVE(.col_names)
+  has_col_names <- lifecycle::is_present(.col_names)
+  if (has_col_names) {
+    lifecycle::deprecate_warn(
+      when = "0.7.0",
+      what = "specify_df(.col_names)",
+      with = "specify_df(.required)"
+    )
+  } else {
+    .col_names <- NULL
+  }
   structure(
     function(
       .x,
@@ -49,13 +69,22 @@ specify_df <- function(
       .call = caller_env(),
       .x_class = object_type(.x)
     ) {
+      # LIFECYCLE-REMOVE(.col_names)
+      if (has_col_names) {
+        # specify_df() already warned.
+        rlang::local_options(lifecycle_verbosity = "quiet")
+      }
       rlang::inject(
         stabilize_df(
           .x,
           !!!element_specs,
           !!!list(...),
           .extra_cols = .extra_cols,
-          .col_names = .col_names,
+          .col_names = if (has_col_names) {
+            .col_names
+          } else {
+            lifecycle::deprecated()
+          },
           .min_rows = .min_rows,
           .max_rows = .max_rows,
           .allow_null = .allow_null,

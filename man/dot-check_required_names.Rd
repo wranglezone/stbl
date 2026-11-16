@@ -14,7 +14,8 @@
 \arguments{
 \item{x}{The object to check.}
 
-\item{required}{\code{(character)} Names that must be present in \code{x}.}
+\item{required}{\verb{(character or list)} Names that must be present in \code{x}. A
+list can express conditional requirements (see \code{\link[=stabilize_names]{stabilize_names()}}).}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
