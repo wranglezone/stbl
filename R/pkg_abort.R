@@ -111,17 +111,29 @@ expect_pkg_error_classes <- function(
 #' @returns `TRUE` if `expr` is a covr counter call, `FALSE` otherwise.
 #' @keywords internal
 .is_covr_count_call <- function(expr) {
-  is.call(expr) &&
+  if (!is.call(expr)) {
+    return(FALSE)
+  }
+  # covr < 4.0.0 instruments with `covr:::count(key)`.
+  if (
+    identical(expr[[1L]], call(":::", as.symbol("covr"), as.symbol("count")))
+  ) {
+    return(TRUE)
+  }
+  # covr >= 4.0.0 instruments with `.Call(covr:::covr_count, key)`.
+  identical(expr[[1L]], as.symbol(".Call")) &&
+    length(expr) >= 2L &&
     identical(
-      expr[[1L]],
-      call(":::", as.symbol("covr"), as.symbol("count"))
+      expr[[2L]],
+      call(":::", as.symbol("covr"), as.symbol("covr_count"))
     )
 }
 
 #' Strip covr counter wrappers from an expression
 #'
 #' covr instruments code for coverage by wrapping expressions in
-#' `if (TRUE) { covr:::count(key); original }` blocks. This function recursively
+#' `if (TRUE) { covr:::count(key); original }` blocks (or, in covr 4.0.0 and
+#' later, `if (TRUE) { .Call(covr:::covr_count, key); original }`). This function recursively
 #' removes those wrappers so that snapshotted code remains stable across normal
 #' and coverage runs.
 #'
