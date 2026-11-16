@@ -1,9 +1,10 @@
 # Strip covr counter wrappers from an expression
 
 covr instruments code for coverage by wrapping expressions in
-`if (TRUE) { covr:::count(key); original }` blocks. This function
-recursively removes those wrappers so that snapshotted code remains
-stable across normal and coverage runs.
+`if (TRUE) { covr:::count(key); original }` blocks (or, in covr 4.0.0
+and later, `if (TRUE) { .Call(covr:::covr_count, key); original }`).
+This function recursively removes those wrappers so that snapshotted
+code remains stable across normal and coverage runs.
 
 ## Usage
 
