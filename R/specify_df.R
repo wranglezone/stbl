@@ -41,6 +41,7 @@
 #' try(stabilize_person_df3(data.frame(name = "Alice", card = 1L)))
 specify_df <- function(
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(), # LIFECYCLE-REMOVE(.col_names)
   .min_rows = NULL,
@@ -79,6 +80,7 @@ specify_df <- function(
           .x,
           !!!element_specs,
           !!!list(...),
+          .patterns = .patterns,
           .extra_cols = .extra_cols,
           .col_names = if (has_col_names) {
             .col_names

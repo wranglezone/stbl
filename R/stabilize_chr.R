@@ -436,10 +436,24 @@ stabilise_character_scalar <- stabilize_chr_scalar
     return(is.na(x) | stringr::str_detect(x, regex))
   }
 
+  is.na(x) | .detect_regex(x, regex)
+}
+
+#' Detect a regex in a character vector
+#'
+#' Uses ICU regular expressions (via stringi) when available, because they
+#' support lookarounds, named groups, and `\\p{}` classes that are common in
+#' ECMAScript-style patterns. Falls back to [grepl()] otherwise.
+#'
+#' @param x `(character)` Values to search.
+#' @param regex `(character(1))` The regular expression.
+#' @returns A logical vector the length of `x` (`NA` where `x` is `NA`).
+#' @keywords internal
+.detect_regex <- function(x, regex) {
   if (requireNamespace("stringi", quietly = TRUE)) {
-    return(is.na(x) | stringi::stri_detect_regex(x, regex))
+    return(stringi::stri_detect_regex(x, regex))
   }
-  return(is.na(x) | grepl(regex, x)) # nocov
+  grepl(regex, x) # nocov
 }
 
 #' Describe a character-based validation failure

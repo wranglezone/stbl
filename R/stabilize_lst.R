@@ -27,6 +27,15 @@
 #'   - A single stabilizer function, such as a `stabilize_*` function
 #'   ([stabilize_chr()], etc) or a function produced by a `specify_*()` function
 #'   ([specify_chr()], etc), used to validate every unnamed element.
+#' @param .patterns `(list)` A named list of stabilizers, such as `specify_*()`
+#'   results, `stabilize_*()` functions, or `to_*()` functions. Each name is a
+#'   regular expression matched against the names of `.x`, and the spec is
+#'   applied to every element whose name matches. Matching uses ICU regular
+#'   expressions when the stringi package is installed (otherwise [grepl()]).
+#'   An element matching any pattern is not an "extra" element, so `.named` does
+#'   not apply to it. An element that matches several patterns, or a pattern and
+#'   an exact spec in `...`, is checked by every matching spec and the results
+#'   are combined with [reconcile()].
 #' @param .unique (`logical(1)`) Should all elements in `.x` be distinct? If
 #'   `TRUE`, duplicated elements are rejected.
 #' @param .required `(character or list)` Names of elements that must be
@@ -60,6 +69,13 @@
 #'   (including conditionally required elements whose trigger is present).
 #'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
 #'   `.named = FALSE` and a name in `.required` has no spec in `...`.
+#'   - `<stbl-error-bad_patterns>` when `.patterns` is invalid, with subclasses
+#'   `<stbl-error-bad_patterns-not_list>`,
+#'   `<stbl-error-bad_patterns-missing_name>`,
+#'   `<stbl-error-bad_patterns-invalid_regex>`, or
+#'   `<stbl-error-bad_patterns-invalid_spec>`.
+#'   - `<stbl-error-cant_stabilize_patterns>` when elements matching `.patterns`
+#'   fail their specs.
 #'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
 #'   `.unnamed` is `NULL` or `FALSE`.
 #'   - `<stbl-error-bad_named>` when extra named elements are present but
@@ -136,6 +152,12 @@
 #' stabilize_credit_card(list(name = "Alice"))
 #' try(stabilize_credit_card(list(name = "Alice", credit_card = 1234L)))
 #'
+#' # Validate elements by name pattern
+#' stabilize_lst(
+#'   list(S_a = "x", I_n = 1L),
+#'   .patterns = list("^S_" = stabilize_chr_scalar, "^I_" = stabilize_int_scalar)
+#' )
+#'
 #' # Simplify a list of scalars to an atomic vector
 #' stabilize_lst(
 #'   list(lon = 1.5, lat = 2L),
@@ -146,6 +168,7 @@
 stabilize_lst <- function(
   .x,
   ...,
+  .patterns = NULL,
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
@@ -165,9 +188,13 @@ stabilize_lst <- function(
   force(.call)
   .simplify <- to_lgl_scalar(.simplify, x_arg = ".simplify", call = .call)
   .required <- .normalize_required(.required, ".required", call = .call)
+  .patterns <- .normalize_patterns(.patterns, ".patterns", call = .call)
   .check_required_have_specs(
     .required,
-    spec_names = ...names(),
+    spec_names = c(
+      ...names(),
+      .names_matching_patterns(.required_names(.required), .patterns)
+    ),
     named = .named,
     named_arg = ".named",
     call = .call
@@ -202,6 +229,7 @@ stabilize_lst <- function(
   .x <- .validate_named_elements(
     .x,
     ...,
+    .patterns = .patterns,
     .named = .named,
     .required = .required,
     .allow_duplicate_names = .allow_duplicate_names,
@@ -321,6 +349,7 @@ NULL
 .validate_named_elements <- function(
   .x,
   ...,
+  .patterns,
   .named,
   .required,
   .allow_duplicate_names,
@@ -342,16 +371,30 @@ NULL
     x_arg = .x_arg,
     call = .call
   )
-  is_extra_named <- rlang::have_name(.x) & !(nms %in% names(element_specs))
-  if (is.null(.named) || isFALSE(.named)) {
-    # Required names without specs are known (but unchecked), not extra.
-    is_extra_named <- is_extra_named &
-      !(nms %in% setdiff(.required_names(.required), names(element_specs)))
-  }
+  matches <- .match_patterns(nms, .patterns)
+  is_matched <- rowSums(matches) > 0L
+  is_extra_named <- .find_extra_named(
+    .x,
+    nms,
+    spec_names = names(element_specs),
+    is_matched = is_matched,
+    named = .named,
+    required = .required
+  )
   .x <- .validate_specified_elements(
     .x,
     element_specs,
     nms,
+    skip = is_matched,
+    .x_arg = .x_arg,
+    .call = .call
+  )
+  .x <- .validate_pattern_elements(
+    .x,
+    nms,
+    element_specs,
+    .patterns,
+    matches,
     .x_arg = .x_arg,
     .call = .call
   )
@@ -376,19 +419,23 @@ NULL
   .x,
   element_specs,
   nms,
+  skip = rep(FALSE, length(nms)),
   .x_arg,
   .call
 ) {
   for (nm in names(element_specs)) {
-    positions <- which(nms == nm)
+    all_positions <- which(nms == nm)
+    positions <- setdiff(all_positions, which(skip))
     if (!length(positions)) {
       next
     }
     for (i in positions) {
-      # Use name-based path when unambiguous; fall back to position for
-      # duplicates
-      nm_arg <- if (length(positions) == 1L) deparse(nm) else i
-      element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
+      element_arg <- .element_arg(
+        .x_arg,
+        nm,
+        i,
+        is_ambiguous = length(all_positions) > 1L
+      )
       .x[[i]] <- .call_specified_fn(
         element_specs[[nm]],
         .x[[i]],
@@ -398,6 +445,53 @@ NULL
     }
   }
   .x
+}
+
+#' Build the `x_arg` label for one element of a list
+#'
+#' Uses the element name when unambiguous; falls back to position for
+#' duplicated names.
+#'
+#' @param nm `(character(1))` The element's name.
+#' @param position `(integer(1))` The element's position.
+#' @param is_ambiguous `(logical(1))` Is `nm` shared with other elements?
+#' @inheritParams stabilize_lst
+#' @returns `(character(1))` The label, such as `x[["a"]]` or `x[[2]]`.
+#' @keywords internal
+.element_arg <- function(.x_arg, nm, position, is_ambiguous) {
+  nm_arg <- if (is_ambiguous) position else deparse(nm)
+  paste0(.x_arg, "[[", nm_arg, "]]")
+}
+
+#' Find extra named elements
+#'
+#' Extra named elements are named, have no exact spec, and match no pattern.
+#' When `named` is `NULL` or `FALSE`, names in `required` that lack a spec are
+#' known (but unchecked), so they are not extra.
+#'
+#' @param spec_names `(character)` Names of the exact specs.
+#' @param is_matched `(logical)` Element-wise indicator of elements matching
+#'   any pattern.
+#' @param named The `.named` argument.
+#' @param required The normalized `.required` argument.
+#' @inheritParams stabilize_lst
+#' @inheritParams .shared-params-lst
+#' @returns `(logical)` Element-wise indicator of extra named positions.
+#' @keywords internal
+.find_extra_named <- function(
+  .x,
+  nms,
+  spec_names,
+  is_matched,
+  named,
+  required
+) {
+  is_extra_named <- rlang::have_name(.x) & !(nms %in% spec_names) & !is_matched
+  if (is.null(named) || isFALSE(named)) {
+    is_extra_named <- is_extra_named &
+      !(nms %in% setdiff(.required_names(required), spec_names))
+  }
+  is_extra_named
 }
 
 #' Validate or reject unnamed elements
@@ -415,30 +509,57 @@ NULL
     return(.x)
   }
   if (is.null(.unnamed)) {
-    unnamed_positions <- which(is_unnamed)
-    .stop_must(
-      "must not contain unnamed elements.",
-      x_arg = .x_arg,
-      additional_msg = c(
-        x = format_inline(
-          "Unnamed position{?s}: {as.character(unnamed_positions)}"
-        )
-      ),
-      call = .call,
-      subclass = "bad_unnamed",
-      message_env = rlang::current_env()
-    )
+    .abort_unnamed(which(is_unnamed), .x_arg, .call)
   }
   for (i in which(is_unnamed)) {
-    element_arg <- paste0(.x_arg, "[[", i, "]]")
     .x[[i]] <- .call_specified_fn(
       .unnamed,
       .x[[i]],
-      .x_arg = element_arg,
+      .x_arg = paste0(.x_arg, "[[", i, "]]"),
       .call = .call
     )
   }
   .x
+}
+
+#' Abort because unnamed elements are not allowed
+#'
+#' @param unnamed_positions `(integer)` Positions of the unnamed elements.
+#' @inheritParams stabilize_lst
+#' @returns Does not return; always signals an error.
+#' @keywords internal
+.abort_unnamed <- function(unnamed_positions, .x_arg, .call) {
+  .stop_must(
+    "must not contain unnamed elements.",
+    x_arg = .x_arg,
+    additional_msg = c(
+      x = format_inline(
+        "Unnamed position{?s}: {as.character(unnamed_positions)}"
+      )
+    ),
+    call = .call,
+    subclass = "bad_unnamed",
+    message_env = rlang::current_env()
+  )
+}
+
+#' Abort because extra named elements are not allowed
+#'
+#' @param extra_names `(character)` Names of the extra elements.
+#' @inheritParams stabilize_lst
+#' @returns Does not return; always signals an error.
+#' @keywords internal
+.abort_extra_named <- function(extra_names, .x_arg, .call) {
+  .stop_must(
+    "must not contain extra named elements.",
+    x_arg = .x_arg,
+    additional_msg = c(
+      x = format_inline("Extra element{?s}: {.val {extra_names}}")
+    ),
+    call = .call,
+    subclass = "bad_named",
+    message_env = rlang::current_env()
+  )
 }
 
 #' Validate or reject extra named elements
@@ -463,24 +584,16 @@ NULL
     return(.x)
   }
   if (is.null(named_spec)) {
-    extra_names <- unique(nms[is_extra_named])
-    .stop_must(
-      "must not contain extra named elements.",
-      x_arg = .x_arg,
-      additional_msg = c(
-        x = format_inline("Extra element{?s}: {.val {extra_names}}")
-      ),
-      call = .call,
-      subclass = "bad_named",
-      message_env = rlang::current_env()
-    )
+    .abort_extra_named(unique(nms[is_extra_named]), .x_arg, .call)
   }
   dup_extra_nms <- nms[is_extra_named][duplicated(nms[is_extra_named])]
   for (i in which(is_extra_named)) {
-    nm <- nms[[i]]
-    # Use name-based path when unambiguous; fall back to position for duplicates
-    nm_arg <- if (!nm %in% dup_extra_nms) deparse(nm) else i
-    element_arg <- paste0(.x_arg, "[[", nm_arg, "]]")
+    element_arg <- .element_arg(
+      .x_arg,
+      nms[[i]],
+      i,
+      is_ambiguous = nms[[i]] %in% dup_extra_nms
+    )
     .x[[i]] <- .call_specified_fn(
       named_spec,
       .x[[i]],

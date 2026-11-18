@@ -10,6 +10,7 @@
 stabilize_df(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -25,6 +26,7 @@ stabilize_df(
 stabilise_df(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -40,6 +42,7 @@ stabilise_df(
 stabilize_data_frame(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -55,6 +58,7 @@ stabilize_data_frame(
 stabilise_data_frame(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -75,6 +79,11 @@ stabilise_data_frame(
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a column in \code{.x}, and the
 function is used to validate that column when present. Whether the column
 is required is controlled by \code{.required}.}
+
+\item{.patterns}{\code{(list)} A named list of stabilizers. Each name is a regular
+expression matched against the column names of \code{.x}, and the spec is
+applied to every matching column. See \code{.patterns} in \code{\link[=stabilize_lst]{stabilize_lst()}} for
+the matching rules.}
 
 \item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:
@@ -145,6 +154,8 @@ for conversion to a data frame.
 \code{.max_rows} rows.
 \item \verb{<stbl-error-missing_cols>} when required names in \code{.col_names} are
 absent.
+\item \verb{<stbl-error-bad_patterns>} when \code{.patterns} is invalid (see
+\code{\link[=stabilize_lst]{stabilize_lst()}} for subclasses).
 \item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when
 \code{.extra_cols = FALSE} and a name in \code{.required} has no spec in \code{...}.
 \item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is

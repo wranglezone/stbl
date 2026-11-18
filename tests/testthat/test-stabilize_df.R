@@ -31,23 +31,23 @@ test_that("stabilize_df() errors for non-convertible input (#142, #377)", {
 })
 
 test_that("stabilize_df() converts a named list to a data frame (#142)", {
-  given_list <- list(name = "Alice", age = 30L)
+  given_list <- list(name = c("Alice", "Bob"), age = c(30, 31))
   result <- stabilize_df(
     given_list,
-    name = specify_chr_scalar(),
-    age = specify_int_scalar()
+    name = stabilize_chr,
+    age = stabilize_int
   )
   expect_s3_class(result, "data.frame")
-  expect_identical(result$name, "Alice")
-  expect_identical(result$age, 30L)
+  expect_identical(result$name, c("Alice", "Bob"))
+  expect_identical(result$age, 30:31)
 })
 
 test_that("stabilize_df() returns a valid data frame unchanged (#142)", {
   given <- data.frame(name = "Alice", age = 30L)
   result <- stabilize_df(
     given,
-    name = specify_chr_scalar(),
-    age = specify_int_scalar()
+    name = stabilize_chr,
+    age = stabilize_int
   )
   expect_identical(result, given)
   expect_s3_class(result, "data.frame")
@@ -55,14 +55,14 @@ test_that("stabilize_df() returns a valid data frame unchanged (#142)", {
 
 test_that("stabilize_df() converts compatible column types (#142)", {
   given <- data.frame(age = "30")
-  result <- stabilize_df(given, age = specify_int_scalar())
+  result <- stabilize_df(given, age = stabilize_int)
   expect_identical(result$age, 30L)
   expect_s3_class(result, "data.frame")
 })
 
 test_that("stabilize_df() errors when required column is missing (#142)", {
   expect_pkg_error_snapshot(
-    stabilize_df(data.frame(foo = "a"), name = specify_chr_scalar()),
+    stabilize_df(data.frame(foo = "a"), name = stabilize_chr),
     "stbl",
     "missing_element"
   )
@@ -72,15 +72,15 @@ test_that("stabilize_df() allows an absent optional column via .required (#279)"
   given <- data.frame(name = "Alice")
   result <- stabilize_df(
     given,
-    name = specify_chr_scalar(),
-    age = specify_int_scalar(),
+    name = stabilize_chr,
+    age = stabilize_int,
     .required = "name"
   )
   expect_identical(result, given)
 })
 
 test_that("stabilize_df() skips required-column check for zero-column .x by default (#344)", {
-  result <- stabilize_df(data.frame(), name = specify_chr_scalar())
+  result <- stabilize_df(data.frame(), name = stabilize_chr)
   expect_identical(result, data.frame())
 })
 
@@ -88,7 +88,7 @@ test_that("stabilize_df() checks required columns for zero-column .x when .allow
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(),
-      name = specify_chr_scalar(),
+      name = stabilize_chr,
       .allow_zero_length = FALSE
     ),
     "stbl",
@@ -100,8 +100,8 @@ test_that("stabilize_df() still validates an optional column when present (#279)
   expect_pkg_error_classes(
     stabilize_df(
       data.frame(name = "Alice", age = "not-int"),
-      name = specify_chr_scalar(),
-      age = specify_int_scalar(),
+      name = stabilize_chr,
+      age = stabilize_int,
       .required = "name"
     ),
     "stbl",
@@ -114,7 +114,7 @@ test_that("stabilize_df() errors informatively when column fails validation (#14
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(count = "not-an-int"),
-      count = specify_int_scalar()
+      count = stabilize_int
     ),
     "stbl",
     "incompatible_values",
@@ -124,7 +124,7 @@ test_that("stabilize_df() errors informatively when column fails validation (#14
 
 test_that("stabilize_df() errors on extra columns by default (#142)", {
   expect_pkg_error_snapshot(
-    stabilize_df(data.frame(a = 1L, b = 2L), a = specify_int_scalar()),
+    stabilize_df(data.frame(a = 1L, b = 2L), a = stabilize_int),
     "stbl",
     "bad_named"
   )
@@ -134,7 +134,7 @@ test_that("stabilize_df() allows extra columns with .extra_cols (#142)", {
   given <- data.frame(a = 1L, b = 2L)
   result <- stabilize_df(
     given,
-    a = specify_int_scalar(),
+    a = stabilize_int,
     .extra_cols = assert_present
   )
   expect_identical(result, given)
@@ -144,8 +144,8 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310, 
   expect_pkg_error_snapshot(
     stabilize_df(
       data.frame(a = 1L, b = "not-int"),
-      a = specify_int_scalar(),
-      .extra_cols = specify_int_scalar()
+      a = stabilize_int,
+      .extra_cols = stabilize_int
     ),
     "stbl",
     "incompatible_values",
@@ -155,7 +155,7 @@ test_that("stabilize_df() validates extra columns with .extra_cols (#142, #310, 
 
 test_that("stabilize_df() allows extra columns unchecked with .extra_cols = TRUE (#281)", {
   given <- data.frame(a = 1L, b = "anything")
-  result <- stabilize_df(given, a = specify_int_scalar(), .extra_cols = TRUE)
+  result <- stabilize_df(given, a = stabilize_int, .extra_cols = TRUE)
   expect_identical(result, given)
 })
 
@@ -259,7 +259,7 @@ test_that("stabilize_df() allows .col_names alongside ... specs (#142)", {
   given <- data.frame(a = 1L, b = "hello", c = TRUE)
   result <- stabilize_df(
     given,
-    a = specify_int_scalar(),
+    a = stabilize_int,
     .col_names = c("b", "c"),
     .extra_cols = assert_present
   )
@@ -270,8 +270,8 @@ test_that("stabilize_df() preserves data frame class after column conversion (#1
   df <- data.frame(x = c("1", "2", "3"), y = 1:3)
   result <- stabilize_df(
     df,
-    x = specify_int(),
-    y = specify_int()
+    x = stabilize_int,
+    y = stabilize_int
   )
   expect_s3_class(result, "data.frame")
   expect_identical(result$x, 1L:3L)
@@ -286,7 +286,7 @@ test_that("stabilize_df() works with no column specs and .extra_cols (#142)", {
 
 test_that("stabilize_df() with unnamed specs errors informatively (#142)", {
   expect_pkg_error_snapshot(
-    stabilize_df(data.frame(a = 1L), specify_int_scalar()),
+    stabilize_df(data.frame(a = 1L), stabilize_int),
     "stbl",
     "unnamed_spec"
   )
@@ -317,9 +317,9 @@ test_that("stabilize_df() supports conditional .required (#291)", {
   expect_pkg_error_snapshot(
     stabilize_df(
       given,
-      name = specify_chr_scalar(),
-      card = specify_int_scalar(),
-      address = specify_chr_scalar(),
+      name = stabilize_chr,
+      card = stabilize_int,
+      address = stabilize_chr,
       .required = list("name", card = "address")
     ),
     "stbl",
@@ -328,9 +328,9 @@ test_that("stabilize_df() supports conditional .required (#291)", {
   expect_identical(
     stabilize_df(
       data.frame(name = "A"),
-      name = specify_chr_scalar(),
-      card = specify_int_scalar(),
-      address = specify_chr_scalar(),
+      name = stabilize_chr,
+      card = stabilize_int,
+      address = stabilize_chr,
       .required = list("name", card = "address")
     ),
     data.frame(name = "A")
@@ -352,5 +352,40 @@ test_that("stabilize_df() requires names in .required without specs (#291)", {
     stabilize_df(given, .required = "b", .extra_cols = FALSE),
     "stbl",
     "bad_required"
+  )
+})
+
+test_that("stabilize_df() applies .patterns to columns (#292)", {
+  given <- data.frame(score_a = 1L, score_b = 2L, id = "x")
+  expect_identical(
+    stabilize_df(
+      given,
+      .patterns = list("^score_" = specify_dbl(min_value = 0)),
+      id = stabilize_chr
+    ),
+    data.frame(score_a = 1, score_b = 2, id = "x")
+  )
+  expect_identical(
+    stabilize_df(
+      given[1:2],
+      .patterns = list("^score_" = stabilize_dbl),
+      .required = "score_a",
+      .extra_cols = FALSE
+    ),
+    data.frame(score_a = 1, score_b = 2)
+  )
+  expect_pkg_error_classes(
+    stabilize_df(
+      given,
+      .patterns = list("^score_" = specify_dbl(min_value = 5))
+    ),
+    "stbl",
+    "cant_stabilize_patterns"
+  )
+  expect_pkg_error_classes(
+    stabilize_df(given, .patterns = "a"),
+    "stbl",
+    "bad_patterns",
+    "not_list"
   )
 })
