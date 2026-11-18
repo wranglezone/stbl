@@ -10,6 +10,7 @@ with the provided arguments. `specify_list()` is a synonym of
 ``` r
 specify_lst(
   ...,
+  .patterns = NULL,
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
@@ -25,6 +26,7 @@ specify_lst(
 
 specify_list(
   ...,
+  .patterns = NULL,
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
@@ -50,6 +52,20 @@ specify_list(
   etc). Each name corresponds to an element in `.x`, and the function is
   used to validate that element when present. Whether the element is
   required (its absence is an error) is controlled by `.required`.
+
+- .patterns:
+
+  `(list)` A named list of stabilizers, such as `specify_*()` results,
+  `stabilize_*()` functions, or `to_*()` functions. Each name is a
+  regular expression matched against the names of `.x`, and the spec is
+  applied to every element whose name matches. Matching uses ICU regular
+  expressions when the stringi package is installed (otherwise
+  [`grepl()`](https://rdrr.io/r/base/grep.html)). An element matching
+  any pattern is not an "extra" element, so `.named` does not apply to
+  it. An element that matches several patterns, or a pattern and an
+  exact spec in `...`, is checked by every matching spec and the results
+  are combined with
+  [`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md).
 
 - .named:
 

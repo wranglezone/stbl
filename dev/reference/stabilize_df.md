@@ -13,6 +13,7 @@ are synonyms of `stabilize_df()`.
 stabilize_df(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -28,6 +29,7 @@ stabilize_df(
 stabilise_df(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -43,6 +45,7 @@ stabilise_df(
 stabilize_data_frame(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -58,6 +61,7 @@ stabilize_data_frame(
 stabilise_data_frame(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -86,6 +90,14 @@ stabilise_data_frame(
   etc). Each name corresponds to a column in `.x`, and the function is
   used to validate that column when present. Whether the column is
   required is controlled by `.required`.
+
+- .patterns:
+
+  `(list)` A named list of stabilizers. Each name is a regular
+  expression matched against the column names of `.x`, and the spec is
+  applied to every matching column. See `.patterns` in
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  for the matching rules.
 
 - .extra_cols:
 
@@ -187,6 +199,10 @@ The validated data frame, or an error condition with classes
 
 - `<stbl-error-missing_cols>` when required names in `.col_names` are
   absent.
+
+- `<stbl-error-bad_patterns>` when `.patterns` is invalid (see
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  for subclasses).
 
 - `<stbl-error-bad_required>` when `.required` is invalid, or when
   `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.

@@ -10,6 +10,7 @@ with the provided arguments. `specify_data_frame()` is a synonym of
 ``` r
 specify_df(
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -21,6 +22,7 @@ specify_df(
 
 specify_data_frame(
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -42,6 +44,14 @@ specify_data_frame(
   etc). Each name corresponds to a column in `.x`, and the function is
   used to validate that column when present. Whether the column is
   required is controlled by `.required`.
+
+- .patterns:
+
+  `(list)` A named list of stabilizers. Each name is a regular
+  expression matched against the column names of `.x`, and the spec is
+  applied to every matching column. See `.patterns` in
+  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
+  for the matching rules.
 
 - .extra_cols:
 

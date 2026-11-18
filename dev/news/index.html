@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +51,8 @@
 <ul><li>New <code><a href="../reference/reconcile.html">reconcile()</a></code> returns the narrowest common representation of equivalent values, or errors if they are not equivalent (<a href="https://github.com/wranglezone/stbl/issues/408" class="external-link">#408</a>).</li>
 <li>
 <code><a href="../reference/stabilize_all_of.html">stabilize_all_of()</a></code> now accepts specs whose results are equivalent but differ in type (such as integer and double), and returns the same result regardless of spec order (<a href="https://github.com/wranglezone/stbl/issues/408" class="external-link">#408</a>).</li>
+<li>
+<code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code>, <code><a href="../reference/stabilize_df.html">stabilize_df()</a></code>, <code><a href="../reference/specify_lst.html">specify_lst()</a></code>, and <code><a href="../reference/specify_df.html">specify_df()</a></code> gain <code>.patterns</code> to apply specs to every element or column whose name matches a regular expression (<a href="https://github.com/wranglezone/stbl/issues/292" class="external-link">#292</a>).</li>
 <li>
 <code><a href="../reference/stabilize_lst.html">stabilize_lst()</a></code> and <code><a href="../reference/specify_lst.html">specify_lst()</a></code> (and their synonyms) gain a <code>.simplify</code> argument (default <code>FALSE</code>) to combine a list of scalars with a common type into an atomic vector (<a href="https://github.com/wranglezone/stbl/issues/407" class="external-link">#407</a>).</li>
 <li>New <code><a href="../reference/stabilize_lst_positional.html">stabilize_lst_positional()</a></code> (and its synonyms <code><a href="../reference/stabilize_lst_positional.html">stabilise_lst_positional()</a></code>, <code><a href="../reference/stabilize_lst_positional.html">stabilize_list_positional()</a></code>, <code><a href="../reference/stabilize_lst_positional.html">stabilise_list_positional()</a></code>, <code><a href="../reference/stabilize_lst_positional.html">stabilize_tuple()</a></code>, and <code><a href="../reference/stabilize_lst_positional.html">stabilise_tuple()</a></code>) and <code><a href="../reference/specify_lst_positional.html">specify_lst_positional()</a></code> (with synonyms <code><a href="../reference/specify_lst_positional.html">specify_list_positional()</a></code> and <code><a href="../reference/specify_lst_positional.html">specify_tuple()</a></code>) validate a list positionally, applying a different spec to each element, like JSON Schema tuple arrays (<a href="https://github.com/wranglezone/stbl/issues/284" class="external-link">#284</a>).</li>

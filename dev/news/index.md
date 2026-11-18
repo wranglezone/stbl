@@ -45,6 +45,14 @@
   (such as integer and double), and returns the same result regardless
   of spec order
   ([\#408](https://github.com/wranglezone/stbl/issues/408)).
+- [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
+  [`stabilize_df()`](https://stbl.wrangle.zone/dev/reference/stabilize_df.md),
+  [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md),
+  and
+  [`specify_df()`](https://stbl.wrangle.zone/dev/reference/specify_df.md)
+  gain `.patterns` to apply specs to every element or column whose name
+  matches a regular expression
+  ([\#292](https://github.com/wranglezone/stbl/issues/292)).
 - [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
   and
   [`specify_lst()`](https://stbl.wrangle.zone/dev/reference/specify_lst.md)

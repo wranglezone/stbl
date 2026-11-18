@@ -5,7 +5,14 @@ Validate named elements against their spec functions
 ## Usage
 
 ``` r
-.validate_specified_elements(.x, element_specs, nms, .x_arg, .call)
+.validate_specified_elements(
+  .x,
+  element_specs,
+  nms,
+  skip = rep(FALSE, length(nms)),
+  .x_arg,
+  .call
+)
 ```
 
 ## Arguments

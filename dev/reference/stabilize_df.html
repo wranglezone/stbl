@@ -17,7 +17,7 @@ stabilize_df()."><meta property="og:image" content="https://stbl.wrangle.zone/lo
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +61,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stabilize_df</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -76,6 +77,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span><span class="fu">stabilise_df</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -91,6 +93,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span><span class="fu">stabilize_data_frame</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -106,6 +109,7 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 <span><span class="fu">stabilise_data_frame</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -133,6 +137,13 @@ the row count is within specified bounds. <code>stabilise_df()</code>,
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a column in <code>.x</code>, and the
 function is used to validate that column when present. Whether the column
 is required is controlled by <code>.required</code>.</p></dd>
+
+
+<dt id="arg--patterns">.patterns<a class="anchor" aria-label="anchor" href="#arg--patterns"></a></dt>
+<dd><p><code>(list)</code> A named list of stabilizers. Each name is a regular
+expression matched against the column names of <code>.x</code>, and the spec is
+applied to every matching column. See <code>.patterns</code> in <code><a href="stabilize_lst.html">stabilize_lst()</a></code> for
+the matching rules.</p></dd>
 
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
@@ -220,6 +231,8 @@ for conversion to a data frame.</p></li>
 <code>.max_rows</code> rows.</p></li>
 <li><p><code>&lt;stbl-error-missing_cols&gt;</code> when required names in <code>.col_names</code> are
 absent.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns&gt;</code> when <code>.patterns</code> is invalid (see
+<code><a href="stabilize_lst.html">stabilize_lst()</a></code> for subclasses).</p></li>
 <li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when
 <code>.extra_cols = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
 <li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.validate_named_elements</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  <span class="va">.patterns</span>,</span>
 <span>  <span class="va">.named</span>,</span>
 <span>  <span class="va">.required</span>,</span>
 <span>  <span class="va">.allow_duplicate_names</span>,</span>
@@ -68,6 +69,18 @@
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to an element in <code>.x</code>, and
 the function is used to validate that element when present. Whether the
 element is required (its absence is an error) is controlled by <code>.required</code>.</p></dd>
+
+
+<dt id="arg--patterns">.patterns<a class="anchor" aria-label="anchor" href="#arg--patterns"></a></dt>
+<dd><p><code>(list)</code> A named list of stabilizers, such as <code>specify_*()</code>
+results, <code>stabilize_*()</code> functions, or <code>to_*()</code> functions. Each name is a
+regular expression matched against the names of <code>.x</code>, and the spec is
+applied to every element whose name matches. Matching uses ICU regular
+expressions when the stringi package is installed (otherwise <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl()</a></code>).
+An element matching any pattern is not an "extra" element, so <code>.named</code> does
+not apply to it. An element that matches several patterns, or a pattern and
+an exact spec in <code>...</code>, is checked by every matching spec and the results
+are combined with <code><a href="reconcile.html">reconcile()</a></code>.</p></dd>
 
 
 <dt id="arg--named">.named<a class="anchor" aria-label="anchor" href="#arg--named"></a></dt>

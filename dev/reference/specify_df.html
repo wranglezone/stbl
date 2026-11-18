@@ -9,7 +9,7 @@ provided arguments. specify_data_frame() is a synonym of specify_df()."><meta pr
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,7 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_df</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -59,6 +60,7 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
 <span></span>
 <span><span class="fu">specify_data_frame</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
+<span>  .patterns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .col_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .min_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -79,6 +81,13 @@ provided arguments. <code>specify_data_frame()</code> is a synonym of <code>spec
 (<code><a href="specify_chr.html">specify_chr()</a></code>, etc). Each name corresponds to a column in <code>.x</code>, and the
 function is used to validate that column when present. Whether the column
 is required is controlled by <code>.required</code>.</p></dd>
+
+
+<dt id="arg--patterns">.patterns<a class="anchor" aria-label="anchor" href="#arg--patterns"></a></dt>
+<dd><p><code>(list)</code> A named list of stabilizers. Each name is a regular
+expression matched against the column names of <code>.x</code>, and the spec is
+applied to every matching column. See <code>.patterns</code> in <code><a href="stabilize_lst.html">stabilize_lst()</a></code> for
+the matching rules.</p></dd>
 
 
 <dt id="arg--extra-cols">.extra_cols<a class="anchor" aria-label="anchor" href="#arg--extra-cols"></a></dt>
