@@ -33,7 +33,7 @@
 # stabilize_df() errors when required column is missing (#142)
 
     Code
-      stabilize_df(data.frame(foo = "a"), name = specify_chr_scalar())
+      stabilize_df(data.frame(foo = "a"), name = stabilize_chr)
     Condition <stbl-error-missing_element>
       Error:
       ! `data.frame(foo = "a")` must contain column "name".
@@ -41,7 +41,7 @@
 # stabilize_df() checks required columns for zero-column .x when .allow_zero_length = FALSE (#344)
 
     Code
-      stabilize_df(data.frame(), name = specify_chr_scalar(), .allow_zero_length = FALSE)
+      stabilize_df(data.frame(), name = stabilize_chr, .allow_zero_length = FALSE)
     Condition <stbl-error-missing_element>
       Error:
       ! `data.frame()` must contain column "name".
@@ -49,7 +49,7 @@
 # stabilize_df() errors informatively when column fails validation (#142, #310, #335, #377)
 
     Code
-      stabilize_df(data.frame(count = "not-an-int"), count = specify_int_scalar())
+      stabilize_df(data.frame(count = "not-an-int"), count = stabilize_int)
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `data.frame(count = "not-an-int")[["count"]]` <character> must be convertible to <integer>
@@ -60,7 +60,7 @@
 # stabilize_df() errors on extra columns by default (#142)
 
     Code
-      stabilize_df(data.frame(a = 1L, b = 2L), a = specify_int_scalar())
+      stabilize_df(data.frame(a = 1L, b = 2L), a = stabilize_int)
     Condition <stbl-error-bad_named>
       Error:
       ! `data.frame(a = 1L, b = 2L)` must not contain extra named elements.
@@ -69,8 +69,7 @@
 # stabilize_df() validates extra columns with .extra_cols (#142, #310, #335, #377)
 
     Code
-      stabilize_df(data.frame(a = 1L, b = "not-int"), a = specify_int_scalar(),
-      .extra_cols = specify_int_scalar())
+      stabilize_df(data.frame(a = 1L, b = "not-int"), a = stabilize_int, .extra_cols = stabilize_int)
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `data.frame(a = 1L, b = "not-int")[["b"]]` <character> must be convertible to <integer>
@@ -107,7 +106,7 @@
 # stabilize_df() with unnamed specs errors informatively (#142)
 
     Code
-      stabilize_df(data.frame(a = 1L), specify_int_scalar())
+      stabilize_df(data.frame(a = 1L), stabilize_int)
     Condition <stbl-error-unnamed_spec>
       Error:
       ! All elements passed via `...` must be named.
@@ -116,8 +115,8 @@
 # stabilize_df() supports conditional .required (#291)
 
     Code
-      stabilize_df(given, name = specify_chr_scalar(), card = specify_int_scalar(),
-      address = specify_chr_scalar(), .required = list("name", card = "address"))
+      stabilize_df(given, name = stabilize_chr, card = stabilize_int, address = stabilize_chr,
+        .required = list("name", card = "address"))
     Condition <stbl-error-missing_element>
       Error:
       ! `given` must contain column "address" when "card" is present.

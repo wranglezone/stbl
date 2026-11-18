@@ -17,7 +17,7 @@
 # stabilize_lst() errors when required named element is missing (#110)
 
     Code
-      stabilize_lst(list(foo = "a"), name = specify_chr_scalar())
+      stabilize_lst(list(foo = "a"), name = stabilize_chr_scalar)
     Condition <stbl-error-missing_element>
       Error:
       ! `list(foo = "a")` must contain element "name".
@@ -25,7 +25,7 @@
 ---
 
     Code
-      wrapped_stabilize_lst(list(foo = "a"), name = specify_chr_scalar())
+      wrapped_stabilize_lst(list(foo = "a"), name = stabilize_chr_scalar)
     Condition <stbl-error-missing_element>
       Error in `wrapped_stabilize_lst()`:
       ! `val` must contain element "name".
@@ -33,7 +33,7 @@
 # stabilize_lst() errors informatively when element fails validation (#110, #310, #335, #377)
 
     Code
-      stabilize_lst(list(count = "not-an-int"), count = specify_int_scalar())
+      stabilize_lst(list(count = "not-an-int"), count = stabilize_int_scalar)
     Condition <stbl-error-incompatible_values-integer>
       Error:
       ! `list(count = "not-an-int")[["count"]]` <character> must be convertible to <integer>
@@ -120,7 +120,7 @@
 # stabilize_lst() enforces .min_size (#110)
 
     Code
-      stabilize_lst(list(a = 1L), .named = specify_int_scalar(), .min_size = 2)
+      stabilize_lst(list(a = 1L), .named = stabilize_int_scalar, .min_size = 2)
     Condition <stbl-error-size_too_small>
       Error:
       ! `list(a = 1L)` must have size >= 2.
@@ -137,7 +137,7 @@
 # stabilize_lst() requires all named specs by default (#279)
 
     Code
-      stabilize_lst(list(a = 1L), a = specify_int_scalar(), b = specify_int_scalar())
+      stabilize_lst(list(a = 1L), a = stabilize_int_scalar, b = stabilize_int_scalar)
     Condition <stbl-error-missing_element>
       Error:
       ! `list(a = 1L)` must contain element "b".
@@ -145,7 +145,7 @@
 # stabilize_lst() still errors on required elements not in .required (#279)
 
     Code
-      stabilize_lst(list(z = 1L), a = specify_int_scalar(), b = specify_int_scalar(),
+      stabilize_lst(list(z = 1L), a = stabilize_int_scalar, b = stabilize_int_scalar,
       .named = TRUE, .required = "a")
     Condition <stbl-error-missing_element>
       Error:
@@ -154,7 +154,7 @@
 # stabilize_lst() errors on missing required element in unnamed non-empty list (#344)
 
     Code
-      stabilize_lst(list(1L, 2L), a = specify_int_scalar())
+      stabilize_lst(list(1L, 2L), a = stabilize_int_scalar)
     Condition <stbl-error-missing_element>
       Error:
       ! `list(1L, 2L)` must contain element "a".
@@ -171,7 +171,7 @@
 # stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)
 
     Code
-      stabilize_lst(list(), a = specify_int_scalar(), .allow_zero_length = FALSE)
+      stabilize_lst(list(), a = stabilize_int_scalar, .allow_zero_length = FALSE)
     Condition <stbl-error-missing_element>
       Error:
       ! `list()` must contain element "a".
@@ -179,7 +179,7 @@
 # .check_duplicate_names(): errors on duplicate names by default (#110)
 
     Code
-      stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar())
+      stabilize_lst(list(a = 1L, a = 2L), .named = stabilize_int_scalar)
     Condition <stbl-error-duplicate_names>
       Error:
       ! `list(a = 1L, a = 2L)` must not contain duplicate names.
@@ -188,7 +188,7 @@
 ---
 
     Code
-      wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar())
+      wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = stabilize_int_scalar)
     Condition <stbl-error-duplicate_names>
       Error in `wrapped_stabilize_lst()`:
       ! `val` must not contain duplicate names.
@@ -197,7 +197,7 @@
 # .check_duplicate_names(): reports all duplicate name groups (#110)
 
     Code
-      stabilize_lst(list(a = 1L, b = 2L, a = 3L, b = 4L), .named = specify_int_scalar())
+      stabilize_lst(list(a = 1L, b = 2L, a = 3L, b = 4L), .named = stabilize_int_scalar)
     Condition
       Error:
       ! `list(a = 1L, b = 2L, a = 3L, b = 4L)` must not contain duplicate names.
@@ -220,4 +220,13 @@
       ! Every name in the requirements must have a spec in `...` when `.named` is `FALSE`.
       x Missing spec for: "a"
       i Use `NULL` to allow required names without specs.
+
+# stabilize_lst() treats pattern-matched names as known (#292)
+
+    Code
+      stabilize_lst(list(S_a = 1L, b = 1L), .patterns = patterns)
+    Condition <stbl-error-bad_named>
+      Error:
+      ! `list(S_a = 1L, b = 1L)` must not contain extra named elements.
+      x Extra element: "b"
 

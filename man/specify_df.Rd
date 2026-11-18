@@ -7,6 +7,7 @@
 \usage{
 specify_df(
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -18,6 +19,7 @@ specify_df(
 
 specify_data_frame(
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(),
   .min_rows = NULL,
@@ -33,6 +35,11 @@ specify_data_frame(
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to a column in \code{.x}, and the
 function is used to validate that column when present. Whether the column
 is required is controlled by \code{.required}.}
+
+\item{.patterns}{\code{(list)} A named list of stabilizers. Each name is a regular
+expression matched against the column names of \code{.x}, and the spec is
+applied to every matching column. See \code{.patterns} in \code{\link[=stabilize_lst]{stabilize_lst()}} for
+the matching rules.}
 
 \item{.extra_cols}{Controls how columns of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:

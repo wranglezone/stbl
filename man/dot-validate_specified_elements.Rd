@@ -4,7 +4,14 @@
 \alias{.validate_specified_elements}
 \title{Validate named elements against their spec functions}
 \usage{
-.validate_specified_elements(.x, element_specs, nms, .x_arg, .call)
+.validate_specified_elements(
+  .x,
+  element_specs,
+  nms,
+  skip = rep(FALSE, length(nms)),
+  .x_arg,
+  .call
+)
 }
 \arguments{
 \item{.x}{The object to stabilize.}

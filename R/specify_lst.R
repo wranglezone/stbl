@@ -46,6 +46,7 @@
 #' try(stabilize_payment(list(name = "Alice", card = 1L)))
 specify_lst <- function(
   ...,
+  .patterns = NULL,
   .named = NULL,
   .unnamed = NULL,
   .allow_duplicate_names = FALSE,
@@ -72,6 +73,7 @@ specify_lst <- function(
           .x,
           !!!element_specs,
           !!!list(...),
+          .patterns = .patterns,
           .named = .named,
           .unnamed = .unnamed,
           .allow_duplicate_names = .allow_duplicate_names,

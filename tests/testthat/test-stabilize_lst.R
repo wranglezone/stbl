@@ -18,7 +18,7 @@ test_that("stabilize_lst() respects .allow_null (#110)", {
 test_that("stabilize_lst() returns a valid list unchanged (#110)", {
   given <- list(a = 1L, b = "hello")
   expect_identical(
-    stabilize_lst(given, a = specify_int_scalar(), b = specify_chr_scalar()),
+    stabilize_lst(given, a = stabilize_int_scalar, b = stabilize_chr_scalar),
     given
   )
 })
@@ -28,8 +28,8 @@ test_that("stabilize_lst() validates required named elements (#110)", {
   expect_identical(
     stabilize_lst(
       given,
-      name = specify_chr_scalar(),
-      age = specify_int_scalar()
+      name = stabilize_chr_scalar,
+      age = stabilize_int_scalar
     ),
     given
   )
@@ -37,12 +37,12 @@ test_that("stabilize_lst() validates required named elements (#110)", {
 
 test_that("stabilize_lst() errors when required named element is missing (#110)", {
   expect_pkg_error_snapshot(
-    stabilize_lst(list(foo = "a"), name = specify_chr_scalar()),
+    stabilize_lst(list(foo = "a"), name = stabilize_chr_scalar),
     "stbl",
     "missing_element"
   )
   expect_pkg_error_snapshot(
-    wrapped_stabilize_lst(list(foo = "a"), name = specify_chr_scalar()),
+    wrapped_stabilize_lst(list(foo = "a"), name = stabilize_chr_scalar),
     "stbl",
     "missing_element"
   )
@@ -52,7 +52,7 @@ test_that("stabilize_lst() errors informatively when element fails validation (#
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(count = "not-an-int"),
-      count = specify_int_scalar()
+      count = stabilize_int_scalar
     ),
     "stbl",
     "incompatible_values",
@@ -76,11 +76,11 @@ test_that("stabilize_lst() errors on extra named elements by default (#110)", {
 test_that("stabilize_lst() validates extra named elements with .named (#110, #310)", {
   given <- list(a = 1L, b = 2L)
   expect_identical(
-    stabilize_lst(given, .named = specify_int_scalar()),
+    stabilize_lst(given, .named = stabilize_int_scalar),
     given
   )
   expect_pkg_error_classes(
-    stabilize_lst(list(a = 1L, b = "not-int"), .named = specify_int_scalar()),
+    stabilize_lst(list(a = 1L, b = "not-int"), .named = stabilize_int_scalar),
     "stbl",
     "incompatible_values",
     "integer"
@@ -121,11 +121,11 @@ test_that("stabilize_lst() errors on unnamed elements by default (#110)", {
 test_that("stabilize_lst() validates unnamed elements with .unnamed (#110, #310)", {
   given <- list(1L, 2L, 3L)
   expect_identical(
-    stabilize_lst(given, .unnamed = specify_int_scalar()),
+    stabilize_lst(given, .unnamed = stabilize_int_scalar),
     given
   )
   expect_pkg_error_classes(
-    stabilize_lst(list(1L, "not-int"), .unnamed = specify_int_scalar()),
+    stabilize_lst(list(1L, "not-int"), .unnamed = stabilize_int_scalar),
     "stbl",
     "incompatible_values",
     "integer"
@@ -159,9 +159,9 @@ test_that("stabilize_lst() handles mixed named/unnamed lists (#110)", {
   expect_identical(
     stabilize_lst(
       given,
-      a = specify_int_scalar(),
-      b = specify_int_scalar(),
-      .unnamed = specify_int_scalar()
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar,
+      .unnamed = stabilize_int_scalar
     ),
     given
   )
@@ -169,7 +169,7 @@ test_that("stabilize_lst() handles mixed named/unnamed lists (#110)", {
 
 test_that("stabilize_lst() enforces .min_size (#110)", {
   expect_pkg_error_snapshot(
-    stabilize_lst(list(a = 1L), .named = specify_int_scalar(), .min_size = 2),
+    stabilize_lst(list(a = 1L), .named = stabilize_int_scalar, .min_size = 2),
     "stbl",
     "size_too_small"
   )
@@ -179,7 +179,7 @@ test_that("stabilize_lst() enforces .max_size (#110)", {
   expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L, b = 2L, c = 3L),
-      .named = specify_int_scalar(),
+      .named = stabilize_int_scalar,
       .max_size = 2
     ),
     "stbl",
@@ -191,7 +191,7 @@ test_that("stabilize_lst() enforces .unique (#280)", {
   expect_identical(
     stabilize_lst(
       list(1L, 2L),
-      .unnamed = specify_int_scalar(),
+      .unnamed = stabilize_int_scalar,
       .unique = TRUE
     ),
     list(1L, 2L)
@@ -199,7 +199,7 @@ test_that("stabilize_lst() enforces .unique (#280)", {
   expect_pkg_error_classes(
     stabilize_lst(
       list(1L, 2L, 1L),
-      .unnamed = specify_int_scalar(),
+      .unnamed = stabilize_int_scalar,
       .unique = TRUE
     ),
     "stbl",
@@ -211,7 +211,7 @@ test_that("stabilize_lst() reports duplicate locations for .unique failures (#28
   cnd <- rlang::catch_cnd(
     stabilize_lst(
       list("a", "b", "a"),
-      .unnamed = specify_chr_scalar(),
+      .unnamed = stabilize_chr_scalar,
       .unique = TRUE
     )
   )
@@ -222,7 +222,7 @@ test_that("stabilize_lst() checks .unique after conversion (#280)", {
   cnd <- rlang::catch_cnd(
     stabilize_lst(
       list("1", 1.0),
-      .unnamed = specify_int_scalar(),
+      .unnamed = stabilize_int_scalar,
       .unique = TRUE
     )
   )
@@ -231,7 +231,7 @@ test_that("stabilize_lst() checks .unique after conversion (#280)", {
 })
 
 test_that("stabilize_lst() validates nested lists (#110, #377)", {
-  spec_aes <- specify_lst(x = specify_chr_scalar(), y = specify_chr_scalar())
+  spec_aes <- specify_lst(x = stabilize_chr_scalar, y = stabilize_chr_scalar)
   given <- list(aes = list(x = "mpg", y = "hp"))
   expect_identical(
     stabilize_lst(given, aes = spec_aes),
@@ -253,8 +253,8 @@ test_that("stabilize_lst() requires all named specs by default (#279)", {
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(a = 1L),
-      a = specify_int_scalar(),
-      b = specify_int_scalar()
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar
     ),
     "stbl",
     "missing_element"
@@ -266,8 +266,8 @@ test_that("stabilize_lst() allows an absent optional element via .required (#279
   expect_identical(
     stabilize_lst(
       given,
-      a = specify_int_scalar(),
-      b = specify_int_scalar(),
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar,
       .required = "a"
     ),
     given
@@ -278,8 +278,8 @@ test_that("stabilize_lst() still validates an optional element when present (#27
   expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L, b = "not-int"),
-      a = specify_int_scalar(),
-      b = specify_int_scalar(),
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar,
       .required = "a"
     ),
     "stbl",
@@ -293,8 +293,8 @@ test_that("stabilize_lst() treats .required = NULL as making everything optional
   expect_identical(
     stabilize_lst(
       given,
-      a = specify_int_scalar(),
-      b = specify_int_scalar(),
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar,
       .named = TRUE,
       .required = NULL
     ),
@@ -306,8 +306,8 @@ test_that("stabilize_lst() still errors on required elements not in .required (#
   expect_pkg_error_snapshot(
     stabilize_lst(
       list(z = 1L),
-      a = specify_int_scalar(),
-      b = specify_int_scalar(),
+      a = stabilize_int_scalar,
+      b = stabilize_int_scalar,
       .named = TRUE,
       .required = "a"
     ),
@@ -318,7 +318,7 @@ test_that("stabilize_lst() still errors on required elements not in .required (#
 
 test_that("stabilize_lst() errors on missing required element in unnamed non-empty list (#344)", {
   expect_pkg_error_snapshot(
-    stabilize_lst(list(1L, 2L), a = specify_int_scalar()),
+    stabilize_lst(list(1L, 2L), a = stabilize_int_scalar),
     "stbl",
     "missing_element"
   )
@@ -326,7 +326,7 @@ test_that("stabilize_lst() errors on missing required element in unnamed non-emp
 
 test_that("stabilize_lst() skips required-element check for empty .x by default (#344)", {
   expect_identical(
-    stabilize_lst(list(), a = specify_int_scalar()),
+    stabilize_lst(list(), a = stabilize_int_scalar),
     list()
   )
 })
@@ -341,7 +341,7 @@ test_that("stabilize_lst() still enforces .min_size on empty .x when .allow_zero
 
 test_that("stabilize_lst() checks required elements for empty .x when .allow_zero_length = FALSE (#344)", {
   expect_pkg_error_snapshot(
-    stabilize_lst(list(), a = specify_int_scalar(), .allow_zero_length = FALSE),
+    stabilize_lst(list(), a = stabilize_int_scalar, .allow_zero_length = FALSE),
     "stbl",
     "missing_element"
   )
@@ -349,7 +349,7 @@ test_that("stabilize_lst() checks required elements for empty .x when .allow_zer
 
 test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
   expect_pkg_error_classes(
-    stabilize_lst(list(1L), specify_int_scalar()),
+    stabilize_lst(list(1L), stabilize_int_scalar),
     "stbl",
     "unnamed_spec"
   )
@@ -357,12 +357,12 @@ test_that("stabilize_lst() with unnamed specs errors informatively (#110)", {
 
 test_that(".check_duplicate_names(): errors on duplicate names by default (#110)", {
   expect_pkg_error_snapshot(
-    stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
+    stabilize_lst(list(a = 1L, a = 2L), .named = stabilize_int_scalar),
     "stbl",
     "duplicate_names"
   )
   expect_pkg_error_snapshot(
-    wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = specify_int_scalar()),
+    wrapped_stabilize_lst(list(a = 1L, a = 2L), .named = stabilize_int_scalar),
     "stbl",
     "duplicate_names"
   )
@@ -373,7 +373,7 @@ test_that(".check_duplicate_names(): allows duplicates with .allow_duplicate_nam
   expect_identical(
     stabilize_lst(
       given,
-      .named = specify_int_scalar(),
+      .named = stabilize_int_scalar,
       .allow_duplicate_names = TRUE
     ),
     given
@@ -384,7 +384,7 @@ test_that(".check_duplicate_names(): reports all duplicate name groups (#110)", 
   expect_snapshot(
     stabilize_lst(
       list(a = 1L, b = 2L, a = 3L, b = 4L),
-      .named = specify_int_scalar()
+      .named = stabilize_int_scalar
     ),
     error = TRUE
   )
@@ -394,8 +394,8 @@ test_that(".check_duplicate_names(): unnamed elements do not count as duplicates
   expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L, 2L, a = 3L),
-      .named = specify_int_scalar(),
-      .unnamed = specify_int_scalar()
+      .named = stabilize_int_scalar,
+      .unnamed = stabilize_int_scalar
     ),
     "stbl",
     "duplicate_names"
@@ -453,7 +453,7 @@ test_that("stabilize_lst() simplifies after validation (#407)", {
   expect_identical(
     stabilize_lst(
       list(a = "1", b = 2L),
-      .named = specify_int_scalar(),
+      .named = stabilize_int_scalar,
       .simplify = TRUE
     ),
     c(a = 1L, b = 2L)
@@ -488,9 +488,9 @@ test_that("stabilize_lst() resolves unconditional and conditional .required (#29
   spec <- function(x, ...) {
     stabilize_lst(
       x,
-      name = specify_chr_scalar(),
-      card = specify_int_scalar(),
-      address = specify_chr_scalar(),
+      name = stabilize_chr_scalar,
+      card = stabilize_int_scalar,
+      address = stabilize_chr_scalar,
       ...
     )
   }
@@ -560,7 +560,7 @@ test_that("stabilize_lst() requires names in .required without specs (#291)", {
   expect_pkg_error_classes(
     stabilize_lst(
       list(a = 1L),
-      a = specify_int_scalar(),
+      a = stabilize_int_scalar,
       .required = c("a", "z")
     ),
     "stbl",
@@ -569,14 +569,14 @@ test_that("stabilize_lst() requires names in .required without specs (#291)", {
   given <- list(a = 1L, z = "anything")
   # NULL: known but unchecked.
   expect_identical(
-    stabilize_lst(given, a = specify_int_scalar(), .required = c("a", "z")),
+    stabilize_lst(given, a = stabilize_int_scalar, .required = c("a", "z")),
     given
   )
   # TRUE: ordinary extra element.
   expect_identical(
     stabilize_lst(
       given,
-      a = specify_int_scalar(),
+      a = stabilize_int_scalar,
       .required = c("a", "z"),
       .named = TRUE
     ),
@@ -586,9 +586,9 @@ test_that("stabilize_lst() requires names in .required without specs (#291)", {
   expect_pkg_error_classes(
     stabilize_lst(
       given,
-      a = specify_int_scalar(),
+      a = stabilize_int_scalar,
       .required = c("a", "z"),
-      .named = specify_int_scalar()
+      .named = stabilize_int_scalar
     ),
     "stbl",
     "incompatible_values",
@@ -612,7 +612,7 @@ test_that("stabilize_lst() errors early for unspecced .required with .named = FA
       list(),
       .required = list(a = "b"),
       .named = FALSE,
-      a = specify_int_scalar()
+      a = stabilize_int_scalar
     ),
     "stbl",
     "bad_required"
@@ -620,10 +620,128 @@ test_that("stabilize_lst() errors early for unspecced .required with .named = FA
   expect_identical(
     stabilize_lst(
       list(a = 1L),
-      a = specify_int_scalar(),
+      a = stabilize_int_scalar,
       .required = "a",
       .named = FALSE
     ),
     list(a = 1L)
+  )
+})
+
+test_that("stabilize_lst() applies .patterns to matching names (#292)", {
+  expect_identical(
+    stabilize_lst(
+      list(S_a = "x", S_b = "y", I_n = 1.0, 2),
+      .patterns = list("^S_" = stabilize_chr, "^I_" = stabilize_int),
+      .unnamed = TRUE
+    ),
+    list(S_a = "x", S_b = "y", I_n = 1L, 2)
+  )
+  expect_identical(
+    stabilize_lst(list(), .patterns = list("a" = to_int)),
+    list()
+  )
+})
+
+test_that("stabilize_lst() treats pattern-matched names as known (#292)", {
+  patterns <- list("^S_" = stabilize_int)
+  expect_identical(
+    stabilize_lst(list(S_a = 1L), .patterns = patterns, .named = FALSE),
+    list(S_a = 1L)
+  )
+  expect_pkg_error_snapshot(
+    stabilize_lst(list(S_a = 1L, b = 1L), .patterns = patterns),
+    "stbl",
+    "bad_named"
+  )
+  expect_identical(
+    stabilize_lst(
+      list(S_a = 1L, b = "1"),
+      .patterns = patterns,
+      .named = stabilize_int
+    ),
+    list(S_a = 1L, b = 1L)
+  )
+})
+
+test_that("stabilize_lst() counts .patterns as specs for .required (#292)", {
+  expect_identical(
+    stabilize_lst(
+      list(S_a = 1L),
+      .patterns = list("^S_" = stabilize_int),
+      .required = "S_a",
+      .named = FALSE
+    ),
+    list(S_a = 1L)
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(S_a = 1L),
+      .patterns = list("^T_" = stabilize_int),
+      .required = "S_a",
+      .named = FALSE
+    ),
+    "stbl",
+    "bad_required"
+  )
+})
+
+test_that("stabilize_lst() combines exact specs and .patterns (#292)", {
+  expect_identical(
+    stabilize_lst(
+      list(S_a = 1),
+      S_a = stabilize_dbl,
+      .patterns = list("^S_" = stabilize_int)
+    ),
+    list(S_a = 1L)
+  )
+  expect_identical(
+    stabilize_lst(
+      list(S_a = 1, S_a = 2),
+      S_a = stabilize_dbl,
+      .patterns = list("^S_" = stabilize_int),
+      .allow_duplicate_names = TRUE
+    ),
+    list(S_a = 1L, S_a = 2L)
+  )
+  expect_pkg_error_classes(
+    stabilize_lst(
+      list(S_a = 1.5),
+      S_a = stabilize_dbl,
+      .patterns = list("^S_" = stabilize_int)
+    ),
+    "stbl",
+    "cant_stabilize_patterns"
+  )
+})
+
+test_that("stabilize_lst() validates .patterns before .x (#292)", {
+  expect_pkg_error_classes(
+    stabilize_lst(stop("touched"), .patterns = "a"),
+    "stbl",
+    "bad_patterns",
+    "not_list"
+  )
+})
+
+test_that("stabilize_lst() .patterns work with .simplify (#292)", {
+  expect_identical(
+    stabilize_lst(
+      list(S_a = 1, S_b = 2),
+      .patterns = list("^S_" = stabilize_int_scalar),
+      .simplify = TRUE
+    ),
+    c(S_a = 1L, S_b = 2L)
+  )
+})
+
+test_that("stabilize_lst() applies exact specs to duplicate names (#292)", {
+  expect_identical(
+    stabilize_lst(
+      list(a = 1, a = 2),
+      a = stabilize_int,
+      .allow_duplicate_names = TRUE
+    ),
+    list(a = 1L, a = 2L)
   )
 })

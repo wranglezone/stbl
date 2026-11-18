@@ -10,6 +10,7 @@
 
 * New `reconcile()` returns the narrowest common representation of equivalent values, or errors if they are not equivalent (#408).
 * `stabilize_all_of()` now accepts specs whose results are equivalent but differ in type (such as integer and double), and returns the same result regardless of spec order (#408).
+* `stabilize_lst()`, `stabilize_df()`, `specify_lst()`, and `specify_df()` gain `.patterns` to apply specs to every element or column whose name matches a regular expression (#292).
 * `stabilize_lst()` and `specify_lst()` (and their synonyms) gain a `.simplify` argument (default `FALSE`) to combine a list of scalars with a common type into an atomic vector (#407).
 * New `stabilize_lst_positional()` (and its synonyms `stabilise_lst_positional()`, `stabilize_list_positional()`, `stabilise_list_positional()`, `stabilize_tuple()`, and `stabilise_tuple()`) and `specify_lst_positional()` (with synonyms `specify_list_positional()` and `specify_tuple()`) validate a list positionally, applying a different spec to each element, like JSON Schema tuple arrays (#284).
 * `stabilize_names()`, `stabilize_lst()`, `stabilize_df()`, and their `specify_*()` versions accept a list for `required` / `.required` to express conditional requirements, similar to JSON Schema `dependentRequired` (#291).

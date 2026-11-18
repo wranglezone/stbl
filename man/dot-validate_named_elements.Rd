@@ -7,6 +7,7 @@
 .validate_named_elements(
   .x,
   ...,
+  .patterns,
   .named,
   .required,
   .allow_duplicate_names,
@@ -22,6 +23,16 @@
 (\code{\link[=specify_chr]{specify_chr()}}, etc). Each name corresponds to an element in \code{.x}, and
 the function is used to validate that element when present. Whether the
 element is required (its absence is an error) is controlled by \code{.required}.}
+
+\item{.patterns}{\code{(list)} A named list of stabilizers, such as \verb{specify_*()}
+results, \verb{stabilize_*()} functions, or \verb{to_*()} functions. Each name is a
+regular expression matched against the names of \code{.x}, and the spec is
+applied to every element whose name matches. Matching uses ICU regular
+expressions when the stringi package is installed (otherwise \code{\link[=grepl]{grepl()}}).
+An element matching any pattern is not an "extra" element, so \code{.named} does
+not apply to it. An element that matches several patterns, or a pattern and
+an exact spec in \code{...}, is checked by every matching spec and the results
+are combined with \code{\link[=reconcile]{reconcile()}}.}
 
 \item{.named}{Controls how named elements of \code{.x} that are \emph{not} explicitly
 listed in \code{...} are handled. One of:

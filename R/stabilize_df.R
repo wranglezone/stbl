@@ -12,6 +12,10 @@
 #'   ([specify_chr()], etc). Each name corresponds to a column in `.x`, and the
 #'   function is used to validate that column when present. Whether the column
 #'   is required is controlled by `.required`.
+#' @param .patterns `(list)` A named list of stabilizers. Each name is a regular
+#'   expression matched against the column names of `.x`, and the spec is
+#'   applied to every matching column. See `.patterns` in [stabilize_lst()] for
+#'   the matching rules.
 #' @param .extra_cols Controls how columns of `.x` that are *not* explicitly
 #'   listed in `...` are handled. One of:
 #'   - `NULL` (default): any extra columns cause an error. Names in `.required`
@@ -55,6 +59,8 @@
 #'   `.max_rows` rows.
 #'   - `<stbl-error-missing_cols>` when required names in `.col_names` are
 #'   absent.
+#'   - `<stbl-error-bad_patterns>` when `.patterns` is invalid (see
+#'   [stabilize_lst()] for subclasses).
 #'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
 #'   `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.
 #'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
@@ -137,6 +143,7 @@
 stabilize_df <- function(
   .x,
   ...,
+  .patterns = NULL,
   .extra_cols = NULL,
   .col_names = lifecycle::deprecated(), # LIFECYCLE-REMOVE(.col_names)
   .min_rows = NULL,
@@ -163,9 +170,13 @@ stabilize_df <- function(
   }
 
   required <- .normalize_required(.required, ".required", call = .call)
+  .patterns <- .normalize_patterns(.patterns, ".patterns", call = .call)
   .check_required_have_specs(
     required,
-    spec_names = ...names(),
+    spec_names = c(
+      ...names(),
+      .names_matching_patterns(.required_names(required), .patterns)
+    ),
     named = .extra_cols,
     named_arg = ".extra_cols",
     call = .call
@@ -203,6 +214,7 @@ stabilize_df <- function(
   x_lst <- stabilize_lst(
     .x,
     ...,
+    .patterns = .patterns,
     .named = .extra_cols,
     .allow_zero_length = .allow_zero_length,
     .required = .required,
