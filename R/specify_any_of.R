@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' stabilize_int_or_chr <- specify_any_of(specify_int(), specify_chr())
+#' stabilize_int_or_chr <- specify_any_of(stabilize_int, stabilize_chr)
 #' stabilize_int_or_chr(1L)
 #' stabilize_int_or_chr("a")
 #' try(stabilize_int_or_chr(TRUE))

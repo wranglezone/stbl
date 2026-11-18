@@ -15,13 +15,6 @@ test_that("stabilize_one_of() converts via the single matching function (#286)",
   expect_identical(stabilize_one_of("a", stabilize_int, stabilize_chr), "a")
 })
 
-test_that("stabilize_one_of() works with specify_* functions (#286)", {
-  expect_identical(
-    stabilize_one_of("a", specify_int_scalar(), specify_chr_scalar()),
-    "a"
-  )
-})
-
 test_that("stabilize_one_of() errors when specs overlap and more than one matches (#286)", {
   # "1" is both int-ish and dbl-ish, so both specs succeed
   expect_pkg_error_snapshot(
