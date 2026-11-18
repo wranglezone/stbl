@@ -177,8 +177,8 @@ you want to provide additional context or functionality.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stabilize_person_df</span> <span class="op">&lt;-</span> <span class="fu">specify_df</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .extra_cols <span class="op">=</span> <span class="va">assert_present</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_person_df</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, age <span class="op">=</span> <span class="fl">30L</span>, score <span class="op">=</span> <span class="fl">99.5</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -190,8 +190,8 @@ you want to provide additional context or functionality.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Mark a column as optional via .required</span></span></span>
 <span class="r-in"><span><span class="va">stabilize_person_df2</span> <span class="op">&lt;-</span> <span class="fu">specify_df</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .required <span class="op">=</span> <span class="st">"name"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">stabilize_person_df2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -200,9 +200,9 @@ you want to provide additional context or functionality.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Require a column only when another is present</span></span></span>
 <span class="r-in"><span><span class="va">stabilize_person_df3</span> <span class="op">&lt;-</span> <span class="fu">specify_df</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  card <span class="op">=</span> <span class="fu"><a href="specify_int.html">specify_int_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  address <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr_scalar</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="specify_chr.html">specify_chr</a></span><span class="op">(</span>allow_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  card <span class="op">=</span> <span class="va">stabilize_int</span>,</span></span>
+<span class="r-in"><span>  address <span class="op">=</span> <span class="va">stabilize_chr</span>,</span></span>
 <span class="r-in"><span>  .required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"name"</span>, card <span class="op">=</span> <span class="st">"address"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">stabilize_person_df3</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Alice"</span>, card <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>

@@ -152,15 +152,15 @@ with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">assert_not</span><span class="op">(</span><span class="st">"a"</span>, <span class="fu"><a href="specify_int.html">specify_int</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">assert_not</span><span class="op">(</span><span class="st">"a"</span>, <span class="va">stabilize_int</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
 <span class="r-in"><span><span class="fu">assert_not</span><span class="op">(</span><span class="fl">1.5</span>, <span class="va">stabilize_int</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Errors because "1" is int-ish, even though it isn't literally an integer</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">assert_not</span><span class="op">(</span><span class="st">"1"</span>, <span class="fu"><a href="specify_int.html">specify_int</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">assert_not</span><span class="op">(</span><span class="st">"1"</span>, <span class="va">stabilize_int</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   `"1"` must not match <span style="color: #0000BB;">"specify_int()"</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `"1"` must not match <span style="color: #0000BB;">"stabilize_int"</span>.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Errors because stabilize_int() succeeds outright on 1L</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">assert_not</span><span class="op">(</span><span class="fl">1L</span>, <span class="va">stabilize_int</span><span class="op">)</span><span class="op">)</span></span></span>

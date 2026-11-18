@@ -51,7 +51,7 @@ Other specification functions:
 ## Examples
 
 ``` r
-stabilize_int_or_chr <- specify_any_of(specify_int(), specify_chr())
+stabilize_int_or_chr <- specify_any_of(stabilize_int, stabilize_chr)
 stabilize_int_or_chr(1L)
 #> [1] 1
 stabilize_int_or_chr("a")

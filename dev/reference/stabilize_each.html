@@ -141,7 +141,7 @@ failed.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2" "3"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Elements that can't be simplified into a common type stay a list</span></span></span>
-<span class="r-in"><span><span class="fu">stabilize_each</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="st">"a"</span><span class="op">)</span>, <span class="fu"><a href="specify_any_of.html">specify_any_of</a></span><span class="op">(</span><span class="fu"><a href="specify_int.html">specify_int</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="specify_chr.html">specify_chr</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stabilize_each</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="st">"a"</span><span class="op">)</span>, <span class="fu"><a href="specify_any_of.html">specify_any_of</a></span><span class="op">(</span><span class="va">stabilize_int</span>, <span class="va">stabilize_chr</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

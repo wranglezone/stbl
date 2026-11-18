@@ -101,7 +101,7 @@ stabilize_each(list(1L, 2L, 3L), stabilize_chr)
 #> [1] "1" "2" "3"
 
 # Elements that can't be simplified into a common type stay a list
-stabilize_each(list(1L, "a"), specify_any_of(specify_int(), specify_chr()))
+stabilize_each(list(1L, "a"), specify_any_of(stabilize_int, stabilize_chr))
 #> [[1]]
 #> [1] 1
 #> 
