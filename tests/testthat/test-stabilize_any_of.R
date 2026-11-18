@@ -17,13 +17,6 @@ test_that("stabilize_any_of() falls through to the next function when first fail
   )
 })
 
-test_that("stabilize_any_of() works with specify_* functions (#215, #285)", {
-  expect_identical(
-    stabilize_any_of(1L, specify_int_scalar(), specify_chr_scalar()),
-    1L
-  )
-})
-
 test_that("stabilize_any_of() errors with a combined message when all functions fail (#215, #285)", {
   # NULL fails both when allow_null = FALSE
   expect_pkg_error_snapshot(

@@ -45,11 +45,11 @@ with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
 \strong{would} be accepted by \code{spec}, and returns \code{x} unchanged otherwise.
 }
 \examples{
-assert_not("a", specify_int())
+assert_not("a", stabilize_int)
 assert_not(1.5, stabilize_int)
 
 # Errors because "1" is int-ish, even though it isn't literally an integer
-try(assert_not("1", specify_int()))
+try(assert_not("1", stabilize_int))
 
 # Errors because stabilize_int() succeeds outright on 1L
 try(assert_not(1L, stabilize_int))

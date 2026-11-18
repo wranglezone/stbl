@@ -94,8 +94,8 @@ provided arguments. \code{specify_data_frame()} is a synonym of \code{specify_df
 }
 \examples{
 stabilize_person_df <- specify_df(
-  name = specify_chr_scalar(allow_na = FALSE),
-  age = specify_int_scalar(allow_na = FALSE),
+  name = specify_chr(allow_na = FALSE),
+  age = specify_int(allow_na = FALSE),
   .extra_cols = assert_present
 )
 stabilize_person_df(data.frame(name = "Alice", age = 30L, score = 99.5))
@@ -103,17 +103,17 @@ try(stabilize_person_df(data.frame(name = "Alice")))
 
 # Mark a column as optional via .required
 stabilize_person_df2 <- specify_df(
-  name = specify_chr_scalar(allow_na = FALSE),
-  age = specify_int_scalar(allow_na = FALSE),
+  name = specify_chr(allow_na = FALSE),
+  age = specify_int(allow_na = FALSE),
   .required = "name"
 )
 stabilize_person_df2(data.frame(name = "Alice"))
 
 # Require a column only when another is present
 stabilize_person_df3 <- specify_df(
-  name = specify_chr_scalar(allow_na = FALSE),
-  card = specify_int_scalar(),
-  address = specify_chr_scalar(),
+  name = specify_chr(allow_na = FALSE),
+  card = stabilize_int,
+  address = stabilize_chr,
   .required = list("name", card = "address")
 )
 try(stabilize_person_df3(data.frame(name = "Alice", card = 1L)))

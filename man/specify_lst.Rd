@@ -139,17 +139,17 @@ try(
 
 # Mark some elements as optional via .required
 stabilize_settings <- specify_lst(
-  name = specify_chr_scalar(),
-  nickname = specify_chr_scalar(),
+  name = stabilize_chr,
+  nickname = stabilize_chr,
   .required = "name"
 )
 stabilize_settings(list(name = "Alice"))
 
 # Require an element only when another is present
 stabilize_payment <- specify_lst(
-  name = specify_chr_scalar(),
-  card = specify_int_scalar(),
-  address = specify_chr_scalar(),
+  name = stabilize_chr,
+  card = stabilize_int,
+  address = stabilize_chr,
   .required = list("name", card = "address")
 )
 try(stabilize_payment(list(name = "Alice", card = 1L)))

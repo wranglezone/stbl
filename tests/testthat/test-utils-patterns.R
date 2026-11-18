@@ -148,7 +148,7 @@ test_that(".validate_pattern_elements() keeps NULL results and applies exact spe
 test_that(".validate_pattern_elements() reports all failures together (#292)", {
   x <- list(S_a = "x", S_b = 1L, S_c = "z", d = "no")
   nms <- names(x)
-  patterns <- list("^S_" = specify_int_scalar())
+  patterns <- list("^S_" = stabilize_int)
   matches <- .match_patterns(nms, patterns)
   expect_pkg_error_snapshot(
     .validate_pattern_elements(

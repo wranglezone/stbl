@@ -28,13 +28,6 @@ test_that("stabilize_all_of() order doesn't affect whether x passes (#278)", {
   )
 })
 
-test_that("stabilize_all_of() works with specify_* functions (#278)", {
-  expect_identical(
-    stabilize_all_of(1L, specify_int_scalar(), specify_int(min_value = 0)),
-    1L
-  )
-})
-
 test_that("stabilize_all_of() errors when any function fails (#278, #377)", {
   # "a" can't become integer, so the whole spec set fails
   expect_pkg_error_snapshot(
