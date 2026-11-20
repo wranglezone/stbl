@@ -74,6 +74,7 @@ For any feature, fix, or refactor:
 
 - R console: use `--quiet --vanilla`.
 - Comments explain *why*, not *what*.
+- Line-ending-only diffs (CRLF vs LF), e.g. in `tests/testthat/_snaps/` or `man/`, are noise on Windows. `.gitattributes` normalizes them to LF on commit. Ignore them; do not try to fix them. To confirm, use `git diff --ignore-cr-at-eol`.
 - Do not remove comments ending in `----` (RStudio document outline markers) or `# nocov` comments (code coverage exclusions).
 
 ### Namespacing
