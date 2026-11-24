@@ -133,18 +133,11 @@ example, <code>as.character(list(1:3))</code> returns "1:3". In the unlikely eve
 that this is the expected behavior, use <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> instead.</p></li>
 <li><p><code>NULL</code> values can be rejected as part of the call to this function (with
 <code>allow_null = FALSE</code>).</p></li>
-<li><p>When <code>coerce_function = TRUE</code>, named functions are converted to their string
-name. If the function comes
-from a package namespace, the result is a <code>"pkg::fn"</code> string. For example,
-<code>to_chr(mean)</code> returns <code>"base::mean"</code>. Anonymous functions produce an
-error.</p>
-<p>To preserve the original call-site symbol when <code>to_chr()</code> is called inside
-a wrapper function, use the embrace operator <code>{{ }}</code>. For example:</p></li>
-</ul><p></p><div class="sourceCode r"><pre><code><span><span class="va">my_wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fn</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="../reference/to_chr.html">to_chr</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">fn</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="fu">my_wrapper</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>  <span class="co"># Returns "base::mean"</span></span></code></pre><p></p></div>
-    </div>
+<li><p>When <code>coerce_function = TRUE</code>, named functions are converted to their
+string name. If the function comes from a package namespace, the result is
+a <code>"pkg::fn"</code> string. For example, <code>to_chr(mean)</code> returns <code>"base::mean"</code>.
+Anonymous functions produce an error.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other character functions:
@@ -238,6 +231,14 @@ a wrapper function, use the embrace operator <code>{{ }}</code>. For example:</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in eval(expr, envir) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Can't convert `function(x) x` <span style="color: #0000BB;">&lt;function&gt;</span> to <span style="color: #0000BB;">&lt;character&gt;</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Anonymous functions can't be converted to a string name.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use the embrace operator {{ }} to preserve the original call-site symbol</span></span></span>
+<span class="r-in"><span><span class="co"># when `to_chr()` is called inside a wrapper function.</span></span></span>
+<span class="r-in"><span><span class="va">my_wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fn</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">to_chr</span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">fn</span> <span class="op">}</span><span class="op">}</span>, coerce_function <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">my_wrapper</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="co"># Returns "base::mean"</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "base::mean"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

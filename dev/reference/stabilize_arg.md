@@ -124,14 +124,13 @@ specific class by failure mode:
 - `<stbl-error-bad_named>` when the presence of names doesn't match
   `named`.
 
-- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE` in
-  `stabilize_arg()`.
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
 - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
   are present in `stabilize_arg()`.
 
-- `<stbl-error-non_scalar>` for non-scalar vectors (including `NULL`
-  when `allow_null = FALSE`) in `stabilize_arg_scalar()`.
+- `<stbl-error-non_scalar>` for non-scalar vectors in
+  `stabilize_arg_scalar()`.
 
 - `<stbl-error-size_too_large>` when the vector is longer than
   `max_size` in `stabilize_arg()`.

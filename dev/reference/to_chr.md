@@ -104,15 +104,6 @@ This function has two important differences from
   result is a `"pkg::fn"` string. For example, `to_chr(mean)` returns
   `"base::mean"`. Anonymous functions produce an error.
 
-  To preserve the original call-site symbol when `to_chr()` is called
-  inside a wrapper function, use the embrace operator `{{ }}`. For
-  example:
-
-    my_wrapper <- function(fn) {
-      to_chr({{ fn }})
-    }
-    my_wrapper(mean)  # Returns "base::mean"
-
 ## See also
 
 Other character functions:
@@ -207,4 +198,12 @@ try(to_chr(function(x) x, coerce_function = TRUE))
 #> Error in eval(expr, envir) : 
 #>   Can't convert `function(x) x` <function> to <character>.
 #> ℹ Anonymous functions can't be converted to a string name.
+
+# Use the embrace operator {{ }} to preserve the original call-site symbol
+# when `to_chr()` is called inside a wrapper function.
+my_wrapper <- function(fn) {
+  to_chr({{ fn }}, coerce_function = TRUE)
+}
+my_wrapper(mean) # Returns "base::mean"
+#> [1] "base::mean"
 ```

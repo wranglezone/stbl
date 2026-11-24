@@ -150,6 +150,14 @@
   [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)),
   consistent with the other `to_*()` functions
   ([\#392](https://github.com/wranglezone/stbl/issues/392)).
+- [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
+  [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
+  and their synonyms and `specify_*()` versions now apply and validate
+  `tz` for length-1 date-times, consistent with
+  [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md).
+  Previously a length-1 date-time was returned unchanged, so `tz` was
+  ignored and an invalid `tz` did not error
+  ([\#423](https://github.com/wranglezone/stbl/issues/423)).
 - [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)
   and
   [`specify_chr_scalar()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md)

@@ -1,8 +1,6 @@
 # Reconcile a list of values
 
-The comparison runs in C (`stbl_reconcile()`). Date, POSIXct, hms,
-Period, and other classed values are compared in R by
-[`.atomic_mismatch()`](https://stbl.wrangle.zone/dev/reference/dot-atomic_mismatch.md).
+Reconcile a list of values
 
 ## Usage
 

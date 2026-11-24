@@ -120,7 +120,8 @@ specific class by failure mode:
   function.
 
 - `<stbl-error-invalid_function_name>` when `x` uses colons other than a
-  single `::` between a package name and a function name.
+  single `::` between a package name and a function name, or is `""` or
+  `NA`.
 
 - `<stbl-error-non_scalar>` when `x` has more than one element.
 
@@ -201,24 +202,24 @@ Other stabilization functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x57eb1457f7a0>
+#> <bytecode: 0x5f95722097a0>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x57eb1bdbfb10>
+#> <environment: 0x5f957a4ea808>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x57eb1457f7a0>
+#> <bytecode: 0x5f95722097a0>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x57eb13ef2c60>
+#> <bytecode: 0x5f9571b7cc60>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL
