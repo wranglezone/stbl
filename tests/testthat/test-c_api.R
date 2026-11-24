@@ -1533,7 +1533,10 @@ test_that(".reconcile() returns the narrowest value and no mismatch (#414)", {
 })
 
 test_that(".reconcile() locates the first mismatch (#414)", {
-  mismatch <- .reconcile(list(list(1, list(x = 1)), list(1, list(x = 2))))$mismatch
+  mismatch <- .reconcile(list(
+    list(1, list(x = 1)),
+    list(1, list(x = 2))
+  ))$mismatch
   expect_identical(mismatch$at, c(2L, 1L))
   expect_identical(c(mismatch$i, mismatch$j), c(1L, 2L))
   expect_identical(mismatch$reason, 0L)
