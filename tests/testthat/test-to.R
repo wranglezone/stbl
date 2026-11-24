@@ -440,18 +440,6 @@ test_that("tz passes through to() (#381)", {
   )
 })
 
-test_that("tz passes through to() (#381)", {
-  expect_identical(
-    to(
-      1704067200,
-      as.Date("2023-12-31"),
-      tz = "America/Los_Angeles",
-      treat_number_as = "seconds"
-    ),
-    as.Date("2023-12-31")
-  )
-})
-
 # to POSIXct -------------------------------------------------------------------
 
 test_that("to() converts character to POSIXct (#366)", {
