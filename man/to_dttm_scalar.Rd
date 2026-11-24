@@ -88,8 +88,8 @@ safely converted to datetime.
 }
 }
 \description{
-Checks whether a vector can be converted to a length-1 \link[base:POSIXct]{base::POSIXct} vector.
-\code{to_datetime_scalar()} is a synonym of \code{to_dttm_scalar()}.
+Checks whether a vector can be converted to a length-1 \link[base:POSIXct]{base::POSIXct}
+vector. \code{to_datetime_scalar()} is a synonym of \code{to_dttm_scalar()}.
 }
 \examples{
 to_dttm_scalar("2024-01-01T12:00:00Z")

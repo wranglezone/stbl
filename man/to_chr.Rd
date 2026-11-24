@@ -79,21 +79,11 @@ example, \code{as.character(list(1:3))} returns "1:3". In the unlikely event
 that this is the expected behavior, use \code{as.character()} instead.
 \item \code{NULL} values can be rejected as part of the call to this function (with
 \code{allow_null = FALSE}).
-\item When \code{coerce_function = TRUE}, named functions are converted to their string
-name. If the function comes
-from a package namespace, the result is a \code{"pkg::fn"} string. For example,
-\code{to_chr(mean)} returns \code{"base::mean"}. Anonymous functions produce an
-error.
-
-To preserve the original call-site symbol when \code{to_chr()} is called inside
-a wrapper function, use the embrace operator \code{{{ }}}. For example:
+\item When \code{coerce_function = TRUE}, named functions are converted to their
+string name. If the function comes from a package namespace, the result is
+a \code{"pkg::fn"} string. For example, \code{to_chr(mean)} returns \code{"base::mean"}.
+Anonymous functions produce an error.
 }
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{my_wrapper <- function(fn) \{
-  to_chr(\{\{ fn \}\})
-\}
-my_wrapper(mean)  # Returns "base::mean"
-}\if{html}{\out{</div>}}
 }
 \examples{
 to_chr("a")
@@ -110,6 +100,13 @@ try(to_chr(mean))
 to_chr(mean, coerce_function = TRUE)
 to_chr(base::mean, coerce_function = TRUE)
 try(to_chr(function(x) x, coerce_function = TRUE))
+
+# Use the embrace operator {{ }} to preserve the original call-site symbol
+# when `to_chr()` is called inside a wrapper function.
+my_wrapper <- function(fn) {
+  to_chr({{ fn }}, coerce_function = TRUE)
+}
+my_wrapper(mean) # Returns "base::mean"
 }
 \seealso{
 Other character functions:

@@ -97,7 +97,8 @@ vectors) when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-coerce-function>} when \code{x} cannot be converted to a
 function.
 \item \verb{<stbl-error-invalid_function_name>} when \code{x} uses colons other than a
-single \code{::} between a package name and a function name.
+single \code{::} between a package name and a function name, or is \code{""} or
+\code{NA}.
 \item \verb{<stbl-error-non_scalar>} when \code{x} has more than one element.
 \item \verb{<stbl-error-unknown_function>} when \code{x} doesn't resolve to a known
 function.

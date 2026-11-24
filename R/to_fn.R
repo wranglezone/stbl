@@ -23,7 +23,8 @@
 #'   - `<stbl-error-coerce-function>` when `x` cannot be converted to a
 #'   function.
 #'   - `<stbl-error-invalid_function_name>` when `x` uses colons other than a
-#'   single `::` between a package name and a function name.
+#'   single `::` between a package name and a function name, or is `""` or
+#'   `NA`.
 #'   - `<stbl-error-non_scalar>` when `x` has more than one element.
 #'   - `<stbl-error-unknown_function>` when `x` doesn't resolve to a known
 #'   function.

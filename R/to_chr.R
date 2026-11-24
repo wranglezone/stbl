@@ -15,21 +15,10 @@
 #'   that this is the expected behavior, use `as.character()` instead.
 #' - `NULL` values can be rejected as part of the call to this function (with
 #'   `allow_null = FALSE`).
-#' - When `coerce_function = TRUE`, named functions are converted to their string
-#'   name. If the function comes
-#'   from a package namespace, the result is a `"pkg::fn"` string. For example,
-#'   `to_chr(mean)` returns `"base::mean"`. Anonymous functions produce an
-#'   error.
-#'
-#'   To preserve the original call-site symbol when `to_chr()` is called inside
-#'   a wrapper function, use the embrace operator `{{ }}`. For example:
-#'
-#' ```r
-#' my_wrapper <- function(fn) {
-#'   to_chr({{ fn }})
-#' }
-#' my_wrapper(mean)  # Returns "base::mean"
-#' ```
+#' - When `coerce_function = TRUE`, named functions are converted to their
+#'   string name. If the function comes from a package namespace, the result is
+#'   a `"pkg::fn"` string. For example, `to_chr(mean)` returns `"base::mean"`.
+#'   Anonymous functions produce an error.
 #'
 #' @inheritParams .shared-params
 #'
@@ -62,6 +51,13 @@
 #' to_chr(mean, coerce_function = TRUE)
 #' to_chr(base::mean, coerce_function = TRUE)
 #' try(to_chr(function(x) x, coerce_function = TRUE))
+#'
+#' # Use the embrace operator {{ }} to preserve the original call-site symbol
+#' # when `to_chr()` is called inside a wrapper function.
+#' my_wrapper <- function(fn) {
+#'   to_chr({{ fn }}, coerce_function = TRUE)
+#' }
+#' my_wrapper(mean) # Returns "base::mean"
 to_chr <- function(
   x,
   ...,

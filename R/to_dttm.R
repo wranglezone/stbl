@@ -312,8 +312,8 @@ to_dttm.default <- function(
 
 #' Convert to length-1 date-time
 #'
-#' Checks whether a vector can be converted to a length-1 [base::POSIXct] vector.
-#' `to_datetime_scalar()` is a synonym of `to_dttm_scalar()`.
+#' Checks whether a vector can be converted to a length-1 [base::POSIXct]
+#' vector. `to_datetime_scalar()` is a synonym of `to_dttm_scalar()`.
 #'
 #' @inheritParams .shared-params
 #' @inheritParams to_dttm
@@ -356,7 +356,7 @@ to_dttm_scalar <- function(
 ) {
   .to_cls_scalar(
     x,
-    is_rlang_cls_scalar = .is_scalar_dttm,
+    is_rlang_cls_scalar = .fast_false,
     to_cls_fn = to_dttm,
     to_cls_args = c(
       list(tz = tz, treat_number_as = treat_number_as),
@@ -374,15 +374,6 @@ to_dttm_scalar <- function(
 #' @export
 #' @rdname to_dttm_scalar
 to_datetime_scalar <- to_dttm_scalar
-
-#' Test for a length-1 date-time vector
-#'
-#' @inheritParams .shared-params-check
-#' @returns `TRUE` if `x` is a length-1 [base::POSIXct] vector, else `FALSE`.
-#' @keywords internal
-.is_scalar_dttm <- function(x) {
-  inherits(x, "POSIXct") && length(x) == 1L
-}
 
 #' An empty date-time object for error messages
 #'

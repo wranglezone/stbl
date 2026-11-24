@@ -36,7 +36,7 @@
       x Unexpected location: 3
       x Unexpected value: "z".
 
-# .check_scalar() works (#95)
+# .check_scalar() works (#95, #422)
 
     Code
       .check_scalar(1:2)
@@ -49,10 +49,9 @@
 
     Code
       .check_scalar(NULL, allow_null = FALSE)
-    Condition <stbl-error-non_scalar>
+    Condition <stbl-error-bad_null>
       Error:
-      ! `NULL` must be a single <non-NULL>.
-      x `NULL` has no values.
+      ! `NULL` must not be <NULL>.
 
 ---
 

@@ -13,7 +13,6 @@
 The reconciled value, or a mismatch (see \code{.new_mismatch()}).
 }
 \description{
-The comparison runs in C (\code{stbl_reconcile()}). Date, POSIXct, hms, Period,
-and other classed values are compared in R by \code{.atomic_mismatch()}.
+Reconcile a list of values
 }
 \keyword{internal}

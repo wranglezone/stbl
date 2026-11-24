@@ -115,3 +115,19 @@
       Error:
       ! Can't convert `1L` <integer> to <function>.
 
+# to_fn() errors with a stbl class for empty and NA strings (#424)
+
+    Code
+      to_fn("")
+    Condition <stbl-error-invalid_function_name>
+      Error:
+      ! `""` must be a valid function name.
+
+---
+
+    Code
+      to_fn(NA_character_)
+    Condition <stbl-error-invalid_function_name>
+      Error:
+      ! `NA_character_` must be a valid function name.
+

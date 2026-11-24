@@ -143,9 +143,9 @@ static SEXP handle_fn_not_found(SEXP cond, void* data_) {
  */
 SEXP stbl_chr_to_fn(SEXP x, SEXP definition_env) {
   SEXP xi = STRING_ELT(x, 0);
-  if (xi == NA_STRING) Rf_error("Can't convert <NA> to a function.");
+  if (xi == NA_STRING) return signal_classed_error("stbl_invalid_function_name");
   const char* s = CHAR(xi);
-  if (*s == '\0') Rf_error("Can't convert \"\" to a function.");
+  if (*s == '\0') return signal_classed_error("stbl_invalid_function_name");
 
   /* Validate colon usage via shared helper */
   if (!is_valid_colon_usage(s))

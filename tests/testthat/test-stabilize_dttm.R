@@ -206,6 +206,17 @@ test_that("stabilise_datetime() exists (#105)", {
   expect_no_error(stabilise_datetime("2024-01-01T12:00:00Z"))
 })
 
+test_that("stabilize_dttm_scalar() applies tz to length-1 date-times (#423)", {
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  result <- stabilize_dttm_scalar(given, tz = "America/Chicago")
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+  expect_pkg_error_classes(
+    stabilize_dttm_scalar(given, tz = "Bogus/Zone"),
+    "stbl",
+    "bad_tz"
+  )
+})
+
 test_that("stabilize_dttm_scalar() allows length-1 date-times through (#105)", {
   given <- to_dttm("2024-01-01T12:00:00Z")
   expect_identical(stabilize_dttm_scalar(given), given)

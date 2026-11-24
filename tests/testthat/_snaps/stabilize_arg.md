@@ -126,23 +126,21 @@
       ! `val` must be a single <integer>.
       x `val` has 10 values.
 
-# stabilize_arg_scalar() respects allow_null (#12, #58)
+# stabilize_arg_scalar() respects allow_null (#12, #58, #422)
 
     Code
       stabilize_arg_scalar(given, allow_null = FALSE)
-    Condition <stbl-error-non_scalar>
+    Condition <stbl-error-bad_null>
       Error:
-      ! `given` must be a single <non-NULL>.
-      x `given` has no values.
+      ! `given` must not be <NULL>.
 
 ---
 
     Code
       wrapped_stabilize_arg_scalar(given, allow_null = FALSE)
-    Condition <stbl-error-non_scalar>
+    Condition <stbl-error-bad_null>
       Error in `wrapped_stabilize_arg_scalar()`:
-      ! `val` must be a single <non-NULL>.
-      x `val` has no values.
+      ! `val` must not be <NULL>.
 
 # stabilize_arg_scalar() errors on weird internal arg values (#12, #58)
 

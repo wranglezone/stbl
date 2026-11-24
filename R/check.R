@@ -154,9 +154,9 @@
   subclass <- "non_scalar"
   if (!length(x)) {
     if (is.null(x)) {
-      if (.is_allowed_null(x, allow_null = allow_null, call = call)) {
-        return(invisible(NULL))
-      }
+      return(invisible(
+        .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
+      ))
     } else {
       allow_zero_length <- to_lgl_scalar(
         allow_zero_length,
@@ -176,9 +176,6 @@
 
   x_size <- vctrs::vec_size(x)
 
-  if (identical(x_class, "NULL")) {
-    x_class <- "non-NULL"
-  }
   .stop_must(
     "must be a single {.cls {x_class}}.",
     x_arg = x_arg,
@@ -187,18 +184,6 @@
     subclass = subclass,
     message_env = rlang::current_env()
   )
-}
-
-#' Check if a value is NULL and NULLs are allowed
-#'
-#' @inheritParams .shared-params-check
-#' @inheritParams .shared-params
-#' @returns (`logical(1)`) `TRUE` if `x` is `NULL` and `allow_null` is `TRUE`,
-#'   else `FALSE`.
-#' @keywords internal
-.is_allowed_null <- function(x, allow_null = TRUE, call = caller_env()) {
-  allow_null <- to_lgl_scalar(allow_null, call = call)
-  return(is.null(x) && allow_null)
 }
 
 #' Check that one value is not greater than another
