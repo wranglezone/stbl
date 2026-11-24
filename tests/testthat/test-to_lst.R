@@ -112,3 +112,13 @@ test_that("to_lst() ignores coerce_function for non-function input (#380)", {
   expect_null(to_lst(NULL, coerce_function = TRUE))
   expect_identical(to_lst(1:2, coerce_function = TRUE), list(1L, 2L))
 })
+
+test_that("to_lst() accepts x_class for every method (#419)", {
+  expect_identical(to_lst(list(1), x_class = "a"), list(1))
+  expect_null(to_lst(NULL, x_class = "a"))
+  expect_identical(to_lst(1:2, x_class = "a"), list(1L, 2L))
+  expect_identical(
+    to_lst(mean, coerce_function = TRUE, x_class = "a"),
+    as.list(mean)
+  )
+})

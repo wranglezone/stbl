@@ -7,6 +7,7 @@
 #' @keywords internal
 .to_null <- function(
   x,
+  ...,
   allow_null = TRUE,
   x_arg = caller_arg(x),
   call = caller_env()

@@ -34,7 +34,11 @@ evaluate variables in error messages.}
 }
 \value{
 The result of \code{expr}, or an error with the replacement message if a
-matching \code{{stbl}} error is thrown.
+matching \code{{stbl}} error is thrown. The replacement error has the classes in
+\code{additional_class}, followed by the \code{stbl} classes of the original error
+(such as \verb{<stbl-error-coerce-character>}, \verb{<stbl-error-coerce>},
+\verb{<stbl-error>}, and \verb{<stbl-condition>}), \verb{<rlang_error>}, \verb{<error>}, and
+\verb{<condition>}.
 }
 \description{
 Catches a \code{stbl} error with the specified \code{subclass} and replaces its message

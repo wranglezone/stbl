@@ -9,24 +9,33 @@
 #' @returns The input as a character vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-bad_named>` when the presence of names doesn't match
 #'   `named`.
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
-#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
+#'   (for example a `data.frame`, or an anonymous function).
 #'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
 #'   present.
+#'   - `<stbl-error-incompatible_values-character>` when some elements of a
+#'   list cannot be converted to character.
+#'   - `<stbl-error-n_characters>` when some elements have fewer characters
+#'   than `min_characters` and others have more than `max_characters`.
 #'   - `<stbl-error-n_characters-too_few>` when elements have fewer characters
 #'   than `min_characters`.
 #'   - `<stbl-error-n_characters-too_many>` when elements have more characters
 #'   than `max_characters`.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
-#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
-#'   - `<stbl-error-bad_function>` for functions when
-#'   `coerce_function = FALSE` (the default).
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size`, or
+#'   `min_characters` is larger than `max_characters`.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -48,6 +57,7 @@ stabilize_chr <- function(
   ...,
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -55,7 +65,6 @@ stabilize_chr <- function(
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
-  named = NULL,
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),
@@ -115,24 +124,31 @@ stabilise_character <- stabilize_chr
 #' @returns The input as a length-1 character vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
+#'   - `<stbl-error-allowed_values>` when the value is not in
+#'   `allowed_values`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - `<stbl-error-bad_function>` for functions when
+#'   `coerce_function = FALSE` (the default).
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-bad_named>` when the presence of names doesn't match
 #'   `named`.
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
+#'   (for example a `data.frame`, or an anonymous function).
+#'   - `<stbl-error-incompatible_values-character>` when some elements of a
+#'   list cannot be converted to character.
 #'   - `<stbl-error-n_characters-too_few>` when the element has fewer characters
 #'   than `min_characters`.
 #'   - `<stbl-error-n_characters-too_many>` when the element has more characters
 #'   than `max_characters`.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-regex_mismatch>` when `regex` checks fail.
-#'   - `<stbl-error-allowed_values>` when the value is not in
-#'   `allowed_values`.
-#'   - `<stbl-error-bad_function>` for functions when
-#'   `coerce_function = FALSE` (the default).
+#'   - `<stbl-error-size_x_vs_y>` when `min_characters` is larger than
+#'   `max_characters`.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -148,11 +164,11 @@ stabilize_chr_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_characters = NULL,
   max_characters = NULL,
   regex = NULL,
   allowed_values = NULL,
-  named = NULL,
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   call = caller_env(),

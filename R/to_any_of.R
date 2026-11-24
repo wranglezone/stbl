@@ -13,6 +13,7 @@ to_any_of <- function(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 ) {
@@ -29,7 +30,7 @@ to_any_of <- function(
         x,
         proto,
         x_arg = x_arg,
-        to_arg = NULL,
+        to_arg = to_arg,
         call = call,
         x_class = x_class
       ),

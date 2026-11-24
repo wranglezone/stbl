@@ -745,3 +745,35 @@ test_that("stabilize_lst() applies exact specs to duplicate names (#292)", {
     list(a = 1L, a = 2L)
   )
 })
+
+test_that(".call_specified_fn() forwards .to_arg and .x_class only to specs that accept them (#419)", {
+  spec <- function(x, to_arg = "none", x_class = "default") {
+    paste(to_arg, x_class)
+  }
+  expect_identical(
+    .call_specified_fn(
+      spec,
+      1,
+      .x_arg = "x",
+      .call = NULL,
+      .to_arg = "to",
+      .x_class = "cls"
+    ),
+    "to cls"
+  )
+  expect_identical(
+    .call_specified_fn(spec, 1, .x_arg = "x", .call = NULL),
+    "none default"
+  )
+  expect_identical(
+    .call_specified_fn(
+      to_int,
+      "1",
+      .x_arg = "x",
+      .call = NULL,
+      .to_arg = "to",
+      .x_class = "cls"
+    ),
+    1L
+  )
+})

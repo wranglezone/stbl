@@ -36,14 +36,14 @@
 #' @returns `x` with stabilized names, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-allowed_names>` when a name is not in `allowed_names`.
 #'   - `<stbl-error-bad_named>` when `allowed_names` or `spec` is supplied and
 #'   `x` is not fully named.
-#'   - `<stbl-error-allowed_names>` when a name is not in `allowed_names`.
+#'   - `<stbl-error-bad_required>` when `required` is invalid.
 #'   - `<stbl-error-duplicate_names>` when duplicate names are present and
 #'   `allow_duplicate_names = FALSE`.
 #'   - `<stbl-error-missing_element>` when a name in `required` is absent
 #'   (including conditionally required names whose trigger is present).
-#'   - `<stbl-error-bad_required>` when `required` is invalid.
 #'   - Errors from `spec` when a name does not satisfy it.
 #' @family names functions
 #' @family stabilization functions

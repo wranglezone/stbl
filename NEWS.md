@@ -15,11 +15,13 @@
 * New `stabilize_lst_positional()` (and its synonyms `stabilise_lst_positional()`, `stabilize_list_positional()`, `stabilise_list_positional()`, `stabilize_tuple()`, and `stabilise_tuple()`) and `specify_lst_positional()` (with synonyms `specify_list_positional()` and `specify_tuple()`) validate a list positionally, applying a different spec to each element, like JSON Schema tuple arrays (#284).
 * `stabilize_names()`, `stabilize_lst()`, `stabilize_df()`, and their `specify_*()` versions accept a list for `required` / `.required` to express conditional requirements, similar to JSON Schema `dependentRequired` (#291).
 * New `stabilize_names()` (and its synonym `stabilise_names()`) and `specify_names()` validate and optionally convert only the names of an object, leaving its class and values alone (#26).
+* `to()` gains an explicit `allow_null` argument. `to_each()` gains `to_arg` and `x_class` arguments (forwarded to `spec` when supplied), and `to_one_of()` and `to_any_of()` gain a `to_arg` argument (#419).
 
 ## Bug fixes
 
 * `stabilize_lst()` and `stabilize_df()` (and their `specify_*()` versions) now require every name in `.required`, not just names that have a spec in `...`. A call with `.named = FALSE` (or `.extra_cols = FALSE`) and a required name that has no spec now errors early with class `<stbl-error-bad_required>` (#291).
 * `specify_lst()` gains the `.allow_duplicate_names` argument of `stabilize_lst()`, so a specified list stabilizer can allow duplicate names (#400).
+* `to_lst()` and the `to_df()` and `to_fn()` methods now accept an `x_class` argument, like the other `to_*()` functions, and `to()` now passes `x_class` along to `to_lst()` and `to_df()` (#419).
 * `to_date()`, `to_dttm()`, `to_dur()`, `to_time()`, `to_df()`, and `to()` for those classes now convert an empty list to an empty vector of the target type (or a zero-row, zero-column data frame for `to_df()`), consistent with the other `to_*()` functions (#392).
 * `specify_chr()` and `specify_chr_scalar()` (and their synonyms) and `to()` now return the function's name instead of `"x"` when `coerce_function = TRUE`, e.g., `specify_chr(coerce_function = TRUE)(mean)` returns `"base::mean"`, as does `to(mean, "a", coerce_function = TRUE)` (#394, #395).
 

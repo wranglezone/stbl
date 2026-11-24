@@ -26,3 +26,13 @@
       x Can't determine the local time zone ("Not/A_Zone" is not recognized).
       i Supply a value from `OlsonNames()` as `tz`.
 
+# .check_tz() reports an undetermined local time zone (#370)
+
+    Code
+      .check_tz("")
+    Condition <stbl-error-bad_tz>
+      Error:
+      ! `tz` must be a recognized time zone.
+      x Can't determine the local time zone.
+      i Supply a value from `OlsonNames()` as `tz`.
+

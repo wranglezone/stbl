@@ -4,7 +4,7 @@
 \alias{.call_specified_fn}
 \title{Call a spec function with properly-named context arguments}
 \usage{
-.call_specified_fn(spec_fn, .x, .x_arg, .call)
+.call_specified_fn(spec_fn, .x, .x_arg, .call, .to_arg = NULL, .x_class = NULL)
 }
 \arguments{
 \item{spec_fn}{A stabilizer function.}
@@ -18,6 +18,9 @@ unexported functions.}
 
 \item{.call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{.to_arg, .x_class}{Optional \code{to_arg} and \code{x_class} values, passed on
+only when \code{spec_fn} accepts them and they are not \code{NULL}.}
 }
 \value{
 The validated value.

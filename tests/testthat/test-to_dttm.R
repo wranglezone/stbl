@@ -218,18 +218,14 @@ test_that("to_dttm() validates treat_number_as (#372)", {
   expect_error(to_dttm(1, treat_number_as = "bogus"), class = "rlang_error")
 })
 
-test_that("treat_number_as passes through to_dttm_scalar() and to() (#372)", {
+test_that("treat_number_as passes through to_dttm_scalar() (#372)", {
   expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
   expect_identical(
     to_dttm_scalar(1704110400000, treat_number_as = "milliseconds"),
     expected
   )
-  expect_identical(
-    to(1704110400000, expected, treat_number_as = "milliseconds"),
-    expected
-  )
   expect_pkg_error_classes(
-    to(1, expected, treat_number_as = "error"),
+    to_dttm_scalar(1, treat_number_as = "error"),
     "stbl",
     "coerce",
     "datetime"
@@ -352,10 +348,6 @@ test_that("to_dttm() converts an empty list to an empty datetime (#392)", {
   expect_identical(
     to_dttm(list()),
     as.POSIXct(character(), tz = "UTC")
-  )
-  expect_identical(
-    to(list(), vctrs::new_datetime(tzone = "America/Chicago")),
-    as.POSIXct(character(), tz = "America/Chicago")
   )
 })
 

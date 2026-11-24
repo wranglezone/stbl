@@ -14,6 +14,7 @@
 #'   fails `spec`; the condition's `locations` element gives the positions that
 #'   failed.
 #' @family multiple type functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples

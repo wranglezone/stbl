@@ -14,6 +14,7 @@ stabilize_dttm(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -21,7 +22,6 @@ stabilize_dttm(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -34,6 +34,7 @@ stabilise_dttm(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -41,7 +42,6 @@ stabilise_dttm(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -54,6 +54,7 @@ stabilize_datetime(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -61,7 +62,6 @@ stabilize_datetime(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -74,6 +74,7 @@ stabilise_datetime(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
@@ -81,7 +82,6 @@ stabilise_datetime(
   max_value = NULL,
   allowed_values = NULL,
   accepted_datetime_formats = locale_datetime_formats(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -106,6 +106,14 @@ Unix epoch, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
+
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
 will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
@@ -133,14 +141,6 @@ that parses every non-\code{NA} element of \code{x} is used; if none do, the res
 shape (\code{"\%Y-\%m-\%d"}, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.}
 
-\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
-\code{character(0)} skip the check. \code{TRUE} requires every element to have a
-non-empty name; \code{FALSE} requires that no elements are named. A character
-vector (or factor) requires \code{x} to be named, with every name in the vector.
-A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
-\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
-and is applied to \code{names(x)}, so every name must satisfy it.}
-
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
@@ -159,25 +159,29 @@ The input as a \link[base:POSIXct]{base::POSIXct} vector, or an error condition 
 classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-datetime>} when \code{x} cannot be converted to datetime.
-\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
-safely converted to datetime.
-\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
-\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
+\item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
 \code{named}.
-\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
-\item \verb{<stbl-error-size_too_small>} when the vector is shorter than
-\code{min_size}.
-\item \verb{<stbl-error-size_too_large>} when the vector is longer than
-\code{max_size}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
+\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-datetime>} when \code{x} cannot be converted to datetime,
+including numbers when \code{treat_number_as = "error"}.
 \item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates
 are present.
+\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
+safely converted to datetime.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
-\item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than
+\code{max_size}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than
+\code{min_size}.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}.
+\item Errors from \code{named} when it is a function and a name does not satisfy
+it.
 }
 }
 \description{
@@ -232,6 +236,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -250,16 +255,20 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }

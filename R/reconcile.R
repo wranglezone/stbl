@@ -65,10 +65,10 @@
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
 #'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
 #'   mode:
-#'   - `<stbl-error-empty_values>` when no values are supplied in `...`.
 #'   - `<stbl-error-cant_reconcile>` when any two values are not equivalent.
-#'     The message names the pair that disagreed and, for nested values, the
-#'     path to the first difference.
+#'   The message names the pair that disagreed and, for nested values, the path
+#'   to the first difference.
+#'   - `<stbl-error-empty_values>` when no values are supplied in `...`.
 #' @family multiple type functions
 #' @seealso [stabilize_all_of()], which uses `reconcile()` to combine the
 #'   results of several specs.

@@ -245,6 +245,10 @@ test_that("to() treats language input as data for list targets (#366)", {
   expect_identical(to(given, list()), as.list(given))
 })
 
+test_that("to() accepts x_class for lists (#419)", {
+  expect_identical(to(list(1), list(), x_class = "a"), list(1))
+})
+
 # allow_null -------------------------------------------------------------------
 
 test_that("to() returns NULL by default when x is NULL (#182)", {
@@ -308,6 +312,17 @@ test_that("to() converts vector to data frame (#182)", {
   result <- to(given, data.frame())
   expected <- data.frame(x = c("a", "b", "c"), stringsAsFactors = FALSE)
   expect_identical(result, expected)
+})
+
+test_that("to() accepts x_class for df (#419)", {
+  expect_identical(
+    to(data.frame(a = 1), data.frame(), x_class = "a"),
+    data.frame(a = 1)
+  )
+})
+
+test_that("to() converts an empty list to an empty data frame (#392)", {
+  expect_identical(to(list(), data.frame(a = 1)), data.frame())
 })
 
 # to NULL (target) --------------------------------------------------------------
@@ -405,6 +420,38 @@ test_that("to() errors for incompatible character -> Date (#366, #401)", {
   )
 })
 
+test_that("treat_number_as passes through to() (#381)", {
+  expected <- as.Date("2024-01-01")
+  expect_identical(
+    to(1704110400, expected, treat_number_as = "seconds"),
+    expected
+  )
+})
+
+test_that("tz passes through to() (#381)", {
+  expect_identical(
+    to(
+      1704067200,
+      as.Date("2024-01-01"),
+      tz = "America/Los_Angeles",
+      treat_number_as = "seconds"
+    ),
+    as.Date("2023-12-31")
+  )
+})
+
+test_that("tz passes through to() (#381)", {
+  expect_identical(
+    to(
+      1704067200,
+      as.Date("2023-12-31"),
+      tz = "America/Los_Angeles",
+      treat_number_as = "seconds"
+    ),
+    as.Date("2023-12-31")
+  )
+})
+
 # to POSIXct -------------------------------------------------------------------
 
 test_that("to() converts character to POSIXct (#366)", {
@@ -429,6 +476,20 @@ test_that("to() errors for incompatible character -> POSIXct (#366, #401)", {
     to("not-a-datetime", as.POSIXct("2024-01-01", tz = "UTC")),
     "stbl",
     "incompatible_values",
+    "datetime"
+  )
+})
+
+test_that("treat_number_as passes through to() (#372)", {
+  expected <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  expect_identical(
+    to(1704110400000, expected, treat_number_as = "milliseconds"),
+    expected
+  )
+  expect_pkg_error_classes(
+    to(1, expected, treat_number_as = "error"),
+    "stbl",
+    "coerce",
     "datetime"
   )
 })
@@ -459,6 +520,13 @@ test_that("to() errors for incompatible character -> hms (#366, #401)", {
   )
 })
 
+test_that("treat_number_as passes through to() (#387)", {
+  expect_identical(
+    to(0.5, hms::hms(), treat_number_as = "days"),
+    hms::hms(43200)
+  )
+})
+
 # to Period --------------------------------------------------------------------
 
 test_that("to() converts character to Period (#366)", {
@@ -480,6 +548,13 @@ test_that("to() errors for incompatible character -> Period (#366, #401)", {
     "stbl",
     "incompatible_values",
     "duration"
+  )
+})
+
+test_that("treat_number_as passes through to() (#382)", {
+  expect_identical(
+    to(1, lubridate::period(), treat_number_as = "days"),
+    lubridate::period(day = 1)
   )
 })
 

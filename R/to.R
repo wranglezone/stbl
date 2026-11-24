@@ -15,10 +15,15 @@
 #' @returns `x` converted to the type of `.to`, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_tz>` when `.to` is a [base::Date] or [base::POSIXct]
+#'   and `tz` is not `""` or a value from [OlsonNames()], or is `""` and your
+#'   local time zone can't be determined.
+#'   - `<stbl-error-coerce-*>` (where `*` is the class of `.to`) when the class
+#'   of `.to` has no corresponding `to_*()` function and [vctrs::vec_cast()]
+#'   cannot convert `x` to `.to`.
+#'   - `<stbl-error-bad_null>` when `.to` is `NULL` and `allow_null = FALSE`.
 #'   - The failure classes documented for the `to_*()` function corresponding
 #'   to the class of `.to` (for example [to_int()] for `.to = integer()`).
-#'   - `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-#'   `to_*()` function and [vctrs::vec_cast()] cannot converted `x` to `.to`.
 #'
 #' @details
 #' When the class of `.to` does not have a corresponding `to_*()` function,
@@ -52,6 +57,7 @@ to <- function(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -155,7 +161,14 @@ to.data.frame <- function(
       x_class = x_class
     ))
   }
-  to_df(x, ..., x_arg = x_arg, to_arg = to_arg, call = call)
+  to_df(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -256,7 +269,14 @@ to.list <- function(
       x_class = x_class
     ))
   }
-  to_lst(x, ..., x_arg = x_arg, to_arg = to_arg, call = call)
+  to_lst(
+    x,
+    ...,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    call = call,
+    x_class = x_class
+  )
 }
 
 #' @export
@@ -287,12 +307,13 @@ to.NULL <- function(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
   x_class = object_type(x)
 ) {
-  .to_null(x, ..., x_arg = x_arg, call = call)
+  .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
 }
 
 #' @export

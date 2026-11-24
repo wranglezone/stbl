@@ -75,13 +75,15 @@ condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
 \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
 failure mode:
 \itemize{
-\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
-safely converted to datetime.
-\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
-\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
+\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-datetime>} when \code{x} cannot be converted to datetime,
+including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
+safely converted to datetime.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 }
 }
@@ -124,6 +126,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -142,15 +145,19 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }

@@ -14,10 +14,10 @@ stabilize_dur_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -30,10 +30,10 @@ stabilise_dur_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -46,10 +46,10 @@ stabilize_duration_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -62,10 +62,10 @@ stabilise_duration_scalar(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -86,6 +86,14 @@ of days, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
+\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
+\code{character(0)} skip the check. \code{TRUE} requires every element to have a
+non-empty name; \code{FALSE} requires that no elements are named. A character
+vector (or factor) requires \code{x} to be named, with every name in the vector.
+A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
+\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
+and is applied to \code{names(x)}, so every name must satisfy it.}
+
 \item{min_value}{(\code{numeric(1)}) The lowest allowed value for \code{x}. If \code{NULL}
 (default) values are not checked.}
 
@@ -95,14 +103,6 @@ of days, or \code{"error"} to reject numbers. Ignored for non-numeric input.}
 \item{allowed_values}{A vector of permitted values (converted to the target
 type). \code{NULL} (default) skips the check. \code{NA} values in \code{x} are permitted
 independently of \code{allowed_values}, subject to \code{allow_na}.}
-
-\item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
-\code{character(0)} skip the check. \code{TRUE} requires every element to have a
-non-empty name; \code{FALSE} requires that no elements are named. A character
-vector (or factor) requires \code{x} to be named, with every name in the vector.
-A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
-\verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
-and is applied to \code{names(x)}, so every name must satisfy it.}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -123,22 +123,24 @@ error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
 \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
 mode:
 \itemize{
-\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a
-duration.
-\item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
-safely converted to a duration.
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
+\item \verb{<stbl-error-allowed_values>} when the value is not in
+\code{allowed_values}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE}.
-\item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
 \code{named}.
-\item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a
+duration, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
+safely converted to a duration.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
 \code{max_value}.
-\item \verb{<stbl-error-allowed_values>} when the value is not in
-\code{allowed_values}.
+\item Errors from \code{named} when it is a function and a name does not satisfy
+it.
 }
 }
 \description{
@@ -180,6 +182,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm]{stabilize_dttm()}},
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -198,16 +201,20 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }

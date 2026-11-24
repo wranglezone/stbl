@@ -10,10 +10,10 @@ stabilize_arg(
   ...,
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -40,14 +40,6 @@ stabilize_arg_scalar(
 
 \item{allow_na}{(\code{logical(1)}) Are NA values ok?}
 
-\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
-will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-
-\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
-will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
-
-\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
-
 \item{named}{Controls the names of \code{x}. \code{NULL} (default), \code{NA}, or
 \code{character(0)} skip the check. \code{TRUE} requires every element to have a
 non-empty name; \code{FALSE} requires that no elements are named. A character
@@ -55,6 +47,14 @@ vector (or factor) requires \code{x} to be named, with every name in the vector.
 A single stabilizer or conversion function (such as \code{\link[=stabilize_chr]{stabilize_chr()}}, a
 \verb{to_*} function, or the result of \code{\link[=specify_chr]{specify_chr()}}) requires \code{x} to be named
 and is applied to \code{names(x)}, so every name must satisfy it.}
+
+\item{min_size}{(\code{integer(1)}) The minimum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{max_size}{(\code{integer(1)}) The maximum size of the object. Object size
+will be tested using \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.}
+
+\item{unique}{(\code{logical(1)}) Should all elements in \code{x} be distinct?}
 
 \item{x_arg}{(\code{character(1)}) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -76,17 +76,26 @@ the original class.}
 \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
 specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
-\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-bad_empty>} for empty vectors when
 \code{allow_zero_length = FALSE} in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
-\item \verb{<stbl-error-non_scalar>} for non-scalar vectors in
-\code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
+\code{named}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE} in
+\code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
+present in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors (including \code{NULL} when
+\code{allow_null = FALSE}) in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}
+in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}
+in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size} in
+\code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item Errors from \code{named} when it is a function and a name does not satisfy
+it.
 }
 }
 \description{
@@ -130,6 +139,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -148,16 +158,20 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }

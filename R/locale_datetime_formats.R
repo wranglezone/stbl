@@ -15,7 +15,17 @@
 #'   starting with `"%Y-%m-%dT%H:%M:%S"`, `"%Y-%m-%d %H:%M:%S"`, and
 #'   `"%Y-%m-%d"` (in that order), followed by the locale's conventional
 #'   day/month order with `"/"` and then `"-"` separators (each listed with,
-#'   then without, a `" %H:%M:%S"` suffix).
+#'   then without, a `" %H:%M:%S"` suffix), or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_empty>` when `locale_time` is empty.
+#'   - `<stbl-error-bad_function>` when `locale_time` is a function.
+#'   - `<stbl-error-bad_null>` when `locale_time` is `NULL`.
+#'   - `<stbl-error-coerce-character>` when `locale_time` cannot be converted
+#'   to character.
+#'   - `<stbl-error-incompatible_values-character>` when `locale_time` is a
+#'   list whose elements cannot be converted to character.
+#'   - `<stbl-error-non_scalar>` when `locale_time` has more than one value.
 #' @family date functions
 #' @family datetime functions
 #' @export

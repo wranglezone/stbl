@@ -6,7 +6,9 @@
 #' any type constraints on its value.
 #'
 #' @inheritParams .shared-params
-#' @returns The value, unchanged.
+#' @returns The value, unchanged, or an error condition with classes
+#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+#'   `<condition>`, and `<stbl-error-bad_null>` when `x` is `NULL`.
 #' @family list functions
 #' @family stabilization functions
 #' @export
@@ -20,10 +22,12 @@
 #' stabilize_lst(list(data = mtcars), data = assert_present)
 assert_present <- function(
   x,
+  ...,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
 ) {
+  rlang::check_dots_empty(...)
   if (is.null(x)) {
     .stop_null(x_arg = x_arg, call = call)
   }

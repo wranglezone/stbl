@@ -11,15 +11,20 @@
 #' @returns The input as a factor, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-bad_named>` when the presence of names doesn't match
 #'   `named`.
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
-#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
+#'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
+#'   cannot be converted to factor.
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size`.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family factor functions
 #' @family stabilization functions
 #' @export
@@ -35,12 +40,12 @@ stabilize_fct <- function(
   ...,
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -88,16 +93,20 @@ stabilise_factor <- stabilize_fct
 #' @returns The input as a length-1 factor, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-bad_named>` when the presence of names doesn't match
 #'   `named`.
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
 #'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
+#'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
+#'   cannot be converted to factor.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family factor functions
 #' @family stabilization functions
 #' @export
@@ -112,10 +121,10 @@ stabilize_fct_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
+  named = NULL,
   levels = NULL,
   ordered = is.ordered(x),
   to_na = character(),
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)

@@ -36,3 +36,7 @@ test_that("to_any_of() errors when ... is empty (#215, #285)", {
     "empty_specs"
   )
 })
+
+test_that("to_any_of() accepts to_arg (#419)", {
+  expect_identical(to_any_of("a", integer(), character(), to_arg = "foo"), "a")
+})

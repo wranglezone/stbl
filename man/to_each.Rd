@@ -10,7 +10,9 @@ to_each(
   ...,
   simplify = TRUE,
   x_arg = caller_arg(x),
-  call = caller_env()
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = NULL
 )
 }
 \arguments{
@@ -32,8 +34,18 @@ in error messages. The automatic value will work in most cases, or pass it
 through from higher-level functions to make error messages clearer in
 unexported functions.}
 
+\item{to_arg}{(\code{character(1)} or \code{NULL}) The name of the object that \code{x} is
+being converted to match, for use in error messages. When \code{NULL}, error
+messages describe only \code{x}. When supplied, conversion failure messages name
+both \code{x_arg} and \code{to_arg}.}
+
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its conversion, but want the error message to match
+the original class.}
 }
 \value{
 \code{x} with every element converted by \code{spec}, simplified to an atomic
@@ -58,6 +70,67 @@ try(to_each(list("1", "a"), to_int))
 \seealso{
 Other multiple type functions:
 \code{\link[=reconcile]{reconcile()}},
-\code{\link[=stabilize_each]{stabilize_each()}}
+\code{\link[=specify_all_of]{specify_all_of()}},
+\code{\link[=specify_any_of]{specify_any_of()}},
+\code{\link[=specify_each]{specify_each()}},
+\code{\link[=specify_one_of]{specify_one_of()}},
+\code{\link[=stabilize_all_of]{stabilize_all_of()}},
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}}
+
+Other stabilization functions:
+\code{\link[=assert_contains]{assert_contains()}},
+\code{\link[=assert_not]{assert_not()}},
+\code{\link[=assert_present]{assert_present()}},
+\code{\link[=stabilize_all_of]{stabilize_all_of()}},
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
+\code{\link[=stabilize_arg]{stabilize_arg()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
+\code{\link[=stabilize_date]{stabilize_date()}},
+\code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}},
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=stabilize_dttm]{stabilize_dttm()}},
+\code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
+\code{\link[=stabilize_dur]{stabilize_dur()}},
+\code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
+\code{\link[=stabilize_names]{stabilize_names()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
+\code{\link[=stabilize_time]{stabilize_time()}},
+\code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
+\code{\link[=to_chr]{to_chr()}},
+\code{\link[=to_chr_scalar]{to_chr_scalar()}},
+\code{\link[=to_date]{to_date()}},
+\code{\link[=to_date_scalar]{to_date_scalar()}},
+\code{\link[=to_dbl]{to_dbl()}},
+\code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
+\code{\link[=to_dttm]{to_dttm()}},
+\code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
+\code{\link[=to_dur]{to_dur()}},
+\code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_fct]{to_fct()}},
+\code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
+\code{\link[=to_int]{to_int()}},
+\code{\link[=to_int_scalar]{to_int_scalar()}},
+\code{\link[=to_lgl]{to_lgl()}},
+\code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
+\code{\link[=to_time]{to_time()}},
+\code{\link[=to_time_scalar]{to_time_scalar()}}
 }
 \concept{multiple type functions}
+\concept{stabilization functions}

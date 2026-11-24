@@ -12,17 +12,26 @@
 #' @returns `x`, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
-#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
-#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
-#'   `named`.
 #'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE` in [stabilize_arg_scalar()].
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors in
-#'   [stabilize_arg_scalar()].
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE` in
+#'   [stabilize_arg()].
+#'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
+#'   present in [stabilize_arg()].
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors (including `NULL` when
+#'   `allow_null = FALSE`) in [stabilize_arg_scalar()].
+#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`
+#'   in [stabilize_arg()].
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`
+#'   in [stabilize_arg()].
+#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size` in
+#'   [stabilize_arg()].
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family stabilization functions
 #' @export
 #'
@@ -45,10 +54,10 @@ stabilize_arg <- function(
   ...,
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)

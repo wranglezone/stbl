@@ -11,10 +11,10 @@
 #' @returns The input as a double vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family double functions
 #' @family stabilization functions
 #' @export
@@ -212,12 +212,12 @@ to_dbl.default <- function(
 #' @returns The input as a length-1 double vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-coerce-double>` when `x` cannot be converted to double.
 #'   - `<stbl-error-incompatible_values-double>` when some values cannot be
 #'   safely converted to double.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #' @family double functions
 #' @family stabilization functions

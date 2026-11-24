@@ -22,11 +22,13 @@
 #' @returns The object as a list, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-list>` when `x` is a primitive function.
 #'   - `<stbl-error-bad_function>` for functions when
 #'   `coerce_function = FALSE` (the default).
 #'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-list>` when `x` cannot be converted to a list,
+#'   including primitive functions when `coerce_function = TRUE`.
 #' @family list functions
+#' @family stabilization functions
 #' @export
 to_lst <- function(
   x,
@@ -34,7 +36,8 @@ to_lst <- function(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   UseMethod("to_lst")
 }
@@ -51,7 +54,8 @@ to_lst.list <- function(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   check_dots_empty0(..., call = call)
   x
@@ -91,7 +95,8 @@ to_lst.NULL <- function(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   check_dots_empty0(..., call = call)
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
@@ -105,7 +110,8 @@ to_lst.function <- function(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   check_dots_empty0(..., call = call)
   .check_function_allowed(x, coerce_function, x_arg = x_arg, call = call)
