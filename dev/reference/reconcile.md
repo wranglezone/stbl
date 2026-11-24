@@ -29,11 +29,11 @@ error condition with classes `<stbl-error>`, `<stbl-condition>`,
 `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 failure mode:
 
-- `<stbl-error-empty_values>` when no values are supplied in `...`.
-
 - `<stbl-error-cant_reconcile>` when any two values are not equivalent.
   The message names the pair that disagreed and, for nested values, the
   path to the first difference.
+
+- `<stbl-error-empty_values>` when no values are supplied in `...`.
 
 ## Equivalence
 
@@ -111,7 +111,14 @@ not equal any single input. For `list(a = 1L, b = 2)` and
 which uses `reconcile()` to combine the results of several specs.
 
 Other multiple type functions:
+[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
+[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
 [`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
+[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
 [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
 
 ## Examples

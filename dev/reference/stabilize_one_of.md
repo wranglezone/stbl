@@ -38,6 +38,7 @@ to_one_of(
   x,
   ...,
   x_arg = caller_arg(x),
+  to_arg = NULL,
   call = caller_env(),
   x_class = object_type(x)
 )
@@ -85,6 +86,13 @@ to_one_of(
   object before checking its conversion, but want the error message to
   match the original class.
 
+- to_arg:
+
+  (`character(1)` or `NULL`) The name of the object that `x` is being
+  converted to match, for use in error messages. When `NULL`, error
+  messages describe only `x`. When supplied, conversion failure messages
+  name both `x_arg` and `to_arg`.
+
 ## Value
 
 `x` converted or validated by the single successful function or
@@ -92,14 +100,26 @@ prototype in `...`, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
-- `<stbl-error-empty_specs>` when no functions are supplied in `...`.
-
-- `<stbl-error-named_spec>` when any element of `...` is named.
-
 - `<stbl-error-cant_stabilize_one_of>` when zero, or more than one,
-  provided functions succeed.
+  provided functions or prototypes succeed.
+
+- `<stbl-error-empty_specs>` when nothing is supplied in `...`.
+
+- `<stbl-error-named_spec>` when any element of `...` is named
+  (`stabilize_one_of()` only).
 
 ## See also
+
+Other multiple type functions:
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md),
+[`specify_all_of()`](https://stbl.wrangle.zone/dev/reference/specify_all_of.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
+[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
+[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
+[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
 
 Other stabilization functions:
 [`assert_contains()`](https://stbl.wrangle.zone/dev/reference/assert_contains.md),
@@ -119,6 +139,7 @@ Other stabilization functions:
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
+[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
@@ -136,16 +157,20 @@ Other stabilization functions:
 [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
 [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
 [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
+[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md),
 [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
 [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md),
 [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
 [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
 [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
 [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md),
 [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
 

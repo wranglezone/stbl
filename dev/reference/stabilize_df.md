@@ -183,13 +183,47 @@ The validated data frame, or an error condition with classes
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
+- `<stbl-error-bad_named>` when list input has unnamed elements, or when
+  extra columns are present but `.extra_cols` is `NULL` or `FALSE`.
+
 - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+
+- `<stbl-error-bad_patterns-invalid_regex>` when a name of `.patterns`
+  is not a valid regular expression.
+
+- `<stbl-error-bad_patterns-invalid_spec>` when an element of
+  `.patterns` is not a function.
+
+- `<stbl-error-bad_patterns-missing_name>` when an element of
+  `.patterns` is unnamed.
+
+- `<stbl-error-bad_patterns-not_list>` when `.patterns` is not a list.
+
+- `<stbl-error-bad_required>` when `.required` is invalid, or when
+  `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.
+
+- `<stbl-error-bad_unnamed>` when the data frame has unnamed columns.
+
+- `<stbl-error-cant_stabilize_patterns>` when columns matching
+  `.patterns` fail their specs.
 
 - `<stbl-error-coerce-data.frame>` when `.x` cannot be converted to a
   data frame.
 
+- `<stbl-error-duplicate_names>` when the data frame has duplicate
+  column names.
+
 - `<stbl-error-jagged>` when list input has incompatible element lengths
   for conversion to a data frame.
+
+- `<stbl-error-missing_cols>` when required names in `.col_names` are
+  absent.
+
+- `<stbl-error-missing_element>` when a required column is absent
+  (including conditionally required columns whose trigger is present).
+
+- `<stbl-error-size_x_vs_y>` when `.min_rows` is larger than
+  `.max_rows`.
 
 - `<stbl-error-too_few_rows>` when the data frame has fewer than
   `.min_rows` rows.
@@ -197,24 +231,11 @@ The validated data frame, or an error condition with classes
 - `<stbl-error-too_many_rows>` when the data frame has more than
   `.max_rows` rows.
 
-- `<stbl-error-missing_cols>` when required names in `.col_names` are
-  absent.
-
-- `<stbl-error-bad_patterns>` when `.patterns` is invalid (see
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
-  for subclasses).
-
-- `<stbl-error-bad_required>` when `.required` is invalid, or when
-  `.extra_cols = FALSE` and a name in `.required` has no spec in `...`.
-
 - `<stbl-error-unnamed_spec>` when any element passed through `...` is
   unnamed.
 
-- `<stbl-error-missing_element>`, `<stbl-error-bad_named>`,
-  `<stbl-error-bad_unnamed>`, or `<stbl-error-duplicate_names>` when
-  list-like column checks delegated to
-  [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md)
-  fail.
+- Errors from the specs in `...` or `.extra_cols` when a column does not
+  satisfy its spec.
 
 ## See also
 
@@ -240,6 +261,7 @@ Other stabilization functions:
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`stabilize_dur()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
+[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
@@ -258,16 +280,20 @@ Other stabilization functions:
 [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
 [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
 [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
+[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md),
 [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
 [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md),
 [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
 [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
 [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
 [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md),
 [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
 

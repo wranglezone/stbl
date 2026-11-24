@@ -93,6 +93,16 @@
   validate and optionally convert only the names of an object, leaving
   its class and values alone
   ([\#26](https://github.com/wranglezone/stbl/issues/26)).
+- [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) gains an
+  explicit `allow_null` argument.
+  [`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
+  gains `to_arg` and `x_class` arguments (forwarded to `spec` when
+  supplied), and
+  [`to_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md)
+  and
+  [`to_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md)
+  gain a `to_arg` argument
+  ([\#419](https://github.com/wranglezone/stbl/issues/419)).
 
 ### Bug fixes
 
@@ -109,6 +119,15 @@
   [`stabilize_lst()`](https://stbl.wrangle.zone/dev/reference/stabilize_lst.md),
   so a specified list stabilizer can allow duplicate names
   ([\#400](https://github.com/wranglezone/stbl/issues/400)).
+- [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) and
+  the [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md) and
+  [`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md) methods
+  now accept an `x_class` argument, like the other `to_*()` functions,
+  and [`to()`](https://stbl.wrangle.zone/dev/reference/to.md) now passes
+  `x_class` along to
+  [`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md) and
+  [`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md)
+  ([\#419](https://github.com/wranglezone/stbl/issues/419)).
 - [`to_date()`](https://stbl.wrangle.zone/dev/reference/to_date.md),
   [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
   [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),

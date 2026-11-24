@@ -15,7 +15,7 @@ functions for details)."><meta property="og:image" content="https://stbl.wrangle
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,17 @@ a full locale-aware calendar implementation.</p></dd>
 starting with <code>"%Y-%m-%dT%H:%M:%S"</code>, <code>"%Y-%m-%d %H:%M:%S"</code>, and
 <code>"%Y-%m-%d"</code> (in that order), followed by the locale's conventional
 day/month order with <code>"/"</code> and then <code>"-"</code> separators (each listed with,
-then without, a <code>" %H:%M:%S"</code> suffix).</p>
-    </div>
+then without, a <code>" %H:%M:%S"</code> suffix), or an error condition with classes
+<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_empty&gt;</code> when <code>locale_time</code> is empty.</p></li>
+<li><p><code>&lt;stbl-error-bad_function&gt;</code> when <code>locale_time</code> is a function.</p></li>
+<li><p><code>&lt;stbl-error-bad_null&gt;</code> when <code>locale_time</code> is <code>NULL</code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-character&gt;</code> when <code>locale_time</code> cannot be converted
+to character.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-character&gt;</code> when <code>locale_time</code> is a
+list whose elements cannot be converted to character.</p></li>
+<li><p><code>&lt;stbl-error-non_scalar&gt;</code> when <code>locale_time</code> has more than one value.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other date functions:

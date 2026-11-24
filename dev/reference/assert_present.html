@@ -13,7 +13,7 @@ any type constraints on its value."><meta property="og:image" content="https://s
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,7 @@ any type constraints on its value.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">assert_present</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -66,6 +67,10 @@ any type constraints on its value.</p>
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>The object to stabilize.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Arguments passed to methods.</p></dd>
 
 
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
@@ -89,7 +94,9 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The value, unchanged.</p>
+    <p>The value, unchanged, or an error condition with classes
+<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
+<code>&lt;condition&gt;</code>, and <code>&lt;stbl-error-bad_null&gt;</code> when <code>x</code> is <code>NULL</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -117,6 +124,7 @@ the original class.</p></dd>
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
 <code><a href="stabilize_dur.html">stabilize_dur()</a></code>,
 <code><a href="stabilize_dur_scalar.html">stabilize_dur_scalar()</a></code>,
+<code><a href="stabilize_each.html">stabilize_each()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_fct_scalar.html">stabilize_fct_scalar()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
@@ -135,16 +143,20 @@ the original class.</p></dd>
 <code><a href="to_date_scalar.html">to_date_scalar()</a></code>,
 <code><a href="to_dbl.html">to_dbl()</a></code>,
 <code><a href="to_dbl_scalar.html">to_dbl_scalar()</a></code>,
+<code><a href="to_df.html">to_df()</a></code>,
 <code><a href="to_dttm.html">to_dttm()</a></code>,
 <code><a href="to_dttm_scalar.html">to_dttm_scalar()</a></code>,
 <code><a href="to_dur.html">to_dur()</a></code>,
 <code><a href="to_dur_scalar.html">to_dur_scalar()</a></code>,
+<code><a href="to_each.html">to_each()</a></code>,
 <code><a href="to_fct.html">to_fct()</a></code>,
 <code><a href="to_fct_scalar.html">to_fct_scalar()</a></code>,
+<code><a href="to_fn.html">to_fn()</a></code>,
 <code><a href="to_int.html">to_int()</a></code>,
 <code><a href="to_int_scalar.html">to_int_scalar()</a></code>,
 <code><a href="to_lgl.html">to_lgl()</a></code>,
 <code><a href="to_lgl_scalar.html">to_lgl_scalar()</a></code>,
+<code><a href="to_lst.html">to_lst()</a></code>,
 <code><a href="to_time.html">to_time()</a></code>,
 <code><a href="to_time_scalar.html">to_time_scalar()</a></code></p></div>
     </div>

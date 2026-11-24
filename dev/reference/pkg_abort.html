@@ -9,7 +9,7 @@ opinionated framework of error classes."><meta property="og:image" content="http
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,12 @@ evaluate variables in error messages.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>NULL</code> invisibly (called for side effects).</p>
+    <p>Does not return; always throws an error condition. Its classes are
+built from <code>package</code> and <code>subclass</code>, from most to least specific. For
+example, <code>pkg_abort("mypkg", "msg", c("coerce", "list"))</code> throws an error
+with classes <code>&lt;mypkg-error-coerce-list&gt;</code>, <code>&lt;mypkg-error-coerce&gt;</code>,
+<code>&lt;mypkg-error&gt;</code>, <code>&lt;mypkg-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, and
+<code>&lt;condition&gt;</code>.</p>
     </div>
 
     <div class="section level2">

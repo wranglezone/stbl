@@ -9,7 +9,7 @@ slower. stabilise_date() is a synonym of stabilize_date()."><meta property="og:i
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@ slower. <code>stabilise_date()</code> is a synonym of <code>stabilize_date()</co
 <span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"days"</span>, <span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -60,7 +61,6 @@ slower. <code>stabilise_date()</code> is a synonym of <code>stabilize_date()</co
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -73,6 +73,7 @@ slower. <code>stabilise_date()</code> is a synonym of <code>stabilize_date()</co
 <span>  treat_number_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"days"</span>, <span class="st">"seconds"</span>, <span class="st">"milliseconds"</span>, <span class="st">"error"</span><span class="op">)</span>,</span>
 <span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  allow_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -80,7 +81,6 @@ slower. <code>stabilise_date()</code> is a synonym of <code>stabilize_date()</co
 <span>  max_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  accepted_datetime_formats <span class="op">=</span> <span class="fu"><a href="locale_datetime_formats.html">locale_datetime_formats</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  named <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  x_arg <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_arg.html" class="external-link">caller_arg</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  x_class <span class="op">=</span> <span class="fu"><a href="object_type.html">object_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -120,6 +120,16 @@ Unix epoch, or <code>"error"</code> to reject numbers. Ignored for non-numeric i
 
 <dt id="arg-allow-na">allow_na<a class="anchor" aria-label="anchor" href="#arg-allow-na"></a></dt>
 <dd><p>(<code>logical(1)</code>) Are NA values ok?</p></dd>
+
+
+<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
+<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
+<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
+non-empty name; <code>FALSE</code> requires that no elements are named. A character
+vector (or factor) requires <code>x</code> to be named, with every name in the vector.
+A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
+<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
+and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
 
 
 <dt id="arg-min-size">min_size<a class="anchor" aria-label="anchor" href="#arg-min-size"></a></dt>
@@ -162,16 +172,6 @@ shape (<code>"%Y-%m-%d"</code>, optionally with a time-of-day component) before
 falling back to the current locale's conventional date order.</p></dd>
 
 
-<dt id="arg-named">named<a class="anchor" aria-label="anchor" href="#arg-named"></a></dt>
-<dd><p>Controls the names of <code>x</code>. <code>NULL</code> (default), <code>NA</code>, or
-<code>character(0)</code> skip the check. <code>TRUE</code> requires every element to have a
-non-empty name; <code>FALSE</code> requires that no elements are named. A character
-vector (or factor) requires <code>x</code> to be named, with every name in the vector.
-A single stabilizer or conversion function (such as <code><a href="stabilize_chr.html">stabilize_chr()</a></code>, a
-<code>to_*</code> function, or the result of <code><a href="specify_chr.html">specify_chr()</a></code>) requires <code>x</code> to be named
-and is applied to <code>names(x)</code>, so every name must satisfy it.</p></dd>
-
-
 <dt id="arg-x-arg">x_arg<a class="anchor" aria-label="anchor" href="#arg-x-arg"></a></dt>
 <dd><p>(<code>character(1)</code>) The name of the object being stabilized to use
 in error messages. The automatic value will work in most cases, or pass it
@@ -195,21 +195,29 @@ the original class.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input as a <a href="https://rdrr.io/r/base/Dates.html" class="external-link">base::Date</a> vector, or an error condition with
 classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-coerce-date&gt;</code> when <code>x</code> cannot be converted to date.</p></li>
-<li><p><code>&lt;stbl-error-incompatible_values-date&gt;</code> when some values cannot be safely
-converted to date.</p></li>
-<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when values are not in <code>allowed_values</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match
 <code>named</code>.</p></li>
-<li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
-<li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
-<li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_tz&gt;</code> when <code>tz</code> is needed (for date-time or
+<code>treat_number_as = "seconds"</code> or <code>"milliseconds"</code> input) and is not <code>""</code>
+or a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>, or is <code>""</code> and your local time zone can't
+be determined.</p></li>
+<li><p><code>&lt;stbl-error-coerce-date&gt;</code> when <code>x</code> cannot be converted to date,
+including numbers when <code>treat_number_as = "error"</code>.</p></li>
 <li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>unique = TRUE</code> and duplicates are
 present.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-date&gt;</code> when some values cannot be safely
+converted to date.</p></li>
 <li><p><code>&lt;stbl-error-outside_range&gt;</code> when values fall outside <code>min_value</code> or
 <code>max_value</code>.</p></li>
-<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when values are not in <code>allowed_values</code>.</p></li>
+<li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
+<li><p><code>&lt;stbl-error-size_x_vs_y&gt;</code> when <code>min_size</code> is larger than <code>max_size</code>.</p></li>
+<li><p>Errors from <code>named</code> when it is a function and a name does not satisfy
+it.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -237,6 +245,7 @@ present.</p></li>
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
 <code><a href="stabilize_dur.html">stabilize_dur()</a></code>,
 <code><a href="stabilize_dur_scalar.html">stabilize_dur_scalar()</a></code>,
+<code><a href="stabilize_each.html">stabilize_each()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_fct_scalar.html">stabilize_fct_scalar()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
@@ -255,16 +264,20 @@ present.</p></li>
 <code><a href="to_date_scalar.html">to_date_scalar()</a></code>,
 <code><a href="to_dbl.html">to_dbl()</a></code>,
 <code><a href="to_dbl_scalar.html">to_dbl_scalar()</a></code>,
+<code><a href="to_df.html">to_df()</a></code>,
 <code><a href="to_dttm.html">to_dttm()</a></code>,
 <code><a href="to_dttm_scalar.html">to_dttm_scalar()</a></code>,
 <code><a href="to_dur.html">to_dur()</a></code>,
 <code><a href="to_dur_scalar.html">to_dur_scalar()</a></code>,
+<code><a href="to_each.html">to_each()</a></code>,
 <code><a href="to_fct.html">to_fct()</a></code>,
 <code><a href="to_fct_scalar.html">to_fct_scalar()</a></code>,
+<code><a href="to_fn.html">to_fn()</a></code>,
 <code><a href="to_int.html">to_int()</a></code>,
 <code><a href="to_int_scalar.html">to_int_scalar()</a></code>,
 <code><a href="to_lgl.html">to_lgl()</a></code>,
 <code><a href="to_lgl_scalar.html">to_lgl_scalar()</a></code>,
+<code><a href="to_lst.html">to_lst()</a></code>,
 <code><a href="to_time.html">to_time()</a></code>,
 <code><a href="to_time_scalar.html">to_time_scalar()</a></code></p></div>
     </div>

@@ -5,7 +5,7 @@ Ensure an object is NULL
 ## Usage
 
 ``` r
-.to_null(x, allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+.to_null(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ Ensure an object is NULL
 - x:
 
   The object to stabilize.
+
+- ...:
+
+  Arguments passed to methods.
 
 - allow_null:
 

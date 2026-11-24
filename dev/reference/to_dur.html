@@ -11,7 +11,7 @@ informative error message is signaled."><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -169,11 +169,11 @@ the original class.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input as a <a href="https://lubridate.tidyverse.org/reference/Period-class.html" class="external-link">lubridate::Period</a> vector, or an error
 condition with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>,
-<code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-coerce-duration&gt;</code> when numbers are rejected by
-<code>treat_number_as = "error"</code>.</p></li>
+<code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-duration&gt;</code> when <code>x</code> cannot be converted to a
+duration, including numbers when <code>treat_number_as = "error"</code>.</p></li>
 <li><p><code>&lt;stbl-error-incompatible_values-duration&gt;</code> when some values cannot be
 safely converted to a duration.</p></li>
-<li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -228,6 +228,7 @@ ignored for non-numeric input.</p>
 <code><a href="stabilize_dttm_scalar.html">stabilize_dttm_scalar()</a></code>,
 <code><a href="stabilize_dur.html">stabilize_dur()</a></code>,
 <code><a href="stabilize_dur_scalar.html">stabilize_dur_scalar()</a></code>,
+<code><a href="stabilize_each.html">stabilize_each()</a></code>,
 <code><a href="stabilize_fct.html">stabilize_fct()</a></code>,
 <code><a href="stabilize_fct_scalar.html">stabilize_fct_scalar()</a></code>,
 <code><a href="stabilize_int.html">stabilize_int()</a></code>,
@@ -246,15 +247,19 @@ ignored for non-numeric input.</p>
 <code><a href="to_date_scalar.html">to_date_scalar()</a></code>,
 <code><a href="to_dbl.html">to_dbl()</a></code>,
 <code><a href="to_dbl_scalar.html">to_dbl_scalar()</a></code>,
+<code><a href="to_df.html">to_df()</a></code>,
 <code><a href="to_dttm.html">to_dttm()</a></code>,
 <code><a href="to_dttm_scalar.html">to_dttm_scalar()</a></code>,
 <code><a href="to_dur_scalar.html">to_dur_scalar()</a></code>,
+<code><a href="to_each.html">to_each()</a></code>,
 <code><a href="to_fct.html">to_fct()</a></code>,
 <code><a href="to_fct_scalar.html">to_fct_scalar()</a></code>,
+<code><a href="to_fn.html">to_fn()</a></code>,
 <code><a href="to_int.html">to_int()</a></code>,
 <code><a href="to_int_scalar.html">to_int_scalar()</a></code>,
 <code><a href="to_lgl.html">to_lgl()</a></code>,
 <code><a href="to_lgl_scalar.html">to_lgl_scalar()</a></code>,
+<code><a href="to_lst.html">to_lst()</a></code>,
 <code><a href="to_time.html">to_time()</a></code>,
 <code><a href="to_time_scalar.html">to_time_scalar()</a></code></p></div>
     </div>

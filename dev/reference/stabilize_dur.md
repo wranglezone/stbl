@@ -15,13 +15,13 @@ stabilize_dur(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -33,13 +33,13 @@ stabilise_dur(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -51,13 +51,13 @@ stabilize_duration(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -69,13 +69,13 @@ stabilise_duration(
   treat_number_as = c("seconds", "milliseconds", "days", "error"),
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   unique = FALSE,
   min_value = NULL,
   max_value = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -105,6 +105,19 @@ stabilise_duration(
 - allow_na:
 
   (`logical(1)`) Are NA values ok?
+
+- named:
+
+  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
+  skip the check. `TRUE` requires every element to have a non-empty
+  name; `FALSE` requires that no elements are named. A character vector
+  (or factor) requires `x` to be named, with every name in the vector. A
+  single stabilizer or conversion function (such as
+  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
+  a `to_*` function, or the result of
+  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md))
+  requires `x` to be named and is applied to `names(x)`, so every name
+  must satisfy it.
 
 - min_size:
 
@@ -138,19 +151,6 @@ stabilise_duration(
   (default) skips the check. `NA` values in `x` are permitted
   independently of `allowed_values`, subject to `allow_na`.
 
-- named:
-
-  Controls the names of `x`. `NULL` (default), `NA`, or `character(0)`
-  skip the check. `TRUE` requires every element to have a non-empty
-  name; `FALSE` requires that no elements are named. A character vector
-  (or factor) requires `x` to be named, with every name in the vector. A
-  single stabilizer or conversion function (such as
-  [`stabilize_chr()`](https://stbl.wrangle.zone/dev/reference/stabilize_chr.md),
-  a `to_*` function, or the result of
-  [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md))
-  requires `x` to be named and is applied to `names(x)`, so every name
-  must satisfy it.
-
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -178,34 +178,39 @@ vector, or an error condition with classes `<stbl-error>`,
 `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 specific class by failure mode:
 
-- `<stbl-error-coerce-duration>` when `x` cannot be converted to a
-  duration.
+- `<stbl-error-allowed_names>` when names are not in `named`.
 
-- `<stbl-error-incompatible_values-duration>` when some values cannot be
-  safely converted to a duration.
-
-- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 
 - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 
 - `<stbl-error-bad_named>` when the presence of names doesn't match
   `named`.
 
-- `<stbl-error-allowed_names>` when names are not in `named`.
+- `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
-- `<stbl-error-size_too_small>` when the vector is shorter than
-  `min_size`.
-
-- `<stbl-error-size_too_large>` when the vector is longer than
-  `max_size`.
+- `<stbl-error-coerce-duration>` when `x` cannot be converted to a
+  duration, including numbers when `treat_number_as = "error"`.
 
 - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates
   are present.
 
+- `<stbl-error-incompatible_values-duration>` when some values cannot be
+  safely converted to a duration.
+
 - `<stbl-error-outside_range>` when values fall outside `min_value` or
   `max_value`.
 
-- `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+- `<stbl-error-size_too_large>` when the vector is longer than
+  `max_size`.
+
+- `<stbl-error-size_too_small>` when the vector is shorter than
+  `min_size`.
+
+- `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size`.
+
+- Errors from `named` when it is a function and a name does not satisfy
+  it.
 
 ## Details
 
@@ -240,6 +245,7 @@ Other stabilization functions:
 [`stabilize_dttm()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm.md),
 [`stabilize_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dttm_scalar.md),
 [`stabilize_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_dur_scalar.md),
+[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
 [`stabilize_fct()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct.md),
 [`stabilize_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/stabilize_fct_scalar.md),
 [`stabilize_int()`](https://stbl.wrangle.zone/dev/reference/stabilize_int.md),
@@ -258,16 +264,20 @@ Other stabilization functions:
 [`to_date_scalar()`](https://stbl.wrangle.zone/dev/reference/to_date_scalar.md),
 [`to_dbl()`](https://stbl.wrangle.zone/dev/reference/to_dbl.md),
 [`to_dbl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dbl_scalar.md),
+[`to_df()`](https://stbl.wrangle.zone/dev/reference/to_df.md),
 [`to_dttm()`](https://stbl.wrangle.zone/dev/reference/to_dttm.md),
 [`to_dttm_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dttm_scalar.md),
 [`to_dur()`](https://stbl.wrangle.zone/dev/reference/to_dur.md),
 [`to_dur_scalar()`](https://stbl.wrangle.zone/dev/reference/to_dur_scalar.md),
+[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md),
 [`to_fct()`](https://stbl.wrangle.zone/dev/reference/to_fct.md),
 [`to_fct_scalar()`](https://stbl.wrangle.zone/dev/reference/to_fct_scalar.md),
+[`to_fn()`](https://stbl.wrangle.zone/dev/reference/to_fn.md),
 [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md),
 [`to_int_scalar()`](https://stbl.wrangle.zone/dev/reference/to_int_scalar.md),
 [`to_lgl()`](https://stbl.wrangle.zone/dev/reference/to_lgl.md),
 [`to_lgl_scalar()`](https://stbl.wrangle.zone/dev/reference/to_lgl_scalar.md),
+[`to_lst()`](https://stbl.wrangle.zone/dev/reference/to_lst.md),
 [`to_time()`](https://stbl.wrangle.zone/dev/reference/to_time.md),
 [`to_time_scalar()`](https://stbl.wrangle.zone/dev/reference/to_time_scalar.md)
 

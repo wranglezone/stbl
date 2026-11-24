@@ -10,6 +10,7 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -135,6 +136,7 @@ to(
   x,
   .to,
   ...,
+  allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = caller_arg(.to),
   call = caller_env(),
@@ -203,6 +205,10 @@ to(
 
   Arguments passed to methods and on to `to_*()` functions.
 
+- allow_null:
+
+  (`logical(1)`) Is NULL an acceptable value?
+
 - x_arg:
 
   (`character(1)`) The name of the object being stabilized to use in
@@ -259,15 +265,24 @@ to(
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
+- `<stbl-error-bad_tz>` when `.to` is a
+  [base::Date](https://rdrr.io/r/base/Dates.html) or
+  [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) and `tz`
+  is not `""` or a value from
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
+  and your local time zone can't be determined.
+
+- `<stbl-error-coerce-*>` (where `*` is the class of `.to`) when the
+  class of `.to` has no corresponding `to_*()` function and
+  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
+  cannot convert `x` to `.to`.
+
+- `<stbl-error-bad_null>` when `.to` is `NULL` and `allow_null = FALSE`.
+
 - The failure classes documented for the `to_*()` function corresponding
   to the class of `.to` (for example
   [`to_int()`](https://stbl.wrangle.zone/dev/reference/to_int.md) for
   `.to = integer()`).
-
-- `<stbl-error-coerce-*>` when the class of `.to` has no corresponding
-  `to_*()` function and
-  [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
-  cannot converted `x` to `.to`.
 
 ## Details
 
@@ -386,7 +401,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x64059af7fe20>
+#> <bytecode: 0x60dd069847a0>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

@@ -31,6 +31,17 @@ provide additional context or functionality.
 
 ## See also
 
+Other multiple type functions:
+[`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md),
+[`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
+[`specify_each()`](https://stbl.wrangle.zone/dev/reference/specify_each.md),
+[`specify_one_of()`](https://stbl.wrangle.zone/dev/reference/specify_one_of.md),
+[`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md),
+[`stabilize_any_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_any_of.md),
+[`stabilize_each()`](https://stbl.wrangle.zone/dev/reference/stabilize_each.md),
+[`stabilize_one_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_one_of.md),
+[`to_each()`](https://stbl.wrangle.zone/dev/reference/to_each.md)
+
 Other specification functions:
 [`specify_any_of()`](https://stbl.wrangle.zone/dev/reference/specify_any_of.md),
 [`specify_chr()`](https://stbl.wrangle.zone/dev/reference/specify_chr.md),

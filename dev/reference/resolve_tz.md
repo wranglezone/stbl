@@ -37,10 +37,28 @@ resolve_tz(x = NULL, default = Sys.timezone(), call = caller_env())
 
 The name of a time zone from
 [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) as a character
-string, or an error condition with classes `<stbl-error-bad_tz>`,
-`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-`<condition>` when the time zone cannot be determined or is not a value
-from [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+string, or an error condition with classes `<stbl-error>`,
+`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
+specific class by failure mode:
+
+- `<stbl-error-bad_empty>` when `default` is used and is empty.
+
+- `<stbl-error-bad_function>` when `default` is used and is a function.
+
+- `<stbl-error-bad_null>` when `default` is used and is `NULL`.
+
+- `<stbl-error-bad_tz>` when the time zone cannot be determined or is
+  not a value from
+  [`OlsonNames()`](https://rdrr.io/r/base/timezones.html).
+
+- `<stbl-error-coerce-character>` when `default` is used and cannot be
+  converted to character.
+
+- `<stbl-error-incompatible_values-character>` when `default` is used
+  and is a list whose elements cannot be converted to character.
+
+- `<stbl-error-non_scalar>` when `default` is used and has more than one
+  value.
 
 ## See also
 

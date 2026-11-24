@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stbl</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.map_each_fast</span><span class="op">(</span><span class="va">x</span>, <span class="va">spec</span>, <span class="va">x_arg</span>, <span class="va">call</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.map_each_fast</span><span class="op">(</span><span class="va">x</span>, <span class="va">spec</span>, <span class="va">x_arg</span>, <span class="va">call</span>, to_arg <span class="op">=</span> <span class="cn">NULL</span>, x_class <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +68,13 @@ unexported functions.</p></dd>
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
 <dd><p><code>(environment)</code> The execution environment to mention as the
 source of error messages.</p></dd>
+
+
+<dt id="arg-x-class">x_class<a class="anchor" aria-label="anchor" href="#arg-x-class"></a></dt>
+<dd><p>(<code>character(1)</code>) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its conversion, but want the error message to match
+the original class.</p></dd>
 
 </dl></div>
     <div class="section level2">

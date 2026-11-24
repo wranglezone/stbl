@@ -54,4 +54,9 @@ Signal an error with standards applied
 
 ## Value
 
-`NULL` invisibly (called for side effects).
+Does not return; always throws an error condition. Its classes are built
+from `package` and `subclass`, from most to least specific. For example,
+`pkg_abort("mypkg", "msg", c("coerce", "list"))` throws an error with
+classes `<mypkg-error-coerce-list>`, `<mypkg-error-coerce>`,
+`<mypkg-error>`, `<mypkg-condition>`, `<rlang_error>`, `<error>`, and
+`<condition>`.

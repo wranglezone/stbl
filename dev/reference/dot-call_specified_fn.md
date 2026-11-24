@@ -5,7 +5,7 @@ Call a spec function with properly-named context arguments
 ## Usage
 
 ``` r
-.call_specified_fn(spec_fn, .x, .x_arg, .call)
+.call_specified_fn(spec_fn, .x, .x_arg, .call, .to_arg = NULL, .x_class = NULL)
 ```
 
 ## Arguments
@@ -29,6 +29,11 @@ Call a spec function with properly-named context arguments
 
   `(environment)` The execution environment to mention as the source of
   error messages.
+
+- .to_arg, .x_class:
+
+  Optional `to_arg` and `x_class` values, passed on only when `spec_fn`
+  accepts them and they are not `NULL`.
 
 ## Value
 
