@@ -23,15 +23,18 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a character vector, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_function>` for functions when
-#'   `coerce_function = FALSE` (the default).
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
-#'   (for example a `data.frame`, or an anonymous function).
-#'   - `<stbl-error-incompatible_values-character>` when some elements of a
-#'   list cannot be converted to character.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_function(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("character", extra = " (for example a `data.frame`, or an anonymous function)"),
+#'   .doc_err_incompatible("character", what = "elements")
+#' )
+#' ```
 #' @family character functions
 #' @family stabilization functions
 #' @export
@@ -347,18 +350,21 @@ to_character <- to_chr
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 character vector, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-bad_function>` for functions when
-#'   `coerce_function = FALSE` (the default).
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-character>` when `x` cannot be converted to character
-#'   (for example a `data.frame`, or an anonymous function).
-#'   - `<stbl-error-incompatible_values-character>` when some elements of a
-#'   list cannot be converted to character.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_empty(),
+#'   .doc_err_function(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("character", extra = " (for example a `data.frame`, or an anonymous function)"),
+#'   .doc_err_incompatible("character", what = "elements"),
+#'   .doc_err_scalar()
+#' )
+#' ```
 #' @family character functions
 #' @family stabilization functions
 #' @export

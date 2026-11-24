@@ -119,28 +119,21 @@ the original class.}
 }
 \value{
 The input as a length-1 \link[lubridate:Period-class]{lubridate::Period} vector, or an
-error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
-mode:
+error condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
-\item \verb{<stbl-error-allowed_values>} when the value is not in
-\code{allowed_values}.
-\item \verb{<stbl-error-bad_empty>} for empty vectors when
-\code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-allowed_values>} when the value is not in \code{allowed_values}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a
-duration, including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be
-safely converted to a duration.
+\item \verb{<stbl-error-coerce-duration>} when \code{x} cannot be converted to a duration, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-duration>} when some values cannot be safely converted to a duration.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
-\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
-\code{max_value}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or \code{max_value}.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

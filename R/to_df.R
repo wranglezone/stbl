@@ -10,13 +10,18 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The object as a data frame, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_named>` when a list has any unnamed elements.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-data.frame>` when `x` cannot be converted to a data
-#'   frame.
-#'   - `<stbl-error-jagged>` when a list has incompatible element lengths.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_named", "when a list has any unnamed elements."),
+#'   .doc_err_null(),
+#'   .doc_err(c("coerce", "data.frame"), "when `x` cannot be converted to a data frame."),
+#'   .doc_err("jagged", "when a list has incompatible element lengths.")
+#' )
+#' ```
 #' @family data frame functions
 #' @family stabilization functions
 #' @export

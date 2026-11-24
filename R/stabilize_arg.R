@@ -9,28 +9,24 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns `x`, or an error condition with classes `<stbl-error>`,
-#'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-#'   specific class by failure mode:
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE` in [stabilize_arg_scalar()].
-#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
-#'   `named`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
-#'   present in [stabilize_arg()].
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors in
-#'   [stabilize_arg_scalar()].
-#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`
-#'   in [stabilize_arg()].
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`
-#'   in [stabilize_arg()].
-#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size` in
-#'   [stabilize_arg()].
-#'   - Errors from `named` when it is a function and a name does not satisfy
-#'   it.
+#' @returns `x`, or an error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_allowed_names(),
+#'   .doc_err_empty("stabilize_arg_scalar"),
+#'   .doc_err_na(),
+#'   .doc_err_named(),
+#'   .doc_err_null(),
+#'   .doc_err("duplicate_elements", "when `unique = TRUE` and duplicates are present in [stabilize_arg()]."),
+#'   .doc_err_scalar("stabilize_arg_scalar"),
+#'   .doc_err_size(fn = "stabilize_arg"),
+#'   .doc_err_named_fn()
+#' )
+#' ```
 #' @family stabilization functions
 #' @export
 #'

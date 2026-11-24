@@ -16,6 +16,27 @@ description: Document package functions. Use when asked to document functions.
 - Whenever you add a new (non-internal) documentation topic, also add the topic to `_pkgdown.yml`.
 - Use `pkgdown::check_pkgdown()` to check that all topics are included in the reference index.
 
+## Error classes in `@returns`
+
+For functions that throw stbl errors, don't hand-write the list of classes. Include `man/rmd/error-classes.md` as a child chunk, then build the bullets with `.doc_errors()` in an asis chunk (see `R/aaa-doc_errors.R`):
+
+```r
+#' @returns The input as an integer vector, or an error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_null(),
+#'   .doc_err_coerce("integer"),
+#'   .doc_err(c("some", "subclass"), "when something happens.")
+#' )
+#' ```
+```
+
+Use the shared `.doc_err_*()` helpers when one exists, `.doc_err()` for one-off entries, and `.doc_err_other()` for bullets that aren't a stbl subclass. Entries are sorted alphabetically and duplicate subclasses error.
+
 ## Shared parameters
 
 **Parameters used in more than one function** go in `R/aaa-shared_params.R` under `@name .shared-params`. Functions inherit them with `@inheritParams .shared-params`. See `R/aaa-shared_params.R` for current definitions (if it exists).

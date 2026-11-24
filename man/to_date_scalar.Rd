@@ -57,20 +57,15 @@ the original class.}
 }
 \value{
 The input as a length-1 \link[base:Date]{base::Date} vector, or an error condition
-with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
-\verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
+with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_empty>} for empty vectors when
-\code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-bad_tz>} when \code{tz} is needed (for date-time or
-\code{treat_number_as = "seconds"} or \code{"milliseconds"} input) and is not \code{""}
-or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't
-be determined.
-\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be converted to date,
-including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-incompatible_values-date>} when some values cannot be
-safely converted to date.
+\item \verb{<stbl-error-bad_tz>} when the time zone is needed (for date-time or \code{treat_number_as = "seconds"} or \code{"milliseconds"} input) and \code{tz} is not \code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be converted to date, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-date>} when some values cannot be safely converted to date.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 }
 }

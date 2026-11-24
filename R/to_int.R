@@ -9,12 +9,17 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The input as an integer vector, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
-#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
-#'   safely converted to integer.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_null(),
+#'   .doc_err_coerce("integer"),
+#'   .doc_err_incompatible("integer")
+#' )
+#' ```
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -201,15 +206,20 @@ to_int.default <- function(
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 integer vector, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
-#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
-#'   safely converted to integer.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_empty(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("integer"),
+#'   .doc_err_incompatible("integer"),
+#'   .doc_err_scalar()
+#' )
+#' ```
 #' @family integer functions
 #' @family stabilization functions
 #' @export

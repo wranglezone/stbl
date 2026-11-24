@@ -49,15 +49,12 @@ the original class.}
 \value{
 \code{x}, unchanged, if the number of elements of \code{x} matching \code{spec} is
 between \code{min_matches} and \code{max_matches}, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-outside_range>} when \code{min_matches} is negative, or when
-\code{max_matches} is less than \code{min_matches}.
-\item \verb{<stbl-error-too_few_matches>} when fewer than \code{min_matches} elements
-match \code{spec}.
-\item \verb{<stbl-error-too_many_matches>} when more than \code{max_matches} elements
-match \code{spec}.
+\item \verb{<stbl-error-outside_range>} when \code{min_matches} is negative, or when \code{max_matches} is less than \code{min_matches}.
+\item \verb{<stbl-error-too_few_matches>} when fewer than \code{min_matches} elements match \code{spec}.
+\item \verb{<stbl-error-too_many_matches>} when more than \code{max_matches} elements match \code{spec}.
 }
 }
 \description{

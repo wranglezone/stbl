@@ -21,17 +21,19 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a [base::Date] vector, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-bad_tz>` when `tz` is needed (for date-time or
-#'   `treat_number_as = "seconds"` or `"milliseconds"` input) and is not `""`
-#'   or a value from [OlsonNames()], or is `""` and your local time zone can't
-#'   be determined.
-#'   - `<stbl-error-coerce-date>` when `x` cannot be converted to date,
-#'   including numbers when `treat_number_as = "error"`.
-#'   - `<stbl-error-incompatible_values-date>` when some values cannot be
-#'   safely converted to date.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_null(),
+#'   .doc_err_tz('the time zone is needed (for date-time or `treat_number_as = "seconds"` or `"milliseconds"` input)'),
+#'   .doc_err_coerce("date", extra = r"---(, including numbers when `treat_number_as = "error"`)---"),
+#'   .doc_err_incompatible("date")
+#' )
+#' ```
 #' @family date functions
 #' @family stabilization functions
 #' @export
@@ -270,20 +272,21 @@ to_date.default <- function(
 #' @inheritParams to_date
 #'
 #' @returns The input as a length-1 [base::Date] vector, or an error condition
-#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-#'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-bad_tz>` when `tz` is needed (for date-time or
-#'   `treat_number_as = "seconds"` or `"milliseconds"` input) and is not `""`
-#'   or a value from [OlsonNames()], or is `""` and your local time zone can't
-#'   be determined.
-#'   - `<stbl-error-coerce-date>` when `x` cannot be converted to date,
-#'   including numbers when `treat_number_as = "error"`.
-#'   - `<stbl-error-incompatible_values-date>` when some values cannot be
-#'   safely converted to date.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_empty(),
+#'   .doc_err_null(),
+#'   .doc_err_tz('the time zone is needed (for date-time or `treat_number_as = "seconds"` or `"milliseconds"` input)'),
+#'   .doc_err_coerce("date", extra = r"---(, including numbers when `treat_number_as = "error"`)---"),
+#'   .doc_err_incompatible("date"),
+#'   .doc_err_scalar()
+#' )
+#' ```
 #' @family date functions
 #' @family stabilization functions
 #' @export

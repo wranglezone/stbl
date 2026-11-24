@@ -19,3 +19,4 @@
 ^\.posit$
 ^\.posit/assistant$
 ^\.quarto$
+^man/rmd$

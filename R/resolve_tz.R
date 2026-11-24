@@ -13,20 +13,22 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The name of a time zone from [OlsonNames()] as a character string,
-#'   or an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
-#'   mode:
-#'   - `<stbl-error-bad_empty>` when `default` is used and is empty.
-#'   - `<stbl-error-bad_function>` when `default` is used and is a function.
-#'   - `<stbl-error-bad_null>` when `default` is used and is `NULL`.
-#'   - `<stbl-error-bad_tz>` when the time zone cannot be determined or is not
-#'   a value from [OlsonNames()].
-#'   - `<stbl-error-coerce-character>` when `default` is used and cannot be
-#'   converted to character.
-#'   - `<stbl-error-incompatible_values-character>` when `default` is used and
-#'   is a list whose elements cannot be converted to character.
-#'   - `<stbl-error-non_scalar>` when `default` is used and has more than one
-#'   value.
+#'   or an error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_empty", "when `default` is used and is empty."),
+#'   .doc_err("bad_function", "when `default` is used and is a function."),
+#'   .doc_err("bad_null", "when `default` is used and is `NULL`."),
+#'   .doc_err("bad_tz", "when the time zone cannot be determined or is not a value from [OlsonNames()]."),
+#'   .doc_err(c("coerce", "character"), "when `default` is used and cannot be converted to character."),
+#'   .doc_err(c("incompatible_values", "character"), "when `default` is used and is a list whose elements cannot be converted to character."),
+#'   .doc_err("non_scalar", "when `default` is used and has more than one value.")
+#' )
+#' ```
 #' @family datetime functions
 #' @export
 #'

@@ -20,13 +20,17 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The object as a list, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_function>` for functions when
-#'   `coerce_function = FALSE` (the default).
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-list>` when `x` cannot be converted to a list,
-#'   including primitive functions when `coerce_function = TRUE`.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_function(),
+#'   .doc_err_null(),
+#'   .doc_err(c("coerce", "list"), "when `x` cannot be converted to a list, including primitive functions when `coerce_function = TRUE`.")
+#' )
+#' ```
 #' @family list functions
 #' @family stabilization functions
 #' @export

@@ -15,13 +15,11 @@ source of error messages.}
 \value{
 The narrowest common representation of the values in \code{...} if they
 are all equivalent. A single value is returned unchanged. Otherwise, an
-error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
-mode:
+error condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-cant_reconcile>} when any two values are not equivalent.
-The message names the pair that disagreed and, for nested values, the path
-to the first difference.
+\item \verb{<stbl-error-cant_reconcile>} when any two values are not equivalent. The message names the pair that disagreed and, for nested values, the path to the first difference.
 \item \verb{<stbl-error-empty_values>} when no values are supplied in \code{...}.
 }
 }

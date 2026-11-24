@@ -7,8 +7,15 @@
 #'
 #' @inheritParams .shared-params
 #' @returns The value, unchanged, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and `<stbl-error-bad_null>` when `x` is `NULL`.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_null", "when `x` is `NULL`.")
+#' )
+#' ```
 #' @family list functions
 #' @family stabilization functions
 #' @export

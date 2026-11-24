@@ -114,32 +114,24 @@ the original class.}
 }
 \value{
 The input as a \link[base:Date]{base::Date} vector, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-bad_tz>} when \code{tz} is needed (for date-time or
-\code{treat_number_as = "seconds"} or \code{"milliseconds"} input) and is not \code{""}
-or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't
-be determined.
-\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be converted to date,
-including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
-present.
-\item \verb{<stbl-error-incompatible_values-date>} when some values cannot be safely
-converted to date.
-\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
-\code{max_value}.
+\item \verb{<stbl-error-bad_tz>} when the time zone is needed (for date-time or \code{treat_number_as = "seconds"} or \code{"milliseconds"} input) and \code{tz} is not \code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-date>} when \code{x} cannot be converted to date, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are present.
+\item \verb{<stbl-error-incompatible_values-date>} when some values cannot be safely converted to date.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or \code{max_value}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

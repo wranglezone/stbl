@@ -36,9 +36,12 @@ the original class.}
 }
 \value{
 \code{x}, unchanged, if \code{x} does not match \code{spec}, or an error condition
-with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
-\verb{<error>}, \verb{<condition>}, and \verb{<stbl-error-matched_spec>} when \code{x} matches
-\code{spec}.
+with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-matched_spec>} when \code{x} matches \code{spec}.
+}
 }
 \description{
 \code{assert_not()} is the inverse of a single specification: it errors when \code{x}

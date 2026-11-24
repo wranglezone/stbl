@@ -116,23 +116,20 @@ the original class.}
 }
 \value{
 The input as a factor, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-coerce-factor>} when \code{x} cannot be converted to factor.
 \item \verb{<stbl-error-fct_levels>} when values are not present in \code{levels}.
-\item \verb{<stbl-error-incompatible_values-factor>} when some elements of a list
-cannot be converted to factor.
+\item \verb{<stbl-error-incompatible_values-factor>} when some elements of a list cannot be converted to factor.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

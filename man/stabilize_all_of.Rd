@@ -46,13 +46,13 @@ the original class.}
 }
 \value{
 \code{x} converted or validated by every function in \code{...}, or an error
-condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
-\verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
+condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-cant_stabilize_all_of>} when any provided function fails.
 \item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
-\item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but
-their results are not all equivalent.
+\item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but their results are not all equivalent.
 \item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 }
 }

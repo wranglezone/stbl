@@ -62,13 +62,17 @@
 #'
 #' @returns The narrowest common representation of the values in `...` if they
 #'   are all equivalent. A single value is returned unchanged. Otherwise, an
-#'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
-#'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
-#'   mode:
-#'   - `<stbl-error-cant_reconcile>` when any two values are not equivalent.
-#'   The message names the pair that disagreed and, for nested values, the path
-#'   to the first difference.
-#'   - `<stbl-error-empty_values>` when no values are supplied in `...`.
+#'   error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("cant_reconcile", "when any two values are not equivalent. The message names the pair that disagreed and, for nested values, the path to the first difference."),
+#'   .doc_err("empty_values", "when no values are supplied in `...`.")
+#' )
+#' ```
 #' @family multiple type functions
 #' @seealso [stabilize_all_of()], which uses `reconcile()` to combine the
 #'   results of several specs.

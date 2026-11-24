@@ -32,8 +32,11 @@ the original class.}
 }
 \value{
 The value, unchanged, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and \verb{<stbl-error-bad_null>} when \code{x} is \code{NULL}.
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-bad_null>} when \code{x} is \code{NULL}.
+}
 }
 \description{
 \code{assert_present()} validates that a value is not \code{NULL}. Any non-\code{NULL} value

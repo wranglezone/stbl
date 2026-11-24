@@ -229,18 +229,14 @@ types: they restrict \code{x} to a fixed set of permitted values.}
 }
 \value{
 \code{x} converted to the type of \code{.to}, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_tz>} when \code{.to} is a \link[base:Date]{base::Date} or \link[base:POSIXct]{base::POSIXct}
-and \code{tz} is not \code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your
-local time zone can't be determined.
-\item \verb{<stbl-error-coerce-*>} (where \code{*} is the class of \code{.to}) when the class
-of \code{.to} has no corresponding \verb{to_*()} function and \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}
-cannot convert \code{x} to \code{.to}.
 \item \verb{<stbl-error-bad_null>} when \code{.to} is \code{NULL} and \code{allow_null = FALSE}.
-\item The failure classes documented for the \verb{to_*()} function corresponding
-to the class of \code{.to} (for example \code{\link[=to_int]{to_int()}} for \code{.to = integer()}).
+\item \verb{<stbl-error-bad_tz>} when \code{.to} is a \link[base:Date]{base::Date} or \link[base:POSIXct]{base::POSIXct} and \code{tz} is not \code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-*>} (where \code{*} is the class of \code{.to}) when the class of \code{.to} has no corresponding \verb{to_*()} function and \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} cannot convert \code{x} to \code{.to}.
+\item The failure classes documented for the \verb{to_*()} function corresponding to the class of \code{.to} (for example \code{\link[=to_int]{to_int()}} for \code{.to = integer()}).
 }
 }
 \description{

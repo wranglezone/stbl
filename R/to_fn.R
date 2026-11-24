@@ -15,19 +15,20 @@
 #'   when the input is a namespaced string of the form `"pkg::fn"`, in which
 #'   case the package namespace is used instead.
 #' @inheritParams .shared-params
-#' @returns A function, or an error condition with classes `<stbl-error>`,
-#'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-#'   specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values (or length-0 character
-#'   vectors) when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-function>` when `x` cannot be converted to a
-#'   function.
-#'   - `<stbl-error-invalid_function_name>` when `x` uses colons other than a
-#'   single `::` between a package name and a function name, or is `""` or
-#'   `NA`.
-#'   - `<stbl-error-non_scalar>` when `x` has more than one element.
-#'   - `<stbl-error-unknown_function>` when `x` doesn't resolve to a known
-#'   function.
+#' @returns A function, or an error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_null", "for `NULL` values (or length-0 character vectors) when `allow_null = FALSE`."),
+#'   .doc_err(c("coerce", "function"), "when `x` cannot be converted to a function."),
+#'   .doc_err("invalid_function_name", r"---(when `x` uses colons other than a single `::` between a package name and a function name, or is `""` or `NA`.)---"),
+#'   .doc_err("non_scalar", "when `x` has more than one element."),
+#'   .doc_err("unknown_function", "when `x` doesn't resolve to a known function.")
+#' )
+#' ```
 #' @family function functions
 #' @family stabilization functions
 #' @export

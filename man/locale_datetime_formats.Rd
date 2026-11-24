@@ -19,16 +19,14 @@ starting with \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}, \code{"\%Y-\%m-\%d \%H:\%M:\%S"}
 \code{"\%Y-\%m-\%d"} (in that order), followed by the locale's conventional
 day/month order with \code{"/"} and then \code{"-"} separators (each listed with,
 then without, a \code{" \%H:\%M:\%S"} suffix), or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-bad_empty>} when \code{locale_time} is empty.
 \item \verb{<stbl-error-bad_function>} when \code{locale_time} is a function.
 \item \verb{<stbl-error-bad_null>} when \code{locale_time} is \code{NULL}.
-\item \verb{<stbl-error-coerce-character>} when \code{locale_time} cannot be converted
-to character.
-\item \verb{<stbl-error-incompatible_values-character>} when \code{locale_time} is a
-list whose elements cannot be converted to character.
+\item \verb{<stbl-error-coerce-character>} when \code{locale_time} cannot be converted to character.
+\item \verb{<stbl-error-incompatible_values-character>} when \code{locale_time} is a list whose elements cannot be converted to character.
 \item \verb{<stbl-error-non_scalar>} when \code{locale_time} has more than one value.
 }
 }

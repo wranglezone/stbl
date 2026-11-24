@@ -146,36 +146,26 @@ the original class.}
 }
 \value{
 The input as a character vector, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
-\item \verb{<stbl-error-bad_function>} for functions when
-\code{coerce_function = FALSE} (the default).
+\item \verb{<stbl-error-bad_function>} for functions when \code{coerce_function = FALSE} (the default).
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character
-(for example a \code{data.frame}, or an anonymous function).
-\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
-present.
-\item \verb{<stbl-error-incompatible_values-character>} when some elements of a
-list cannot be converted to character.
-\item \verb{<stbl-error-n_characters>} when some elements have fewer characters
-than \code{min_characters} and others have more than \code{max_characters}.
-\item \verb{<stbl-error-n_characters-too_few>} when elements have fewer characters
-than \code{min_characters}.
-\item \verb{<stbl-error-n_characters-too_many>} when elements have more characters
-than \code{max_characters}.
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character (for example a \code{data.frame}, or an anonymous function).
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are present.
+\item \verb{<stbl-error-incompatible_values-character>} when some elements of a list cannot be converted to character.
+\item \verb{<stbl-error-n_characters>} when some elements have fewer characters than \code{min_characters} and others have more than \code{max_characters}.
+\item \verb{<stbl-error-n_characters-too_few>} when elements have fewer characters than \code{min_characters}.
+\item \verb{<stbl-error-n_characters-too_many>} when elements have more characters than \code{max_characters}.
 \item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
-\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}, or
-\code{min_characters} is larger than \code{max_characters}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}, or \code{min_characters} is larger than \code{max_characters}.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{
