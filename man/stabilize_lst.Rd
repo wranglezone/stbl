@@ -180,40 +180,28 @@ the original class.}
 \value{
 The validated list (or an atomic vector when \code{.simplify = TRUE} and
 simplification is possible), or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function =   FALSE} (the default).
-\item \verb{<stbl-error-bad_named>} when extra named elements are present but
-\code{.named} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function = FALSE} (the default).
+\item \verb{<stbl-error-bad_named>} when extra named elements are present but \code{.named} is \code{NULL} or \code{FALSE}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-bad_patterns-invalid_regex>} when a name of \code{.patterns} is
-not a valid regular expression.
-\item \verb{<stbl-error-bad_patterns-invalid_spec>} when an element of \code{.patterns}
-is not a function.
-\item \verb{<stbl-error-bad_patterns-missing_name>} when an element of \code{.patterns}
-is unnamed.
+\item \verb{<stbl-error-bad_patterns-invalid_regex>} when a name of \code{.patterns} is not a valid regular expression.
+\item \verb{<stbl-error-bad_patterns-invalid_spec>} when an element of \code{.patterns} is not a function.
+\item \verb{<stbl-error-bad_patterns-missing_name>} when an element of \code{.patterns} is unnamed.
 \item \verb{<stbl-error-bad_patterns-not_list>} when \code{.patterns} is not a list.
-\item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when
-\code{.named = FALSE} and a name in \code{.required} has no spec in \code{...}.
-\item \verb{<stbl-error-bad_unnamed>} when unnamed elements are present but
-\code{.unnamed} is \code{NULL} or \code{FALSE}.
-\item \verb{<stbl-error-cant_stabilize_patterns>} when elements matching \code{.patterns}
-fail their specs.
+\item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when \code{.named = FALSE} and a name in \code{.required} has no spec in \code{...}.
+\item \verb{<stbl-error-bad_unnamed>} when unnamed elements are present but \code{.unnamed} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-cant_stabilize_patterns>} when elements matching \code{.patterns} fail their specs.
 \item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
-\item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate
-elements are present.
-\item \verb{<stbl-error-duplicate_names>} when duplicate names are present and
-\code{.allow_duplicate_names = FALSE}.
-\item \verb{<stbl-error-missing_element>} when a required named element is absent
-(including conditionally required elements whose trigger is present).
+\item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate elements are present.
+\item \verb{<stbl-error-duplicate_names>} when duplicate names are present and \code{.allow_duplicate_names = FALSE}.
+\item \verb{<stbl-error-missing_element>} when a required named element is absent (including conditionally required elements whose trigger is present).
 \item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
 \item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
 \item \verb{<stbl-error-size_x_vs_y>} when \code{.min_size} is larger than \code{.max_size}.
-\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
-unnamed.
-\item Errors from the specs in \code{...}, \code{.named}, or \code{.unnamed} when an element
-does not satisfy its spec.
+\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is unnamed.
+\item Errors from the specs in \code{...}, \code{.named}, or \code{.unnamed} when an element does not satisfy its spec.
 }
 }
 \description{

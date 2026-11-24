@@ -7,29 +7,27 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The input as an integer vector, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
-#'   - `<stbl-error-bad_multiple_of>` when `multiple_of` is not positive.
-#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
-#'   `named`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
-#'   - `<stbl-error-duplicate_elements>` when `unique = TRUE` and duplicates are
-#'   present.
-#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
-#'   safely converted to integer.
-#'   - `<stbl-error-not_multiple>` when values are not a multiple of
-#'   `multiple_of`.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
-#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
-#'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
-#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size`.
-#'   - Errors from `named` when it is a function and a name does not satisfy
-#'   it.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_allowed_names(),
+#'   .doc_err_allowed_values(),
+#'   .doc_err_multiple_of(),
+#'   .doc_err_na(),
+#'   .doc_err_named(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("integer"),
+#'   .doc_err_unique(),
+#'   .doc_err_incompatible("integer"),
+#'   .doc_err_not_multiple(),
+#'   .doc_err_range(exclusive = TRUE),
+#'   .doc_err_size(),
+#'   .doc_err_named_fn()
+#' )
+#' ```
 #' @family integer functions
 #' @family stabilization functions
 #' @export
@@ -124,28 +122,28 @@ stabilise_integer <- stabilize_int
 #' @inheritParams .shared-params
 #'
 #' @returns The input as a length-1 integer vector, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-allowed_values>` when the value is not in
-#'   `allowed_values`.
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-bad_multiple_of>` when `multiple_of` is not positive.
-#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
-#'   `named`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-integer>` when `x` cannot be converted to integer.
-#'   - `<stbl-error-incompatible_values-integer>` when some values cannot be
-#'   safely converted to integer.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
-#'   - `<stbl-error-not_multiple>` when the value is not a multiple of
-#'   `multiple_of`.
-#'   - `<stbl-error-outside_range>` when values fall outside `min_value`,
-#'   `max_value`, `exclusive_min_value`, or `exclusive_max_value`.
-#'   - Errors from `named` when it is a function and a name does not satisfy
-#'   it.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_allowed_names(),
+#'   .doc_err_allowed_values(scalar = TRUE),
+#'   .doc_err_empty(),
+#'   .doc_err_multiple_of(),
+#'   .doc_err_na(),
+#'   .doc_err_named(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("integer"),
+#'   .doc_err_incompatible("integer"),
+#'   .doc_err_scalar(),
+#'   .doc_err_not_multiple(scalar = TRUE),
+#'   .doc_err_range(exclusive = TRUE),
+#'   .doc_err_named_fn()
+#' )
+#' ```
 #' @family integer functions
 #' @family stabilization functions
 #' @export

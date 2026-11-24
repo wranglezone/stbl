@@ -103,15 +103,13 @@ the original class.}
 }
 \value{
 The input as an \code{\link[hms:hms]{hms::hms()}} vector, always expressed in UTC, or an
-error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
-mode:
+error condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-time>} when \code{x} cannot be converted to a time of
-day, including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
-safely converted to a time of day.
+\item \verb{<stbl-error-coerce-time>} when \code{x} cannot be converted to a time of day, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be safely converted to a time of day.
 }
 }
 \description{

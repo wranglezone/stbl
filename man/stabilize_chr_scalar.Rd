@@ -132,34 +132,25 @@ the original class.}
 }
 \value{
 The input as a length-1 character vector, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
-\item \verb{<stbl-error-allowed_values>} when the value is not in
-\code{allowed_values}.
-\item \verb{<stbl-error-bad_empty>} for empty vectors when
-\code{allow_zero_length = FALSE}.
-\item \verb{<stbl-error-bad_function>} for functions when
-\code{coerce_function = FALSE} (the default).
+\item \verb{<stbl-error-allowed_values>} when the value is not in \code{allowed_values}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when \code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-bad_function>} for functions when \code{coerce_function = FALSE} (the default).
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character
-(for example a \code{data.frame}, or an anonymous function).
-\item \verb{<stbl-error-incompatible_values-character>} when some elements of a
-list cannot be converted to character.
-\item \verb{<stbl-error-n_characters-too_few>} when the element has fewer characters
-than \code{min_characters}.
-\item \verb{<stbl-error-n_characters-too_many>} when the element has more characters
-than \code{max_characters}.
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character (for example a \code{data.frame}, or an anonymous function).
+\item \verb{<stbl-error-incompatible_values-character>} when some elements of a list cannot be converted to character.
+\item \verb{<stbl-error-n_characters-too_few>} when the element has fewer characters than \code{min_characters}.
+\item \verb{<stbl-error-n_characters-too_many>} when the element has more characters than \code{max_characters}.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 \item \verb{<stbl-error-regex_mismatch>} when \code{regex} checks fail.
-\item \verb{<stbl-error-size_x_vs_y>} when \code{min_characters} is larger than
-\code{max_characters}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{min_characters} is larger than \code{max_characters}.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

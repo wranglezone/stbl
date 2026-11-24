@@ -13,17 +13,19 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `x` converted to the type of `.to`, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_tz>` when `.to` is a [base::Date] or [base::POSIXct]
-#'   and `tz` is not `""` or a value from [OlsonNames()], or is `""` and your
-#'   local time zone can't be determined.
-#'   - `<stbl-error-coerce-*>` (where `*` is the class of `.to`) when the class
-#'   of `.to` has no corresponding `to_*()` function and [vctrs::vec_cast()]
-#'   cannot convert `x` to `.to`.
-#'   - `<stbl-error-bad_null>` when `.to` is `NULL` and `allow_null = FALSE`.
-#'   - The failure classes documented for the `to_*()` function corresponding
-#'   to the class of `.to` (for example [to_int()] for `.to = integer()`).
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_tz("`.to` is a [base::Date] or [base::POSIXct]"),
+#'   .doc_err(c("coerce", "*"), "(where `*` is the class of `.to`) when the class of `.to` has no corresponding `to_*()` function and [vctrs::vec_cast()] cannot convert `x` to `.to`."),
+#'   .doc_err("bad_null", "when `.to` is `NULL` and `allow_null = FALSE`."),
+#'   .doc_err_other("The failure classes documented for the `to_*()` function corresponding to the class of `.to` (for example [to_int()] for `.to = integer()`).")
+#' )
+#' ```
 #'
 #' @details
 #' When the class of `.to` does not have a corresponding `to_*()` function,

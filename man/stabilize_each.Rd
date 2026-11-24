@@ -55,10 +55,12 @@ the original class.}
 \value{
 \code{x} with every element converted by \code{spec}, simplified to an atomic
 vector when \code{simplify = TRUE} and possible, otherwise a list. Errors with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and \verb{<stbl-error-cant_stabilize_each>} when any element
-fails \code{spec}; the condition's \code{locations} element gives the positions that
-failed.
+classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
+\itemize{
+\item \verb{<stbl-error-cant_stabilize_each>} when any element fails \code{spec}; the condition's \code{locations} element gives the positions that failed.
+}
 }
 \description{
 \code{stabilize_each()} applies \code{spec} (a \verb{to_*} function, \verb{stabilize_*} function,

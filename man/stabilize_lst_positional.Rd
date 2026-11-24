@@ -167,23 +167,19 @@ the original class.}
 \value{
 The validated list (or an atomic vector when \code{.simplify = TRUE} and
 simplification is possible), or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_additional>} when extra elements are present but
-\code{.additional} is \code{NULL} or \code{FALSE}.
-\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function =   FALSE} (the default).
+\item \verb{<stbl-error-bad_additional>} when extra elements are present but \code{.additional} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function = FALSE} (the default).
 \item \verb{<stbl-error-bad_n_required>} when \code{.n_required} is out of range.
 \item \verb{<stbl-error-bad_named>} when \code{.x} has named elements.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-cant_stabilize_positional>} when any element fails its
-spec; the condition's \code{locations} element gives the positions that failed.
+\item \verb{<stbl-error-cant_stabilize_positional>} when any element fails its spec; the condition's \code{locations} element gives the positions that failed.
 \item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
-\item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate
-elements are present.
+\item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate elements are present.
 \item \verb{<stbl-error-empty_specs>} when no specs are provided.
-\item \verb{<stbl-error-missing_element>} when \code{.x} has fewer than \code{.n_required}
-elements.
+\item \verb{<stbl-error-missing_element>} when \code{.x} has fewer than \code{.n_required} elements.
 \item \verb{<stbl-error-named_spec>} when any spec passed through \code{...} is named.
 \item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
 \item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.

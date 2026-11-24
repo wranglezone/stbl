@@ -96,30 +96,23 @@ the original class.}
 }
 \value{
 The input as an \code{\link[hms:hms]{hms::hms()}} vector, or an error condition with
-classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
 \item \verb{<stbl-error-allowed_values>} when values are not in \code{allowed_values}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-time>} when \code{x} cannot be converted to a time of
-day, including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates
-are present.
-\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be
-safely converted to a time of day.
-\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or
-\code{max_value}.
-\item \verb{<stbl-error-size_too_large>} when the vector is longer than
-\code{max_size}.
-\item \verb{<stbl-error-size_too_small>} when the vector is shorter than
-\code{min_size}.
+\item \verb{<stbl-error-coerce-time>} when \code{x} cannot be converted to a time of day, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are present.
+\item \verb{<stbl-error-incompatible_values-time>} when some values cannot be safely converted to a time of day.
+\item \verb{<stbl-error-outside_range>} when values fall outside \code{min_value} or \code{max_value}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}.
 \item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

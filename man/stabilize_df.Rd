@@ -140,43 +140,28 @@ the original class.}
 }
 \value{
 The validated data frame, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_named>} when list input has unnamed elements, or when
-extra columns are present but \code{.extra_cols} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-bad_named>} when list input has unnamed elements, or when extra columns are present but \code{.extra_cols} is \code{NULL} or \code{FALSE}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-bad_patterns-invalid_regex>} when a name of \code{.patterns} is
-not a valid regular expression.
-\item \verb{<stbl-error-bad_patterns-invalid_spec>} when an element of \code{.patterns}
-is not a function.
-\item \verb{<stbl-error-bad_patterns-missing_name>} when an element of \code{.patterns}
-is unnamed.
+\item \verb{<stbl-error-bad_patterns-invalid_regex>} when a name of \code{.patterns} is not a valid regular expression.
+\item \verb{<stbl-error-bad_patterns-invalid_spec>} when an element of \code{.patterns} is not a function.
+\item \verb{<stbl-error-bad_patterns-missing_name>} when an element of \code{.patterns} is unnamed.
 \item \verb{<stbl-error-bad_patterns-not_list>} when \code{.patterns} is not a list.
-\item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when
-\code{.extra_cols = FALSE} and a name in \code{.required} has no spec in \code{...}.
+\item \verb{<stbl-error-bad_required>} when \code{.required} is invalid, or when \code{.extra_cols = FALSE} and a name in \code{.required} has no spec in \code{...}.
 \item \verb{<stbl-error-bad_unnamed>} when the data frame has unnamed columns.
-\item \verb{<stbl-error-cant_stabilize_patterns>} when columns matching \code{.patterns}
-fail their specs.
-\item \verb{<stbl-error-coerce-data.frame>} when \code{.x} cannot be converted to a data
-frame.
-\item \verb{<stbl-error-duplicate_names>} when the data frame has duplicate column
-names.
-\item \verb{<stbl-error-jagged>} when list input has incompatible element lengths
-for conversion to a data frame.
-\item \verb{<stbl-error-missing_cols>} when required names in \code{.col_names} are
-absent.
-\item \verb{<stbl-error-missing_element>} when a required column is absent
-(including conditionally required columns whose trigger is present).
+\item \verb{<stbl-error-cant_stabilize_patterns>} when columns matching \code{.patterns} fail their specs.
+\item \verb{<stbl-error-coerce-data.frame>} when \code{.x} cannot be converted to a data frame.
+\item \verb{<stbl-error-duplicate_names>} when the data frame has duplicate column names.
+\item \verb{<stbl-error-jagged>} when list input has incompatible element lengths for conversion to a data frame.
+\item \verb{<stbl-error-missing_cols>} when required names in \code{.col_names} are absent.
+\item \verb{<stbl-error-missing_element>} when a required column is absent (including conditionally required columns whose trigger is present).
 \item \verb{<stbl-error-size_x_vs_y>} when \code{.min_rows} is larger than \code{.max_rows}.
-\item \verb{<stbl-error-too_few_rows>} when the data frame has fewer than
-\code{.min_rows} rows.
-\item \verb{<stbl-error-too_many_rows>} when the data frame has more than
-\code{.max_rows} rows.
-\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is
-unnamed.
-\item Errors from the specs in \code{...} or \code{.extra_cols} when a column does not
-satisfy its spec.
+\item \verb{<stbl-error-too_few_rows>} when the data frame has fewer than \code{.min_rows} rows.
+\item \verb{<stbl-error-too_many_rows>} when the data frame has more than \code{.max_rows} rows.
+\item \verb{<stbl-error-unnamed_spec>} when any element passed through \code{...} is unnamed.
+\item Errors from the specs in \code{...} or \code{.extra_cols} when a column does not satisfy its spec.
 }
 }
 \description{

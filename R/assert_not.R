@@ -8,9 +8,16 @@
 #' @param ... Reserved for future use; must be empty.
 #' @inheritParams .shared-params
 #' @returns `x`, unchanged, if `x` does not match `spec`, or an error condition
-#'   with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-#'   `<error>`, `<condition>`, and `<stbl-error-matched_spec>` when `x` matches
-#'   `spec`.
+#'   with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("matched_spec", "when `x` matches `spec`.")
+#' )
+#' ```
 #' @family stabilization functions
 #' @export
 #'

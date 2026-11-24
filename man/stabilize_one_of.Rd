@@ -62,15 +62,13 @@ both \code{x_arg} and \code{to_arg}.}
 }
 \value{
 \code{x} converted or validated by the single successful function or
-prototype in \code{...}, or an error condition with classes \verb{<stbl-error>},
-\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
-specific class by failure mode:
+prototype in \code{...}, or an error condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-cant_stabilize_one_of>} when zero, or more than one,
-provided functions or prototypes succeed.
+\item \verb{<stbl-error-cant_stabilize_one_of>} when zero, or more than one, provided functions or prototypes succeed.
 \item \verb{<stbl-error-empty_specs>} when nothing is supplied in \code{...}.
-\item \verb{<stbl-error-named_spec>} when any element of \code{...} is named
-(\code{stabilize_one_of()} only).
+\item \verb{<stbl-error-named_spec>} when any element of \code{...} is named (\code{stabilize_one_of()} only).
 }
 }
 \description{

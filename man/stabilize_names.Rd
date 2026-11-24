@@ -76,17 +76,14 @@ source of error messages.}
 }
 \value{
 \code{x} with stabilized names, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when a name is not in \code{allowed_names}.
-\item \verb{<stbl-error-bad_named>} when \code{allowed_names} or \code{spec} is supplied and
-\code{x} is not fully named.
+\item \verb{<stbl-error-bad_named>} when \code{allowed_names} or \code{spec} is supplied and \code{x} is not fully named.
 \item \verb{<stbl-error-bad_required>} when \code{required} is invalid.
-\item \verb{<stbl-error-duplicate_names>} when duplicate names are present and
-\code{allow_duplicate_names = FALSE}.
-\item \verb{<stbl-error-missing_element>} when a name in \code{required} is absent
-(including conditionally required names whose trigger is present).
+\item \verb{<stbl-error-duplicate_names>} when duplicate names are present and \code{allow_duplicate_names = FALSE}.
+\item \verb{<stbl-error-missing_element>} when a name in \code{required} is absent (including conditionally required names whose trigger is present).
 \item Errors from \code{spec} when a name does not satisfy it.
 }
 }

@@ -19,13 +19,18 @@
 #'   will be computed by [base::factor()].
 #'
 #' @returns The input as a factor, or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
-#'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
-#'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
-#'   cannot be converted to factor.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_null(),
+#'   .doc_err_coerce("factor"),
+#'   .doc_err_fct_levels(),
+#'   .doc_err_incompatible("factor", what = "elements")
+#' )
+#' ```
 #' @family factor functions
 #' @family stabilization functions
 #' @export
@@ -309,16 +314,21 @@ to_fct.default <- function(
 #'   will be computed by [base::factor()].
 #'
 #' @returns The input as a length-1 factor, or an error condition with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-coerce-factor>` when `x` cannot be converted to factor.
-#'   - `<stbl-error-fct_levels>` when values are not present in `levels`.
-#'   - `<stbl-error-incompatible_values-factor>` when some elements of a list
-#'   cannot be converted to factor.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err_empty(),
+#'   .doc_err_null(),
+#'   .doc_err_coerce("factor"),
+#'   .doc_err_fct_levels(),
+#'   .doc_err_incompatible("factor", what = "elements"),
+#'   .doc_err_scalar()
+#' )
+#' ```
 #' @family factor functions
 #' @family stabilization functions
 #' @export

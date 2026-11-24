@@ -53,40 +53,31 @@
 #'
 #' @returns The validated list (or an atomic vector when `.simplify = TRUE` and
 #'   simplification is possible), or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
-#'   FALSE` (the default).
-#'   - `<stbl-error-bad_named>` when extra named elements are present but
-#'   `.named` is `NULL` or `FALSE`.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-bad_patterns-invalid_regex>` when a name of `.patterns` is
-#'   not a valid regular expression.
-#'   - `<stbl-error-bad_patterns-invalid_spec>` when an element of `.patterns`
-#'   is not a function.
-#'   - `<stbl-error-bad_patterns-missing_name>` when an element of `.patterns`
-#'   is unnamed.
-#'   - `<stbl-error-bad_patterns-not_list>` when `.patterns` is not a list.
-#'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
-#'   `.named = FALSE` and a name in `.required` has no spec in `...`.
-#'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
-#'   `.unnamed` is `NULL` or `FALSE`.
-#'   - `<stbl-error-cant_stabilize_patterns>` when elements matching `.patterns`
-#'   fail their specs.
-#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
-#'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
-#'   elements are present.
-#'   - `<stbl-error-duplicate_names>` when duplicate names are present and
-#'   `.allow_duplicate_names = FALSE`.
-#'   - `<stbl-error-missing_element>` when a required named element is absent
-#'   (including conditionally required elements whose trigger is present).
-#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
-#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
-#'   - `<stbl-error-size_x_vs_y>` when `.min_size` is larger than `.max_size`.
-#'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
-#'   unnamed.
-#'   - Errors from the specs in `...`, `.named`, or `.unnamed` when an element
-#'   does not satisfy its spec.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_function", "for functions when `.coerce_function = FALSE` (the default)."),
+#'   .doc_err("bad_named", "when extra named elements are present but `.named` is `NULL` or `FALSE`."),
+#'   .doc_err_null(".allow_null"),
+#'   .doc_err(c("bad_patterns", "invalid_regex"), "when a name of `.patterns` is not a valid regular expression."),
+#'   .doc_err(c("bad_patterns", "invalid_spec"), "when an element of `.patterns` is not a function."),
+#'   .doc_err(c("bad_patterns", "missing_name"), "when an element of `.patterns` is unnamed."),
+#'   .doc_err(c("bad_patterns", "not_list"), "when `.patterns` is not a list."),
+#'   .doc_err("bad_required", "when `.required` is invalid, or when `.named = FALSE` and a name in `.required` has no spec in `...`."),
+#'   .doc_err("bad_unnamed", "when unnamed elements are present but `.unnamed` is `NULL` or `FALSE`."),
+#'   .doc_err("cant_stabilize_patterns", "when elements matching `.patterns` fail their specs."),
+#'   .doc_err(c("coerce", "list"), "when `.x` cannot be converted to a list."),
+#'   .doc_err("duplicate_elements", "when `.unique = TRUE` and duplicate elements are present."),
+#'   .doc_err("duplicate_names", "when duplicate names are present and `.allow_duplicate_names = FALSE`."),
+#'   .doc_err("missing_element", "when a required named element is absent (including conditionally required elements whose trigger is present)."),
+#'   .doc_err_size("list", ".min_size", ".max_size"),
+#'   .doc_err("unnamed_spec", "when any element passed through `...` is unnamed."),
+#'   .doc_err_other("Errors from the specs in `...`, `.named`, or `.unnamed` when an element does not satisfy its spec.")
+#' )
+#' ```
 #' @family list functions
 #' @family stabilization functions
 #' @export

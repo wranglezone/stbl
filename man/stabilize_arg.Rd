@@ -72,29 +72,21 @@ the original class.}
 \item{allow_zero_length}{(\code{logical(1)}) Are zero-length vectors acceptable?}
 }
 \value{
-\code{x}, or an error condition with classes \verb{<stbl-error>},
-\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a
-specific class by failure mode:
+\code{x}, or an error condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
 \item \verb{<stbl-error-allowed_names>} when names are not in \code{named}.
-\item \verb{<stbl-error-bad_empty>} for empty vectors when
-\code{allow_zero_length = FALSE} in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when \code{allow_zero_length = FALSE} in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
-\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
-\code{named}.
+\item \verb{<stbl-error-bad_named>} when the presence of names doesn't match \code{named}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
-present in \code{\link[=stabilize_arg]{stabilize_arg()}}.
-\item \verb{<stbl-error-non_scalar>} for non-scalar vectors in
-\code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
-\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}
-in \code{\link[=stabilize_arg]{stabilize_arg()}}.
-\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}
-in \code{\link[=stabilize_arg]{stabilize_arg()}}.
-\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size} in
-\code{\link[=stabilize_arg]{stabilize_arg()}}.
-\item Errors from \code{named} when it is a function and a name does not satisfy
-it.
+\item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are present in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size} in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size} in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{min_size} is larger than \code{max_size} in \code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item Errors from \code{named} when it is a function and a name does not satisfy it.
 }
 }
 \description{

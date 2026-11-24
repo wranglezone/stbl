@@ -71,19 +71,15 @@ the original class.}
 }
 \value{
 The input as a length-1 \link[base:POSIXct]{base::POSIXct} vector, or an error
-condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
-\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by
-failure mode:
+condition with classes
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_empty>} for empty vectors when
-\code{allow_zero_length = FALSE}.
+\item \verb{<stbl-error-bad_empty>} for empty vectors when \code{allow_zero_length = FALSE}.
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from
-\code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
-\item \verb{<stbl-error-coerce-datetime>} when \code{x} cannot be converted to datetime,
-including numbers when \code{treat_number_as = "error"}.
-\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be
-safely converted to datetime.
+\item \verb{<stbl-error-bad_tz>} when \code{tz} is not \code{""} or a value from \code{\link[=OlsonNames]{OlsonNames()}}, or is \code{""} and your local time zone can't be determined.
+\item \verb{<stbl-error-coerce-datetime>} when \code{x} cannot be converted to datetime, including numbers when \code{treat_number_as = "error"}.
+\item \verb{<stbl-error-incompatible_values-datetime>} when some values cannot be safely converted to datetime.
 \item \verb{<stbl-error-non_scalar>} for non-scalar vectors.
 }
 }

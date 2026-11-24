@@ -52,16 +52,13 @@ the original class.}
 }
 \value{
 The input as a character vector, or an error condition with classes
-\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
-\verb{<condition>}, and a specific class by failure mode:
+
+\verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_function>} for functions when
-\code{coerce_function = FALSE} (the default).
+\item \verb{<stbl-error-bad_function>} for functions when \code{coerce_function = FALSE} (the default).
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character
-(for example a \code{data.frame}, or an anonymous function).
-\item \verb{<stbl-error-incompatible_values-character>} when some elements of a
-list cannot be converted to character.
+\item \verb{<stbl-error-coerce-character>} when \code{x} cannot be converted to character (for example a \code{data.frame}, or an anonymous function).
+\item \verb{<stbl-error-incompatible_values-character>} when some elements of a list cannot be converted to character.
 }
 }
 \description{

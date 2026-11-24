@@ -15,13 +15,19 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `x` converted or validated by every function in `...`, or an error
-#'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-#'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
-#'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
-#'   - `<stbl-error-inconsistent_all_of>` when every function succeeds, but
-#'   their results are not all equivalent.
-#'   - `<stbl-error-named_spec>` when any element of `...` is named.
+#'   condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("cant_stabilize_all_of", "when any provided function fails."),
+#'   .doc_err("empty_specs", "when no functions are supplied in `...`."),
+#'   .doc_err("inconsistent_all_of", "when every function succeeds, but their results are not all equivalent."),
+#'   .doc_err("named_spec", "when any element of `...` is named.")
+#' )
+#' ```
 #'
 #' @details
 #' The results of the specs are combined with [reconcile()], so they don't need

@@ -24,27 +24,26 @@
 #'
 #' @returns The validated list (or an atomic vector when `.simplify = TRUE` and
 #'   simplification is possible), or an error condition with classes
-#'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_additional>` when extra elements are present but
-#'   `.additional` is `NULL` or `FALSE`.
-#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
-#'   FALSE` (the default).
-#'   - `<stbl-error-bad_n_required>` when `.n_required` is out of range.
-#'   - `<stbl-error-bad_named>` when `.x` has named elements.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-cant_stabilize_positional>` when any element fails its
-#'   spec; the condition's `locations` element gives the positions that failed.
-#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
-#'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
-#'   elements are present.
-#'   - `<stbl-error-empty_specs>` when no specs are provided.
-#'   - `<stbl-error-missing_element>` when `.x` has fewer than `.n_required`
-#'   elements.
-#'   - `<stbl-error-named_spec>` when any spec passed through `...` is named.
-#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
-#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
-#'   - `<stbl-error-size_x_vs_y>` when `.min_size` is larger than `.max_size`.
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("bad_additional", "when extra elements are present but `.additional` is `NULL` or `FALSE`."),
+#'   .doc_err("bad_function", "for functions when `.coerce_function = FALSE` (the default)."),
+#'   .doc_err("bad_n_required", "when `.n_required` is out of range."),
+#'   .doc_err("bad_named", "when `.x` has named elements."),
+#'   .doc_err_null(".allow_null"),
+#'   .doc_err("cant_stabilize_positional", "when any element fails its spec; the condition's `locations` element gives the positions that failed."),
+#'   .doc_err(c("coerce", "list"), "when `.x` cannot be converted to a list."),
+#'   .doc_err("duplicate_elements", "when `.unique = TRUE` and duplicate elements are present."),
+#'   .doc_err("empty_specs", "when no specs are provided."),
+#'   .doc_err("missing_element", "when `.x` has fewer than `.n_required` elements."),
+#'   .doc_err("named_spec", "when any spec passed through `...` is named."),
+#'   .doc_err_size("list", ".min_size", ".max_size")
+#' )
+#' ```
 #' @family list functions
 #' @family stabilization functions
 #' @export

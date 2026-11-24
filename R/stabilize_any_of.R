@@ -20,14 +20,18 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `x` converted or validated by the first successful function or
-#'   prototype in `...`, or an error condition with classes `<stbl-error>`,
-#'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-#'   specific class by failure mode:
-#'   - `<stbl-error-cant_stabilize_any_of>` when all provided functions or
-#'   prototypes fail.
-#'   - `<stbl-error-empty_specs>` when nothing is supplied in `...`.
-#'   - `<stbl-error-named_spec>` when any element of `...` is named
-#'   (`stabilize_any_of()` only).
+#'   prototype in `...`, or an error condition with classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("cant_stabilize_any_of", "when all provided functions or prototypes fail."),
+#'   .doc_err("empty_specs", "when nothing is supplied in `...`."),
+#'   .doc_err("named_spec", "when any element of `...` is named (`stabilize_any_of()` only).")
+#' )
+#' ```
 #' @family multiple type functions
 #' @family stabilization functions
 #' @export

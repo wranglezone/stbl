@@ -9,10 +9,16 @@
 #'
 #' @returns `x` with every element converted by `spec`, simplified to an atomic
 #'   vector when `simplify = TRUE` and possible, otherwise a list. Errors with
-#'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-#'   `<condition>`, and `<stbl-error-cant_stabilize_each>` when any element
-#'   fails `spec`; the condition's `locations` element gives the positions that
-#'   failed.
+#'   classes
+#'
+#' ```{r child = "man/rmd/error-classes.md"}
+#' ```
+#'
+#' ```{r, results = "asis", echo = FALSE}
+#' .doc_errors(
+#'   .doc_err("cant_stabilize_each", "when any element fails `spec`; the condition's `locations` element gives the positions that failed.")
+#' )
+#' ```
 #' @family multiple type functions
 #' @family stabilization functions
 #' @export
