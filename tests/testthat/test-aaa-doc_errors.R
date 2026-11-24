@@ -57,7 +57,11 @@ test_that(".doc_err() accepts a vector subclass (#426)", {
 })
 
 test_that("shared entries with scalar and exclusive variants work (#426)", {
-  expect_match(.doc_err_range()$text, "`min_value` or `max_value`", fixed = TRUE)
+  expect_match(
+    .doc_err_range()$text,
+    "`min_value` or `max_value`",
+    fixed = TRUE
+  )
   expect_match(.doc_err_range(TRUE)$text, "`exclusive_max_value`", fixed = TRUE)
   expect_match(.doc_err_allowed_values()$text, "values are not in")
   expect_match(.doc_err_allowed_values(TRUE)$text, "the value is not in")
@@ -84,7 +88,11 @@ test_that("simple shared entries carry their subclass (#426)", {
 test_that("size, n_characters, regex, and tz entries work (#426)", {
   sizes <- .doc_err_size("list", ".min_size", ".max_size", fn = "f")
   expect_length(sizes, 3)
-  expect_match(sizes[[1]]$text, "list is longer than `.max_size` in [f()].", fixed = TRUE)
+  expect_match(
+    sizes[[1]]$text,
+    "list is longer than `.max_size` in [f()].",
+    fixed = TRUE
+  )
   expect_length(.doc_err_size(x_vs_y = FALSE), 2)
   expect_match(
     .doc_err_size_x_vs_y(also = c("min_characters", "max_characters"))$text,
@@ -95,7 +103,10 @@ test_that("size, n_characters, regex, and tz entries work (#426)", {
   expect_length(.doc_err_n_characters(scalar = TRUE), 2)
   expect_identical(.doc_err_regex()$subclass, "regex_mismatch")
   expect_match(.doc_err_tz()$text, "^`<stbl-error-bad_tz>` when `tz` is not")
-  expect_match(.doc_err_tz("`.to` is a Date")$text, "when `.to` is a Date and `tz`")
+  expect_match(
+    .doc_err_tz("`.to` is a Date")$text,
+    "when `.to` is a Date and `tz`"
+  )
   expect_match(.doc_err_empty("f")$text, "in [f()].", fixed = TRUE)
   expect_match(.doc_err_scalar("f")$text, "in [f()].", fixed = TRUE)
 })
