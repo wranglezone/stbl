@@ -201,24 +201,24 @@ Other stabilization functions:
 to_fn("mean")
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x59e09380be80>
+#> <bytecode: 0x59dc8ac309a0>
 #> <environment: namespace:base>
 to_fn(~ . + 1)
 #> <lambda>
 #> function (..., .x = ..1, .y = ..2, . = ..1) 
 #> . + 1
-#> <environment: 0x59e0962193e8>
+#> <environment: 0x59dc8c221410>
 #> attr(,"class")
 #> [1] "rlang_lambda_function" "function"             
 to_fn(mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x59e09380be80>
+#> <bytecode: 0x59dc8ac309a0>
 #> <environment: namespace:base>
 to_fn("stats::median")
 #> function (x, na.rm = FALSE, ...) 
 #> UseMethod("median")
-#> <bytecode: 0x59e09317dc10>
+#> <bytecode: 0x59dc8a5a1b80>
 #> <environment: namespace:stats>
 to_fn(NULL)
 #> NULL
