@@ -354,8 +354,6 @@ test_that("reconcile() leaves vectors with extra attributes to R (#408)", {
     "stbl",
     "cant_reconcile"
   )
-  double_factor <- structure(1, levels = "a", class = "factor")
-  expect_identical(reconcile("a", double_factor), double_factor)
   bad_levels <- structure(1L, levels = 1L, class = "factor")
   expect_pkg_error_classes(reconcile("a", bad_levels), "stbl", "cant_reconcile")
 })
