@@ -1,11 +1,13 @@
 # Reconcile a list of values
 
-Reconcile a list of values
+The comparison runs in C (`stbl_reconcile()`). Date, POSIXct, hms,
+Period, and other classed values are compared in R by
+[`.atomic_mismatch()`](https://stbl.wrangle.zone/dev/reference/dot-atomic_mismatch.md).
 
 ## Usage
 
 ``` r
-.reconcile_values(values, path = "")
+.reconcile_values(values)
 ```
 
 ## Arguments
@@ -13,11 +15,6 @@ Reconcile a list of values
 - values:
 
   `(list)` At least one value.
-
-- path:
-
-  `(character(1))` The path to `values` within the original values, for
-  messages.
 
 ## Value
 

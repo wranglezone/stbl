@@ -30,6 +30,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-are_not_fct_ish_chr.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-as_chr_named.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-atomic_difference.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-atomic_mismatch.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-atomics_equivalent.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-bad_tz_msgs_local.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-call_specified_fn.html</loc></url>
@@ -92,7 +93,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-compile_pkg_warning_classes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_specification_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-construct_stabilizer_symbol.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-container_difference.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_levels_impl.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-convert_fct_to_na.html</loc></url>
@@ -147,6 +147,7 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_check_dupes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-maybe_qualify_fn_name.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-merge_required.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-mismatch_path.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-name_like.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-names_matching_patterns.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-new_mismatch.html</loc></url>
@@ -155,7 +156,6 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-normalize_patterns.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-normalize_required.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-normalize_required_list.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-other_attributes.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_matches.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_offset.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_dttm_parts.html</loc></url>
@@ -163,19 +163,17 @@
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-parse_time_parts.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-path_step.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-quote_fn_exprs.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_atomics.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_category.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_identical.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_labeled.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_labels.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_lists.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_ranking.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_reason.html</loc></url>
+<url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_reasons.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_type.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-reconcile_values.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-required_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-resolve_extra_control.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-round_trips.html</loc></url>
-<url><loc>https://stbl.wrangle.zone/dev/reference/dot-row_names.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-same_fn.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-check.html</loc></url>
 <url><loc>https://stbl.wrangle.zone/dev/reference/dot-shared-params-lst.html</loc></url>

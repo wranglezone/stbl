@@ -40,6 +40,17 @@
   returns the narrowest common representation of equivalent values, or
   errors if they are not equivalent
   ([\#408](https://github.com/wranglezone/stbl/issues/408)).
+- [`reconcile()`](https://stbl.wrangle.zone/dev/reference/reconcile.md)
+  and
+  [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
+  now do their comparisons in C, which is faster for large inputs: in
+  benchmarks on 1e6-element vectors, comparing integer and double
+  vectors was about 9x faster, and comparing nested lists of 1e4
+  elements was about 150x faster. Comparisons that are dominated by
+  converting between character and numeric values are not noticeably
+  faster. `stbl_reconcile()` is also registered as a C callable in the
+  public C API
+  ([\#414](https://github.com/wranglezone/stbl/issues/414)).
 - [`stabilize_all_of()`](https://stbl.wrangle.zone/dev/reference/stabilize_all_of.md)
   now accepts specs whose results are equivalent but differ in type
   (such as integer and double), and returns the same result regardless
