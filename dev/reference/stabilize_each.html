@@ -121,11 +121,9 @@ the original class.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>x</code> with every element converted by <code>spec</code>, simplified to an atomic
 vector when <code>simplify = TRUE</code> and possible, otherwise a list. Errors with
-classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and <code>&lt;stbl-error-cant_stabilize_each&gt;</code> when any element
-fails <code>spec</code>; the condition's <code>locations</code> element gives the positions that
-failed.</p>
-    </div>
+classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-cant_stabilize_each&gt;</code> when any element fails <code>spec</code>; the condition's <code>locations</code> element gives the positions that failed.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other multiple type functions:

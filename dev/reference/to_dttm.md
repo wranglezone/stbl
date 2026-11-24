@@ -146,9 +146,10 @@ to_dttm(
 
 The input as a
 [base::POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) vector, or
-an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 

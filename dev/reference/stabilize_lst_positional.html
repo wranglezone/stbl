@@ -243,22 +243,17 @@ the original class.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The validated list (or an atomic vector when <code>.simplify = TRUE</code> and
-simplification is possible), or an error condition with classes
-<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_additional&gt;</code> when extra elements are present but
-<code>.additional</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>.coerce_function =   FALSE</code> (the default).</p></li>
+simplification is possible), or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_additional&gt;</code> when extra elements are present but <code>.additional</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>.coerce_function = FALSE</code> (the default).</p></li>
 <li><p><code>&lt;stbl-error-bad_n_required&gt;</code> when <code>.n_required</code> is out of range.</p></li>
 <li><p><code>&lt;stbl-error-bad_named&gt;</code> when <code>.x</code> has named elements.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-cant_stabilize_positional&gt;</code> when any element fails its
-spec; the condition's <code>locations</code> element gives the positions that failed.</p></li>
+<li><p><code>&lt;stbl-error-cant_stabilize_positional&gt;</code> when any element fails its spec; the condition's <code>locations</code> element gives the positions that failed.</p></li>
 <li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be converted to a list.</p></li>
-<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate
-elements are present.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate elements are present.</p></li>
 <li><p><code>&lt;stbl-error-empty_specs&gt;</code> when no specs are provided.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when <code>.x</code> has fewer than <code>.n_required</code>
-elements.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when <code>.x</code> has fewer than <code>.n_required</code> elements.</p></li>
 <li><p><code>&lt;stbl-error-named_spec&gt;</code> when any spec passed through <code>...</code> is named.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>

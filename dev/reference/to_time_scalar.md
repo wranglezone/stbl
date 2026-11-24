@@ -74,9 +74,10 @@ to_time_scalar(
 
 The input as a length-1
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) vector, or
-an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_empty>` for empty vectors when
   `allow_zero_length = FALSE`.

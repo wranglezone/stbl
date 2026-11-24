@@ -94,9 +94,10 @@ to_any_of(
 ## Value
 
 `x` converted or validated by the first successful function or prototype
-in `...`, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+in `...`, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-cant_stabilize_any_of>` when all provided functions or
   prototypes fail.

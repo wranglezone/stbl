@@ -96,9 +96,10 @@ to_one_of(
 ## Value
 
 `x` converted or validated by the single successful function or
-prototype in `...`, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+prototype in `...`, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-cant_stabilize_one_of>` when zero, or more than one,
   provided functions or prototypes succeed.

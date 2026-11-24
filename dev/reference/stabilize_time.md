@@ -138,9 +138,10 @@ stabilise_time(
 
 The input as an
 [`hms::hms()`](https://hms.tidyverse.org/reference/hms.html) vector, or
-an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-allowed_names>` when names are not in `named`.
 

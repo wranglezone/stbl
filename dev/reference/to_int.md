@@ -115,6 +115,7 @@ to_int(
 ## Value
 
 The input as an integer vector, or an error condition with classes
+
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 

@@ -50,9 +50,12 @@ assert_present(
 
 ## Value
 
-The value, unchanged, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and
-`<stbl-error-bad_null>` when `x` is `NULL`.
+The value, unchanged, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-bad_null>` when `x` is `NULL`.
 
 ## See also
 

@@ -238,27 +238,20 @@ the original class.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input as a length-1 double vector, or an error condition with
-classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
-<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when the value is not in
-<code>allowed_values</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_empty&gt;</code> for empty vectors when
-<code>allow_zero_length = FALSE</code>.</p></li>
+classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
+<li><p><code>&lt;stbl-error-allowed_values&gt;</code> when the value is not in <code>allowed_values</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_empty&gt;</code> for empty vectors when <code>allow_zero_length = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_multiple_of&gt;</code> when <code>multiple_of</code> is not positive.</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match
-<code>named</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match <code>named</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-coerce-double&gt;</code> when <code>x</code> cannot be converted to double.</p></li>
-<li><p><code>&lt;stbl-error-incompatible_values-double&gt;</code> when some values cannot be
-safely converted to double.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-double&gt;</code> when some values cannot be safely converted to double.</p></li>
 <li><p><code>&lt;stbl-error-non_scalar&gt;</code> for non-scalar vectors.</p></li>
-<li><p><code>&lt;stbl-error-not_multiple&gt;</code> when the value is not a multiple of
-<code>multiple_of</code>.</p></li>
-<li><p><code>&lt;stbl-error-outside_range&gt;</code> when values fall outside <code>min_value</code>,
-<code>max_value</code>, <code>exclusive_min_value</code>, or <code>exclusive_max_value</code>.</p></li>
-<li><p>Errors from <code>named</code> when it is a function and a name does not satisfy
-it.</p></li>
+<li><p><code>&lt;stbl-error-not_multiple&gt;</code> when the value is not a multiple of <code>multiple_of</code>.</p></li>
+<li><p><code>&lt;stbl-error-outside_range&gt;</code> when values fall outside <code>min_value</code>, <code>max_value</code>, <code>exclusive_min_value</code>, or <code>exclusive_max_value</code>.</p></li>
+<li><p>Errors from <code>named</code> when it is a function and a name does not satisfy it.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

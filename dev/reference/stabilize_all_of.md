@@ -68,9 +68,10 @@ stabilise_all_of(
 ## Value
 
 `x` converted or validated by every function in `...`, or an error
-condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
 

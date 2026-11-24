@@ -84,18 +84,19 @@ to_date_scalar(
 ## Value
 
 The input as a length-1 [base::Date](https://rdrr.io/r/base/Dates.html)
-vector, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+vector, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_empty>` for empty vectors when
   `allow_zero_length = FALSE`.
 
 - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 
-- `<stbl-error-bad_tz>` when `tz` is needed (for date-time or
-  `treat_number_as = "seconds"` or `"milliseconds"` input) and is not
-  `""` or a value from
+- `<stbl-error-bad_tz>` when the time zone is needed (for date-time or
+  `treat_number_as = "seconds"` or `"milliseconds"` input) and `tz` is
+  not `""` or a value from
   [`OlsonNames()`](https://rdrr.io/r/base/timezones.html), or is `""`
   and your local time zone can't be determined.
 

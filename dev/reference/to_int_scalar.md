@@ -76,7 +76,9 @@ to_integer_scalar(
 ## Value
 
 The input as a length-1 integer vector, or an error condition with
-classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_empty>` for empty vectors when

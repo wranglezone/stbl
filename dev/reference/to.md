@@ -262,8 +262,11 @@ to(
 ## Value
 
 `x` converted to the type of `.to`, or an error condition with classes
+
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-bad_null>` when `.to` is `NULL` and `allow_null = FALSE`.
 
 - `<stbl-error-bad_tz>` when `.to` is a
   [base::Date](https://rdrr.io/r/base/Dates.html) or
@@ -276,8 +279,6 @@ to(
   class of `.to` has no corresponding `to_*()` function and
   [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
   cannot convert `x` to `.to`.
-
-- `<stbl-error-bad_null>` when `.to` is `NULL` and `allow_null = FALSE`.
 
 - The failure classes documented for the `to_*()` function corresponding
   to the class of `.to` (for example
@@ -401,7 +402,7 @@ to(c("a", "b"), factor(levels = c("a", "b", "c")))
 to("mean", mean)
 #> function (x, ...) 
 #> UseMethod("mean")
-#> <bytecode: 0x5f95722097a0>
+#> <bytecode: 0x64d75b8792c0>
 #> <environment: namespace:base>
 to("2024-01-01", as.Date("2024-01-01"))
 #> [1] "2024-01-01"

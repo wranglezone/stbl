@@ -76,7 +76,9 @@ assert_contains(
 
 `x`, unchanged, if the number of elements of `x` matching `spec` is
 between `min_matches` and `max_matches`, or an error condition with
-classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-outside_range>` when `min_matches` is negative, or when

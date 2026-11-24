@@ -37,9 +37,10 @@ resolve_tz(x = NULL, default = Sys.timezone(), call = caller_env())
 
 The name of a time zone from
 [`OlsonNames()`](https://rdrr.io/r/base/timezones.html) as a character
-string, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+string, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_empty>` when `default` is used and is empty.
 

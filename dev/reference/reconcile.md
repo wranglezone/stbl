@@ -25,9 +25,10 @@ reconcile(..., call = caller_env())
 
 The narrowest common representation of the values in `...` if they are
 all equivalent. A single value is returned unchanged. Otherwise, an
-error condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-cant_reconcile>` when any two values are not equivalent.
   The message names the pair that disagreed and, for nested values, the

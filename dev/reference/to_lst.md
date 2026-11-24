@@ -122,9 +122,10 @@ to_lst(
 
 ## Value
 
-The object as a list, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+The object as a list, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_function>` for functions when
   `coerce_function = FALSE` (the default).

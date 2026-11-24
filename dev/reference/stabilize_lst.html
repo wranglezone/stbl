@@ -261,39 +261,26 @@ the original class.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The validated list (or an atomic vector when <code>.simplify = TRUE</code> and
-simplification is possible), or an error condition with classes
-<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>.coerce_function =   FALSE</code> (the default).</p></li>
-<li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but
-<code>.named</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
+simplification is possible), or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>.coerce_function = FALSE</code> (the default).</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when extra named elements are present but <code>.named</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-invalid_regex&gt;</code> when a name of <code>.patterns</code> is
-not a valid regular expression.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-invalid_spec&gt;</code> when an element of <code>.patterns</code>
-is not a function.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-missing_name&gt;</code> when an element of <code>.patterns</code>
-is unnamed.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-invalid_regex&gt;</code> when a name of <code>.patterns</code> is not a valid regular expression.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-invalid_spec&gt;</code> when an element of <code>.patterns</code> is not a function.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-missing_name&gt;</code> when an element of <code>.patterns</code> is unnamed.</p></li>
 <li><p><code>&lt;stbl-error-bad_patterns-not_list&gt;</code> when <code>.patterns</code> is not a list.</p></li>
-<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when
-<code>.named = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when unnamed elements are present but
-<code>.unnamed</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-cant_stabilize_patterns&gt;</code> when elements matching <code>.patterns</code>
-fail their specs.</p></li>
+<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when <code>.named = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when unnamed elements are present but <code>.unnamed</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-cant_stabilize_patterns&gt;</code> when elements matching <code>.patterns</code> fail their specs.</p></li>
 <li><p><code>&lt;stbl-error-coerce-list&gt;</code> when <code>.x</code> cannot be converted to a list.</p></li>
-<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate
-elements are present.</p></li>
-<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and
-<code>.allow_duplicate_names = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent
-(including conditionally required elements whose trigger is present).</p></li>
+<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>.unique = TRUE</code> and duplicate elements are present.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and <code>.allow_duplicate_names = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required named element is absent (including conditionally required elements whose trigger is present).</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the list is longer than <code>.max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the list is shorter than <code>.min_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_x_vs_y&gt;</code> when <code>.min_size</code> is larger than <code>.max_size</code>.</p></li>
-<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
-unnamed.</p></li>
-<li><p>Errors from the specs in <code>...</code>, <code>.named</code>, or <code>.unnamed</code> when an element
-does not satisfy its spec.</p></li>
+<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is unnamed.</p></li>
+<li><p>Errors from the specs in <code>...</code>, <code>.named</code>, or <code>.unnamed</code> when an element does not satisfy its spec.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

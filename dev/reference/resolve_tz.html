@@ -76,19 +76,14 @@ source of error messages.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The name of a time zone from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code> as a character string,
-or an error condition with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>,
-<code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure
-mode:</p><ul><li><p><code>&lt;stbl-error-bad_empty&gt;</code> when <code>default</code> is used and is empty.</p></li>
+or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_empty&gt;</code> when <code>default</code> is used and is empty.</p></li>
 <li><p><code>&lt;stbl-error-bad_function&gt;</code> when <code>default</code> is used and is a function.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> when <code>default</code> is used and is <code>NULL</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_tz&gt;</code> when the time zone cannot be determined or is not
-a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>.</p></li>
-<li><p><code>&lt;stbl-error-coerce-character&gt;</code> when <code>default</code> is used and cannot be
-converted to character.</p></li>
-<li><p><code>&lt;stbl-error-incompatible_values-character&gt;</code> when <code>default</code> is used and
-is a list whose elements cannot be converted to character.</p></li>
-<li><p><code>&lt;stbl-error-non_scalar&gt;</code> when <code>default</code> is used and has more than one
-value.</p></li>
+<li><p><code>&lt;stbl-error-bad_tz&gt;</code> when the time zone cannot be determined or is not a value from <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">OlsonNames()</a></code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-character&gt;</code> when <code>default</code> is used and cannot be converted to character.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-character&gt;</code> when <code>default</code> is used and is a list whose elements cannot be converted to character.</p></li>
+<li><p><code>&lt;stbl-error-non_scalar&gt;</code> when <code>default</code> is used and has more than one value.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

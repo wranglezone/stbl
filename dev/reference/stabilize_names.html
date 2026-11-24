@@ -140,16 +140,12 @@ source of error messages.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> with stabilized names, or an error condition with classes
-<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when a name is not in <code>allowed_names</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_named&gt;</code> when <code>allowed_names</code> or <code>spec</code> is supplied and
-<code>x</code> is not fully named.</p></li>
+    <p><code>x</code> with stabilized names, or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when a name is not in <code>allowed_names</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when <code>allowed_names</code> or <code>spec</code> is supplied and <code>x</code> is not fully named.</p></li>
 <li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>required</code> is invalid.</p></li>
-<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and
-<code>allow_duplicate_names = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a name in <code>required</code> is absent
-(including conditionally required names whose trigger is present).</p></li>
+<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when duplicate names are present and <code>allow_duplicate_names = FALSE</code>.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a name in <code>required</code> is absent (including conditionally required names whose trigger is present).</p></li>
 <li><p>Errors from <code>spec</code> when a name does not satisfy it.</p></li>
 </ul></div>
     <div class="section level2">

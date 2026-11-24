@@ -81,10 +81,13 @@ stabilise_each(
 
 `x` with every element converted by `spec`, simplified to an atomic
 vector when `simplify = TRUE` and possible, otherwise a list. Errors
-with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
-`<error>`, `<condition>`, and `<stbl-error-cant_stabilize_each>` when
-any element fails `spec`; the condition's `locations` element gives the
-positions that failed.
+with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-cant_stabilize_each>` when any element fails `spec`; the
+  condition's `locations` element gives the positions that failed.
 
 ## See also
 

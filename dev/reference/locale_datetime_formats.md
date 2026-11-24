@@ -33,9 +33,10 @@ strings, always starting with `"%Y-%m-%dT%H:%M:%S"`,
 `"%Y-%m-%d %H:%M:%S"`, and `"%Y-%m-%d"` (in that order), followed by the
 locale's conventional day/month order with `"/"` and then `"-"`
 separators (each listed with, then without, a `" %H:%M:%S"` suffix), or
-an error condition with classes `<stbl-error>`, `<stbl-condition>`,
-`<rlang_error>`, `<error>`, `<condition>`, and a specific class by
-failure mode:
+an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-bad_empty>` when `locale_time` is empty.
 

@@ -174,9 +174,10 @@ stabilise_duration(
 
 The input as a
 [lubridate::Period](https://lubridate.tidyverse.org/reference/Period-class.html)
-vector, or an error condition with classes `<stbl-error>`,
-`<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
-specific class by failure mode:
+vector, or an error condition with classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-allowed_names>` when names are not in `named`.
 

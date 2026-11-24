@@ -98,6 +98,7 @@ to_fct(
 ## Value
 
 The input as a factor, or an error condition with classes
+
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 

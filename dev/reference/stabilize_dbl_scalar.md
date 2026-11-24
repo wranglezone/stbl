@@ -197,7 +197,9 @@ stabilise_double_scalar(
 ## Value
 
 The input as a length-1 double vector, or an error condition with
-classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 
 - `<stbl-error-allowed_names>` when names are not in `named`.

@@ -69,11 +69,8 @@ source of error messages.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The narrowest common representation of the values in <code>...</code> if they
 are all equivalent. A single value is returned unchanged. Otherwise, an
-error condition with classes <code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>,
-<code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure
-mode:</p><ul><li><p><code>&lt;stbl-error-cant_reconcile&gt;</code> when any two values are not equivalent.
-The message names the pair that disagreed and, for nested values, the path
-to the first difference.</p></li>
+error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-cant_reconcile&gt;</code> when any two values are not equivalent. The message names the pair that disagreed and, for nested values, the path to the first difference.</p></li>
 <li><p><code>&lt;stbl-error-empty_values&gt;</code> when no values are supplied in <code>...</code>.</p></li>
 </ul></div>
     <div class="section level2">

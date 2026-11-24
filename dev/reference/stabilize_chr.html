@@ -224,35 +224,24 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The input as a character vector, or an error condition with classes
-<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
+    <p>The input as a character vector, or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-allowed_names&gt;</code> when names are not in <code>named</code>.</p></li>
 <li><p><code>&lt;stbl-error-allowed_values&gt;</code> when values are not in <code>allowed_values</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when
-<code>coerce_function = FALSE</code> (the default).</p></li>
+<li><p><code>&lt;stbl-error-bad_function&gt;</code> for functions when <code>coerce_function = FALSE</code> (the default).</p></li>
 <li><p><code>&lt;stbl-error-bad_na&gt;</code> for <code>NA</code> values when <code>allow_na = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match
-<code>named</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_named&gt;</code> when the presence of names doesn't match <code>named</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-coerce-character&gt;</code> when <code>x</code> cannot be converted to character
-(for example a <code>data.frame</code>, or an anonymous function).</p></li>
-<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>unique = TRUE</code> and duplicates are
-present.</p></li>
-<li><p><code>&lt;stbl-error-incompatible_values-character&gt;</code> when some elements of a
-list cannot be converted to character.</p></li>
-<li><p><code>&lt;stbl-error-n_characters&gt;</code> when some elements have fewer characters
-than <code>min_characters</code> and others have more than <code>max_characters</code>.</p></li>
-<li><p><code>&lt;stbl-error-n_characters-too_few&gt;</code> when elements have fewer characters
-than <code>min_characters</code>.</p></li>
-<li><p><code>&lt;stbl-error-n_characters-too_many&gt;</code> when elements have more characters
-than <code>max_characters</code>.</p></li>
+<li><p><code>&lt;stbl-error-coerce-character&gt;</code> when <code>x</code> cannot be converted to character (for example a <code>data.frame</code>, or an anonymous function).</p></li>
+<li><p><code>&lt;stbl-error-duplicate_elements&gt;</code> when <code>unique = TRUE</code> and duplicates are present.</p></li>
+<li><p><code>&lt;stbl-error-incompatible_values-character&gt;</code> when some elements of a list cannot be converted to character.</p></li>
+<li><p><code>&lt;stbl-error-n_characters&gt;</code> when some elements have fewer characters than <code>min_characters</code> and others have more than <code>max_characters</code>.</p></li>
+<li><p><code>&lt;stbl-error-n_characters-too_few&gt;</code> when elements have fewer characters than <code>min_characters</code>.</p></li>
+<li><p><code>&lt;stbl-error-n_characters-too_many&gt;</code> when elements have more characters than <code>max_characters</code>.</p></li>
 <li><p><code>&lt;stbl-error-regex_mismatch&gt;</code> when <code>regex</code> checks fail.</p></li>
 <li><p><code>&lt;stbl-error-size_too_large&gt;</code> when the vector is longer than <code>max_size</code>.</p></li>
 <li><p><code>&lt;stbl-error-size_too_small&gt;</code> when the vector is shorter than <code>min_size</code>.</p></li>
-<li><p><code>&lt;stbl-error-size_x_vs_y&gt;</code> when <code>min_size</code> is larger than <code>max_size</code>, or
-<code>min_characters</code> is larger than <code>max_characters</code>.</p></li>
-<li><p>Errors from <code>named</code> when it is a function and a name does not satisfy
-it.</p></li>
+<li><p><code>&lt;stbl-error-size_x_vs_y&gt;</code> when <code>min_size</code> is larger than <code>max_size</code>, or <code>min_characters</code> is larger than <code>max_characters</code>.</p></li>
+<li><p>Errors from <code>named</code> when it is a function and a name does not satisfy it.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

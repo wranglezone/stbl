@@ -215,6 +215,7 @@ stabilise_double(
 ## Value
 
 The input as a double vector, or an error condition with classes
+
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 

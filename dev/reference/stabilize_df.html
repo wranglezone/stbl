@@ -218,42 +218,26 @@ the original class.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The validated data frame, or an error condition with classes
-<code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>,
-<code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_named&gt;</code> when list input has unnamed elements, or when
-extra columns are present but <code>.extra_cols</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
+    <p>The validated data frame, or an error condition with classes</p>
+<p><code>&lt;stbl-error&gt;</code>, <code>&lt;stbl-condition&gt;</code>, <code>&lt;rlang_error&gt;</code>, <code>&lt;error&gt;</code>, <code>&lt;condition&gt;</code>, and a specific class by failure mode:</p><ul><li><p><code>&lt;stbl-error-bad_named&gt;</code> when list input has unnamed elements, or when extra columns are present but <code>.extra_cols</code> is <code>NULL</code> or <code>FALSE</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_null&gt;</code> for <code>NULL</code> values when <code>.allow_null = FALSE</code>.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-invalid_regex&gt;</code> when a name of <code>.patterns</code> is
-not a valid regular expression.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-invalid_spec&gt;</code> when an element of <code>.patterns</code>
-is not a function.</p></li>
-<li><p><code>&lt;stbl-error-bad_patterns-missing_name&gt;</code> when an element of <code>.patterns</code>
-is unnamed.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-invalid_regex&gt;</code> when a name of <code>.patterns</code> is not a valid regular expression.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-invalid_spec&gt;</code> when an element of <code>.patterns</code> is not a function.</p></li>
+<li><p><code>&lt;stbl-error-bad_patterns-missing_name&gt;</code> when an element of <code>.patterns</code> is unnamed.</p></li>
 <li><p><code>&lt;stbl-error-bad_patterns-not_list&gt;</code> when <code>.patterns</code> is not a list.</p></li>
-<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when
-<code>.extra_cols = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
+<li><p><code>&lt;stbl-error-bad_required&gt;</code> when <code>.required</code> is invalid, or when <code>.extra_cols = FALSE</code> and a name in <code>.required</code> has no spec in <code>...</code>.</p></li>
 <li><p><code>&lt;stbl-error-bad_unnamed&gt;</code> when the data frame has unnamed columns.</p></li>
-<li><p><code>&lt;stbl-error-cant_stabilize_patterns&gt;</code> when columns matching <code>.patterns</code>
-fail their specs.</p></li>
-<li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be converted to a data
-frame.</p></li>
-<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when the data frame has duplicate column
-names.</p></li>
-<li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths
-for conversion to a data frame.</p></li>
-<li><p><code>&lt;stbl-error-missing_cols&gt;</code> when required names in <code>.col_names</code> are
-absent.</p></li>
-<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required column is absent
-(including conditionally required columns whose trigger is present).</p></li>
+<li><p><code>&lt;stbl-error-cant_stabilize_patterns&gt;</code> when columns matching <code>.patterns</code> fail their specs.</p></li>
+<li><p><code>&lt;stbl-error-coerce-data.frame&gt;</code> when <code>.x</code> cannot be converted to a data frame.</p></li>
+<li><p><code>&lt;stbl-error-duplicate_names&gt;</code> when the data frame has duplicate column names.</p></li>
+<li><p><code>&lt;stbl-error-jagged&gt;</code> when list input has incompatible element lengths for conversion to a data frame.</p></li>
+<li><p><code>&lt;stbl-error-missing_cols&gt;</code> when required names in <code>.col_names</code> are absent.</p></li>
+<li><p><code>&lt;stbl-error-missing_element&gt;</code> when a required column is absent (including conditionally required columns whose trigger is present).</p></li>
 <li><p><code>&lt;stbl-error-size_x_vs_y&gt;</code> when <code>.min_rows</code> is larger than <code>.max_rows</code>.</p></li>
-<li><p><code>&lt;stbl-error-too_few_rows&gt;</code> when the data frame has fewer than
-<code>.min_rows</code> rows.</p></li>
-<li><p><code>&lt;stbl-error-too_many_rows&gt;</code> when the data frame has more than
-<code>.max_rows</code> rows.</p></li>
-<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is
-unnamed.</p></li>
-<li><p>Errors from the specs in <code>...</code> or <code>.extra_cols</code> when a column does not
-satisfy its spec.</p></li>
+<li><p><code>&lt;stbl-error-too_few_rows&gt;</code> when the data frame has fewer than <code>.min_rows</code> rows.</p></li>
+<li><p><code>&lt;stbl-error-too_many_rows&gt;</code> when the data frame has more than <code>.max_rows</code> rows.</p></li>
+<li><p><code>&lt;stbl-error-unnamed_spec&gt;</code> when any element passed through <code>...</code> is unnamed.</p></li>
+<li><p>Errors from the specs in <code>...</code> or <code>.extra_cols</code> when a column does not satisfy its spec.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -137,6 +137,7 @@ stabilise_logical(
 ## Value
 
 The input as a logical vector, or an error condition with classes
+
 `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 `<condition>`, and a specific class by failure mode:
 

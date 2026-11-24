@@ -54,8 +54,12 @@ assert_not(
 ## Value
 
 `x`, unchanged, if `x` does not match `spec`, or an error condition with
-classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
-`<condition>`, and `<stbl-error-matched_spec>` when `x` matches `spec`.
+classes
+
+`<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
+`<condition>`, and a specific class by failure mode:
+
+- `<stbl-error-matched_spec>` when `x` matches `spec`.
 
 ## See also
 
