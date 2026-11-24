@@ -66,3 +66,18 @@ test_that("to_each() errors when ... contains extra arguments (#287)", {
     class = "rlib_error_dots_nonempty"
   )
 })
+
+test_that("to_each() forwards x_class and to_arg to specs that accept them (#419)", {
+  spec <- function(x, to_arg = "none", x_class = "default") {
+    paste(to_arg, x_class)
+  }
+  expect_identical(to_each(list(1, 2), spec), c("none default", "none default"))
+  expect_identical(
+    to_each(list(1), spec, to_arg = "to", x_class = "cls"),
+    "to cls"
+  )
+  expect_identical(
+    to_each(list("1"), to_int, to_arg = "to", x_class = "cls"),
+    1L
+  )
+})

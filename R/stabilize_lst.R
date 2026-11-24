@@ -55,33 +55,38 @@
 #'   simplification is possible), or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
 #'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
 #'   FALSE` (the default).
-#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
-#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
-#'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
-#'   elements are present.
-#'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
-#'   unnamed.
-#'   - `<stbl-error-missing_element>` when a required named element is absent
-#'   (including conditionally required elements whose trigger is present).
-#'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
-#'   `.named = FALSE` and a name in `.required` has no spec in `...`.
-#'   - `<stbl-error-bad_patterns>` when `.patterns` is invalid, with subclasses
-#'   `<stbl-error-bad_patterns-not_list>`,
-#'   `<stbl-error-bad_patterns-missing_name>`,
-#'   `<stbl-error-bad_patterns-invalid_regex>`, or
-#'   `<stbl-error-bad_patterns-invalid_spec>`.
-#'   - `<stbl-error-cant_stabilize_patterns>` when elements matching `.patterns`
-#'   fail their specs.
-#'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
-#'   `.unnamed` is `NULL` or `FALSE`.
 #'   - `<stbl-error-bad_named>` when extra named elements are present but
 #'   `.named` is `NULL` or `FALSE`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
+#'   - `<stbl-error-bad_patterns-invalid_regex>` when a name of `.patterns` is
+#'   not a valid regular expression.
+#'   - `<stbl-error-bad_patterns-invalid_spec>` when an element of `.patterns`
+#'   is not a function.
+#'   - `<stbl-error-bad_patterns-missing_name>` when an element of `.patterns`
+#'   is unnamed.
+#'   - `<stbl-error-bad_patterns-not_list>` when `.patterns` is not a list.
+#'   - `<stbl-error-bad_required>` when `.required` is invalid, or when
+#'   `.named = FALSE` and a name in `.required` has no spec in `...`.
+#'   - `<stbl-error-bad_unnamed>` when unnamed elements are present but
+#'   `.unnamed` is `NULL` or `FALSE`.
+#'   - `<stbl-error-cant_stabilize_patterns>` when elements matching `.patterns`
+#'   fail their specs.
+#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
+#'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
+#'   elements are present.
 #'   - `<stbl-error-duplicate_names>` when duplicate names are present and
 #'   `.allow_duplicate_names = FALSE`.
+#'   - `<stbl-error-missing_element>` when a required named element is absent
+#'   (including conditionally required elements whose trigger is present).
+#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
+#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
+#'   - `<stbl-error-size_x_vs_y>` when `.min_size` is larger than `.max_size`.
+#'   - `<stbl-error-unnamed_spec>` when any element passed through `...` is
+#'   unnamed.
+#'   - Errors from the specs in `...`, `.named`, or `.unnamed` when an element
+#'   does not satisfy its spec.
 #' @family list functions
 #' @family stabilization functions
 #' @export
@@ -324,14 +329,30 @@ NULL
 #'
 #' @param spec_fn A stabilizer function.
 #' @param .x The value to validate.
+#' @param .to_arg,.x_class Optional `to_arg` and `x_class` values, passed on
+#'   only when `spec_fn` accepts them and they are not `NULL`.
 #' @inheritParams stabilize_lst
 #' @returns The validated value.
 #' @keywords internal
-.call_specified_fn <- function(spec_fn, .x, .x_arg, .call) {
+.call_specified_fn <- function(
+  spec_fn,
+  .x,
+  .x_arg,
+  .call,
+  .to_arg = NULL,
+  .x_class = NULL
+) {
   fmls <- rlang::fn_fmls_names(spec_fn)
   x_arg_nm <- grep("^[.]?x_arg$", fmls, value = TRUE)
   call_nm <- grep("^[.]?call$", fmls, value = TRUE)
   args <- list(.x)
+  # Only forwarded when supplied, so specs keep their own defaults otherwise.
+  if (!is.null(.to_arg) && "to_arg" %in% fmls) {
+    args[["to_arg"]] <- .to_arg
+  }
+  if (!is.null(.x_class) && "x_class" %in% fmls) {
+    args[["x_class"]] <- .x_class
+  }
   if (length(x_arg_nm)) {
     args[[x_arg_nm[[1L]]]] <- .x_arg
   }

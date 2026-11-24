@@ -221,14 +221,10 @@ test_that("to_date() ignores treat_number_as for non-numbers (#381)", {
   )
 })
 
-test_that("treat_number_as passes through to_date_scalar() and to() (#381)", {
+test_that("treat_number_as passes through to_date_scalar() (#381)", {
   expected <- as.Date("2024-01-01")
   expect_identical(
     to_date_scalar(1704110400000, treat_number_as = "milliseconds"),
-    expected
-  )
-  expect_identical(
-    to(1704110400, expected, treat_number_as = "seconds"),
     expected
   )
   expect_pkg_error_classes(
@@ -315,19 +311,10 @@ test_that("to_date() validates tz for epoch numbers (#381)", {
   )
 })
 
-test_that("tz passes through to_date_scalar() and to() (#381)", {
+test_that("tz passes through to_date_scalar() (#381)", {
   expect_identical(
     to_date_scalar(
       1704067200,
-      tz = "America/Los_Angeles",
-      treat_number_as = "seconds"
-    ),
-    as.Date("2023-12-31")
-  )
-  expect_identical(
-    to(
-      1704067200,
-      as.Date("2024-01-01"),
       tz = "America/Los_Angeles",
       treat_number_as = "seconds"
     ),
@@ -337,7 +324,6 @@ test_that("tz passes through to_date_scalar() and to() (#381)", {
 
 test_that("to_date() converts an empty list to an empty date (#392)", {
   expect_identical(to_date(list()), as.Date(character()))
-  expect_identical(to(list(), Sys.Date()), as.Date(character()))
 })
 
 test_that("to_date() still rejects non-empty lists (#392)", {

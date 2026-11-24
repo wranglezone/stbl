@@ -12,6 +12,7 @@
 #'   vector when `simplify = TRUE` and possible, otherwise a list. Errors with
 #'   whatever condition `spec` throws for the first failing element.
 #' @family multiple type functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples
@@ -29,7 +30,9 @@ to_each <- function(
   ...,
   simplify = TRUE,
   x_arg = caller_arg(x),
-  call = caller_env()
+  to_arg = NULL,
+  call = caller_env(),
+  x_class = NULL
 ) {
   force(x_arg)
   force(call)
@@ -38,7 +41,14 @@ to_each <- function(
     return(x)
   }
   simplify <- to_lgl_scalar(simplify, call = call)
-  out <- .map_each_fast(x, spec, x_arg = x_arg, call = call)
+  out <- .map_each_fast(
+    x,
+    spec,
+    x_arg = x_arg,
+    call = call,
+    to_arg = to_arg,
+    x_class = x_class
+  )
   .simplify_each(out, simplify = simplify)
 }
 
@@ -48,7 +58,14 @@ to_each <- function(
 #' @inheritParams stabilize_each
 #' @returns A list of per-element results, the same length as `x`.
 #' @keywords internal
-.map_each_fast <- function(x, spec, x_arg, call) {
+.map_each_fast <- function(
+  x,
+  spec,
+  x_arg,
+  call,
+  to_arg = NULL,
+  x_class = NULL
+) {
   n <- length(x)
   out <- vector("list", n)
   out <- .name_like(out, x)
@@ -58,7 +75,9 @@ to_each <- function(
       spec,
       x[[i]],
       .x_arg = element_arg,
-      .call = call
+      .call = call,
+      .to_arg = to_arg,
+      .x_class = x_class
     )
   }
   out

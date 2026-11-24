@@ -26,24 +26,25 @@
 #'   simplification is possible), or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
-#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
-#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
-#'   FALSE` (the default).
-#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
-#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
-#'   - `<stbl-error-empty_specs>` when no specs are provided.
-#'   - `<stbl-error-named_spec>` when any spec passed through `...` is named.
-#'   - `<stbl-error-bad_n_required>` when `.n_required` is out of range.
-#'   - `<stbl-error-bad_named>` when `.x` has named elements.
-#'   - `<stbl-error-missing_element>` when `.x` has fewer than `.n_required`
-#'   elements.
 #'   - `<stbl-error-bad_additional>` when extra elements are present but
 #'   `.additional` is `NULL` or `FALSE`.
+#'   - `<stbl-error-bad_function>` for functions when `.coerce_function =
+#'   FALSE` (the default).
+#'   - `<stbl-error-bad_n_required>` when `.n_required` is out of range.
+#'   - `<stbl-error-bad_named>` when `.x` has named elements.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `.allow_null = FALSE`.
 #'   - `<stbl-error-cant_stabilize_positional>` when any element fails its
 #'   spec; the condition's `locations` element gives the positions that failed.
+#'   - `<stbl-error-coerce-list>` when `.x` cannot be converted to a list.
 #'   - `<stbl-error-duplicate_elements>` when `.unique = TRUE` and duplicate
 #'   elements are present.
+#'   - `<stbl-error-empty_specs>` when no specs are provided.
+#'   - `<stbl-error-missing_element>` when `.x` has fewer than `.n_required`
+#'   elements.
+#'   - `<stbl-error-named_spec>` when any spec passed through `...` is named.
+#'   - `<stbl-error-size_too_large>` when the list is longer than `.max_size`.
+#'   - `<stbl-error-size_too_small>` when the list is shorter than `.min_size`.
+#'   - `<stbl-error-size_x_vs_y>` when `.min_size` is larger than `.max_size`.
 #' @family list functions
 #' @family stabilization functions
 #' @export

@@ -49,11 +49,11 @@ the original class.}
 condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>},
 \verb{<error>}, \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
-\item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 \item \verb{<stbl-error-cant_stabilize_all_of>} when any provided function fails.
+\item \verb{<stbl-error-empty_specs>} when no functions are supplied in \code{...}.
 \item \verb{<stbl-error-inconsistent_all_of>} when every function succeeds, but
 their results are not all equivalent.
+\item \verb{<stbl-error-named_spec>} when any element of \code{...} is named.
 }
 }
 \description{
@@ -101,6 +101,17 @@ try(
 \seealso{
 \code{\link[=reconcile]{reconcile()}}
 
+Other multiple type functions:
+\code{\link[=reconcile]{reconcile()}},
+\code{\link[=specify_all_of]{specify_all_of()}},
+\code{\link[=specify_any_of]{specify_any_of()}},
+\code{\link[=specify_each]{specify_each()}},
+\code{\link[=specify_one_of]{specify_one_of()}},
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
+\code{\link[=to_each]{to_each()}}
+
 Other stabilization functions:
 \code{\link[=assert_contains]{assert_contains()}},
 \code{\link[=assert_not]{assert_not()}},
@@ -118,6 +129,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -136,17 +148,22 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }
+\concept{multiple type functions}
 \concept{stabilization functions}

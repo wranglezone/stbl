@@ -12,12 +12,13 @@
 #' @returns The object as a data frame, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-bad_named>` when a list has any unnamed elements.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-coerce-data.frame>` when `x` cannot be converted to a data
 #'   frame.
-#'   - `<stbl-error-bad_named>` when a list has any unnamed elements.
 #'   - `<stbl-error-jagged>` when a list has incompatible element lengths.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family data frame functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples
@@ -48,7 +49,8 @@ to_df.data.frame <- function(
   ...,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   check_dots_empty0(..., call = call)
   x
@@ -62,7 +64,8 @@ to_df.NULL <- function(
   allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   check_dots_empty0(..., call = call)
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)

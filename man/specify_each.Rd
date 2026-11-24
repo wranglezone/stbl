@@ -36,6 +36,17 @@ stabilize_ints(list("1", "2", "3"))
 try(stabilize_ints(list("1", "a")))
 }
 \seealso{
+Other multiple type functions:
+\code{\link[=reconcile]{reconcile()}},
+\code{\link[=specify_all_of]{specify_all_of()}},
+\code{\link[=specify_any_of]{specify_any_of()}},
+\code{\link[=specify_one_of]{specify_one_of()}},
+\code{\link[=stabilize_all_of]{stabilize_all_of()}},
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
+\code{\link[=to_each]{to_each()}}
+
 Other specification functions:
 \code{\link[=specify_all_of]{specify_all_of()}},
 \code{\link[=specify_any_of]{specify_any_of()}},
@@ -54,4 +65,5 @@ Other specification functions:
 \code{\link[=specify_one_of]{specify_one_of()}},
 \code{\link[=specify_time]{specify_time()}}
 }
+\concept{multiple type functions}
 \concept{specification functions}

@@ -4,7 +4,7 @@
 \alias{.map_each_fast}
 \title{Apply a spec to each element of x, failing on the first error}
 \usage{
-.map_each_fast(x, spec, x_arg, call)
+.map_each_fast(x, spec, x_arg, call, to_arg = NULL, x_class = NULL)
 }
 \arguments{
 \item{x}{The object to stabilize.}
@@ -18,6 +18,11 @@ unexported functions.}
 
 \item{call}{\code{(environment)} The execution environment to mention as the
 source of error messages.}
+
+\item{x_class}{(\code{character(1)}) The class name of the object being stabilized
+to use in error messages. Use this if you remove a special class from the
+object before checking its conversion, but want the error message to match
+the original class.}
 }
 \value{
 A list of per-element results, the same length as \code{x}.

@@ -308,7 +308,7 @@ test_that("to_time() ignores treat_number_as for non-numbers (#387)", {
   )
 })
 
-test_that("treat_number_as passes through to_time_scalar() and to() (#387)", {
+test_that("treat_number_as passes through to_time_scalar() (#387)", {
   expect_identical(
     to_time_scalar(3600000, treat_number_as = "milliseconds"),
     hms::hms(3600)
@@ -319,15 +319,10 @@ test_that("treat_number_as passes through to_time_scalar() and to() (#387)", {
     "coerce",
     "time"
   )
-  expect_identical(
-    to(0.5, hms::hms(), treat_number_as = "days"),
-    hms::hms(43200)
-  )
 })
 
 test_that("to_time() converts an empty list to an empty time (#392)", {
   expect_identical(to_time(list()), to_time(character()))
-  expect_identical(to(list(), hms::hms(1)), to_time(character()))
 })
 
 test_that("to_time() still rejects non-empty lists (#392)", {

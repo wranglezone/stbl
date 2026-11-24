@@ -44,11 +44,11 @@
 #' @returns The input as a [lubridate::Period-class] vector, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-duration>` when numbers are rejected by
-#'   `treat_number_as = "error"`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-duration>` when `x` cannot be converted to a
+#'   duration, including numbers when `treat_number_as = "error"`.
 #'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
 #'   safely converted to a duration.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #' @family duration functions
 #' @family stabilization functions
 #' @export
@@ -385,11 +385,13 @@ to_dur.default <- function(
 #'   error condition with classes `<stbl-error>`, `<stbl-condition>`,
 #'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by failure
 #'   mode:
-#'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
-#'   safely converted to a duration.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-duration>` when `x` cannot be converted to a
+#'   duration, including numbers when `treat_number_as = "error"`.
+#'   - `<stbl-error-incompatible_values-duration>` when some values cannot be
+#'   safely converted to a duration.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #' @family duration functions
 #' @family stabilization functions

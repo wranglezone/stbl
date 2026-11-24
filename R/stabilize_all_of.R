@@ -17,11 +17,11 @@
 #' @returns `x` converted or validated by every function in `...`, or an error
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`,
 #'   `<error>`, `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
-#'   - `<stbl-error-named_spec>` when any element of `...` is named.
 #'   - `<stbl-error-cant_stabilize_all_of>` when any provided function fails.
+#'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
 #'   - `<stbl-error-inconsistent_all_of>` when every function succeeds, but
 #'   their results are not all equivalent.
+#'   - `<stbl-error-named_spec>` when any element of `...` is named.
 #'
 #' @details
 #' The results of the specs are combined with [reconcile()], so they don't need
@@ -31,6 +31,7 @@
 #' `1L`), and doesn't depend on the order of the specs. See [reconcile()] for
 #' the rules of equivalence and for how types are ranked.
 #'
+#' @family multiple type functions
 #' @family stabilization functions
 #' @seealso [reconcile()]
 #' @export

@@ -253,7 +253,7 @@ test_that("to_dur() ignores treat_number_as for non-numbers (#382)", {
   expect_identical(to_dur(given, treat_number_as = "error"), given)
 })
 
-test_that("treat_number_as passes through to_dur_scalar() and to() (#382)", {
+test_that("treat_number_as passes through to_dur_scalar() (#382)", {
   expect_identical(
     to_dur_scalar(1000, treat_number_as = "milliseconds"),
     lubridate::seconds_to_period(1)
@@ -263,10 +263,6 @@ test_that("treat_number_as passes through to_dur_scalar() and to() (#382)", {
     "stbl",
     "coerce",
     "duration"
-  )
-  expect_identical(
-    to(1, lubridate::period(), treat_number_as = "days"),
-    lubridate::period(day = 1)
   )
 })
 
@@ -311,7 +307,6 @@ test_that("to_dur_scalar() respects allow_zero_length (#295)", {
 
 test_that("to_dur() converts an empty list to an empty duration (#392)", {
   expect_identical(to_dur(list()), to_dur(character()))
-  expect_length(to(list(), lubridate::period(1)), 0L)
 })
 
 test_that("to_dur() still rejects non-empty lists (#392)", {

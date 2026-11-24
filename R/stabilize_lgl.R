@@ -9,15 +9,20 @@
 #' @returns The input as a logical vector, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-allowed_names>` when names are not in `named`.
+#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
 #'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
 #'   - `<stbl-error-bad_named>` when the presence of names doesn't match
 #'   `named`.
-#'   - `<stbl-error-allowed_names>` when names are not in `named`.
-#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
+#'   - `<stbl-error-incompatible_values-logical>` when some values cannot be
+#'   safely converted to logical.
 #'   - `<stbl-error-size_too_large>` when the vector is longer than `max_size`.
-#'   - `<stbl-error-allowed_values>` when values are not in `allowed_values`.
+#'   - `<stbl-error-size_too_small>` when the vector is shorter than `min_size`.
+#'   - `<stbl-error-size_x_vs_y>` when `min_size` is larger than `max_size`.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family logical functions
 #' @family stabilization functions
 #' @export
@@ -37,10 +42,10 @@ stabilize_lgl <- function(
   ...,
   allow_null = TRUE,
   allow_na = TRUE,
+  named = NULL,
   min_size = NULL,
   max_size = NULL,
   allowed_values = NULL,
-  named = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)
@@ -89,17 +94,21 @@ stabilise_logical <- stabilize_lgl
 #' @returns The input as a length-1 logical vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
-#'   - `<stbl-error-bad_empty>` for empty vectors when
-#'   `allow_zero_length = FALSE`.
-#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
-#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
-#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
-#'   `named`.
 #'   - `<stbl-error-allowed_names>` when names are not in `named`.
 #'   - `<stbl-error-allowed_values>` when the value is not in
 #'   `allowed_values`.
+#'   - `<stbl-error-bad_empty>` for empty vectors when
+#'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-bad_na>` for `NA` values when `allow_na = FALSE`.
+#'   - `<stbl-error-bad_named>` when the presence of names doesn't match
+#'   `named`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-logical>` when `x` cannot be converted to logical.
+#'   - `<stbl-error-incompatible_values-logical>` when some values cannot be
+#'   safely converted to logical.
+#'   - `<stbl-error-non_scalar>` for non-scalar vectors.
+#'   - Errors from `named` when it is a function and a name does not satisfy
+#'   it.
 #' @family logical functions
 #' @family stabilization functions
 #' @export
@@ -116,8 +125,8 @@ stabilize_lgl_scalar <- function(
   allow_null = FALSE,
   allow_zero_length = FALSE,
   allow_na = TRUE,
-  allowed_values = NULL,
   named = NULL,
+  allowed_values = NULL,
   x_arg = caller_arg(x),
   call = caller_env(),
   x_class = object_type(x)

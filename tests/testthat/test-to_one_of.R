@@ -52,3 +52,7 @@ test_that("to_one_of() errors when ... is empty (#286)", {
     "empty_specs"
   )
 })
+
+test_that("to_one_of() accepts to_arg (#419)", {
+  expect_identical(to_one_of("a", integer(), character(), to_arg = "foo"), "a")
+})

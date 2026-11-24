@@ -33,11 +33,13 @@
 #' @returns The input as a [base::POSIXct] vector, or an error condition with
 #'   classes `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
-#'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
-#'   safely converted to datetime.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
 #'   [OlsonNames()], or is `""` and your local time zone can't be determined.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-coerce-datetime>` when `x` cannot be converted to datetime,
+#'   including numbers when `treat_number_as = "error"`.
+#'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
+#'   safely converted to datetime.
 #' @family datetime functions
 #' @family stabilization functions
 #' @export
@@ -320,13 +322,15 @@ to_dttm.default <- function(
 #'   condition with classes `<stbl-error>`, `<stbl-condition>`,
 #'   `<rlang_error>`, `<error>`, `<condition>`, and a specific class by
 #'   failure mode:
-#'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
-#'   safely converted to datetime.
-#'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
-#'   [OlsonNames()], or is `""` and your local time zone can't be determined.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
 #'   - `<stbl-error-bad_empty>` for empty vectors when
 #'   `allow_zero_length = FALSE`.
+#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-bad_tz>` when `tz` is not `""` or a value from
+#'   [OlsonNames()], or is `""` and your local time zone can't be determined.
+#'   - `<stbl-error-coerce-datetime>` when `x` cannot be converted to datetime,
+#'   including numbers when `treat_number_as = "error"`.
+#'   - `<stbl-error-incompatible_values-datetime>` when some values cannot be
+#'   safely converted to datetime.
 #'   - `<stbl-error-non_scalar>` for non-scalar vectors.
 #' @family datetime functions
 #' @family stabilization functions

@@ -11,6 +11,7 @@
 #'   also accept `...` for additional unnamed specs to pass to
 #'   [stabilize_one_of()]. You can copy/paste the body of the resulting function
 #'   if you want to provide additional context or functionality.
+#' @family multiple type functions
 #' @family specification functions
 #' @export
 #'

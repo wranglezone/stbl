@@ -4,10 +4,12 @@
 \alias{.to_null}
 \title{Ensure an object is NULL}
 \usage{
-.to_null(x, allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
+.to_null(x, ..., allow_null = TRUE, x_arg = caller_arg(x), call = caller_env())
 }
 \arguments{
 \item{x}{The object to stabilize.}
+
+\item{...}{Arguments passed to methods.}
 
 \item{allow_null}{(\code{logical(1)}) Is NULL an acceptable value?}
 

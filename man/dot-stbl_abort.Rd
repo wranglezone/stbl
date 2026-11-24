@@ -33,7 +33,12 @@ evaluate variables in error messages.}
 \code{\link[rlang:abort]{rlang::abort()}}.}
 }
 \value{
-\code{NULL} invisibly (called for side effects).
+Does not return; always throws an error condition. Its classes are
+built from \code{package} and \code{subclass}, from most to least specific. For
+example, \code{pkg_abort("mypkg", "msg", c("coerce", "list"))} throws an error
+with classes \verb{<mypkg-error-coerce-list>}, \verb{<mypkg-error-coerce>},
+\verb{<mypkg-error>}, \verb{<mypkg-condition>}, \verb{<rlang_error>}, \verb{<error>}, and
+\verb{<condition>}.
 }
 \description{
 Signal an error with standards applied

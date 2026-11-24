@@ -170,23 +170,24 @@ simplification is possible), or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
-\item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
-\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function =   FALSE} (the default).
-\item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
-\item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
-\item \verb{<stbl-error-empty_specs>} when no specs are provided.
-\item \verb{<stbl-error-named_spec>} when any spec passed through \code{...} is named.
-\item \verb{<stbl-error-bad_n_required>} when \code{.n_required} is out of range.
-\item \verb{<stbl-error-bad_named>} when \code{.x} has named elements.
-\item \verb{<stbl-error-missing_element>} when \code{.x} has fewer than \code{.n_required}
-elements.
 \item \verb{<stbl-error-bad_additional>} when extra elements are present but
 \code{.additional} is \code{NULL} or \code{FALSE}.
+\item \verb{<stbl-error-bad_function>} for functions when \code{.coerce_function =   FALSE} (the default).
+\item \verb{<stbl-error-bad_n_required>} when \code{.n_required} is out of range.
+\item \verb{<stbl-error-bad_named>} when \code{.x} has named elements.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{.allow_null = FALSE}.
 \item \verb{<stbl-error-cant_stabilize_positional>} when any element fails its
 spec; the condition's \code{locations} element gives the positions that failed.
+\item \verb{<stbl-error-coerce-list>} when \code{.x} cannot be converted to a list.
 \item \verb{<stbl-error-duplicate_elements>} when \code{.unique = TRUE} and duplicate
 elements are present.
+\item \verb{<stbl-error-empty_specs>} when no specs are provided.
+\item \verb{<stbl-error-missing_element>} when \code{.x} has fewer than \code{.n_required}
+elements.
+\item \verb{<stbl-error-named_spec>} when any spec passed through \code{...} is named.
+\item \verb{<stbl-error-size_too_large>} when the list is longer than \code{.max_size}.
+\item \verb{<stbl-error-size_too_small>} when the list is shorter than \code{.min_size}.
+\item \verb{<stbl-error-size_x_vs_y>} when \code{.min_size} is larger than \code{.max_size}.
 }
 }
 \description{
@@ -274,6 +275,7 @@ Other stabilization functions:
 \code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
 \code{\link[=stabilize_dur]{stabilize_dur()}},
 \code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
 \code{\link[=stabilize_fct]{stabilize_fct()}},
 \code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
 \code{\link[=stabilize_int]{stabilize_int()}},
@@ -291,16 +293,20 @@ Other stabilization functions:
 \code{\link[=to_date_scalar]{to_date_scalar()}},
 \code{\link[=to_dbl]{to_dbl()}},
 \code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
 \code{\link[=to_dttm]{to_dttm()}},
 \code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
 \code{\link[=to_dur]{to_dur()}},
 \code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
 \code{\link[=to_fct]{to_fct()}},
 \code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
 \code{\link[=to_int]{to_int()}},
 \code{\link[=to_int_scalar]{to_int_scalar()}},
 \code{\link[=to_lgl]{to_lgl()}},
 \code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_lst]{to_lst()}},
 \code{\link[=to_time]{to_time()}},
 \code{\link[=to_time_scalar]{to_time_scalar()}}
 }

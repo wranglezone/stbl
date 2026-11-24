@@ -20,9 +20,22 @@ source of error messages.}
 }
 \value{
 The name of a time zone from \code{\link[=OlsonNames]{OlsonNames()}} as a character string,
-or an error condition with classes \verb{<stbl-error-bad_tz>}, \verb{<stbl-error>},
-\verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>}, \verb{<condition>} when the time
-zone cannot be determined or is not a value from \code{\link[=OlsonNames]{OlsonNames()}}.
+or an error condition with classes \verb{<stbl-error>}, \verb{<stbl-condition>},
+\verb{<rlang_error>}, \verb{<error>}, \verb{<condition>}, and a specific class by failure
+mode:
+\itemize{
+\item \verb{<stbl-error-bad_empty>} when \code{default} is used and is empty.
+\item \verb{<stbl-error-bad_function>} when \code{default} is used and is a function.
+\item \verb{<stbl-error-bad_null>} when \code{default} is used and is \code{NULL}.
+\item \verb{<stbl-error-bad_tz>} when the time zone cannot be determined or is not
+a value from \code{\link[=OlsonNames]{OlsonNames()}}.
+\item \verb{<stbl-error-coerce-character>} when \code{default} is used and cannot be
+converted to character.
+\item \verb{<stbl-error-incompatible_values-character>} when \code{default} is used and
+is a list whose elements cannot be converted to character.
+\item \verb{<stbl-error-non_scalar>} when \code{default} is used and has more than one
+value.
+}
 }
 \description{
 Finds the time zone an object is displayed in, falling back to \code{default} if

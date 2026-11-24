@@ -57,3 +57,11 @@ test_that(".check_tz() rejects an unrecognized local time zone (#370)", {
   withr::local_timezone("Not/A_Zone")
   expect_pkg_error_snapshot(.check_tz(""), "stbl", "bad_tz")
 })
+
+test_that(".check_tz() reports an undetermined local time zone (#370)", {
+  local_mocked_bindings(
+    Sys.timezone = function(...) NA_character_,
+    .package = "base"
+  )
+  expect_pkg_error_snapshot(.check_tz(""), "stbl", "bad_tz")
+})

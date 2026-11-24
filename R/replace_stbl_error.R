@@ -11,7 +11,11 @@
 #' @inheritParams .shared-params
 #'
 #' @returns The result of `expr`, or an error with the replacement message if a
-#'   matching `{stbl}` error is thrown.
+#'   matching `{stbl}` error is thrown. The replacement error has the classes in
+#'   `additional_class`, followed by the `stbl` classes of the original error
+#'   (such as `<stbl-error-coerce-character>`, `<stbl-error-coerce>`,
+#'   `<stbl-error>`, and `<stbl-condition>`), `<rlang_error>`, `<error>`, and
+#'   `<condition>`.
 #' @export
 #'
 #' @examples

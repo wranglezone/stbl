@@ -15,6 +15,8 @@
 #'   between `min_matches` and `max_matches`, or an error condition with classes
 #'   `<stbl-error>`, `<stbl-condition>`, `<rlang_error>`, `<error>`,
 #'   `<condition>`, and a specific class by failure mode:
+#'   - `<stbl-error-outside_range>` when `min_matches` is negative, or when
+#'   `max_matches` is less than `min_matches`.
 #'   - `<stbl-error-too_few_matches>` when fewer than `min_matches` elements
 #'   match `spec`.
 #'   - `<stbl-error-too_many_matches>` when more than `max_matches` elements

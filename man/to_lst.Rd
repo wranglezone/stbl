@@ -15,7 +15,8 @@ to_lst(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 
 to_list(
@@ -24,7 +25,8 @@ to_list(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 
 \method{to_lst}{list}(
@@ -33,7 +35,8 @@ to_list(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 
 \method{to_lst}{default}(
@@ -53,7 +56,8 @@ to_list(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 
 \method{to_lst}{`function`}(
@@ -62,7 +66,8 @@ to_list(
   coerce_function = FALSE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 )
 }
 \arguments{
@@ -97,10 +102,11 @@ The object as a list, or an error condition with classes
 \verb{<stbl-error>}, \verb{<stbl-condition>}, \verb{<rlang_error>}, \verb{<error>},
 \verb{<condition>}, and a specific class by failure mode:
 \itemize{
-\item \verb{<stbl-error-coerce-list>} when \code{x} is a primitive function.
 \item \verb{<stbl-error-bad_function>} for functions when
 \code{coerce_function = FALSE} (the default).
 \item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
+\item \verb{<stbl-error-coerce-list>} when \code{x} cannot be converted to a list,
+including primitive functions when \code{coerce_function = TRUE}.
 }
 }
 \description{
@@ -129,5 +135,59 @@ Other list functions:
 \code{\link[=stabilize_lst]{stabilize_lst()}},
 \code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
 \code{\link[=to]{to()}}
+
+Other stabilization functions:
+\code{\link[=assert_contains]{assert_contains()}},
+\code{\link[=assert_not]{assert_not()}},
+\code{\link[=assert_present]{assert_present()}},
+\code{\link[=stabilize_all_of]{stabilize_all_of()}},
+\code{\link[=stabilize_any_of]{stabilize_any_of()}},
+\code{\link[=stabilize_arg]{stabilize_arg()}},
+\code{\link[=stabilize_chr]{stabilize_chr()}},
+\code{\link[=stabilize_chr_scalar]{stabilize_chr_scalar()}},
+\code{\link[=stabilize_date]{stabilize_date()}},
+\code{\link[=stabilize_date_scalar]{stabilize_date_scalar()}},
+\code{\link[=stabilize_dbl]{stabilize_dbl()}},
+\code{\link[=stabilize_dbl_scalar]{stabilize_dbl_scalar()}},
+\code{\link[=stabilize_df]{stabilize_df()}},
+\code{\link[=stabilize_dttm]{stabilize_dttm()}},
+\code{\link[=stabilize_dttm_scalar]{stabilize_dttm_scalar()}},
+\code{\link[=stabilize_dur]{stabilize_dur()}},
+\code{\link[=stabilize_dur_scalar]{stabilize_dur_scalar()}},
+\code{\link[=stabilize_each]{stabilize_each()}},
+\code{\link[=stabilize_fct]{stabilize_fct()}},
+\code{\link[=stabilize_fct_scalar]{stabilize_fct_scalar()}},
+\code{\link[=stabilize_int]{stabilize_int()}},
+\code{\link[=stabilize_int_scalar]{stabilize_int_scalar()}},
+\code{\link[=stabilize_lgl]{stabilize_lgl()}},
+\code{\link[=stabilize_lgl_scalar]{stabilize_lgl_scalar()}},
+\code{\link[=stabilize_lst]{stabilize_lst()}},
+\code{\link[=stabilize_lst_positional]{stabilize_lst_positional()}},
+\code{\link[=stabilize_names]{stabilize_names()}},
+\code{\link[=stabilize_one_of]{stabilize_one_of()}},
+\code{\link[=stabilize_time]{stabilize_time()}},
+\code{\link[=stabilize_time_scalar]{stabilize_time_scalar()}},
+\code{\link[=to_chr]{to_chr()}},
+\code{\link[=to_chr_scalar]{to_chr_scalar()}},
+\code{\link[=to_date]{to_date()}},
+\code{\link[=to_date_scalar]{to_date_scalar()}},
+\code{\link[=to_dbl]{to_dbl()}},
+\code{\link[=to_dbl_scalar]{to_dbl_scalar()}},
+\code{\link[=to_df]{to_df()}},
+\code{\link[=to_dttm]{to_dttm()}},
+\code{\link[=to_dttm_scalar]{to_dttm_scalar()}},
+\code{\link[=to_dur]{to_dur()}},
+\code{\link[=to_dur_scalar]{to_dur_scalar()}},
+\code{\link[=to_each]{to_each()}},
+\code{\link[=to_fct]{to_fct()}},
+\code{\link[=to_fct_scalar]{to_fct_scalar()}},
+\code{\link[=to_fn]{to_fn()}},
+\code{\link[=to_int]{to_int()}},
+\code{\link[=to_int_scalar]{to_int_scalar()}},
+\code{\link[=to_lgl]{to_lgl()}},
+\code{\link[=to_lgl_scalar]{to_lgl_scalar()}},
+\code{\link[=to_time]{to_time()}},
+\code{\link[=to_time_scalar]{to_time_scalar()}}
 }
 \concept{list functions}
+\concept{stabilization functions}

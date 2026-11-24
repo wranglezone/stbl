@@ -23,9 +23,12 @@
 #'   prototype in `...`, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
-#'   - `<stbl-error-empty_specs>` when no functions are supplied in `...`.
-#'   - `<stbl-error-named_spec>` when any element of `...` is named.
-#'   - `<stbl-error-cant_stabilize_any_of>` when all provided functions fail.
+#'   - `<stbl-error-cant_stabilize_any_of>` when all provided functions or
+#'   prototypes fail.
+#'   - `<stbl-error-empty_specs>` when nothing is supplied in `...`.
+#'   - `<stbl-error-named_spec>` when any element of `...` is named
+#'   (`stabilize_any_of()` only).
+#' @family multiple type functions
 #' @family stabilization functions
 #' @export
 #'

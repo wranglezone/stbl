@@ -18,15 +18,17 @@
 #' @returns A function, or an error condition with classes `<stbl-error>`,
 #'   `<stbl-condition>`, `<rlang_error>`, `<error>`, `<condition>`, and a
 #'   specific class by failure mode:
+#'   - `<stbl-error-bad_null>` for `NULL` values (or length-0 character
+#'   vectors) when `allow_null = FALSE`.
 #'   - `<stbl-error-coerce-function>` when `x` cannot be converted to a
 #'   function.
-#'   - `<stbl-error-invalid_function_name>` when `x` is not a syntactically
-#'   valid function name.
-#'   - `<stbl-error-unknown_function>` when `x` is a syntactically valid name
-#'   that doesn't resolve to a known function.
+#'   - `<stbl-error-invalid_function_name>` when `x` uses colons other than a
+#'   single `::` between a package name and a function name.
 #'   - `<stbl-error-non_scalar>` when `x` has more than one element.
-#'   - `<stbl-error-bad_null>` for `NULL` values when `allow_null = FALSE`.
+#'   - `<stbl-error-unknown_function>` when `x` doesn't resolve to a known
+#'   function.
 #' @family function functions
+#' @family stabilization functions
 #' @export
 #'
 #' @examples
@@ -63,7 +65,8 @@ to_fn.NULL <- function(
   allow_null = TRUE,
   x_arg = caller_arg(x),
   to_arg = NULL,
-  call = caller_env()
+  call = caller_env(),
+  x_class = object_type(x)
 ) {
   .to_null(x, allow_null = allow_null, x_arg = x_arg, call = call)
 }

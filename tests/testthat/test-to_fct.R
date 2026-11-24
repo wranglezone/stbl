@@ -185,3 +185,10 @@ test_that("to_fct() attaches bad-level locations (#274)", {
   cnd <- rlang::catch_cnd(to_fct(c("a", "b", "c", "d"), levels = c("a", "b")))
   expect_identical(cnd$locations, c(3L, 4L))
 })
+
+test_that("to_fct() can make a factor with no levels ordered (#246)", {
+  expect_identical(
+    to_fct(factor(character()), ordered = TRUE),
+    ordered(character())
+  )
+})
