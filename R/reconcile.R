@@ -165,56 +165,82 @@ reconcile <- function(..., call = caller_env()) {
 #' Reconcile a list of values
 #'
 #' @param values `(list)` At least one value.
-#' @param path `(character(1))` The path to `values` within the original
-#'   values, for messages.
 #' @returns The reconciled value, or a mismatch (see `.new_mismatch()`).
 #' @keywords internal
-.reconcile_values <- function(values, path = "") {
-  if (length(values) == 1L) {
-    return(values[[1L]])
+.reconcile_values <- function(values) {
+  out <- .reconcile(values)
+  mismatch <- out$mismatch
+  if (is.null(mismatch)) {
+    return(out$result)
   }
-  categories <- vapply(values, .reconcile_category, character(1))
-  different <- which(categories != categories[[1L]])
-  if (length(different)) {
-    return(.new_mismatch(1L, different[[1L]], path))
-  }
-  switch(
-    categories[[1L]],
-    atomic = .reconcile_atomics(values, path),
-    list = .reconcile_lists(values, path),
-    data_frame = .reconcile_lists(values, path, is_df = TRUE),
-    .reconcile_identical(values, path)
+  .new_mismatch(
+    mismatch$i,
+    mismatch$j,
+    .mismatch_path(values[[1L]], mismatch$at),
+    .reconcile_reason(mismatch$reason)
   )
 }
 
-#' Describe the category of a value for reconciliation
+# The reasons the C code can give for a mismatch
+#
+# The position in this vector is the reason code in `stbl.h`.
+.reconcile_reasons <- c(
+  "Lengths differ.",
+  "Names differ.",
+  "Ordering differs.",
+  "Levels differ.",
+  "Time zones differ.",
+  "Classes differ.",
+  "Column names differ.",
+  "Row names differ.",
+  "Attributes differ."
+)
+
+#' Describe a reason code as a message
 #'
-#' Values of different categories are never equivalent.
-#'
-#' @param x The value to categorize.
-#' @returns One of `"null"`, `"function"`, `"data_frame"`, `"atomic"`,
-#'   `"list"`, or `"other"`.
+#' @param code `(integer(1))` A reason code from C, or `0` for no specific
+#'   reason.
+#' @returns A single string, or `NULL` if there is no specific reason.
 #' @keywords internal
-.reconcile_category <- function(x) {
-  if (is.null(x)) {
-    return("null")
+.reconcile_reason <- function(code) {
+  if (code == 0L) {
+    return(NULL)
   }
-  if (is.function(x)) {
-    return("function")
+  .reconcile_reasons[[code]]
+}
+
+#' Describe the location of the first difference
+#'
+#' @param x The first of the values being reconciled.
+#' @param at `(integer)` The position of the difference, from the top.
+#' @returns A string like `"$a[[2]]"`, or `""` at the top level.
+#' @keywords internal
+.mismatch_path <- function(x, at) {
+  path <- ""
+  for (i in at) {
+    path <- paste0(path, .path_step(names(x), i))
+    x <- x[[i]]
   }
-  if (is.data.frame(x)) {
-    return("data_frame")
+  path
+}
+
+#' Compare two atomic vectors, for the C code
+#'
+#' Called from C for pairs it doesn't compare itself.
+#'
+#' @inheritParams .atomics_equivalent
+#' @returns `-1L` if `x` and `y` are equivalent. Otherwise the reason code of
+#'   the difference (see `.reconcile_reasons`), or `0L` for no specific reason.
+#' @keywords internal
+.atomic_mismatch <- function(x, y) {
+  if (.atomics_equivalent(x, y)) {
+    return(-1L)
   }
-  if (!is.na(.reconcile_type(x))) {
-    return("atomic")
+  reason <- .atomic_difference(x, y)
+  if (is.null(reason)) {
+    return(0L)
   }
-  if (is.list(x) && !is.object(x)) {
-    return("list")
-  }
-  if (is.atomic(x)) {
-    return("atomic")
-  }
-  "other"
+  match(reason, .reconcile_reasons)
 }
 
 #' Find the ranked type of a value
@@ -240,50 +266,6 @@ reconcile <- function(..., call = caller_env()) {
     return(base_type)
   }
   NA_character_
-}
-
-#' Reconcile values that must be identical
-#'
-#' @inheritParams .reconcile_values
-#' @returns The first value, or a mismatch.
-#' @keywords internal
-.reconcile_identical <- function(values, path) {
-  for (k in seq_along(values)[-1L]) {
-    if (!identical(values[[1L]], values[[k]])) {
-      return(.new_mismatch(1L, k, path))
-    }
-  }
-  values[[1L]]
-}
-
-#' Reconcile atomic vectors
-#'
-#' Every pair must be equivalent. The result is the narrowest input.
-#'
-#' @inheritParams .reconcile_values
-#' @returns The narrowest value, or a mismatch.
-#' @keywords internal
-.reconcile_atomics <- function(values, path) {
-  n <- length(values)
-  for (i in seq_len(n - 1L)) {
-    for (j in seq(i + 1L, n)) {
-      if (!.atomics_equivalent(values[[i]], values[[j]])) {
-        return(.new_mismatch(
-          i,
-          j,
-          path,
-          .atomic_difference(values[[i]], values[[j]])
-        ))
-      }
-    }
-  }
-  ranks <- match(
-    vapply(values, .reconcile_type, character(1)),
-    .reconcile_ranking
-  )
-  # Unranked types are only equivalent to equal values, so any will do.
-  ranks[is.na(ranks)] <- 1L
-  values[[which.min(ranks)]]
 }
 
 #' Check whether two atomic vectors are equivalent
@@ -358,97 +340,7 @@ reconcile <- function(..., call = caller_env()) {
   if (!identical(names(x), names(y))) {
     return("Names differ.")
   }
-  if (is.factor(x) && is.factor(y)) {
-    if (!identical(class(x), class(y))) {
-      return("Ordering differs.")
-    }
-    if (!identical(levels(x), levels(y))) {
-      return("Levels differ.")
-    }
-  }
-  if (inherits(x, "POSIXct") && inherits(y, "POSIXct")) {
-    if (!identical(attr(x, "tzone"), attr(y, "tzone"))) {
-      return("Time zones differ.")
-    }
-  }
   NULL
-}
-
-#' Reconcile lists or data frames element by element
-#'
-#' @inheritParams .reconcile_values
-#' @param is_df `(logical(1))` Whether the values are data frames.
-#' @returns A list (or data frame) of reconciled elements, or a mismatch.
-#' @keywords internal
-.reconcile_lists <- function(values, path, is_df = FALSE) {
-  first <- values[[1L]]
-  for (k in seq_along(values)[-1L]) {
-    reason <- .container_difference(first, values[[k]], is_df)
-    if (!is.null(reason)) {
-      return(.new_mismatch(1L, k, path, reason))
-    }
-  }
-  out <- vector("list", length(first))
-  for (i in seq_along(first)) {
-    element <- .reconcile_values(
-      lapply(values, \(value) value[[i]]),
-      path = paste0(path, .path_step(names(first), i, is_df))
-    )
-    if (.is_mismatch(element)) {
-      return(element)
-    }
-    out[i] <- list(element)
-  }
-  attributes(out) <- attributes(first)
-  out
-}
-
-#' Explain why two lists or data frames can't be reconciled
-#'
-#' @param x,y The lists or data frames to compare.
-#' @param is_df `(logical(1))` Whether `x` and `y` are data frames.
-#' @returns A single string, or `NULL` if the containers are compatible.
-#' @keywords internal
-.container_difference <- function(x, y, is_df) {
-  if (is_df && !identical(class(x), class(y))) {
-    return("Classes differ.")
-  }
-  if (!is_df && length(x) != length(y)) {
-    return("Lengths differ.")
-  }
-  if (!identical(names(x), names(y))) {
-    return(if (is_df) "Column names differ." else "Names differ.")
-  }
-  if (is_df && !identical(.row_names(x), .row_names(y))) {
-    return("Row names differ.")
-  }
-  if (!identical(.other_attributes(x), .other_attributes(y))) {
-    return("Attributes differ.")
-  }
-  NULL
-}
-
-#' Get the row names of a data frame
-#'
-#' @param x A data frame.
-#' @returns The row names, preserving whether they are automatic.
-#' @keywords internal
-.row_names <- function(x) {
-  attr(x, "row.names", exact = TRUE)
-}
-
-#' Get the attributes of an object, other than names
-#'
-#' @param x The object.
-#' @returns A list of attributes, sorted by name.
-#' @keywords internal
-.other_attributes <- function(x) {
-  attrs <- attributes(x)
-  attrs[["names"]] <- NULL
-  if (!length(attrs)) {
-    return(NULL)
-  }
-  attrs[order(names(attrs))]
 }
 
 #' Describe the location of an element within a list

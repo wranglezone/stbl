@@ -244,3 +244,39 @@
       Error in `wrapped_reconcile()`:
       ! `val` and `TRUE` must be equivalent.
 
+# reconcile() compares pairlists like lists (#408)
+
+    Code
+      reconcile(pairlist(a = 1L), pairlist(a = 2L))
+    Condition <stbl-error-cant_reconcile>
+      Error:
+      ! `pairlist(a = 1L)` and `pairlist(a = 2L)` must be equivalent.
+      i The first difference is at `$a`.
+
+# reconcile() compares attributes as a set (#408)
+
+    Code
+      reconcile(structure(list(1), foo = "x"), structure(list(1), bar = "x"))
+    Condition <stbl-error-cant_reconcile>
+      Error:
+      ! `structure(list(1), foo = "x")` and `structure(list(1), bar = "x")` must be equivalent.
+      x Attributes differ.
+
+# reconcile() explains length and name differences for classed vectors (#408)
+
+    Code
+      reconcile(hms::hms(1), hms::hms(1:2))
+    Condition <stbl-error-cant_reconcile>
+      Error:
+      ! `hms::hms(1)` and `hms::hms(1:2)` must be equivalent.
+      x Lengths differ.
+
+---
+
+    Code
+      reconcile(stats::setNames(hms::hms(1), "a"), hms::hms(1))
+    Condition <stbl-error-cant_reconcile>
+      Error:
+      ! `stats::setNames(hms::hms(1), "a")` and `hms::hms(1)` must be equivalent.
+      x Names differ.
+

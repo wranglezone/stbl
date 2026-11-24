@@ -9,6 +9,7 @@
 ## New features
 
 * New `reconcile()` returns the narrowest common representation of equivalent values, or errors if they are not equivalent (#408).
+* `reconcile()` and `stabilize_all_of()` now do their comparisons in C, which is faster for large inputs: in benchmarks on 1e6-element vectors, comparing integer and double vectors was about 9x faster, and comparing nested lists of 1e4 elements was about 150x faster. Comparisons that are dominated by converting between character and numeric values are not noticeably faster. `stbl_reconcile()` is also registered as a C callable in the public C API (#414).
 * `stabilize_all_of()` now accepts specs whose results are equivalent but differ in type (such as integer and double), and returns the same result regardless of spec order (#408).
 * `stabilize_lst()`, `stabilize_df()`, `specify_lst()`, and `specify_df()` gain `.patterns` to apply specs to every element or column whose name matches a regular expression (#292).
 * `stabilize_lst()` and `specify_lst()` (and their synonyms) gain a `.simplify` argument (default `FALSE`) to combine a list of scalars with a common type into an atomic vector (#407).
