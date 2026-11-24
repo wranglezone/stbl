@@ -116,17 +116,17 @@ test_that("stabilize_arg_scalar() errors for non-scalars (#12, #58)", {
   )
 })
 
-test_that("stabilize_arg_scalar() respects allow_null (#12, #58)", {
+test_that("stabilize_arg_scalar() respects allow_null (#12, #58, #422)", {
   given <- NULL
   expect_pkg_error_snapshot(
     stabilize_arg_scalar(given, allow_null = FALSE),
     "stbl",
-    "non_scalar"
+    "bad_null"
   )
   expect_pkg_error_snapshot(
     wrapped_stabilize_arg_scalar(given, allow_null = FALSE),
     "stbl",
-    "non_scalar"
+    "bad_null"
   )
 })
 

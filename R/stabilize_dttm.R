@@ -331,7 +331,7 @@ stabilise_datetime_scalar <- stabilize_dttm_scalar
 ) {
   .to_cls_scalar(
     x,
-    is_rlang_cls_scalar = .is_scalar_dttm,
+    is_rlang_cls_scalar = .fast_false,
     to_cls_fn = .to_dttm_locale,
     to_cls_args = list(
       tz = tz,

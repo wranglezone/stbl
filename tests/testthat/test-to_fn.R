@@ -126,6 +126,19 @@ test_that("to_function() exists (#250)", {
   expect_no_error(to_function("mean"))
 })
 
+test_that("to_fn() errors with a stbl class for empty and NA strings (#424)", {
+  expect_pkg_error_snapshot(
+    to_fn(""),
+    "stbl",
+    "invalid_function_name"
+  )
+  expect_pkg_error_snapshot(
+    to_fn(NA_character_),
+    "stbl",
+    "invalid_function_name"
+  )
+})
+
 # C callables ------------------------------------------------------------------
 
 test_that(".chr_to_fn() works via C callable (#250)", {

@@ -242,6 +242,21 @@ test_that("to_dttm_scalar() allows length-1 date-times through (#105)", {
   expect_identical(to_dttm_scalar(given), given)
 })
 
+test_that("to_dttm_scalar() applies tz to length-1 date-times (#423)", {
+  given <- as.POSIXct("2024-01-01 12:00:00", tz = "UTC")
+  result <- to_dttm_scalar(given, tz = "America/Chicago")
+  expect_identical(attr(result, "tzone"), "America/Chicago")
+  expect_equal(as.numeric(result), as.numeric(given))
+})
+
+test_that("to_dttm_scalar() rejects an unrecognized tz for length-1 date-times (#423)", {
+  expect_pkg_error_classes(
+    to_dttm_scalar(Sys.time(), tz = "Bogus/Zone"),
+    "stbl",
+    "bad_tz"
+  )
+})
+
 test_that("to_dttm_scalar() converts length-1 input (#105)", {
   expect_identical(
     to_dttm_scalar("2024-01-01T12:00:00Z"),

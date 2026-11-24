@@ -58,7 +58,7 @@ test_that(".check_allowed_values() attaches failing locations (#282)", {
   expect_identical(cnd$locations, c(3L, 4L))
 })
 
-test_that(".check_scalar() works (#95)", {
+test_that(".check_scalar() works (#95, #422)", {
   expect_null(.check_scalar(1))
   expect_null(.check_scalar(NULL))
   expect_null(.check_scalar(character()))
@@ -66,25 +66,13 @@ test_that(".check_scalar() works (#95)", {
   expect_pkg_error_snapshot(
     .check_scalar(NULL, allow_null = FALSE),
     "stbl",
-    "non_scalar"
+    "bad_null"
   )
   expect_pkg_error_snapshot(
     .check_scalar(character(), allow_zero_length = FALSE),
     "stbl",
     "bad_empty"
   )
-})
-
-test_that(".is_allowed_null() checks whether value is NULL and ok", {
-  wrapper <- function(wrapper_val, ...) {
-    return(.is_allowed_null(wrapper_val, ...))
-  }
-
-  given <- NULL
-  expect_true(.is_allowed_null(given))
-  expect_true(wrapper(given))
-  expect_false(.is_allowed_null(given, allow_null = FALSE))
-  expect_false(wrapper(given, allow_null = FALSE))
 })
 
 test_that(".check_x_no_more_than_y() works (#95)", {

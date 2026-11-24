@@ -82,12 +82,11 @@ specific class by failure mode:
 \item \verb{<stbl-error-bad_na>} for \code{NA} values when \code{allow_na = FALSE}.
 \item \verb{<stbl-error-bad_named>} when the presence of names doesn't match
 \code{named}.
-\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE} in
-\code{\link[=stabilize_arg]{stabilize_arg()}}.
+\item \verb{<stbl-error-bad_null>} for \code{NULL} values when \code{allow_null = FALSE}.
 \item \verb{<stbl-error-duplicate_elements>} when \code{unique = TRUE} and duplicates are
 present in \code{\link[=stabilize_arg]{stabilize_arg()}}.
-\item \verb{<stbl-error-non_scalar>} for non-scalar vectors (including \code{NULL} when
-\code{allow_null = FALSE}) in \code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
+\item \verb{<stbl-error-non_scalar>} for non-scalar vectors in
+\code{\link[=stabilize_arg_scalar]{stabilize_arg_scalar()}}.
 \item \verb{<stbl-error-size_too_large>} when the vector is longer than \code{max_size}
 in \code{\link[=stabilize_arg]{stabilize_arg()}}.
 \item \verb{<stbl-error-size_too_small>} when the vector is shorter than \code{min_size}

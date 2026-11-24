@@ -138,9 +138,9 @@ expect_pkg_error_classes <- function(
 #'
 #' covr instruments code for coverage by wrapping expressions in
 #' `if (TRUE) { covr:::count(key); original }` blocks (or, in covr 4.0.0 and
-#' later, `if (TRUE) { .Call(covr:::covr_count, key); original }`). This function recursively
-#' removes those wrappers so that snapshotted code remains stable across normal
-#' and coverage runs.
+#' later, `if (TRUE) { .Call(covr:::covr_count, key); original }`). This
+#' function recursively removes those wrappers so that snapshotted code remains
+#' stable across normal and coverage runs.
 #'
 #' @param expr An R expression (e.g. as returned by [rlang::enexpr()]).
 #' @returns The expression with all covr counter blocks removed.
