@@ -309,3 +309,69 @@ test_that("reconcile() reports errors from the caller's perspective (#408)", {
     "cant_reconcile"
   )
 })
+
+test_that("reconcile() compares pairlists like lists (#408)", {
+  expect_identical(
+    reconcile(pairlist(a = 1L), pairlist(a = 1)),
+    list(a = 1L)
+  )
+  expect_pkg_error_snapshot(
+    reconcile(pairlist(a = 1L), pairlist(a = 2L)),
+    "stbl",
+    "cant_reconcile"
+  )
+})
+
+test_that("reconcile() recurses through deeply nested lists (#408)", {
+  nest <- function(depth, leaf) {
+    for (i in seq_len(depth)) {
+      leaf <- list(leaf)
+    }
+    leaf
+  }
+  expect_identical(reconcile(nest(200, 1L), nest(200, 1)), nest(200, 1L))
+  expect_pkg_error_classes(
+    reconcile(nest(200, 1L), nest(200, 2L)),
+    "stbl",
+    "cant_reconcile"
+  )
+})
+
+test_that("reconcile() compares attributes as a set (#408)", {
+  expect_pkg_error_snapshot(
+    reconcile(
+      structure(list(1), foo = "x"),
+      structure(list(1), bar = "x")
+    ),
+    "stbl",
+    "cant_reconcile"
+  )
+})
+
+test_that("reconcile() leaves vectors with extra attributes to R (#408)", {
+  expect_pkg_error_classes(
+    reconcile(structure(1L, foo = "x"), 1),
+    "stbl",
+    "cant_reconcile"
+  )
+  bad_levels <- structure(1L, levels = 1L, class = "factor")
+  expect_pkg_error_classes(reconcile("a", bad_levels), "stbl", "cant_reconcile")
+})
+
+test_that("reconcile() explains length and name differences for classed vectors (#408)", {
+  skip_if_not_installed("hms")
+  expect_pkg_error_snapshot(
+    reconcile(hms::hms(1), hms::hms(1:2)),
+    "stbl",
+    "cant_reconcile"
+  )
+  expect_pkg_error_snapshot(
+    reconcile(stats::setNames(hms::hms(1), "a"), hms::hms(1)),
+    "stbl",
+    "cant_reconcile"
+  )
+})
+
+test_that(".reconcile() requires a non-empty list (#408)", {
+  expect_error(.reconcile(list()), "at least one")
+})

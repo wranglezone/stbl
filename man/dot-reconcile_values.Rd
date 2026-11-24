@@ -4,18 +4,16 @@
 \alias{.reconcile_values}
 \title{Reconcile a list of values}
 \usage{
-.reconcile_values(values, path = "")
+.reconcile_values(values)
 }
 \arguments{
 \item{values}{\code{(list)} At least one value.}
-
-\item{path}{\code{(character(1))} The path to \code{values} within the original
-values, for messages.}
 }
 \value{
 The reconciled value, or a mismatch (see \code{.new_mismatch()}).
 }
 \description{
-Reconcile a list of values
+The comparison runs in C (\code{stbl_reconcile()}). Date, POSIXct, hms, Period,
+and other classed values are compared in R by \code{.atomic_mismatch()}.
 }
 \keyword{internal}

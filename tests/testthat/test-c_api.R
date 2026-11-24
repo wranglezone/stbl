@@ -1525,3 +1525,24 @@ test_that(".stbl_to() doesn't derive a to_arg when it is NULL (#371, #377)", {
   .stbl_to("a", logical(), x_arg = "my_arg") |>
     expect_pkg_error_snapshot("stbl", "incompatible_values", "logical")
 })
+
+# reconcile --------------------------------------------------------------------
+
+test_that(".reconcile() returns the narrowest value and no mismatch (#414)", {
+  expect_identical(.reconcile(list(1L, 1)), list(result = 1L, mismatch = NULL))
+})
+
+test_that(".reconcile() locates the first mismatch (#414)", {
+  mismatch <- .reconcile(list(
+    list(1, list(x = 1)),
+    list(1, list(x = 2))
+  ))$mismatch
+  expect_identical(mismatch$at, c(2L, 1L))
+  expect_identical(c(mismatch$i, mismatch$j), c(1L, 2L))
+  expect_identical(mismatch$reason, 0L)
+})
+
+test_that(".reconcile() requires a non-empty list (#414)", {
+  expect_error(.reconcile(list()), "non-empty|at least one")
+  expect_error(.reconcile(1:3), "at least one")
+})

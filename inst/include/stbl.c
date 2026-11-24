@@ -63,6 +63,9 @@ SEXP (*stbl_check_max_dbl)(SEXP, SEXP)           = NULL;
 SEXP (*stbl_check_min_dbl_exclusive)(SEXP, SEXP) = NULL;
 SEXP (*stbl_check_max_dbl_exclusive)(SEXP, SEXP) = NULL;
 
+/* reconcile */
+SEXP (*stbl_reconcile)(SEXP)                                   = NULL;
+
 /* to */
 SEXP (*stbl_to)(SEXP, SEXP, SEXP, SEXP, SEXP)                  = NULL;
 
@@ -122,6 +125,8 @@ void stbl_init_api(void) {
   stbl_check_max_dbl           = (SEXP (*)(SEXP, SEXP)) R_GetCCallable("stbl", "stbl_check_max_dbl");
   stbl_check_min_dbl_exclusive = (SEXP (*)(SEXP, SEXP)) R_GetCCallable("stbl", "stbl_check_min_dbl_exclusive");
   stbl_check_max_dbl_exclusive = (SEXP (*)(SEXP, SEXP)) R_GetCCallable("stbl", "stbl_check_max_dbl_exclusive");
+  /* reconcile */
+  stbl_reconcile      = (SEXP (*)(SEXP))             R_GetCCallable("stbl", "stbl_reconcile");
   /* to */
   stbl_to             = (SEXP (*)(SEXP, SEXP, SEXP, SEXP, SEXP)) R_GetCCallable("stbl", "stbl_to");
 }

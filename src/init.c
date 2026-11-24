@@ -83,6 +83,9 @@ SEXP stbl_check_max_dbl(SEXP x, SEXP max_val);
 SEXP stbl_check_min_dbl_exclusive(SEXP x, SEXP min_val);
 SEXP stbl_check_max_dbl_exclusive(SEXP x, SEXP max_val);
 
+/* reconcile */
+SEXP stbl_reconcile(SEXP values);
+
 /* to */
 SEXP stbl_to(SEXP x, SEXP to, SEXP x_arg, SEXP to_arg, SEXP call);
 
@@ -145,6 +148,8 @@ static const R_CallMethodDef callMethods[] = {
   {"stbl_check_max_dbl",             (DL_FUNC) &stbl_check_max_dbl,             2},
   {"stbl_check_min_dbl_exclusive",   (DL_FUNC) &stbl_check_min_dbl_exclusive,   2},
   {"stbl_check_max_dbl_exclusive",   (DL_FUNC) &stbl_check_max_dbl_exclusive,   2},
+  /* reconcile */
+  {"stbl_reconcile",      (DL_FUNC) &stbl_reconcile,      1},
   /* to */
   {"stbl_to",              (DL_FUNC) &stbl_to,              5},
   {NULL, NULL, 0}
@@ -213,6 +218,8 @@ void R_init_stbl(DllInfo* dll) {
   R_RegisterCCallable("stbl", "stbl_check_max_dbl",           (DL_FUNC) &stbl_check_max_dbl);
   R_RegisterCCallable("stbl", "stbl_check_min_dbl_exclusive", (DL_FUNC) &stbl_check_min_dbl_exclusive);
   R_RegisterCCallable("stbl", "stbl_check_max_dbl_exclusive", (DL_FUNC) &stbl_check_max_dbl_exclusive);
+  /* reconcile */
+  R_RegisterCCallable("stbl", "stbl_reconcile",      (DL_FUNC) &stbl_reconcile);
   /* to */
   R_RegisterCCallable("stbl", "stbl_to",              (DL_FUNC) &stbl_to);
 }

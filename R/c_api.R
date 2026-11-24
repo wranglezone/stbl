@@ -212,6 +212,23 @@
   .Call(stbl_to, x, to, x_arg, to_arg, call)
 }
 
+# reconcile ----
+
+#' Call the C routine that reconciles equivalent values
+#'
+#' @param values `(list)` At least one value.
+#'
+#' @returns A list with two elements. `result` is the narrowest common
+#'   representation of `values`, and `mismatch` is `NULL`, if every value is
+#'   equivalent to every other value. Otherwise `result` is `NULL` and
+#'   `mismatch` is a list with the positions `i` and `j` of the first pair of
+#'   values that disagree, the positions `at` of the first difference inside
+#'   lists and data frames, and an integer `reason` code (see `stbl.h`).
+#' @keywords internal
+.reconcile <- function(values) {
+  .Call(stbl_reconcile, values)
+}
+
 # range checks ----
 
 #' @rdname c_x_to_y
